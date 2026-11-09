@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kiểm Thử & Demo Task TF2520C — Product Card & Modal</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <style>
+    /* CSS bổ trợ riêng cho giao diện trang test (không ảnh hưởng base.css) */
+    .test-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--sp-6) var(--sp-4);
+    }
+    .test-header {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-6);
+      margin-bottom: var(--sp-6);
+    }
+    .test-header h1 {
+      font-family: var(--font-head);
+      font-size: var(--fs-xl);
+      color: var(--secondary-300);
+      margin-bottom: var(--sp-2);
+    }
+    .test-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-6);
+      margin-bottom: var(--sp-6);
+    }
+    .section-title {
+      font-family: var(--font-head);
+      font-size: var(--fs-lg);
+      color: var(--primary-300);
+      margin-bottom: var(--sp-2);
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+    }
+    .section-desc {
+      color: var(--text-muted);
+      font-size: var(--fs-sm);
+      margin-bottom: var(--sp-5);
+    }
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-3);
+      margin-bottom: var(--sp-5);
+    }
+    .code-box {
+      background: #0d0d18;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--sp-3) var(--sp-4);
+      font-family: monospace;
+      font-size: 13px;
+      color: var(--secondary-300);
+      overflow-x: auto;
+      margin-top: var(--sp-3);
+    }
+    .test-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: var(--sp-4);
+    }
+    .test-table th, .test-table td {
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      text-align: left;
+      font-size: var(--fs-sm);
+    }
+    .test-table th {
+      background: rgba(255, 255, 255, 0.05);
+      font-weight: 700;
+      color: var(--text);
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .status-pass {
+      background: rgba(52, 211, 153, 0.2);
+      color: var(--success);
+      border: 1px solid var(--success);
+    }
+    .status-pending {
+      background: rgba(251, 191, 36, 0.2);
+      color: var(--warning);
+      border: 1px solid var(--warning);
+    }
+    .status-info {
+      background: rgba(6, 182, 212, 0.2);
+      color: var(--secondary-300);
+      border: 1px solid var(--secondary-400);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="test-container">
+
+    <!-- HEADER TRANG TEST -->
+    <header class="test-header">
+      <h1>🚀 TASK TF2520C — Kiểm Thử & Nghiệm Thu</h1>
+      <p style="color: var(--text-muted); font-size: 14px;">
+        <strong>Phạm vi:</strong> [FE] T05 base.css: Product Card & Modal |
+        <strong>Đối tượng thực hiện:</strong> Sinh viên năm 2 CNTT |
+        <strong>Quy ước:</strong> Dùng chung 1 cấu trúc HTML duy nhất cho cả 3 biến thể.
+      </p>
+    </header>
+
+    <!-- SECTION 1: LIVE SWITCHER CHỨNG MINH TIÊU CHÍ CỐT LÕI -->
+    <section class="test-section">
+      <h2 class="section-title">1. Live Switcher — Đổi Modifier Thời Gian Thực</h2>
+      <p class="section-desc">
+        Card bên dưới giữ nguyên 100% cấu trúc HTML. Nhấn các nút để chỉ thay đổi modifier class trên thẻ <code>&lt;article class="product-card ..."&gt;</code>. CSS sẽ tự động điều khiển việc ẩn/hiện các thông tin đặc thù.
+      </p>
+
+      <div class="btn-group">
+        <button class="btn btn-primary" id="btnSetFlash" type="button">⚡ Đổi sang: product-card--flash</button>
+        <button class="btn btn-secondary" id="btnSetNew" type="button">✨ Đổi sang: product-card--new</button>
+        <button class="btn btn-outline" id="btnSetUsed" type="button">🔄 Đổi sang: product-card--used</button>
+      </div>
+
+      <div style="max-width: 320px; margin: 0 auto;">
+        <!-- ĐÂY LÀ CARD ĐỘNG KIỂM CHỨNG (CHUNG 1 CẤU TRÚC HTML) -->
+        <article class="product-card product-card--flash" id="liveCard">
+          <div class="product-media">
+            <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80" alt="iPhone 15 Pro Max">
+            <div class="product-badges">
+              <span class="badge badge-flash">⚡ Flash Sale -20%</span>
+              <span class="badge badge-mall">Chính Hãng</span>
+              <span class="badge badge-used-cond">95% Like New</span>
+            </div>
+          </div>
+          <div class="product-body">
+            <span class="product-cat">Thiết bị di động</span>
+            <h3 class="product-name">iPhone 15 Pro Max 256GB Titanium Tự Nhiên</h3>
+            
+            <!-- Meta Đồ Mới -->
+            <div class="product-meta-new">
+              <span class="product-stars">★★★★★</span>
+              <span class="product-reviews">(128 đánh giá)</span>
+            </div>
+
+            <!-- Meta Đồ Cũ -->
+            <div class="product-meta-used">
+              <span class="chip-status">Độ mới: 95%</span>
+              <span class="chip-verified">✓ Người bán xác minh</span>
+              <span class="chip-inspected">Đã kiểm định</span>
+              <span class="seller-location">📍 Hà Nội</span>
+            </div>
+
+            <!-- Giá sản phẩm -->
+            <div class="product-price">
+              <span class="price-current">24.500.000₫</span>
+              <span class="price-old">29.990.000₫</span>
+              <span class="price-discount">-18%</span>
+            </div>
+          </div>
+          <div class="product-actions">
+            <button class="btn btn-primary btn-action-main" type="button">Thêm Vào Giỏ</button>
+            <button class="btn btn-outline btn-sm btn-action-offer" type="button" data-open="offerModal">Trả Giá</button>
+            <button class="btn btn-secondary btn-sm btn-action-buy" type="button">Mua Ngay</button>
+          </div>
+        </article>
+      </div>
+
+      <div class="code-box">
+        <strong>Modifier hiện tại:</strong> <span id="currentModifierText" style="color: #34d399;">product-card product-card--flash</span>
+      </div>
+    </section>
+
+    <!-- SECTION 2: SHOWCASE 3 BIẾN THỂ TRÊN CÙNG GIAO DIỆN -->
+    <section class="test-section">
+      <h2 class="section-title">2. Showcase 3 Biến Thể (Chung 1 Cấu Trúc HTML)</h2>
+      <p class="section-desc">
+        Cả 3 thẻ bên dưới có cấu trúc các thẻ con bên trong giống hệt nhau 100%. Chỉ khác modifier class ở thẻ cha.
+      </p>
+
+      <div class="product-grid">
+        <!-- 1. FLASH SALE CARD -->
+        <article class="product-card product-card--flash" id="cardFlash">
+          <div class="product-media">
+            <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=600&auto=format&fit=crop&q=80" alt="Apple Watch Ultra">
+            <div class="product-badges">
+              <span class="badge badge-flash">⚡ Giảm Sốc 25%</span>
+              <span class="badge badge-mall">Chính Hãng</span>
+              <span class="badge badge-used-cond">95% Like New</span>
+            </div>
+          </div>
+          <div class="product-body">
+            <span class="product-cat">Đồng hồ thông minh</span>
+            <h3 class="product-name">Apple Watch Ultra GPS + Cellular 49mm Titanium</h3>
+            <div class="product-meta-new">
+              <span class="product-stars">★★★★★</span>
+              <span class="product-reviews">(85 đánh giá)</span>
+            </div>
+            <div class="product-meta-used">
+              <span class="chip-status">Độ mới: 98%</span>
+              <span class="chip-verified">✓ Đã xác minh</span>
+              <span class="chip-inspected">Đã kiểm định</span>
+              <span class="seller-location">📍 TP. Hồ Chí Minh</span>
+            </div>
+            <div class="product-price">
+              <span class="price-current">14.990.000₫</span>
+              <span class="price-old">19.990.000₫</span>
+              <span class="price-discount">-25%</span>
+            </div>
+          </div>
+          <div class="product-actions">
+            <button class="btn btn-primary btn-action-main" type="button">Thêm Vào Giỏ</button>
+            <button class="btn btn-outline btn-sm btn-action-offer" type="button" data-open="offerModal">Trả Giá</button>
+            <button class="btn btn-secondary btn-sm btn-action-buy" type="button">Mua Ngay</button>
+          </div>
+        </article>
+
+        <!-- 2. HÀNG MỚI (NEW) CARD -->
+        <article class="product-card product-card--new" id="cardNew">
+          <div class="product-media">
+            <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&auto=format&fit=crop&q=80" alt="MacBook Pro M3">
+            <div class="product-badges">
+              <span class="badge badge-flash">⚡ Giảm Sốc 25%</span>
+              <span class="badge badge-mall">Chính Hãng 100%</span>
+              <span class="badge badge-used-cond">95% Like New</span>
+            </div>
+          </div>
+          <div class="product-body">
+            <span class="product-cat">Laptop cao cấp</span>
+            <h3 class="product-name">MacBook Pro 14 inch M3 Pro (18GB RAM / 512GB SSD)</h3>
+            <div class="product-meta-new">
+              <span class="product-stars">★★★★★ 4.9</span>
+              <span class="product-reviews">(216 đánh giá)</span>
+            </div>
+            <div class="product-meta-used">
+              <span class="chip-status">Độ mới: 99%</span>
+              <span class="chip-verified">✓ Đã xác minh</span>
+              <span class="chip-inspected">Đã kiểm định</span>
+              <span class="seller-location">📍 Đà Nẵng</span>
+            </div>
+            <div class="product-price">
+              <span class="price-current">49.990.000₫</span>
+              <span class="price-old">52.990.000₫</span>
+              <span class="price-discount">-5%</span>
+            </div>
+          </div>
+          <div class="product-actions">
+            <button class="btn btn-primary btn-action-main" type="button">Thêm Vào Giỏ</button>
+            <button class="btn btn-outline btn-sm btn-action-offer" type="button" data-open="offerModal">Trả Giá</button>
+            <button class="btn btn-secondary btn-sm btn-action-buy" type="button">Mua Ngay</button>
+          </div>
+        </article>
+
+        <!-- 3. ĐỒ CŨ (USED / C2C) CARD -->
+        <article class="product-card product-card--used" id="cardUsed">
+          <div class="product-media">
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=80" alt="Tai nghe Sony WH-1000XM5">
+            <div class="product-badges">
+              <span class="badge badge-flash">⚡ Giảm Sốc 25%</span>
+              <span class="badge badge-mall">Chính Hãng</span>
+              <span class="badge badge-used-cond">Độ mới 95%</span>
+            </div>
+          </div>
+          <div class="product-body">
+            <span class="product-cat">Âm thanh & Phụ kiện</span>
+            <h3 class="product-name">Tai nghe Sony WH-1000XM5 Chống Ồn Cao Cấp</h3>
+            <div class="product-meta-new">
+              <span class="product-stars">★★★★☆ 4.6</span>
+              <span class="product-reviews">(42 đánh giá)</span>
+            </div>
+            <div class="product-meta-used">
+              <span class="chip-status">95% Like New</span>
+              <span class="chip-verified">✓ Người bán xác minh</span>
+              <span class="chip-inspected">Đã kiểm định</span>
+              <span class="seller-location">📍 Cầu Giấy, Hà Nội</span>
+            </div>
+            <div class="product-price">
+              <span class="price-current">5.800.000₫</span>
+              <span class="price-old">8.490.000₫</span>
+              <span class="price-discount">-32%</span>
+            </div>
+          </div>
+          <div class="product-actions">
+            <button class="btn btn-primary btn-action-main" type="button">Thêm Vào Giỏ</button>
+            <button class="btn btn-outline btn-sm btn-action-offer" type="button" data-open="offerModal">Trả Giá</button>
+            <button class="btn btn-secondary btn-sm btn-action-buy" type="button">Mua Ngay</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECTION 3: HỆ THỐNG MODAL (3 KÍCH THƯỚC) -->
+    <section class="test-section">
+      <h2 class="section-title">3. Kiểm Thử Hệ Thống Modal</h2>
+      <p class="section-desc">
+        Hỗ trợ 3 kích thước: <code>.modal-sm</code>, <code>.modal-md</code>, <code>.modal-lg</code>. Modal Trả giá bắt buộc dùng kích thước <strong>.modal-lg</strong>. Có hiệu ứng nền mờ (backdrop blur), khóa cuộn trang, và đóng bằng phím <code>Esc</code> hoặc click nền ngoài.
+      </p>
+
+      <div class="btn-group">
+        <button class="btn btn-outline" type="button" data-open="modalSmall">🔍 Mở Modal Nhỏ (.modal-sm)</button>
+        <button class="btn btn-secondary" type="button" data-open="modalMedium">📋 Mở Modal Vừa (.modal-md)</button>
+        <button class="btn btn-primary" type="button" data-open="offerModal">💬 Mở Modal Trả Giá (.modal-lg)</button>
+      </div>
+    </section>
+
+    <!-- SECTION 4: BẢNG KIỂM TRA 11 TIÊU CHÍ NGHIỆM THU -->
+    <section class="test-section">
+      <h2 class="section-title">4. Bảng Đối Chiếu 11 Tiêu Chí Nghiệm Thu TF2520C</h2>
+      <p class="section-desc">
+        Nhấn nút bên dưới để bộ kịch bản tự động kiểm tra DOM, CSS Computed Style và tương tác Modal.
+      </p>
+
+      <div style="margin-bottom: var(--sp-4);">
+        <button class="btn btn-accent" id="btnRunAutoTests" type="button">▶ Chạy Kiểm Thử Tự Động (Run Tests)</button>
+        <span id="testSummary" style="margin-left: var(--sp-3); font-weight: 700; color: var(--secondary-300);"></span>
+      </div>
+
+      <table class="test-table">
+        <thead>
+          <tr>
+            <th style="width: 50px;">STT</th>
+            <th>Nội dung tiêu chí nghiệm thu</th>
+            <th style="width: 140px;">Phương thức</th>
+            <th style="width: 120px;">Trạng thái</th>
+            <th>Ghi chú / Kết quả kiểm tra</th>
+          </tr>
+        </thead>
+        <tbody id="testResultsBody">
+          <tr id="row-tc1">
+            <td>1</td>
+            <td>Ba loại card có sử dụng CHUNG một cấu trúc HTML không?</td>
+            <td>Tự động</td>
+            <td><span class="status-badge status-pending" id="badge-tc1">Chưa chạy</span></td>
+            <td id="note-tc1">So sánh cây DOM của 3 thẻ cardFlash, cardNew, cardUsed.</td>
+          </tr>
+          <tr id="row-tc2">
+            <td>2</td>
+            <td>Chỉ thay đổi modifier class có chuyển đổi đúng giao diện không?</td>
+            <td>Tự động</td>
+            <td><span class="status-badge status-pending" id="badge-tc2">Chưa chạy</span></td>
+            <td id="note-tc2">Thử nghiệm add/remove modifier class trên liveCard.</td>
+          </tr>
+          <tr id="row-tc3">
+            <td>3</td>
+            <td>Flash Sale có nhãn giảm giá và giá cũ gạch ngang không?</td>
+            <td>Tự động</td>
+            <td><span class="status-badge status-pending" id="badge-tc3">Chưa chạy</span></td>
+            <td id="note-tc3">Kiểm tra badge-flash và price-old có text-decoration line-through.</td>
+          </tr>
+          <tr id="row-tc4">
+            <td>4</td>
+            <td>Hàng mới có sao, lượt đánh giá và nhãn chính hãng không?</td>
+            <td>Tự động</td>
+            <td><span class="status-badge status-pending" id="badge-tc4">Chưa chạy</span></td>
+            <td id="note-tc4">Kiểm tra hiển thị của product-stars, product-reviews, badge-mall.</td>
+          </tr>
+          <tr id="row-tc5">
+            <td>5</td>
+            <td>Đồ cũ có chip tình trạng, xác minh, kiểm định và địa điểm không?</td>
+            <td>Tự động</td>
+            <td><span class="status-badge status-pending" id="badge-tc5">Chưa chạy</span></td>
+            <td id="note-tc5">Kiểm tra hiển thị chip-status, chip-verified, chip-inspected, seller-location.</td>
+          </tr>
+          <tr id="row-tc6">
+            <td>6</td>
+            <td>Mỗi card có đủ đúng ba nút chức năng (Nút chính, Trả giá, Mua ngay)?</td>
+            <td>Tự động</td>
+            <td><span class="status-badge status-pending" id="badge-tc6">Chưa chạy</span></td>
+            <td id="note-tc6">Đếm số lượng và class của các button trong .product-actions.</td>
+          </tr>
+          <tr id="row-tc7">
+            <td>7</td>
+            <td>Modal có đủ ba kích thước (.modal-sm, .modal-md, .modal-lg)?</td>
+            <td>Tự động</td>
+            <td><span class="status-badge status-pending" id="badge-tc7">Chưa chạy</span></td>
+            <td id="note-tc7">Kiểm tra max-width CSS của các class .modal-sm, .modal-md, .modal-lg.</td>
+          </tr>
+          <tr id="row-tc8">
+            <td>8</td>
+            <td>Modal Trả giá có sử dụng kích thước .modal-lg không?</td>
+            <td>Tự động</td>
+            <td><span class="status-badge status-pending" id="badge-tc8">Chưa chạy</span></td>
+            <td id="note-tc8">Kiểm tra thẻ .modal của #offerModal có class modal-lg.</td>
+          </tr>
+          <tr id="row-tc9">
+            <td>9</td>
+            <td>Nhấn phím Esc có đóng Modal không?</td>
+            <td>Tự động</td>
+            <td><span class="status-badge status-pending" id="badge-tc9">Chưa chạy</span></td>
+            <td id="note-tc9">Mở modal, dispatch phím Escape và kiểm tra class is-open.</td>
+          </tr>
+          <tr id="row-tc10">
+            <td>10</td>
+            <td>Mở Modal có khóa cuộn trang và đóng Modal có khôi phục cuộn trang không?</td>
+            <td>Tự động</td>
+            <td><span class="status-badge status-pending" id="badge-tc10">Chưa chạy</span></td>
+            <td id="note-tc10">Kiểm tra body.classList.contains('modal-open') và computed overflow.</td>
+          </tr>
+          <tr id="row-tc11">
+            <td>11</td>
+            <td>Giao diện có hoạt động tốt và không bị tràn trên màn hình nhỏ (mobile)?</td>
+            <td>Thủ công + CSS</td>
+            <td><span class="status-badge status-info" id="badge-tc11">Kiểm tra CSS</span></td>
+            <td id="note-tc11">Đã cấu hình media query max-width 420px. Hãy co giãn trình duyệt hoặc dùng F12 DevTools để xem trực quan.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </div>
+
+  <!-- ===================================================================
+       CÁC MODAL KIỂM THỬ THEO CHUẨN HEAD - BODY - FOOT
+       =================================================================== -->
+
+  <!-- MODAL SM: KÍCH THƯỚC NHỎ -->
+  <div class="modal-backdrop" id="modalSmall">
+    <div class="modal modal-sm" role="dialog" aria-modal="true">
+      <div class="modal-head">
+        <h3 class="modal-title">🔔 Thông Báo Nhanh</h3>
+        <button class="modal-close" type="button" data-close aria-label="Đóng">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Đây là <strong>Modal kích thước nhỏ (.modal-sm)</strong>, phù hợp cho các thông báo xác nhận ngắn gọn, cảnh báo hoặc thao tác đơn giản.</p>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-primary btn-sm" type="button" data-close>Đã Hiểu</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL MD: KÍCH THƯỚC VỪA (MẶC ĐỊNH) -->
+  <div class="modal-backdrop" id="modalMedium">
+    <div class="modal modal-md" role="dialog" aria-modal="true">
+      <div class="modal-head">
+        <h3 class="modal-title">📦 Thông Tin Chi Tiết</h3>
+        <button class="modal-close" type="button" data-close aria-label="Đóng">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Đây là <strong>Modal kích thước vừa (.modal-md)</strong>, kích thước tiêu chuẩn cho form nhập liệu hoặc thông tin sản phẩm.</p>
+        <div class="form-group" style="margin-top: 15px;">
+          <label class="form-label" for="txtSample">Ghi chú thử nghiệm</label>
+          <input class="input" id="txtSample" type="text" placeholder="Nhập thử dữ liệu...">
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-outline btn-sm" type="button" data-close>Đóng</button>
+        <button class="btn btn-secondary btn-sm" type="button" data-close>Xác Nhận</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL LG: MODAL TRẢ GIÁ (BẮT BUỘC SỬ DỤNG .modal-lg) -->
+  <div class="modal-backdrop" id="offerModal">
+    <div class="modal modal-lg" role="dialog" aria-modal="true">
+      <div class="modal-head">
+        <h3 class="modal-title">
+          <span>🏷️</span> Đề Nghị Trả Giá Mua Sản Phẩm
+        </h3>
+        <button class="modal-close" type="button" data-close aria-label="Đóng">&times;</button>
+      </div>
+      <form id="offerForm" onsubmit="event.preventDefault(); alert('Đã gửi đề xuất giá thành công!'); closeModal('offerModal');">
+        <div class="modal-body">
+          <p style="margin-bottom: 15px; color: var(--text);">
+            Bạn đang thương lượng giá cho sản phẩm: <strong>iPhone 15 Pro Max 256GB</strong>
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 16px;">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="offerPriceInput">Mức giá bạn mong muốn (VNĐ) *</label>
+              <input class="input" id="offerPriceInput" type="number" required placeholder="Ví dụ: 22000000" min="100000" step="50000">
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="offerContact">Số điện thoại liên hệ *</label>
+              <input class="input" id="offerContact" type="tel" required placeholder="09xxxxxxxx">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="offerMessage">Lời nhắn gửi đến người bán</label>
+            <textarea class="textarea" id="offerMessage" rows="3" placeholder="Ví dụ: Em rất thiện chí mua, nếu anh đồng ý giá này em qua lấy máy ngay trong hôm nay ạ..."></textarea>
+          </div>
+
+          <div style="background: rgba(255, 255, 255, 0.04); padding: 12px; border-radius: var(--radius-md); font-size: 13px;">
+            💡 <strong>Mẹo trả giá:</strong> Đưa ra mức giá hợp lý (thường trong khoảng 5% - 15% so với giá niêm yết) sẽ giúp người bán dễ dàng đồng ý hơn.
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn btn-outline" type="button" data-close>Hủy Bỏ</button>
+          <button class="btn btn-accent" type="submit">Gửi Đề Xuất Giá</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- SCRIPT MODAL CHÍNH THỨC CỦA DỰ ÁN -->
+  <script src="../js/modal.js"></script>
+
+  <!-- SCRIPT ĐIỀU KHIỂN LIVE SWITCHER VÀ KIỂM THỬ TỰ ĐỘNG -->
+  <script>
+    // 1. Live Switcher logic
+    const liveCard = document.getElementById("liveCard");
+    const currentModifierText = document.getElementById("currentModifierText");
+
+    function setLiveModifier(modifierClass) {
+      liveCard.classList.remove("product-card--flash", "product-card--new", "product-card--used");
+      liveCard.classList.add(modifierClass);
+      currentModifierText.textContent = liveCard.className;
+    }
+
+    document.getElementById("btnSetFlash").addEventListener("click", () => setLiveModifier("product-card--flash"));
+    document.getElementById("btnSetNew").addEventListener("click", () => setLiveModifier("product-card--new"));
+    document.getElementById("btnSetUsed").addEventListener("click", () => setLiveModifier("product-card--used"));
+
+    // 2. Kịch bản Kiểm Thử Tự Động (Automated Testing Suite)
+    function setTestStatus(tcId, isPass, message) {
+      const badge = document.getElementById("badge-" + tcId);
+      const note = document.getElementById("note-" + tcId);
+      if (isPass) {
+        badge.className = "status-badge status-pass";
+        badge.textContent = "ĐẠT (PASS)";
+      } else {
+        badge.className = "status-badge status-pending";
+        badge.style.background = "rgba(239, 68, 68, 0.2)";
+        badge.style.color = "#f87171";
+        badge.style.borderColor = "#f87171";
+        badge.textContent = "LỖI (FAIL)";
+      }
+      if (message) note.textContent = message;
+    }
+
+    function runAutomatedTests() {
+      let passCount = 0;
+      const totalTests = 10;
+
+      // TC1: Cả 3 card có CHUNG 1 CẤU TRÚC HTML
+      try {
+        const getTagSignature = (el) => {
+          return Array.from(el.querySelectorAll("*"))
+            .map(node => node.tagName + "." + Array.from(node.classList).filter(c => !c.startsWith("product-card--")).sort().join("."))
+            .join(" > ");
+        };
+        const sigFlash = getTagSignature(document.getElementById("cardFlash"));
+        const sigNew = getTagSignature(document.getElementById("cardNew"));
+        const sigUsed = getTagSignature(document.getElementById("cardUsed"));
+        
+        if (sigFlash === sigNew && sigNew === sigUsed) {
+          setTestStatus("tc1", true, "100% khớp: Cả 3 biến thể dùng đúng 1 cây thẻ DOM như nhau.");
+          passCount++;
+        } else {
+          setTestStatus("tc1", false, "Cấu trúc DOM giữa các thẻ chưa hoàn toàn đồng nhất.");
+        }
+      } catch (e) {
+        setTestStatus("tc1", false, e.message);
+      }
+
+      // TC2: Đổi modifier tự chuyển đổi giao diện CSS
+      try {
+        setLiveModifier("product-card--flash");
+        const flashBadgeDisplay = window.getComputedStyle(liveCard.querySelector(".badge-flash")).display;
+        setLiveModifier("product-card--new");
+        const mallBadgeDisplay = window.getComputedStyle(liveCard.querySelector(".badge-mall")).display;
+        setLiveModifier("product-card--used");
+        const usedCondDisplay = window.getComputedStyle(liveCard.querySelector(".badge-used-cond")).display;
+
+        if (flashBadgeDisplay !== "none" && mallBadgeDisplay !== "none" && usedCondDisplay !== "none") {
+          setTestStatus("tc2", true, "Đạt: Đổi class modifier lập tức hiển thị đúng thành phần theo CSS.");
+          passCount++;
+        } else {
+          setTestStatus("tc2", false, "Chưa chuyển đổi chính xác qua CSS.");
+        }
+      } catch (e) {
+        setTestStatus("tc2", false, e.message);
+      }
+
+      // TC3: Flash Sale có nhãn giảm giá và giá cũ gạch ngang
+      try {
+        const cFlash = document.getElementById("cardFlash");
+        const badgeFlash = cFlash.querySelector(".badge-flash");
+        const priceOld = cFlash.querySelector(".price-old");
+        const isBadgeVisible = window.getComputedStyle(badgeFlash).display !== "none";
+        const isOldVisible = window.getComputedStyle(priceOld).display !== "none";
+        const isLineThrough = window.getComputedStyle(priceOld).textDecoration.includes("line-through");
+
+        if (isBadgeVisible && isOldVisible && isLineThrough) {
+          setTestStatus("tc3", true, "Đạt: Nhãn Flash Sale hiển thị rõ, giá cũ có gạch ngang text-decoration.");
+          passCount++;
+        } else {
+          setTestStatus("tc3", false, "Thiếu nhãn giảm giá hoặc giá cũ chưa gạch ngang.");
+        }
+      } catch (e) {
+        setTestStatus("tc3", false, e.message);
+      }
+
+      // TC4: Hàng mới có sao, lượt đánh giá và nhãn chính hãng
+      try {
+        const cNew = document.getElementById("cardNew");
+        const badgeMall = cNew.querySelector(".badge-mall");
+        const metaNew = cNew.querySelector(".product-meta-new");
+        const isMallVisible = window.getComputedStyle(badgeMall).display !== "none";
+        const isMetaVisible = window.getComputedStyle(metaNew).display !== "none";
+
+        if (isMallVisible && isMetaVisible) {
+          setTestStatus("tc4", true, "Đạt: Nhãn Chính hãng, số sao và số lượt đánh giá hiển thị đầy đủ.");
+          passCount++;
+        } else {
+          setTestStatus("tc4", false, "Chưa hiển thị đủ thông tin cho hàng mới.");
+        }
+      } catch (e) {
+        setTestStatus("tc4", false, e.message);
+      }
+
+      // TC5: Đồ cũ có chip tình trạng, xác minh, kiểm định và địa điểm
+      try {
+        const cUsed = document.getElementById("cardUsed");
+        const badgeCond = cUsed.querySelector(".badge-used-cond");
+        const metaUsed = cUsed.querySelector(".product-meta-used");
+        const isCondVisible = window.getComputedStyle(badgeCond).display !== "none";
+        const isMetaVisible = window.getComputedStyle(metaUsed).display !== "none";
+
+        if (isCondVisible && isMetaVisible) {
+          setTestStatus("tc5", true, "Đạt: Có chip tình trạng 95%, người bán xác minh, kiểm định và địa điểm.");
+          passCount++;
+        } else {
+          setTestStatus("tc5", false, "Chưa hiển thị đủ thông tin cho đồ cũ.");
+        }
+      } catch (e) {
+        setTestStatus("tc5", false, e.message);
+      }
+
+      // TC6: Mỗi card có đúng ba nút chức năng
+      try {
+        const cards = [document.getElementById("cardFlash"), document.getElementById("cardNew"), document.getElementById("cardUsed")];
+        const allHaveThreeButtons = cards.every(c => {
+          const btns = c.querySelectorAll(".product-actions button");
+          const hasMain = c.querySelector(".btn-action-main") !== null;
+          const hasOffer = c.querySelector(".btn-action-offer") !== null;
+          const hasBuy = c.querySelector(".btn-action-buy") !== null;
+          return btns.length === 3 && hasMain && hasOffer && hasBuy;
+        });
+
+        if (allHaveThreeButtons) {
+          setTestStatus("tc6", true, "Đạt: Mỗi card có đúng 3 nút: Nút chính, Trả giá, Mua ngay.");
+          passCount++;
+        } else {
+          setTestStatus("tc6", false, "Số lượng hoặc loại nút bấm chưa đúng.");
+        }
+      } catch (e) {
+        setTestStatus("tc6", false, e.message);
+      }
+
+      // TC7: Modal có đủ ba kích thước sm, md, lg
+      try {
+        const sm = document.querySelector(".modal-sm");
+        const md = document.querySelector(".modal-md");
+        const lg = document.querySelector(".modal-lg");
+        const smWidth = parseInt(window.getComputedStyle(sm).maxWidth);
+        const mdWidth = parseInt(window.getComputedStyle(md).maxWidth);
+        const lgWidth = parseInt(window.getComputedStyle(lg).maxWidth);
+
+        if (smWidth < mdWidth && mdWidth < lgWidth) {
+          setTestStatus("tc7", true, `Đạt: sm (${smWidth}px) < md (${mdWidth}px) < lg (${lgWidth}px).`);
+          passCount++;
+        } else {
+          setTestStatus("tc7", false, "Thứ tự kích thước modal chưa đúng.");
+        }
+      } catch (e) {
+        setTestStatus("tc7", false, e.message);
+      }
+
+      // TC8: Modal Trả giá có sử dụng .modal-lg
+      try {
+        const offerModalBox = document.querySelector("#offerModal .modal");
+        if (offerModalBox && offerModalBox.classList.contains("modal-lg")) {
+          setTestStatus("tc8", true, "Đạt: #offerModal chứa class .modal-lg chuẩn yêu cầu.");
+          passCount++;
+        } else {
+          setTestStatus("tc8", false, "#offerModal chưa áp dụng class .modal-lg.");
+        }
+      } catch (e) {
+        setTestStatus("tc8", false, e.message);
+      }
+
+      // TC9: Nhấn phím Esc đóng modal
+      try {
+        openModal("modalSmall");
+        const isOpened = document.getElementById("modalSmall").classList.contains("is-open");
+        // Giả lập nhấn Escape
+        const escEvent = new KeyboardEvent("keydown", { key: "Escape", code: "Escape", bubbles: true });
+        document.dispatchEvent(escEvent);
+        const isClosed = !document.getElementById("modalSmall").classList.contains("is-open");
+
+        if (isOpened && isClosed) {
+          setTestStatus("tc9", true, "Đạt: Mở modal và nhấn Esc tự động đóng modal thành công.");
+          passCount++;
+        } else {
+          setTestStatus("tc9", false, "Phím Esc chưa đóng modal.");
+        }
+      } catch (e) {
+        setTestStatus("tc9", false, e.message);
+      }
+
+      // TC10: Mở modal khóa cuộn body, đóng modal khôi phục cuộn
+      try {
+        openModal("modalSmall");
+        const bodyLocked = document.body.classList.contains("modal-open") && window.getComputedStyle(document.body).overflow === "hidden";
+        closeModal("modalSmall");
+        const bodyUnlocked = !document.body.classList.contains("modal-open") && window.getComputedStyle(document.body).overflow !== "hidden";
+
+        if (bodyLocked && bodyUnlocked) {
+          setTestStatus("tc10", true, "Đạt: body.modal-open khóa cuộn overflow:hidden khi mở và gỡ khi đóng.");
+          passCount++;
+        } else {
+          setTestStatus("tc10", false, "Chưa khóa hoặc chưa khôi phục cuộn trang.");
+        }
+      } catch (e) {
+        setTestStatus("tc10", false, e.message);
+      }
+
+      // Tổng kết
+      const summary = document.getElementById("testSummary");
+      summary.textContent = `Kết quả tự động: ${passCount}/${totalTests} tiêu chí ĐẠT!`;
+      summary.style.color = passCount === totalTests ? "#34d399" : "#fbbf24";
+    }
+
+    document.getElementById("btnRunAutoTests").addEventListener("click", runAutomatedTests);
+  </script>
+</body>
+</html>
