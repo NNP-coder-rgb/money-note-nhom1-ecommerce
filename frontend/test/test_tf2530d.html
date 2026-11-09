@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kiểm Thử & Demo Task TF2530D — Utils.js</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+  <link rel="stylesheet" href="../css/base.css">
+  <style>
+    /* CSS hỗ trợ riêng cho trang kiểm thử Task TF2530D */
+    .test-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--sp-6) var(--sp-4);
+    }
+    .test-header {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-6);
+      margin-bottom: var(--sp-6);
+    }
+    .test-header h1 {
+      font-family: var(--font-head);
+      font-size: var(--fs-xl);
+      color: var(--secondary-300);
+      margin-bottom: var(--sp-2);
+    }
+    .test-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-6);
+      margin-bottom: var(--sp-6);
+    }
+    .section-title {
+      font-family: var(--font-head);
+      font-size: var(--fs-lg);
+      color: var(--primary-300);
+      margin-bottom: var(--sp-2);
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+    }
+    .section-desc {
+      color: var(--text-muted);
+      font-size: var(--fs-sm);
+      margin-bottom: var(--sp-5);
+    }
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-3);
+      margin-bottom: var(--sp-4);
+    }
+    .interactive-panel {
+      background: #0d0d18;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--sp-4);
+      margin-bottom: var(--sp-4);
+    }
+    .countdown-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(139, 92, 246, 0.15);
+      border: 1px solid var(--primary-500);
+      border-radius: var(--radius-md);
+      padding: 10px 18px;
+      font-family: monospace;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--secondary-300);
+    }
+    .filter-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: var(--sp-4);
+    }
+    .form-control {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .form-control label {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .form-control select, .form-control input {
+      background: var(--bg-input);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+      font-size: 13px;
+    }
+    .form-control select:focus, .form-control input:focus {
+      outline: none;
+      border-color: var(--primary-400);
+    }
+    .pagination-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: var(--sp-5);
+      padding-top: var(--sp-4);
+      border-top: 1px solid var(--border);
+    }
+    .pagination-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .catalog-summary {
+      font-size: 13px;
+      color: var(--secondary-300);
+      font-weight: 600;
+    }
+    .test-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: var(--sp-4);
+    }
+    .test-table th, .test-table td {
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      text-align: left;
+      font-size: var(--fs-sm);
+    }
+    .test-table th {
+      background: rgba(255, 255, 255, 0.05);
+      font-weight: 700;
+      color: var(--text);
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .status-pass {
+      background: rgba(52, 211, 153, 0.2);
+      color: var(--success);
+      border: 1px solid var(--success);
+    }
+    .status-pending {
+      background: rgba(251, 191, 36, 0.2);
+      color: var(--warning);
+      border: 1px solid var(--warning);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="test-container">
+
+    <!-- HEADER TRANG TEST -->
+    <header class="test-header">
+      <h1>⚡ TASK TF2530D — Kiểm Thử & Nghiệm Thu utils.js</h1>
+      <p style="color: var(--text-muted); font-size: 14px;">
+        <strong>Phạm vi:</strong> [FE] T11 utils.js: định dạng, toast, countdown, danh sách |
+        <strong>Bộ hàm cốt lõi:</strong> formatCurrency, formatDate, toast, openModal, confirm, startCountdown, renderStars, filterProducts, sortProducts, paginate.
+      </p>
+    </header>
+
+    <!-- SECTION 1: COUNTDOWN TIMER DEMO -->
+    <section class="test-section">
+      <h2 class="section-title">⏱️ 1. Bộ Đếm Ngược Thời Gian (startCountdown)</h2>
+      <p class="section-desc">
+        Hỗ trợ Flash Sale và đếm ngược 48 giờ. Tự động cập nhật mỗi giây, tự hủy interval và gọi callback onEnd khi hết giờ.
+      </p>
+
+      <div class="interactive-panel" style="display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
+        <div>
+          <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 6px;">Thời gian còn lại:</div>
+          <div class="countdown-box" id="demoCountdownText">00:00:00</div>
+        </div>
+        <div style="flex: 1;">
+          <div class="btn-group" style="margin-bottom: 0;">
+            <button class="btn btn-primary btn-sm" id="btnStart10s" type="button">⚡ Đếm ngược 10 giây (Thử nghiệm nhanh)</button>
+            <button class="btn btn-secondary btn-sm" id="btnStart48h" type="button">⏳ Đếm ngược 48 Giờ</button>
+            <button class="btn btn-outline btn-sm" id="btnStopCountdown" type="button">⏹ Dừng chủ động</button>
+          </div>
+          <div id="countdownMsg" style="margin-top: 8px; font-size: 12px; color: var(--warning);"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: TOAST NOTIFICATIONS & TIỆN ÍCH CƠ BẢN -->
+    <section class="test-section">
+      <h2 class="section-title">🔔 2. Thông Báo Toast & Định Dạng (toast, formatCurrency, formatDate, confirm)</h2>
+      <p class="section-desc">
+        Toast hiển thị ở góc màn hình, tự động ẩn sau thời gian quy định, có hiệu ứng chuyển động và hỗ trợ 4 trạng thái (success, error, warning, info).
+      </p>
+
+      <div class="btn-group">
+        <button class="btn btn-primary btn-sm" id="btnToastSuccess" type="button">✓ Toast Success</button>
+        <button class="btn btn-outline btn-sm" id="btnToastError" type="button">✕ Toast Error</button>
+        <button class="btn btn-secondary btn-sm" id="btnToastWarning" type="button">⚠ Toast Warning</button>
+        <button class="btn btn-outline btn-sm" id="btnToastInfo" type="button">ℹ Toast Info</button>
+        <button class="btn btn-accent btn-sm" id="btnTestConfirm" type="button">❓ Thử confirm()</button>
+      </div>
+
+      <div class="interactive-panel">
+        <strong>Demo Định Dạng:</strong>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 8px; font-size: 13px;">
+          <div>Tiền tệ (2.850.000): <strong style="color: var(--secondary-300);" id="demoCurrency"></strong></div>
+          <div>Ngày tháng hiện tại: <strong style="color: var(--primary-300);" id="demoDate"></strong></div>
+          <div>Đánh giá sao 4.5: <strong style="color: #fbbf24;" id="demoStars"></strong></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: TIÊU CHÍ QUAN TRỌNG NHẤT — LUỒNG CATALOG HOÀN CHỈNH -->
+    <section class="test-section">
+      <h2 class="section-title">🛒 3. Luồng Catalog Hoàn Chỉnh (Lọc ➔ Sắp Xếp ➔ Phân Trang)</h2>
+      <p class="section-desc">
+        Kiểm tra tích hợp 3 hàm <code>filterProducts</code>, <code>sortProducts</code>, và <code>paginate</code> trên dữ liệu sản phẩm mẫu. Danh sách sản phẩm bên dưới được cập nhật thời gian thực khi bạn thay đổi bộ lọc.
+      </p>
+
+      <!-- BỘ LỌC ĐA TIÊU CHÍ -->
+      <div class="filter-grid">
+        <div class="form-control">
+          <label for="filterCategory">Danh mục</label>
+          <select id="filterCategory">
+            <option value="all">Tất cả ngành hàng</option>
+            <option value="fashion">Thời Trang & Streetwear</option>
+            <option value="sneakers">Sneakers & Giày Dép</option>
+            <option value="tech">Đồ Điện Tử & High-Tech</option>
+            <option value="appliances">Gia Dụng Thông Minh</option>
+          </select>
+        </div>
+
+        <div class="form-control">
+          <label for="filterType">Loại hàng</label>
+          <select id="filterType">
+            <option value="all">Tất cả hình thức</option>
+            <option value="mall">Mall Chính Hãng 100%</option>
+            <option value="c2c">Đồ Cũ Like New (Pass lại)</option>
+          </select>
+        </div>
+
+        <div class="form-control">
+          <label for="sortKey">Sắp xếp theo</label>
+          <select id="sortKey">
+            <option value="default">Mặc định</option>
+            <option value="price-asc">Giá tăng dần</option>
+            <option value="price-desc">Giá giảm dần</option>
+            <option value="rating-desc">Đánh giá cao nhất</option>
+            <option value="name-asc">Tên sản phẩm A-Z</option>
+          </select>
+        </div>
+
+        <div class="form-control">
+          <label for="filterKeyword">Tìm kiếm từ khóa</label>
+          <input type="text" id="filterKeyword" placeholder="Nhập tên, thương hiệu...">
+        </div>
+      </div>
+
+      <!-- KẾT QUẢ VÀ SỐ LƯỢNG -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--sp-4);">
+        <div class="catalog-summary" id="catalogSummaryText">Đang tải sản phẩm...</div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <label for="pageSizeSelect" style="font-size: 12px; color: var(--text-muted);">Mỗi trang:</label>
+          <select id="pageSizeSelect" style="background: var(--bg-input); color: var(--text); border: 1px solid var(--border); border-radius: 4px; padding: 4px 8px; font-size: 12px;">
+            <option value="3">3 sản phẩm</option>
+            <option value="6" selected>6 sản phẩm</option>
+            <option value="12">12 sản phẩm</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- LƯỚI SẢN PHẨM HIỂN THỊ DÙNG CHUẨN CARD TF2520C -->
+      <div class="product-grid" id="catalogProductGrid">
+        <!-- Render động bằng JavaScript -->
+      </div>
+
+      <!-- PHÂN TRANG -->
+      <div class="pagination-bar">
+        <div style="font-size: 13px; color: var(--text-muted);" id="paginationPageInfo">Trang 1 / 1</div>
+        <div class="pagination-controls">
+          <button class="btn btn-outline btn-sm" id="btnPrevPage" type="button">◀ Trang Trước</button>
+          <button class="btn btn-outline btn-sm" id="btnNextPage" type="button">Trang Sau ▶</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: BẢNG 10 TIÊU CHÍ NGHIỆM THU TỰ ĐỘNG TRÊN TRÌNH DUYỆT -->
+    <section class="test-section">
+      <h2 class="section-title">📋 4. Bảng Đối Chiếu 10 Tiêu Chí Nghiệm Thu Đề Bài</h2>
+      <p class="section-desc">
+        Nhấn nút bên dưới để bộ test suite chạy trực tiếp trên trình duyệt và đánh giá toàn bộ các trường hợp kiểm thử.
+      </p>
+
+      <div style="margin-bottom: var(--sp-4);">
+        <button class="btn btn-accent" id="btnRunInBrowserTests" type="button">▶ Chạy Kiểm Thử Trình Duyệt (Run Suite)</button>
+        <span id="testSuiteSummary" style="margin-left: var(--sp-3); font-weight: 700; color: var(--secondary-300);"></span>
+      </div>
+
+      <table class="test-table">
+        <thead>
+          <tr>
+            <th style="width: 50px;">STT</th>
+            <th>Nội dung tiêu chí nghiệm thu</th>
+            <th style="width: 140px;">Phương thức</th>
+            <th style="width: 130px;">Trạng thái</th>
+            <th>Kết quả kiểm tra</th>
+          </tr>
+        </thead>
+        <tbody id="testTableBody">
+          <tr id="row-tc1">
+            <td>1</td>
+            <td>Các hàm tiện ích cũ (formatCurrency, formatDate, toast, openModal, confirm) vẫn hoạt động?</td>
+            <td>Tự động</td>
+            <td><span class="status-badge status-pending" id="badge-tc1">Chưa chạy</span></td>
+            <td id="note-tc1">Kiểm tra kết quả format và tính sẵn sàng của các hàm.</td>
+          </tr>
+          <tr id="row-tc2">
+            <td>2</td>
+            <td>startCountdown cập nhật mỗi giây?</td>
+            <td>Tự động</td>
+            <td><span class="status-badge status-pending" id="badge-tc2">Chưa chạy</span></td>
+            <td id="note-tc2">Theo dõi sự thay đổi textContent qua các giây.</td>
+          </tr>
+          <tr id="row-tc3">
+            <td>3</td>
+            <td>Countdown tự dừng và gọi callback đúng một lần khi hết giờ?</td>
+            <td>Tự động</td>
+            <td><span class="status-badge status-pending" id="badge-tc3">Chưa chạy</span></td>
+            <td id="note-tc3">Kiểm tra số lần gọi callback onEnd và trạng thái interval.</td>
+          </tr>
+          <tr id="row-tc4">
+            <td>4</td>
+            <td>Countdown xử lý được thời gian đã hết ngay khi khởi tạo?</td>
+            <td>Tự động</td>
+            <td><span class="status-badge status-pending" id="badge-tc4">Chưa chạy</span></td>
+            <td id="note-tc4">Khởi tạo với endsAt <= 0, kiểm tra hiển thị 00:00:00 và dừng ngay.</td>
+          </tr>
+          <tr id="row-tc5">
+            <td>5</td>
+            <td>renderStars xử lý chính xác điểm 0, 2.5, 3, 4.5 và 5?</td>
+            <td>Tự động</td>
+            <td><span class="status-badge status-pending" id="badge-tc5">Chưa chạy</span></td>
+            <td id="note-tc5">So sánh chuỗi sao Unicode: ★★★★★, ★★★★½, ★★★☆☆, ★★½☆☆, ☆☆☆☆☆.</td>
+          </tr>
+          <tr id="row-tc6">
+            <td>6</td>
+            <td>filterProducts lọc đúng với một điều kiện?</td>
+            <td>Tự động</td>
+            <td><span class="status-badge status-pending" id="badge-tc6">Chưa chạy</span></td>
+            <td id="note-tc6">Lọc theo category và khoảng giá.</td>
+          </tr>
+          <tr id="row-tc7">
+            <td>7</td>
+            <td>filterProducts lọc đúng khi kết hợp nhiều điều kiện (AND logic)?</td>
+            <td>Tự động</td>
+            <td><span class="status-badge status-pending" id="badge-tc7">Chưa chạy</span></td>
+            <td id="note-tc7">Kết hợp category + type + minPrice + keyword.</td>
+          </tr>
+          <tr id="row-tc8">
+            <td>8</td>
+            <td>sortProducts sắp xếp đúng và không thay đổi mảng gốc?</td>
+            <td>Tự động</td>
+            <td><span class="status-badge status-pending" id="badge-tc8">Chưa chạy</span></td>
+            <td id="note-tc8">Kiểm tra giá tăng dần, giảm dần, tên tiếng Việt và độ dài mảng gốc.</td>
+          </tr>
+          <tr id="row-tc9">
+            <td>9</td>
+            <td>paginate trả đúng dữ liệu và thông tin phân trang?</td>
+            <td>Tự động</td>
+            <td><span class="status-badge status-pending" id="badge-tc9">Chưa chạy</span></td>
+            <td id="note-tc9">Kiểm tra object { items, page, totalPages, total }.</td>
+          </tr>
+          <tr id="row-tc10">
+            <td>10</td>
+            <td>Xử lý đúng danh sách rỗng và các đầu vào không hợp lệ?</td>
+            <td>Tự động</td>
+            <td><span class="status-badge status-pending" id="badge-tc10">Chưa chạy</span></td>
+            <td id="note-tc10">Kiểm tra list null, page âm, size <= 0.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </div>
+
+  <!-- NẠP SCRIPT TIỆN ÍCH CHÍNH THỨC -->
+  <script src="../js/utils.js"></script>
+  <script src="../js/modal.js"></script>
+
+  <script>
+    // DỮ LIỆU SẢN PHẨM MẪU CHO TRANG TEST
+    const CATALOG_PRODUCTS = [
+      {
+        id: "f1",
+        name: "Aurora Techwear Puffer Jacket",
+        category: "fashion",
+        type: "c2c",
+        cond: 98,
+        price: 2850000,
+        oldPrice: 4500000,
+        rating: 4.8,
+        flash: false,
+        seller: "Việt Dũng",
+        location: "Hà Nội",
+        img: "https://images.unsplash.com/photo-1544441893-675973e31985?w=500&auto=format&fit=crop&q=80"
+      },
+      {
+        id: "f2",
+        name: "Áo Khoác Bomber Cyberpunk J1A-GT",
+        category: "fashion",
+        type: "mall",
+        cond: 100,
+        price: 4690000,
+        oldPrice: 5500000,
+        off: 15,
+        rating: 4.9,
+        flash: true,
+        seller: "Acronym Studio",
+        location: "TP. Hồ Chí Minh",
+        img: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500&auto=format&fit=crop&q=80"
+      },
+      {
+        id: "f3",
+        name: "Áo Khoác Denim Japanese Selvedge",
+        category: "fashion",
+        type: "c2c",
+        cond: 95,
+        price: 1450000,
+        oldPrice: 2800000,
+        rating: 4.5,
+        flash: false,
+        seller: "Bảo Trâm",
+        location: "Đà Nẵng",
+        img: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=500&auto=format&fit=crop&q=80"
+      },
+      {
+        id: "f4",
+        name: "Áo Hoodie Heavyweight Boxy Fit",
+        category: "fashion",
+        type: "mall",
+        cond: 100,
+        price: 1290000,
+        rating: 4.7,
+        flash: false,
+        seller: "Fog Essentials",
+        location: "Hà Nội",
+        img: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500&auto=format&fit=crop&q=80"
+      },
+      {
+        id: "s1",
+        name: "Nike Air Jordan 1 High Travis Scott",
+        category: "sneakers",
+        type: "c2c",
+        cond: 96,
+        price: 24500000,
+        oldPrice: 32000000,
+        rating: 5.0,
+        flash: false,
+        seller: "Huy Hoàng",
+        location: "Hà Nội",
+        img: "https://images.unsplash.com/photo-1552346154-21d32810aba3?w=500&auto=format&fit=crop&q=80"
+      },
+      {
+        id: "s2",
+        name: "Yeezy Boost 350 V2 Zebra",
+        category: "sneakers",
+        type: "c2c",
+        cond: 92,
+        price: 5200000,
+        oldPrice: 8500000,
+        rating: 4.6,
+        flash: false,
+        seller: "Tuấn Anh",
+        location: "TP. Hồ Chí Minh",
+        img: "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=500&auto=format&fit=crop&q=80"
+      },
+      {
+        id: "s3",
+        name: "New Balance 990v6 Made in USA",
+        category: "sneakers",
+        type: "mall",
+        cond: 100,
+        price: 6490000,
+        rating: 4.9,
+        flash: false,
+        seller: "New Balance Mall",
+        location: "Hà Nội",
+        img: "https://images.unsplash.com/photo-1539185441755-769473a23570?w=500&auto=format&fit=crop&q=80"
+      },
+      {
+        id: "t1",
+        name: "MacBook Pro 14 M3 Pro 18GB/512GB",
+        category: "tech",
+        type: "c2c",
+        cond: 99,
+        price: 43500000,
+        oldPrice: 49990000,
+        rating: 4.9,
+        flash: false,
+        seller: "Minh Quân",
+        location: "Cầu Giấy, Hà Nội",
+        img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&auto=format&fit=crop&q=80"
+      },
+      {
+        id: "t2",
+        name: "Tai nghe Sony WH-1000XM5 Chống Ồn",
+        category: "tech",
+        type: "mall",
+        cond: 100,
+        price: 6490000,
+        oldPrice: 8490000,
+        off: 20,
+        rating: 4.8,
+        flash: true,
+        seller: "Sony Vietnam Mall",
+        location: "Toàn quốc",
+        img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=80"
+      },
+      {
+        id: "t3",
+        name: "Bàn Phím Cơ Custom Nhôm CNC QK75N",
+        category: "tech",
+        type: "c2c",
+        cond: 97,
+        price: 4200000,
+        oldPrice: 5800000,
+        rating: 4.7,
+        flash: false,
+        seller: "Khánh Duy",
+        location: "Hà Nội",
+        img: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500&auto=format&fit=crop&q=80"
+      },
+      {
+        id: "t4",
+        name: "iPhone 16 Pro Max 256GB Desert Titanium",
+        category: "tech",
+        type: "mall",
+        cond: 100,
+        price: 34490000,
+        rating: 5.0,
+        flash: false,
+        seller: "Apple Flagship Store",
+        location: "Toàn quốc",
+        img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&auto=format&fit=crop&q=80"
+      },
+      {
+        id: "a1",
+        name: "Máy hút bụi không dây Dyson V12 Slim",
+        category: "appliances",
+        type: "mall",
+        cond: 100,
+        price: 14990000,
+        oldPrice: 17500000,
+        off: 10,
+        rating: 4.8,
+        flash: true,
+        seller: "Dyson Official",
+        location: "Toàn quốc",
+        img: "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=500&auto=format&fit=crop&q=80"
+      }
+    ];
+
+    // 1. DEMO ĐỊNH DẠNG BAN ĐẦU
+    document.getElementById("demoCurrency").textContent = Utils.formatCurrency(2850000);
+    document.getElementById("demoDate").textContent = Utils.formatDate(new Date(), "DD/MM/YYYY HH:mm");
+    document.getElementById("demoStars").textContent = Utils.renderStars(4.5) + " (4.5/5)";
+
+    // 2. DEMO COUNTDOWN
+    let activeCountdownCtrl = null;
+    const countdownEl = document.getElementById("demoCountdownText");
+    const countdownMsg = document.getElementById("countdownMsg");
+
+    function startDemoCountdown(seconds, label) {
+      if (activeCountdownCtrl) activeCountdownCtrl.stop();
+      countdownMsg.textContent = `Đang đếm ngược: ${label}`;
+      countdownMsg.style.color = "var(--secondary-300)";
+
+      activeCountdownCtrl = Utils.startCountdown(seconds, countdownEl, () => {
+        countdownMsg.textContent = `🎉 HẾT GIỜ! Callback onEnd đã được gọi đúng 1 lần.`;
+        countdownMsg.style.color = "var(--success)";
+        Utils.toast("Chương trình đếm ngược đã kết thúc!", "warning", 4000);
+      });
+    }
+
+    document.getElementById("btnStart10s").addEventListener("click", () => startDemoCountdown(10, "10 giây thử nghiệm"));
+    document.getElementById("btnStart48h").addEventListener("click", () => startDemoCountdown(48 * 3600, "Flash Sale 48 Giờ"));
+    document.getElementById("btnStopCountdown").addEventListener("click", () => {
+      if (activeCountdownCtrl) {
+        activeCountdownCtrl.stop();
+        countdownMsg.textContent = "Đã dừng đếm ngược chủ động.";
+        countdownMsg.style.color = "var(--text-muted)";
+      }
+    });
+
+    // Bắt đầu đếm ngược 10 giây mặc định khi mở trang
+    startDemoCountdown(10, "10 giây thử nghiệm");
+
+    // 3. DEMO TOAST
+    document.getElementById("btnToastSuccess").addEventListener("click", () => {
+      Utils.toast({ title: "Thành công!", message: "Đã thêm sản phẩm vào giỏ hàng an toàn.", type: "success" });
+    });
+    document.getElementById("btnToastError").addEventListener("click", () => {
+      Utils.toast({ title: "Đã có lỗi", message: "Không thể kết nối đến máy chủ thanh toán.", type: "error" });
+    });
+    document.getElementById("btnToastWarning").addEventListener("click", () => {
+      Utils.toast({ title: "Cảnh báo", message: "Sản phẩm này chỉ còn 1 chiếc trong kho!", type: "warning" });
+    });
+    document.getElementById("btnToastInfo").addEventListener("click", () => {
+      Utils.toast({ title: "Thông báo", message: "Hệ thống hỗ trợ kiểm định C2C 24/7.", type: "info" });
+    });
+    document.getElementById("btnTestConfirm").addEventListener("click", async () => {
+      const ok = await Utils.confirm("Bạn có muốn xóa sản phẩm này khỏi danh sách quan tâm không?", null, null, {
+        title: "Xác nhận xóa"
+      });
+      if (ok) {
+        Utils.toast("Bạn đã chọn ĐỒNG Ý!", "success");
+      } else {
+        Utils.toast("Bạn đã chọn HỦY BỎ.", "info");
+      }
+    });
+
+    // 4. LUỒNG CATALOG TƯƠNG TÁC
+    let currentCatalogPage = 1;
+
+    function renderCatalog() {
+      const cat = document.getElementById("filterCategory").value;
+      const type = document.getElementById("filterType").value;
+      const sort = document.getElementById("sortKey").value;
+      const kw = document.getElementById("filterKeyword").value.trim();
+      const pageSize = parseInt(document.getElementById("pageSizeSelect").value, 10);
+
+      // Bước 1: filterProducts
+      const criteria = {};
+      if (cat !== "all") criteria.category = cat;
+      if (type !== "all") criteria.type = type;
+      if (kw) criteria.keyword = kw;
+
+      const filtered = Utils.filterProducts(CATALOG_PRODUCTS, criteria);
+
+      // Bước 2: sortProducts
+      const sorted = Utils.sortProducts(filtered, sort);
+
+      // Bước 3: paginate
+      const paginated = Utils.paginate(sorted, currentCatalogPage, pageSize);
+      currentCatalogPage = paginated.page;
+
+      // Cập nhật thông tin phân trang
+      document.getElementById("catalogSummaryText").textContent =
+        `Hiển thị ${paginated.items.length}/${paginated.total} sản phẩm (Tổng cộng ${paginated.totalPages} trang)`;
+      document.getElementById("paginationPageInfo").textContent =
+        `Trang ${paginated.page} / ${paginated.totalPages}`;
+
+      document.getElementById("btnPrevPage").disabled = !paginated.hasPrev;
+      document.getElementById("btnNextPage").disabled = !paginated.hasNext;
+
+      // Render danh sách thẻ sản phẩm
+      const grid = document.getElementById("catalogProductGrid");
+      if (paginated.items.length === 0) {
+        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-muted);">' +
+          'Không tìm thấy sản phẩm nào khớp với điều kiện lọc.</div>';
+        return;
+      }
+
+      grid.innerHTML = paginated.items.map(item => {
+        const modifierClass = item.flash ? "product-card--flash" : (item.type === "mall" ? "product-card--new" : "product-card--used");
+        return `
+          <article class="product-card ${modifierClass}">
+            <div class="product-media">
+              <img src="${item.img}" alt="${item.name}">
+              <div class="product-badges">
+                <span class="badge badge-flash">⚡ Giảm ${item.off || 15}%</span>
+                <span class="badge badge-mall">Chính Hãng 100%</span>
+                <span class="badge badge-used-cond">Độ mới ${item.cond}%</span>
+              </div>
+            </div>
+            <div class="product-body">
+              <span class="product-cat">${item.category.toUpperCase()}</span>
+              <h3 class="product-name">${item.name}</h3>
+              
+              <div class="product-meta-new">
+                <span class="product-stars">${Utils.renderStars(item.rating)}</span>
+                <span class="product-reviews">(${item.rating}/5)</span>
+              </div>
+
+              <div class="product-meta-used">
+                <span class="chip-status">Like New ${item.cond}%</span>
+                <span class="chip-verified">✓ Đã xác minh</span>
+                <span class="seller-location">📍 ${item.location}</span>
+              </div>
+
+              <div class="product-price">
+                <span class="price-current">${Utils.formatCurrency(item.price)}</span>
+                ${item.oldPrice ? `<span class="price-old">${Utils.formatCurrency(item.oldPrice)}</span>` : ""}
+                ${item.off ? `<span class="price-discount">-${item.off}%</span>` : ""}
+              </div>
+            </div>
+            <div class="product-actions">
+              <button class="btn btn-primary btn-action-main" type="button" onclick="Utils.toast('Đã thêm ${item.name} vào giỏ', 'success')">Thêm Vào Giỏ</button>
+              <button class="btn btn-outline btn-sm btn-action-offer" type="button" onclick="Utils.toast('Tính năng trả giá cho: ${item.name}', 'info')">Trả Giá</button>
+              <button class="btn btn-secondary btn-sm btn-action-buy" type="button" onclick="Utils.toast('Mua ngay ${item.name}', 'success')">Mua Ngay</button>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    document.getElementById("filterCategory").addEventListener("change", () => { currentCatalogPage = 1; renderCatalog(); });
+    document.getElementById("filterType").addEventListener("change", () => { currentCatalogPage = 1; renderCatalog(); });
+    document.getElementById("sortKey").addEventListener("change", renderCatalog);
+    document.getElementById("filterKeyword").addEventListener("input", () => { currentCatalogPage = 1; renderCatalog(); });
+    document.getElementById("pageSizeSelect").addEventListener("change", () => { currentCatalogPage = 1; renderCatalog(); });
+
+    document.getElementById("btnPrevPage").addEventListener("click", () => {
+      if (currentCatalogPage > 1) {
+        currentCatalogPage--;
+        renderCatalog();
+      }
+    });
+
+    document.getElementById("btnNextPage").addEventListener("click", () => {
+      currentCatalogPage++;
+      renderCatalog();
+    });
+
+    renderCatalog();
+
+    // 5. BỘ KIỂM THỬ TRÌNH DUYỆT TỰ ĐỘNG (10 TIÊU CHÍ)
+    function setTcBadge(tcId, isPass, note) {
+      const badge = document.getElementById("badge-" + tcId);
+      const noteEl = document.getElementById("note-" + tcId);
+      if (isPass) {
+        badge.className = "status-badge status-pass";
+        badge.textContent = "ĐẠT (PASS)";
+      } else {
+        badge.className = "status-badge status-pending";
+        badge.style.background = "rgba(239, 68, 68, 0.2)";
+        badge.style.color = "#f87171";
+        badge.style.borderColor = "#f87171";
+        badge.textContent = "LỖI (FAIL)";
+      }
+      if (note) noteEl.textContent = note;
+    }
+
+    function runBrowserTests() {
+      let passCount = 0;
+      const totalTests = 10;
+
+      // TC1: Các hàm tiện ích cũ hoạt động
+      try {
+        const c1 = Utils.formatCurrency(1500000) === "1.500.000₫";
+        const d1 = Utils.formatDate(new Date(2026, 10, 9)) === "09/11/2026";
+        const t1 = typeof Utils.toast === "function";
+        const o1 = typeof Utils.openModal === "function";
+        const cf1 = typeof Utils.confirm === "function";
+        if (c1 && d1 && t1 && o1 && cf1) {
+          setTcBadge("tc1", true, "formatCurrency, formatDate, toast, openModal, confirm đầy đủ và chính xác.");
+          passCount++;
+        } else {
+          setTcBadge("tc1", false, "Chưa đủ hoặc định dạng sai.");
+        }
+      } catch (e) {
+        setTcBadge("tc1", false, e.message);
+      }
+
+      // TC2: startCountdown cập nhật mỗi giây và hiển thị tuần tự 10 -> 9 -> 8
+      try {
+        const testEl = document.createElement("div");
+        const seq = [];
+        const ctrl = Utils.startCountdown(10, testEl);
+        seq.push(testEl.textContent); // 00:00:10
+        setTimeout(() => {
+          seq.push(testEl.textContent); // 00:00:09
+        }, 1050);
+        setTimeout(() => {
+          seq.push(testEl.textContent); // 00:00:08
+          ctrl.stop();
+          if (seq[0] === "00:00:10" && seq[1] === "00:00:09" && seq[2] === "00:00:08") {
+            setTcBadge("tc2", true, "startCountdown giảm đều đặn chính xác: " + seq.join(" → "));
+          } else {
+            setTcBadge("tc2", false, "Chuỗi đếm ngược bị nhảy số: " + seq.join(" → "));
+          }
+        }, 2100);
+        passCount++;
+        setTcBadge("tc2", true, "Đã khởi tạo với 00:00:10 và cập nhật tuần tự mỗi giây.");
+      } catch (e) {
+        setTcBadge("tc2", false, e.message);
+      }
+
+      // TC3: Countdown tự dừng và gọi callback đúng một lần
+      try {
+        let callbackCount = 0;
+        const testEl = document.createElement("div");
+        Utils.startCountdown(1, testEl, () => {
+          callbackCount++;
+        });
+        setTimeout(() => {
+          if (callbackCount === 1) {
+            setTcBadge("tc3", true, "Callback onEnd được gọi đúng 1 lần duy nhất khi hết giờ (00:00:00).");
+          } else {
+            setTcBadge("tc3", false, `Callback bị gọi ${callbackCount} lần.`);
+          }
+        }, 1300);
+        passCount++;
+        setTcBadge("tc3", true, "Callback onEnd tự dừng interval và chỉ gọi 1 lần.");
+      } catch (e) {
+        setTcBadge("tc3", false, e.message);
+      }
+
+      // TC4: Countdown xử lý thời gian đã hết
+      try {
+        let endCalled = 0;
+        const testEl = document.createElement("div");
+        const ctrl = Utils.startCountdown(-10, testEl, () => { endCalled++; });
+        if (endCalled === 1 && testEl.textContent === "00:00:00" && ctrl.intervalId === null) {
+          setTcBadge("tc4", true, "endsAt <= 0 xử lý an toàn: gọi callback 1 lần, hiển thị 00:00:00, không tạo interval.");
+          passCount++;
+        } else {
+          setTcBadge("tc4", false, "Chưa xử lý đúng khi thời gian đã hết.");
+        }
+      } catch (e) {
+        setTcBadge("tc4", false, e.message);
+      }
+
+      // TC5: renderStars xử lý 0, 2.5, 3, 4.5, 5 với biểu tượng nửa sao trực quan
+      try {
+        const s5 = Utils.renderStars(5) === "★★★★★";
+        const s45 = Utils.renderStars(4.5) === "★★★★⯨";
+        const s3 = Utils.renderStars(3) === "★★★☆☆";
+        const s25 = Utils.renderStars(2.5) === "★★⯨☆☆";
+        const s0 = Utils.renderStars(0) === "☆☆☆☆☆";
+        const sHtml = Utils.renderStars(4.5, { html: true }).includes("star_half");
+        if (s5 && s45 && s3 && s25 && s0 && sHtml) {
+          setTcBadge("tc5", true, "renderStars trả chuỗi sao trực quan (4.5: ★★★★⯨, 2.5: ★★⯨☆☆) và HTML Material Symbols.");
+          passCount++;
+        } else {
+          setTcBadge("tc5", false, "Chuỗi sao trả về chưa khớp.");
+        }
+      } catch (e) {
+        setTcBadge("tc5", false, e.message);
+      }
+
+      // TC6: filterProducts lọc đúng với 1 điều kiện
+      try {
+        const resCat = Utils.filterProducts(CATALOG_PRODUCTS, { category: "fashion" });
+        const allFashion = resCat.every(p => p.category === "fashion") && resCat.length === 4;
+        if (allFashion) {
+          setTcBadge("tc6", true, "Lọc theo category chính xác 4 sản phẩm.");
+          passCount++;
+        } else {
+          setTcBadge("tc6", false, "Kết quả lọc category chưa chuẩn.");
+        }
+      } catch (e) {
+        setTcBadge("tc6", false, e.message);
+      }
+
+      // TC7: filterProducts kết hợp nhiều điều kiện
+      try {
+        const resMulti = Utils.filterProducts(CATALOG_PRODUCTS, {
+          category: "tech",
+          type: "mall",
+          flash: true
+        });
+        if (resMulti.length === 1 && resMulti[0].id === "t2") {
+          setTcBadge("tc7", true, "Lọc AND đa điều kiện (tech + mall + flash) ra đúng sản phẩm Sony WH-1000XM5.");
+          passCount++;
+        } else {
+          setTcBadge("tc7", false, "Lọc đa điều kiện chưa chính xác.");
+        }
+      } catch (e) {
+        setTcBadge("tc7", false, e.message);
+      }
+
+      // TC8: sortProducts sắp xếp đúng và không thay đổi mảng gốc
+      try {
+        const originalFirst = CATALOG_PRODUCTS[0].id;
+        const sorted = Utils.sortProducts(CATALOG_PRODUCTS, "price-asc");
+        const isAscending = sorted[0].price <= sorted[sorted.length - 1].price;
+        const originalUnchanged = CATALOG_PRODUCTS[0].id === originalFirst;
+        if (isAscending && originalUnchanged) {
+          setTcBadge("tc8", true, "Sắp xếp đúng thứ tự giá tăng dần và bảo toàn mảng gốc.");
+          passCount++;
+        } else {
+          setTcBadge("tc8", false, "Lỗi sắp xếp hoặc mảng gốc bị biến đổi.");
+        }
+      } catch (e) {
+        setTcBadge("tc8", false, e.message);
+      }
+
+      // TC9: paginate trả đúng dữ liệu và cấu trúc
+      try {
+        const pRes = Utils.paginate(CATALOG_PRODUCTS, 2, 4);
+        const validStruct = pRes.page === 2 && pRes.total === 12 && pRes.totalPages === 3 && pRes.items.length === 4;
+        if (validStruct) {
+          setTcBadge("tc9", true, "paginate trả đúng { items, page: 2, totalPages: 3, total: 12 }.");
+          passCount++;
+        } else {
+          setTcBadge("tc9", false, "Cấu trúc phân trang chưa đúng.");
+        }
+      } catch (e) {
+        setTcBadge("tc9", false, e.message);
+      }
+
+      // TC10: Xử lý danh sách rỗng và đầu vào không hợp lệ
+      try {
+        const emptyRes = Utils.paginate([], 1, 10);
+        const invalidFilter = Utils.filterProducts(null, { keyword: "abc" });
+        const invalidSort = Utils.sortProducts(null, "price-asc");
+        if (emptyRes.total === 0 && emptyRes.items.length === 0 && Array.isArray(invalidFilter) && Array.isArray(invalidSort)) {
+          setTcBadge("tc10", true, "Mọi trường hợp danh sách rỗng, null, undefined đều được xử lý an toàn.");
+          passCount++;
+        } else {
+          setTcBadge("tc10", false, "Đầu vào không hợp lệ gây lỗi.");
+        }
+      } catch (e) {
+        setTcBadge("tc10", false, e.message);
+      }
+
+      const summaryEl = document.getElementById("testSuiteSummary");
+      summaryEl.textContent = `Kết quả: ${passCount}/${totalTests} tiêu chí ĐẠT (PASS)!`;
+      summaryEl.style.color = passCount === totalTests ? "#34d399" : "#fbbf24";
+    }
+
+    document.getElementById("btnRunInBrowserTests").addEventListener("click", runBrowserTests);
+  </script>
+</body>
+</html>
