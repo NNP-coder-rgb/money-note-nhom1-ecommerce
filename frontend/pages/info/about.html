@@ -1,0 +1,2161 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Giới Thiệu HYBRID.STORE — Nền Tảng Mua Sắm &amp; Thẩm Định Chất Lượng Tiên
+      Phong
+    </title>
+
+    <!-- Chống giật giao diện (Zero-FOUC Theme Init) -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("hybrid_theme") || "dark";
+          document.documentElement.setAttribute("data-theme", t);
+          if (t === "light")
+            document.documentElement.classList.add("light-theme");
+        } catch (e) {}
+      })();
+    </script>
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="stylesheet" href="../../css/base.css?v=4" />
+    <link rel="stylesheet" href="../../css/catalog.css?v=4" />
+    <link rel="stylesheet" href="../../css/master_screens.css?v=4" />
+
+    <style>
+      .about-hero {
+        text-align: center;
+        max-width: 900px;
+        margin: 0 auto 52px;
+      }
+      .about-hero-title {
+        font-family: var(--font-head);
+        font-size: 2.25rem;
+        font-weight: 800;
+        line-height: 1.3;
+        letter-spacing: -0.015em;
+        color: var(--text);
+        margin-bottom: 16px;
+      }
+      .about-hero-desc {
+        font-size: 15px;
+        line-height: 1.8;
+        color: var(--text-muted);
+        max-width: 780px;
+        margin: 0 auto 28px;
+      }
+
+      .about-section {
+        margin-bottom: 64px;
+      }
+      .about-section-head {
+        text-align: center;
+        max-width: 740px;
+        margin: 0 auto 36px;
+      }
+      .about-section-title {
+        font-family: var(--font-head);
+        font-size: 1.65rem;
+        font-weight: 800;
+        line-height: 1.35;
+        color: var(--text);
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      .about-section-desc {
+        font-size: 14px;
+        color: var(--text-muted);
+        line-height: 1.7;
+      }
+
+      .icon-box {
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform var(--t-fast);
+      }
+      .icon-box .material-symbols-outlined {
+        font-size: 24px;
+      }
+      .icon-box.tone-primary {
+        background: rgba(139, 92, 246, 0.16);
+        border: 1.5px solid rgba(139, 92, 246, 0.45);
+        color: #c4b5fd;
+      }
+      .icon-box.tone-secondary {
+        background: rgba(6, 182, 212, 0.16);
+        border: 1.5px solid rgba(6, 182, 212, 0.45);
+        color: #38bdf8;
+      }
+      .icon-box.tone-tertiary {
+        background: rgba(236, 72, 153, 0.16);
+        border: 1.5px solid rgba(236, 72, 153, 0.45);
+        color: #f472b6;
+      }
+      .icon-box.tone-success {
+        background: rgba(16, 185, 129, 0.16);
+        border: 1.5px solid rgba(16, 185, 129, 0.45);
+        color: #34d399;
+      }
+      .icon-box.tone-warning {
+        background: rgba(245, 158, 11, 0.16);
+        border: 1.5px solid rgba(245, 158, 11, 0.45);
+        color: #fbbf24;
+      }
+      .icon-box.tone-info {
+        background: rgba(59, 130, 246, 0.16);
+        border: 1.5px solid rgba(59, 130, 246, 0.45);
+        color: #60a5fa;
+      }
+
+      [data-theme="light"] .icon-box.tone-primary,
+      body.light-theme .icon-box.tone-primary {
+        background: #ede9fe;
+        border: 1.5px solid #8b5cf6 !important;
+        color: #5b21b6 !important;
+      }
+      [data-theme="light"] .icon-box.tone-secondary,
+      body.light-theme .icon-box.tone-secondary {
+        background: #e0f2fe;
+        border: 1.5px solid #0284c7 !important;
+        color: #0369a1 !important;
+      }
+      [data-theme="light"] .icon-box.tone-success,
+      body.light-theme .icon-box.tone-success {
+        background: #dcfce7;
+        border: 1.5px solid #16a34a !important;
+        color: #15803d !important;
+      }
+      [data-theme="light"] .icon-box.tone-info,
+      body.light-theme .icon-box.tone-info {
+        background: #eff6ff;
+        border: 1.5px solid #2563eb !important;
+        color: #1d4ed8 !important;
+      }
+      [data-theme="light"] .icon-box.tone-tertiary,
+      body.light-theme .icon-box.tone-tertiary {
+        background: #fdf2f8;
+        border: 1.5px solid #db2777 !important;
+        color: #be185d !important;
+      }
+      [data-theme="light"] .icon-box.tone-warning,
+      body.light-theme .icon-box.tone-warning {
+        background: #fef3c7;
+        border: 1.5px solid #d97706 !important;
+        color: #b45309 !important;
+      }
+
+      /* 1. Stats Bar */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-bottom: 56px;
+      }
+      @media (max-width: 992px) {
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 540px) {
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .stat-card {
+        background: var(--bg-card);
+        border: 1.5px solid var(--border);
+        border-radius: var(--radius-xl);
+        padding: 24px 20px;
+        text-align: center;
+        transition:
+          transform var(--t-fast) ease,
+          border-color var(--t-fast) ease;
+      }
+      .stat-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(139, 92, 246, 0.4);
+      }
+      [data-theme="light"] .stat-card,
+      body.light-theme .stat-card {
+        background: #ffffff;
+        border-color: #e2e8f0;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+      }
+      .stat-val {
+        font-size: 2rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        margin: 10px 0 4px;
+      }
+      .stat-label {
+        font-size: 13.5px;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 4px;
+      }
+      .stat-sub {
+        font-size: 12px;
+        color: var(--text-muted);
+        line-height: 1.5;
+      }
+
+      /* 2. Hybrid Model Cards */
+      /* Policy-style Pills & Badges for Model Cards */
+      .policy-card-top-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 14px;
+        flex-wrap: wrap;
+      }
+      .policy-type-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11.5px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        padding: 5px 12px;
+        border-radius: 9999px;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .policy-type-pill.mall {
+        background: rgba(139, 92, 246, 0.16);
+        color: var(--primary-300, #c4b5fd);
+        border: 1px solid rgba(139, 92, 246, 0.35);
+      }
+      .policy-type-pill.c2c {
+        background: rgba(6, 182, 212, 0.14);
+        color: var(--secondary-300, #67e8f9);
+        border: 1px solid rgba(6, 182, 212, 0.35);
+      }
+      .policy-benefit-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 11.5px;
+        font-weight: 700;
+        padding: 5px 12px;
+        border-radius: 9999px;
+        white-space: nowrap;
+        flex-shrink: 0;
+        letter-spacing: 0.02em;
+      }
+      .policy-benefit-badge.mall {
+        background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        color: #ffffff;
+        box-shadow: 0 2px 8px rgba(124, 58, 237, 0.35);
+        border: 1px solid rgba(139, 92, 246, 0.5);
+      }
+      .policy-benefit-badge.c2c {
+        background: linear-gradient(135deg, #06b6d4, #0891b2);
+        color: #ffffff;
+        box-shadow: 0 2px 8px rgba(6, 182, 212, 0.35);
+        border: 1px solid rgba(6, 182, 212, 0.5);
+      }
+
+      [data-theme="light"] .policy-type-pill.mall,
+      body.light-theme .policy-type-pill.mall {
+        background: #f3e8ff;
+        color: #6d28d9;
+        border-color: #d8b4fe;
+      }
+      [data-theme="light"] .policy-type-pill.c2c,
+      body.light-theme .policy-type-pill.c2c {
+        background: #e0f2fe;
+        color: #0369a1;
+        border-color: #bae6fd;
+      }
+      [data-theme="light"] .policy-benefit-badge.mall,
+      body.light-theme .policy-benefit-badge.mall {
+        background: linear-gradient(135deg, #7c3aed, #6d28d9);
+        color: #ffffff;
+        border-color: #7c3aed;
+        box-shadow: 0 2px 8px rgba(109, 40, 217, 0.25);
+      }
+      [data-theme="light"] .policy-benefit-badge.c2c,
+      body.light-theme .policy-benefit-badge.c2c {
+        background: linear-gradient(135deg, #0891b2, #0e7490);
+        color: #ffffff;
+        border-color: #0891b2;
+        box-shadow: 0 2px 8px rgba(8, 145, 178, 0.25);
+      }
+
+      .hybrid-model-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+      @media (max-width: 860px) {
+        .hybrid-model-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .model-card {
+        background: var(--bg-card);
+        border: 1.5px solid var(--border);
+        border-radius: var(--radius-2xl);
+        padding: 32px 28px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        overflow: hidden;
+        transition:
+          transform var(--t-fast) ease,
+          border-color var(--t-fast) ease,
+          box-shadow var(--t-fast) ease;
+      }
+      .model-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+      }
+      .model-card--mall {
+        background: linear-gradient(
+          135deg,
+          rgba(139, 92, 246, 0.08),
+          rgba(99, 102, 241, 0.03)
+        );
+        border-color: rgba(139, 92, 246, 0.35);
+      }
+      .model-card--c2c {
+        background: linear-gradient(
+          135deg,
+          rgba(6, 182, 212, 0.08),
+          rgba(16, 185, 129, 0.03)
+        );
+        border-color: rgba(6, 182, 212, 0.35);
+      }
+      [data-theme="light"] .model-card--mall,
+      body.light-theme .model-card--mall {
+        background: linear-gradient(135deg, #faf5ff, #f5f3ff);
+        border-color: #c4b5fd !important;
+        box-shadow: 0 8px 24px rgba(109, 40, 217, 0.08);
+      }
+      [data-theme="light"] .model-card--c2c,
+      body.light-theme .model-card--c2c {
+        background: linear-gradient(135deg, #f0fdfa, #f0fdf4);
+        border-color: #a7f3d0 !important;
+        box-shadow: 0 8px 24px rgba(13, 148, 136, 0.08);
+      }
+      .model-feature-list {
+        list-style: none;
+        padding: 0;
+        margin: 20px 0 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .model-feature-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 13.5px;
+        color: var(--text-muted);
+        line-height: 1.5;
+      }
+      .model-feature-item strong {
+        color: var(--text);
+      }
+
+      /* 3. Cam kết dịch vụ */
+      .pledge-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+      @media (max-width: 992px) {
+        .pledge-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 18px;
+        }
+      }
+      @media (max-width: 580px) {
+        .pledge-grid {
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
+      }
+      .pledge-card {
+        background: var(--bg-card);
+        border: 1.5px solid var(--border);
+        border-radius: var(--radius-xl, 16px);
+        padding: 24px 22px;
+        display: flex;
+        flex-direction: column;
+        transition:
+          transform var(--t-fast) ease,
+          border-color var(--t-fast) ease,
+          box-shadow var(--t-fast) ease;
+      }
+      .pledge-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(139, 92, 246, 0.45);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+      }
+      .pledge-card-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+      .pledge-num {
+        font-family: var(--font-mono, monospace);
+        font-size: 13px;
+        font-weight: 800;
+        color: var(--text-faint, #64748b);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 2px 8px;
+        border-radius: 9999px;
+        letter-spacing: 0.04em;
+      }
+      .pledge-title {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--text);
+        margin: 0 0 8px;
+        line-height: 1.4;
+      }
+      .pledge-desc {
+        font-size: 13.5px;
+        color: var(--text-muted);
+        line-height: 1.65;
+        margin: 0;
+      }
+      [data-theme="light"] .pledge-card,
+      body.light-theme .pledge-card {
+        background: #ffffff;
+        border-color: #e2e8f0;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+      }
+      [data-theme="light"] .pledge-card:hover,
+      body.light-theme .pledge-card:hover {
+        border-color: #8b5cf6 !important;
+        box-shadow: 0 8px 24px rgba(139, 92, 246, 0.12);
+      }
+      [data-theme="light"] .pledge-title,
+      body.light-theme .pledge-title {
+        color: #0f172a;
+      }
+      [data-theme="light"] .pledge-desc,
+      body.light-theme .pledge-desc {
+        color: #475569;
+      }
+      [data-theme="light"] .pledge-num,
+      body.light-theme .pledge-num {
+        background: #f1f5f9;
+        border-color: #cbd5e1;
+        color: #64748b;
+      }
+
+      /* 4. Stepper 5 bước */
+      .stepper-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 16px;
+      }
+      @media (max-width: 1024px) {
+        .stepper-grid {
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+      }
+      .stepper-item {
+        background: var(--bg-card);
+        border: 1.5px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 20px 14px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition:
+          transform var(--t-fast),
+          border-color var(--t-fast);
+      }
+      .stepper-item:hover {
+        transform: translateY(-3px);
+        border-color: var(--primary-400);
+      }
+      [data-theme="light"] .stepper-item,
+      body.light-theme .stepper-item {
+        background: #ffffff;
+        border-color: #e2e8f0;
+      }
+      .stepper-num {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: rgba(139, 92, 246, 0.18);
+        border: 1.5px solid rgba(139, 92, 246, 0.5);
+        color: var(--primary-300);
+        font-family: var(--font-mono);
+        font-weight: 800;
+        font-size: 13.5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 12px;
+      }
+      [data-theme="light"] .stepper-num,
+      body.light-theme .stepper-num {
+        background: #ede9fe;
+        color: #6d28d9;
+        border-color: #8b5cf6;
+      }
+
+      /* 5. Bảng 15 bước kiểm định */
+      .lab-filter-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+      }
+      .lab-filter-btn {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        color: var(--text-muted);
+        padding: 7px 16px;
+        border-radius: var(--radius-pill);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all var(--t-fast) ease;
+      }
+      .lab-filter-btn:hover,
+      .lab-filter-btn.active {
+        background: var(--primary-500);
+        border-color: var(--primary-500);
+        color: #ffffff;
+      }
+      [data-theme="light"] .lab-filter-btn,
+      body.light-theme .lab-filter-btn {
+        background: #f1f5f9;
+        border-color: #cbd5e1;
+        color: #475569;
+      }
+      [data-theme="light"] .lab-filter-btn.active,
+      body.light-theme .lab-filter-btn.active {
+        background: #6d28d9;
+        border-color: #6d28d9;
+        color: #ffffff;
+      }
+      .lab-table-container {
+        overflow-x: auto;
+        border-radius: var(--radius-lg);
+        border: 1.5px solid var(--border);
+        background: var(--bg-card);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      }
+      [data-theme="light"] .lab-table-container,
+      body.light-theme .lab-table-container {
+        background: #ffffff;
+        border-color: #e2e8f0;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      }
+      .lab-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      .lab-table th {
+        background: var(--bg-surface);
+        color: var(--text);
+        font-weight: 700;
+        padding: 14px 18px;
+        border-bottom: 1.5px solid var(--border);
+        text-align: left;
+        white-space: nowrap;
+      }
+      [data-theme="light"] .lab-table th,
+      body.light-theme .lab-table th {
+        background: #f8fafc;
+        border-bottom-color: #e2e8f0;
+      }
+      .lab-table td {
+        padding: 14px 18px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        vertical-align: middle;
+      }
+      [data-theme="light"] .lab-table td,
+      body.light-theme .lab-table td {
+        border-bottom-color: #e2e8f0;
+      }
+      .lab-table tr:last-child td {
+        border-bottom: none;
+      }
+      .lab-table tr:hover td {
+        background: rgba(139, 92, 246, 0.04);
+      }
+      [data-theme="light"] .lab-table tr:hover td {
+        background: #f5f3ff;
+      }
+
+      /* 6. Hệ thống Showroom */
+      .showroom-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      @media (max-width: 960px) {
+        .showroom-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .showroom-card {
+        background: var(--bg-card);
+        border: 1.5px solid var(--border);
+        border-radius: var(--radius-xl);
+        padding: 26px 22px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition:
+          transform var(--t-fast) ease,
+          border-color var(--t-fast) ease;
+      }
+      .showroom-card:hover {
+        transform: translateY(-3px);
+        border-color: var(--primary-500);
+      }
+      [data-theme="light"] .showroom-card,
+      body.light-theme .showroom-card {
+        background: #ffffff;
+        border-color: #e2e8f0;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+      }
+      .showroom-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--secondary-400);
+        background: rgba(6, 182, 212, 0.12);
+        border: 1px solid rgba(6, 182, 212, 0.3);
+        padding: 4px 10px;
+        border-radius: var(--radius-pill);
+        width: fit-content;
+        margin-bottom: 14px;
+      }
+      [data-theme="light"] .showroom-badge,
+      body.light-theme .showroom-badge {
+        background: #e0f2fe;
+        color: #0369a1;
+        border-color: #bae6fd;
+      }
+      .showroom-name {
+        font-size: 15.5px;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 10px;
+        line-height: 1.4;
+      }
+      .showroom-address {
+        font-size: 13px;
+        color: var(--text-muted);
+        line-height: 1.6;
+        margin-bottom: 14px;
+      }
+      .showroom-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        font-size: 12.5px;
+        color: var(--text-muted);
+        padding: 12px 0;
+        border-top: 1px dashed var(--border);
+        border-bottom: 1px dashed var(--border);
+        margin-bottom: 16px;
+      }
+      .showroom-features {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      /* 7. Đối tác chiến lược */
+      .partner-logos-grid {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 16px;
+      }
+      @media (max-width: 900px) {
+        .partner-logos-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      @media (max-width: 520px) {
+        .partner-logos-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      .partner-card {
+        background: var(--bg-card);
+        border: 1.5px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 18px 12px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        transition:
+          transform var(--t-fast) ease,
+          border-color var(--t-fast) ease;
+      }
+      .partner-card:hover {
+        transform: translateY(-2px);
+        border-color: var(--primary-400);
+      }
+      [data-theme="light"] .partner-card,
+      body.light-theme .partner-card {
+        background: #ffffff;
+        border-color: #e2e8f0;
+      }
+      .partner-name {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--text);
+      }
+      .partner-type {
+        font-size: 11px;
+        color: var(--text-muted);
+      }
+
+      /* 8. FAQ Accordion */
+      .faq-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        max-width: 840px;
+        margin: 20px auto 0;
+      }
+      .faq-item {
+        border: 1.5px solid var(--border);
+        border-radius: var(--radius-lg);
+        background: var(--bg-card);
+        overflow: hidden;
+        transition: border-color var(--t-fast);
+      }
+      [data-theme="light"] .faq-item,
+      body.light-theme .faq-item {
+        background: #ffffff;
+        border-color: #e2e8f0;
+      }
+      .faq-item.active {
+        border-color: rgba(139, 92, 246, 0.6);
+      }
+      [data-theme="light"] .faq-item.active,
+      body.light-theme .faq-item.active {
+        border-color: #8b5cf6 !important;
+      }
+      .faq-question {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 16px 20px;
+        background: none;
+        border: none;
+        color: var(--text);
+        font-size: 14.5px;
+        font-weight: 700;
+        cursor: pointer;
+        text-align: left;
+        transition: background var(--t-fast);
+      }
+      .faq-question:hover,
+      .faq-question:focus-visible {
+        background: rgba(139, 92, 246, 0.06);
+        outline: 2px solid var(--primary-400);
+        outline-offset: -2px;
+      }
+      .faq-icon {
+        transition: transform var(--t-fast);
+        color: var(--text-muted);
+      }
+      .faq-item.active .faq-icon {
+        transform: rotate(180deg);
+        color: var(--primary-400);
+      }
+      .faq-answer {
+        display: none;
+        padding: 0 20px 18px;
+        font-size: 13.5px;
+        line-height: 1.7;
+        color: var(--text-muted);
+        border-top: 1px solid rgba(255, 255, 255, 0.04);
+      }
+      [data-theme="light"] .faq-answer,
+      body.light-theme .faq-answer {
+        border-top-color: #f1f5f9;
+      }
+      .faq-item.active .faq-answer {
+        display: block;
+      }
+
+      /* 9. CTA Box */
+      .cta-box {
+        background: linear-gradient(
+          135deg,
+          rgba(139, 92, 246, 0.14),
+          rgba(6, 182, 212, 0.1)
+        );
+        border: 1.5px solid rgba(139, 92, 246, 0.4);
+        border-radius: var(--radius-xl);
+        padding: 44px 28px;
+        text-align: center;
+        max-width: 860px;
+        margin: 0 auto;
+      }
+      [data-theme="light"] .cta-box,
+      body.light-theme .cta-box {
+        background: linear-gradient(135deg, #faf5ff, #f0fdf4);
+        border-color: #8b5cf6 !important;
+        box-shadow: 0 10px 28px rgba(139, 92, 246, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===== HEADER ===== -->
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="../../index.html">
+          <span class="brand-mark"
+            ><span class="material-symbols-outlined">token</span></span
+          >
+          <span
+            >HYBRID<span class="text-secondary">.STORE</span>
+            <span class="badge">GIỚI THIỆU</span></span
+          >
+        </a>
+
+        <div class="header-actions">
+          <button
+            class="icon-btn theme-toggle-btn"
+            id="themeToggleBtn"
+            type="button"
+            title="Chuyển chế độ Sáng / Tối"
+            aria-label="Chuyển đổi giao diện"
+          >
+            <span class="material-symbols-outlined theme-toggle-icon"
+              >light_mode</span
+            >
+          </button>
+          <a class="btn btn-secondary hide-sm" href="../shop/catalog.html"
+            >Xem Sản Phẩm</a
+          >
+          <a class="avatar" href="../account/profile.html" title="Tài khoản">
+            <span class="material-symbols-outlined">person</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== BREADCRUMB ===== -->
+    <div class="subnav">
+      <div class="container">
+        <nav>
+          <a href="../../index.html">Trang Chủ</a>
+          <span class="text-faint">/</span>
+          <span class="active"
+            >Giới Thiệu &amp; Thẩm Định Chất Lượng HYBRID.STORE</span
+          >
+        </nav>
+        <div class="subnav-info hide-sm">
+          <span class="text-success"
+            ><span class="material-symbols-outlined icon-sm">verified</span>
+            Đồng Kiểm 100% Tận Tay</span
+          >
+          <span class="text-secondary"
+            ><span class="material-symbols-outlined icon-sm">storefront</span> 3
+            Showroom &amp; TT Kỹ Thuật</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <main class="container py-8">
+      <!-- 1. HERO BANNER: THƯƠNG HIỆU & SỨ MỆNH -->
+      <section class="about-hero">
+        <span class="badge badge-solid mb-3"
+          >HỆ THỐNG MUA SẮM THƯƠNG MẠI ĐIỆN TỬ TIÊN PHONG</span
+        >
+        <h1 class="about-hero-title">
+          Tái Định Nghĩa Mua Sắm: Hàng Mới Chính Hãng &amp; Đồ Cũ Thẩm Định
+        </h1>
+        <p class="about-hero-desc">
+          <strong>HYBRID.STORE</strong> được kiến tạo để giải quyết triệt để rủi
+          ro lớn nhất của người mua hàng trực tuyến:
+          <em>"hàng nhận không giống hình"</em> và
+          <em>"lo sợ mua phải đồ cũ dựng, linh kiện đã qua sửa chữa"</em>. Chúng
+          tôi kết hợp song hành giữa phân phối
+          <strong>Brand Mall 100% Nguyên Seal</strong> và nền tảng
+          <strong>Chợ Đồ Cũ Like New Được Kiểm Định 15 Bước</strong>, áp dụng
+          đặc quyền <strong>đồng kiểm 100% cùng shipper</strong> trước khi trả
+          tiền.
+        </p>
+
+        <div class="flex items-center justify-center gap-3 flex-wrap">
+          <a
+            class="btn btn-primary"
+            href="../shop/catalog.html"
+            style="padding: 12px 26px; font-weight: 700"
+          >
+            <span class="material-symbols-outlined icon-sm">shopping_bag</span>
+            Khám Phá Danh Mục Sản Phẩm
+          </a>
+          <a
+            class="btn btn-secondary"
+            href="../seller/post_item.html"
+            style="padding: 12px 24px; font-weight: 700"
+          >
+            <span class="material-symbols-outlined icon-sm">sell</span>
+            Đăng Bán Đồ Cũ Like New
+          </a>
+        </div>
+      </section>
+
+      <!-- 2. BỐN CON SỐ ẤN TƯỢNG (STATS BAR) -->
+      <section class="stats-grid">
+        <div class="stat-card">
+          <div class="icon-box tone-primary mb-1">
+            <span class="material-symbols-outlined">group</span>
+          </div>
+          <div class="stat-val mono text-gradient">150.000+</div>
+          <div class="stat-label">Khách Hàng Toàn Quốc</div>
+          <div class="stat-sub">
+            Mua sắm tin cậy &amp; tái mua cao trên toàn hệ sinh thái
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="icon-box tone-secondary mb-1">
+            <span class="material-symbols-outlined">verified</span>
+          </div>
+          <div class="stat-val mono text-gradient">99.8%</div>
+          <div class="stat-label">Đồng Kiểm Thành Công</div>
+          <div class="stat-sub">
+            Khách hàng mở hộp nghiệm thu ưng ý cùng nhân viên giao hàng
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="icon-box tone-success mb-1">
+            <span class="material-symbols-outlined">rule</span>
+          </div>
+          <div class="stat-val mono text-gradient">15/15</div>
+          <div class="stat-label">Tiêu Chí Thẩm Định</div>
+          <div class="stat-sub">
+            Quy trình test máy thực tế khắt khe cho từng sản phẩm cũ
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="icon-box tone-warning mb-1">
+            <span class="material-symbols-outlined">storefront</span>
+          </div>
+          <div class="stat-val mono text-gradient">3 Showroom</div>
+          <div class="stat-label">Hà Nội • ĐN • TP.HCM</div>
+          <div class="stat-sub">
+            Không gian trải nghiệm thực tế và bảo hành trực tiếp
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. MÔ HÌNH KINH DOANH SONG HÀNH (HYBRID SHOPPING MODEL) -->
+      <section class="about-section">
+        <div class="about-section-head">
+          <span class="badge badge-primary mb-2"
+            >MÔ HÌNH THƯƠNG MẠI ĐỘC BẢN</span
+          >
+          <h2 class="about-section-title">
+            Hai Trụ Cột Sản Phẩm Song Hành Cân Bằng
+          </h2>
+          <p class="about-section-desc">
+            Không như các sàn thương mại điện tử hỗn tạp, HYBRID.STORE phân tách
+            rạch ròi giữa phân khúc Hàng Mới Tuyệt Đối và Đồ Cũ Có Kiểm Định,
+            giúp khách hàng đưa ra quyết định mua sắm tối ưu ngân sách.
+          </p>
+        </div>
+
+        <div class="hybrid-model-grid">
+          <!-- Cột 1: Brand Mall -->
+          <div class="model-card model-card--mall">
+            <div>
+              <div class="policy-card-top-row">
+                <span class="policy-type-pill mall">
+                  <span class="material-symbols-outlined icon-xs"
+                    >verified</span
+                  >
+                  Brand Mall 100%
+                </span>
+                <span class="policy-benefit-badge mall">
+                  <span class="material-symbols-outlined icon-xs"
+                    >verified</span
+                  >
+                  Chính Hãng Phân Phối
+                </span>
+              </div>
+              <h3 class="text-lg fw-700 text-text mb-2">
+                Hàng Mới Phân Phối Chính Thức
+              </h3>
+              <p class="text-xs text-muted" style="line-height: 1.6">
+                Dành cho khách hàng tìm kiếm sự hoàn hảo tuyệt đối. Mọi sản phẩm
+                đều nguyên seal nhà sản xuất, nguồn gốc minh bạch từ các nhà
+                phân phối ủy quyền cấp 1 tại Việt Nam.
+              </p>
+
+              <ul class="model-feature-list">
+                <li class="model-feature-item">
+                  <span
+                    class="material-symbols-outlined text-success icon-sm"
+                    style="flex-shrink: 0; margin-top: 2px"
+                    >check_circle</span
+                  >
+                  <span
+                    ><strong>100% Nguyên Hộp Nguyên Seal:</strong> Chưa từng
+                    khui hộp, bảo hành điện tử chính hãng từ 12 đến 24
+                    tháng.</span
+                  >
+                </li>
+                <li class="model-feature-item">
+                  <span
+                    class="material-symbols-outlined text-success icon-sm"
+                    style="flex-shrink: 0; margin-top: 2px"
+                    >check_circle</span
+                  >
+                  <span
+                    ><strong>Đầy Đủ Hóa Đơn VAT &amp; Chứng Từ:</strong> Hợp lệ
+                    khấu trừ doanh nghiệp và bảo hành tại mọi trung tâm ủy quyền
+                    toàn quốc.</span
+                  >
+                </li>
+                <li class="model-feature-item">
+                  <span
+                    class="material-symbols-outlined text-success icon-sm"
+                    style="flex-shrink: 0; margin-top: 2px"
+                    >check_circle</span
+                  >
+                  <span
+                    ><strong>Đổi Mới 1-1 Trong 07 Ngày:</strong> Nếu phát sinh
+                    lỗi kỹ thuật từ nhà sản xuất, đổi mới ngay không chờ đợi sửa
+                    chữa.</span
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div class="pt-4 border-top flex items-center justify-between">
+              <span class="text-xs text-muted"
+                >Giá niêm yết cạnh tranh kèm ưu đãi</span
+              >
+              <a
+                class="btn btn-primary btn-sm"
+                href="../shop/catalog.html?type=mall"
+              >
+                Xem Hàng Mall →
+              </a>
+            </div>
+          </div>
+
+          <!-- Cột 2: C2C Like New -->
+          <div class="model-card model-card--c2c">
+            <div>
+              <div class="policy-card-top-row">
+                <span class="policy-type-pill c2c">
+                  <span class="material-symbols-outlined icon-xs"
+                    >recycling</span
+                  >
+                  Đồ Cũ Like New
+                </span>
+                <span class="policy-benefit-badge c2c">
+                  <span class="material-symbols-outlined icon-xs">savings</span>
+                  Tiết Kiệm 20% — 50%
+                </span>
+              </div>
+              <h3 class="text-lg fw-700 text-text mb-2">
+                Chợ Đồ Cũ Like New Thẩm Định 15 Bước
+              </h3>
+              <p class="text-xs text-muted" style="line-height: 1.6">
+                Giải pháp thông minh cho người sành công nghệ và thời trang. Sở
+                hữu các siêu phẩm Like New với mức giá rẻ hơn đồ mới từ 20% đến
+                50%, an tâm tuyệt đối nhờ màng niêm phong kiểm tra.
+              </p>
+
+              <ul class="model-feature-list">
+                <li class="model-feature-item">
+                  <span
+                    class="material-symbols-outlined text-secondary icon-sm"
+                    style="flex-shrink: 0; margin-top: 2px"
+                    >check_circle</span
+                  >
+                  <span
+                    ><strong>Test Máy Kỹ Thuật 15 Tiêu Chí:</strong> Kiểm tra bo
+                    mạch zin, pin &gt; 85%, màn hình không ám ố, dán tem QR
+                    chống tráo hàng.</span
+                  >
+                </li>
+                <li class="model-feature-item">
+                  <span
+                    class="material-symbols-outlined text-secondary icon-sm"
+                    style="flex-shrink: 0; margin-top: 2px"
+                    >check_circle</span
+                  >
+                  <span
+                    ><strong>Bảo Hành 6 - 12 Tháng Tại Sàn:</strong> Hỗ trợ kỹ
+                    thuật phần cứng, tiếp nhận bảo hành tại 3 trung tâm Showroom
+                    toàn quốc.</span
+                  >
+                </li>
+                <li class="model-feature-item">
+                  <span
+                    class="material-symbols-outlined text-secondary icon-sm"
+                    style="flex-shrink: 0; margin-top: 2px"
+                    >check_circle</span
+                  >
+                  <span
+                    ><strong>Thương Lượng Trả Giá Trực Tiếp:</strong> Đề xuất
+                    mức giá mong muốn với người bán qua công cụ trả giá thông
+                    minh.</span
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div class="pt-4 border-top flex items-center justify-between">
+              <span class="text-xs text-muted"
+                >Tiết kiệm chi phí, trải nghiệm đỉnh cao</span
+              >
+              <a
+                class="btn btn-secondary btn-sm"
+                href="../shop/catalog.html?type=c2c"
+              >
+                Săn Đồ Cũ Like New →
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. SÁU CAM KẾT VÀNG CHO KHÁCH HÀNG (CORE VALUES) -->
+      <section class="about-section">
+        <div class="about-section-head">
+          <span class="badge badge-solid mb-2"
+            >CHÍNH SÁCH BẢO VỆ NGƯỜI MUA</span
+          >
+          <h2 class="about-section-title">6 Cam Kết Vàng Vận Hành Minh Bạch</h2>
+          <p class="about-section-desc">
+            Chúng tôi xây dựng hệ thống quy chuẩn chặt chẽ để khách hàng ở bất
+            kỳ tỉnh thành nào cũng được tận hưởng dịch vụ an toàn và chuyên
+            nghiệp nhất.
+          </p>
+        </div>
+
+        <div class="pledge-grid">
+          <!-- Cam kết 1 -->
+          <div class="pledge-card">
+            <div class="pledge-card-top">
+              <span class="icon-box tone-primary">
+                <span class="material-symbols-outlined">inventory_2</span>
+              </span>
+              <span class="pledge-num">#01</span>
+            </div>
+            <h3 class="pledge-title">Đồng Kiểm 100% Cùng Shipper</h3>
+            <p class="pledge-desc">
+              Khách hàng được quyền mở hộp, cầm nắm sản phẩm, bật nguồn test màn
+              hình và các tính năng cơ bản trước khi thanh toán. Không đúng mô
+              tả hoàn trả 0₫ phí.
+            </p>
+          </div>
+
+          <!-- Cam kết 2 -->
+          <div class="pledge-card">
+            <div class="pledge-card-top">
+              <span class="icon-box tone-secondary">
+                <span class="material-symbols-outlined">qr_code_scanner</span>
+              </span>
+              <span class="pledge-num">#02</span>
+            </div>
+            <h3 class="pledge-title">Tem Niêm Phong QR Màng Vỡ</h3>
+            <p class="pledge-desc">
+              Mỗi sản phẩm cũ sau khi test xong đều được dán tem niêm phong màng
+              vỡ có mã QR dẫn trực tiếp tới video &amp; biên bản kiểm tra 15
+              bước của kỹ thuật viên.
+            </p>
+          </div>
+
+          <!-- Cam kết 3 -->
+          <div class="pledge-card">
+            <div class="pledge-card-top">
+              <span class="icon-box tone-success">
+                <span class="material-symbols-outlined">payments</span>
+              </span>
+              <span class="pledge-num">#03</span>
+            </div>
+            <h3 class="pledge-title">Thanh Toán Minh Bạch &amp; Tiện Lợi</h3>
+            <p class="pledge-desc">
+              Hỗ trợ chuyển khoản nhanh Napas 24/7, quét mã VietQR tự động khớp
+              lệnh 0 giây, hoặc thanh toán tiền mặt khi nhận hàng (COD) không
+              phát sinh phụ phí.
+            </p>
+          </div>
+
+          <!-- Cam kết 4 -->
+          <div class="pledge-card">
+            <div class="pledge-card-top">
+              <span class="icon-box tone-warning">
+                <span class="material-symbols-outlined">badge</span>
+              </span>
+              <span class="pledge-num">#04</span>
+            </div>
+            <h3 class="pledge-title">Định Danh Người Bán eKYC CCCD</h3>
+            <p class="pledge-desc">
+              100% người bán đồ cũ bắt buộc phải xác thực Căn cước công dân gắn
+              chip 2 mặt và được Ban Quản Trị đối soát, loại bỏ hoàn toàn gian
+              lận hoặc hàng giả.
+            </p>
+          </div>
+
+          <!-- Cam kết 5 -->
+          <div class="pledge-card">
+            <div class="pledge-card-top">
+              <span class="icon-box tone-tertiary">
+                <span class="material-symbols-outlined"
+                  >published_with_changes</span
+                >
+              </span>
+              <span class="pledge-num">#05</span>
+            </div>
+            <h3 class="pledge-title">Bảo Hành &amp; Đổi Trả Trong 7 Ngày</h3>
+            <p class="pledge-desc">
+              Chính sách bao test trải nghiệm 7 ngày đổi mới hoặc hoàn tiền nếu
+              có lỗi kỹ thuật; bảo hành điện tử chính hãng từ 6 đến 24 tháng
+              theo từng ngành hàng.
+            </p>
+          </div>
+
+          <!-- Cam kết 6 -->
+          <div class="pledge-card">
+            <div class="pledge-card-top">
+              <span class="icon-box tone-info">
+                <span class="material-symbols-outlined">storefront</span>
+              </span>
+              <span class="pledge-num">#06</span>
+            </div>
+            <h3 class="pledge-title">3 Showroom &amp; Trung Tâm Kỹ Thuật</h3>
+            <p class="pledge-desc">
+              Hệ thống không gian trải nghiệm thực tế và tiếp nhận bảo hành trực
+              tiếp tại Hà Nội, Đà Nẵng và TP.HCM, hỗ trợ kỹ thuật tận tâm không
+              phải chờ đợi gửi bưu điện.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. QUY TRÌNH 5 BƯỚC MUA BÁN AN TOÀN (STEPPER) -->
+      <section class="about-section">
+        <div class="about-section-head">
+          <span class="badge badge-secondary mb-2">TRẢI NGHIỆM ĐƠN GIẢN</span>
+          <h2 class="about-section-title">
+            Quy Trình Mua Bán 5 Bước Minh Bạch
+          </h2>
+          <p class="about-section-desc">
+            Từ lúc tìm kiếm sản phẩm đến khi nhận hàng tận tay chỉ với vài thao
+            tác trực quan, an tâm và nhanh gọn.
+          </p>
+        </div>
+
+        <div class="stepper-grid">
+          <div class="stepper-item">
+            <div class="stepper-num">01</div>
+            <strong class="text-xs mb-1">Chọn Sản Phẩm</strong>
+            <span class="text-xs text-muted"
+              >Xem ảnh thật, thông số độ mới % và biên bản thẩm định tình trạng
+              chi tiết.</span
+            >
+          </div>
+
+          <div class="stepper-item">
+            <div class="stepper-num">02</div>
+            <strong class="text-xs mb-1">Thương Lượng Trả Giá</strong>
+            <span class="text-xs text-muted"
+              >Đề xuất mức giá mong muốn trực tiếp với người bán đồ cũ qua công
+              cụ trả giá.</span
+            >
+          </div>
+
+          <div class="stepper-item">
+            <div class="stepper-num">03</div>
+            <strong class="text-xs mb-1">Kiểm Định Kỹ Thuật</strong>
+            <span class="text-xs text-muted"
+              >Chuyên viên kỹ thuật test toàn diện 15 tiêu chí và dán tem niêm
+              phong QR.</span
+            >
+          </div>
+
+          <div class="stepper-item">
+            <div class="stepper-num">04</div>
+            <strong class="text-xs mb-1">Thanh Toán Linh Hoạt</strong>
+            <span class="text-xs text-muted"
+              >Quét mã VietQR/Napas tự động hoặc lựa chọn thanh toán tiền mặt
+              COD khi nhận.</span
+            >
+          </div>
+
+          <div class="stepper-item">
+            <div class="stepper-num">05</div>
+            <strong class="text-xs mb-1">Đồng Kiểm &amp; Nhận Hàng</strong>
+            <span class="text-xs text-muted"
+              >Mở hộp test thực tế cùng shipper, kích hoạt gói bảo hành điện tử
+              chính thức.</span
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. QUY CHUẨN KIỂM ĐỊNH KỸ THUẬT 15 BƯỚC (INTERACTIVE TABLE) -->
+      <section class="about-section">
+        <div class="about-section-head">
+          <span class="badge badge-solid mb-2">TIÊU CHUẨN CHUYÊN GIA</span>
+          <h2 class="about-section-title">
+            Bảng Quy Chuẩn Kiểm Tra Kỹ Thuật 15 Bước
+          </h2>
+          <p class="about-section-desc">
+            Quy trình test máy thực tế được xây dựng bởi các chuyên gia kỹ thuật
+            phần cứng, áp dụng bắt buộc cho từng nhóm ngành hàng đồ cũ trước khi
+            xuất bán.
+          </p>
+        </div>
+
+        <!-- Bộ lọc tab nhanh theo ngành hàng -->
+        <div class="lab-filter-bar">
+          <button class="lab-filter-btn active" data-filter="all" type="button">
+            Tất Cả 15 Bước
+          </button>
+          <button class="lab-filter-btn" data-filter="tech" type="button">
+            Đồ Điện Tử &amp; Hi-Tech (05)
+          </button>
+          <button class="lab-filter-btn" data-filter="sneakers" type="button">
+            Giày Sneakers Hype (04)
+          </button>
+          <button class="lab-filter-btn" data-filter="fashion" type="button">
+            Thời Trang Thiết Kế (03)
+          </button>
+          <button class="lab-filter-btn" data-filter="iot" type="button">
+            Gia Dụng Thông Minh (03)
+          </button>
+        </div>
+
+        <div class="lab-table-container">
+          <table class="lab-table" aria-label="Bảng 15 bước kiểm tra kỹ thuật">
+            <thead>
+              <tr>
+                <th style="width: 100px; text-align: center">STT</th>
+                <th style="width: 320px">Hạng Mục Kiểm Tra &amp; Ngành Hàng</th>
+                <th>Thao Tác Thực Tế &amp; Tiêu Chuẩn Nghiệm Thu Xuất Bán</th>
+              </tr>
+            </thead>
+            <tbody id="labTableBody">
+              <!-- Hi-Tech (1-5) -->
+              <tr data-cat="tech">
+                <td style="text-align: center">
+                  <span class="badge badge-primary">Bước 01</span>
+                </td>
+                <td>
+                  <strong>Đo dung lượng pin &amp; Tốc độ sạc nhanh</strong>
+                  <span class="badge badge-outline text-xs">Hi-Tech</span>
+                </td>
+                <td>
+                  Đo dung lượng thực tế qua chu kỳ xả nạp; yêu cầu dung lượng
+                  pin đạt &gt; 85%, nhận diện chuẩn sạc nhanh không nóng bất
+                  thường.
+                </td>
+              </tr>
+              <tr data-cat="tech">
+                <td style="text-align: center">
+                  <span class="badge badge-primary">Bước 02</span>
+                </td>
+                <td>
+                  <strong>Soi ngoại quan, ốc máy &amp; chống ẩm</strong>
+                  <span class="badge badge-outline text-xs">Hi-Tech</span>
+                </td>
+                <td>
+                  Kiểm tra vết trầy xước, soi chân ốc đít zin chưa toét đầu,
+                  kiểm tra quỳ tím bên trong chưa đổi màu (không dính ẩm/vào
+                  nước).
+                </td>
+              </tr>
+              <tr data-cat="tech">
+                <td style="text-align: center">
+                  <span class="badge badge-primary">Bước 03</span>
+                </td>
+                <td>
+                  <strong>Test cảm ứng &amp; Màn hình hiển thị</strong>
+                  <span class="badge badge-outline text-xs">Hi-Tech</span>
+                </td>
+                <td>
+                  Vuốt biểu tượng kiểm tra toàn dải cảm ứng; soi nền trắng/đen
+                  kiểm tra điểm chết pixel, ám ố, sọc màn và bóng mờ burn-in.
+                </td>
+              </tr>
+              <tr data-cat="tech">
+                <td style="text-align: center">
+                  <span class="badge badge-primary">Bước 04</span>
+                </td>
+                <td>
+                  <strong>Kiểm tra sóng, loa, mic &amp; cảm biến</strong>
+                  <span class="badge badge-outline text-xs">Hi-Tech</span>
+                </td>
+                <td>
+                  Lắp SIM test đàm thoại loa trong/ngoài trong trẻo; đo tốc độ
+                  5G, Wi-Fi; kiểm tra độ nhạy Face ID/Vân tay và cảm biến tiệm
+                  cận.
+                </td>
+              </tr>
+              <tr data-cat="tech">
+                <td style="text-align: center">
+                  <span class="badge badge-primary">Bước 05</span>
+                </td>
+                <td>
+                  <strong>Chạy thử tải nặng &amp; Quay video 4K</strong>
+                  <span class="badge badge-outline text-xs">Hi-Tech</span>
+                </td>
+                <td>
+                  Bật quay video 4K liên tục 10 phút, kiểm tra chống rung quang
+                  học, tản nhiệt ổn định, máy không bị giật lag hay sập nguồn.
+                </td>
+              </tr>
+
+              <!-- Sneakers (6-9) -->
+              <tr data-cat="sneakers">
+                <td style="text-align: center">
+                  <span class="badge badge-secondary">Bước 06</span>
+                </td>
+                <td>
+                  <strong>Thẩm định chất liệu da &amp; Form mũi giày</strong>
+                  <span class="badge badge-outline text-xs">Sneakers</span>
+                </td>
+                <td>
+                  Kiểm tra độ đàn hồi chất da/vải dệt, độ cong chuẩn của mũi
+                  giày, đường may viền đều đặn không có chỉ thừa hay méo form.
+                </td>
+              </tr>
+              <tr data-cat="sneakers">
+                <td style="text-align: center">
+                  <span class="badge badge-secondary">Bước 07</span>
+                </td>
+                <td>
+                  <strong>Kiểm tra chỉ khâu Strobel &amp; Lót đệm</strong>
+                  <span class="badge badge-outline text-xs">Sneakers</span>
+                </td>
+                <td>
+                  Nhấc lót giày soi đường chỉ may Strobel dưới đế; kiểm tra họa
+                  tiết in logo trên lót và độ dày đệm lót insole nguyên bản.
+                </td>
+              </tr>
+              <tr data-cat="sneakers">
+                <td style="text-align: center">
+                  <span class="badge badge-secondary">Bước 08</span>
+                </td>
+                <td>
+                  <strong>Đo độ êm nảy đệm Air / Bọt Boost</strong>
+                  <span class="badge badge-outline text-xs">Sneakers</span>
+                </td>
+                <td>
+                  Thử lực đàn hồi khi nén, kiểm tra áp suất túi khí Air không xì
+                  xẹp, hạt bọt Boost/React đàn hồi êm ái khi vận động.
+                </td>
+              </tr>
+              <tr data-cat="sneakers">
+                <td style="text-align: center">
+                  <span class="badge badge-secondary">Bước 09</span>
+                </td>
+                <td>
+                  <strong>Đối soát mã size tag &amp; Phụ kiện hộp</strong>
+                  <span class="badge badge-outline text-xs">Sneakers</span>
+                </td>
+                <td>
+                  Đối chiếu mã số UPC/EAN trên tem nhiệt trong giày với tem hộp
+                  chính hãng; kiểm tra đầy đủ dây giày phụ, tag hãng đi kèm.
+                </td>
+              </tr>
+
+              <!-- Thời trang (10-12) -->
+              <tr data-cat="fashion">
+                <td style="text-align: center">
+                  <span class="badge badge-warning">Bước 10</span>
+                </td>
+                <td>
+                  <strong>Thẩm định sợi vải &amp; Khả năng kháng nước</strong>
+                  <span class="badge badge-outline text-xs">Thời Trang</span>
+                </td>
+                <td>
+                  Kiểm tra độ bền sợi dệt, độ co giãn, bề mặt vải không xù lông;
+                  test hạt nước lăn lá sen trên áo khoác chống thấm Gore-Tex.
+                </td>
+              </tr>
+              <tr data-cat="fashion">
+                <td style="text-align: center">
+                  <span class="badge badge-warning">Bước 11</span>
+                </td>
+                <td>
+                  <strong>Kiểm tra khóa kéo YKK &amp; Cúc kim loại</strong>
+                  <span class="badge badge-outline text-xs">Thời Trang</span>
+                </td>
+                <td>
+                  Kéo thử khóa kéo YKK/Riri trơn tru không cấn răng; kiểm tra
+                  cúc bấm, đinh tán kim loại dập logo sắc nét chống gỉ sét.
+                </td>
+              </tr>
+              <tr data-cat="fashion">
+                <td style="text-align: center">
+                  <span class="badge badge-warning">Bước 12</span>
+                </td>
+                <td>
+                  <strong>Vệ sinh hơi nước nóng &amp; Khử mùi thơm</strong>
+                  <span class="badge badge-outline text-xs">Thời Trang</span>
+                </td>
+                <td>
+                  Hấp ủi hơi nước định hình form áo quần, loại bỏ hoàn toàn vi
+                  khuẩn và mùi ẩm mốc trước khi đóng gói túi zip chuyên dụng.
+                </td>
+              </tr>
+
+              <!-- Smart IoT (13-15) -->
+              <tr data-cat="iot">
+                <td style="text-align: center">
+                  <span class="badge badge-success">Bước 13</span>
+                </td>
+                <td>
+                  <strong>Test lực hút &amp; Độ êm của động cơ</strong>
+                  <span class="badge badge-outline text-xs">Smart IoT</span>
+                </td>
+                <td>
+                  Chạy thử máy hút bụi, máy lọc không khí ở các cấp độ gió; đo
+                  lực hút mạnh mẽ và đảm bảo động cơ hoạt động êm, không mùi
+                  khét.
+                </td>
+              </tr>
+              <tr data-cat="iot">
+                <td style="text-align: center">
+                  <span class="badge badge-success">Bước 14</span>
+                </td>
+                <td>
+                  <strong>Test cảm biến chống rơi &amp; Điều khiển App</strong>
+                  <span class="badge badge-outline text-xs">Smart IoT</span>
+                </td>
+                <td>
+                  Cho robot hút bụi chạy thử trên bàn kiểm tra cảm biến chống
+                  rơi vực; kết nối ứng dụng điện thoại điều khiển mượt mà.
+                </td>
+              </tr>
+              <tr data-cat="iot">
+                <td style="text-align: center">
+                  <span class="badge badge-success">Bước 15</span>
+                </td>
+                <td>
+                  <strong>Kiểm tra an toàn điện &amp; Tự ngắt sạc</strong>
+                  <span class="badge badge-outline text-xs">Smart IoT</span>
+                </td>
+                <td>
+                  Kiểm tra dây nguồn không hở điện, đo củ sạc adapter chính hãng
+                  và kiểm tra rơ-le tự ngắt sạc khi pin đầy chống chai nổ.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 7. HỆ THỐNG SHOWROOM & TRUNG TÂM KỸ THUẬT TRẢI NGHIỆM TRỰC TIẾP -->
+      <section class="about-section">
+        <div class="about-section-head">
+          <span class="badge badge-primary mb-2">ĐIỂM HẸN TRẢI NGHIỆM</span>
+          <h2 class="about-section-title">
+            Hệ Thống 3 Showroom &amp; Trung Tâm Kỹ Thuật
+          </h2>
+          <p class="about-section-desc">
+            Không chỉ là không gian mua sắm sang trọng, mỗi Showroom của
+            HYBRID.STORE là một trạm kiểm định thực tế nơi bạn có thể trực tiếp
+            test máy, gửi bảo hành hoặc giao nhận hàng hỏa tốc.
+          </p>
+        </div>
+
+        <div class="showroom-grid">
+          <!-- Showroom Hà Nội -->
+          <div class="showroom-card">
+            <div>
+              <div class="showroom-badge">
+                <span class="material-symbols-outlined icon-xs"
+                  >location_city</span
+                >
+                TRUNG TÂM MIỀN BẮC • HÀ NỘI
+              </div>
+              <h3 class="showroom-name">
+                Showroom &amp; TT Kỹ Thuật Keangnam Landmark 72
+              </h3>
+              <p class="showroom-address">
+                Tầng 1, Tòa tháp Keangnam Landmark 72, Đường Phạm Hùng, Phường
+                Mễ Trì, Quận Nam Từ Liêm, TP. Hà Nội
+              </p>
+              <div class="showroom-meta">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined icon-xs text-secondary"
+                    >schedule</span
+                  >
+                  <span
+                    >Mở cửa: <strong>08:00 - 22:00</strong> (Tất cả các
+                    ngày)</span
+                  >
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined icon-xs text-success"
+                    >call</span
+                  >
+                  <span
+                    >Hotline:
+                    <strong class="mono text-text">024 7300 8899</strong></span
+                  >
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined icon-xs text-primary"
+                    >local_shipping</span
+                  >
+                  <span
+                    >Giao hỏa tốc: <strong>2 giờ</strong> nội thành Hà Nội</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="showroom-features">
+              <span class="badge badge-sm badge-secondary"
+                >Trải nghiệm máy trực tiếp</span
+              >
+              <span class="badge badge-sm badge-primary"
+                >Thẩm định kỹ thuật tại chỗ</span
+              >
+              <span class="badge badge-sm badge-success"
+                >Bảo hành 1-1 lấy ngay</span
+              >
+            </div>
+          </div>
+
+          <!-- Showroom Đà Nẵng -->
+          <div class="showroom-card">
+            <div>
+              <div class="showroom-badge">
+                <span class="material-symbols-outlined icon-xs"
+                  >location_city</span
+                >
+                TRUNG TÂM MIỀN TRUNG • ĐÀ NẴNG
+              </div>
+              <h3 class="showroom-name">
+                Showroom &amp; TT Kỹ Thuật FPT Complex Đà Nẵng
+              </h3>
+              <p class="showroom-address">
+                Tòa nhà FPT Complex, Đường Nam Kỳ Khởi Nghĩa, Khu Đô Thị Công
+                Nghệ FPT City, Quận Ngũ Hành Sơn, TP. Đà Nẵng
+              </p>
+              <div class="showroom-meta">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined icon-xs text-secondary"
+                    >schedule</span
+                  >
+                  <span
+                    >Mở cửa: <strong>08:00 - 22:00</strong> (Tất cả các
+                    ngày)</span
+                  >
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined icon-xs text-success"
+                    >call</span
+                  >
+                  <span
+                    >Hotline:
+                    <strong class="mono text-text">0236 730 8899</strong></span
+                  >
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined icon-xs text-primary"
+                    >local_shipping</span
+                  >
+                  <span
+                    >Giao hỏa tốc: <strong>2 giờ</strong> nội thành Đà
+                    Nẵng</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="showroom-features">
+              <span class="badge badge-sm badge-secondary"
+                >Khu trải nghiệm Hi-Tech</span
+              >
+              <span class="badge badge-sm badge-primary"
+                >Tiếp nhận ký gửi đồ cũ</span
+              >
+              <span class="badge badge-sm badge-success"
+                >Dán tem niêm phong QR</span
+              >
+            </div>
+          </div>
+
+          <!-- Showroom TP.HCM -->
+          <div class="showroom-card">
+            <div>
+              <div class="showroom-badge">
+                <span class="material-symbols-outlined icon-xs"
+                  >location_city</span
+                >
+                TRUNG TÂM MIỀN NAM • TP. HỒ CHÍ MINH
+              </div>
+              <h3 class="showroom-name">
+                Showroom &amp; TT Kỹ Thuật Bitexco Financial Tower
+              </h3>
+              <p class="showroom-address">
+                Tầng trệt, Tòa nhà Tài chính Bitexco, Số 2 Đường Hải Triều,
+                Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh
+              </p>
+              <div class="showroom-meta">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined icon-xs text-secondary"
+                    >schedule</span
+                  >
+                  <span
+                    >Mở cửa: <strong>08:00 - 22:00</strong> (Tất cả các
+                    ngày)</span
+                  >
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined icon-xs text-success"
+                    >call</span
+                  >
+                  <span
+                    >Hotline:
+                    <strong class="mono text-text">028 7300 8899</strong></span
+                  >
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined icon-xs text-primary"
+                    >local_shipping</span
+                  >
+                  <span
+                    >Giao hỏa tốc: <strong>2 giờ</strong> nội thành TP.HCM</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="showroom-features">
+              <span class="badge badge-sm badge-secondary"
+                >Flagship Store chuẩn quốc tế</span
+              >
+              <span class="badge badge-sm badge-primary"
+                >Phòng Lab kiểm tra phần cứng</span
+              >
+              <span class="badge badge-sm badge-success"
+                >Giao dịch mua bán trực tiếp</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. ĐỐI TÁC CHIẾN LƯỢC & HỆ SINH THÁI THANH TOÁN (PARTNERS) -->
+      <section class="about-section">
+        <div class="about-section-head">
+          <span class="badge badge-secondary mb-2">MẠNG LƯỚI ĐỒNG HÀNH</span>
+          <h2 class="about-section-title">
+            Đối Tác Phân Phối &amp; Hạ Tầng Thanh Toán
+          </h2>
+          <p class="about-section-desc">
+            Hợp tác cùng các tập đoàn công nghệ hàng đầu và hệ thống ngân hàng
+            quốc gia để đảm bảo sản phẩm chuẩn hãng và giao dịch thông suốt.
+          </p>
+        </div>
+
+        <div class="partner-logos-grid">
+          <div class="partner-card">
+            <span
+              class="material-symbols-outlined text-primary"
+              style="font-size: 28px"
+              >verified</span
+            >
+            <div class="partner-name">Apple Authorised</div>
+            <div class="partner-type">Phân phối chính thức</div>
+          </div>
+          <div class="partner-card">
+            <span
+              class="material-symbols-outlined text-secondary"
+              style="font-size: 28px"
+              >videocam</span
+            >
+            <div class="partner-name">Sony Vietnam</div>
+            <div class="partner-type">Đối tác máy ảnh &amp; âm thanh</div>
+          </div>
+          <div class="partner-card">
+            <span
+              class="material-symbols-outlined text-success"
+              style="font-size: 28px"
+              >air</span
+            >
+            <div class="partner-name">Dyson Official</div>
+            <div class="partner-type">Gia dụng thông minh cao cấp</div>
+          </div>
+          <div class="partner-card">
+            <span
+              class="material-symbols-outlined text-warning"
+              style="font-size: 28px"
+              >smartphone</span
+            >
+            <div class="partner-name">Samsung Vina</div>
+            <div class="partner-type">Thiết bị di động &amp; màn hình</div>
+          </div>
+          <div class="partner-card">
+            <span
+              class="material-symbols-outlined text-primary"
+              style="font-size: 28px"
+              >account_balance</span
+            >
+            <div class="partner-name">Napas 24/7</div>
+            <div class="partner-type">Cổng thanh toán quốc gia</div>
+          </div>
+          <div class="partner-card">
+            <span
+              class="material-symbols-outlined text-secondary"
+              style="font-size: 28px"
+              >local_shipping</span
+            >
+            <div class="partner-name">GHTK &amp; Viettel Post</div>
+            <div class="partner-type">Vận chuyển &amp; đồng kiểm</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 9. HỎI ĐÁP THỰC TẾ CHO KHÁCH HÀNG (FAQ) -->
+      <section class="about-section">
+        <div class="about-section-head">
+          <span class="badge badge-primary mb-2">HỎI ĐÁP THƯỜNG GẶP</span>
+          <h2 class="about-section-title">Thắc Mắc Phổ Biến Của Khách Hàng</h2>
+          <p class="about-section-desc">
+            Giải đáp cặn kẽ mọi câu hỏi thường gặp về quy trình đồng kiểm, bảo
+            hành và cách thức mua bán tại HYBRID.STORE.
+          </p>
+        </div>
+
+        <div
+          class="faq-list"
+          role="region"
+          aria-label="Danh sách câu hỏi thường gặp"
+        >
+          <!-- FAQ 1 -->
+          <div class="faq-item active">
+            <button
+              class="faq-question"
+              type="button"
+              aria-expanded="true"
+              aria-controls="faq-ans-1"
+              id="faq-btn-1"
+            >
+              <span
+                >1. Mô hình của HYBRID.STORE có điểm gì khác biệt so với các sàn
+                thương mại điện tử thông thường?</span
+              >
+              <span class="material-symbols-outlined faq-icon"
+                >expand_more</span
+              >
+            </button>
+            <div
+              class="faq-answer"
+              id="faq-ans-1"
+              role="region"
+              aria-labelledby="faq-btn-1"
+            >
+              Khác với các sàn mở để người bán tự do đăng hàng không kiểm soát
+              chất lượng, HYBRID.STORE đóng vai trò là bên thứ ba kiểm định và
+              bảo chứng độc lập. Mỗi món hàng cũ đăng bán đều phải qua chuyên
+              viên kỹ thuật test thực tế 15 bước, dán tem niêm phong màng vỡ có
+              mã QR và khách hàng luôn được
+              <strong>đồng kiểm 100% mở hộp xem máy cùng shipper</strong> trước
+              khi trả tiền.
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="faq-item">
+            <button
+              class="faq-question"
+              type="button"
+              aria-expanded="false"
+              aria-controls="faq-ans-2"
+              id="faq-btn-2"
+            >
+              <span
+                >2. Quyền lợi đồng kiểm 100% cùng shipper diễn ra cụ thể như thế
+                nào?</span
+              >
+              <span class="material-symbols-outlined faq-icon"
+                >expand_more</span
+              >
+            </button>
+            <div
+              class="faq-answer"
+              id="faq-ans-2"
+              role="region"
+              aria-labelledby="faq-btn-2"
+            >
+              Khi nhân viên giao hàng tới, bạn được quyền bóc hộp carton bảo vệ,
+              cầm trực tiếp sản phẩm trên tay, kiểm tra ngoại quan vết xước, bật
+              nguồn thử nghiệm các tính năng cơ bản như cảm ứng, camera, loa và
+              đối chiếu số serial/IMEI với hồ sơ niêm phong. Nếu cảm thấy không
+              đúng như mô tả, bạn có quyền từ chối nhận hàng tại chỗ với 0₫ phụ
+              phí.
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="faq-item">
+            <button
+              class="faq-question"
+              type="button"
+              aria-expanded="false"
+              aria-controls="faq-ans-3"
+              id="faq-btn-3"
+            >
+              <span
+                >3. Làm sao tôi kiểm tra được nguồn gốc và tình trạng thật của
+                sản phẩm cũ Like New?</span
+              >
+              <span class="material-symbols-outlined faq-icon"
+                >expand_more</span
+              >
+            </button>
+            <div
+              class="faq-answer"
+              id="faq-ans-3"
+              role="region"
+              aria-labelledby="faq-btn-3"
+            >
+              Mỗi sản phẩm cũ tại HYBRID.STORE đều đi kèm mã định danh hồ sơ kỹ
+              thuật riêng. Trên tem niêm phong của máy có mã QR, bạn chỉ cần
+              dùng camera điện thoại quét để xem toàn bộ video test máy, thông
+              số dung lượng pin thực tế, biên bản kiểm tra ốc vít chưa toét và
+              ảnh chụp độ mới chi tiết trước khi đóng gói.
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="faq-item">
+            <button
+              class="faq-question"
+              type="button"
+              aria-expanded="false"
+              aria-controls="faq-ans-4"
+              id="faq-btn-4"
+            >
+              <span
+                >4. Chính sách bảo hành và đổi trả trong 7 ngày được xử lý ra
+                sao?</span
+              >
+              <span class="material-symbols-outlined faq-icon"
+                >expand_more</span
+              >
+            </button>
+            <div
+              class="faq-answer"
+              id="faq-ans-4"
+              role="region"
+              aria-labelledby="faq-btn-4"
+            >
+              Đối với hàng mới Brand Mall, bạn nhận đầy đủ bảo hành chính hãng
+              theo chính sách của nhà phân phối tại Việt Nam. Đối với đồ cũ Like
+              New, HYBRID.STORE cung cấp gói bảo hành từ 6 đến 12 tháng tại 3
+              Showroom &amp; Trung tâm kỹ thuật toàn quốc, cùng chính sách 1 đổi
+              1 hoặc hoàn tiền 100% trong 7 ngày nếu phát sinh bất kỳ lỗi phần
+              cứng nào.
+            </div>
+          </div>
+
+          <!-- FAQ 5 -->
+          <div class="faq-item">
+            <button
+              class="faq-question"
+              type="button"
+              aria-expanded="false"
+              aria-controls="faq-ans-5"
+              id="faq-btn-5"
+            >
+              <span
+                >5. Tôi có thể đến trực tiếp các Showroom để trải nghiệm và mua
+                hàng không?</span
+              >
+              <span class="material-symbols-outlined faq-icon"
+                >expand_more</span
+              >
+            </button>
+            <div
+              class="faq-answer"
+              id="faq-ans-5"
+              role="region"
+              aria-labelledby="faq-btn-5"
+            >
+              Hoàn toàn được. Chúng tôi mở cửa 3 Showroom trải nghiệm &amp;
+              Trung tâm kỹ thuật tại Keangnam Landmark 72 (Hà Nội), Bitexco
+              Financial Tower (TP.HCM) và FPT Complex (Đà Nẵng) từ 08:00 đến
+              22:00 tất cả các ngày trong tuần. Bạn có thể ghé trực tiếp để tự
+              tay trải nghiệm sản phẩm, nhờ kỹ thuật viên tư vấn hoặc nhận máy
+              trực tiếp.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10. KÊU GỌI HÀNH ĐỘNG (CTA BOX) -->
+      <section class="about-section">
+        <div class="cta-box">
+          <span class="badge badge-solid mb-3"
+            >MUA SẮM THÔNG MINH CÙNG HYBRID.STORE</span
+          >
+          <h2 class="about-section-title" style="font-size: 1.75rem">
+            Sẵn Sàng Trải Nghiệm Mua Sắm An Toàn Tuyệt Đối?
+          </h2>
+          <p
+            class="text-xs text-muted mb-6"
+            style="max-width: 600px; margin-inline: auto; line-height: 1.8"
+          >
+            Khám phá ngay bộ sưu tập hàng hiệu mới nguyên seal chính hãng hoặc
+            săn các siêu phẩm công nghệ Like New tiết kiệm đến 50% cùng đặc
+            quyền đồng kiểm an tâm tận tay.
+          </p>
+
+          <div class="flex items-center justify-center gap-4 flex-wrap">
+            <a
+              class="btn btn-primary"
+              href="../shop/catalog.html?type=mall"
+              style="padding: 12px 24px; font-weight: 700"
+            >
+              <span class="material-symbols-outlined icon-sm">verified</span>
+              Khám Phá Brand Mall Hàng Mới 100%
+            </a>
+            <a
+              class="btn btn-secondary"
+              href="../shop/catalog.html?type=c2c"
+              style="padding: 12px 24px; font-weight: 700"
+            >
+              <span class="material-symbols-outlined icon-sm">savings</span>
+              Săn Đồ Cũ Like New Tiết Kiệm Đến 50%
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer mt-8" data-component="footer"></footer>
+
+    <script src="../../js/utils.js"></script>
+    <script src="../../js/components.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // 1. Chuyển đổi giao diện sáng / tối
+        var toggleBtn = document.getElementById("themeToggleBtn");
+        if (toggleBtn) {
+          toggleBtn.addEventListener("click", function () {
+            var current =
+              document.documentElement.getAttribute("data-theme") || "dark";
+            var next = current === "dark" ? "light" : "dark";
+            document.documentElement.setAttribute("data-theme", next);
+            if (next === "light") {
+              document.documentElement.classList.add("light-theme");
+            } else {
+              document.documentElement.classList.remove("light-theme");
+            }
+            try {
+              localStorage.setItem("hybrid_theme", next);
+            } catch (e) {}
+          });
+        }
+
+        // 2. Logic FAQ Accordion
+        var faqButtons = document.querySelectorAll(".faq-question");
+        function toggleFAQ(btn) {
+          var item = btn.closest(".faq-item");
+          var isExpanded = btn.getAttribute("aria-expanded") === "true";
+
+          faqButtons.forEach(function (otherBtn) {
+            var otherItem = otherBtn.closest(".faq-item");
+            if (otherItem) otherItem.classList.remove("active");
+            otherBtn.setAttribute("aria-expanded", "false");
+          });
+
+          if (!isExpanded) {
+            item.classList.add("active");
+            btn.setAttribute("aria-expanded", "true");
+          }
+        }
+
+        faqButtons.forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            toggleFAQ(btn);
+          });
+          btn.addEventListener("keydown", function (e) {
+            if (
+              e.key === "Enter" ||
+              e.key === " " ||
+              e.key === "Spacebar" ||
+              e.keyCode === 32 ||
+              e.keyCode === 13
+            ) {
+              e.preventDefault();
+              toggleFAQ(btn);
+            }
+          });
+        });
+
+        // 3. Logic lọc nhanh Bảng 15 bước kiểm định
+        var filterBtns = document.querySelectorAll(".lab-filter-btn");
+        var tableRows = document.querySelectorAll("#labTableBody tr");
+
+        filterBtns.forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var filter = btn.getAttribute("data-filter");
+
+            filterBtns.forEach(function (b) {
+              b.classList.remove("active");
+            });
+            btn.classList.add("active");
+
+            tableRows.forEach(function (row) {
+              var rowCat = row.getAttribute("data-cat");
+              if (filter === "all" || rowCat === filter) {
+                row.style.display = "";
+              } else {
+                row.style.display = "none";
+              }
+            });
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
