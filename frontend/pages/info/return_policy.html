@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chính Sách Đổi Trả &amp; Hoàn Tiền | HYBRID.STORE</title>
+
+    <!-- Chống giật giao diện (Zero-FOUC Theme Init) -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("hybrid_theme") || "dark";
+          document.documentElement.setAttribute("data-theme", t);
+          if (t === "light")
+            document.documentElement.classList.add("light-theme");
+        } catch (e) {}
+      })();
+    </script>
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="stylesheet" href="../../css/base.css" />
+    <link rel="stylesheet" href="../../css/catalog.css" />
+    <link rel="stylesheet" href="../../css/master_screens.css" />
+    <link rel="stylesheet" href="../../css/policy.css" />
+  </head>
+  <body>
+    <!-- ===== HEADER ===== -->
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="../../index.html">
+          <span class="brand-mark"
+            ><span class="material-symbols-outlined">token</span></span
+          >
+          <span
+            >HYBRID<span class="text-secondary">.STORE</span>
+            <span class="badge">ĐỔI TRẢ</span></span
+          >
+        </a>
+
+        <div class="header-actions">
+          <button
+            class="icon-btn theme-toggle-btn"
+            id="themeToggleBtn"
+            type="button"
+            title="Chuyển chế độ Sáng / Tối"
+            aria-label="Chuyển đổi giao diện"
+          >
+            <span class="material-symbols-outlined theme-toggle-icon"
+              >light_mode</span
+            >
+          </button>
+          <a class="btn btn-secondary hide-sm" href="../shop/catalog.html"
+            >Xem Sản Phẩm</a
+          >
+          <a class="avatar" href="../account/profile.html" title="Tài khoản">
+            <span class="material-symbols-outlined">person</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== BREADCRUMB ===== -->
+    <div class="subnav">
+      <div class="container">
+        <nav>
+          <a href="../../index.html">Trang Chủ</a>
+          <span class="text-faint">/</span>
+          <span class="active">Chính Sách Đổi Trả</span>
+        </nav>
+        <div class="subnav-info hide-sm">
+          <span class="text-secondary"
+            ><span class="material-symbols-outlined icon-sm">sync_alt</span> Đổi
+            trả linh hoạt 7 ngày</span
+          >
+          <span class="text-success"
+            ><span class="material-symbols-outlined icon-sm">bolt</span> Hoàn
+            tiền Napas 24/7</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <main class="policy-page">
+      <!-- Tiêu đề trang -->
+      <div class="policy-hero">
+        <span class="badge badge-success"
+          >QUYỀN LỢI NGƯỜI TIÊU DÙNG TỐI ĐA</span
+        >
+        <h1>Chính Sách Đổi Trả &amp; Hoàn Tiền</h1>
+        <p>
+          Bảo vệ quyền lợi tối đa cho người mua với quy trình đổi trả minh bạch,
+          thu hồi tận nhà và hoàn tiền tức thì qua Napas 24/7.
+        </p>
+      </div>
+
+      <!-- Bảng so sánh 2 gói đổi trả tách biệt thành 2 khối rõ ràng -->
+      <div class="policy-compare-grid">
+        <div class="policy-card policy-card-primary" style="margin-bottom: 0">
+          <div class="policy-card-top-row">
+            <span class="policy-type-pill mall">
+              <span class="material-symbols-outlined icon-xs">verified</span>
+              Brand Mall Mới 100%
+            </span>
+            <span class="policy-benefit-badge mall">
+              <span class="material-symbols-outlined icon-xs">schedule</span>
+              07 Ngày Đổi Trả
+            </span>
+          </div>
+          <h3 class="policy-main-headline">Đổi Mới Trong Vòng 07 Ngày</h3>
+          <div class="policy-item-list">
+            <div class="policy-check-item">
+              <span class="material-symbols-outlined text-primary"
+                >check_circle</span
+              >
+              <span
+                ><strong>Đổi mới 100% ngay lập tức</strong> nếu sản phẩm xuất
+                hiện lỗi kỹ thuật từ nhà sản xuất.</span
+              >
+            </div>
+            <div class="policy-check-item">
+              <span class="material-symbols-outlined text-primary"
+                >check_circle</span
+              >
+              <span
+                >Hỗ trợ đổi trả do đổi ý (sản phẩm còn nguyên hộp,
+                <strong>nguyên vẹn seal niêm phong</strong>).</span
+              >
+            </div>
+            <div class="policy-check-item">
+              <span class="material-symbols-outlined text-primary"
+                >check_circle</span
+              >
+              <span
+                >Đổi miễn phí nếu giao sai phân loại, sai kích thước hoặc thiếu
+                phụ kiện đính kèm.</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="policy-card policy-card-secondary" style="margin-bottom: 0">
+          <div class="policy-card-top-row">
+            <span class="policy-type-pill c2c">
+              <span class="material-symbols-outlined icon-xs">recycling</span>
+              Đồ Cũ Like New
+            </span>
+            <span class="policy-benefit-badge c2c">
+              <span class="material-symbols-outlined icon-xs">verified</span>
+              48h Trải Nghiệm
+            </span>
+          </div>
+          <h3 class="policy-main-headline">
+            Đồng Kiểm &amp; 48 Giờ Trải Nghiệm
+          </h3>
+          <div class="policy-item-list">
+            <div class="policy-check-item">
+              <span class="material-symbols-outlined text-secondary"
+                >check_circle</span
+              >
+              <span
+                ><strong>Đồng kiểm cùng bưu tá</strong> khi nhận hàng (kiểm tra
+                ngoại quan, bật thử máy trước khi nhận).</span
+              >
+            </div>
+            <div class="policy-check-item">
+              <span class="material-symbols-outlined text-secondary"
+                >check_circle</span
+              >
+              <span
+                >Bảo lưu <strong>48 giờ kiểm thử tại nhà</strong> để trải nghiệm
+                mọi tính năng thực tế.</span
+              >
+            </div>
+            <div class="policy-check-item">
+              <span class="material-symbols-outlined text-secondary"
+                >check_circle</span
+              >
+              <span
+                >Hoàn tiền 100% qua Napas 24/7 nếu máy phát sinh lỗi phần cứng
+                ẩn hoặc <strong>khác mô tả của người bán</strong>.</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Khối 1: Điều kiện hợp lệ tiếp nhận đổi trả -->
+      <section class="policy-card policy-card-success">
+        <div class="policy-card-head">
+          <h2 class="policy-card-title">
+            <span class="material-symbols-outlined text-success">task_alt</span>
+            1. Điều Kiện Tiếp Nhận Đổi Trả Hợp Lệ
+          </h2>
+          <span class="badge badge-success">ĐỦ ĐIỀU KIỆN</span>
+        </div>
+        <p class="text-sm text-muted mb-3" style="line-height: 1.7">
+          Sản phẩm yêu cầu đổi trả cần đáp ứng các tiêu chuẩn chất lượng sau:
+        </p>
+        <div class="policy-item-list">
+          <div class="policy-check-item">
+            <span class="material-symbols-outlined text-success">task_alt</span>
+            <span
+              ><strong>Tem niêm phong:</strong> Còn nguyên vẹn tem niêm phong kỹ
+              thuật đạt chuẩn (đối với hàng pass C2C) hoặc tem niêm phong điện
+              tử của nhà sản xuất.</span
+            >
+          </div>
+          <div class="policy-check-item">
+            <span class="material-symbols-outlined text-success">task_alt</span>
+            <span
+              ><strong>Chứng từ đơn hàng:</strong> Có hóa đơn mua hàng điện tử
+              hoặc mã vận đơn hiển thị trong lịch sử tài khoản
+              HYBRID.STORE.</span
+            >
+          </div>
+          <div class="policy-check-item">
+            <span class="material-symbols-outlined text-success">task_alt</span>
+            <span
+              ><strong>Phụ kiện &amp; Bao bì:</strong> Đầy đủ vỏ hộp nguyên vẹn,
+              cáp sạc, phụ kiện kèm theo, sách hướng dẫn và quà tặng kèm (nếu
+              có).</span
+            >
+          </div>
+          <div class="policy-check-item">
+            <span class="material-symbols-outlined text-success">task_alt</span>
+            <span
+              ><strong>Ngoại quan:</strong> Không có dấu hiệu cấn móp, rơi vỡ,
+              trầy xước phát sinh mới ngoài biên bản nghiệm thu trước khi
+              giao.</span
+            >
+          </div>
+          <div class="policy-check-item">
+            <span class="material-symbols-outlined text-success">task_alt</span>
+            <span
+              ><strong>Đăng xuất tài khoản cá nhân:</strong> Thiết bị thông minh
+              (điện thoại, máy tính bảng, laptop) đã được đăng xuất toàn bộ
+              iCloud, Google, Mi Account và đặt lại về cài đặt gốc.</span
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Khối 2: Các trường hợp không áp dụng đổi trả -->
+      <section class="policy-card policy-card-danger">
+        <div class="policy-card-head">
+          <h2 class="policy-card-title">
+            <span class="material-symbols-outlined text-danger"
+              >do_not_disturb_on</span
+            >
+            2. Các Trường Hợp Không Áp Dụng Đổi Trả
+          </h2>
+          <span class="badge badge-danger">TỪ CHỐI ĐỔI TRẢ</span>
+        </div>
+        <p class="text-sm text-muted mb-3" style="line-height: 1.7">
+          Chính sách đổi trả không áp dụng cho các trường hợp dưới đây:
+        </p>
+        <div class="policy-item-list">
+          <div class="policy-check-item">
+            <span class="material-symbols-outlined text-danger">block</span>
+            <span
+              ><strong>Quá thời hạn:</strong> Vượt quá thời hạn 07 ngày đối với
+              hàng Mall hoặc quá 48 giờ trải nghiệm đối với đồ cũ C2C.</span
+            >
+          </div>
+          <div class="policy-check-item">
+            <span class="material-symbols-outlined text-danger">block</span>
+            <span
+              ><strong>Rách tem niêm phong:</strong> Tem niêm phong kỹ thuật bị
+              rách rời, mất số IMEI/Serial Number hoặc có dấu hiệu can thiệp ốc
+              vít.</span
+            >
+          </div>
+          <div class="policy-check-item">
+            <span class="material-symbols-outlined text-danger">block</span>
+            <span
+              ><strong>Lỗi do sử dụng:</strong> Sản phẩm bị ẩm ướt, vô nước,
+              chập cháy điện hoặc rơi vỡ do người sử dụng bảo quản không đúng
+              cách.</span
+            >
+          </div>
+          <div class="policy-check-item">
+            <span class="material-symbols-outlined text-danger">block</span>
+            <span
+              ><strong>Hàng thời trang đã qua sử dụng:</strong> Quần áo, giày
+              dép đã xé mác thương hiệu, qua giặt tẩy hoặc bám mùi nước hoa,
+              chất bẩn.</span
+            >
+          </div>
+          <div class="policy-check-item">
+            <span class="material-symbols-outlined text-danger">block</span>
+            <span
+              ><strong>Thiếu bằng chứng:</strong> Khách hàng từ chối cho bưu tá
+              đến thu hồi hoặc không cung cấp được video/hình ảnh minh chứng
+              lỗi.</span
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Khối 3: Quy trình 4 bước đổi trả -->
+      <section class="policy-card">
+        <div class="policy-card-head">
+          <h2 class="policy-card-title">
+            <span class="material-symbols-outlined text-primary"
+              >published_with_changes</span
+            >
+            3. Quy Trình 4 Bước Đổi Trả &amp; Hoàn Tiền Siêu Tốc
+          </h2>
+          <span class="badge badge-primary">HOÀN TIỀN TỨC THÌ</span>
+        </div>
+        <div class="policy-step-grid">
+          <div class="policy-step-card">
+            <span class="policy-step-badge badge badge-primary">BƯỚC 1</span>
+            <h4 class="policy-step-title">Tạo Yêu Cầu Trên Website</h4>
+            <p class="policy-step-text">
+              Truy cập <em>Hồ Sơ Cá Nhân</em> &gt;
+              <em>Lịch Sử Đơn Hàng</em> &gt; chọn sản phẩm cần hoàn và bấm
+              <em>"Yêu Cầu Đổi Trả"</em> kèm hình ảnh bằng chứng.
+            </p>
+          </div>
+
+          <div class="policy-step-card">
+            <span class="policy-step-badge badge badge-primary">BƯỚC 2</span>
+            <h4 class="policy-step-title">Bưu Tá Thu Hồi Miễn Phí</h4>
+            <p class="policy-step-text">
+              Hệ thống kích hoạt lệnh thu hồi tự động. Bưu tá liên hệ và nhận
+              lại sản phẩm tận nhà khách hàng hoàn toàn
+              <em>miễn phí cước vận chuyển</em>.
+            </p>
+          </div>
+
+          <div class="policy-step-card">
+            <span class="policy-step-badge badge badge-primary">BƯỚC 3</span>
+            <h4 class="policy-step-title">Nghiệm Thu Kỹ Thuật Thực Tế</h4>
+            <p class="policy-step-text">
+              Sản phẩm chuyển về trung tâm thẩm định để đối chiếu tình trạng, số
+              serial và xác nhận lý do hoàn trả trong tối đa <em>24 giờ</em>.
+            </p>
+          </div>
+
+          <div class="policy-step-card">
+            <span class="policy-step-badge badge badge-primary">BƯỚC 4</span>
+            <h4 class="policy-step-title">Hoàn Tiền Napas 24/7 Tức Thì</h4>
+            <p class="policy-step-text">
+              Sau khi xác nhận hợp lệ, tiền được chuyển thẳng về tài khoản ngân
+              hàng chính chủ qua cổng <em>Napas 24/7 chỉ trong 15 phút</em>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Khối 4: Chính sách hoàn tiền -->
+      <section class="policy-card policy-card-secondary">
+        <div class="policy-card-head">
+          <h2 class="policy-card-title">
+            <span class="material-symbols-outlined text-secondary"
+              >payments</span
+            >
+            4. Hình Thức &amp; Thời Gian Hoàn Tiền
+          </h2>
+          <span class="badge badge-secondary">CỔNG THANH TOÁN</span>
+        </div>
+        <div class="policy-item-list">
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-secondary"
+                >flash_on</span
+              >
+              Chuyển Khoản Ngân Hàng Napas 24/7 (Khuyên Dùng)
+            </div>
+            <p class="policy-item-desc">
+              Tiền hoàn chuyển thẳng về tài khoản ngân hàng nội địa chính chủ
+              của khách hàng ngay lập tức trong vòng
+              <strong>15–30 phút</strong> sau khi trung tâm thẩm định hoàn tất
+              nghiệm thu.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-secondary"
+                >credit_card</span
+              >
+              Thẻ Tín Dụng &amp; Ghi Nợ Quốc Tế (Visa / Mastercard / JCB)
+            </div>
+            <p class="policy-item-desc">
+              Số tiền hoàn được ghi có lại vào hạn mức thẻ trong vòng
+              <strong>3 đến 7 ngày làm việc</strong> tùy theo quy trình đối soát
+              của ngân hàng phát hành thẻ.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-secondary"
+                >swap_horiz</span
+              >
+              Đổi Sang Sản Phẩm Hoặc Mã Hàng Khác
+            </div>
+            <p class="policy-item-desc">
+              Trường hợp khách hàng muốn đổi sản phẩm có giá trị cao hơn, khách
+              hàng chỉ cần thanh toán phần chênh lệch; nếu sản phẩm mới có giá
+              thấp hơn, phần tiền thừa sẽ được hoàn lại ngay qua tài khoản
+              Napas.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Nút điều hướng chân trang -->
+      <div class="policy-bottom-nav">
+        <a class="btn btn-secondary" href="../../index.html">
+          <span class="material-symbols-outlined icon-xs">arrow_back</span> Về
+          Trang Chủ
+        </a>
+        <div class="flex items-center gap-3">
+          <a class="btn btn-ghost" href="terms_of_service.html"
+            >Điều Khoản Dịch Vụ →</a
+          >
+          <a class="btn btn-ghost" href="warranty_policy.html"
+            >Chính Sách Bảo Hành →</a
+          >
+        </div>
+      </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer mt-8" data-component="footer"></footer>
+    <script src="../../js/utils.js"></script>
+    <script src="../../js/components.js"></script>
+  </body>
+</html>
