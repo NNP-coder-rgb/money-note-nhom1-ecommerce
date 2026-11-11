@@ -1816,3 +1816,242 @@ const MOCK_CHAT = [
     time: "09:32",
   },
 ];
+
+/* =========================================================================
+   TASK [FE] T10 — MOCK DATA: NGƯỜI DÙNG, ĐƠN, TRANH CHẤP
+   ========================================================================= */
+
+/* ---------------- 1. NGƯỜI DÙNG MẪU (MOCK_USERS) ---------------- */
+const MOCK_USERS = [
+  {
+    id: "u1",
+    username: "phuc_buyer",
+    email: "phuc.nn@gmail.com",
+    fullName: "Nguyễn Ngọc Phúc",
+    role: "buyer", // 'buyer' | 'seller' | 'mall' | 'admin'
+    phone: "0912 345 678",
+    avatar: "P",
+    address: "Tòa Keangnam Landmark 72, Phạm Hùng, Mễ Trì, Nam Từ Liêm, Hà Nội",
+    cccd: "001201018899",
+    ekycStatus: "verified", // 'unverified' | 'pending' | 'verified'
+    creditScore: 98,
+    walletBalance: 45000000,
+    fido2Passkey: true,
+  },
+  {
+    id: "u2",
+    username: "techzone_c2c",
+    email: "duc.tm@gmail.com",
+    fullName: "Trần Minh Đức",
+    role: "seller",
+    phone: "0988 776 655",
+    avatar: "Đ",
+    storeName: "TechZone C2C Hà Nội",
+    rating: 4.9,
+    completedOrders: 142,
+    cccd: "001201099882",
+    ekycStatus: "verified",
+    walletAvailable: 34500000,
+    walletPending: 8500000,
+    fido2Passkey: true,
+  },
+  {
+    id: "u3",
+    username: "apple_mall",
+    email: "apple.mall@hybrid.store",
+    fullName: "Apple Authorized Flagship Store",
+    role: "mall",
+    phone: "1800 1127",
+    avatar: "A",
+    storeName: "Apple Brand Mall VN/A",
+    rating: 5.0,
+    completedOrders: 3200,
+    cccd: "DKKD-01029384",
+    ekycStatus: "verified",
+    walletAvailable: 420000000,
+    walletPending: 56000000,
+    fido2Passkey: true,
+  },
+  {
+    id: "u4",
+    username: "admin_master",
+    email: "admin@hybrid.store",
+    fullName: "Master Admin Command Center",
+    role: "admin",
+    phone: "1900 8888",
+    avatar: "M",
+    permissions: ["ALL"],
+    ekycStatus: "verified",
+    fido2Passkey: true,
+  },
+];
+
+/* ---------------- 2. TÀI KHOẢN VÍ & GIAO DỊCH THANH TOÁN (MOCK_ESCROW / MOCK_PAYMENTS) ---------------- */
+const MOCK_ESCROW = {
+  summary: {
+    totalTvl: 148500000000,
+    totalAvailable: 124200000000,
+    totalPending: 24300000000,
+    totalTransactions: 84920,
+    proofOfReserveRatio: "102.4%",
+    bankPartners: ["Techcombank", "Vietcombank", "MBBank"],
+  },
+  sellerWallet: {
+    userId: "u2",
+    availableBalance: 34500000,
+    pendingBalance: 8500000,
+    totalEarned: 184500000,
+    minWithdraw: 50000,
+    linkedBank: "Techcombank - 19036788899999",
+    accountHolder: "TRAN MINH DUC",
+  },
+  transactions: [
+    {
+      id: "TX-9901",
+      type: "withdraw",
+      amount: 15000000,
+      note: "Rút tiền nhanh 24/7 Napas về Techcombank",
+      date: "08/11/2026 16:45",
+      status: "completed",
+    },
+    {
+      id: "TX-9902",
+      type: "hold",
+      amount: 8500000,
+      note: "Tạm khóa an toàn chờ đồng kiểm đơn #ORD-20261108-9841",
+      date: "08/11/2026 14:30",
+      status: "pending",
+    },
+    {
+      id: "TX-9903",
+      type: "release",
+      amount: 11700000,
+      note: "Giải ngân đơn hàng thành công #ORD-20261105-7720",
+      date: "07/11/2026 11:20",
+      status: "completed",
+    },
+    {
+      id: "TX-9904",
+      type: "deposit",
+      amount: 20000000,
+      note: "Kích hoạt ví giao dịch bảo đảm",
+      date: "01/11/2026 09:00",
+      status: "completed",
+    },
+  ],
+};
+
+/* ---------------- 3. TRANH CHẤP & KHIẾU NẠI 3 BÊN (MOCK_DISPUTES) ---------------- */
+const MOCK_DISPUTES = [
+  {
+    id: "DSP-20261108-01",
+    orderId: "ORD-20261108-9841",
+    createdAt: "2026-11-08T15:20:00Z",
+    status: "under_review", // 'under_review' | 'resolved' | 'cancelled'
+    statusLabel: "Đang phân xử 3 bên",
+    reason:
+      "Ngoại quan viền camera bị cấn xước không đúng cam kết Like New 99%",
+    buyer: {
+      id: "u1",
+      name: "Nguyễn Ngọc Phúc",
+      phone: "0912 345 678",
+      avatar: "P",
+    },
+    seller: {
+      id: "u2",
+      name: "Trần Minh Đức (TechZone C2C)",
+      phone: "0988 776 655",
+      avatar: "Đ",
+    },
+    arbitrator: {
+      id: "u5",
+      name: "Giám định viên Lab - Hoàng Nam",
+      labStation: "Trạm Lab 01 Hà Nội",
+      avatar: "L",
+    },
+    proofMedia: [
+      {
+        type: "video",
+        url: "https://video.hybrid.store/unbox-4k-9841.mp4",
+        label: "Video mở hộp 4K đồng kiểm cùng shipper",
+        duration: "02:45",
+      },
+      {
+        type: "image",
+        url: IMG.iphone,
+        label: "Ảnh macro chụp cận cảnh vết cấn viền 1.5mm",
+      },
+    ],
+    proposedSolutions: [
+      {
+        id: "sol_refund",
+        title: "Hoàn tiền 100% (21.490.000₫) về tài khoản Napas 24/7",
+        status: "pending_approval",
+        selected: true,
+      },
+      {
+        id: "sol_replace",
+        title: "Đổi máy iPhone 15 Pro Max 99% khác đã kiểm định chuẩn",
+        status: "offered",
+        selected: false,
+      },
+      {
+        id: "sol_voucher",
+        title: "Bồi thường voucher 1.500.000₫ và người mua giữ lại máy",
+        status: "rejected",
+        selected: false,
+      },
+    ],
+    chatMessages: [
+      {
+        sender: "buyer",
+        name: "Nguyễn Ngọc Phúc",
+        text: "Tôi vừa mở hộp cùng shipper, phát hiện viền camera có vết cấn sâu khoảng 1.5mm, trong khi bài đăng cam kết like new 99% không tì vết.",
+        time: "15:22",
+      },
+      {
+        sender: "arbitrator",
+        name: "Giám định viên Lab - Hoàng Nam",
+        text: "Đã tiếp nhận khiếu nại DSP-20261108-01. Phòng Lab đang đối chiếu video unbox 4K và biên bản kiểm định xuất kho lúc 11:30 ngày 08/11/2026.",
+        time: "15:25",
+      },
+      {
+        sender: "seller",
+        name: "Trần Minh Đức",
+        text: "Dạ em xin lỗi anh Phúc về sự cố sơ suất khi đóng gói ạ. Bên em chấp thuận phương án hoàn tiền 100% hoặc đổi máy khác ngay trong hôm nay cho anh ạ.",
+        time: "15:28",
+      },
+    ],
+  },
+];
+
+/* ---------------- XUẤT CHO MÔI TRƯỜNG NODE.JS & WINDOW ---------------- */
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = {
+    IMG,
+    CATEGORIES,
+    PRODUCTS,
+    FLASH_SALE,
+    TICKER,
+    MOCK_ORDERS,
+    MOCK_REVIEWS,
+    MOCK_CHAT,
+    MOCK_USERS,
+    MOCK_ESCROW,
+    MOCK_DISPUTES,
+  };
+}
+
+if (typeof window !== "undefined") {
+  window.IMG = IMG;
+  window.CATEGORIES = CATEGORIES;
+  window.PRODUCTS = PRODUCTS;
+  window.FLASH_SALE = FLASH_SALE;
+  window.TICKER = TICKER;
+  window.MOCK_ORDERS = MOCK_ORDERS;
+  window.MOCK_REVIEWS = MOCK_REVIEWS;
+  window.MOCK_CHAT = MOCK_CHAT;
+  window.MOCK_USERS = MOCK_USERS;
+  window.MOCK_ESCROW = MOCK_ESCROW;
+  window.MOCK_DISPUTES = MOCK_DISPUTES;
+}
