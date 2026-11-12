@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Giỏ Hàng Gom Nhóm Theo Người Bán | HYBRID.STORE</title>
+
+    <!-- Chống giật giao diện (Zero-FOUC Theme Init) -->
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem("hybrid_theme") || "dark";
+                document.documentElement.setAttribute("data-theme", t);
+                if (t === "light") document.documentElement.classList.add("light-theme");
+            } catch (e) { }
+        })();
+    </script>
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="../../css/base.css" />
+    <link rel="stylesheet" href="../../css/catalog.css" />
+    <link rel="stylesheet" href="../../css/master_screens.css" />
+</head>
+
+<body>
+    <!-- ===== HEADER MINIMAL (Task T13) ===== -->
+    <header class="site-header site-header--minimal" id="siteHeader">
+        <div class="container">
+            <div class="flex items-center gap-3">
+                <a class="brand" href="../../index.html">
+                    <span class="brand-mark"><span class="material-symbols-outlined">token</span></span>
+                    <span>HYBRID<span class="text-secondary">.STORE</span> <span class="badge">GIỎ HÀNG</span></span>
+                </a>
+            </div>
+
+            <div class="header-trust-pills hide-md flex items-center gap-4 text-xs text-muted">
+                <span class="flex items-center gap-1 text-success fw-600">
+                    <span class="material-symbols-outlined icon-sm">verified_user</span> Đồng kiểm 100% khi nhận hàng
+                </span>
+                <span class="flex items-center gap-1 text-secondary fw-600">
+                    <span class="material-symbols-outlined icon-sm">bolt</span> Thanh toán Napas 24/7
+                </span>
+                <span class="flex items-center gap-1">
+                    <span class="material-symbols-outlined icon-sm">support_agent</span> Hotline: 1900 8899
+                </span>
+            </div>
+
+            <div class="header-actions">
+                <a class="btn btn-secondary btn-sm hide-sm" href="catalog.html">
+                    <span class="material-symbols-outlined icon-sm">arrow_back</span> Tiếp Tục Mua Sắm
+                </a>
+                <button class="icon-btn theme-toggle-btn" id="themeToggleBtn" type="button"
+                    aria-label="Chuyển chế độ sáng / tối" title="Chuyển sang giao diện Sáng">
+                    <span class="material-symbols-outlined theme-toggle-icon">light_mode</span>
+                </button>
+                <a class="icon-btn active" href="cart.html" aria-label="Giỏ hàng" title="Giỏ hàng">
+                    <span class="material-symbols-outlined">shopping_bag</span>
+                    <span class="badge badge-counter" id="cartCount">0</span>
+                </a>
+                <a class="avatar" id="avatarBtn" href="../account/profile.html" title="Tài khoản">
+                    <span class="material-symbols-outlined">person</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== BREADCRUMB (Task T14) ===== -->
+    <div class="subnav">
+        <div class="container flex items-center justify-between flex-wrap gap-3">
+            <nav class="breadcrumb-nav" aria-label="Đường dẫn trang">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../../index.html">Trang Chủ</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Giỏ Hàng Gom Nhóm Theo Người Bán</li>
+                </ol>
+            </nav>
+            <div class="subnav-info hide-sm">
+                <span class="text-success flex items-center gap-1">
+                    <span class="material-symbols-outlined icon-sm">verified</span> Phí kiểm định: 0₫
+                </span>
+                <span class="text-secondary flex items-center gap-1">
+                    <span class="material-symbols-outlined icon-sm">local_shipping</span> Miễn phí giao hàng toàn quốc
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== TIẾN TRÌNH THANH TOÁN (STEPPER 3 BƯỚC TRONG KHUNG) ===== -->
+    <div class="container mt-4 mb-2">
+        <div class="cart-stepper-frame">
+            <div class="cart-step active">
+                <div class="cart-step-icon">
+                    <span class="material-symbols-outlined">shopping_cart</span>
+                </div>
+                <div class="cart-step-text">
+                    <strong>1. Giỏ Hàng</strong>
+                    <small>Kiểm tra kiện hàng</small>
+                </div>
+            </div>
+
+            <span class="material-symbols-outlined cart-step-arrow hide-sm">chevron_right</span>
+
+            <div class="cart-step">
+                <div class="cart-step-icon">
+                    <span class="material-symbols-outlined">local_shipping</span>
+                </div>
+                <div class="cart-step-text">
+                    <strong>2. Giao Hàng</strong>
+                    <small>Địa chỉ nhận máy</small>
+                </div>
+            </div>
+
+            <span class="material-symbols-outlined cart-step-arrow hide-sm">chevron_right</span>
+
+            <div class="cart-step">
+                <div class="cart-step-icon">
+                    <span class="material-symbols-outlined">verified</span>
+                </div>
+                <div class="cart-step-text">
+                    <strong>3. Hoàn Tất</strong>
+                    <small>Đồng kiểm &amp; thanh toán</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="container py-4">
+        <!-- TIÊU ĐỀ TRANG VỪA PHẢI & NÚT XÓA GIỎ -->
+        <div class="cart-header-bar mb-5 flex items-center justify-between flex-wrap gap-3">
+            <div>
+                <h1 class="cart-header-title">
+                    <span class="material-symbols-outlined cart-title-icon">shopping_cart</span>
+                    Giỏ Hàng Của Bạn
+                </h1>
+                <p class="cart-header-desc">
+                    Tự động phân nhóm kiện hàng theo nguồn gốc: Brand Mall Chính Hãng &amp; Người Bán C2C Tuyển Chọn.
+                </p>
+            </div>
+            <button class="btn btn-secondary btn-sm" id="clearCartBtn" type="button" style="display: none;">
+                <span class="material-symbols-outlined icon-sm">delete_sweep</span> Xóa Tất Cả
+            </button>
+        </div>
+
+        <!-- KHỐI 1: GIAO DIỆN GIỎ HÀNG TRỐNG -->
+        <div id="cartEmptyView" style="display: none;">
+            <div class="cart-empty-box">
+                <span class="material-symbols-outlined cart-empty-icon">remove_shopping_cart</span>
+                <h2 style="font-family: var(--font-head); font-size: 1.5rem; margin-bottom: 8px;">Giỏ hàng của bạn đang
+                    trống</h2>
+                <p class="text-muted text-sm mb-4" style="max-width: 480px; margin-inline: auto;">
+                    Hãy dạo quanh HYBRID.STORE để khám phá hàng ngàn thiết bị công nghệ chính hãng Brand Mall và đồ cũ
+                    Like New chất lượng cao với mức giá tiết kiệm nhất!
+                </p>
+                <div class="flex justify-center gap-3">
+                    <a href="catalog.html" class="btn btn-primary">
+                        <span class="material-symbols-outlined icon-sm">storefront</span> Khám Phá Sản Phẩm Ngay
+                    </a>
+                    <a href="../../index.html" class="btn btn-outlined">
+                        <span class="material-symbols-outlined icon-sm">home</span> Về Trang Chủ
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- KHỐI 2: GIAO DIỆN 2 CỘT KHI CÓ SẢN PHẨM -->
+        <div class="grid grid-2 gap-6" id="cartLayoutView"
+            style="grid-template-columns: minmax(0, 1fr) 380px; align-items: start;">
+            <!-- CỘT TRÁI: DANH SÁCH KIỆN HÀNG PHÂN THEO NGUỒN GỐC -->
+            <section id="cartLeftSection">
+                <div id="cartItemsList">
+                    <!-- Được render động bởi cart.js -->
+                </div>
+
+                <!-- 3 KHỐI CAM KẾT AN TÂM -->
+                <div class="cart-trust-grid">
+                    <div class="cart-trust-card">
+                        <span class="material-symbols-outlined text-success"
+                            style="font-size: 28px;">verified_user</span>
+                        <div>
+                            <strong class="text-sm block mb-1">Đồng kiểm 100% khi nhận</strong>
+                            <p class="text-xs text-muted mb-0">Shipper chờ bạn mở hộp kiểm tra ngoại quan đúng mô tả
+                                trước khi thanh toán.</p>
+                        </div>
+                    </div>
+                    <div class="cart-trust-card">
+                        <span class="material-symbols-outlined text-secondary"
+                            style="font-size: 28px;">published_with_changes</span>
+                        <div>
+                            <strong class="text-sm block mb-1">Đổi trả 7 ngày miễn phí</strong>
+                            <p class="text-xs text-muted mb-0">Hoàn tiền 100% nếu sản phẩm có lỗi kỹ thuật hoặc sai lệch
+                                thông tin cam kết.</p>
+                        </div>
+                    </div>
+                    <div class="cart-trust-card">
+                        <span class="material-symbols-outlined text-primary"
+                            style="font-size: 28px;">local_shipping</span>
+                        <div>
+                            <strong class="text-sm block mb-1">Giao hàng toàn quốc 0₫</strong>
+                            <p class="text-xs text-muted mb-0">Đóng gói niêm phong chống va đập và bảo hiểm vận chuyển
+                                hỏa tốc toàn diện.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CỘT PHẢI: TỔNG KẾT, VOUCHER & TIẾN HÀNH THANH TOÁN (STICKY) -->
+            <aside class="panel p-5" style="position: sticky; top: 90px;">
+                <h3 class="panel-title mb-3 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">receipt_long</span>
+                    Tóm Tắt Đơn Hàng
+                </h3>
+                <div class="summary-row">
+                    <span>Tạm tính (<span id="summaryTotalQty">0</span> món):</span>
+                    <strong class="mono" id="summarySubtotal">0₫</strong>
+                </div>
+                <div class="summary-row">
+                    <span>Phí kiểm định &amp; niêm phong:</span>
+                    <span class="text-success fw-600">0₫ (Miễn phí)</span>
+                </div>
+                <div class="summary-row">
+                    <span>Phí giao hàng toàn quốc:</span>
+                    <span class="text-success fw-600">0₫ (Freeship)</span>
+                </div>
+                <div class="summary-row" id="voucherRow" style="display: none;">
+                    <span>Mã giảm giá (<span id="voucherCodeText" class="text-success fw-600"></span>):</span>
+                    <span class="text-success fw-600" id="summaryDiscount">-0₫</span>
+                </div>
+                <div class="summary-row total-row">
+                    <span>Tổng thanh toán:</span>
+                    <strong class="mono text-gradient" id="summaryTotal" style="font-size: 1.4rem;">0₫</strong>
+                </div>
+                <small class="text-xs text-muted block mt-1">Đã bao gồm thuế VAT và bảo hiểm đóng gói 100%</small>
+
+                <!-- Ô NHẬP VOUCHER -->
+                <div class="panel p-3 mt-4"
+                    style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border);">
+                    <label class="text-xs fw-600 block mb-2" for="voucherInput">Mã Giảm Giá / Phiếu Ưu Đãi:</label>
+                    <div class="input-group" style="margin-bottom: 8px;">
+                        <input id="voucherInput" class="input input-sm" type="text"
+                            placeholder="Nhập mã (HYBRID50, WELCOME)" style="text-transform: uppercase;" />
+                        <button class="btn btn-secondary btn-sm" id="applyVoucherBtn" type="button">
+                            Áp Dụng
+                        </button>
+                    </div>
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <span class="text-xs text-muted">Mã gợi ý:</span>
+                        <button type="button" class="badge badge-secondary cursor-pointer"
+                            onclick="document.getElementById('voucherInput').value='HYBRID50'; document.getElementById('applyVoucherBtn').click();">HYBRID50
+                            (-50k)</button>
+                        <button type="button" class="badge badge-secondary cursor-pointer"
+                            onclick="document.getElementById('voucherInput').value='WELCOME'; document.getElementById('applyVoucherBtn').click();">WELCOME
+                            (-10%)</button>
+                        <button type="button" class="badge badge-secondary cursor-pointer"
+                            onclick="document.getElementById('voucherInput').value='FREESHIP'; document.getElementById('applyVoucherBtn').click();">FREESHIP
+                            (-30k)</button>
+                    </div>
+                </div>
+
+                <!-- NÚT TIẾN HÀNH THANH TOÁN -->
+                <a class="btn btn-primary is-full btn-lg mt-4" id="btnProceedCheckout" href="checkout.html"
+                    style="padding: 14px;">
+                    <span class="material-symbols-outlined">payments</span>
+                    Tiến Hành Đặt Hàng &amp; Thanh Toán
+                </a>
+
+                <!-- HUY HIỆU PHƯƠNG THỨC THANH TOÁN AN TOÀN -->
+                <div class="mt-4 pt-3 text-center" style="border-top: 1px solid var(--border);">
+                    <span class="text-xs text-muted block mb-2">Chấp nhận thanh toán an toàn:</span>
+                    <div class="flex justify-center gap-2 flex-wrap text-xs">
+                        <span class="badge badge-secondary">Napas 24/7</span>
+                        <span class="badge badge-secondary">VietQR Pro</span>
+                        <span class="badge badge-secondary">COD Đồng Kiểm</span>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- ===== FOOTER (Task T14) ===== -->
+    <footer class="site-footer" id="siteFooter">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-col--brand">
+                    <div class="brand mb-3">
+                        <span class="brand-mark"><span
+                                class="material-symbols-outlined text-primary">token</span></span>
+                        <span>HYBRID<span class="text-secondary">.STORE</span> <span class="badge">v3.2</span></span>
+                    </div>
+                    <p class="mb-3 text-sm text-muted">
+                        Nền tảng thương mại điện tử mua sắm uy tín. Chuyên phân phối hàng mới chính hãng 100% và chợ đồ
+                        cũ Like New chất lượng cao với giá tiết kiệm nhất.
+                    </p>
+                    <div class="footer-showrooms text-xs text-muted mb-3">
+                        <div class="fw-700 text-text mb-1 flex items-center gap-1">
+                            <span class="material-symbols-outlined icon-sm text-primary">location_on</span>
+                            3 Trung Tâm Kỹ Thuật Showroom:
+                        </div>
+                        <div>• Hà Nội: Tầng 1, Keangnam Landmark 72, Nam Từ Liêm</div>
+                        <div>• Đà Nẵng: Tòa FPT Complex, Ngũ Hành Sơn</div>
+                        <div>• TP.HCM: Tầng trệt, Bitexco Financial Tower, Quận 1</div>
+                    </div>
+                    <div class="flex gap-4 mono text-xs">
+                        <span class="text-success fw-600">● Bảo hành 12-24T</span>
+                        <span class="text-secondary fw-600">● Đổi trả 7 ngày</span>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Thị Trường Mua Sắm</h5>
+                    <ul class="footer-links">
+                        <li><a href="catalog.html?category=dien-thoai">Điện Thoại &amp; Smartphone</a></li>
+                        <li><a href="catalog.html?category=laptop">Laptop &amp; MacBook Cao Cấp</a></li>
+                        <li><a href="catalog.html?category=audio">Tai Nghe &amp; Thiết Bị Âm Thanh</a></li>
+                        <li><a href="catalog.html?category=camera">Máy Ảnh &amp; Ống Kính Mirrorless</a></li>
+                        <li><a href="catalog.html?type=mall">Brand Mall — Hàng Mới 100%</a></li>
+                        <li><a href="catalog.html?type=c2c">Chợ Đồ Cũ Like New Tuyển Chọn</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Chính Sách &amp; Hỗ Trợ</h5>
+                    <ul class="footer-links">
+                        <li><a href="../../about-web.html">Giới thiệu nền tảng HYBRID.STORE</a></li>
+                        <li><a href="../../about.html">Quy trình kiểm định kỹ thuật 15 bước</a></li>
+                        <li><a href="../../warranty_policy.html">Chính sách bảo hành chính hãng</a></li>
+                        <li><a href="../../return_policy.html">Chính sách đổi trả trong 7 ngày</a></li>
+                        <li><a href="../../terms_of_service.html">Điều khoản dịch vụ sàn</a></li>
+                        <li><a href="../seller/post_item.html">Quy định đăng tin bán đồ cũ C2C</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Hỗ Trợ 24/7</h5>
+                    <ul class="footer-links mb-3">
+                        <li class="mono text-secondary fw-700 flex items-center gap-1">
+                            <span class="material-symbols-outlined icon-sm">call</span> Hotline: 1900 8899 (Miễn phí)
+                        </li>
+                        <li class="flex items-center gap-1">
+                            <span class="material-symbols-outlined icon-sm">mail</span> support@hybridstore.vn
+                        </li>
+                        <li><a href="../buyer/dispute.html">Trung tâm xử lý khiếu nại &amp; Chat</a></li>
+                        <li><a href="../buyer/orders.html">Tra cứu tiến độ đơn hàng</a></li>
+                    </ul>
+                    <div class="footer-payment-methods">
+                        <div class="text-xs text-muted mb-2 fw-600">Thanh toán &amp; Đồng kiểm:</div>
+                        <div class="flex flex-wrap gap-2 text-xs">
+                            <span class="badge badge-secondary">Napas 24/7</span>
+                            <span class="badge badge-secondary">VietQR</span>
+                            <span class="badge badge-secondary">COD Đồng Kiểm 100%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>© 2026 HYBRID.STORE — Bán Hàng Mới &amp; Đồ Cũ Tuyển Chọn. All rights reserved.</span>
+                <span class="flex gap-4">
+                    <a href="../../terms_of_service.html">Điều Khoản Dịch Vụ</a>
+                    <a href="../../warranty_policy.html">Chính Sách Bảo Hành</a>
+                    <a href="../../return_policy.html">Chính Sách Đổi Trả</a>
+                </span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Các tập lệnh JavaScript cần nạp -->
+    <script src="../../js/popup.js"></script>
+    <script src="../../js/auth.js"></script>
+    <script src="../../js/mock_data.js"></script>
+    <script src="../../js/utils.js"></script>
+    <script src="../../js/components.js"></script>
+    <script src="../../js/cart.js"></script>
+    <script>
+        (function () {
+            // Gắn sự kiện nút checkout kiểm tra đăng nhập mượt mà
+            const btnCheckout = document.getElementById("btnProceedCheckout");
+            if (btnCheckout) {
+                btnCheckout.addEventListener("click", (e) => {
+                    if (typeof Auth !== "undefined" && !Auth.current()) {
+                        e.preventDefault();
+                        Auth.ensureLogin(() => {
+                            window.location.href = "checkout.html";
+                        });
+                    }
+                });
+            }
+        })();
+    </script>
+</body>
+
+</html>
