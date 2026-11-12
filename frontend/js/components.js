@@ -375,6 +375,216 @@
       }
     }
   };
+  /* =====================================================================
+     TASK [FE] T14: RENDER PRODUCT CARD (Brand Mall & Chợ Đồ Cũ C2C)
+     ===================================================================== */
+
+  var ProductCard = {
+    /**
+     * Tạo mã HTML cho một thẻ sản phẩm
+     * @param {Object} p Thông tin sản phẩm từ mock_data
+     * @param {Object} options { basePath: "", context: "catalog"|"home"|"flash" }
+     */
+    createHTML: function (p, options) {
+      if (!p) return "";
+      options = options || {};
+      var bp = detectBasePath(options.basePath);
+      var isMall = p.type === "mall";
+      var title = p.short || p.name || "Sản phẩm";
+      var detailUrl = isMall
+        ? resolveUrl("pages/shop/product_new.html?id=" + encodeURIComponent(p.id), bp)
+        : resolveUrl("pages/shop/product_used.html?id=" + encodeURIComponent(p.id), bp);
+      var imgUrl = resolveUrl(p.img || "", bp);
+
+      var formattedPrice = formatMoney(p.price);
+      var formattedOldPrice = p.oldPrice ? formatMoney(p.oldPrice) : "";
+      var starsHtml = getRatingStars(p.rating || 5.0);
+      var ratingNumber = p.rating ? Number(p.rating).toFixed(1) : "5.0";
+
+      /* ----- THẺ SẢN PHẨM BRAND MALL (Hàng mới 100%) ----- */
+      if (isMall) {
+        return (
+          '<article class="product-card" data-id="' +
+          escapeHtml(p.id) +
+          '" data-type="mall">' +
+          '<div class="product-media">' +
+          '<a href="' + detailUrl + '">' +
+          '<img src="' + imgUrl + '" alt="' + escapeHtml(title) + '" loading="lazy">' +
+          "</a>" +
+          '<div class="product-tags">' +
+          '<span class="badge badge-solid">' + escapeHtml(p.badge || "CHÍNH HÃNG MALL") + "</span>" +
+          (p.off ? '<span class="badge badge-success">-' + p.off + "%</span>" : "") +
+          "</div>" +
+          '<button class="product-wishlist-btn" type="button" data-action="wishlist" data-id="' + escapeHtml(p.id) + '" aria-label="Yêu thích" title="Lưu vào danh sách yêu thích">' +
+          '<span class="material-symbols-outlined">favorite_border</span>' +
+          "</button>" +
+          (p.tag ? '<span class="media-tag">' + escapeHtml(p.tag) + "</span>" : "") +
+          "</div>" +
+          '<div class="product-body">' +
+          '<span class="product-cat text-primary">' + escapeHtml(p.sub || "CHÍNH HÃNG 100%") + "</span>" +
+          '<h3 class="product-name line-clamp-2" title="' + escapeHtml(p.name) + '">' +
+          '<a href="' + detailUrl + '" class="text-hover-primary">' + escapeHtml(p.name) + "</a>" +
+          "</h3>" +
+          '<div class="stars-container">' +
+          starsHtml +
+          "</div>" +
+          '<div class="product-price mt-2">' +
+          '<span class="price">' + formattedPrice + "</span>" +
+          (formattedOldPrice ? '<span class="price-old">' + formattedOldPrice + "</span>" : "") +
+          "</div>" +
+          "</div>" +
+          '<div class="product-actions">' +
+          '<button class="btn btn-outlined btn-sm" type="button" data-action="add-cart" data-id="' +
+          escapeHtml(p.id) +
+          '" title="Thêm vào giỏ hàng">' +
+          '<span class="material-symbols-outlined icon-sm">add_shopping_cart</span> Thêm Vào Giỏ' +
+          "</button>" +
+          '<button class="btn btn-primary btn-sm" type="button" data-action="buy" data-id="' +
+          escapeHtml(p.id) +
+          '">' +
+          '<span class="material-symbols-outlined icon-sm">bolt</span> Mua Ngay' +
+          "</button>" +
+          "</div>" +
+          "</article>"
+        );
+      }
+
+      /* ----- THẺ SẢN PHẨM C2C (Đồ cũ Like New tuyển chọn) ----- */
+      var discount = p.oldPrice ? Math.round((1 - p.price / p.oldPrice) * 100) : 0;
+      var savedAmount = p.oldPrice ? p.oldPrice - p.price : 0;
+      var badgeCls = p.limited ? "badge badge-limited" : "badge badge-solid-secondary";
+
+      return (
+        '<article class="product-card" data-id="' +
+        escapeHtml(p.id) +
+        '" data-type="c2c">' +
+        '<div class="product-media">' +
+        '<a href="' + detailUrl + '">' +
+        '<img src="' + imgUrl + '" alt="' + escapeHtml(title) + '" loading="lazy">' +
+        "</a>" +
+        '<div class="product-tags">' +
+        '<span class="' + badgeCls + '">' + escapeHtml(p.badge || "ĐỒ CŨ LIKE NEW") + "</span>" +
+        (discount > 0 ? '<span class="badge badge-success">Rẻ hơn đồ mới ' + discount + "%</span>" : "") +
+        '<span class="badge badge-secondary">' + escapeHtml(p.condText || p.cond + "% Mới") + "</span>" +
+        "</div>" +
+        (p.tag ? '<span class="media-tag">' + escapeHtml(p.tag) + "</span>" : "") +
+        "</div>" +
+        '<div class="product-body">' +
+        '<div class="cond">' +
+        '<div class="progress-label"><span>' +
+        escapeHtml(p.condPrefix || "Độ mới") +
+        ": <strong>" +
+        escapeHtml(p.condLabel || p.cond + "%") +
+        "</strong></span>" +
+        '<strong class="text-secondary">' + p.cond + "%</strong></div>" +
+        '<div class="progress progress-secondary" style="--value:' + p.cond + '%"><div class="progress-bar"></div></div>' +
+        "</div>" +
+        '<div class="product-meta mt-1">' +
+        '<span class="material-symbols-outlined icon-sm text-secondary">verified</span>' +
+        '<span class="truncate">' + escapeHtml(p.seller || p.sellerName || "Người bán uy tín") + "</span>" +
+        "</div>" +
+        '<h3 class="product-name line-clamp-2" title="' + escapeHtml(p.name) + '">' +
+        '<a href="' + detailUrl + '" class="text-hover-primary">' + escapeHtml(p.name) + "</a>" +
+        "</h3>" +
+        '<div class="product-price mt-2">' +
+        '<span class="price">' + formattedPrice + "</span>" +
+        (formattedOldPrice
+          ? '<span class="price-old" title="Giá hàng mới 100%">Giá mới: ' + formattedOldPrice + "</span>"
+          : "") +
+        "</div>" +
+        (discount > 0
+          ? '<div class="text-xs text-success fw-600 mt-1">Tiết kiệm ' +
+            discount +
+            "% (" +
+            formatMoney(savedAmount) +
+            ") so với mua mới</div>"
+          : "") +
+        "</div>" +
+        '<div class="product-actions c2c-actions" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">' +
+        '<button class="btn btn-outlined btn-sm" type="button" data-action="add-cart" data-id="' +
+        escapeHtml(p.id) +
+        '" title="Thêm vào giỏ hàng">' +
+        '<span class="material-symbols-outlined icon-sm">add_shopping_cart</span> Thêm Vào Giỏ' +
+        "</button>" +
+        '<button class="btn btn-primary btn-sm" type="button" data-action="buy" data-id="' +
+        escapeHtml(p.id) +
+        '">' +
+        '<span class="material-symbols-outlined icon-sm">bolt</span> Mua Ngay' +
+        "</button>" +
+        '<button class="btn btn-secondary btn-sm" type="button" data-action="offer" data-id="' +
+        escapeHtml(p.id) +
+        '" style="grid-column: span 2;" title="Thương lượng giá trực tiếp">' +
+        '<span class="material-symbols-outlined icon-sm">handshake</span> Trả Giá Với Người Bán' +
+        "</button>" +
+        "</div>" +
+        "</article>"
+      );
+    },
+
+    render: function (target, product, options) {
+      if (typeof document === "undefined") return;
+      var el = typeof target === "string" ? document.querySelector(target) : target;
+      if (!el) return;
+      el.innerHTML = ProductCard.createHTML(product, options);
+    }
+  };
+
+  /* =====================================================================
+     XUẤT RA TOÀN CỤC & TỰ ĐỘNG KHỞI TẠO (AUTO-INIT)
+     ===================================================================== */
+
+  var Components = {
+    detectBasePath: detectBasePath,
+    resolveUrl: resolveUrl,
+    Header: Header,
+    Footer: Footer,
+    Breadcrumb: Breadcrumb,
+    ProductCard: ProductCard,
+
+    // Shortcut API trực quan
+    renderHeader: function (target, options) {
+      return Header.render(target, options);
+    },
+    renderFooter: function (target, options) {
+      return Footer.render(target, options);
+    },
+    renderBreadcrumb: function (target, items, options) {
+      return Breadcrumb.render(target, items, options);
+    },
+    renderProductCard: function (product, options) {
+      return ProductCard.createHTML(product, options);
+    },
+
+    /**
+     * Tự động quét và render các container có đánh dấu data-component
+     */
+    initAuto: function () {
+      if (typeof document === "undefined") return;
+
+      // Quét Header tự động
+      var headerEl = document.querySelector('[data-component="header"]');
+      if (headerEl) {
+        var variant = headerEl.getAttribute("data-variant") || Header.MARKETPLACE;
+        var title = headerEl.getAttribute("data-title") || "";
+        Header.render(headerEl, { variant: variant, title: title });
+      }
+
+      // Quét Footer tự động
+      var footerEl = document.querySelector('[data-component="footer"]');
+      if (footerEl) {
+        Footer.render(footerEl);
+      }
+
+      // Quét Breadcrumb tự động
+      var breadcrumbEl = document.querySelector('[data-component="breadcrumb"]');
+      if (breadcrumbEl && breadcrumbEl.getAttribute("data-items")) {
+        try {
+          var items = JSON.parse(breadcrumbEl.getAttribute("data-items"));
+          Breadcrumb.render(breadcrumbEl, items);
+        } catch (e) {}
+      }
+    }
+  };
 // Tự động chạy khi DOM sẵn sàng trong trình duyệt
   if (typeof document !== "undefined") {
     if (document.readyState === "loading") {
