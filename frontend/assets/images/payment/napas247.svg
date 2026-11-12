@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 56" width="160" height="56">
+  <rect width="160" height="56" rx="10" fill="#004b91" />
+  <g transform="translate(14, 12)">
+    <!-- Napas Typography -->
+    <text x="0" y="24" fill="#ffffff" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="900" font-size="20" letter-spacing="1">NAPAS</text>
+    <!-- 247 Badge -->
+    <rect x="78" y="4" width="54" height="24" rx="6" fill="#00dfc0" />
+    <text x="105" y="21" fill="#004b91" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="900" font-size="14" text-anchor="middle">24/7</text>
+  </g>
+</svg>
