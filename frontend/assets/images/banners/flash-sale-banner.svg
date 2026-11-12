@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300">
+  <defs>
+    <linearGradient id="flashBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#450a0a" />
+      <stop offset="50%" stop-color="#18181b" />
+      <stop offset="100%" stop-color="#1e1838" />
+    </linearGradient>
+    <linearGradient id="fireGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="50%" stop-color="#ef4444" />
+      <stop offset="100%" stop-color="#ec4899" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="300" rx="16" fill="url(#flashBg)" stroke="rgba(239, 68, 68, 0.3)" stroke-width="2" />
+
+  <g transform="translate(60, 60)">
+    <!-- Pill -->
+    <rect x="0" y="0" width="160" height="32" rx="16" fill="#ef4444" />
+    <text x="80" y="21" fill="#ffffff" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="900" font-size="13" letter-spacing="1" text-anchor="middle">🔥 FLASH SALE 48H</text>
+
+    <!-- Main Title -->
+    <text x="0" y="85" fill="#ffffff" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="900" font-size="38">
+      GIẢM TỚI <tspan fill="url(#fireGrad)">50% TOÀN SÀN</tspan>
+    </text>
+
+    <!-- Subtitle -->
+    <text x="0" y="130" fill="#cbd5e1" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="600" font-size="16">
+      Sneakers Hypebeast • Smartphone Likenew 99% • Thiết Bị Công Nghệ Audio
+    </text>
+  </g>
+</svg>

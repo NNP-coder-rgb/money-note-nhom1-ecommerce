@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 44" width="160" height="44">
+  <rect width="160" height="44" rx="8" fill="rgba(239, 68, 68, 0.12)" stroke="#ef4444" stroke-width="1.5" />
+  <g transform="translate(12, 10)">
+    <rect x="0" y="2" width="20" height="20" rx="4" fill="#ef4444" />
+    <text x="10" y="17" fill="#ffffff" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="900" font-size="12" text-anchor="middle">M</text>
+    <text x="28" y="16" fill="#ef4444" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="800" font-size="12" letter-spacing="0.5">OFFICIAL MALL</text>
+  </g>
+</svg>

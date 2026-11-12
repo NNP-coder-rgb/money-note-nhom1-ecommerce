@@ -1,0 +1,918 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      HYBRID.STORE — Sàn TMĐT Bán Lẻ Hàng Mới &amp; Đồ Cũ Tiết Kiệm 50%
+    </title>
+
+    <!-- Chống giật giao diện (Zero-FOUC Theme Init) -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("hybrid_theme") || "dark";
+          document.documentElement.setAttribute("data-theme", t);
+          if (t === "light")
+            document.documentElement.classList.add("light-theme");
+        } catch (e) {}
+      })();
+    </script>
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+
+    <!-- base.css trước, CSS riêng của trang sau -->
+    <link rel="stylesheet" href="css/base.css?v=4" />
+    <link rel="stylesheet" href="css/index.css?v=4" />
+
+    <!-- Style thanh cuộn trong suốt & bố trí dọc badge thẻ sản phẩm -->
+    <style>
+      /* Bố trí dọc các badge sản phẩm để nhìn thấy toàn bộ nội dung */
+      .product-tags {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 5px !important;
+        position: absolute !important;
+        top: 10px !important;
+        left: 10px !important;
+        right: auto !important;
+        z-index: 2 !important;
+        pointer-events: none !important;
+      }
+      .product-tags .badge {
+        display: inline-flex !important;
+        align-items: center !important;
+        max-width: fit-content !important;
+        width: fit-content !important;
+        white-space: nowrap !important;
+        font-size: 11px !important;
+        font-weight: 700 !important;
+        padding: 3.5px 8px !important;
+        line-height: 1.25 !important;
+        border-radius: 6px !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45) !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+      }
+
+      /* Thanh cuộn trong suốt 100%, không nền trắng, không nút mũi tên, kéo chuột mượt mà */
+      #chipBar,
+      .chip-scroll,
+      .subnav .container,
+      ::-webkit-scrollbar {
+        background: transparent !important;
+      }
+      #chipBar::-webkit-scrollbar-button,
+      .chip-scroll::-webkit-scrollbar-button,
+      .subnav .container::-webkit-scrollbar-button,
+      ::-webkit-scrollbar-button {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+      }
+      #chipBar::-webkit-scrollbar,
+      .chip-scroll::-webkit-scrollbar,
+      .subnav .container::-webkit-scrollbar {
+        height: 6px !important;
+        background: transparent !important;
+        border: none !important;
+      }
+      #chipBar::-webkit-scrollbar-track,
+      .chip-scroll::-webkit-scrollbar-track,
+      .subnav .container::-webkit-scrollbar-track,
+      ::-webkit-scrollbar-track {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+      #chipBar::-webkit-scrollbar-thumb,
+      .chip-scroll::-webkit-scrollbar-thumb,
+      .subnav .container::-webkit-scrollbar-thumb {
+        background: rgba(139, 92, 246, 0.35) !important;
+        border-radius: 9999px !important;
+        border: none !important;
+        cursor: pointer !important;
+      }
+      #chipBar::-webkit-scrollbar-thumb:hover,
+      .chip-scroll::-webkit-scrollbar-thumb:hover,
+      .subnav .container::-webkit-scrollbar-thumb:hover {
+        background: rgba(139, 92, 246, 0.8) !important;
+      }
+      [data-theme="light"] #chipBar::-webkit-scrollbar-thumb,
+      [data-theme="light"] .chip-scroll::-webkit-scrollbar-thumb,
+      [data-theme="light"] .subnav .container::-webkit-scrollbar-thumb,
+      body.light-theme #chipBar::-webkit-scrollbar-thumb,
+      body.light-theme .chip-scroll::-webkit-scrollbar-thumb,
+      body.light-theme .subnav .container::-webkit-scrollbar-thumb {
+        background: rgba(109, 40, 217, 0.35) !important;
+      }
+      [data-theme="light"] #chipBar::-webkit-scrollbar-thumb:hover,
+      [data-theme="light"] .chip-scroll::-webkit-scrollbar-thumb:hover,
+      [data-theme="light"] .subnav .container::-webkit-scrollbar-thumb:hover,
+      body.light-theme #chipBar::-webkit-scrollbar-thumb:hover,
+      body.light-theme .chip-scroll::-webkit-scrollbar-thumb:hover,
+      body.light-theme .subnav .container::-webkit-scrollbar-thumb:hover {
+        background: #6d28d9 !important;
+      }
+      @supports not selector(::-webkit-scrollbar) {
+        #chipBar,
+        .chip-scroll,
+        .subnav .container {
+          scrollbar-width: thin !important;
+          scrollbar-color: rgba(139, 92, 246, 0.35) transparent !important;
+        }
+        [data-theme="light"] #chipBar,
+        [data-theme="light"] .chip-scroll,
+        [data-theme="light"] .subnav .container,
+        body.light-theme #chipBar,
+        body.light-theme .chip-scroll,
+        body.light-theme .subnav .container {
+          scrollbar-color: rgba(109, 40, 217, 0.35) transparent !important;
+        }
+      }
+
+      /* =======================================================
+         ĐỘ TƯƠNG PHẢN CAO CHO BADGE & NÚT Ở CHẾ ĐỘ SÁNG (LIGHT THEME)
+         ======================================================= */
+      [data-theme="light"] .badge,
+      body.light-theme .badge {
+        color: #5b21b6 !important;
+        background: #ede9fe !important;
+        border: 1.5px solid #8b5cf6 !important;
+        font-weight: 800 !important;
+      }
+      [data-theme="light"] .badge .material-symbols-outlined,
+      body.light-theme .badge .material-symbols-outlined {
+        color: inherit !important;
+      }
+      [data-theme="light"] .badge-primary,
+      body.light-theme .badge-primary,
+      [data-theme="light"] .hero-badge-row .badge-primary,
+      body.light-theme .hero-badge-row .badge-primary {
+        color: #5b21b6 !important;
+        background: #ede9fe !important;
+        border: 1.5px solid #7c3aed !important;
+        font-weight: 800 !important;
+      }
+      [data-theme="light"] .hero-badge-row .badge-success,
+      body.light-theme .hero-badge-row .badge-success {
+        color: #15803d !important;
+        background: #dcfce7 !important;
+        border: 1.5px solid #16a34a !important;
+        font-weight: 800 !important;
+      }
+      [data-theme="light"] .badge-secondary,
+      body.light-theme .badge-secondary {
+        color: #0369a1 !important;
+        background: #e0f2fe !important;
+        border: 1.5px solid #0284c7 !important;
+        font-weight: 800 !important;
+      }
+      [data-theme="light"] .badge-success,
+      body.light-theme .badge-success {
+        color: #15803d !important;
+        background: #dcfce7 !important;
+        border: 1.5px solid #22c55e !important;
+        font-weight: 800 !important;
+      }
+      [data-theme="light"] .brand .badge,
+      body.light-theme .brand .badge {
+        color: #5b21b6 !important;
+        background: #ede9fe !important;
+        border: 1.5px solid #7c3aed !important;
+        font-weight: 800 !important;
+      }
+      [data-theme="light"] .btn-outlined,
+      body.light-theme .btn-outlined {
+        background: #ffffff !important;
+        border: 1.5px solid #6d28d9 !important;
+        color: #6d28d9 !important;
+        font-weight: 700 !important;
+      }
+      [data-theme="light"] .btn-outlined:hover,
+      body.light-theme .btn-outlined:hover {
+        background: #f3e8ff !important;
+        border-color: #5b21b6 !important;
+        color: #5b21b6 !important;
+      }
+      [data-theme="light"] .btn-secondary,
+      body.light-theme .btn-secondary {
+        background: #f0f9ff !important;
+        border: 1.5px solid #0284c7 !important;
+        color: #0369a1 !important;
+        font-weight: 700 !important;
+      }
+      [data-theme="light"] .btn-secondary:hover,
+      body.light-theme .btn-secondary:hover {
+        background: #e0f2fe !important;
+        border-color: #0369a1 !important;
+        color: #0c4a6e !important;
+      }
+
+      /* Bố cục nút bấm trên thẻ sản phẩm (Hỗ trợ nút Thêm Giỏ Hàng cho mọi sản phẩm) */
+      .product-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        padding: 0 var(--sp-4) var(--sp-4);
+      }
+      .product-actions .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+      .product-actions.c2c-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .product-actions.c2c-actions .btn-offer-c2c,
+      .product-actions.c2c-actions [data-action="offer"],
+      .product-actions.c2c-actions > :nth-child(3),
+      .product-actions.c2c-actions .btn-buy-now {
+        grid-column: span 2 !important;
+        grid-column: 1 / -1 !important;
+        width: 100% !important;
+      }
+
+      /* =======================================================
+         BỘ CHUYỂN ĐỔI CHUYÊN MỤC ĐỒ MỚI VS ĐỒ CŨ TRANG CHỦ
+         ======================================================= */
+      .catalog-type-tabs {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: var(--sp-6) 0 var(--sp-4);
+        padding: 6px;
+        background: var(--bg-surface);
+        border: 1.5px solid var(--border-default);
+        border-radius: var(--radius-xl);
+        overflow-x: auto;
+      }
+      .type-tab-btn {
+        flex: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 18px;
+        font-size: var(--text-sm);
+        font-weight: 700;
+        color: var(--text-muted);
+        background: transparent;
+        border: 1px solid transparent;
+        border-radius: var(--radius-lg);
+        cursor: pointer;
+        transition: all var(--duration-fast) var(--ease-standard);
+        white-space: nowrap;
+      }
+      .type-tab-btn:hover {
+        color: var(--text-default);
+        background: rgba(255, 255, 255, 0.05);
+      }
+      .type-tab-btn.active {
+        color: #ffffff !important;
+        background: #8b5cf6 !important;
+        border-color: #8b5cf6 !important;
+        box-shadow: 0 4px 14px rgba(139, 92, 246, 0.4);
+      }
+      .type-tab-btn[data-type="c2c"].active {
+        background: #0284c7 !important;
+        border-color: #0284c7 !important;
+        box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
+      }
+      [data-theme="light"] .catalog-type-tabs,
+      body.light-theme .catalog-type-tabs {
+        background: #f8fafc !important;
+        border-color: #cbd5e1 !important;
+      }
+      [data-theme="light"] .type-tab-btn,
+      body.light-theme .type-tab-btn {
+        color: #475569 !important;
+      }
+      [data-theme="light"] .type-tab-btn:hover,
+      body.light-theme .type-tab-btn:hover {
+        background: #e2e8f0 !important;
+        color: #0f172a !important;
+      }
+      [data-theme="light"] .type-tab-btn.active,
+      body.light-theme .type-tab-btn.active {
+        color: #ffffff !important;
+        background: #7c3aed !important;
+        border-color: #7c3aed !important;
+      }
+      [data-theme="light"] .type-tab-btn[data-type="c2c"].active,
+      body.light-theme .type-tab-btn[data-type="c2c"].active {
+        background: #0284c7 !important;
+        border-color: #0284c7 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===== HEADER ===== -->
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="index.html">
+          <span class="brand-mark"
+            ><span class="material-symbols-outlined">token</span></span
+          >
+          <span
+            >HYBRID<span class="text-secondary">.STORE</span>
+            <span class="badge">v3.2</span>
+            <small
+              ><span class="status-dot"></span> Hàng Mới 100% & Đồ Cũ Tuyển
+              Chọn</small
+            >
+          </span>
+        </a>
+
+        <div class="header-search">
+          <form
+            id="homeSearchForm"
+            action="pages/shop/catalog.html"
+            method="GET"
+            style="margin: 0; width: 100%"
+          >
+            <div class="input-group">
+              <span class="icon-left material-symbols-outlined">search</span>
+              <input
+                id="homeSearchInput"
+                name="q"
+                class="input input-search"
+                type="search"
+                autocomplete="off"
+                placeholder="Tìm kiếm sản phẩm, thương hiệu (iPhone, Nike, Sony, Dyson...)"
+              />
+            </div>
+          </form>
+          <div
+            class="search-dropdown"
+            id="searchDropdown"
+            style="display: none"
+          ></div>
+        </div>
+
+        <div class="header-actions">
+          <div class="wallet-pill">
+            <span class="material-symbols-outlined text-secondary"
+              >account_balance_wallet</span
+            >
+            <div>
+              <small>Giao hàng toàn quốc</small><strong>Miễn Phí 0₫</strong>
+            </div>
+          </div>
+          <button class="btn btn-danger" type="button" data-open="postModal">
+            <span class="material-symbols-outlined">add_circle</span
+            ><span class="hide-md">Đăng Bán Đồ Cũ</span>
+          </button>
+          <button
+            class="icon-btn theme-toggle-btn"
+            id="themeToggleBtn"
+            type="button"
+            aria-label="Chuyển chế độ sáng / tối"
+            title="Chuyển sang giao diện Sáng"
+          >
+            <span class="material-symbols-outlined theme-toggle-icon"
+              >light_mode</span
+            >
+          </button>
+          <a class="icon-btn" href="pages/shop/cart.html" aria-label="Giỏ hàng">
+            <span class="material-symbols-outlined">shopping_bag</span>
+            <span class="badge badge-counter" id="cartCount">0</span>
+          </a>
+          <button
+            class="avatar"
+            id="avatarBtn"
+            type="button"
+            aria-label="Tài khoản"
+          >
+            <span class="material-symbols-outlined">person</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- ===== DÒNG CHẠY GIAO DỊCH MỚI ===== -->
+      <section class="ticker">
+        <div class="ticker-label">
+          <span class="material-symbols-outlined icon-sm text-secondary spin"
+            >sync</span
+          >
+          Giao Dịch Mới:
+        </div>
+        <div class="ticker-track">
+          <div class="ticker-inner" id="tickerInner"></div>
+        </div>
+      </section>
+
+      <!-- ===== HERO ===== -->
+      <section class="container section">
+        <div class="chip-scroll mb-5" id="chipBar"></div>
+
+        <div class="hero-grid">
+          <div class="hero-main">
+            <img
+              src="assets/images/banners/hero-banner.svg"
+              alt="HYBRID.STORE — Đại Siêu Thị Mall Chính Hãng & Đồ Cũ Đồng Kiểm 100%"
+              style="
+                width: 100%;
+                height: auto;
+                border-radius: var(--radius-xl);
+                object-fit: cover;
+              "
+            />
+            <div class="hero-content">
+              <div class="hero-badge-row">
+                <span class="badge badge-primary flex items-center gap-1">
+                  <span class="material-symbols-outlined icon-xs"
+                    >storefront</span
+                  >
+                  HỆ THỐNG MUA SẮM TOÀN QUỐC
+                </span>
+                <span class="badge badge-success flex items-center gap-1">
+                  <span class="material-symbols-outlined icon-xs">savings</span>
+                  ĐỒ MỚI 100% &amp; ĐỒ CŨ TIẾT KIỆM 50%
+                </span>
+              </div>
+
+              <h1 class="hero-title">
+                Đại Siêu Thị Mua Sắm Trực Tuyến Hàng Đầu
+                <span class="hero-highlight"
+                  >Thời Trang • Giày Dép • Điện Tử • Gia Dụng</span
+                >
+              </h1>
+
+              <p class="hero-desc">
+                Trải nghiệm mua sắm an tâm với 100% hàng mới chính hãng nguyên
+                seal từ Brand Mall, hoặc lựa chọn đồ cũ Like New tuyển chọn tiết
+                kiệm từ 20% đến 50% cùng chính sách đồng kiểm tận tay.
+              </p>
+
+              <!-- Các dòng cam kết căn chỉnh đều -->
+              <div class="hero-features-row">
+                <div class="hero-feature-item">
+                  <span class="material-symbols-outlined text-success icon-sm"
+                    >check_circle</span
+                  >
+                  <span>Đồng kiểm 100% khi nhận</span>
+                </div>
+                <div class="hero-feature-item">
+                  <span class="material-symbols-outlined text-secondary icon-sm"
+                    >verified</span
+                  >
+                  <span>Bảo hành tới 12 tháng</span>
+                </div>
+                <div class="hero-feature-item">
+                  <span class="material-symbols-outlined text-primary icon-sm"
+                    >sync_alt</span
+                  >
+                  <span>Đổi trả 7 ngày miễn phí</span>
+                </div>
+              </div>
+
+              <div class="btn-group">
+                <a
+                  class="btn btn-primary"
+                  href="pages/shop/catalog.html?type=mall"
+                >
+                  <span class="material-symbols-outlined icon-sm"
+                    >verified</span
+                  >
+                  <span>Sàn Đồ Mới Mall 100%</span>
+                </a>
+                <a
+                  class="btn btn-secondary"
+                  href="pages/shop/catalog.html?type=c2c"
+                >
+                  <span class="material-symbols-outlined icon-sm">savings</span>
+                  <span>Chợ Đồ Cũ Like New</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-side">
+            <div class="panel hero-card">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="badge badge-secondary badge-dot"
+                    >CAM KẾT CHẤT LƯỢNG</span
+                  >
+                  <span class="mono text-xs text-success fw-600"
+                    >Đổi Trả 7 Ngày</span
+                  >
+                </div>
+                <h3>Hàng Mới Chính Hãng &amp; Đồ Cũ Tuyển Chọn</h3>
+                <p class="text-sm text-muted mt-2">
+                  Đầy đủ hóa đơn, bảo hành chính hãng cho hàng mới. Mọi sản phẩm
+                  đồ cũ đều được kiểm tra kỹ và hiển thị rõ mức giá rẻ hơn đồ
+                  mới.
+                </p>
+              </div>
+              <div class="mini-stats">
+                <div class="mini-stat">
+                  <strong class="text-primary">100%</strong
+                  ><span>Chính hãng hàng mới</span>
+                </div>
+                <div class="mini-stat">
+                  <strong class="text-success">-20% ~ 50%</strong
+                  ><span>Tiết kiệm mua đồ cũ</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="label-caps mb-4">
+                Chỉ mục 8 đại ngành hàng trọng tâm
+              </div>
+              <div class="cat-jump-grid" id="catJump"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== 3 CAM KẾT VÀNG ===== -->
+      <section class="container" id="value-pillars">
+        <div class="grid grid-3">
+          <div class="panel tone-primary">
+            <span class="icon-box"
+              ><span class="material-symbols-outlined">verified</span></span
+            >
+            <div class="label-caps mt-4">Cam kết 01</div>
+            <h3 class="pillar-title">Hàng Mới Chính Hãng 100%</h3>
+            <p class="text-sm text-muted">
+              Phân phối trực tiếp từ các thương hiệu hàng đầu, nguyên hộp,
+              nguyên seal với đầy đủ chế độ bảo hành chính hãng từ 12 đến 24
+              tháng trên toàn quốc.
+            </p>
+          </div>
+          <div class="panel tone-secondary">
+            <span class="icon-box"
+              ><span class="material-symbols-outlined">savings</span></span
+            >
+            <div class="label-caps mt-4">Cam kết 02</div>
+            <h3 class="pillar-title">Đồ Cũ Rẻ Hơn Từ 20% Đến 50%</h3>
+            <p class="text-sm text-muted">
+              Đồ cũ Like New từ 90% đến 99% được kiểm tra ngoại quan và tính
+              năng kỹ lưỡng, giá rẻ hơn đồ mới tương ứng theo từng sản phẩm để
+              bạn tiết kiệm tối đa.
+            </p>
+          </div>
+          <div class="panel tone-success">
+            <span class="icon-box"
+              ><span class="material-symbols-outlined"
+                >local_shipping</span
+              ></span
+            >
+            <div class="label-caps mt-4">Cam kết 03</div>
+            <h3 class="pillar-title">Đồng Kiểm &amp; Đổi Trả Dễ Dàng</h3>
+            <p class="text-sm text-muted">
+              Giao hàng nhanh toàn quốc, khách hàng được kiểm tra hàng thoải mái
+              trước khi thanh toán. Hỗ trợ đổi trả miễn phí trong 7 ngày nếu
+              không ưng ý.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== FLASH SALE ===== -->
+      <section class="container section" id="flash-sale">
+        <div class="panel flash-panel">
+          <div class="flash-head">
+            <div class="flex items-center gap-3">
+              <span class="icon-box tone-tertiary"
+                ><span class="material-symbols-outlined icon-lg"
+                  >bolt</span
+                ></span
+              >
+              <div>
+                <div class="flex items-center gap-2">
+                  <h2 class="flash-title">FLASH SALE HÔM NAY</h2>
+                  <span class="badge badge-tertiary">LIMITED TIME</span>
+                </div>
+                <p class="text-sm text-muted">
+                  Sản phẩm giá chạm đáy kiểm định sẵn sàng giao ngay
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-sm text-muted"
+                ><span class="material-symbols-outlined icon-sm">timer</span>
+                Đếm ngược:</span
+              >
+              <div class="countdown">
+                <span class="countdown-unit" id="fs-h">03</span
+                ><span class="countdown-sep">:</span>
+                <span class="countdown-unit" id="fs-m">42</span
+                ><span class="countdown-sep">:</span>
+                <span class="countdown-unit" id="fs-s">19</span>
+              </div>
+            </div>
+          </div>
+          <div class="product-grid" id="flashGrid"></div>
+        </div>
+      </section>
+
+      <!-- ===== BỘ CHUYỂN ĐỔI CHUYÊN MỤC ĐỒ MỚI VS ĐỒ CŨ ===== -->
+      <section
+        class="container section pb-0"
+        id="sectionTypeSelector"
+        style="padding-bottom: 0"
+      >
+        <div
+          class="catalog-type-tabs"
+          style="margin-top: 0; margin-bottom: var(--sp-6)"
+        >
+          <button
+            class="type-tab-btn active"
+            id="homeTabAll"
+            data-type="all"
+            type="button"
+            title="Xem tất cả ngành hàng song hành"
+          >
+            <span class="material-symbols-outlined">grid_view</span>
+            <span>✨ Tất Cả Ngành Hàng (Hybrid 130+)</span>
+          </button>
+          <button
+            class="type-tab-btn"
+            id="homeTabMall"
+            data-type="mall"
+            type="button"
+            title="Chuyên mục 100% Brand Mall chính hãng"
+          >
+            <span class="material-symbols-outlined text-primary">verified</span>
+            <span>🛍️ Sàn Hàng Mới 100% (Brand Mall)</span>
+          </button>
+          <button
+            class="type-tab-btn"
+            id="homeTabC2c"
+            data-type="c2c"
+            type="button"
+            title="Chuyên mục Đồ cũ Like New thẩm định Lab AI"
+          >
+            <span class="material-symbols-outlined text-secondary">eco</span>
+            <span>♻️ Chợ Đồ Cũ Tuyển Chọn (C2C Like New)</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- ===== CÁC KHỐI NGÀNH HÀNG ===== -->
+      <div id="categorySections"></div>
+
+      <!-- ===== BANNER CAM KẾT MUA SẮM ===== -->
+      <section class="container section">
+        <div class="insurance">
+          <div>
+            <span class="badge badge-secondary mb-4"
+              ><span class="material-symbols-outlined icon-sm"
+                >verified_user</span
+              >AN TÂM MUA SẮM TUYỆT ĐỐI</span
+            >
+            <h3>
+              Đồng Kiểm Khi Nhận Hàng.<br /><span class="text-secondary"
+                >Bảo Hành Chính Hãng – Đổi Trả Miễn Phí Trong 7 Ngày.</span
+              >
+            </h3>
+            <p class="mt-4">
+              Mỗi đơn hàng gửi đi đều được đóng gói cẩn thận và dán tem niêm
+              phong. Người mua được mở gói hàng kiểm tra cùng shipper trước khi
+              thanh toán. Hàng mới cam kết 100% nguyên seal; đồ cũ Like New được
+              mô tả chính xác tình trạng và hình ảnh thực tế, giúp bạn hoàn toàn
+              an tâm khi lựa chọn.
+            </p>
+          </div>
+          <div class="insurance-items">
+            <div class="insurance-item">
+              <span class="material-symbols-outlined icon-lg text-secondary"
+                >local_shipping</span
+              >
+              <div>
+                <strong class="text-sm fw-600"
+                  >Giao Hàng Nhanh Toàn Quốc</strong
+                >
+                <div class="text-xs text-muted">
+                  Đóng gói tiêu chuẩn, giao hỏa tốc 1 - 3 ngày
+                </div>
+              </div>
+            </div>
+            <div class="insurance-item">
+              <span class="material-symbols-outlined icon-lg text-success"
+                >published_with_changes</span
+              >
+              <div>
+                <strong class="text-sm fw-600">Hỗ Trợ Đổi Trả 7 Ngày</strong>
+                <div class="text-xs text-muted">
+                  Đổi mới hoặc hoàn tiền 100% nếu phát sinh lỗi
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer" data-component="footer"></footer>
+
+    <!-- ===== MODAL: TRẢ GIÁ ===== -->
+    <div class="modal-backdrop" id="offerModal">
+      <div
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="offerTitle"
+      >
+        <div class="modal-head">
+          <h4 class="modal-title" id="offerTitle">
+            <span class="material-symbols-outlined text-secondary"
+              >price_change</span
+            >
+            Đề Nghị Trả Giá Mua
+          </h4>
+          <button
+            class="modal-close"
+            type="button"
+            data-close
+            aria-label="Đóng"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <form id="offerForm" novalidate>
+          <div class="modal-body">
+            <div class="offer-summary">
+              <div class="fw-600" id="offerProduct">Tên sản phẩm</div>
+              <div class="text-xs text-muted mono mt-2">
+                Người bán:
+                <span class="text-secondary" id="offerSeller">-</span> • Độ mới:
+                <span class="text-secondary" id="offerCond">-</span>
+              </div>
+              <div
+                class="text-right mono fw-700 text-secondary mt-2"
+                id="offerCurrent"
+              >
+                0₫
+              </div>
+            </div>
+            <div class="form-group mt-4">
+              <label class="form-label" for="offerPrice"
+                >Mức giá đề xuất thương lượng (VNĐ)</label
+              >
+              <input
+                class="input mono"
+                id="offerPrice"
+                type="text"
+                inputmode="numeric"
+                required
+              />
+            </div>
+            <div class="chip-row mb-4">
+              <button class="chip" type="button" data-quick="-5">-5%</button>
+              <button class="chip" type="button" data-quick="-10">-10%</button>
+              <button class="chip" type="button" data-quick="-15">-15%</button>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="offerMsg"
+                >Lời nhắn đến người bán</label
+              >
+              <textarea
+                class="textarea"
+                id="offerMsg"
+                rows="2"
+                placeholder="Ví dụ: Em gửi anh giá này được em chốt luôn trong ngày..."
+              ></textarea>
+            </div>
+          </div>
+          <div class="modal-foot">
+            <button class="btn btn-secondary" type="button" data-close>
+              Hủy
+            </button>
+            <button class="btn btn-accent" type="submit">Gửi Đề Nghị</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ===== MODAL: ĐĂNG BÁN NHANH ===== -->
+    <div class="modal-backdrop" id="postModal">
+      <div
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="postTitle"
+      >
+        <div class="modal-head">
+          <h4 class="modal-title" id="postTitle">
+            <span class="material-symbols-outlined text-primary">sell</span>
+            Đăng Bán Đồ Cũ / Like New
+          </h4>
+          <button
+            class="modal-close"
+            type="button"
+            data-close
+            aria-label="Đóng"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <form id="postForm" novalidate>
+          <div class="modal-body">
+            <div class="form-group">
+              <label class="form-label" for="postName"
+                >Tên thiết bị / Dòng máy</label
+              >
+              <input
+                class="input"
+                id="postName"
+                type="text"
+                placeholder="VD: Sony WH-1000XM4 màu Đen..."
+              />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="postPrice"
+                  >Giá muốn bán (VNĐ)</label
+                >
+                <input
+                  class="input mono"
+                  id="postPrice"
+                  type="number"
+                  min="0"
+                  placeholder="VD: 3500000"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="postCond"
+                  >Độ mới tự đánh giá</label
+                >
+                <select class="select" id="postCond">
+                  <option value="99%">99% (Likenew)</option>
+                  <option value="95%">95% (Rất đẹp)</option>
+                  <option value="90%">90% (Xước dăm nhẹ)</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label flex justify-between items-center">
+                <span>Hình ảnh sản phẩm (Chụp 4 góc cạnh + Tem máy) (*)</span>
+                <span class="text-xs text-muted" id="modalPostImgCount"
+                  >0/6 ảnh đã chọn</span
+                >
+              </label>
+              <input
+                type="file"
+                id="modalPostFileInput"
+                multiple
+                accept="image/*"
+                style="display: none"
+              />
+              <div
+                class="upload-box"
+                id="modalPostDropzone"
+                style="cursor: pointer; transition: all 0.2s ease"
+              >
+                <span class="material-symbols-outlined icon-lg text-primary"
+                  >add_a_photo</span
+                >
+                <div class="fw-600 text-sm" id="modalPostDropzoneText">
+                  Bấm để chọn ảnh từ máy hoặc kéo thả vào đây
+                </div>
+                <div class="text-xs text-faint">
+                  Hỗ trợ JPG, PNG, WEBP (Tự động nén tối ưu) • Có thể bấm Ctrl+V
+                  để dán ảnh
+                </div>
+              </div>
+              <div
+                id="modalPostPreviewStrip"
+                class="flex gap-2 mt-2"
+                style="display: none; overflow-x: auto; padding: 4px 0"
+              ></div>
+            </div>
+          </div>
+          <div class="modal-foot">
+            <button class="btn btn-secondary" type="button" data-close>
+              Hủy
+            </button>
+            <button class="btn btn-primary" type="submit">Đăng Bán Ngay</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Thứ tự script: popup, auth, dữ liệu, components, rồi mới tới index.js -->
+    <script src="js/popup.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/mock_data.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>

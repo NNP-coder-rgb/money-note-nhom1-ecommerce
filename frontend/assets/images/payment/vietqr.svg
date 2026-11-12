@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 56" width="160" height="56">
+  <rect width="160" height="56" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5" />
+  <g transform="translate(14, 12)">
+    <!-- VietQR Red/Blue Icon Mark -->
+    <path d="M4 4h12v12H4z" fill="#005baa" />
+    <path d="M20 4h6v6h-6z" fill="#ed1c24" />
+    <path d="M20 14h6v6h-6z" fill="#005baa" />
+    <path d="M4 20h12v6H4z" fill="#ed1c24" />
+    <!-- Text -->
+    <text x="34" y="23" fill="#005baa" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="900" font-size="20">Viet<tspan fill="#ed1c24">QR</tspan></text>
+  </g>
+</svg>
