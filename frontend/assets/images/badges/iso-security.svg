@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 44" width="180" height="44">
+  <rect width="180" height="44" rx="8" fill="rgba(139, 92, 246, 0.12)" stroke="#8b5cf6" stroke-width="1.5" />
+  <g transform="translate(12, 10)">
+    <path d="M10 2L1 6v7c0 6.6 4.3 12.8 10 14.5 5.7-1.7 10-7.9 10-14.5V6l-11-4z" fill="#8b5cf6" />
+    <path d="M6 13l3 3 6-6" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="26" y="16" fill="#a78bfa" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="800" font-size="11" letter-spacing="0.5">ISO 27001 SECURED</text>
+  </g>
+</svg>

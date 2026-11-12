@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 56" width="160" height="56">
+  <rect width="160" height="56" rx="10" fill="#1e1e2d" stroke="#38bdf8" stroke-width="1.5" />
+  <g transform="translate(14, 11)">
+    <!-- Shield / Box Icon -->
+    <path d="M6 4l12-3 12 3v10c0 7-6 13-12 15C12 27 6 21 6 14V4z" fill="none" stroke="#38bdf8" stroke-width="2" />
+    <path d="M13 13l4 4 7-7" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" />
+    <!-- Text -->
+    <text x="38" y="16" fill="#ffffff" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="800" font-size="14">COD 100%</text>
+    <text x="38" y="28" fill="#94a3b8" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="600" font-size="10">ĐỒNG KIỂM</text>
+  </g>
+</svg>
