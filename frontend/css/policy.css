@@ -1,0 +1,460 @@
+/* ==========================================================================
+   policy.css — Phong cách hiển thị các trang Chính Sách & Pháp Lý (HYBRID.STORE)
+   Đặc điểm:
+   - Các khối (Card) tách bạch rõ ràng, viền nổi bật, tuyệt đối không dính liền nhau.
+   - Khoảng cách (margins, gaps) rộng rãi, thông thoáng.
+   - Cỡ chữ vừa phải (moderate), phân cấp thị giác mạch lạc, line-height 1.7 - 1.8 dễ đọc.
+   - Màu sắc chữ tương phản cao, dễ nhìn trong giao diện tối.
+   ========================================================================== */
+
+.policy-page {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 32px 18px 64px;
+}
+
+/* Tiêu đề trang */
+.policy-hero {
+  text-align: center;
+  margin-bottom: 36px;
+  padding: 0 12px;
+}
+.policy-hero .badge {
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  padding: 5px 14px;
+  margin-bottom: 12px;
+  display: inline-block;
+}
+.policy-hero h1 {
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin: 0 0 10px 0;
+  line-height: 1.3;
+}
+.policy-hero p {
+  font-size: 0.92rem;
+  color: #94a3b8;
+  max-width: 680px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Khối thông điệp nổi bật / Tóm tắt */
+.policy-intro-box {
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.09) 0%,
+    rgba(6, 182, 212, 0.06) 100%
+  );
+  border: 1px solid rgba(139, 92, 246, 0.28);
+  border-radius: 14px;
+  padding: 22px 26px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+.policy-intro-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--primary-300, #c4b5fd);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.policy-intro-desc {
+  font-size: 0.91rem;
+  line-height: 1.75;
+  color: #cbd5e1;
+  margin: 0;
+}
+
+/* Khối Card chính (Độc lập, cách nhau rõ rệt, không nối liền) */
+.policy-card {
+  background: #131722;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 24px 28px;
+  margin-bottom: 28px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+.policy-card:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Biến thể viền trên tạo điểm nhấn nhận diện */
+.policy-card-primary {
+  border-top: 3px solid var(--primary-500, #8b5cf6);
+  background: linear-gradient(
+    180deg,
+    rgba(139, 92, 246, 0.05) 0%,
+    #131722 100%
+  );
+}
+.policy-card-secondary {
+  border-top: 3px solid var(--secondary-400, #22d3ee);
+  background: linear-gradient(180deg, rgba(6, 182, 212, 0.05) 0%, #131722 100%);
+}
+.policy-card-success {
+  border-top: 3px solid #10b981;
+}
+.policy-card-danger {
+  border-top: 3px solid #ef4444;
+}
+
+/* Header của Card */
+.policy-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.policy-card-head .badge {
+  white-space: nowrap !important;
+  flex-shrink: 0;
+}
+.policy-card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #f8fafc;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  line-height: 1.4;
+}
+.policy-card-title .material-symbols-outlined {
+  font-size: 1.35rem;
+  flex-shrink: 0;
+}
+
+/* Khối so sánh 2 gói: Hàng Mới Mall & Đồ Cũ C2C */
+.policy-card-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.policy-type-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+.policy-type-pill.mall {
+  background: rgba(139, 92, 246, 0.16);
+  color: var(--primary-300, #c4b5fd);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+}
+.policy-type-pill.c2c {
+  background: rgba(6, 182, 212, 0.14);
+  color: var(--secondary-300, #67e8f9);
+  border: 1px solid rgba(6, 182, 212, 0.35);
+}
+.policy-benefit-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
+}
+.policy-benefit-badge.mall {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.35);
+  border: 1px solid rgba(139, 92, 246, 0.5);
+}
+.policy-benefit-badge.c2c {
+  background: linear-gradient(135deg, #06b6d4, #0891b2);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(6, 182, 212, 0.35);
+  border: 1px solid rgba(6, 182, 212, 0.5);
+}
+.policy-main-headline {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 16px 0;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Các tiểu mục (Items / Clauses) bên trong Card để nội dung không bị dồn cục */
+.policy-item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.policy-item {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 14px 18px;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+.policy-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+.policy-item-title {
+  font-size: 0.93rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.policy-item-desc {
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: #94a3b8;
+  margin: 0;
+}
+.policy-item-desc strong {
+  color: #f1f5f9;
+}
+
+/* Lưới so sánh 2 cột (ví dụ Mall 100% vs Đồ cũ C2C) */
+.policy-compare-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+/* Lưới các bước (Step Grid) */
+.policy-step-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 14px;
+}
+.policy-step-card {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.policy-step-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  width: fit-content;
+}
+.policy-step-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #f8fafc;
+  margin: 0;
+}
+.policy-step-text {
+  font-size: 0.86rem;
+  line-height: 1.65;
+  color: #94a3b8;
+  margin: 0;
+}
+.policy-step-text em {
+  color: var(--secondary-300, #67e8f9);
+  font-style: normal;
+}
+
+/* Danh sách kiểm tra (Checklist / Condition items) */
+.policy-check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  font-size: 0.89rem;
+  line-height: 1.7;
+  color: #cbd5e1;
+}
+.policy-check-item .material-symbols-outlined {
+  font-size: 1.25rem;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+.policy-check-item strong {
+  color: #ffffff;
+}
+
+/* Thanh chuyển hướng cuối trang (Bottom Nav) */
+.policy-bottom-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive cho điện thoại / màn hình nhỏ */
+@media (max-width: 768px) {
+  .policy-page {
+    padding: 24px 14px 48px;
+  }
+  .policy-hero h1 {
+    font-size: 1.5rem;
+  }
+  .policy-card {
+    padding: 18px 18px;
+    margin-bottom: 20px;
+  }
+  .policy-compare-grid,
+  .policy-step-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .policy-bottom-nav {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* Chế độ Sáng / Light Theme */
+[data-theme="light"] .policy-hero h1,
+body.light-theme .policy-hero h1 {
+  color: #0f172a;
+}
+[data-theme="light"] .policy-hero p,
+body.light-theme .policy-hero p {
+  color: #475569;
+}
+[data-theme="light"] .policy-intro-box,
+body.light-theme .policy-intro-box {
+  background: #faf5ff;
+  border-color: #d8b4fe;
+}
+[data-theme="light"] .policy-intro-title,
+body.light-theme .policy-intro-title {
+  color: #6d28d9;
+}
+[data-theme="light"] .policy-intro-desc,
+body.light-theme .policy-intro-desc {
+  color: #334155;
+}
+[data-theme="light"] .policy-card,
+body.light-theme .policy-card {
+  background: #ffffff;
+  border-color: #e2e8f0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+[data-theme="light"] .policy-card:hover,
+body.light-theme .policy-card:hover {
+  border-color: #cbd5e1;
+}
+[data-theme="light"] .policy-card-title,
+body.light-theme .policy-card-title {
+  color: #0f172a;
+}
+[data-theme="light"] .policy-item-title,
+body.light-theme .policy-item-title {
+  color: #1e293b;
+}
+[data-theme="light"] .policy-item-desc,
+body.light-theme .policy-item-desc {
+  color: #475569;
+}
+[data-theme="light"] .policy-check-item,
+body.light-theme .policy-check-item {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+  color: #334155;
+}
+[data-theme="light"] .policy-check-item strong,
+body.light-theme .policy-check-item strong {
+  color: #0f172a;
+}
+[data-theme="light"] .policy-step-card,
+body.light-theme .policy-step-card {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+}
+[data-theme="light"] .policy-step-title,
+body.light-theme .policy-step-title {
+  color: #0f172a;
+}
+[data-theme="light"] .policy-step-text,
+body.light-theme .policy-step-text {
+  color: #475569;
+}
+[data-theme="light"] .policy-bottom-nav,
+body.light-theme .policy-bottom-nav {
+  border-color: #e2e8f0;
+}
+[data-theme="light"] .policy-type-pill.mall,
+body.light-theme .policy-type-pill.mall {
+  background: #f3e8ff;
+  color: #6d28d9;
+  border-color: #d8b4fe;
+}
+[data-theme="light"] .policy-type-pill.c2c,
+body.light-theme .policy-type-pill.c2c {
+  background: #e0f2fe;
+  color: #0369a1;
+  border-color: #bae6fd;
+}
+[data-theme="light"] .policy-benefit-badge.mall,
+body.light-theme .policy-benefit-badge.mall {
+  background: linear-gradient(135deg, #7c3aed, #6d28d9);
+  color: #ffffff;
+  border-color: #7c3aed;
+  box-shadow: 0 2px 8px rgba(109, 40, 217, 0.25);
+}
+[data-theme="light"] .policy-benefit-badge.c2c,
+body.light-theme .policy-benefit-badge.c2c {
+  background: linear-gradient(135deg, #0891b2, #0e7490);
+  color: #ffffff;
+  border-color: #0891b2;
+  box-shadow: 0 2px 8px rgba(8, 145, 178, 0.25);
+}
+[data-theme="light"] .policy-card-primary,
+body.light-theme .policy-card-primary {
+  background: linear-gradient(180deg, #faf5ff 0%, #ffffff 100%);
+  border-top: 3px solid #8b5cf6;
+}
+[data-theme="light"] .policy-card-secondary,
+body.light-theme .policy-card-secondary {
+  background: linear-gradient(180deg, #f0fdfa 0%, #ffffff 100%);
+  border-top: 3px solid #06b6d4;
+}
+[data-theme="light"] .policy-main-headline,
+body.light-theme .policy-main-headline {
+  color: #0f172a;
+  border-bottom-color: #e2e8f0;
+}
