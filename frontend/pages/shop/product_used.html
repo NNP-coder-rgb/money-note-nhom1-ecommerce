@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>07 — Chi Tiết SP Đồ Cũ &amp; Modal Trả Giá | HYBRID.STORE</title>
+
+    <!-- Chống giật giao diện (Zero-FOUC Theme Init) -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("hybrid_theme") || "dark";
+          document.documentElement.setAttribute("data-theme", t);
+          if (t === "light") document.documentElement.classList.add("light-theme");
+        } catch (e) {}
+      })();
+    </script>
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="stylesheet" href="../../css/base.css?v=4" />
+    <link rel="stylesheet" href="../../css/catalog.css?v=4" />
+    <link rel="stylesheet" href="../../css/master_screens.css?v=4" />
+    <style>
+      .cond-meter-card {
+        background: linear-gradient(135deg, rgba(34, 211, 238, 0.1), rgba(139, 92, 246, 0.1));
+        border: 1px solid rgba(34, 211, 238, 0.3);
+        border-radius: var(--radius-lg);
+        padding: var(--sp-4);
+        margin-block: var(--sp-4);
+      }
+      [data-theme="light"] .cond-meter-card,
+      body.light-theme .cond-meter-card {
+        background: #faf5ff;
+        border: 2px solid #6d28d9 !important;
+        box-shadow: 0 4px 16px rgba(109, 40, 217, 0.1);
+      }
+      .lab-report-box {
+        background: var(--bg-surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        padding: var(--sp-3);
+      }
+      [data-theme="light"] .lab-report-box,
+      body.light-theme .lab-report-box {
+        background: #ffffff;
+        border: 2px solid #6d28d9 !important;
+        box-shadow: 0 4px 16px rgba(109, 40, 217, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===== HEADER ===== -->
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="../../index.html">
+          <span class="brand-mark"><span class="material-symbols-outlined">token</span></span>
+          <span>HYBRID<span class="text-secondary">.STORE</span> <span class="badge badge-c2c">CHỢ ĐỒ CŨ</span></span>
+        </a>
+
+        <div class="header-actions">
+          <a class="btn btn-secondary hide-sm" href="catalog.html">Xem Danh Mục</a>
+          <button
+            class="icon-btn theme-toggle-btn"
+            id="themeToggleBtn"
+            type="button"
+            aria-label="Chuyển chế độ sáng / tối"
+            title="Chuyển sang giao diện Sáng"
+          >
+            <span class="material-symbols-outlined theme-toggle-icon">light_mode</span>
+          </button>
+          <a class="icon-btn" href="cart.html" aria-label="Giỏ hàng">
+            <span class="material-symbols-outlined">shopping_bag</span>
+            <span class="badge badge-counter" id="cartCount">0</span>
+          </a>
+          <a class="avatar" href="../account/profile.html" title="Tài khoản">
+            <span class="material-symbols-outlined">person</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <div class="subnav">
+      <div class="container">
+        <nav>
+          <a href="../../index.html">Trang Chủ</a>
+          <span class="text-faint">/</span>
+          <a href="catalog.html?type=c2c">Đồ Cũ Like New</a>
+          <span class="text-faint">/</span>
+          <span class="active">iPhone 15 Pro Max 256GB Like New 99%</span>
+        </nav>
+        <div class="subnav-info hide-sm">
+          <span class="text-success"><span class="material-symbols-outlined icon-sm">savings</span> Rẻ hơn đồ mới 27%</span>
+          <span class="text-secondary"><span class="material-symbols-outlined icon-sm">verified</span> Đồng kiểm khi nhận</span>
+        </div>
+      </div>
+    </div>
+
+    <main class="container py-6">
+      <div class="product-detail-grid">
+        <!-- Cột trái: Ảnh 4 góc thực tế -->
+        <div>
+          <div class="panel p-3" style="position: relative; border-radius: var(--radius-xl); overflow: hidden;">
+            <div style="position: absolute; top: 16px; left: 16px; z-index: 2;">
+              <span class="badge badge-c2c">ĐỒ CŨ LIKE NEW 99% • -27%</span>
+            </div>
+            <div class="img-zoom-container" id="zoomContainer" title="Bấm để xem ảnh phóng to toàn màn hình">
+              <img id="mainUsedImg" src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=700" alt="iPhone 15 Pro Max Cũ" style="width: 100%; border-radius: var(--radius-lg); aspect-ratio: 1/1; object-fit: cover;" />
+            </div>
+          </div>
+
+          <div class="text-xs text-muted mt-2 fw-600">ẢNH CHỤP 4 GÓC CẠNH THỰC TẾ:</div>
+          <div class="flex gap-3 mt-2">
+            <img class="thumb-item active" src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=200" style="width: 70px; height: 70px; border-radius: 8px; object-fit: cover; border: 2px solid var(--secondary-400); cursor: pointer;" />
+            <img class="thumb-item" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=200" style="width: 70px; height: 70px; border-radius: 8px; object-fit: cover; opacity: 0.6; cursor: pointer;" />
+          </div>
+
+          <!-- Báo cáo kiểm định -->
+          <div class="panel mt-4 p-4 lab-report-box">
+            <div class="flex items-center justify-between mb-2">
+              <strong class="text-xs uppercase text-secondary flex items-center gap-1">
+                <span class="material-symbols-outlined icon-xs">task_alt</span> Báo Cáo Kiểm Tra Thực Tế
+              </strong>
+              <span class="badge badge-success">ĐẠT CHUẨN LOẠI A</span>
+            </div>
+            <div class="grid grid-2 gap-2 text-xs text-muted">
+              <div>Dung lượng pin: <strong class="text-text">99% Zin</strong></div>
+              <div>Màn hình: <strong class="text-text">Sáng đẹp, không ám ố</strong></div>
+              <div>Ốc đít / Vỏ: <strong class="text-text">Chưa từng bung mở</strong></div>
+              <div>Face ID / Loa: <strong class="text-text">Hoạt động hoàn hảo</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cột phải: Thông tin, Độ mới & Trả giá -->
+        <div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="badge badge-secondary badge-dot">NGƯỜI BÁN ĐÃ XÁC MINH</span>
+            <span class="text-xs text-muted">Việt Dũng (Đã eKYC CCCD • 18 lượt bán)</span>
+          </div>
+
+          <h1 class="page-title mb-2" style="font-size: 2rem;">iPhone 15 Pro Max 256GB Titan Tự Nhiên (Like New 99%)</h1>
+
+          <!-- Condition Meter -->
+          <div class="cond-meter-card">
+            <div class="flex items-center justify-between mb-2 text-xs">
+              <span>Thanh đo độ mới (Condition Meter):</span>
+              <strong class="text-secondary mono" style="font-size: 14px;">99% (Như Mới Khui Hộp)</strong>
+            </div>
+            <div class="progress progress-secondary" style="--value: 99%; height: 8px;">
+              <div class="progress-bar"></div>
+            </div>
+            <div class="text-xs text-muted mt-2">
+              Mô tả người bán: <em>"Máy dùng lướt 2 tuần làm review YouTube, fullbox phụ kiện zin theo máy."</em>
+            </div>
+          </div>
+
+          <!-- Giá & Mức rẻ hơn so với đồ mới -->
+          <div class="panel p-4 mb-4" style="background: rgba(139, 92, 246, 0.08); border-color: rgba(139, 92, 246, 0.3);">
+            <div class="text-xs text-muted">GIÁ ĐỒ CŨ THANH LÝ:</div>
+            <div class="flex items-baseline gap-3 my-2">
+              <span class="mono text-gradient" style="font-size: 2.3rem; font-weight: 800;">21.990.000₫</span>
+              <span class="text-faint line-through mono text-lg">29.990.000₫</span>
+            </div>
+            <div class="discount-callout">
+              <span class="material-symbols-outlined icon-sm">savings</span>
+              <span>Rẻ hơn đồ mới 27% (Tiết kiệm ngay 8.000.000₫)</span>
+            </div>
+          </div>
+
+          <!-- Nhóm nút hành động -->
+          <div class="product-actions-group mb-4" style="display: flex; flex-direction: column; gap: 10px;">
+            <div class="flex items-center gap-3">
+              <button class="btn btn-outlined flex-1" id="btnUsedAddCart" type="button" style="padding: 14px; font-weight: 700;" title="Thêm vào giỏ hàng">
+                <span class="material-symbols-outlined icon-sm">add_shopping_cart</span>
+                Thêm Vào Giỏ Hàng
+              </button>
+              <button class="btn btn-primary flex-1" id="btnUsedBuyNow" type="button" style="padding: 14px; font-weight: 700;" title="Mua ngay sản phẩm">
+                <span class="material-symbols-outlined icon-sm">bolt</span>
+                Mua Ngay
+              </button>
+            </div>
+            <button class="btn btn-secondary w-full" id="btnUsedOffer" type="button" style="padding: 14px; font-weight: 700;" title="Thương lượng đề xuất giá khác với người bán">
+              <span class="material-symbols-outlined icon-sm">price_change</span>
+              Thương Lượng Trả Giá Với Người Bán
+            </button>
+          </div>
+
+          <!-- KHỐI LỊCH SỬ THƯƠNG LƯỢNG TRẢ GIÁ CỦA BẠN (DÀNH CHO ĐỒ CŨ) -->
+          <div class="panel p-4 mb-4" id="offerTrackerPanel" style="display: none; background: rgba(6, 182, 212, 0.04); border-color: rgba(6, 182, 212, 0.3);">
+            <div class="flex items-center justify-between mb-3">
+              <strong class="text-sm flex items-center gap-1.5 text-secondary">
+                <span class="material-symbols-outlined icon-sm">history_edu</span>
+                Đề Xuất Trả Giá Của Bạn
+              </strong>
+              <span class="badge badge-primary text-xs" id="offerCountBadge">1 đề xuất</span>
+            </div>
+            <div id="offerItemsContainer">
+              <!-- Render danh sách đề xuất tự động bằng JS -->
+            </div>
+          </div>
+
+          <!-- Cam kết an toàn -->
+          <div class="panel p-4 text-xs text-muted" style="line-height: 1.8;">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="material-symbols-outlined text-success icon-sm">check_circle</span>
+              <strong>Đồng kiểm 100%:</strong> Mở hộp bật nguồn test máy cùng shipper trước khi thanh toán.
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-secondary icon-sm">published_with_changes</span>
+              <strong>Bảo hành 6 tháng + Đổi trả miễn phí 7 ngày</strong> nếu phát sinh lỗi kỹ thuật.
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal Trả Giá Thông Minh -->
+    <div class="modal-backdrop" id="usedOfferModal">
+      <div class="modal" role="dialog" aria-modal="true" style="max-width: 500px;">
+        <div class="modal-head">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-secondary">handshake</span>
+            <h4 class="modal-title">Thương Lượng Trả Giá Với Người Bán</h4>
+          </div>
+          <button class="modal-close" type="button" data-close><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <div class="modal-body">
+          <!-- Thông tin tóm tắt sản phẩm -->
+          <div class="flex items-center gap-3 p-3 rounded mb-3" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border);">
+            <img id="modalProductThumb" src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=200" style="width: 54px; height: 54px; border-radius: 8px; object-fit: cover;" />
+            <div class="flex-1">
+              <div class="text-xs fw-600 line-clamp-1 text-white" id="modalProductName">iPhone 15 Pro Max 256GB Titan Tự Nhiên (99%)</div>
+              <div class="text-xs text-muted mt-0.5">Giá niêm yết: <strong class="text-secondary mono" id="modalListedPrice">21.990.000₫</strong></div>
+            </div>
+          </div>
+
+          <div class="form-group mb-2">
+            <label class="form-label flex justify-between items-center">
+              <span>Mức giá đề xuất mua (VNĐ) (*)</span>
+              <span class="text-xs text-secondary mono" id="offerDiscountPreview">Tiết kiệm: 2.200.000₫ (-10%)</span>
+            </label>
+            <div class="input-group">
+              <span class="icon-left material-symbols-outlined">payments</span>
+              <input class="input mono fw-700" id="inputOfferPrice" type="text" value="19.790.000" placeholder="Nhập số tiền..." />
+            </div>
+            <span class="form-error" id="offerPriceError" style="display: none; color: var(--danger); font-size: 11px; margin-top: 4px;"></span>
+          </div>
+
+          <!-- Gợi ý nhanh các mức giảm -->
+          <div class="text-xs text-muted mb-1.5">Gợi ý mức trả giá nhanh:</div>
+          <div class="chip-row mb-3" id="quickOfferChips">
+            <button class="chip" type="button" data-percent="5">-5%</button>
+            <button class="chip active" type="button" data-percent="10">-10%</button>
+            <button class="chip" type="button" data-percent="15">-15%</button>
+            <button class="chip" type="button" data-percent="20">-20%</button>
+          </div>
+
+          <!-- Lời nhắn gửi người bán -->
+          <div class="form-group mb-3">
+            <label class="form-label flex justify-between items-center">
+              <span>Lời nhắn gửi người bán</span>
+              <span class="text-xs text-faint">Tăng 80% tỷ lệ đồng ý</span>
+            </label>
+            <textarea class="textarea" id="offerMessageInput" rows="2" placeholder="Ví dụ: Em thiện chí chốt nhanh chuyển khoản Napas 24/7 liền tay ạ..."></textarea>
+            <div class="flex gap-1.5 flex-wrap mt-2" id="quickNoteButtons">
+              <button type="button" class="btn btn-secondary btn-xs quick-note-btn">Chốt nhanh trong ngày</button>
+              <button type="button" class="btn btn-secondary btn-xs quick-note-btn">Chuyển khoản Napas 24/7</button>
+              <button type="button" class="btn btn-secondary btn-xs quick-note-btn">Qua xem test máy trực tiếp</button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn btn-secondary" type="button" data-close>Hủy Bỏ</button>
+          <button class="btn btn-primary" id="btnSubmitOffer" type="button">
+            <span class="material-symbols-outlined icon-xs">send</span> Gửi Đề Nghị Trả Giá
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast-stack" id="toastStack"></div>
+
+    <script src="../../js/popup.js"></script>
+    <script src="../../js/auth.js"></script>
+    <script src="../../js/mock_data.js"></script>
+    <script src="../../js/utils.js"></script>
+    <script>
+      (function () {
+        Utils.Cart.syncBadge();
+
+        // 1. Phân giải sản phẩm từ URL query (?id=...)
+        const params = new URLSearchParams(window.location.search);
+        const productId = params.get("id");
+        let p = null;
+
+        if (productId) {
+          if (typeof PRODUCTS !== "undefined" && PRODUCTS.length) {
+            p = PRODUCTS.find((x) => x.id === productId);
+          }
+          if (!p) {
+            try {
+              const customList = JSON.parse(localStorage.getItem("hv_seller_products") || "[]");
+              p = customList.find((x) => x.id === productId);
+            } catch (e) {}
+          }
+        }
+        if (!p && typeof PRODUCTS !== "undefined" && PRODUCTS.length) {
+          p = PRODUCTS.find((x) => x.type === "c2c") || PRODUCTS[0];
+        }
+
+        if (!p) return;
+
+        const originalPrice = p.price || 21990000;
+        const oldPriceVal = p.oldPrice || Math.round(originalPrice * 1.35);
+        const discountPercent = Math.round((1 - originalPrice / oldPriceVal) * 100);
+        const savedAmount = oldPriceVal - originalPrice;
+        const resolvedImg = window.resolveAssetUrl ? window.resolveAssetUrl(p.img) : p.img;
+        const prodShortTitle = p.short || p.name;
+        const prodFullTitle = p.name + " (" + (p.condText || "Like New " + (p.cond || 98) + "%") + ")";
+
+        // 2. Cập nhật tiêu đề trang & Breadcrumb
+        document.title = prodFullTitle + " | HYBRID.STORE C2C";
+        const breadcrumbActive = document.querySelector(".subnav nav .active");
+        if (breadcrumbActive) breadcrumbActive.textContent = prodShortTitle;
+
+        const breadcrumbSavings = document.querySelector(".subnav-info .text-success");
+        if (breadcrumbSavings) {
+          breadcrumbSavings.innerHTML = `<span class="material-symbols-outlined icon-sm">savings</span> Rẻ hơn đồ mới ${discountPercent}%`;
+        }
+
+        // 3. Cập nhật hình ảnh & huy hiệu ảnh chính
+        const mainUsedImg = document.getElementById("mainUsedImg");
+        if (mainUsedImg) {
+          mainUsedImg.src = resolvedImg;
+          mainUsedImg.alt = p.name;
+        }
+
+        const mediaBadge = document.querySelector(".product-detail-grid .badge-c2c");
+        if (mediaBadge) {
+          mediaBadge.textContent = `ĐỒ CŨ ${p.condText || "LIKE NEW"} • -${discountPercent}%`;
+        }
+
+        // Cập nhật danh sách Thumbnails ảnh thật
+        const thumbContainer = document.querySelector(".product-detail-grid .flex.gap-3.mt-2");
+        if (thumbContainer) {
+          const allImages = (p.images && p.images.length) ? p.images : [resolvedImg, resolvedImg];
+          thumbContainer.innerHTML = allImages.map((imgSrc, i) => {
+            const rImg = window.resolveAssetUrl ? window.resolveAssetUrl(imgSrc) : imgSrc;
+            return `
+              <img class="thumb-item ${i === 0 ? 'active' : ''}" src="${rImg}" style="width: 70px; height: 70px; border-radius: 8px; object-fit: cover; border: 2px solid ${i === 0 ? 'var(--secondary-400)' : 'transparent'}; opacity: ${i === 0 ? '1' : '0.6'}; cursor: pointer; transition: all 0.2s ease;" alt="Góc chụp ${i + 1}" />
+            `;
+          }).join("");
+
+          thumbContainer.querySelectorAll(".thumb-item").forEach((thumb) => {
+            thumb.addEventListener("click", () => {
+              thumbContainer.querySelectorAll(".thumb-item").forEach((t) => {
+                t.classList.remove("active");
+                t.style.borderColor = "transparent";
+                t.style.opacity = "0.6";
+              });
+              thumb.classList.add("active");
+              thumb.style.borderColor = "var(--secondary-400)";
+              thumb.style.opacity = "1";
+              if (mainUsedImg) mainUsedImg.src = thumb.src;
+            });
+          });
+        }
+
+        // 4. Báo cáo kiểm định kỹ thuật theo ngành hàng
+        const labGrid = document.querySelector(".lab-report-box .grid");
+        if (labGrid) {
+          if (p.category === "tech" || p.category === "audio" || p.category === "gaming" || p.category === "camera") {
+            labGrid.innerHTML = `
+              <div>Dung lượng pin: <strong class="text-text">${(p.cond || 98) >= 95 ? "99% Zin" : "91% Zin"}</strong></div>
+              <div>Màn hình: <strong class="text-text">Sáng đẹp, không ám ố</strong></div>
+              <div>Ốc vít / Vỏ: <strong class="text-text">Chưa từng bung mở, tem zin</strong></div>
+              <div>Chức năng: <strong class="text-text">Hoạt động hoàn hảo 100%</strong></div>
+            `;
+          } else if (p.category === "fashion" || p.category === "sneakers") {
+            labGrid.innerHTML = `
+              <div>Đường may / Chỉ: <strong class="text-text">Nguyên bản 100%, không xước sờn</strong></div>
+              <div>Chất liệu vải / da: <strong class="text-text">Mềm mại, chuẩn form zin</strong></div>
+              <div>Đế giày / Khóa: <strong class="text-text">Độ mòn < 3%, trơn tru</strong></div>
+              <div>Tem mác phụ kiện: <strong class="text-text">Đầy đủ tem tag chính hãng</strong></div>
+            `;
+          } else {
+            labGrid.innerHTML = `
+              <div>Động cơ / Mạch: <strong class="text-text">Vận hành êm, mạch zin</strong></div>
+              <div>Ngoại quan vỏ: <strong class="text-text">Đẹp ${p.cond || 95}%, không cấn móp</strong></div>
+              <div>Dây cáp / Pin: <strong class="text-text">An toàn, đúng tiêu chuẩn</strong></div>
+              <div>Linh kiện kèm theo: <strong class="text-text">Đầy đủ phụ kiện theo máy</strong></div>
+            `;
+          }
+        }
+
+        // 5. Cập nhật thông tin người bán & Tiêu đề
+        const sellerMeta = document.querySelector(".product-detail-grid .text-xs.text-muted");
+        if (sellerMeta) {
+          sellerMeta.textContent = `${p.seller || p.sellerName || "Việt Dũng"} (Đã eKYC CCCD • 18 lượt bán)`;
+        }
+
+        const pageTitle = document.querySelector(".product-detail-grid .page-title");
+        if (pageTitle) {
+          pageTitle.textContent = prodFullTitle;
+        }
+
+        // 6. Thanh đo độ mới (Condition meter)
+        const condCard = document.querySelector(".cond-meter-card");
+        if (condCard) {
+          const condVal = p.cond || 98;
+          const condLabel = condCard.querySelector("strong.text-secondary.mono");
+          if (condLabel) condLabel.textContent = `${condVal}% (${p.condText || p.condLabel || "Rất Đẹp"})`;
+          const progBar = condCard.querySelector(".progress");
+          if (progBar) progBar.style.setProperty("--value", `${condVal}%`);
+          const sellerNote = condCard.querySelector(".text-xs.text-muted.mt-2 em");
+          if (sellerNote) {
+            sellerNote.textContent = `"${p.desc || p.condLabel || "Hàng dùng lướt kỹ lưỡng, đầy đủ hộp và phụ kiện nguyên bản."}"`;
+          }
+        }
+
+        // 7. Giá & Mức tiết kiệm
+        const curPriceEl = document.querySelector(".product-detail-grid .mono.text-gradient");
+        if (curPriceEl) curPriceEl.textContent = Utils.formatCurrency(originalPrice);
+        const oldPriceEl = document.querySelector(".product-detail-grid .text-faint.line-through.mono");
+        if (oldPriceEl) oldPriceEl.textContent = Utils.formatCurrency(oldPriceVal);
+        const discountCallout = document.querySelector(".discount-callout span:nth-child(2)");
+        if (discountCallout) {
+          discountCallout.textContent = `Rẻ hơn đồ mới ${discountPercent}% (Tiết kiệm ngay ${Utils.formatCurrency(savedAmount)})`;
+        }
+
+        // Elements
+        const btnUsedAddCart = document.getElementById("btnUsedAddCart");
+        const btnUsedOffer = document.getElementById("btnUsedOffer");
+        const btnUsedBuyNow = document.getElementById("btnUsedBuyNow");
+        const modal = document.getElementById("usedOfferModal");
+        const modalProductName = document.getElementById("modalProductName");
+        const modalListedPrice = document.getElementById("modalListedPrice");
+        const modalProductThumb = document.getElementById("modalProductThumb");
+        const inputOfferPrice = document.getElementById("inputOfferPrice");
+        const offerDiscountPreview = document.getElementById("offerDiscountPreview");
+        const offerPriceError = document.getElementById("offerPriceError");
+        const quickOfferChips = document.querySelectorAll("#quickOfferChips .chip");
+        const offerMessageInput = document.getElementById("offerMessageInput");
+        const quickNoteButtons = document.querySelectorAll(".quick-note-btn");
+        const btnSubmitOffer = document.getElementById("btnSubmitOffer");
+        const offerTrackerPanel = document.getElementById("offerTrackerPanel");
+        const offerItemsContainer = document.getElementById("offerItemsContainer");
+        const offerCountBadge = document.getElementById("offerCountBadge");
+
+        // Đồng bộ dữ liệu sản phẩm vào modal
+        if (modalProductName) modalProductName.textContent = p.name || p.short;
+        if (modalListedPrice) modalListedPrice.textContent = Utils.formatCurrency(originalPrice);
+        if (modalProductThumb) modalProductThumb.src = resolvedImg;
+
+        // Tính toán lại nhãn cho các chip gợi ý
+        quickOfferChips.forEach((chip) => {
+          const pct = Number(chip.dataset.percent) || 10;
+          const discounted = Math.round(originalPrice * (1 - pct / 100));
+          chip.textContent = `-${pct}% (${Utils.formatCurrency(discounted)})`;
+          chip.addEventListener("click", () => {
+            quickOfferChips.forEach((c) => c.classList.remove("active"));
+            chip.classList.add("active");
+            inputOfferPrice.value = discounted.toLocaleString("vi-VN");
+            updateDiscountPreview(discounted);
+          });
+        });
+
+        // Bấm chọn lời nhắn nhanh
+        quickNoteButtons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const current = offerMessageInput.value.trim();
+            const textToAdd = btn.textContent.trim();
+            offerMessageInput.value = current ? current + " • " + textToAdd : textToAdd;
+          });
+        });
+
+        // Hàm cập nhật preview mức giảm
+        function updateDiscountPreview(offered) {
+          if (!offerDiscountPreview) return;
+          if (offered >= originalPrice) {
+            offerDiscountPreview.textContent = "Giá đề xuất cao hơn giá niêm yết";
+            offerDiscountPreview.style.color = "var(--text-muted)";
+            if (offerPriceError) {
+              offerPriceError.textContent = "Mức giá đề xuất nên thấp hơn giá niêm yết.";
+              offerPriceError.style.display = "block";
+            }
+          } else if (offered < originalPrice * 0.5) {
+            const minAllowed = Math.round(originalPrice * 0.5);
+            offerDiscountPreview.textContent = `Không hợp lệ (Tối thiểu 50%: ${Utils.formatCurrency(minAllowed)})`;
+            offerDiscountPreview.style.color = "var(--danger)";
+            if (offerPriceError) {
+              offerPriceError.textContent = "Theo quy định sàn, mức trả giá không được thấp hơn 50% giá niêm yết.";
+              offerPriceError.style.display = "block";
+            }
+          } else {
+            const saving = originalPrice - offered;
+            const pct = Math.round((saving / originalPrice) * 100);
+            offerDiscountPreview.textContent = `Tiết kiệm: ${Utils.formatCurrency(saving)} (-${pct}%)`;
+            offerDiscountPreview.style.color = "var(--secondary-300)";
+            if (offerPriceError) offerPriceError.style.display = "none";
+          }
+        }
+
+        // Tự động định dạng tiền khi gõ
+        inputOfferPrice.addEventListener("input", () => {
+          quickOfferChips.forEach((c) => c.classList.remove("active"));
+          const digits = inputOfferPrice.value.replace(/\D/g, "");
+          const num = Number(digits) || 0;
+          if (num > 0) {
+            inputOfferPrice.value = num.toLocaleString("vi-VN");
+          }
+          updateDiscountPreview(num);
+        });
+
+        // Render lịch sử các đề xuất trả giá
+        function renderOffersTracker() {
+          const offers = Utils.Offer.getOffers(p.id);
+          if (!offers || offers.length === 0) {
+            offerTrackerPanel.style.display = "none";
+            return;
+          }
+          offerTrackerPanel.style.display = "block";
+          offerCountBadge.textContent = `${offers.length} đề xuất`;
+
+          offerItemsContainer.innerHTML = offers.map((o) => {
+            const isAccepted = o.status === "accepted";
+            const isRejected = o.status === "rejected";
+            const badgeClass = isAccepted ? "badge-success" : isRejected ? "badge-danger" : "badge-secondary";
+            const statusLabel = isAccepted ? "ĐÃ CHẤP NHẬN" : isRejected ? "TỪ CHỐI" : "ĐANG CHỜ PHẢN HỒI";
+
+            return `
+              <div class="offer-item-card ${isAccepted ? "accepted" : isRejected ? "rejected" : ""}">
+                <div class="flex items-center justify-between mb-1.5 flex-wrap gap-2">
+                  <div class="flex items-center gap-2">
+                    <span class="mono fw-700 text-white" style="font-size: 15px;">${Utils.formatCurrency(o.offerPrice)}</span>
+                    <span class="badge badge-primary text-xs" style="font-size: 10px;">-${o.discountPercent}%</span>
+                  </div>
+                  <span class="badge ${badgeClass}" style="font-size: 10px;">${statusLabel}</span>
+                </div>
+                ${o.message ? `<div class="text-xs text-muted mb-2 font-italic">"${o.message}"</div>` : ""}
+                <div class="flex items-center justify-between text-xs text-faint flex-wrap gap-2">
+                  <span>Mã thương lượng: <strong class="mono text-muted">${o.id}</strong></span>
+                  ${isAccepted ? `
+                    <button class="btn btn-primary btn-sm btn-buy-offer" data-offer-id="${o.id}" data-price="${o.offerPrice}">
+                      <span class="material-symbols-outlined icon-xs">shopping_bag</span> Mua Với Giá Đã Trả (${Utils.formatCurrency(o.offerPrice)})
+                    </button>
+                  ` : `
+                    <span class="text-xs text-muted flex items-center gap-1">
+                      <span class="material-symbols-outlined icon-xs spin text-secondary">sync</span> Người bán đang xem xét
+                    </span>
+                  `}
+                </div>
+              </div>
+            `;
+          }).join("");
+
+          // Gắn sự kiện nút Mua Với Giá Đã Trả
+          document.querySelectorAll(".btn-buy-offer").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const offerPrice = Number(btn.dataset.price);
+              const customProduct = {
+                ...p,
+                price: offerPrice,
+                negotiated: true,
+                negotiatedDiscount: p.price - offerPrice,
+              };
+              Utils.Cart.addItem(customProduct, 1);
+              Utils.toast({
+                title: "Đã thêm vào giỏ hàng!",
+                message: `Áp dụng mức giá thương lượng thành công: ${Utils.formatCurrency(offerPrice)}`,
+                type: "success",
+              });
+              setTimeout(() => {
+                window.location.href = "cart.html";
+              }, 600);
+            });
+          });
+        }
+
+        // Khởi tạo hiển thị danh sách thương lượng
+        renderOffersTracker();
+
+        // Mở modal trả giá
+        btnUsedOffer.addEventListener("click", () => {
+          if (!Auth.ensureLogin(() => {
+            Utils.openModal("usedOfferModal");
+          }, {
+            title: "Yêu Cầu Đăng Nhập",
+            message: "Vui lòng đăng nhập tài khoản để gửi đề nghị trả giá với người bán.",
+          })) return;
+
+          // Mặc định chọn mức -10%
+          const default10 = Math.round(originalPrice * 0.9);
+          inputOfferPrice.value = default10.toLocaleString("vi-VN");
+          updateDiscountPreview(default10);
+          Utils.openModal("usedOfferModal");
+        });
+
+        // Gửi đề nghị trả giá
+        btnSubmitOffer.addEventListener("click", () => {
+          const user = Auth.current();
+          if (!Auth.ensureLogin(() => {}, {
+            title: "Yêu Cầu Đăng Nhập",
+            message: "Vui lòng đăng nhập tài khoản để gửi đề xuất trả giá.",
+          })) return;
+
+          const rawPrice = inputOfferPrice.value.replace(/\D/g, "");
+          const offerPrice = Number(rawPrice) || Math.round(originalPrice * 0.9);
+
+          if (offerPrice >= originalPrice) {
+            Utils.toast("Mức giá đề xuất nên thấp hơn giá niêm yết hiện tại.", "warning");
+            return;
+          }
+          if (offerPrice < originalPrice * 0.5) {
+            Utils.toast("Không thể trả giá thấp hơn 50% giá trị sản phẩm.", "warning");
+            return;
+          }
+
+          const msg = offerMessageInput.value.trim();
+
+          const res = Utils.Offer.submitOffer({
+            productId: p.id,
+            productName: p.name || p.short,
+            originalPrice: originalPrice,
+            offerPrice: offerPrice,
+            message: msg,
+            buyerName: user ? user.fullName : "Khách hàng",
+          });
+
+          Utils.closeModal("usedOfferModal");
+
+          if (res.success) {
+            renderOffersTracker();
+            Utils.toast({
+              title: "Đã gửi đề xuất trả giá thành công!",
+              message: `Đề xuất mức ${Utils.formatCurrency(offerPrice)} (-${res.offer.discountPercent}%) đã được gửi tới người bán Việt Dũng.`,
+              type: "success",
+            });
+
+            // Giả lập người bán phản hồi tự động sau 2.5 giây
+            if (res.offer.discountPercent <= 15) {
+              setTimeout(() => {
+                Utils.Offer.updateOfferStatus(res.offer.id, "accepted");
+                renderOffersTracker();
+                Utils.toast({
+                  title: "🎉 Người bán ĐÃ CHẤP NHẬN đề xuất!",
+                  message: `Người bán đồng ý để lại cho bạn với giá ${Utils.formatCurrency(offerPrice)}. Bấm "Mua Với Giá Đã Trả" để thanh toán ngay!`,
+                  type: "success",
+                });
+              }, 2500);
+            }
+          } else {
+            Utils.toast(res.message, "danger");
+          }
+        });
+
+        // Xử lý chuyển đổi ảnh thumbnail 4 góc
+        var thumbs = document.querySelectorAll(".thumb-item");
+        var mainImg = document.getElementById("mainUsedImg");
+        thumbs.forEach(function (t) {
+          t.addEventListener("click", function () {
+            thumbs.forEach(function (item) { item.style.opacity = "0.6"; item.style.border = "2px solid transparent"; });
+            this.style.opacity = "1";
+            this.style.border = "2px solid var(--secondary-400)";
+            if (mainImg) mainImg.src = this.src;
+          });
+        });
+
+        // Nút thêm vào giỏ hàng
+        if (btnUsedAddCart) {
+          btnUsedAddCart.addEventListener("click", () => {
+            const prodTitle = p.short || p.name || "sản phẩm đồ cũ";
+            if (!Auth.ensureLogin(() => {
+              Utils.Cart.addItem(p, 1);
+            }, {
+              title: "Đăng Nhập Mua Hàng",
+              message: 'Vui lòng đăng nhập tài khoản để thêm "' + prodTitle + '" vào giỏ hàng.',
+            })) return;
+            Utils.Cart.addItem(p, 1);
+          });
+        }
+
+        // Nút mua ngay trực tiếp
+        btnUsedBuyNow.addEventListener("click", () => {
+          if (!Auth.ensureLogin(() => {
+            Utils.Cart.addItem(p, 1);
+            window.location.href = "cart.html";
+          }, {
+            title: "Đăng Nhập Mua Hàng",
+            message: "Vui lòng đăng nhập tài khoản để mua ngay sản phẩm này.",
+            returnUrl: "cart.html"
+          })) return;
+          Utils.Cart.addItem(p, 1);
+          window.location.href = "cart.html";
+        });
+
+        // 11. Lightbox phóng to ảnh fullscreen
+        const lightbox = document.getElementById("productLightbox");
+        const lightboxImg = document.getElementById("lightboxImg");
+        const lightboxCloseBtn = document.getElementById("lightboxCloseBtn");
+        const mainImgEl = document.getElementById("mainUsedImg");
+
+        if (mainImgEl && lightbox && lightboxImg) {
+          mainImgEl.addEventListener("click", () => {
+            lightboxImg.src = mainImgEl.src;
+            lightbox.classList.add("active");
+          });
+          lightboxCloseBtn.addEventListener("click", () => {
+            lightbox.classList.remove("active");
+          });
+          lightbox.addEventListener("click", (e) => {
+            if (e.target === lightbox) lightbox.classList.remove("active");
+          });
+          document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && lightbox.classList.contains("active")) {
+              lightbox.classList.remove("active");
+            }
+          });
+        }
+
+        // 12. Mobile Sticky Buy Bar
+        const stickyPrice = document.getElementById("stickyPrice");
+        if (stickyPrice) stickyPrice.textContent = Utils.formatCurrency(p.price);
+
+        const stickyAddCart = document.getElementById("stickyBtnAddCart");
+        if (stickyAddCart) {
+          stickyAddCart.addEventListener("click", () => {
+            document.getElementById("btnUsedAddCart").click();
+          });
+        }
+
+        const stickyBuyNow = document.getElementById("stickyBtnBuyNow");
+        if (stickyBuyNow) {
+          stickyBuyNow.addEventListener("click", () => {
+            document.getElementById("btnUsedBuyNow").click();
+          });
+        }
+
+        const stickyOffer = document.getElementById("stickyBtnOffer");
+        if (stickyOffer) {
+          stickyOffer.addEventListener("click", () => {
+            document.getElementById("btnUsedOffer").click();
+          });
+        }
+      })();
+    </script>
+
+    <!-- Mobile Sticky Buy Bar (Hỗ trợ Trả giá C2C, Thêm giỏ, Mua ngay) -->
+    <div class="mobile-sticky-buy-bar hide-md" id="mobileStickyBuyBar">
+      <div class="sticky-price-info">
+        <span class="text-xs text-muted">Giá Đồ Cũ:</span>
+        <strong class="mono text-secondary fs-base" id="stickyPrice">21.990.000₫</strong>
+      </div>
+      <div class="sticky-actions">
+        <button class="btn btn-secondary btn-sm" id="stickyBtnOffer" type="button" title="Trả giá với người bán">
+          <span class="material-symbols-outlined icon-sm">handshake</span>
+        </button>
+        <button class="btn btn-outlined btn-sm" id="stickyBtnAddCart" type="button" title="Thêm vào giỏ">
+          <span class="material-symbols-outlined icon-sm">add_shopping_cart</span>
+        </button>
+        <button class="btn btn-primary btn-sm" id="stickyBtnBuyNow" type="button">
+          <span class="material-symbols-outlined icon-sm">bolt</span> Mua
+        </button>
+      </div>
+    </div>
+
+    <!-- Lightbox phóng to ảnh fullscreen -->
+    <div class="lightbox-modal" id="productLightbox" role="dialog" aria-modal="true">
+      <button class="lightbox-close-btn" id="lightboxCloseBtn" type="button" aria-label="Đóng"><span class="material-symbols-outlined">close</span></button>
+      <img id="lightboxImg" src="" alt="Ảnh sản phẩm phóng to" />
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer" data-component="footer"></footer>
+
+    <script src="../../js/components.js"></script>
+  </body>
+</html>
