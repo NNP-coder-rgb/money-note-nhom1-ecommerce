@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng Ký Tài Khoản | HYBRID.STORE</title>
+
+    <!-- Chống giật giao diện (Zero-FOUC Theme Init) -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("hybrid_theme") || "dark";
+          document.documentElement.setAttribute("data-theme", t);
+          if (t === "light")
+            document.documentElement.classList.add("light-theme");
+        } catch (e) {}
+      })();
+    </script>
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+
+    <!-- base.css trước, CSS riêng của trang sau -->
+    <link rel="stylesheet" href="../../css/base.css" />
+    <link rel="stylesheet" href="../../css/register.css" />
+  </head>
+  <body>
+    <!-- ===== HEADER ===== -->
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="../../index.html">
+          <span class="brand-mark"
+            ><span class="material-symbols-outlined">token</span></span
+          >
+          <span>HYBRID<span class="text-secondary">.STORE</span></span>
+        </a>
+
+        <nav class="nav">
+          <a href="auth_login.html">Đăng nhập</a>
+          <a href="auth_register.html" class="active" aria-current="page"
+            >Đăng ký</a
+          >
+        </nav>
+
+        <div class="header-actions">
+          <button
+            class="icon-btn theme-toggle-btn"
+            id="themeToggleBtn"
+            type="button"
+            title="Chuyển chế độ Sáng / Tối"
+            aria-label="Chuyển đổi giao diện"
+          >
+            <span class="material-symbols-outlined theme-toggle-icon"
+              >light_mode</span
+            >
+          </button>
+          <a class="icon-btn" href="../../index.html" title="Về trang chủ">
+            <span class="material-symbols-outlined">home</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== NỘI DUNG FORM ĐĂNG KÝ Ở GIỮA ===== -->
+    <main class="auth-page">
+      <div class="container">
+        <div class="auth-wrap" style="max-width: 580px; margin: 0 auto">
+          <!-- Logo nhận diện thương hiệu trung tâm -->
+          <div class="auth-logo-center">
+            <a
+              href="../../index.html"
+              class="brand-mark brand-mark-lg"
+              aria-label="HYBRID.STORE"
+              title="Về trang chủ HYBRID.STORE"
+            >
+              <span class="material-symbols-outlined">token</span>
+            </a>
+            <h1 class="auth-logo-title">
+              HYBRID<span class="text-secondary">.STORE</span>
+            </h1>
+            <p class="auth-logo-sub">Tạo tài khoản mới để bắt đầu giao dịch</p>
+          </div>
+
+          <!-- Form đăng ký -->
+          <form class="panel auth-form" id="registerForm" novalidate>
+            <!-- 1. Chọn vai trò -->
+            <section class="form-section">
+              <span class="label-caps">1. Vai trò tài khoản</span>
+              <div class="role-grid">
+                <label class="role-card">
+                  <input
+                    type="radio"
+                    name="accountRole"
+                    value="buyer"
+                    checked
+                  />
+                  <div class="role-top">
+                    <span class="role-icon">
+                      <span class="material-symbols-outlined"
+                        >shopping_bag</span
+                      >
+                    </span>
+                    <span class="role-check">
+                      <span class="material-symbols-outlined icon-sm"
+                        >check</span
+                      >
+                    </span>
+                  </div>
+                  <h2>Người Mua</h2>
+                  <span class="role-sub">Buyer</span>
+                </label>
+
+                <label class="role-card is-seller">
+                  <input type="radio" name="accountRole" value="seller" />
+                  <div class="role-top">
+                    <span class="role-icon">
+                      <span class="material-symbols-outlined">storefront</span>
+                    </span>
+                    <span class="role-check">
+                      <span class="material-symbols-outlined icon-sm"
+                        >check</span
+                      >
+                    </span>
+                  </div>
+                  <h2>Người Bán</h2>
+                  <span class="role-sub">Seller</span>
+                </label>
+              </div>
+            </section>
+
+            <!-- 2. Thông tin tài khoản -->
+            <section class="form-section">
+              <span class="label-caps">2. Thông tin đăng ký</span>
+
+              <div class="form-group">
+                <label class="form-label" for="fullNameInput">
+                  Họ và tên <span class="req">*</span>
+                </label>
+                <div class="input-group">
+                  <span class="icon-left material-symbols-outlined">badge</span>
+                  <input
+                    class="input"
+                    id="fullNameInput"
+                    type="text"
+                    placeholder="Nguyễn Văn A"
+                    autocomplete="name"
+                  />
+                </div>
+                <span class="form-error"></span>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="phoneInput">
+                    Số điện thoại <span class="req">*</span>
+                  </label>
+                  <div class="input-group">
+                    <span class="icon-left material-symbols-outlined"
+                      >smartphone</span
+                    >
+                    <input
+                      class="input mono"
+                      id="phoneInput"
+                      type="tel"
+                      placeholder="090 123 4567"
+                      autocomplete="tel"
+                    />
+                  </div>
+                  <span class="form-error"></span>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="emailInput">
+                    Email <span class="req">*</span>
+                  </label>
+                  <div class="input-group">
+                    <span class="icon-left material-symbols-outlined"
+                      >mail</span
+                    >
+                    <input
+                      class="input"
+                      id="emailInput"
+                      type="email"
+                      placeholder="ban@domain.vn"
+                      autocomplete="email"
+                    />
+                  </div>
+                  <span class="form-error"></span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="referralInput">
+                  Mã giới thiệu <span class="text-faint">(Tùy chọn)</span>
+                </label>
+                <div class="input-group">
+                  <span class="icon-left material-symbols-outlined"
+                    >confirmation_number</span
+                  >
+                  <input
+                    class="input mono input-upper input-accent"
+                    id="referralInput"
+                    type="text"
+                    placeholder="CYBER50M"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="passwordInput">
+                  <span>Mật khẩu <span class="req">*</span></span>
+                  <span id="strengthText">Độ mạnh: Chưa nhập</span>
+                </label>
+                <div class="input-group has-right">
+                  <span class="icon-left material-symbols-outlined">lock</span>
+                  <input
+                    class="input"
+                    id="passwordInput"
+                    type="password"
+                    placeholder="••••••••••••"
+                    autocomplete="new-password"
+                  />
+                  <button
+                    class="icon-right"
+                    id="togglePasswordBtn"
+                    type="button"
+                    aria-label="Hiện/ẩn mật khẩu"
+                  >
+                    <span
+                      class="material-symbols-outlined"
+                      id="passwordToggleIcon"
+                      >visibility</span
+                    >
+                  </button>
+                </div>
+                <div class="strength" id="strengthMeter" data-level="0">
+                  <span></span><span></span><span></span><span></span>
+                </div>
+                <span class="form-error"></span>
+                <p class="form-hint">
+                  Tối thiểu 8 ký tự, nên có chữ hoa, số và ký tự đặc biệt.
+                </p>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="confirmInput">
+                  Nhập lại mật khẩu <span class="req">*</span>
+                </label>
+                <div class="input-group">
+                  <span class="icon-left material-symbols-outlined"
+                    >lock_reset</span
+                  >
+                  <input
+                    class="input"
+                    id="confirmInput"
+                    type="password"
+                    placeholder="••••••••••••"
+                    autocomplete="new-password"
+                  />
+                </div>
+                <span class="form-error"></span>
+              </div>
+            </section>
+
+            <!-- 3. Ngành hàng quan tâm -->
+            <section class="form-section">
+              <div class="flex items-center justify-between">
+                <span class="label-caps">3. Ngành hàng quan tâm</span>
+                <span class="text-xs mono text-faint">Tùy chọn</span>
+              </div>
+              <div class="cat-grid">
+                <label class="cat-chip">
+                  <input type="checkbox" name="category" value="sneakers" />
+                  <span class="material-symbols-outlined icon-lg text-secondary"
+                    >steps</span
+                  >
+                  <span class="name">Sneakers</span>
+                </label>
+                <label class="cat-chip">
+                  <input type="checkbox" name="category" value="fashion" />
+                  <span class="material-symbols-outlined icon-lg text-primary"
+                    >checkroom</span
+                  >
+                  <span class="name">Thời Trang</span>
+                </label>
+                <label class="cat-chip">
+                  <input type="checkbox" name="category" value="tech" />
+                  <span class="material-symbols-outlined icon-lg text-secondary"
+                    >devices</span
+                  >
+                  <span class="name">Đồ Điện Tử</span>
+                </label>
+                <label class="cat-chip">
+                  <input type="checkbox" name="category" value="appliances" />
+                  <span class="material-symbols-outlined icon-lg text-tertiary"
+                    >coffee_maker</span
+                  >
+                  <span class="name">Gia Dụng</span>
+                </label>
+              </div>
+            </section>
+
+            <!-- Điều khoản -->
+            <div class="form-group">
+              <label class="check">
+                <input type="checkbox" id="termsCheck" />
+                <span
+                  >Tôi đồng ý với
+                  <a
+                    href="../info/terms_of_service.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Điều khoản dịch vụ</a
+                  >
+                  và
+                  <a
+                    href="../info/privacy_policy.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Chính sách bảo mật</a
+                  >.</span
+                >
+              </label>
+              <span class="form-error"></span>
+            </div>
+
+            <!-- Nút gửi -->
+            <div class="form-section">
+              <button
+                class="btn btn-cta btn-block"
+                id="submitRegistrationBtn"
+                type="submit"
+              >
+                <span class="material-symbols-outlined">person_add</span>
+                <span>TẠO TÀI KHOẢN NGAY</span>
+              </button>
+              <div class="form-links">
+                <span
+                  >Đã có tài khoản?
+                  <a href="auth_login.html" class="fw-600"
+                    >Đăng nhập ngay</a
+                  ></span
+                >
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+      <div class="container footer-bar">
+        <div class="footer-badges">
+          <span
+            ><span class="material-symbols-outlined icon-sm text-secondary"
+              >verified_user</span
+            >ISO/IEC 27001 Certified</span
+          >
+          <span
+            ><span class="material-symbols-outlined icon-sm text-secondary"
+              >gavel</span
+            >ISO/IEC 27701 Privacy</span
+          >
+          <span
+            ><span class="material-symbols-outlined icon-sm text-secondary"
+              >shield</span
+            >SOC 2 Type II Audited</span
+          >
+        </div>
+        <span class="text-xs text-faint"
+          >© 2026 HYBRID.STORE. All rights reserved.</span
+        >
+      </div>
+    </footer>
+
+    <!-- Thứ tự nạp script -->
+    <script src="../../js/popup.js"></script>
+    <script src="../../js/auth.js"></script>
+    <script src="../../js/utils.js"></script>
+    <script src="../../js/register.js"></script>
+  </body>
+</html>

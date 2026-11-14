@@ -1,0 +1,2385 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hồ Sơ Cá Nhân &amp; Xác Thực Tài Khoản | HYBRID.STORE</title>
+
+    <!-- Chống giật giao diện (Zero-FOUC Theme Init) -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("hybrid_theme") || "dark";
+          document.documentElement.setAttribute("data-theme", t);
+          if (t === "light") document.documentElement.classList.add("light-theme");
+        } catch (e) {}
+      })();
+    </script>
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="stylesheet" href="../../css/base.css" />
+    <link rel="stylesheet" href="../../css/catalog.css" />
+    <link rel="stylesheet" href="../../css/master_screens.css" />
+  </head>
+  <body class="dash-page">
+    <!-- ===== HEADER ===== -->
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="../../index.html">
+          <span class="brand-mark"><span class="material-symbols-outlined">token</span></span>
+          <span>HYBRID<span class="text-secondary">.STORE</span> <span class="badge">HỒ SƠ CÁ NHÂN</span></span>
+        </a>
+
+        <div class="header-actions">
+          <a class="btn btn-secondary hide-sm" href="../../index.html">
+            <span class="material-symbols-outlined icon-sm">home</span> Về Trang Chủ
+          </a>
+          <button
+            class="icon-btn theme-toggle-btn"
+            id="themeToggleBtn"
+            type="button"
+            aria-label="Chuyển chế độ sáng / tối"
+            title="Chuyển sang giao diện Sáng"
+          >
+            <span class="material-symbols-outlined theme-toggle-icon">light_mode</span>
+          </button>
+          <button class="avatar active" id="headerAvatarBtn" type="button" title="Tài khoản">
+            <span class="material-symbols-outlined">person</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== BREADCRUMB ===== -->
+    <div class="subnav">
+      <div class="container">
+        <nav>
+          <a href="../../index.html">Trang Chủ</a>
+          <span class="text-faint">/</span>
+          <a href="#">Tài Khoản</a>
+          <span class="text-faint">/</span>
+          <span class="active">Hồ Sơ Cá Nhân</span>
+        </nav>
+        <div class="subnav-info hide-sm">
+          <span class="text-secondary"><span class="material-symbols-outlined icon-sm">lock</span> Bảo mật AES-256</span>
+          <span class="text-success"><span class="material-symbols-outlined icon-sm">verified</span> Napas 24/7 Sẵn Sàng</span>
+        </div>
+      </div>
+    </div>
+
+    <main class="container py-6">
+      <!-- TIÊU ĐỀ TRANG -->
+      <div class="mb-5 flex items-center justify-between flex-wrap gap-3">
+        <div>
+          <h1 class="profile-header-title">
+            <span class="material-symbols-outlined">account_circle</span>
+            <span>Hồ Sơ Cá Nhân &amp; Xác Thực Tài Khoản</span>
+          </h1>
+          <p class="text-sm text-muted">
+            Quản lý thông tin tài khoản, xác thực Căn cước công dân gắn chip và sổ địa chỉ giao nhận hàng.
+          </p>
+        </div>
+        <div class="flex items-center gap-2" id="topStatusBadges">
+          <!-- Render động trạng thái -->
+        </div>
+      </div>
+
+      <!-- BỐ CỤC 2 CỘT -->
+      <div class="profile-layout">
+        <!-- CỘT TRÁI: THẺ NGƯỜI DÙNG & MENU (CÁC KHỐI SẮP XẾP GỌN GÀNG, TÁCH BẠCH) -->
+        <aside class="profile-sidebar">
+          <!-- KHỐI 1: THẺ THÔNG TIN HỒ SƠ CHÍNH -->
+          <div class="profile-card-user">
+            <div class="profile-avatar-wrap" id="avatarUploadTrigger" title="Nhấp để tải ảnh đại diện từ máy tính / điện thoại">
+              <div class="profile-avatar-img" id="userAvatarText">NP</div>
+              <div class="profile-avatar-upload-overlay">
+                <span class="material-symbols-outlined">photo_camera</span>
+                <small>Đổi ảnh</small>
+              </div>
+              <div class="profile-avatar-badge" id="avatarBadgeIcon">
+                <span class="material-symbols-outlined icon-sm">check_circle</span>
+              </div>
+            </div>
+            <input type="file" id="directAvatarFileInput" accept="image/*" style="display: none;" />
+            
+            <div>
+              <button class="profile-avatar-btn-mini" type="button" id="btnChangeAvatarDirect">
+                <span class="material-symbols-outlined icon-xs">upload</span> Tải ảnh từ máy
+              </button>
+            </div>
+
+            <!-- Tên & Handle gọn gàng, cỡ chữ vừa phải -->
+            <h2 class="profile-card-name" id="userDisplayName">Đang tải...</h2>
+            <div class="profile-card-handle" id="userHandle">@...</div>
+
+            <!-- Huy hiệu vai trò & xác thực -->
+            <div class="flex items-center justify-center gap-2 mt-2" id="userRoleBadges">
+              <span class="badge badge-primary" id="roleBadgeDisplay">---</span>
+              <span class="badge badge-success" id="verifiedStatusBadge">---</span>
+            </div>
+
+            <!-- Khung liên hệ SĐT & Email -->
+            <div class="profile-contact-mini">
+              <div class="flex items-center mb-1.5">
+                <span class="material-symbols-outlined">phone</span>
+                <span id="userPhoneDisplay">---</span>
+              </div>
+              <div class="flex items-center">
+                <span class="material-symbols-outlined">mail</span>
+                <span id="userEmailDisplay" class="text-truncate">---</span>
+              </div>
+            </div>
+
+            <!-- Nút chỉnh sửa toàn bộ hồ sơ -->
+            <button class="btn btn-secondary btn-sm is-full mt-3" id="btnOpenEditProfile" type="button">
+              <span class="material-symbols-outlined icon-xs">edit_note</span> Chỉnh Sửa Hồ Sơ Cá Nhân
+            </button>
+          </div>
+
+          <!-- KHỐI 2: TÍN NHIỆM & THỐNG KÊ ĐƠN HÀNG TÁCH RỜI -->
+          <div class="profile-card-stats" id="profileCardStats">
+            <!-- Hộp tín nhiệm Hybrid -->
+            <div class="profile-trust-row mb-3">
+              <div class="text-left">
+                <div class="text-xs text-muted" style="font-size: 11px;">TÍN NHIỆM HYBRID</div>
+                <div class="text-base fw-700 text-gradient mono" style="font-size: 1.25rem;">
+                  99.8 <span class="text-xs text-muted" style="font-size: 11px;">/ 100</span>
+                </div>
+                <div class="text-xs text-secondary fw-600" id="userTrustRank">Hạng Kim Cương Elite</div>
+              </div>
+              <span class="material-symbols-outlined text-secondary" style="font-size: 30px;">verified_user</span>
+            </div>
+
+            <!-- 2 Ô thống kê giao dịch -->
+            <div class="grid grid-2 gap-2 text-center">
+              <div class="profile-stat-box">
+                <div class="stat-label">Đơn Hoàn Tất</div>
+                <div class="stat-value text-primary" id="userCompletedOrders">47</div>
+                <div class="stat-sub text-success">100% Nhận Hàng</div>
+              </div>
+              <div class="profile-stat-box">
+                <div class="stat-label">Nghiệm Thu</div>
+                <div class="stat-value text-success" id="userAcceptanceRate">100%</div>
+                <div class="stat-sub text-muted">0 Khiếu Nại</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- KHỐI 3: PHÂN BỔ GIAO DỊCH 4 NGÀNH HÀNG TÁCH RỜI -->
+          <div class="profile-card-dist" id="profileCardDist">
+            <div class="profile-dist-head">
+              <span class="profile-dist-title">
+                <span class="material-symbols-outlined icon-xs text-secondary">pie_chart</span>
+                Phân Bổ Giao Dịch
+              </span>
+              <span class="badge badge-secondary" style="font-size: 10px; padding: 2px 6px;">4 NGÀNH</span>
+            </div>
+
+            <div class="profile-dist-item">
+              <div class="profile-dist-info">
+                <span>👟 Sneakers Hype C2C</span>
+                <strong class="mono text-secondary">40%</strong>
+              </div>
+              <div class="progress progress-secondary" style="--value: 40%; height: 4px;"><div class="progress-bar"></div></div>
+            </div>
+
+            <div class="profile-dist-item">
+              <div class="profile-dist-info">
+                <span>👔 Techwear &amp; Thời Trang</span>
+                <strong class="mono text-primary">30%</strong>
+              </div>
+              <div class="progress" style="--value: 30%; height: 4px;"><div class="progress-bar"></div></div>
+            </div>
+
+            <div class="profile-dist-item">
+              <div class="profile-dist-info">
+                <span>💻 Hi-Tech &amp; Audio Lab</span>
+                <strong class="mono text-tertiary">18%</strong>
+              </div>
+              <div class="progress progress-tertiary" style="--value: 18%; height: 4px;"><div class="progress-bar"></div></div>
+            </div>
+
+            <div class="profile-dist-item">
+              <div class="profile-dist-info">
+                <span>🏠 Smart Living IoT</span>
+                <strong class="mono text-success">12%</strong>
+              </div>
+              <div class="progress progress-success" style="--value: 12%; height: 4px;"><div class="progress-bar"></div></div>
+            </div>
+          </div>
+
+          <!-- KHỐI 4: MENU CÁC MỤC HỒ SƠ -->
+          <div class="panel p-3">
+            <nav class="profile-menu" id="profileNavMenu">
+              <button class="profile-menu-item active" type="button" onclick="document.getElementById('sectionPersonalInfo').scrollIntoView({behavior:'smooth'})">
+                <span class="flex items-center gap-2">
+                  <span class="material-symbols-outlined icon-sm">person</span>
+                  1. Thông Tin Cá Nhân &amp; Tài Khoản
+                </span>
+                <span class="material-symbols-outlined icon-xs">chevron_right</span>
+              </button>
+              <button class="profile-menu-item" type="button" onclick="document.getElementById('sectionCccd').scrollIntoView({behavior:'smooth'})">
+                <span class="flex items-center gap-2">
+                  <span class="material-symbols-outlined icon-sm">badge</span>
+                  2. Sinh Trắc Học &amp; CCCD Chip L2
+                </span>
+                <span class="material-symbols-outlined icon-xs">chevron_right</span>
+              </button>
+              <button class="profile-menu-item" type="button" onclick="document.getElementById('sectionBank').scrollIntoView({behavior:'smooth'})">
+                <span class="flex items-center gap-2">
+                  <span class="material-symbols-outlined icon-sm">account_balance</span>
+                  3. Tài Khoản Ngân Hàng Napas
+                </span>
+                <span class="material-symbols-outlined icon-xs">chevron_right</span>
+              </button>
+              <button class="profile-menu-item" type="button" onclick="document.getElementById('sectionAddress').scrollIntoView({behavior:'smooth'})">
+                <span class="flex items-center gap-2">
+                  <span class="material-symbols-outlined icon-sm">local_shipping</span>
+                  4. Sổ Địa Chỉ Giao Nhận Hỏa Tốc
+                </span>
+                <span class="material-symbols-outlined icon-xs">chevron_right</span>
+              </button>
+            </nav>
+            <div class="mt-3 pt-3 border-top">
+              <button class="btn btn-outlined btn-sm is-full text-danger" id="btnLogoutAction" type="button">
+                <span class="material-symbols-outlined icon-xs">logout</span> Đăng Xuất Tài Khoản
+              </button>
+            </div>
+          </div>
+        </aside>
+
+        <!-- CỘT PHẢI: CHI TIẾT CÁC MỤC DANH TÍNH & HỒ SƠ CÁ NHÂN -->
+        <div>
+          <!-- THẺ 1: THÔNG TIN CÁ NHÂN & LIÊN HỆ -->
+          <section class="panel p-5 mb-5" id="sectionPersonalInfo">
+            <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary" style="font-size: 26px;">person_pin</span>
+                <div>
+                  <h3 class="panel-title">1. Thông Tin Cá Nhân &amp; Tài Khoản</h3>
+                  <div class="text-xs text-muted">HỌ TÊN, SỐ ĐIỆN THOẠI, EMAIL &amp; ĐỊA CHỈ THƯỜNG TRÚ CHÍNH CHỦ</div>
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-sm" id="btnEditPersonalInfoTop" type="button">
+                <span class="material-symbols-outlined icon-xs">edit_note</span>
+                Chỉnh Sửa Thông Tin
+              </button>
+            </div>
+
+            <!-- LƯỚI THÔNG TIN CÁ NHÂN CHI TIẾT -->
+            <div class="identity-meta-grid mb-4">
+              <div>
+                <div class="text-xs text-muted">HỌ VÀ TÊN ĐẦY ĐỦ</div>
+                <div class="text-sm fw-700 text-text mono mt-1" id="infoFullName">---</div>
+                <div class="text-xs text-success mt-1 flex items-center gap-1">
+                  <span class="material-symbols-outlined icon-xs">verified</span> Tài khoản chính chủ
+                </div>
+              </div>
+
+              <div>
+                <div class="text-xs text-muted">TÊN NGƯỜI DÙNG / HANDLE</div>
+                <div class="text-sm fw-700 text-secondary mono mt-1" id="infoUsername">@---</div>
+                <div class="text-xs text-muted mt-1">Định danh nội bộ sàn HYBRID.STORE</div>
+              </div>
+
+              <div>
+                <div class="text-xs text-muted">SỐ ĐIỆN THOẠI LIÊN HỆ</div>
+                <div class="text-sm fw-700 text-text mono mt-1" id="infoPhone">---</div>
+                <div class="text-xs text-muted mt-1">Dùng để xác thực OTP &amp; Shipper liên hệ giao hàng</div>
+              </div>
+
+              <div>
+                <div class="text-xs text-muted">EMAIL ĐĂNG KÝ / LIÊN HỆ</div>
+                <div class="text-sm fw-700 text-text mono mt-1" id="infoEmail">---</div>
+                <div class="text-xs text-muted mt-1">Nhận hóa đơn điện tử &amp; biên lai nghiệm thu</div>
+              </div>
+
+              <div>
+                <div class="text-xs text-muted">NGÀY SINH &amp; GIỚI TÍNH</div>
+                <div class="text-sm fw-600 text-text mono mt-1" id="infoDobGender">---</div>
+                <div class="text-xs text-muted mt-1">Khớp dữ liệu định danh công dân</div>
+              </div>
+
+              <div>
+                <div class="text-xs text-muted">VAI TRÒ &amp; HẠNG THÀNH VIÊN</div>
+                <div class="text-sm fw-700 text-secondary mono mt-1" id="infoRoleBadge">---</div>
+                <div class="text-xs text-muted mt-1">Quyền hạn mua sắm &amp; đăng bán C2C</div>
+              </div>
+
+              <div style="grid-column: 1 / -1;">
+                <div class="text-xs text-muted">ĐỊA CHỈ THƯỜNG TRÚ / NƠI Ở HIỆN TẠI</div>
+                <div class="text-sm fw-600 text-text mt-1" id="infoAddress">---</div>
+                <div class="text-xs text-secondary mt-1 flex items-center gap-1">
+                  <span class="material-symbols-outlined icon-xs">location_on</span>
+                  Địa chỉ đăng ký cư trú chính thức của chủ tài khoản
+                </div>
+              </div>
+
+              <div style="grid-column: 1 / -1;" id="infoBioWrap">
+                <div class="text-xs text-muted">TIỂU SỬ / GIỚI THIỆU BẢN THÂN</div>
+                <div class="text-sm text-text mt-1 italic" id="infoBio">---</div>
+              </div>
+            </div>
+
+            <!-- THANH HÀNH ĐỘNG NHANH -->
+            <div class="flex items-center justify-between flex-wrap gap-3 pt-3 border-top">
+              <div class="flex items-center gap-2 text-xs text-muted">
+                <span class="material-symbols-outlined icon-sm text-secondary">verified_user</span>
+                <span>Thông tin cá nhân được bảo vệ theo tiêu chuẩn ISO/IEC 27701</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <button class="btn btn-secondary btn-sm" id="btnQuickChangePassword" type="button">
+                  <span class="material-symbols-outlined icon-xs">lock_reset</span> Đổi Mật Khẩu
+                </button>
+                <button class="btn btn-primary btn-sm" id="btnEditPersonalInfoBottom" type="button">
+                  <span class="material-symbols-outlined icon-xs">edit</span> Cập Nhật Thông Tin
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- THẺ ĐẶC BIỆT DÀNH RIÊNG CHO QUẢN TRỊ VIÊN: THÔNG TIN CHI TIẾT & CỔNG CHUYỂN SANG TRANG QUẢN LÝ -->
+          <section class="panel p-5 mb-5" id="sectionAdminDossier" style="display: none; border-color: rgba(139, 92, 246, 0.4); box-shadow: 0 4px 24px rgba(139, 92, 246, 0.12);">
+            <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary" style="font-size: 28px;">admin_panel_settings</span>
+                <div>
+                  <h3 class="panel-title flex items-center gap-2">
+                    2. Hồ Sơ Đặc Quyền &amp; Quyền Hạn Quản Trị Hệ Thống
+                    <span class="badge badge-primary">ROOT SUPER ADMIN</span>
+                  </h3>
+                  <div class="text-xs text-muted">TOÀN QUYỀN ĐIỀU HÀNH 20 PHÂN HỆ // ZERO RESTRICTIONS // MIỄN TRỪ 100% THỦ TỤC</div>
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="badge badge-success"><span class="material-symbols-outlined icon-xs">bolt</span> HỆ THỐNG ONLINE 99.99%</span>
+                <span class="badge badge-secondary">LEVEL 0 ROOT PRIVILEGED</span>
+              </div>
+            </div>
+
+            <!-- BANNER THÔNG BÁO ĐẶC QUYỀN ADMIN TỐI CAO -->
+            <div class="kyc-status-box verified mb-4" style="border-left: 4px solid var(--primary-500); background: linear-gradient(135deg, rgba(139, 92, 246, 0.14), rgba(56, 189, 248, 0.06));">
+              <span class="material-symbols-outlined text-primary" style="font-size: 38px;">shield_person</span>
+              <div class="flex-1">
+                <div class="flex items-center gap-2 flex-wrap">
+                  <strong class="text-sm text-primary">Tài Khoản Quản Trị Viên Tối Cao (Master Admin Command Center)</strong>
+                  <span class="badge badge-primary text-2xs">Miễn trừ thủ tục</span>
+                  <span class="badge badge-success text-2xs">Toàn quyền vận hành</span>
+                </div>
+                <p class="text-xs text-muted mb-0 mt-1" style="line-height: 1.6;">
+                  Tài khoản Quản Trị Viên được cấp quyền tối cao của nền tảng HYBRID.STORE: <strong>Không cần xác thực CCCD, không cần khai báo sổ địa chỉ giao nhận</strong>, không chịu bất kỳ điều kiện hay giới hạn ràng buộc nào ở tất cả 20 trang mua sắm, trả giá, đăng bán, phê duyệt hay quản trị hệ thống.
+                </p>
+              </div>
+            </div>
+
+            <!-- LƯỚI THÔNG TIN CHI TIẾT CỦA ADMIN -->
+            <div class="identity-meta-grid mb-4">
+              <div>
+                <div class="text-xs text-muted">MÃ ĐỊNH DANH ADMIN (ROOT ID)</div>
+                <div class="text-sm fw-700 text-text mono mt-1">ADM-ROOT-001</div>
+                <div class="text-xs text-success mt-1 flex items-center gap-1">
+                  <span class="material-symbols-outlined icon-xs">verified</span> Cấp bởi Ban Điều Hành HYBRID.STORE
+                </div>
+              </div>
+
+              <div>
+                <div class="text-xs text-muted">CẤP BẬC &amp; VAI TRÒ ĐIỀU HÀNH</div>
+                <div class="text-sm fw-700 text-primary mono mt-1">SUPER ADMINISTRATOR (ROOT)</div>
+                <div class="text-xs text-muted mt-1">Toàn quyền quản trị cơ sở dữ liệu và vận hành sàn</div>
+              </div>
+
+              <div>
+                <div class="text-xs text-muted">XÁC THỰC CCCD &amp; SINH TRẮC HỌC</div>
+                <div class="text-sm fw-700 text-success mono mt-1">MIỄN TRỪ 100% (BYPASS eKYC)</div>
+                <div class="text-xs text-muted mt-1">Tự động kích hoạt mọi quyền mua sắm &amp; bán hàng</div>
+              </div>
+
+              <div>
+                <div class="text-xs text-muted">SỔ ĐỊA CHỈ &amp; HỎA TỐC 2H</div>
+                <div class="text-sm fw-700 text-secondary mono mt-1">MIỄN TRỪ BẮT BUỘC ĐỊA CHỈ</div>
+                <div class="text-xs text-muted mt-1">Trụ sở sàn: Tòa Landmark 81, Vinhomes Central Park, TP.HCM</div>
+              </div>
+
+              <div>
+                <div class="text-xs text-muted">PHẠM VI ĐIỀU PHỐI HỆ THỐNG</div>
+                <div class="text-sm fw-700 text-text mono mt-1">20 / 20 PHÂN HỆ TOÀN SÀN</div>
+                <div class="text-xs text-muted mt-1">Brand Mall, Đồ cũ C2C, Trọng tài, ISO Lab, Escrow...</div>
+              </div>
+
+              <div>
+                <div class="text-xs text-muted">BẢO MẬT PHIÊN LÀM VIỆC (SESSION)</div>
+                <div class="text-sm fw-700 text-success mono mt-1">TLS 1.3 // SHA-256 TOKEN</div>
+                <div class="text-xs text-muted mt-1">Intranet Secure Access • Phiên đang hoạt động</div>
+              </div>
+            </div>
+
+            <!-- KHỐI HƯỚNG CHUYỂN SANG TRANG QUẢN LÝ (ADMIN GATEWAY COMMAND CENTER) -->
+            <div class="panel p-4" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(15, 23, 42, 0.7)); border: 1px solid rgba(139, 92, 246, 0.35); border-radius: var(--radius-lg);">
+              <div class="flex items-center justify-between mb-3 flex-wrap gap-3">
+                <div style="max-width: 620px;">
+                  <h4 class="text-sm fw-700 text-primary flex items-center gap-2 mb-1" style="font-size: 15px;">
+                    <span class="material-symbols-outlined">terminal</span>
+                    CỔNG ĐIỀU HÀNH TRANG QUẢN TRỊ MASTER ADMIN PORTAL
+                  </h4>
+                  <p class="text-xs text-muted mb-0" style="line-height: 1.5;">
+                    Chuyển sang không gian làm việc chuyên sâu dành cho Quản trị viên để giám sát doanh số GMV 12 tháng, quản lý kho 24 sản phẩm, phê duyệt eKYC, phân xử khiếu nại và tra cứu toàn bộ 20 trang hệ thống.
+                  </p>
+                </div>
+                <a href="../admin/admin_system.html" class="btn btn-primary btn-md flex items-center gap-2" style="font-weight: 700; box-shadow: 0 4px 16px rgba(139, 92, 246, 0.45); white-space: nowrap;">
+                  <span class="material-symbols-outlined icon-sm">dashboard_customize</span>
+                  <span>VÀO BẢNG ĐIỀU KHIỂN QUẢN TRỊ</span>
+                  <span class="material-symbols-outlined icon-sm">arrow_forward</span>
+                </a>
+              </div>
+
+              <!-- LƯỚI 8 LỐI TẮT CHUYỂN NHANH VÀO TỪNG PHÂN HỆ CỦA TRANG ADMIN -->
+              <div class="text-2xs fw-700 text-secondary mb-2 mt-4 flex items-center gap-1">
+                <span class="material-symbols-outlined icon-xs">near_me</span>
+                LỐI TẮT TRUY CẬP TRỰC TIẾP TỪNG PHÂN HỆ QUẢN TRỊ:
+              </div>
+              <div class="grid grid-4 gap-2 text-center">
+                <a href="../admin/admin_system.html#tabPane-dashboard" class="admin-quick-card" title="Xem biểu đồ doanh thu GMV và tăng trưởng theo tháng">
+                  <span class="material-symbols-outlined text-primary">bar_chart</span>
+                  <strong>1. Doanh Số &amp; GMV</strong>
+                  <small>Biểu đồ 12 tháng</small>
+                </a>
+                <a href="../admin/admin_system.html#tabPane-products" class="admin-quick-card" title="Quản lý tồn kho 24 sản phẩm Brand Mall và Chợ C2C">
+                  <span class="material-symbols-outlined text-secondary">inventory_2</span>
+                  <strong>2. Kho &amp; Sản Phẩm</strong>
+                  <small>24 sản phẩm sàn</small>
+                </a>
+                <a href="../admin/admin_system.html#tabPane-orders" class="admin-quick-card" title="Theo dõi 1.842 đơn hàng thời gian thực">
+                  <span class="material-symbols-outlined text-success">local_shipping</span>
+                  <strong>3. Giám Sát Đơn Hàng</strong>
+                  <small>1.842 đơn toàn sàn</small>
+                </a>
+                <a href="../admin/admin_system.html#tabPane-disputes" class="admin-quick-card" title="Phán quyết 3 vụ việc tranh chấp khiếu nại khẩn">
+                  <span class="material-symbols-outlined text-warning">gavel</span>
+                  <strong>4. Trọng Tài Khiếu Nại</strong>
+                  <small>3 vụ việc khẩn</small>
+                </a>
+                <a href="../admin/admin_system.html#tabPane-kyc" class="admin-quick-card" title="Hàng đợi phê duyệt Căn cước công dân gắn chip C06">
+                  <span class="material-symbols-outlined text-tertiary">badge</span>
+                  <strong>5. Phê Duyệt eKYC</strong>
+                  <small>Duyệt thẻ CCCD</small>
+                </a>
+                <a href="../admin/admin_system.html#tabPane-users" class="admin-quick-card" title="Quản lý thành viên, tài khoản người mua và người bán">
+                  <span class="material-symbols-outlined text-primary">group</span>
+                  <strong>6. Thành Viên Sàn</strong>
+                  <small>5 user &amp; phân quyền</small>
+                </a>
+                <a href="../admin/admin_system.html#tabPane-labs" class="admin-quick-card" title="Quy trình kiểm định kỹ thuật 15 bước tại 3 phòng Lab">
+                  <span class="material-symbols-outlined text-secondary">science</span>
+                  <strong>7. Trạm Kiểm Định</strong>
+                  <small>3 Lab ISO 15 bước</small>
+                </a>
+                <a href="../admin/admin_system.html#tabPane-security" class="admin-quick-card" title="Nhật ký hoạt động viễn trắc và kiểm toán hệ thống">
+                  <span class="material-symbols-outlined text-muted">history</span>
+                  <strong>8. Audit Trail Logs</strong>
+                  <small>Nhật ký kiểm toán</small>
+                </a>
+              </div>
+            </div>
+          </section>
+
+          <!-- THẺ 2: ĐỊNH DANH CCCD GẮN CHIP (ICAO 9303) -->
+          <section class="panel p-5 mb-5" id="sectionCccd">
+            <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-secondary" style="font-size: 26px;">verified_user</span>
+                <div>
+                  <h3 class="panel-title">2. Định Danh CCCD Gắn Chip (ICAO 9303)</h3>
+                  <div class="text-xs text-muted">XÁC THỰC CƠ SỞ DỮ LIỆU C06 BỘ CÔNG AN // HARDWARE NFC ENCRYPTED</div>
+                </div>
+              </div>
+              <div id="kycCardBadge">
+                <!-- Badge động -->
+              </div>
+            </div>
+
+            <!-- HỘP THÔNG BÁO TRẠNG THÁI XÉT DUYỆT CCCD -->
+            <div id="kycNoticeContainer">
+              <!-- Render động trạng thái: Verified / Pending / Unverified -->
+            </div>
+
+            <!-- LƯỚI THÔNG TIN CCCD CHI TIẾT -->
+            <div class="identity-meta-grid mb-4">
+              <div>
+                <div class="text-xs text-muted">HỌ VÀ TÊN CHỦ SỞ HỮU</div>
+                <div class="text-sm fw-700 text-text mono mt-1" id="cccdFullName">---</div>
+                <div class="text-xs text-success mt-1 flex items-center gap-1">
+                  <span class="material-symbols-outlined icon-xs">verified</span> Khớp 100% cơ sở dữ liệu định danh
+                </div>
+              </div>
+
+              <div>
+                <div class="text-xs text-muted">SỐ THẺ CCCD GẮN CHIP</div>
+                <div class="text-sm fw-700 text-secondary mono mt-1" id="cccdNumber">---</div>
+                <div class="text-xs text-muted mt-1">ICAO 9303 Standard Cryptographic</div>
+              </div>
+
+              <div>
+                <div class="text-xs text-muted">NGÀY SINH &amp; NGÀY CẤP</div>
+                <div class="text-sm fw-600 text-text mono mt-1" id="cccdDob">---</div>
+                <div class="text-xs text-muted mt-1">Thời hạn: Có giá trị vô thời hạn</div>
+              </div>
+
+              <div>
+                <div class="text-xs text-muted">ĐỘ KHỚP LIVENESS 2D FACIAL</div>
+                <div class="text-sm fw-700 text-success mono mt-1" id="cccdFaceMatch">99.6% ANTI-DEEPFAKE AI</div>
+                <div class="text-xs text-muted mt-1">Quét quang phổ camera 3D Sensor</div>
+              </div>
+            </div>
+
+            <!-- KHỐI ẢNH CHỤP 2 MẶT CCCD ĐÃ LƯU TRÊN HỆ THỐNG -->
+            <div class="mb-4" id="cccdSavedPhotosSection" style="display: none;">
+              <div class="text-xs fw-700 text-muted mb-2 flex items-center justify-between">
+                <span class="flex items-center gap-1">
+                  <span class="material-symbols-outlined icon-xs text-secondary">photo_library</span>
+                  ẢNH CHỤP THẺ CCCD GẮN CHIP (2 MẶT ĐỐI SOÁT C06)
+                </span>
+                <span class="text-xs text-success" id="cccdPhotosStatusTag">✓ Đầy đủ 2 mặt hợp lệ</span>
+              </div>
+              <div class="grid grid-2 gap-3" id="cccdSavedPhotosGrid">
+                <!-- Mặt trước preview -->
+                <div class="panel p-2 text-center" style="background: var(--neutral-850); border: 1px solid var(--border); border-radius: var(--radius-lg);">
+                  <div class="text-xs text-muted mb-1 fw-600 flex items-center justify-center gap-1">
+                    <span class="material-symbols-outlined icon-xs text-primary">badge</span>
+                    Mặt Trước (Ảnh, Quốc Huy &amp; Số Thẻ)
+                  </div>
+                  <img id="mainCccdFrontImg" src="" alt="Mặt trước CCCD" style="width: 100%; height: 120px; object-fit: contain; border-radius: var(--radius-md); cursor: pointer; display: block; background: #000;" title="Nhấn để phóng to ảnh" />
+                </div>
+                <!-- Mặt sau preview -->
+                <div class="panel p-2 text-center" style="background: var(--neutral-850); border: 1px solid var(--border); border-radius: var(--radius-lg);">
+                  <div class="text-xs text-muted mb-1 fw-600 flex items-center justify-center gap-1">
+                    <span class="material-symbols-outlined icon-xs text-secondary">contactless</span>
+                    Mặt Sau (Chip NFC &amp; Dải MRZ ICAO)
+                  </div>
+                  <img id="mainCccdBackImg" src="" alt="Mặt sau CCCD" style="width: 100%; height: 120px; object-fit: contain; border-radius: var(--radius-md); cursor: pointer; display: block; background: #000;" title="Nhấn để phóng to ảnh" />
+                </div>
+              </div>
+            </div>
+            <!-- CHỨNG CHỈ ĐIỆN TỬ & NÚT HÀNH ĐỘNG -->
+            <div class="flex items-center justify-between flex-wrap gap-3 pt-3 border-top">
+              <div class="flex items-center gap-2 text-xs text-muted mono">
+                <span class="material-symbols-outlined icon-sm text-primary">lock</span>
+                <span>MÃ BẢO CHỨNG: <span class="text-secondary" id="cccdHash">4b19f4a7c2e911bce44d39f73b6a1858bc82590e</span></span>
+              </div>
+              <div class="flex items-center gap-2">
+                <button class="btn btn-secondary btn-sm" id="btnOpenKycModal" type="button">
+                  <span class="material-symbols-outlined icon-xs">add_photo_alternate</span>
+                  Gửi Yêu Cầu Xác Thực CCCD Mới
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- THẺ 3: TÀI KHOẢN NGÂN HÀNG LIÊN KẾT (NAPAS 24/7) -->
+          <section class="panel p-5 mb-5" id="sectionBank">
+            <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+              <div>
+                <h3 class="panel-title flex items-center gap-2">
+                  <span class="material-symbols-outlined text-primary">account_balance</span>
+                  3. Tài Khoản Ngân Hàng Rút Tiền / Thanh Toán
+                </h3>
+                <div class="text-xs text-muted">LIÊN KẾT RÚT TỰ ĐỘNG NAPAS 24/7 // ĐỐI SOÁT NHANH TRONG 30 GIÂY</div>
+              </div>
+              <button class="btn btn-secondary btn-sm" id="btnAddBank" type="button">
+                + Thêm Tài Khoản Ngân Hàng Mới
+              </button>
+            </div>
+
+            <!-- Ngân hàng chính (đồng bộ động từ hồ sơ) -->
+            <div class="item-list-row">
+              <div class="flex items-center gap-4">
+                <div class="avatar" id="primaryBankLogo" style="background: #e02424; font-size: 11px; font-weight: 700;">TCB</div>
+                <div>
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <strong class="text-sm" id="primaryBankName">Techcombank</strong>
+                    <span class="badge badge-success">MẶC ĐỊNH RÚT TIỀN</span>
+                    <span class="text-xs text-secondary">Napas 24/7 Siêu Tốc</span>
+                  </div>
+                  <div class="text-xs text-muted mono mt-1">
+                    Số TK: <strong class="text-text" id="primaryBankNumber">---</strong> • Chủ TK: <span id="primaryBankHolder">---</span> (Khớp CCCD 100%)
+                  </div>
+                </div>
+              </div>
+              <div class="text-right">
+                <div class="text-xs text-success">Hạn mức: Không giới hạn</div>
+              </div>
+            </div>
+
+            <!-- Vietcombank phụ -->
+            <div class="item-list-row">
+              <div class="flex items-center gap-4">
+                <div class="avatar" style="background: #006837; font-size: 11px; font-weight: 700;">VCB</div>
+                <div>
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <strong class="text-sm">Vietcombank</strong>
+                    <span class="badge">DỰ PHÒNG</span>
+                    <span class="text-xs text-muted">Priority Digital Banking</span>
+                  </div>
+                  <div class="text-xs text-muted mono mt-1">
+                    Số TK: <strong class="text-text">0071 0009 9999 9</strong> • Chủ TK: <span id="secondaryBankHolder">---</span>
+                  </div>
+                </div>
+              </div>
+              <div class="text-right">
+                <div class="text-xs text-muted">Rút tối đa: 200.000.000₫/ngày</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- THẺ 4: SỔ ĐỊA CHỈ GIAO NHẬN HỎA TỐC -->
+          <section class="panel p-5 mb-5" id="sectionAddress">
+            <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+              <div>
+                <h3 class="panel-title flex items-center gap-2">
+                  <span class="material-symbols-outlined text-secondary">local_shipping</span>
+                  4. Sổ Địa Chỉ Giao Nhận Hỏa Tốc
+                </h3>
+                <div class="text-xs text-muted">LƯU TRỮ &amp; QUẢN LÝ RIÊNG BIỆT CHO TỪNG TÀI KHOẢN // SHIPPER HỎA TỐC 2H</div>
+              </div>
+              <button class="btn btn-secondary btn-sm" id="btnAddAddress" type="button">
+                <span class="material-symbols-outlined icon-xs">add_location_alt</span>
+                + Thêm Địa Chỉ Mới
+              </button>
+            </div>
+
+            <!-- Danh sách địa chỉ nhận hàng động -->
+            <div id="addressListContainer">
+              <!-- Render động bằng JS -->
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer mt-8" data-component="footer"></footer>
+
+    <!-- ===== MODAL 1: NỘP HỒ SƠ XÁC THỰC CCCD GẮN CHIP ===== -->
+    <div class="modal-backdrop" id="kycModal" role="dialog" aria-modal="true" onclick="if(event.target===this)Utils.closeModal('kycModal')">
+      <div class="modal" style="max-width: 580px;">
+        <div class="modal-head">
+          <h4 class="modal-title flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary">badge</span>
+            Gửi Hồ Sơ Xác Thực Căn Cước Công Dân (CCCD)
+          </h4>
+          <button class="modal-close" id="btnCloseKycModal" type="button" data-close onclick="Utils.closeModal('kycModal')" aria-label="Đóng"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <form id="kycSubmitForm">
+          <div class="modal-body">
+            <div class="panel p-3 mb-4" style="background: rgba(139, 92, 246, 0.08); border-color: rgba(139, 92, 246, 0.2);">
+              <div class="text-xs text-secondary mb-1 fw-600">Quy trình thẩm định an toàn:</div>
+              <p class="text-xs text-muted" style="margin: 0; line-height: 1.6;">
+                Hồ sơ CCCD của bạn sẽ được gửi trực tiếp tới Ban Quản Trị để đối soát dữ liệu C06 ICAO 9303. Sau khi Admin phê duyệt, tài khoản sẽ được mở khóa toàn bộ quyền mua sắm và đăng bán đồ cũ.
+              </p>
+            </div>
+
+            <div class="form-group mb-3">
+              <label class="form-label" for="inputCardFullName">Họ và tên đầy đủ trên CCCD (*)</label>
+              <input class="input" id="inputCardFullName" type="text" placeholder="VÍ DỤ: NGUYỄN HƯƠNG MAI" required />
+            </div>
+
+            <div class="grid grid-2 gap-3 mb-3">
+              <div class="form-group">
+                <label class="form-label" for="inputIdCardNumber">Số CCCD gắn chip (12 số) (*)</label>
+                <input class="input mono" id="inputIdCardNumber" type="text" maxlength="12" placeholder="001202008849" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="inputDob">Ngày tháng năm sinh (*)</label>
+                <input class="input" id="inputDob" type="text" placeholder="18/09/1994" required />
+              </div>
+            </div>
+
+            <div class="grid grid-2 gap-3 mb-3">
+              <div class="form-group">
+                <label class="form-label" for="inputIssueDate">Ngày cấp thẻ CCCD</label>
+                <input class="input" id="inputIssueDate" type="text" placeholder="24/02/2023" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="inputGender">Giới tính</label>
+                <select class="select" id="inputGender">
+                  <option value="Nam">Nam</option>
+                  <option value="Nữ">Nữ</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group mb-4">
+              <label class="form-label" for="inputAddress">Nơi thường trú / Địa chỉ cư trú (*)</label>
+              <input class="input" id="inputAddress" type="text" placeholder="Căn hộ Landmark 81, Vinhomes Central Park, TP.HCM" required />
+            </div>
+
+                        <div class="form-group mb-3">
+              <div class="flex items-center justify-between mb-1">
+                <label class="form-label mb-0">
+                  Ảnh chụp CCCD gắn chip (Bắt buộc cả 2 mặt) <strong class="text-danger">(*)</strong>
+                </label>
+                <span class="text-xs text-muted">Hỗ trợ JPG, PNG, WEBP</span>
+              </div>
+              <p class="text-xs text-muted mb-2" style="line-height: 1.5;">
+                Yêu cầu ảnh chụp rõ nét, đủ 4 góc, không lóa mờ hay mất góc. Bắt buộc tải lên đủ cả Mặt Trước và Mặt Sau để Admin đối soát thông tin.
+              </p>
+
+              <!-- Hai input file ẩn thật sự -->
+              <input type="file" id="fileCccdFront" accept="image/*" style="display: none;" />
+              <input type="file" id="fileCccdBack" accept="image/*" style="display: none;" />
+
+              <div class="grid grid-2 gap-3" id="cccdUploadBoxes">
+                <!-- Upload Box Mặt Trước -->
+                <div class="cccd-upload-box" id="btnUploadFront" tabindex="0" role="button" aria-label="Tải lên ảnh mặt trước CCCD">
+                  <div class="upload-placeholder" id="placeholderFront">
+                    <span class="material-symbols-outlined text-secondary" style="font-size: 32px;">add_a_photo</span>
+                    <div class="text-xs fw-700 mt-1">Ảnh Mặt Trước CCCD (*)</div>
+                    <div class="text-xs text-muted mt-1" id="frontUploadStatus">Nhấn để chọn ảnh từ máy</div>
+                    <div class="text-xs text-faint mt-1" style="font-size: 11px;">Rõ số, quốc huy &amp; khuôn mặt</div>
+                  </div>
+                  <div class="upload-preview" id="previewFrontContainer" style="display: none; width: 100%; position: relative;">
+                    <img id="imgPreviewFront" src="" alt="Mặt trước CCCD" class="cccd-img-preview" />
+                    <div class="preview-overlay">
+                      <span class="badge badge-success badge-sm"><span class="material-symbols-outlined icon-xs">check</span> Mặt trước OK</span>
+                      <button type="button" class="btn-remove-photo" id="btnRemoveFront" title="Xóa và chọn ảnh khác">&times;</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Upload Box Mặt Sau -->
+                <div class="cccd-upload-box" id="btnUploadBack" tabindex="0" role="button" aria-label="Tải lên ảnh mặt sau CCCD">
+                  <div class="upload-placeholder" id="placeholderBack">
+                    <span class="material-symbols-outlined text-secondary" style="font-size: 32px;">contactless</span>
+                    <div class="text-xs fw-700 mt-1">Ảnh Mặt Sau (Chip NFC) (*)</div>
+                    <div class="text-xs text-muted mt-1" id="backUploadStatus">Nhấn để chọn ảnh từ máy</div>
+                    <div class="text-xs text-faint mt-1" style="font-size: 11px;">Rõ chip vi mạch &amp; mã MRZ</div>
+                  </div>
+                  <div class="upload-preview" id="previewBackContainer" style="display: none; width: 100%; position: relative;">
+                    <img id="imgPreviewBack" src="" alt="Mặt sau CCCD" class="cccd-img-preview" />
+                    <div class="preview-overlay">
+                      <span class="badge badge-success badge-sm"><span class="material-symbols-outlined icon-xs">check</span> Mặt sau OK</span>
+                      <button type="button" class="btn-remove-photo" id="btnRemoveBack" title="Xóa và chọn ảnh khác">&times;</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Thông báo lỗi khi thiếu 1 hoặc cả 2 mặt -->
+              <div class="text-xs text-danger mt-2" id="cccdUploadError" style="display: none; padding: 8px 12px; background: rgba(239, 68, 68, 0.1); border-radius: var(--radius-md); border: 1px solid rgba(239, 68, 68, 0.3);">
+                <span class="material-symbols-outlined icon-xs" style="vertical-align: -2px;">error</span>
+                <span id="cccdUploadErrorText">Bắt buộc phải tải lên đầy đủ ảnh chụp cả 2 mặt (Mặt trước và Mặt sau) của thẻ CCCD gắn chip!</span>
+              </div>
+            </div>
+            </div>
+          </div>
+          <div class="modal-foot">
+            <button class="btn btn-secondary" id="btnCancelKycModal" type="button" data-close onclick="Utils.closeModal('kycModal')">Hủy Bỏ</button>
+            <button class="btn btn-primary" id="btnSubmitKycReq" type="submit">
+              <span class="material-symbols-outlined icon-xs">send</span>
+              Gửi Yêu Cầu Tới Admin Xét Duyệt
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ===== MODAL 2: CHỈNH SỬA TOÀN BỘ HỒ SƠ CÁ NHÂN (FULL TABS) ===== -->
+    <div class="modal-backdrop" id="editProfileModal" role="dialog" aria-modal="true" onclick="if(event.target===this)Utils.closeModal('editProfileModal')">
+      <div class="modal" style="max-width: 640px;">
+        <div class="modal-head">
+          <h4 class="modal-title flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary">manage_accounts</span>
+            Chỉnh Sửa Toàn Bộ Hồ Sơ Cá Nhân
+          </h4>
+          <button class="modal-close" type="button" data-close onclick="Utils.closeModal('editProfileModal')" aria-label="Đóng"><span class="material-symbols-outlined">close</span></button>
+        </div>
+
+        <!-- THANH CHUYỂN TAB CÁC PHẦN THÔNG TIN -->
+        <div class="modal-tabs px-4 pt-3">
+          <button class="modal-tab-btn active" type="button" data-tab="tabProfileBasic">
+            <span class="material-symbols-outlined icon-xs">person</span> 1. Thông Tin Cơ Bản
+          </button>
+          <button class="modal-tab-btn" type="button" data-tab="tabProfileRole">
+            <span class="material-symbols-outlined icon-xs">verified</span> 2. Vai Trò &amp; Danh Hiệu
+          </button>
+          <button class="modal-tab-btn" type="button" data-tab="tabProfileBank">
+            <span class="material-symbols-outlined icon-xs">account_balance</span> 3. Ngân Hàng Napas
+          </button>
+          <button class="modal-tab-btn" type="button" data-tab="tabProfileSecurity">
+            <span class="material-symbols-outlined icon-xs">lock</span> 4. Đổi Mật Khẩu
+          </button>
+        </div>
+
+        <form id="editProfileForm">
+          <div class="modal-body" style="max-height: 65vh; overflow-y: auto;">
+            <!-- TAB 1: THÔNG TIN CƠ BẢN -->
+            <div class="modal-tab-pane active" id="tabProfileBasic">
+              <div class="grid grid-2 gap-3 mb-3">
+                <div class="form-group">
+                  <label class="form-label" for="profileInputFullName">Họ và tên đầy đủ (*)</label>
+                  <input class="input" id="profileInputFullName" type="text" required placeholder="Nguyễn Hương Mai" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="profileInputUsername">Tên người dùng / Handle (*)</label>
+                  <div class="flex items-center gap-1">
+                    <span class="text-sm text-secondary mono">@</span>
+                    <input class="input mono" id="profileInputUsername" type="text" required placeholder="nguyenmai2804" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid grid-2 gap-3 mb-3">
+                <div class="form-group">
+                  <label class="form-label" for="profileInputPhone">Số điện thoại (*)</label>
+                  <input class="input" id="profileInputPhone" type="tel" required placeholder="0396403893" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="profileInputEmail">Email đăng nhập / liên hệ (*)</label>
+                  <input class="input" id="profileInputEmail" type="email" required placeholder="nguyenmai2804@gmail.com" />
+                </div>
+              </div>
+
+              <div class="grid grid-2 gap-3 mb-3">
+                <div class="form-group">
+                  <label class="form-label" for="profileInputDob">Ngày tháng năm sinh</label>
+                  <input class="input" id="profileInputDob" type="text" placeholder="18/09/1994" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="profileSelectGender">Giới tính</label>
+                  <select class="select" id="profileSelectGender">
+                    <option value="Nữ">Nữ</option>
+                    <option value="Nam">Nam</option>
+                    <option value="Khác">Khác</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group mb-3">
+                <label class="form-label" for="profileInputAddress">Địa chỉ thường trú / Nơi ở</label>
+                <input class="input" id="profileInputAddress" type="text" placeholder="Căn hộ Landmark 81, Vinhomes Central Park, Phường 22, Bình Thạnh, TP.HCM" />
+              </div>
+
+              <!-- TẢI ẢNH AVATAR TRỰC TIẾP TỪ THIẾT BỊ -->
+              <div class="form-group mb-3">
+                <label class="form-label">Ảnh đại diện cá nhân (Avatar)</label>
+                <div class="flex items-center gap-4 p-3 rounded" style="background: var(--neutral-850); border: 1px solid var(--border);">
+                  <div class="profile-avatar-wrap" style="width: 72px; height: 72px; margin: 0; flex-shrink: 0; cursor: default;">
+                    <div class="profile-avatar-img" id="modalAvatarPreview" style="font-size: 1.5rem;">HM</div>
+                  </div>
+                  <div class="flex-1">
+                    <div class="text-xs fw-600 text-text mb-1">Tải ảnh chân dung từ máy tính / điện thoại</div>
+                    <div class="text-xs text-muted mb-2">Hỗ trợ JPG, PNG, WEBP (Tự động nén &amp; cắt chuẩn avatar tròn).</div>
+                    <div class="flex items-center gap-2 flex-wrap">
+                      <button class="btn btn-secondary btn-sm" id="btnChooseAvatarModal" type="button">
+                        <span class="material-symbols-outlined icon-xs">upload_file</span> Tải Ảnh Từ Máy
+                      </button>
+                      <button class="btn btn-ghost btn-sm text-danger text-xs" id="btnRemoveAvatarModal" type="button">
+                        <span class="material-symbols-outlined icon-xs">delete</span> Dùng Chữ Viết Tắt
+                      </button>
+                    </div>
+                    <input type="file" id="modalAvatarFileInput" accept="image/*" style="display: none;" />
+                    <input type="hidden" id="profileInputAvatarHidden" value="" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group mb-3">
+                <label class="form-label" for="profileInputBio">Giới thiệu ngắn (Tiểu sử)</label>
+                <textarea class="textarea" id="profileInputBio" rows="2" placeholder="Sở thích sưu tầm Sneakers Hype &amp; Techwear..."></textarea>
+              </div>
+            </div>
+
+            <!-- TAB 2: VAI TRÒ & NGÀNH HÀNG -->
+            <div class="modal-tab-pane" id="tabProfileRole">
+              <div class="panel p-3 mb-3" style="background: rgba(139, 92, 246, 0.08); border-color: rgba(139, 92, 246, 0.25);">
+                <div class="text-xs text-secondary fw-600 mb-1">Quyền hạn &amp; vai trò trên sàn:</div>
+                <div class="text-xs text-muted">
+                  Bạn có thể chọn vai trò Người Mua, Người Bán ký gửi C2C hoặc Đa năng để tối ưu luồng giao dịch trên sàn.
+                </div>
+              </div>
+
+              <div class="form-group mb-3">
+                <label class="form-label" for="profileSelectRole">Vai trò tài khoản</label>
+                <select class="select" id="profileSelectRole">
+                  <option value="ADMIN">Quản Trị Viên Toàn Sàn (Super Admin - Toàn Quyền)</option>
+                  <option value="buyer">Khách Hàng Mua Sắm (Buyer Cá Nhân)</option>
+                  <option value="seller">Gian Hàng / Người Bán Hàng (Seller C2C)</option>
+                  <option value="both">Tài Khoản Đa Năng (Vừa Mua Vừa Bán C2C)</option>
+                </select>
+              </div>
+
+              <div class="form-group mb-3">
+                <label class="form-label" for="profileInputMembershipTitle">Danh hiệu / Huy hiệu hiển thị</label>
+                <input class="input" id="profileInputMembershipTitle" type="text" placeholder="VIP BUYER" />
+                <div class="text-xs text-muted mt-1">Gợi ý: VIP BUYER, TOP COLLECTOR, STORE SELLER, ELITE MEMBER...</div>
+              </div>
+
+              <div class="form-group mb-2">
+                <label class="form-label" for="profileSelectCategory">Ngành hàng quan tâm ưu tiên</label>
+                <select class="select" id="profileSelectCategory">
+                  <option value="sneakers">Sneakers Hype C2C</option>
+                  <option value="techwear">Techwear &amp; Thời Trang</option>
+                  <option value="hitech">Hi-Tech &amp; Audio Lab</option>
+                  <option value="smart-iot">Smart Living IoT</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- TAB 3: NGÂN HÀNG NAPAS 24/7 -->
+            <div class="modal-tab-pane" id="tabProfileBank">
+              <div class="panel p-3 mb-3" style="background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.25);">
+                <div class="text-xs text-success fw-600 mb-1">Tài khoản thụ hưởng nhận tiền Napas 24/7:</div>
+                <div class="text-xs text-muted">
+                  Hệ thống tự động liên kết tài khoản ngân hàng chính chủ để nhận tiền thanh toán bán đồ cũ hoặc tiền hoàn đơn ngay lập tức.
+                </div>
+              </div>
+
+              <div class="form-group mb-3">
+                <label class="form-label" for="profileSelectBank">Ngân hàng thụ hưởng (*)</label>
+                <select class="select" id="profileSelectBank">
+                  <option value="Techcombank">Techcombank (TCB - Ngân hàng Kỹ Thương)</option>
+                  <option value="Vietcombank">Vietcombank (VCB - Ngoại Thương Việt Nam)</option>
+                  <option value="MBBank">MB Bank (Ngân hàng Quân Đội)</option>
+                  <option value="VPBank">VPBank (Việt Nam Thịnh Vượng)</option>
+                  <option value="ACB">ACB (Ngân hàng Á Châu)</option>
+                  <option value="BIDV">BIDV (Đầu Tư &amp; Phát Triển)</option>
+                  <option value="Vietinbank">Vietinbank (Công Thương Việt Nam)</option>
+                  <option value="TPBank">TPBank (Tiên Phong Bank)</option>
+                  <option value="Agribank">Agribank (Nông Nghiệp &amp; PTNT)</option>
+                  <option value="Sacombank">Sacombank (Sài Gòn Thương Tín)</option>
+                </select>
+              </div>
+
+              <div class="form-group mb-3">
+                <label class="form-label" for="profileInputBankNumber">Số tài khoản ngân hàng (*)</label>
+                <input class="input mono" id="profileInputBankNumber" type="text" placeholder="1903 6888 8888 8" />
+              </div>
+
+              <div class="form-group mb-2">
+                <label class="form-label" for="profileInputBankHolder">Họ và tên chủ tài khoản (In hoa không dấu) (*)</label>
+                <input class="input mono" id="profileInputBankHolder" type="text" placeholder="NGUYEN HUONG MAI" />
+                <div class="text-xs text-secondary mt-1">Chủ tài khoản nên trùng khớp với họ tên đăng ký để đối soát Napas 24/7 tức thì.</div>
+              </div>
+            </div>
+
+            <!-- TAB 4: ĐỔI MẬT KHẨU -->
+            <div class="modal-tab-pane" id="tabProfileSecurity">
+              <div class="panel p-3 mb-3" style="background: rgba(239, 68, 68, 0.08); border-color: rgba(239, 68, 68, 0.25);">
+                <div class="text-xs text-danger fw-600 mb-1">Bảo mật tài khoản:</div>
+                <div class="text-xs text-muted">
+                  Để trống nếu bạn không có nhu cầu đổi mật khẩu. Nếu đổi, mật khẩu mới cần tối thiểu 6 ký tự.
+                </div>
+              </div>
+
+              <div class="form-group mb-3">
+                <label class="form-label" for="profileInputNewPassword">Mật khẩu mới (Tối thiểu 6 ký tự)</label>
+                <input class="input" id="profileInputNewPassword" type="password" placeholder="Nhập mật khẩu mới..." />
+              </div>
+
+              <div class="form-group mb-2">
+                <label class="form-label" for="profileInputConfirmPassword">Xác nhận mật khẩu mới</label>
+                <input class="input" id="profileInputConfirmPassword" type="password" placeholder="Nhập lại mật khẩu mới..." />
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-foot">
+            <button class="btn btn-secondary" type="button" data-close onclick="Utils.closeModal('editProfileModal')">Hủy Bỏ</button>
+            <button class="btn btn-primary" type="submit">
+              <span class="material-symbols-outlined icon-xs">save</span> Lưu Toàn Bộ Thay Đổi
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ===== MODAL 3: THÊM / CHỈNH SỬA ĐỊA CHỈ GIAO NHẬN ===== -->
+    <div class="modal-backdrop" id="addressModal" role="dialog" aria-modal="true" onclick="if(event.target===this)Utils.closeModal('addressModal')">
+      <div class="modal" style="max-width: 540px;">
+        <div class="modal-head">
+          <h4 class="modal-title flex items-center gap-2" id="addressModalTitle">
+            <span class="material-symbols-outlined text-secondary">add_location_alt</span>
+            <span>Thêm Địa Chỉ Giao Nhận Mới</span>
+          </h4>
+          <button class="modal-close" type="button" data-close onclick="Utils.closeModal('addressModal')" aria-label="Đóng"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <form id="addressForm">
+          <input type="hidden" id="addrEditId" value="" />
+          <div class="modal-body">
+            <div class="grid grid-2 gap-3 mb-3">
+              <div class="form-group">
+                <label class="form-label" for="addrReceiverName">Họ tên người nhận (*)</label>
+                <input class="input" id="addrReceiverName" type="text" required placeholder="Nguyễn Hương Mai" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="addrPhone">Số điện thoại (*)</label>
+                <input class="input" id="addrPhone" type="tel" required placeholder="0396 403 893" />
+              </div>
+            </div>
+            <div class="grid grid-3 gap-3 mb-3">
+              <div class="form-group">
+                <label class="form-label text-xs fw-600" for="addrProvince">Tỉnh / Thành phố (*)</label>
+                <select class="input" id="addrProvince" required>
+                  <option value="">-- Chọn Tỉnh / TP --</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label text-xs fw-600" for="addrDistrict">Quận / Huyện (*)</label>
+                <select class="input" id="addrDistrict" required disabled>
+                  <option value="">-- Chọn Quận / Huyện --</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label text-xs fw-600" for="addrWard">Phường / Xã (*)</label>
+                <select class="input" id="addrWard" required disabled>
+                  <option value="">-- Chọn Phường / Xã --</option>
+                </select>
+              </div>
+            </div>
+            <input type="hidden" id="addrCity" value="" />
+            <div class="form-group mb-3">
+              <label class="form-label" for="addrDetail">Địa chỉ chi tiết (Số nhà, tên đường, tòa nhà...) (*)</label>
+              <input class="input" id="addrDetail" type="text" required placeholder="Căn hộ Landmark 81, Vinhomes Central Park, Phường 22" />
+            </div>
+            <div class="grid grid-2 gap-3 mb-3">
+              <div class="form-group">
+                <label class="form-label" for="addrType">Loại địa chỉ</label>
+                <select class="select" id="addrType">
+                  <option value="home">Nhà riêng / Căn hộ</option>
+                  <option value="office">Văn phòng / Công ty</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="addrNote">Ghi chú giao hàng</label>
+                <input class="input" id="addrNote" type="text" placeholder="Shipper bấm chuông lên phòng" />
+              </div>
+            </div>
+            <div class="flex items-center gap-2 mt-2">
+              <input type="checkbox" id="addrIsDefault" style="width: 16px; height: 16px; accent-color: var(--primary-500); cursor: pointer;" />
+              <label for="addrIsDefault" class="text-sm cursor-pointer" style="user-select: none;">Đặt làm địa chỉ nhận hàng mặc định</label>
+            </div>
+          </div>
+          <div class="modal-foot">
+            <button class="btn btn-secondary" type="button" data-close onclick="Utils.closeModal('addressModal')">Hủy Bỏ</button>
+            <button class="btn btn-primary" type="submit">
+              <span class="material-symbols-outlined icon-xs">save</span> Lưu Địa Chỉ
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="toast-stack" id="toastStack"></div>
+
+    <script src="../../js/popup.js"></script>
+    <script src="../../js/auth.js"></script>
+    <script src="../../js/mock_data.js"></script>
+    <script src="../../js/utils.js"></script>
+    <script>
+      (function () {
+        const $ = (sel, root) => (root || document).querySelector(sel);
+        const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
+
+        // 1. Chốt chặn bắt buộc đăng nhập để xem trang cá nhân
+        if (!Auth.requireLogin({ message: "Vui lòng đăng nhập để xem trung tâm hồ sơ khách hàng." })) return;
+
+        const topBadges = document.getElementById("topStatusBadges");
+        const kycNoticeContainer = document.getElementById("kycNoticeContainer");
+        const kycCardBadge = document.getElementById("kycCardBadge");
+
+        // 2. Đồng bộ dữ liệu người dùng lên giao diện
+        function renderProfile() {
+          const u = Auth.current();
+          if (!u) return;
+
+          const fullName = u.fullName || "Khách Hàng";
+          let initials = "KH";
+          if (u.avatar && !u.avatar.startsWith("http") && !u.avatar.startsWith("data:") && u.avatar.length <= 4) {
+            initials = u.avatar.toUpperCase();
+          } else {
+            initials = fullName
+              .trim()
+              .split(/\s+/)
+              .slice(-2)
+              .map((w) => w[0])
+              .join("")
+              .toUpperCase() || "KH";
+          }
+
+          document.getElementById("userDisplayName").textContent = fullName;
+          const isImgAvatar = !!(u.avatar && (u.avatar.startsWith("http") || u.avatar.startsWith("data:image")));
+          const avatarWrap = document.getElementById("userAvatarText");
+          if (isImgAvatar) {
+            avatarWrap.innerHTML = `<img src="${u.avatar}" alt="${fullName}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" />`;
+          } else {
+            avatarWrap.textContent = initials;
+          }
+
+          const headerAvatar = document.getElementById("headerAvatarBtn");
+          if (headerAvatar) {
+            if (isImgAvatar) {
+              headerAvatar.innerHTML = `<img src="${u.avatar}" alt="${fullName}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" />`;
+            } else {
+              headerAvatar.textContent = initials;
+            }
+          }
+
+          const username = u.username || (u.email ? u.email.split("@")[0] : "user");
+          document.getElementById("userHandle").textContent = "@" + username;
+          document.getElementById("userPhoneDisplay").textContent = u.phone || "Chưa cập nhật";
+          document.getElementById("userEmailDisplay").textContent = u.email || "Chưa cập nhật";
+
+          // Cập nhật vai trò / danh hiệu
+          const isAdminUser = u.role === "ADMIN" || u.role === "admin";
+          const roleLabel = isAdminUser
+            ? "ROOT SUPER ADMIN"
+            : (u.membershipTitle || (u.role === "seller" ? "STORE SELLER" : u.role === "both" ? "BUYER & SELLER" : "VIP BUYER"));
+          const roleBadgeEl = document.getElementById("roleBadgeDisplay");
+          if (roleBadgeEl) {
+            roleBadgeEl.textContent = roleLabel;
+            if (isAdminUser) roleBadgeEl.className = "badge badge-primary";
+          }
+
+          // Cập nhật Mục 1: Thông tin cá nhân & tài khoản chi tiết
+          const phone = u.phone || "Chưa cập nhật";
+          const email = u.email || "Chưa cập nhật";
+          const dob = u.dob || (u.kycData && u.kycData.dob) || "Chưa cập nhật";
+          const gender = u.gender || (u.kycData && u.kycData.gender) || "Chưa cập nhật";
+          const address = u.address || (u.kycData && u.kycData.address) || (isAdminUser ? "Trung Tâm Điều Hành Toàn Sàn HYBRID.STORE, Landmark 81 (Đặc quyền Quản trị)" : "Chưa cập nhật");
+          const bio = u.bio || (isAdminUser ? "Tài khoản Quản Trị Viên cấp cao của hệ thống sàn HYBRID.STORE." : "Chưa có lời giới thiệu bản thân.");
+
+          if (document.getElementById("infoFullName")) document.getElementById("infoFullName").textContent = fullName;
+          if (document.getElementById("infoUsername")) document.getElementById("infoUsername").textContent = "@" + username;
+          if (document.getElementById("infoPhone")) document.getElementById("infoPhone").textContent = phone;
+          if (document.getElementById("infoEmail")) document.getElementById("infoEmail").textContent = email;
+          if (document.getElementById("infoDobGender")) document.getElementById("infoDobGender").textContent = `${dob} — Giới tính: ${gender}`;
+          if (document.getElementById("infoAddress")) document.getElementById("infoAddress").textContent = address;
+          if (document.getElementById("infoRoleBadge")) document.getElementById("infoRoleBadge").textContent = `${roleLabel} (${(u.role || "buyer").toUpperCase()})`;
+          if (document.getElementById("infoBio")) document.getElementById("infoBio").textContent = `"${bio}"`;
+
+          // Cập nhật thông tin ngân hàng thụ hưởng hiển thị
+          if (u.bankName) {
+            const bNameEl = document.getElementById("primaryBankName");
+            if (bNameEl) bNameEl.textContent = u.bankName;
+          }
+          if (u.bankAccountNumber) {
+            const bNumEl = document.getElementById("primaryBankNumber");
+            if (bNumEl) bNumEl.textContent = u.bankAccountNumber;
+          }
+          const holderName = (u.bankAccountName || fullName).toUpperCase();
+          const bHoldEl = document.getElementById("primaryBankHolder");
+          if (bHoldEl) bHoldEl.textContent = holderName;
+          const secHoldEl = document.getElementById("secondaryBankHolder");
+          if (secHoldEl) secHoldEl.textContent = holderName;
+
+          const kycStatus = u.kycStatus || "UNVERIFIED";
+          const kycData = u.kycData || {};
+
+          // Cập nhật thông tin chi tiết CCCD
+          if (isAdminUser) {
+            document.getElementById("cccdFullName").textContent = fullName.toUpperCase() + " (ROOT ADMIN)";
+            document.getElementById("cccdNumber").textContent = "001202008849 (ĐẶC QUYỀN TOÀN SÀN)";
+            document.getElementById("cccdDob").textContent = "Không thời hạn — Miễn trừ pháp lý";
+            document.getElementById("cccdFaceMatch").textContent = "100% ROOT PRIVILEGED";
+          } else {
+            if (kycData.cardFullName) {
+              document.getElementById("cccdFullName").textContent = kycData.cardFullName.toUpperCase();
+            } else {
+              document.getElementById("cccdFullName").textContent = fullName.toUpperCase();
+            }
+
+            if (kycData.idCardNumber) {
+              const raw = String(kycData.idCardNumber);
+              document.getElementById("cccdNumber").textContent = raw.slice(0, 6) + "****" + raw.slice(-2);
+            } else {
+              document.getElementById("cccdNumber").textContent = "Chưa cung cấp";
+            }
+
+            if (kycData.dob) {
+              document.getElementById("cccdDob").textContent = kycData.dob + (kycData.issueDate ? " — Cấp: " + kycData.issueDate : "");
+            } else if (u.dob) {
+              document.getElementById("cccdDob").textContent = u.dob + " — Cấp: 24/02/2023";
+            }
+
+            if (kycData.faceMatch) {
+              document.getElementById("cccdFaceMatch").textContent = kycData.faceMatch + "% ANTI-DEEPFAKE AI";
+            }
+          }
+
+          // Hiển thị ảnh CCCD đã lưu
+          const savedSection = document.getElementById("cccdSavedPhotosSection");
+          const frontImg = document.getElementById("mainCccdFrontImg");
+          const backImg = document.getElementById("mainCccdBackImg");
+          const statusTag = document.getElementById("cccdPhotosStatusTag");
+
+          if (isAdminUser) {
+            if (savedSection) savedSection.style.display = "block";
+            if (frontImg) frontImg.src = Auth.createSampleCccdSvg("front", fullName, "001202008849");
+            if (backImg) backImg.src = Auth.createSampleCccdSvg("back", fullName, "001202008849");
+            if (statusTag) {
+              statusTag.textContent = "✓ Đặc quyền Quản trị viên tối cao (Miễn trừ xác thực CCCD)";
+              statusTag.className = "text-xs text-primary fw-700";
+            }
+          } else if (kycData.frontImage || kycData.backImage) {
+            if (savedSection) savedSection.style.display = "block";
+            if (frontImg) {
+              frontImg.src = kycData.frontImage || Auth.createSampleCccdSvg("front", kycData.cardFullName || fullName, kycData.idCardNumber);
+            }
+            if (backImg) {
+              backImg.src = kycData.backImage || Auth.createSampleCccdSvg("back", kycData.cardFullName || fullName, kycData.idCardNumber);
+            }
+            if (statusTag) {
+              statusTag.textContent = kycStatus === "VERIFIED" ? "✓ Đã đối soát 2 mặt C06" : "⏳ Đang chờ Admin duyệt 2 mặt";
+              statusTag.className = kycStatus === "VERIFIED" ? "text-xs text-success" : "text-xs text-warning";
+            }
+          } else if (kycStatus === "VERIFIED") {
+            if (savedSection) savedSection.style.display = "block";
+            if (frontImg) frontImg.src = Auth.createSampleCccdSvg("front", fullName, kycData.idCardNumber || "001202008849");
+            if (backImg) backImg.src = Auth.createSampleCccdSvg("back", fullName, kycData.idCardNumber || "001202008849");
+          } else {
+            if (savedSection) savedSection.style.display = "none";
+          }
+
+          // Cập nhật trạng thái hiển thị
+          const secAdmin = document.getElementById("sectionAdminDossier");
+          const secCccd = document.getElementById("sectionCccd");
+          const secBank = document.getElementById("sectionBank");
+          const secAddress = document.getElementById("sectionAddress");
+          const navMenu = document.getElementById("profileNavMenu");
+          const cardStats = document.getElementById("profileCardStats");
+          const cardDist = document.getElementById("profileCardDist");
+
+          if (isAdminUser) {
+            // ĐẶC QUYỀN ROOT ADMIN: Ẩn hoàn toàn các phần CCCD, Ngân hàng, Sổ địa chỉ
+            if (secAdmin) secAdmin.style.display = "block";
+            if (secCccd) secCccd.style.display = "none";
+            if (secBank) secBank.style.display = "none";
+            if (secAddress) secAddress.style.display = "none";
+
+            // Cập nhật Menu bên cột trái dành riêng cho Admin
+            if (navMenu) {
+              navMenu.innerHTML = `
+                <button class="profile-menu-item active" type="button" onclick="document.getElementById('sectionPersonalInfo').scrollIntoView({behavior:'smooth'})">
+                  <span class="flex items-center gap-2">
+                    <span class="material-symbols-outlined icon-sm">person</span>
+                    1. Thông Tin Quản Trị Viên
+                  </span>
+                  <span class="material-symbols-outlined icon-xs">chevron_right</span>
+                </button>
+                <button class="profile-menu-item" type="button" onclick="document.getElementById('sectionAdminDossier').scrollIntoView({behavior:'smooth'})">
+                  <span class="flex items-center gap-2">
+                    <span class="material-symbols-outlined icon-sm text-primary">admin_panel_settings</span>
+                    2. Đặc Quyền Master Admin
+                  </span>
+                  <span class="material-symbols-outlined icon-xs">chevron_right</span>
+                </button>
+                <a class="profile-menu-item text-primary fw-700" href="../admin/admin_system.html" style="text-decoration: none;">
+                  <span class="flex items-center gap-2">
+                    <span class="material-symbols-outlined icon-sm">terminal</span>
+                    3. Bảng Điều Khiển Master Admin
+                  </span>
+                  <span class="material-symbols-outlined icon-xs">arrow_forward</span>
+                </a>
+              `;
+            }
+
+            // Cập nhật thống kê điều hành cột trái dành cho Admin
+            if (cardStats) {
+              cardStats.innerHTML = `
+                <div class="profile-trust-row mb-3">
+                  <div class="text-left">
+                    <div class="text-xs text-muted" style="font-size: 11px;">TÍN NHIỆM QUẢN TRỊ</div>
+                    <div class="text-base fw-700 text-gradient mono" style="font-size: 1.25rem;">
+                      100 <span class="text-xs text-muted" style="font-size: 11px;">/ 100</span>
+                    </div>
+                    <div class="text-xs text-primary fw-700">Root Super Administrator</div>
+                  </div>
+                  <span class="material-symbols-outlined text-primary" style="font-size: 30px;">admin_panel_settings</span>
+                </div>
+                <div class="grid grid-2 gap-2 text-center">
+                  <div class="profile-stat-box">
+                    <div class="stat-label">Giám Sát Đơn</div>
+                    <div class="stat-value text-primary">1.842</div>
+                    <div class="stat-sub text-success">100% Phê Duyệt</div>
+                  </div>
+                  <div class="profile-stat-box">
+                    <div class="stat-label">Trọng Tài &amp; Lab</div>
+                    <div class="stat-value text-success">100%</div>
+                    <div class="stat-sub text-muted">0 Lỗi Vận Hành</div>
+                  </div>
+                </div>
+              `;
+            }
+
+            // Cập nhật phân hệ điều hành cột trái dành cho Admin
+            if (cardDist) {
+              cardDist.innerHTML = `
+                <div class="profile-dist-head">
+                  <span class="profile-dist-title">
+                    <span class="material-symbols-outlined icon-xs text-primary">hub</span>
+                    Phân Hệ Quản Trị
+                  </span>
+                  <span class="badge badge-primary" style="font-size: 10px; padding: 2px 6px;">20 PHÂN HỆ</span>
+                </div>
+                <div class="profile-dist-item">
+                  <div class="profile-dist-info">
+                    <span>📊 Doanh Số &amp; Tài Chính GMV</span>
+                    <strong class="mono text-primary">100%</strong>
+                  </div>
+                  <div class="progress" style="--value: 100%; height: 4px;"><div class="progress-bar"></div></div>
+                </div>
+                <div class="profile-dist-item">
+                  <div class="profile-dist-info">
+                    <span>📦 Kho Hàng &amp; 24 Sản Phẩm</span>
+                    <strong class="mono text-secondary">100%</strong>
+                  </div>
+                  <div class="progress progress-secondary" style="--value: 100%; height: 4px;"><div class="progress-bar"></div></div>
+                </div>
+                <div class="profile-dist-item">
+                  <div class="profile-dist-info">
+                    <span>🚚 Giám Sát 1.842 Đơn &amp; Ship 2H</span>
+                    <strong class="mono text-tertiary">100%</strong>
+                  </div>
+                  <div class="progress progress-tertiary" style="--value: 100%; height: 4px;"><div class="progress-bar"></div></div>
+                </div>
+                <div class="profile-dist-item">
+                  <div class="profile-dist-info">
+                    <span>🔬 Trọng Tài &amp; 3 Lab ISO 15 Bước</span>
+                    <strong class="mono text-success">100%</strong>
+                  </div>
+                  <div class="progress progress-success" style="--value: 100%; height: 4px;"><div class="progress-bar"></div></div>
+                </div>
+              `;
+            }
+
+            // ĐẶC QUYỀN ROOT ADMIN: Miễn trừ hoàn toàn xác thực CCCD & Không cần nhập địa chỉ
+            topBadges.innerHTML = `
+              <span class="badge badge-primary"><span class="material-symbols-outlined icon-xs">shield</span> ROOT ADMIN • QUYỀN TỐI CAO</span>
+              <span class="badge badge-success"><span class="material-symbols-outlined icon-xs">verified</span> MIỄN TRỪ XÁC THỰC CCCD</span>
+              <span class="badge badge-secondary">TOÀN QUYỀN TẤT CẢ CÁC TRANG</span>
+            `;
+            if (kycCardBadge) kycCardBadge.innerHTML = `<span class="badge badge-primary" style="font-size: 13px; padding: 6px 14px;"><span class="material-symbols-outlined icon-xs">admin_panel_settings</span> ĐẶC QUYỀN ROOT ADMIN</span>`;
+            document.getElementById("verifiedStatusBadge").textContent = "QUYỀN TỐI CAO (ALL RIGHTS)";
+            document.getElementById("verifiedStatusBadge").className = "badge badge-primary";
+            document.getElementById("avatarBadgeIcon").innerHTML = `<span class="material-symbols-outlined icon-sm text-primary">admin_panel_settings</span>`;
+          } else {
+            // NGƯỜI DÙNG THÔNG THƯỜNG (BUYER / SELLER)
+            if (secAdmin) secAdmin.style.display = "none";
+            if (secCccd) secCccd.style.display = "block";
+            if (secBank) secBank.style.display = "block";
+            if (secAddress) secAddress.style.display = "block";
+
+            // Menu cho người dùng thông thường (TUYỆT ĐỐI KHÔNG HIỂN THỊ LINK MASTER ADMIN)
+            if (navMenu) {
+              navMenu.innerHTML = `
+                <button class="profile-menu-item active" type="button" onclick="document.getElementById('sectionPersonalInfo').scrollIntoView({behavior:'smooth'})">
+                  <span class="flex items-center gap-2">
+                    <span class="material-symbols-outlined icon-sm">person</span>
+                    1. Thông Tin Cá Nhân &amp; Tài Khoản
+                  </span>
+                  <span class="material-symbols-outlined icon-xs">chevron_right</span>
+                </button>
+                <button class="profile-menu-item" type="button" onclick="document.getElementById('sectionCccd').scrollIntoView({behavior:'smooth'})">
+                  <span class="flex items-center gap-2">
+                    <span class="material-symbols-outlined icon-sm">badge</span>
+                    2. Sinh Trắc Học &amp; CCCD Chip L2
+                  </span>
+                  <span class="material-symbols-outlined icon-xs">chevron_right</span>
+                </button>
+                <button class="profile-menu-item" type="button" onclick="document.getElementById('sectionBank').scrollIntoView({behavior:'smooth'})">
+                  <span class="flex items-center gap-2">
+                    <span class="material-symbols-outlined icon-sm">account_balance</span>
+                    3. Tài Khoản Ngân Hàng Napas
+                  </span>
+                  <span class="material-symbols-outlined icon-xs">chevron_right</span>
+                </button>
+                <button class="profile-menu-item" type="button" onclick="document.getElementById('sectionAddress').scrollIntoView({behavior:'smooth'})">
+                  <span class="flex items-center gap-2">
+                    <span class="material-symbols-outlined icon-sm">local_shipping</span>
+                    4. Sổ Địa Chỉ Giao Nhận Hỏa Tốc
+                  </span>
+                  <span class="material-symbols-outlined icon-xs">chevron_right</span>
+                </button>
+              `;
+            }
+
+            if (kycStatus === "VERIFIED") {
+            topBadges.innerHTML = `
+              <span class="badge badge-success"><span class="material-symbols-outlined icon-xs">verified</span> eKYC Level 2: ĐÃ XÁC MINH</span>
+              <span class="badge badge-primary">TÀI KHOẢN ĐÃ DUYỆT</span>
+              <span class="badge badge-secondary">NAPAS 24/7 SẴN SÀNG</span>
+            `;
+            kycCardBadge.innerHTML = `<span class="badge badge-success" style="font-size: 13px; padding: 6px 14px;"><span class="material-symbols-outlined icon-xs">verified</span> ĐÃ XÁC THỰC L2 - QUỐC GIA</span>`;
+            document.getElementById("verifiedStatusBadge").textContent = "VERIFIED CITIZEN";
+            document.getElementById("verifiedStatusBadge").className = "badge badge-success";
+            document.getElementById("avatarBadgeIcon").innerHTML = `<span class="material-symbols-outlined icon-sm text-success">check_circle</span>`;
+
+            kycNoticeContainer.innerHTML = `
+              <div class="kyc-status-box verified">
+                <span class="material-symbols-outlined text-success" style="font-size: 28px;">check_circle</span>
+                <div class="flex-1">
+                  <strong class="text-sm text-success">Tài Khoản Đã Được Admin Phê Duyệt Toàn Quyền</strong>
+                  <p class="text-xs text-muted mb-0 mt-1">
+                    Căn cước công dân gắn chip của bạn đã được đối soát hợp lệ với CSDL quốc gia C06. Bạn có toàn quyền thực hiện <strong>Mua Hàng</strong>, <strong>Nhận Hàng Đồng Kiểm 100%</strong>, <strong>Đề Nghị Trả Giá</strong> và <strong>Đăng Bán Đồ Cũ Like New</strong>.
+                  </p>
+                </div>
+              </div>
+            `;
+          } else if (kycStatus === "PENDING") {
+            topBadges.innerHTML = `
+              <span class="badge badge-warning"><span class="material-symbols-outlined icon-xs">hourglass_top</span> HỒ SƠ CCCD CHỜ DUYỆT</span>
+              <span class="badge badge-secondary">ĐÃ NỘP HỒ SƠ</span>
+            `;
+            kycCardBadge.innerHTML = `<span class="badge badge-warning" style="font-size: 13px; padding: 6px 14px;"><span class="material-symbols-outlined icon-xs">hourglass_empty</span> ĐANG CHỜ ADMIN DUYỆT</span>`;
+            document.getElementById("verifiedStatusBadge").textContent = "CHỜ XÉT DUYỆT";
+            document.getElementById("verifiedStatusBadge").className = "badge badge-warning";
+            document.getElementById("avatarBadgeIcon").innerHTML = `<span class="material-symbols-outlined icon-sm text-warning">pending</span>`;
+
+            kycNoticeContainer.innerHTML = `
+              <div class="kyc-status-box pending">
+                <span class="material-symbols-outlined text-warning" style="font-size: 28px;">hourglass_top</span>
+                <div class="flex-1">
+                  <strong class="text-sm text-warning">Hồ Sơ Xác Thực CCCD Đang Được Ban Quản Trị Xét Duyệt</strong>
+                  <p class="text-xs text-muted mb-2 mt-1">
+                    Yêu cầu xác thực Căn cước công dân của bạn đã được tiếp nhận an toàn và chuyển đến hàng đợi thẩm định. Sau khi Admin phê duyệt, tài khoản sẽ tự động kích hoạt tính năng mua hàng và đăng bán đồ cũ.
+                  </p>
+                  <div class="flex items-center gap-2">
+                    <span class="badge badge-warning" style="font-size: 12px; padding: 4px 10px;">
+                      <span class="material-symbols-outlined icon-xs">schedule</span> Dự kiến duyệt: 15-30 phút
+                    </span>
+                  </div>
+                </div>
+              </div>
+            `;
+          } else {
+            // UNVERIFIED hoặc REJECTED
+            topBadges.innerHTML = `
+              <span class="badge badge-danger"><span class="material-symbols-outlined icon-xs">error</span> CHƯA XÁC THỰC CCCD</span>
+              <span class="badge">CHƯA ĐƯỢC MUA / BÁN</span>
+            `;
+            kycCardBadge.innerHTML = `<span class="badge badge-danger" style="font-size: 13px; padding: 6px 14px;"><span class="material-symbols-outlined icon-xs">cancel</span> CHƯA XÁC THỰC</span>`;
+            document.getElementById("verifiedStatusBadge").textContent = "CHƯA XÁC THỰC";
+            document.getElementById("verifiedStatusBadge").className = "badge badge-danger";
+            document.getElementById("avatarBadgeIcon").innerHTML = `<span class="material-symbols-outlined icon-sm text-danger">error</span>`;
+
+            kycNoticeContainer.innerHTML = `
+              <div class="kyc-status-box unverified">
+                <span class="material-symbols-outlined text-danger" style="font-size: 28px;">shield_with_heart</span>
+                <div class="flex-1">
+                  <strong class="text-sm text-danger">Tài Khoản Chưa Xác Thực Căn Cước Công Dân (CCCD)</strong>
+                  <p class="text-xs text-muted mb-2 mt-1">
+                    Theo quy định an toàn sàn HYBRID.STORE, bạn cần nộp thông tin CCCD gắn chip và được Ban Quản Trị xét duyệt để kích hoạt tính năng mua sắm hoặc đăng bán đồ cũ.
+                  </p>
+                  <button class="btn btn-primary btn-sm" type="button" onclick="Utils.openModal('kycModal')">
+                    <span class="material-symbols-outlined icon-xs">badge</span>
+                    Nộp Hồ Sơ Xác Thực CCCD Ngay
+                  </button>
+                </div>
+              </div>
+            `;
+          }
+          }
+        }
+
+        renderProfile();
+
+        // Lắng nghe cập nhật KYC & hồ sơ thời gian thực
+        window.addEventListener("auth:kyc-updated", () => {
+          renderProfile();
+        });
+        window.addEventListener("auth:profile-updated", () => {
+          renderProfile();
+        });
+
+        // Hàm xử lý nén và cắt ảnh avatar chuẩn hình vuông tròn từ máy tính/điện thoại
+        function processAvatarFile(file, onComplete) {
+          if (!file) return;
+          if (!file.type || !file.type.startsWith("image/")) {
+            Utils.toast("Vui lòng chọn tệp hình ảnh hợp lệ (JPG, PNG, WEBP).", "warning");
+            return;
+          }
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+              const canvas = document.createElement("canvas");
+              const maxDim = 256;
+              let w = img.width;
+              let h = img.height;
+              const minSide = Math.min(w, h);
+              const sx = (w - minSide) / 2;
+              const sy = (h - minSide) / 2;
+              canvas.width = maxDim;
+              canvas.height = maxDim;
+              const ctx = canvas.getContext("2d");
+              ctx.drawImage(img, sx, sy, minSide, minSide, 0, 0, maxDim, maxDim);
+              const base64 = canvas.toDataURL("image/jpeg", 0.85);
+              onComplete(base64);
+            };
+            img.onerror = () => {
+              Utils.toast("Không thể đọc tệp ảnh đã chọn.", "error");
+            };
+            img.src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        }
+
+        // Tải ảnh avatar trực tiếp từ thẻ người dùng ở cột trái
+        const avatarTrigger = document.getElementById("avatarUploadTrigger");
+        const directInput = document.getElementById("directAvatarFileInput");
+        const directBtn = document.getElementById("btnChangeAvatarDirect");
+
+        if (avatarTrigger && directInput) {
+          avatarTrigger.addEventListener("click", () => directInput.click());
+        }
+        if (directBtn && directInput) {
+          directBtn.addEventListener("click", () => directInput.click());
+        }
+        if (directInput) {
+          directInput.addEventListener("change", (e) => {
+            const file = e.target.files && e.target.files[0];
+            if (!file) return;
+            processAvatarFile(file, (base64) => {
+              Auth.updateProfile({ avatar: base64 });
+              renderProfile();
+              Utils.toast("Đã tải lên và cập nhật ảnh đại diện mới từ thiết bị!", "success");
+            });
+            directInput.value = "";
+          });
+        }
+
+        // Tải ảnh avatar bên trong Modal Chỉnh Sửa Hồ Sơ
+        const modalAvatarBtn = document.getElementById("btnChooseAvatarModal");
+        const modalAvatarInput = document.getElementById("modalAvatarFileInput");
+        const modalRemoveAvatarBtn = document.getElementById("btnRemoveAvatarModal");
+        const modalAvatarHidden = document.getElementById("profileInputAvatarHidden");
+        const modalAvatarPrev = document.getElementById("modalAvatarPreview");
+
+        if (modalAvatarBtn && modalAvatarInput) {
+          modalAvatarBtn.addEventListener("click", () => modalAvatarInput.click());
+        }
+        if (modalAvatarInput) {
+          modalAvatarInput.addEventListener("change", (e) => {
+            const file = e.target.files && e.target.files[0];
+            if (!file) return;
+            processAvatarFile(file, (base64) => {
+              if (modalAvatarHidden) modalAvatarHidden.value = base64;
+              if (modalAvatarPrev) {
+                modalAvatarPrev.innerHTML = `<img src="${base64}" alt="Avatar Preview" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />`;
+              }
+              Utils.toast("Đã chọn ảnh đại diện từ thiết bị!", "success");
+            });
+            modalAvatarInput.value = "";
+          });
+        }
+        if (modalRemoveAvatarBtn) {
+          modalRemoveAvatarBtn.addEventListener("click", () => {
+            if (modalAvatarHidden) modalAvatarHidden.value = "";
+            const fullName = document.getElementById("profileInputFullName").value.trim() || "User";
+            const inits = fullName.split(/\s+/).slice(-2).map((w) => w[0]).join("").toUpperCase() || "KH";
+            if (modalAvatarPrev) modalAvatarPrev.textContent = inits;
+            Utils.toast("Đã chuyển sang dùng chữ viết tắt họ tên.", "info");
+          });
+        }
+
+        // 3. Tab navigation trong Modal Chỉnh Sửa Hồ Sơ
+        document.querySelectorAll(".modal-tab-btn").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const targetId = btn.getAttribute("data-tab");
+            document.querySelectorAll(".modal-tab-btn").forEach((b) => b.classList.remove("active"));
+            document.querySelectorAll(".modal-tab-pane").forEach((p) => p.classList.remove("active"));
+            btn.classList.add("active");
+            const targetPane = document.getElementById(targetId);
+            if (targetPane) targetPane.classList.add("active");
+          });
+        });
+
+        // Xử lý mở Modal Chỉnh Sửa Hồ Sơ Cá Nhân toàn diện
+        function openEditProfileModal(initialTab = "tabProfileBasic") {
+          const u = Auth.current();
+          if (!u) return;
+
+          const fullName = u.fullName || "";
+          let initials = "KH";
+          if (u.avatar && !u.avatar.startsWith("http") && !u.avatar.startsWith("data:") && u.avatar.length <= 4) {
+            initials = u.avatar.toUpperCase();
+          } else {
+            initials = fullName
+              .trim()
+              .split(/\s+/)
+              .slice(-2)
+              .map((w) => w[0])
+              .join("")
+              .toUpperCase() || "KH";
+          }
+
+          // Tab 1: Cơ bản
+          document.getElementById("profileInputFullName").value = fullName;
+          document.getElementById("profileInputUsername").value = u.username || (u.email ? u.email.split("@")[0] : "");
+          document.getElementById("profileInputPhone").value = u.phone || "";
+          document.getElementById("profileInputEmail").value = u.email || "";
+          document.getElementById("profileInputDob").value = u.dob || u.kycData?.dob || "18/09/1994";
+          document.getElementById("profileSelectGender").value = u.gender || u.kycData?.gender || "Nam";
+          document.getElementById("profileInputAddress").value = u.address || u.kycData?.address || "";
+          document.getElementById("profileInputBio").value = u.bio || "";
+
+          // Cập nhật xem trước avatar trong modal
+          const curAvatar = u.avatar || "";
+          if (modalAvatarHidden) modalAvatarHidden.value = curAvatar;
+          if (modalAvatarPrev) {
+            if (curAvatar && (curAvatar.startsWith("http") || curAvatar.startsWith("data:image"))) {
+              modalAvatarPrev.innerHTML = `<img src="${curAvatar}" alt="${fullName}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />`;
+            } else {
+              modalAvatarPrev.textContent = initials;
+            }
+          }
+
+          // Tab 2: Vai trò & Ngành hàng
+          if (u.role === "ADMIN" || u.role === "admin") {
+            document.getElementById("profileSelectRole").value = "ADMIN";
+            document.getElementById("profileInputMembershipTitle").value = u.membershipTitle || "ROOT SUPER ADMIN";
+            document.getElementById("profileInputAddress").placeholder = "Miễn trừ đối với Admin (Tự động dùng Trụ sở Quản Trị)";
+          } else {
+            document.getElementById("profileSelectRole").value = u.role || "buyer";
+            document.getElementById("profileInputMembershipTitle").value = u.membershipTitle || (u.role === "seller" ? "TOP SELLER C2C" : "VIP BUYER");
+          }
+          document.getElementById("profileSelectCategory").value = u.interestCategory || "sneakers";
+
+          // Tab 3: Ngân hàng Napas
+          document.getElementById("profileSelectBank").value = u.bankName || (u.role === "seller" ? "Vietcombank" : "Techcombank");
+          document.getElementById("profileInputBankNumber").value = u.bankAccountNumber || (u.role === "seller" ? "0071 0009 9999 9" : "1903 6888 8888 8");
+          document.getElementById("profileInputBankHolder").value = (u.bankAccountName || u.fullName || "").toUpperCase();
+
+          // Tab 4: Mật khẩu
+          document.getElementById("profileInputNewPassword").value = "";
+          document.getElementById("profileInputConfirmPassword").value = "";
+
+          // Reset về tab được chọn
+          const tabBtn = document.querySelector(`.modal-tab-btn[data-tab="${initialTab}"]`) || document.querySelector('.modal-tab-btn[data-tab="tabProfileBasic"]');
+          if (tabBtn) tabBtn.click();
+
+          Utils.openModal("editProfileModal");
+        }
+
+        document.getElementById("btnOpenEditProfile").addEventListener("click", () => openEditProfileModal("tabProfileBasic"));
+        const btnEditTop = document.getElementById("btnEditPersonalInfoTop");
+        if (btnEditTop) btnEditTop.addEventListener("click", () => openEditProfileModal("tabProfileBasic"));
+        const btnEditBottom = document.getElementById("btnEditPersonalInfoBottom");
+        if (btnEditBottom) btnEditBottom.addEventListener("click", () => openEditProfileModal("tabProfileBasic"));
+        const btnQuickPwd = document.getElementById("btnQuickChangePassword");
+        if (btnQuickPwd) btnQuickPwd.addEventListener("click", () => openEditProfileModal("tabProfileSecurity"));
+
+        // Submit form chỉnh sửa hồ sơ toàn diện
+        document.getElementById("editProfileForm").addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          const fullName = document.getElementById("profileInputFullName").value.trim();
+          const username = document.getElementById("profileInputUsername").value.trim().replace(/^@/, "");
+          const phone = document.getElementById("profileInputPhone").value.trim();
+          const email = document.getElementById("profileInputEmail").value.trim();
+          const dob = document.getElementById("profileInputDob").value.trim();
+          const gender = document.getElementById("profileSelectGender").value;
+          let address = document.getElementById("profileInputAddress").value.trim();
+          const avatar = (modalAvatarHidden ? modalAvatarHidden.value : "").trim();
+          const bio = document.getElementById("profileInputBio").value.trim();
+
+          const curUser = Auth.current();
+          const isAdminUser = curUser && (curUser.role === "ADMIN" || curUser.role === "admin");
+
+          if (!address && isAdminUser) {
+            address = curUser.address || "Trung Tâm Điều Hành Toàn Sàn HYBRID.STORE, Landmark 81 (Đặc quyền Quản trị)";
+          }
+
+          const role = isAdminUser ? "ADMIN" : document.getElementById("profileSelectRole").value;
+          const membershipTitle = isAdminUser ? "ROOT SUPER ADMIN" : document.getElementById("profileInputMembershipTitle").value.trim();
+          const interestCategory = document.getElementById("profileSelectCategory").value;
+
+          const bankName = document.getElementById("profileSelectBank").value;
+          const bankAccountNumber = document.getElementById("profileInputBankNumber").value.trim();
+          const bankAccountName = document.getElementById("profileInputBankHolder").value.trim();
+
+          const newPassword = document.getElementById("profileInputNewPassword").value;
+          const confirmPassword = document.getElementById("profileInputConfirmPassword").value;
+
+          if (!fullName || !phone || !email || !username) {
+            Utils.toast("Vui lòng điền đầy đủ họ tên, username, số điện thoại và email.", "warning");
+            return;
+          }
+
+          if (newPassword) {
+            if (newPassword.length < 6) {
+              Utils.toast("Mật khẩu mới phải có ít nhất 6 ký tự.", "warning");
+              return;
+            }
+            if (newPassword !== confirmPassword) {
+              Utils.toast("Mật khẩu xác nhận không khớp.", "error");
+              return;
+            }
+          }
+
+          const res = Auth.updateProfile({
+            fullName,
+            username,
+            phone,
+            email,
+            dob,
+            gender,
+            address,
+            avatar,
+            bio,
+            role,
+            membershipTitle,
+            interestCategory,
+            bankName,
+            bankAccountNumber,
+            bankAccountName,
+            newPassword: newPassword || undefined,
+          });
+
+          if (res.ok) {
+            Utils.closeModal("editProfileModal");
+            renderProfile();
+            Utils.toast("Đã cập nhật toàn bộ thông tin hồ sơ cá nhân thành công!", "success");
+          } else {
+            Utils.toast(res.error || "Cập nhật hồ sơ thất bại.", "error");
+          }
+        });
+
+                // 4. Xử lý mở Modal nộp hồ sơ CCCD & Tải ảnh 2 mặt
+        let cccdFrontImage = null;
+        let cccdBackImage = null;
+
+        function processCccdImage(file, side, callback) {
+          if (!file) return;
+          if (!file.type || !file.type.startsWith("image/")) {
+            Utils.toast("Vui lòng chọn tệp hình ảnh hợp lệ (JPG, PNG, WEBP).", "warning");
+            return;
+          }
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+              const canvas = document.createElement("canvas");
+              const maxW = 900;
+              let w = img.width;
+              let h = img.height;
+              if (w > maxW) {
+                h = Math.round((h * maxW) / w);
+                w = maxW;
+              }
+              canvas.width = w;
+              canvas.height = h;
+              const ctx = canvas.getContext("2d");
+              ctx.drawImage(img, 0, 0, w, h);
+              const base64 = canvas.toDataURL("image/jpeg", 0.85);
+              callback(base64);
+            };
+            img.onerror = () => {
+              Utils.toast("Không thể đọc tệp ảnh đã chọn.", "error");
+            };
+            img.src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        }
+
+        function setFrontPreview(base64) {
+          cccdFrontImage = base64;
+          const box = document.getElementById("btnUploadFront");
+          const placeholder = document.getElementById("placeholderFront");
+          const container = document.getElementById("previewFrontContainer");
+          const img = document.getElementById("imgPreviewFront");
+          if (base64) {
+            img.src = base64;
+            placeholder.style.display = "none";
+            container.style.display = "block";
+            box.classList.add("has-file");
+            box.classList.remove("has-error");
+          } else {
+            img.src = "";
+            placeholder.style.display = "block";
+            container.style.display = "none";
+            box.classList.remove("has-file");
+          }
+          checkUploadErrors();
+        }
+
+        function setBackPreview(base64) {
+          cccdBackImage = base64;
+          const box = document.getElementById("btnUploadBack");
+          const placeholder = document.getElementById("placeholderBack");
+          const container = document.getElementById("previewBackContainer");
+          const img = document.getElementById("imgPreviewBack");
+          if (base64) {
+            img.src = base64;
+            placeholder.style.display = "none";
+            container.style.display = "block";
+            box.classList.add("has-file");
+            box.classList.remove("has-error");
+          } else {
+            img.src = "";
+            placeholder.style.display = "block";
+            container.style.display = "none";
+            box.classList.remove("has-file");
+          }
+          checkUploadErrors();
+        }
+
+        function checkUploadErrors() {
+          const errBox = document.getElementById("cccdUploadError");
+          if (!errBox) return;
+          if (cccdFrontImage && cccdBackImage) {
+            errBox.style.display = "none";
+            document.getElementById("btnUploadFront").classList.remove("has-error");
+            document.getElementById("btnUploadBack").classList.remove("has-error");
+          }
+        }
+
+        // Kích hoạt input file
+        const fileFront = document.getElementById("fileCccdFront");
+        const fileBack = document.getElementById("fileCccdBack");
+        const boxFront = document.getElementById("btnUploadFront");
+        const boxBack = document.getElementById("btnUploadBack");
+
+        if (boxFront && fileFront) {
+          boxFront.addEventListener("click", (e) => {
+            if (e.target.closest("#btnRemoveFront")) return;
+            fileFront.click();
+          });
+          fileFront.addEventListener("change", (e) => {
+            const f = e.target.files && e.target.files[0];
+            if (f) {
+              processCccdImage(f, "front", (b64) => {
+                setFrontPreview(b64);
+                Utils.toast("Đã tải lên ảnh Mặt Trước CCCD thành công!", "success");
+              });
+            }
+            fileFront.value = "";
+          });
+
+          // Drag and drop
+          ["dragover", "dragenter"].forEach((evt) => {
+            boxFront.addEventListener(evt, (e) => { e.preventDefault(); boxFront.classList.add("dragover"); });
+          });
+          ["dragleave", "drop"].forEach((evt) => {
+            boxFront.addEventListener(evt, (e) => { e.preventDefault(); boxFront.classList.remove("dragover"); });
+          });
+          boxFront.addEventListener("drop", (e) => {
+            const f = e.dataTransfer.files && e.dataTransfer.files[0];
+            if (f) {
+              processCccdImage(f, "front", (b64) => {
+                setFrontPreview(b64);
+                Utils.toast("Đã tải lên ảnh Mặt Trước CCCD thành công!", "success");
+              });
+            }
+          });
+        }
+
+        if (boxBack && fileBack) {
+          boxBack.addEventListener("click", (e) => {
+            if (e.target.closest("#btnRemoveBack")) return;
+            fileBack.click();
+          });
+          fileBack.addEventListener("change", (e) => {
+            const f = e.target.files && e.target.files[0];
+            if (f) {
+              processCccdImage(f, "back", (b64) => {
+                setBackPreview(b64);
+                Utils.toast("Đã tải lên ảnh Mặt Sau CCCD thành công!", "success");
+              });
+            }
+            fileBack.value = "";
+          });
+
+          // Drag and drop
+          ["dragover", "dragenter"].forEach((evt) => {
+            boxBack.addEventListener(evt, (e) => { e.preventDefault(); boxBack.classList.add("dragover"); });
+          });
+          ["dragleave", "drop"].forEach((evt) => {
+            boxBack.addEventListener(evt, (e) => { e.preventDefault(); boxBack.classList.remove("dragover"); });
+          });
+          boxBack.addEventListener("drop", (e) => {
+            const f = e.dataTransfer.files && e.dataTransfer.files[0];
+            if (f) {
+              processCccdImage(f, "back", (b64) => {
+                setBackPreview(b64);
+                Utils.toast("Đã tải lên ảnh Mặt Sau CCCD thành công!", "success");
+              });
+            }
+          });
+        }
+
+        // Nút xóa ảnh đã chọn
+        document.getElementById("btnRemoveFront").addEventListener("click", (e) => {
+          e.stopPropagation();
+          setFrontPreview(null);
+          Utils.toast("Đã hủy ảnh mặt trước, vui lòng chọn lại.", "info");
+        });
+        document.getElementById("btnRemoveBack").addEventListener("click", (e) => {
+          e.stopPropagation();
+          setBackPreview(null);
+          Utils.toast("Đã hủy ảnh mặt sau, vui lòng chọn lại.", "info");
+        });
+
+        // Xem ảnh phóng to (Lightbox)
+        function openCccdLightbox(imgSrc, title) {
+          if (!imgSrc) return;
+          const largeImg = document.getElementById("cccdViewerLargeImg");
+          const viewerTitle = document.getElementById("cccdViewerTitle");
+          if (largeImg) largeImg.src = imgSrc;
+          if (viewerTitle) viewerTitle.textContent = title || "Chi Tiết Ảnh Thẻ CCCD Gắn Chip";
+          Utils.openModal("cccdImageViewerModal");
+        }
+        const savedFront = document.getElementById("mainCccdFrontImg");
+        const savedBack = document.getElementById("mainCccdBackImg");
+        if (savedFront) {
+          savedFront.addEventListener("click", () => openCccdLightbox(savedFront.src, "Mặt Trước CCCD Gắn Chip (Ảnh, Quốc Huy & Số Thẻ)"));
+        }
+        if (savedBack) {
+          savedBack.addEventListener("click", () => openCccdLightbox(savedBack.src, "Mặt Sau CCCD Gắn Chip (Chip NFC & Mã Đọc Máy MRZ)"));
+        }
+
+        // Mở Modal nộp hồ sơ CCCD
+        document.getElementById("btnOpenKycModal").addEventListener("click", () => {
+          const u = Auth.current();
+          if (u && (u.role === "ADMIN" || u.role === "admin")) {
+            Utils.toast("Tài khoản Quản Trị Viên đã được cấp toàn quyền tối cao, miễn trừ hoàn toàn thủ tục nộp CCCD!", "info");
+            return;
+          }
+          if (u) {
+            document.getElementById("inputCardFullName").value = (u.kycData?.cardFullName || u.fullName || "").toUpperCase();
+            if (u.kycData?.idCardNumber) {
+              document.getElementById("inputIdCardNumber").value = u.kycData.idCardNumber;
+            }
+            if (u.kycData?.dob) {
+              document.getElementById("inputDob").value = u.kycData.dob;
+            }
+            if (u.kycData?.issueDate) {
+              document.getElementById("inputIssueDate").value = u.kycData.issueDate;
+            }
+            if (u.kycData?.address || u.address) {
+              document.getElementById("inputAddress").value = u.kycData?.address || u.address;
+            }
+            // Khôi phục ảnh đã có (nếu có)
+            if (u.kycData?.frontImage) {
+              setFrontPreview(u.kycData.frontImage);
+            } else {
+              setFrontPreview(null);
+            }
+            if (u.kycData?.backImage) {
+              setBackPreview(u.kycData.backImage);
+            } else {
+              setBackPreview(null);
+            }
+          }
+          const errBox = document.getElementById("cccdUploadError");
+          if (errBox) errBox.style.display = "none";
+          Utils.openModal("kycModal");
+        });
+
+        // Gửi form nộp hồ sơ CCCD cho Admin duyệt (Bắt buộc cả 2 mặt)
+        document.getElementById("kycSubmitForm").addEventListener("submit", (e) => {
+          e.preventDefault();
+          const cardFullName = document.getElementById("inputCardFullName").value.trim();
+          const idCardNumber = document.getElementById("inputIdCardNumber").value.trim();
+          const dob = document.getElementById("inputDob").value.trim();
+          const issueDate = document.getElementById("inputIssueDate").value.trim();
+          const gender = document.getElementById("inputGender").value;
+          const address = document.getElementById("inputAddress").value.trim();
+
+          if (!cardFullName || !idCardNumber || !dob || !address) {
+            Utils.toast("Vui lòng điền đầy đủ các mục bắt buộc (*).", "warning");
+            return;
+          }
+
+          if (idCardNumber.length !== 12 || !/^\d+$/.test(idCardNumber)) {
+            Utils.toast("Số thẻ CCCD phải gồm đúng 12 chữ số theo quy định.", "error");
+            return;
+          }
+
+          // KIỂM TRA BẮT BUỘC ĐỦ CẢ 2 MẶT ẢNH TRƯỚC VÀ SAU
+          let missingSides = [];
+          if (!cccdFrontImage) {
+            boxFront.classList.add("has-error");
+            missingSides.push("Mặt Trước");
+          }
+          if (!cccdBackImage) {
+            boxBack.classList.add("has-error");
+            missingSides.push("Mặt Sau");
+          }
+
+          if (missingSides.length > 0) {
+            const errBox = document.getElementById("cccdUploadError");
+            const errText = document.getElementById("cccdUploadErrorText");
+            const sideMsg = missingSides.join(" và ");
+            if (errText) {
+              errText.textContent = `Yêu cầu bắt buộc: Bạn chưa tải lên ảnh [${sideMsg}] của thẻ CCCD gắn chip! Vui lòng tải đủ 2 mặt.`;
+            }
+            if (errBox) errBox.style.display = "block";
+            Utils.toast(`Bắt buộc phải tải lên ảnh [${sideMsg}] của CCCD gắn chip (*)! `, "error");
+            return;
+          }
+
+          const res = Auth.submitKyc({
+            cardFullName,
+            idCardNumber,
+            dob,
+            issueDate: issueDate || "24/02/2023",
+            gender,
+            address,
+            faceMatch: 99.6,
+            frontImage: cccdFrontImage,
+            backImage: cccdBackImage,
+          });
+
+          Utils.closeModal("kycModal");
+
+          if (res.ok) {
+            renderProfile();
+            Utils.confirm(
+              {
+                title: "Gửi Hồ Sơ Xác Thực Thành Công!",
+                message: "Hồ sơ CCCD gắn chip (đầy đủ 2 mặt) của bạn đã được chuyển tới Ban Quản Trị. Vui lòng chờ Admin xét duyệt để kích hoạt đầy đủ quyền mua sắm và đăng bán.",
+                confirmText: "Đã Hiểu",
+                cancelText: "",
+              },
+              () => { renderProfile(); },
+              () => { renderProfile(); }
+            );
+          } else {
+            Utils.toast(res.error || "Gửi hồ sơ thất bại.", "error");
+          }
+        });
+
+        // 5. Quản Lý Sổ Địa Chỉ Giao Nhận Hàng (Phân lập riêng biệt theo từng tài khoản)
+        function getAddresses() {
+          return Auth.getAddresses();
+        }
+
+        function saveAddresses(list) {
+          Auth.saveAddresses(list);
+          renderAddresses();
+        }
+
+        function renderAddresses() {
+          const container = document.getElementById("addressListContainer");
+          if (!container) return;
+          const list = getAddresses();
+
+          if (!list || list.length === 0) {
+            container.innerHTML = `
+              <div class="panel p-5 text-center text-muted" style="background: var(--neutral-850); border: 1px dashed var(--border); border-radius: var(--radius-lg);">
+                <span class="material-symbols-outlined text-secondary" style="font-size: 40px;">location_off</span>
+                <p class="text-sm mt-2 mb-1 fw-600 text-text">Tài khoản này chưa có địa chỉ giao nhận nào</p>
+                <p class="text-xs text-muted mb-3">Thêm địa chỉ giao nhận để shipper hỏa tốc 2H giao hàng chính xác tới bạn.</p>
+                <button class="btn btn-primary btn-sm" id="btnEmptyAddAddr" type="button">
+                  <span class="material-symbols-outlined icon-xs">add_location_alt</span> + Thêm Địa Chỉ Nhận Hàng Đầu Tiên
+                </button>
+              </div>
+            `;
+            const emptyBtn = document.getElementById("btnEmptyAddAddr");
+            if (emptyBtn) emptyBtn.addEventListener("click", openAddAddressModal);
+            return;
+          }
+
+          container.innerHTML = list
+            .map((item) => {
+              const typeLabel = item.type === "office" ? "VĂN PHÒNG" : "NHÀ RIÊNG";
+              const typeIcon = item.type === "office" ? "business" : "home";
+              const defaultBadge = item.isDefault
+                ? `<span class="badge badge-primary">MẶC ĐỊNH</span>`
+                : "";
+              const expressBadge = item.express2h
+                ? `<span class="badge badge-secondary">GIAO HỎA TỐC 2H</span>`
+                : "";
+
+              return `
+                <div class="address-card ${item.isDefault ? "is-default" : ""}">
+                  <div class="flex items-start gap-3 flex-1">
+                    <span class="material-symbols-outlined text-primary mt-1" style="font-size: 24px;">${typeIcon}</span>
+                    <div class="flex-1">
+                      <div class="flex items-center gap-2 flex-wrap">
+                        <strong class="text-sm">${item.name}</strong>
+                        <span class="text-xs text-muted mono">• ${item.phone}</span>
+                        ${defaultBadge}
+                        ${expressBadge}
+                        <span class="badge">${typeLabel}</span>
+                      </div>
+                      <div class="text-xs text-text mt-1">
+                        ${item.detail}
+                      </div>
+                      <div class="text-xs text-muted mt-1">
+                        ${item.city}
+                      </div>
+                      ${item.note ? `<div class="text-xs text-secondary mt-1 flex items-center gap-1"><span class="material-symbols-outlined icon-xs">info</span> Ghi chú: ${item.note}</div>` : ""}
+                    </div>
+                  </div>
+                  <div class="address-card-actions">
+                    ${
+                      !item.isDefault
+                        ? `<button class="btn btn-ghost btn-sm text-xs btn-set-default" type="button" onclick="window.profileSetDefaultAddr('${item.id}')" title="Đặt làm mặc định">Đặt Mặc Định</button>`
+                        : ""
+                    }
+                    <button class="icon-btn text-muted" type="button" onclick="window.profileEditAddr('${item.id}')" title="Chỉnh sửa">
+                      <span class="material-symbols-outlined icon-sm">edit</span>
+                    </button>
+                    <button class="icon-btn text-danger" type="button" onclick="window.profileDeleteAddr('${item.id}')" title="Xóa địa chỉ">
+                      <span class="material-symbols-outlined icon-sm">delete</span>
+                    </button>
+                  </div>
+                </div>
+              `;
+            })
+            .join("");
+        }
+
+        // Khởi tạo bộ chọn địa giới hành chính 3 cấp chuẩn Việt Nam (Tỉnh/TP -> Quận/Huyện -> Phường/Xã)
+        if (Utils && Utils.VietnamLocations && typeof Utils.VietnamLocations.setupSelects === "function") {
+          Utils.VietnamLocations.setupSelects({
+            provinceSelect: document.getElementById("addrProvince"),
+            districtSelect: document.getElementById("addrDistrict"),
+            wardSelect: document.getElementById("addrWard"),
+            onAddressChange: () => {
+              const prov = document.getElementById("addrProvince").value;
+              const dist = document.getElementById("addrDistrict").value;
+              const ward = document.getElementById("addrWard").value;
+              const parts = [ward, dist, prov].filter(Boolean);
+              document.getElementById("addrCity").value = parts.join(", ");
+            }
+          });
+        }
+
+        function openAddAddressModal() {
+          const u = Auth.current() || {};
+          document.getElementById("addressModalTitle").innerHTML = `
+            <span class="material-symbols-outlined text-secondary">add_location_alt</span>
+            <span>Thêm Địa Chỉ Giao Nhận Mới</span>
+          `;
+          document.getElementById("addrEditId").value = "";
+          document.getElementById("addrReceiverName").value = u.fullName || "";
+          document.getElementById("addrPhone").value = u.phone || "";
+          const provSelect = document.getElementById("addrProvince");
+          if (provSelect) {
+            provSelect.value = "Hà Nội";
+            provSelect.dispatchEvent(new Event("change"));
+          }
+          document.getElementById("addrDetail").value = "";
+          document.getElementById("addrType").value = u.role === "seller" ? "office" : "home";
+          document.getElementById("addrNote").value = "";
+          document.getElementById("addrIsDefault").checked = getAddresses().length === 0;
+          Utils.openModal("addressModal");
+        }
+
+        function openEditAddressModal(id) {
+          const list = getAddresses();
+          const item = list.find((a) => a.id === id);
+          if (!item) return;
+
+          document.getElementById("addressModalTitle").innerHTML = `
+            <span class="material-symbols-outlined text-secondary">edit_location_alt</span>
+            <span>Chỉnh Sửa Địa Chỉ Giao Nhận</span>
+          `;
+          document.getElementById("addrEditId").value = item.id;
+          document.getElementById("addrReceiverName").value = item.name;
+          document.getElementById("addrPhone").value = item.phone;
+          document.getElementById("addrDetail").value = item.detail;
+          document.getElementById("addrType").value = item.type || "home";
+          document.getElementById("addrNote").value = item.note || "";
+          document.getElementById("addrIsDefault").checked = !!item.isDefault;
+
+          if (item.city && Utils && Utils.VietnamLocations) {
+            const provinces = Utils.VietnamLocations.getProvinces();
+            const matchedProv = provinces.find((p) => item.city.includes(p));
+            if (matchedProv) {
+              const provSelect = document.getElementById("addrProvince");
+              provSelect.value = matchedProv;
+              provSelect.dispatchEvent(new Event("change"));
+
+              const dists = Utils.VietnamLocations.getDistricts(matchedProv);
+              const matchedDist = dists.find((d) => item.city.includes(d));
+              if (matchedDist) {
+                const distSelect = document.getElementById("addrDistrict");
+                distSelect.value = matchedDist;
+                distSelect.dispatchEvent(new Event("change"));
+
+                const wards = Utils.VietnamLocations.getWards(matchedProv, matchedDist);
+                const matchedWard = wards.find((w) => item.city.includes(w));
+                if (matchedWard) {
+                  const wardSelect = document.getElementById("addrWard");
+                  wardSelect.value = matchedWard;
+                  wardSelect.dispatchEvent(new Event("change"));
+                }
+              }
+            }
+          }
+          document.getElementById("addrCity").value = item.city;
+          Utils.openModal("addressModal");
+        }
+
+        function deleteAddress(id) {
+          Utils.confirm(
+            {
+              title: "Xóa Địa Chỉ",
+              message: "Bạn có chắc chắn muốn xóa địa chỉ giao nhận này khỏi sổ địa chỉ của tài khoản?",
+              confirmText: "Xóa",
+              cancelText: "Hủy",
+            },
+            () => {
+              Auth.deleteAddress(id);
+              renderAddresses();
+              Utils.toast("Đã xóa địa chỉ thành công.", "info");
+            }
+          );
+        }
+
+        function setDefaultAddress(id) {
+          const updated = Auth.setDefaultAddress(id);
+          renderAddresses();
+          const def = updated.find((a) => a.id === id);
+          if (def && def.detail) {
+            const addrString = def.detail + (def.city ? ", " + def.city : "");
+            Auth.updateProfile({ address: addrString });
+            renderProfile();
+          }
+          Utils.toast("Đã chuyển thành địa chỉ nhận hàng mặc định.", "success");
+        }
+
+        // Export globals for inline HTML onclick handlers
+        window.profileEditAddr = openEditAddressModal;
+        window.profileDeleteAddr = deleteAddress;
+        window.profileSetDefaultAddr = setDefaultAddress;
+        window.setDefaultAddress = setDefaultAddress;
+
+        document.getElementById("btnAddAddress").addEventListener("click", openAddAddressModal);
+
+        // Submit form thêm / sửa địa chỉ
+        document.getElementById("addressForm").addEventListener("submit", (e) => {
+          e.preventDefault();
+          const editId = document.getElementById("addrEditId").value;
+          const name = document.getElementById("addrReceiverName").value.trim();
+          const phone = document.getElementById("addrPhone").value.trim();
+          const prov = document.getElementById("addrProvince").value;
+          const dist = document.getElementById("addrDistrict").value;
+          const ward = document.getElementById("addrWard").value;
+          let city = [ward, dist, prov].filter(Boolean).join(", ");
+          if (!city) city = document.getElementById("addrCity").value.trim();
+          const detail = document.getElementById("addrDetail").value.trim();
+          const type = document.getElementById("addrType").value;
+          const note = document.getElementById("addrNote").value.trim();
+          const isDefault = document.getElementById("addrIsDefault").checked;
+
+          if (!name || !phone || !city || !detail) {
+            Utils.toast("Vui lòng điền đầy đủ tên, số điện thoại, tỉnh thành và địa chỉ chi tiết.", "warning");
+            return;
+          }
+
+          if (editId) {
+            Auth.updateAddress(editId, { name, phone, city, detail, type, note, isDefault });
+          } else {
+            Auth.addAddress({ name, phone, city, detail, type, note, isDefault });
+          }
+
+          // Tự động đồng bộ địa chỉ mặc định vào thông tin cư trú của tài khoản
+          if (isDefault || getAddresses().length === 1) {
+            const fullAddress = detail + ", " + city;
+            Auth.updateProfile({ address: fullAddress });
+            renderProfile();
+          }
+
+          renderAddresses();
+          Utils.closeModal("addressModal");
+          Utils.toast(editId ? "Đã cập nhật địa chỉ giao nhận thành công!" : "Đã thêm địa chỉ giao nhận mới thành công!", "success");
+        });
+
+        // Lắng nghe cập nhật sổ địa chỉ từ các sự kiện khác
+        window.addEventListener("auth:addresses-updated", () => {
+          renderAddresses();
+        });
+
+        // Khởi tạo danh sách địa chỉ
+        renderAddresses();
+
+        // 6. Nút ngân hàng, đăng xuất
+        document.getElementById("btnAddBank").addEventListener("click", () => {
+          // Mở tab ngân hàng trong modal chỉnh sửa hồ sơ
+          const editBtn = document.getElementById("btnOpenEditProfile");
+          if (editBtn) editBtn.click();
+          setTimeout(() => {
+            const bankTabBtn = document.querySelector('.modal-tab-btn[data-tab="tabProfileBank"]');
+            if (bankTabBtn) bankTabBtn.click();
+          }, 50);
+        });
+
+        document.getElementById("btnLogoutAction").addEventListener("click", () => {
+          Utils.confirm(
+            {
+              title: "Đăng Xuất",
+              message: "Bạn có chắc chắn muốn đăng xuất tài khoản?",
+              confirmText: "Đăng Xuất",
+              cancelText: "Ở lại",
+            },
+            () => {
+              Auth.logout();
+              window.location.href = "../../index.html";
+            }
+          );
+        });
+
+        // 7. Xử lý đóng modal KYC & hủy bỏ an toàn
+        function closeKycModal() {
+          Utils.closeModal("kycModal");
+        }
+
+        const btnCloseIcon = document.getElementById("btnCloseKycModal");
+        if (btnCloseIcon) btnCloseIcon.addEventListener("click", closeKycModal);
+
+        const btnCancel = document.getElementById("btnCancelKycModal");
+        if (btnCancel) btnCancel.addEventListener("click", closeKycModal);
+
+        // Đóng modal khi bấm các nút có data-close
+        document.querySelectorAll("[data-close]").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            const backdrop = btn.closest(".modal-backdrop") || document.getElementById("kycModal");
+            if (backdrop) Utils.closeModal(backdrop);
+          });
+        });
+
+        // Đóng modal khi nhấp ra ngoài vùng modal (backdrop click)
+        ["kycModal", "editProfileModal", "addressModal"].forEach((id) => {
+          const mb = document.getElementById(id);
+          if (mb) {
+            mb.addEventListener("click", (e) => {
+              if (e.target === mb) Utils.closeModal(mb);
+            });
+          }
+        });
+
+        // Bấm phím ESC để đóng modal
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") {
+            document.querySelectorAll(".modal-backdrop.is-open").forEach((m) => {
+              Utils.closeModal(m);
+            });
+          }
+        });
+      })();
+    </script>
+
+    <script src="../../js/components.js"></script>
+    <!-- ===== MODAL 4: PHÓNG TO ẢNH CCCD ===== -->
+    <div class="modal-backdrop" id="cccdImageViewerModal" role="dialog" aria-modal="true" onclick="if(event.target===this)Utils.closeModal('cccdImageViewerModal')">
+      <div class="modal" style="max-width: 650px;">
+        <div class="modal-head">
+          <h4 class="modal-title" id="cccdViewerTitle">Chi Tiết Ảnh Thẻ CCCD Gắn Chip</h4>
+          <button class="modal-close" type="button" onclick="Utils.closeModal('cccdImageViewerModal')" aria-label="Đóng"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <div class="modal-body text-center p-3">
+          <img id="cccdViewerLargeImg" src="" alt="Ảnh CCCD" style="max-width: 100%; max-height: 480px; object-fit: contain; border-radius: var(--radius-lg); border: 1px solid var(--border); background: #000;" />
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

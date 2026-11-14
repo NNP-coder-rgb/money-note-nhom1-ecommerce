@@ -1,0 +1,623 @@
+/* login.css — chỉ chứa phần RIÊNG của trang đăng nhập.
+   Phần chung (màu, nút, form, badge, header, footer, icon) nằm trong base.css */
+
+/* Nền + vầng sáng */
+.login-page {
+  position: relative;
+  overflow: hidden;
+  padding: var(--sp-8) 0;
+}
+.login-page::before,
+.login-page::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(130px);
+}
+.login-page::before {
+  top: -120px;
+  left: -80px;
+  width: 384px;
+  height: 384px;
+  background: rgba(139, 92, 246, 0.2);
+}
+.login-page::after {
+  bottom: 20px;
+  left: 33%;
+  width: 256px;
+  height: 256px;
+  background: rgba(255, 107, 74, 0.12);
+}
+.login-page .container {
+  position: relative;
+  z-index: 1;
+}
+
+.login-centered-wrap {
+  max-width: 480px;
+  width: 100%;
+  margin: 0 auto;
+}
+.login-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: var(--sp-7);
+  align-items: start;
+}
+.login-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+.login-info .lead {
+  max-width: 640px;
+  font-size: var(--fs-lg);
+  color: var(--text-muted);
+}
+.login-info h1 {
+  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+}
+.headline-gradient {
+  background: linear-gradient(
+    90deg,
+    var(--primary-300),
+    var(--secondary-400),
+    var(--tertiary-300)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Chấm trạng thái nhấp nháy */
+.live-dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--secondary-400);
+}
+.live-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--secondary-400);
+  animation: ping 1.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@keyframes ping {
+  75%,
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+/* 4 ô ngành hàng */
+.cat-tiles {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.cat-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.cat-tile small {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--secondary-400);
+}
+.cat-tile strong {
+  font-family: var(--font-head);
+  font-size: var(--fs-sm);
+}
+
+/* 3 thẻ tính năng */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-4);
+}
+.feature-card {
+  padding: var(--sp-5);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition:
+    transform var(--t-base),
+    border-color var(--t-base);
+}
+.feature-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(139, 92, 246, 0.4);
+}
+.feature-icon {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  margin-bottom: var(--sp-3);
+  border-radius: var(--radius-md);
+  background: var(--accent-soft);
+  color: var(--primary-300);
+}
+.feature-icon.is-secondary {
+  background: rgba(6, 182, 212, 0.16);
+  color: var(--secondary-400);
+}
+.feature-icon.is-tertiary {
+  background: rgba(255, 107, 74, 0.16);
+  color: var(--tertiary-300);
+}
+.feature-card h3 {
+  margin: 4px 0;
+  font-size: var(--fs-lg);
+}
+.feature-card p {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+/* Dải thông số HSM */
+.hsm-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: var(--sp-4);
+  background: var(--neutral-900);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.hsm-title {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text);
+}
+.hsm-tags {
+  display: flex;
+  gap: var(--sp-2);
+}
+.tag-mono {
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  background: var(--bg-elevated);
+  border-radius: var(--radius-sm);
+}
+
+/* Thẻ đăng nhập */
+.login-card {
+  position: relative;
+  padding: var(--sp-6);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+.login-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 144px;
+  height: 144px;
+  background: linear-gradient(225deg, rgba(139, 92, 246, 0.2), transparent 60%);
+  pointer-events: none;
+}
+.login-card > * {
+  position: relative;
+}
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-5);
+  padding-bottom: var(--sp-4);
+  border-bottom: 1px solid var(--border);
+}
+.card-head .panel-title {
+  font-size: var(--fs-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.card-head a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+}
+
+.segmented.is-full {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+}
+.segmented.is-full button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+}
+
+.passkey-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: 12px 16px;
+  text-align: left;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition:
+    background var(--t-fast),
+    border-color var(--t-fast);
+}
+.passkey-btn:hover {
+  background: #22223a;
+  border-color: var(--border-strong);
+}
+.passkey-icon {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(6, 182, 212, 0.18);
+  color: var(--secondary-400);
+}
+.passkey-text {
+  flex: 1;
+  min-width: 0;
+}
+.passkey-text strong {
+  display: block;
+  font-family: var(--font-head);
+  font-size: var(--fs-sm);
+}
+.passkey-text small {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-faint);
+}
+
+.or-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-block: var(--sp-5);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-faint);
+}
+.or-divider::before,
+.or-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border-strong);
+}
+
+.login-card .form-label a {
+  font-size: var(--fs-xs);
+  text-transform: none;
+  letter-spacing: 0;
+}
+.remember-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-4);
+}
+.tag-secure {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--secondary-400);
+}
+
+.cert-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-top: var(--sp-5);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--border);
+}
+.cert-row span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-faint);
+  background: var(--neutral-900);
+  border-radius: var(--radius-sm);
+}
+
+.auth-security-note {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-top: var(--sp-4);
+  padding: var(--sp-3) var(--sp-4);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  background: var(--neutral-900);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.auth-security-note strong {
+  color: var(--text);
+}
+
+/* Footer trang auth */
+.footer-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+}
+.footer-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-5);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+.footer-badges span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ==========================================================================
+   Google Login, Phone OTP & Forgot Password Extensions
+   ========================================================================== */
+.btn-social-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  padding: 11px 16px;
+  background: #ffffff;
+  color: #1f2937;
+  border: 1px solid #e5e7eb;
+  border-radius: var(--radius-lg);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--t-fast);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: var(--sp-3);
+  text-decoration: none;
+}
+.btn-social-google:hover {
+  background: #f8fafc;
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+.btn-social-google svg {
+  flex-shrink: 0;
+}
+
+/* Google Auth Wrapper & Hint Row */
+.google-auth-wrapper {
+  margin-bottom: var(--sp-3);
+}
+.google-hint-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 6px;
+  padding: 0 4px;
+}
+.btn-text-link {
+  background: none;
+  border: none;
+  color: var(--secondary-400);
+  font-size: var(--fs-xs);
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  transition: color var(--t-fast);
+}
+.btn-text-link:hover {
+  color: var(--secondary-300);
+}
+.google-current-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: rgba(66, 133, 244, 0.08);
+  border: 1px solid rgba(66, 133, 244, 0.35);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--sp-3);
+}
+
+/* Tab chuyển phương thức đăng nhập */
+.login-method-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--border);
+  padding: 4px;
+  border-radius: var(--radius-md);
+  margin-bottom: var(--sp-4);
+}
+.login-method-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 10px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--t-fast);
+}
+.login-method-btn:hover {
+  color: var(--text);
+}
+.login-method-btn.active {
+  background: var(--neutral-800);
+  color: var(--primary-300);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+/* OTP Hints & Groups */
+.otp-input-group {
+  display: flex;
+  gap: 8px;
+}
+.btn-send-otp {
+  white-space: nowrap;
+  padding: 0 14px;
+  font-size: var(--fs-xs);
+  flex-shrink: 0;
+}
+.otp-hint-badge {
+  background: rgba(6, 182, 212, 0.08);
+  border: 1px dashed rgba(6, 182, 212, 0.4);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  font-size: var(--fs-xs);
+  color: var(--secondary-300);
+  margin-bottom: var(--sp-3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  line-height: 1.5;
+}
+.otp-code-highlight {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 14px;
+  color: #fff;
+  background: rgba(6, 182, 212, 0.2);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* Danh sách tài khoản Google trong modal */
+.google-account-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: var(--sp-3) 0 var(--sp-4);
+}
+.google-account-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--t-fast);
+  text-align: left;
+  width: 100%;
+  color: var(--text);
+}
+.google-account-item:hover {
+  background: rgba(66, 133, 244, 0.1);
+  border-color: rgba(66, 133, 244, 0.5);
+  transform: translateX(2px);
+}
+.google-avatar-mini {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 14px;
+  background: #4285f4;
+  color: #fff;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(66, 133, 244, 0.4);
+}
+
+/* Các bước trong modal Quên Mật Khẩu */
+.wizard-step {
+  display: none;
+}
+.wizard-step.active {
+  display: block;
+}
+
+@media (max-width: 1100px) {
+  .login-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .cat-tiles {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+  .login-card {
+    padding: var(--sp-5);
+  }
+}
+
+/* Chế độ Sáng / Light Theme */
+[data-theme="light"] .login-method-nav,
+body.light-theme .login-method-nav {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+[data-theme="light"] .login-method-btn.active,
+body.light-theme .login-method-btn.active {
+  background: #ffffff;
+  color: #7c3aed;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+[data-theme="light"] .google-account-item,
+body.light-theme .google-account-item {
+  background: #ffffff;
+  border-color: #e2e8f0;
+}
+[data-theme="light"] .google-account-item:hover,
+body.light-theme .google-account-item:hover {
+  background: #f0f7ff;
+  border-color: #93c5fd;
+}
+[data-theme="light"] .google-current-card,
+body.light-theme .google-current-card {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+}
