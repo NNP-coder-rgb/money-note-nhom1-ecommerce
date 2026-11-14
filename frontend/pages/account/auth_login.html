@@ -1,0 +1,795 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng Nhập | HYBRID.STORE</title>
+
+    <!-- Chống giật giao diện (Zero-FOUC Theme Init) -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("hybrid_theme") || "dark";
+          document.documentElement.setAttribute("data-theme", t);
+          if (t === "light")
+            document.documentElement.classList.add("light-theme");
+        } catch (e) {}
+      })();
+    </script>
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+
+    <!-- base.css trước, CSS riêng của trang sau -->
+    <link rel="stylesheet" href="../../css/base.css" />
+    <link rel="stylesheet" href="../../css/login.css" />
+  </head>
+  <body>
+    <!-- ===== HEADER ===== -->
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="../../index.html">
+          <span class="brand-mark"
+            ><span class="material-symbols-outlined">token</span></span
+          >
+          <span>HYBRID<span class="text-secondary">.STORE</span></span>
+        </a>
+
+        <nav class="nav">
+          <a href="auth_login.html" class="active" aria-current="page"
+            >Đăng nhập</a
+          >
+          <a href="auth_register.html">Đăng ký</a>
+        </nav>
+
+        <div class="header-actions">
+          <button
+            class="icon-btn theme-toggle-btn"
+            id="themeToggleBtn"
+            type="button"
+            title="Chuyển chế độ Sáng / Tối"
+            aria-label="Chuyển đổi giao diện"
+          >
+            <span class="material-symbols-outlined theme-toggle-icon"
+              >light_mode</span
+            >
+          </button>
+          <a class="icon-btn" href="../../index.html" title="Về trang chủ">
+            <span class="material-symbols-outlined">home</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== NỘI DUNG: FORM ĐĂNG NHẬP Ở CHÍNH GIỮA ===== -->
+    <main class="login-page">
+      <div class="container">
+        <div class="login-centered-wrap">
+          <!-- Logo nhận diện thương hiệu trung tâm -->
+          <div class="auth-logo-center">
+            <a
+              href="../../index.html"
+              class="brand-mark brand-mark-lg"
+              aria-label="HYBRID.STORE"
+              title="Về trang chủ HYBRID.STORE"
+            >
+              <span class="material-symbols-outlined">token</span>
+            </a>
+            <h1 class="auth-logo-title">
+              HYBRID<span class="text-secondary">.STORE</span>
+            </h1>
+            <p class="auth-logo-sub">
+              Hệ thống mua bán hàng mới & đồ cũ chính hãng
+            </p>
+          </div>
+
+          <div class="panel login-card">
+            <div class="card-head">
+              <span class="panel-title">
+                <span
+                  class="brand-mark"
+                  style="width: 28px; height: 28px; border-radius: 8px"
+                >
+                  <span
+                    class="material-symbols-outlined"
+                    style="font-size: 16px; border-radius: 7px"
+                    >token</span
+                  >
+                </span>
+                Đăng Nhập Tài Khoản
+              </span>
+              <a href="auth_register.html">
+                Đăng ký mới
+                <span class="material-symbols-outlined icon-sm"
+                  >arrow_forward</span
+                >
+              </a>
+            </div>
+
+            <!-- Vai trò đăng nhập -->
+            <div class="form-group">
+              <span class="form-label">Vai trò đăng nhập</span>
+              <div class="segmented is-full" id="roleSelector">
+                <button type="button" class="active" data-role="buyer">
+                  <span class="material-symbols-outlined icon-sm"
+                    >shopping_cart</span
+                  >
+                  Người Mua (Buyer)
+                </button>
+                <button type="button" data-role="seller">
+                  <span class="material-symbols-outlined icon-sm"
+                    >storefront</span
+                  >
+                  Người Bán (Seller)
+                </button>
+              </div>
+            </div>
+
+            <!-- Nút Đăng nhập Google một chạm từ tài khoản thiết bị -->
+            <div class="google-auth-wrapper">
+              <button
+                type="button"
+                class="btn-social-google"
+                id="btnGoogleLogin"
+              >
+                <svg viewBox="0 0 24 24" width="20" height="20">
+                  <path
+                    fill="#4285F4"
+                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                  />
+                  <path
+                    fill="#34A853"
+                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                  />
+                  <path
+                    fill="#FBBC05"
+                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
+                  />
+                  <path
+                    fill="#EA4335"
+                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
+                  />
+                </svg>
+                <span id="googleLoginBtnText"
+                  >Tiếp tục với tài khoản Google</span
+                >
+              </button>
+              <div
+                class="google-hint-row"
+                id="googleHintRow"
+                style="display: none"
+              >
+                <span class="text-xs text-muted">
+                  <span
+                    class="material-symbols-outlined icon-xs text-success"
+                    style="vertical-align: -2px"
+                    >devices</span
+                  >
+                  <span id="googleAccountStatus"
+                    >Tài khoản Google trên thiết bị này</span
+                  >
+                </span>
+                <button
+                  type="button"
+                  class="btn-text-link"
+                  id="btnSwitchGoogleAccount"
+                >
+                  Đổi tài khoản khác
+                </button>
+              </div>
+            </div>
+
+            <div class="or-divider">HOẶC ĐĂNG NHẬP VỚI</div>
+
+            <!-- Tab chuyển đổi: Mật khẩu vs Số điện thoại OTP -->
+            <div class="login-method-nav">
+              <button
+                type="button"
+                class="login-method-btn active"
+                id="tabLoginPassword"
+                data-target="vaultLoginForm"
+              >
+                <span class="material-symbols-outlined icon-xs">key</span> Mật
+                Khẩu (Email/SĐT)
+              </button>
+              <button
+                type="button"
+                class="login-method-btn"
+                id="tabLoginPhone"
+                data-target="phoneOtpLoginForm"
+              >
+                <span class="material-symbols-outlined icon-xs">sms</span> Số
+                Điện Thoại (OTP)
+              </button>
+            </div>
+
+            <!-- Form 1: Đăng nhập bằng Mật khẩu (Email/SĐT) -->
+            <form id="vaultLoginForm" novalidate>
+              <div class="form-group">
+                <label class="form-label" for="identifier"
+                  >Email hoặc Số điện thoại</label
+                >
+                <div class="input-group">
+                  <span class="icon-left material-symbols-outlined"
+                    >alternate_email</span
+                  >
+                  <input
+                    class="input"
+                    id="identifier"
+                    name="identifier"
+                    type="text"
+                    required
+                    placeholder="ban@domain.vn hoặc 098..."
+                    autocomplete="username"
+                  />
+                </div>
+                <span class="form-error"></span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="vaultKey">
+                  <span>Mật khẩu</span>
+                  <a href="javascript:void(0)" id="linkForgotPassword"
+                    >Quên mật khẩu?</a
+                  >
+                </label>
+                <div class="input-group has-right">
+                  <span class="icon-left material-symbols-outlined"
+                    >password</span
+                  >
+                  <input
+                    class="input mono"
+                    id="vaultKey"
+                    name="vaultKey"
+                    type="password"
+                    required
+                    placeholder="••••••••••••••••"
+                    autocomplete="current-password"
+                  />
+                  <button
+                    class="icon-right"
+                    id="togglePasswordBtn"
+                    type="button"
+                    aria-label="Hiện/ẩn mật khẩu"
+                  >
+                    <span class="material-symbols-outlined" id="passwordIcon"
+                      >visibility</span
+                    >
+                  </button>
+                </div>
+                <span class="form-error"></span>
+              </div>
+
+              <div class="remember-row">
+                <label class="check">
+                  <input
+                    type="checkbox"
+                    id="fidoPersistence"
+                    name="fidoPersistence"
+                    checked
+                  />
+                  <span>Ghi nhớ đăng nhập (30 ngày)</span>
+                </label>
+                <span class="tag-secure">
+                  <span class="material-symbols-outlined icon-sm">shield</span>
+                  Bảo mật an toàn
+                </span>
+              </div>
+
+              <button
+                class="btn btn-cta btn-block"
+                id="submitUnlockBtn"
+                type="submit"
+              >
+                <span class="material-symbols-outlined" id="submitIcon"
+                  >lock_open</span
+                >
+                <span id="buttonText">ĐĂNG NHẬP NGAY</span>
+                <span class="material-symbols-outlined icon-sm"
+                  >arrow_forward</span
+                >
+              </button>
+            </form>
+
+            <!-- Form 2: Đăng nhập bằng Số điện thoại + Mã SMS OTP -->
+            <form id="phoneOtpLoginForm" style="display: none" novalidate>
+              <div class="form-group">
+                <label class="form-label" for="otpPhoneNumber"
+                  >Số điện thoại đăng nhập (*)</label
+                >
+                <div class="otp-input-group">
+                  <div class="input-group flex-1">
+                    <span class="icon-left material-symbols-outlined"
+                      >call</span
+                    >
+                    <input
+                      class="input mono"
+                      id="otpPhoneNumber"
+                      name="otpPhoneNumber"
+                      type="tel"
+                      maxlength="10"
+                      required
+                      placeholder="Ví dụ: 0384416977 hoặc 0901234567"
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    class="btn btn-secondary btn-send-otp"
+                    id="btnSendPhoneOtp"
+                  >
+                    <span class="material-symbols-outlined icon-xs">send</span>
+                    Nhận Mã OTP
+                  </button>
+                </div>
+                <span class="form-error" id="phoneInputError"></span>
+              </div>
+
+              <!-- Hộp hiển thị mã OTP mô phỏng -->
+              <div
+                class="otp-hint-badge"
+                id="phoneOtpHintBox"
+                style="display: none"
+              >
+                <div>
+                  <span class="material-symbols-outlined icon-xs text-secondary"
+                    >mark_chat_unread</span
+                  >
+                  <span>Mã OTP gửi đến SĐT của bạn:</span>
+                </div>
+                <span class="otp-code-highlight" id="phoneOtpDisplayCode"
+                  >882601</span
+                >
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="phoneOtpCode"
+                  >Mã xác thực OTP (6 chữ số) (*)</label
+                >
+                <div class="input-group">
+                  <span class="icon-left material-symbols-outlined">pin</span>
+                  <input
+                    class="input mono"
+                    id="phoneOtpCode"
+                    name="phoneOtpCode"
+                    type="text"
+                    inputmode="numeric"
+                    maxlength="6"
+                    required
+                    placeholder="Nhập 6 số OTP (ví dụ: 882601)"
+                  />
+                </div>
+                <span class="form-error" id="phoneOtpCodeError"></span>
+              </div>
+
+              <div class="remember-row">
+                <label class="check">
+                  <input type="checkbox" id="rememberPhoneLogin" checked />
+                  <span>Duy trì đăng nhập trên thiết bị này</span>
+                </label>
+                <span class="tag-secure">
+                  <span class="material-symbols-outlined icon-sm"
+                    >verified</span
+                  >
+                  Xác minh SMS 24/7
+                </span>
+              </div>
+
+              <button
+                class="btn btn-cta btn-block"
+                id="submitPhoneOtpBtn"
+                type="submit"
+              >
+                <span class="material-symbols-outlined">login</span>
+                <span>XÁC NHẬN &amp; ĐĂNG NHẬP</span>
+                <span class="material-symbols-outlined icon-sm"
+                  >arrow_forward</span
+                >
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+      <div class="container footer-bar">
+        <div class="footer-badges">
+          <span
+            ><span class="material-symbols-outlined icon-sm text-secondary"
+              >verified_user</span
+            >ISO/IEC 27001 Certified</span
+          >
+          <span
+            ><span class="material-symbols-outlined icon-sm text-secondary"
+              >gavel</span
+            >ISO/IEC 27701 Privacy</span
+          >
+          <span
+            ><span class="material-symbols-outlined icon-sm text-secondary"
+              >shield</span
+            >SOC 2 Type II Audited</span
+          >
+        </div>
+        <span class="text-xs text-faint"
+          >© 2026 HYBRID.STORE. All rights reserved.</span
+        >
+      </div>
+    </footer>
+
+    <!-- ===== MODAL 1: QUẢN LÝ TÀI KHOẢN GOOGLE TRÊN THIẾT BỊ ===== -->
+    <div
+      class="modal-backdrop"
+      id="googleAuthModal"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="modal" style="max-width: 480px">
+        <div class="modal-head">
+          <div class="flex items-center gap-2">
+            <svg viewBox="0 0 24 24" width="22" height="22">
+              <path
+                fill="#4285F4"
+                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+              />
+              <path
+                fill="#34A853"
+                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+              />
+              <path
+                fill="#FBBC05"
+                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
+              />
+              <path
+                fill="#EA4335"
+                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
+              />
+            </svg>
+            <h4 class="modal-title" style="font-size: 15px">
+              Đăng Nhập Bằng Tài Khoản Google
+            </h4>
+          </div>
+          <button
+            class="modal-close"
+            type="button"
+            id="btnCloseGoogleModal"
+            aria-label="Đóng"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p
+            class="text-xs text-muted mb-3"
+            id="googleModalDesc"
+            style="line-height: 1.5"
+          >
+            Đăng nhập bằng tài khoản Google để trải nghiệm mua sắm nhanh 1-chạm
+            trên thiết bị này:
+          </p>
+
+          <!-- Thẻ tài khoản Google hiện tại đã lưu trên thiết bị này (nếu có) -->
+          <div
+            class="google-current-card"
+            id="currentBrowserGoogleCard"
+            style="display: none"
+          >
+            <div
+              class="google-avatar-mini"
+              id="modalGoogleAvatar"
+              style="background: #4285f4"
+            >
+              G
+            </div>
+            <div class="flex-1 text-left">
+              <div class="flex items-center gap-1">
+                <strong
+                  class="text-sm block"
+                  style="color: #fff"
+                  id="modalGoogleName"
+                  >---</strong
+                >
+                <span
+                  class="badge badge-success"
+                  style="font-size: 9px; padding: 2px 6px"
+                  >Trên thiết bị này</span
+                >
+              </div>
+              <span class="text-xs text-muted block mono" id="modalGoogleEmail"
+                >---</span
+              >
+            </div>
+            <div class="flex items-center gap-1">
+              <button
+                type="button"
+                class="btn btn-primary btn-sm"
+                id="btnConfirmCurrentGoogle"
+                style="white-space: nowrap"
+              >
+                Đăng Nhập
+              </button>
+              <button
+                type="button"
+                class="btn btn-ghost btn-sm text-danger"
+                id="btnClearDeviceGoogle"
+                title="Xóa tài khoản khỏi thiết bị này"
+              >
+                <span class="material-symbols-outlined icon-xs">delete</span>
+              </button>
+            </div>
+          </div>
+
+          <div
+            class="or-divider my-3"
+            id="googleOrDivider"
+            style="display: none"
+          >
+            HOẶC ĐĂNG NHẬP BẰNG TÀI KHOẢN KHÁC
+          </div>
+
+          <div
+            class="p-3 rounded"
+            style="
+              background: rgba(255, 255, 255, 0.02);
+              border: 1px solid var(--border);
+            "
+          >
+            <div class="form-group mb-2">
+              <label class="form-label text-xs" for="customGoogleEmail"
+                >Email Google của bạn (*)</label
+              >
+              <div class="input-group">
+                <span class="icon-left material-symbols-outlined"
+                  >alternate_email</span
+                >
+                <input
+                  class="input text-xs"
+                  id="customGoogleEmail"
+                  type="email"
+                  placeholder="ten-ban@gmail.com"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-group mb-2">
+              <label class="form-label text-xs" for="customGoogleName"
+                >Họ và tên hiển thị</label
+              >
+              <div class="input-group">
+                <span class="icon-left material-symbols-outlined">person</span>
+                <input
+                  class="input text-xs"
+                  id="customGoogleName"
+                  type="text"
+                  placeholder="Ví dụ: Nguyễn Văn A"
+                />
+              </div>
+            </div>
+            <div class="flex items-center justify-between mt-3 flex-wrap gap-2">
+              <label class="check text-xs">
+                <input type="checkbox" id="rememberCustomGoogle" checked />
+                <span>Ghi nhớ trên thiết bị này</span>
+              </label>
+              <button
+                class="btn btn-primary btn-sm"
+                id="btnSubmitCustomGoogle"
+                type="button"
+                style="white-space: nowrap"
+              >
+                <span class="material-symbols-outlined icon-xs">login</span>
+                Đăng Nhập Ngay
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MODAL 2: QUÊN MẬT KHẨU (WIZARD 3 BƯỚC) ===== -->
+    <div
+      class="modal-backdrop"
+      id="forgotPasswordModal"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="modal" style="max-width: 480px">
+        <div class="modal-head">
+          <h4 class="modal-title flex items-center gap-2">
+            <span class="material-symbols-outlined text-secondary"
+              >lock_reset</span
+            >
+            Khôi Phục Mật Khẩu
+          </h4>
+          <button
+            class="modal-close"
+            type="button"
+            id="btnCloseForgotModal"
+            aria-label="Đóng"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- BƯỚC 1: NHẬP EMAIL / SỐ ĐIỆN THOẠI -->
+          <div class="wizard-step active" id="forgotStep1">
+            <p class="text-xs text-muted mb-3" style="line-height: 1.6">
+              Nhập địa chỉ Email hoặc Số điện thoại đăng ký tài khoản của bạn để
+              nhận mã xác nhận OTP đặt lại mật khẩu.
+            </p>
+            <div class="form-group mb-3">
+              <label class="form-label" for="forgotIdentifier"
+                >Email hoặc Số điện thoại (*)</label
+              >
+              <div class="input-group">
+                <span class="icon-left material-symbols-outlined"
+                  >alternate_email</span
+                >
+                <input
+                  class="input"
+                  id="forgotIdentifier"
+                  type="text"
+                  placeholder="ban@hybrid.store hoặc 090..."
+                  required
+                />
+              </div>
+              <span class="form-error" id="forgotStep1Error"></span>
+            </div>
+            <div class="modal-foot p-0 pt-3">
+              <button
+                class="btn btn-secondary"
+                type="button"
+                id="btnCancelForgotModal"
+              >
+                Hủy Bỏ
+              </button>
+              <button
+                class="btn btn-primary"
+                type="button"
+                id="btnSendForgotOtp"
+              >
+                <span class="material-symbols-outlined icon-xs">send</span> Tiếp
+                Tục: Gửi Mã OTP
+              </button>
+            </div>
+          </div>
+
+          <!-- BƯỚC 2: NHẬP MÃ XÁC THỰC OTP -->
+          <div class="wizard-step" id="forgotStep2">
+            <p class="text-xs text-muted mb-2" style="line-height: 1.6">
+              Mã xác minh OTP đã được gửi đến tài khoản của bạn. Vui lòng nhập
+              mã gồm 6 số:
+            </p>
+            <div class="otp-hint-badge" id="forgotOtpHintBox">
+              <div>
+                <span class="material-symbols-outlined icon-xs text-secondary"
+                  >verified</span
+                >
+                <span>Mã OTP xác thực:</span>
+              </div>
+              <span class="otp-code-highlight" id="forgotOtpDisplayCode"
+                >654321</span
+              >
+            </div>
+
+            <div class="form-group mb-3">
+              <label class="form-label" for="forgotOtpCode"
+                >Mã OTP (6 chữ số) (*)</label
+              >
+              <div class="input-group">
+                <span class="icon-left material-symbols-outlined">pin</span>
+                <input
+                  class="input mono"
+                  id="forgotOtpCode"
+                  type="text"
+                  inputmode="numeric"
+                  maxlength="6"
+                  placeholder="Ví dụ: 654321"
+                  required
+                />
+              </div>
+              <span class="form-error" id="forgotStep2Error"></span>
+            </div>
+
+            <div class="modal-foot p-0 pt-3 flex justify-between">
+              <button
+                class="btn btn-secondary btn-sm"
+                type="button"
+                id="btnBackToStep1"
+              >
+                <span class="material-symbols-outlined icon-xs"
+                  >arrow_back</span
+                >
+                Quay lại
+              </button>
+              <button
+                class="btn btn-primary"
+                type="button"
+                id="btnVerifyForgotOtp"
+              >
+                <span class="material-symbols-outlined icon-xs">task_alt</span>
+                Xác Nhận OTP
+              </button>
+            </div>
+          </div>
+
+          <!-- BƯỚC 3: ĐẶT LẠI MẬT KHẨU MỚI -->
+          <div class="wizard-step" id="forgotStep3">
+            <div
+              class="panel p-3 mb-3"
+              style="
+                background: rgba(16, 185, 129, 0.08);
+                border-color: rgba(16, 185, 129, 0.25);
+              "
+            >
+              <div class="text-xs text-success fw-600 mb-1">
+                Xác thực chính chủ thành công!
+              </div>
+              <div class="text-xs text-muted">
+                Vui lòng thiết lập mật khẩu mới (tối thiểu 6 ký tự) cho tài
+                khoản:
+              </div>
+            </div>
+
+            <div class="form-group mb-3">
+              <label class="form-label" for="forgotNewPassword"
+                >Mật khẩu mới (*)</label
+              >
+              <div class="input-group">
+                <span class="icon-left material-symbols-outlined"
+                  >password</span
+                >
+                <input
+                  class="input mono"
+                  id="forgotNewPassword"
+                  type="password"
+                  minlength="6"
+                  placeholder="••••••••"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-group mb-3">
+              <label class="form-label" for="forgotConfirmPassword"
+                >Xác nhận mật khẩu mới (*)</label
+              >
+              <div class="input-group">
+                <span class="icon-left material-symbols-outlined"
+                  >verified</span
+                >
+                <input
+                  class="input mono"
+                  id="forgotConfirmPassword"
+                  type="password"
+                  minlength="6"
+                  placeholder="••••••••"
+                  required
+                />
+              </div>
+              <span class="form-error" id="forgotStep3Error"></span>
+            </div>
+
+            <div class="modal-foot p-0 pt-3">
+              <button
+                class="btn btn-primary is-full"
+                type="button"
+                id="btnSubmitNewPassword"
+              >
+                <span class="material-symbols-outlined icon-xs">save</span> Đổi
+                Mật Khẩu &amp; Đăng Nhập Ngay
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="../../js/popup.js"></script>
+    <script src="../../js/auth.js"></script>
+    <script src="../../js/utils.js"></script>
+    <script src="../../js/login.js"></script>
+  </body>
+</html>

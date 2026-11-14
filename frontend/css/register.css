@@ -1,0 +1,295 @@
+/* register.css — chỉ chứa phần RIÊNG của trang đăng ký.
+   Phần chung (màu, nút, form, header, footer...) đã nằm trong base.css */
+
+/* Nền trang + vầng sáng */
+.auth-page {
+  position: relative;
+  overflow: hidden;
+  padding: var(--sp-7) 0;
+}
+.auth-page::before,
+.auth-page::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(120px);
+}
+.auth-page::before {
+  top: -160px;
+  left: 50%;
+  width: 720px;
+  height: 360px;
+  transform: translateX(-50%);
+  background: rgba(139, 92, 246, 0.14);
+}
+.auth-page::after {
+  bottom: -120px;
+  right: 40px;
+  width: 420px;
+  height: 320px;
+  background: rgba(6, 182, 212, 0.1);
+}
+.auth-wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 580px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+/* Đầu trang */
+.auth-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3);
+  text-align: center;
+}
+.auth-head h1 {
+  max-width: 640px;
+}
+.auth-head > p {
+  max-width: 560px;
+  color: var(--text-muted);
+}
+
+/* Form */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  padding: var(--sp-6);
+}
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+.form-section .form-group {
+  margin-bottom: 0;
+}
+.input-upper {
+  text-transform: uppercase;
+}
+.input-accent {
+  color: var(--secondary-400);
+}
+
+/* Thẻ chọn vai trò — dùng :has() nên KHÔNG cần JS để đổi trạng thái */
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-4);
+}
+.role-card {
+  display: block;
+  padding: var(--sp-4);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  opacity: 0.8;
+  transition: var(--t-base);
+}
+.role-card:hover {
+  background: #20203a;
+}
+.role-card:has(input:checked) {
+  opacity: 1;
+  border-color: rgba(139, 92, 246, 0.6);
+  background: #20203a;
+}
+.role-card input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.role-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.role-icon {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-md);
+  background: var(--accent-soft);
+  color: var(--primary-300);
+}
+.role-card.is-seller .role-icon {
+  background: rgba(6, 182, 212, 0.15);
+  color: var(--secondary-400);
+}
+.role-check {
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--neutral-700);
+  color: transparent;
+}
+.role-card:has(input:checked) .role-check {
+  background: var(--primary-400);
+  color: var(--primary-900);
+}
+.role-card h2 {
+  margin-top: var(--sp-3);
+  font-size: var(--fs-lg);
+}
+.role-card .role-sub {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--secondary-400);
+}
+.role-card p {
+  margin-top: 4px;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+/* Thanh đo độ mạnh mật khẩu — JS chỉ đặt data-level="0..4" */
+.strength {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-top: 4px;
+}
+.strength span {
+  height: 4px;
+  border-radius: var(--radius-pill);
+  background: var(--neutral-700);
+  transition: background var(--t-fast);
+}
+.strength[data-level="1"] span:nth-child(-n + 1) {
+  background: var(--danger);
+}
+.strength[data-level="2"] span:nth-child(-n + 2) {
+  background: var(--tertiary-500);
+}
+.strength[data-level="3"] span:nth-child(-n + 3) {
+  background: var(--secondary-500);
+}
+.strength[data-level="4"] span {
+  background: var(--primary-400);
+}
+#strengthText {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-faint);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* Chip ngành hàng — label + checkbox ẩn */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-3);
+}
+.cat-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 12px;
+  text-align: center;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: var(--t-base);
+}
+.cat-chip:hover {
+  border-color: var(--border-strong);
+}
+.cat-chip input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.cat-chip:has(input:checked) {
+  background: var(--accent-soft);
+  border-color: rgba(139, 92, 246, 0.5);
+  color: var(--primary-200);
+}
+.cat-chip .name {
+  font-family: var(--font-head);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+}
+.cat-chip .sub {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-faint);
+}
+.cat-chip:has(input:checked) .sub {
+  color: var(--secondary-400);
+}
+
+/* Cuối form */
+.form-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  font-size: var(--fs-sm);
+  color: var(--text-faint);
+}
+
+/* Footer trang auth */
+.footer-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+}
+.footer-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-5);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+.footer-badges span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+@media (max-width: 760px) {
+  .role-grid {
+    grid-template-columns: 1fr;
+  }
+  .cat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .auth-form {
+    padding: var(--sp-5);
+  }
+}
+
+/* Chế độ Sáng / Light Theme */
+[data-theme="light"] .role-card,
+body.light-theme .role-card {
+  background: #ffffff;
+  border-color: #e2e8f0;
+}
+[data-theme="light"] .cat-chip,
+body.light-theme .cat-chip {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+}
+[data-theme="light"] .cat-chip:hover,
+body.light-theme .cat-chip:hover {
+  border-color: #cbd5e1;
+}
