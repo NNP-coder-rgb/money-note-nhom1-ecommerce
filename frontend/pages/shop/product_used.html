@@ -1,0 +1,1190 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi Tiết Sản Phẩm Đồ Cũ Like New Tuyển Chọn | HYBRID.STORE</title>
+
+    <!-- Chống giật giao diện (Zero-FOUC Theme Init) -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("hybrid_theme") || "dark";
+          document.documentElement.setAttribute("data-theme", t);
+          if (t === "light") document.documentElement.classList.add("light-theme");
+        } catch (e) {}
+      })();
+    </script>
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="stylesheet" href="../../css/base.css?v=4" />
+    <link rel="stylesheet" href="../../css/catalog.css?v=4" />
+    <link rel="stylesheet" href="../../css/master_screens.css?v=4" />
+    <style>
+      .cond-meter-card {
+        background: linear-gradient(135deg, rgba(34, 211, 238, 0.1), rgba(139, 92, 246, 0.1));
+        border: 1px solid rgba(34, 211, 238, 0.3);
+        border-radius: var(--radius-lg, 12px);
+        padding: var(--sp-4);
+        margin-block: var(--sp-4);
+      }
+      [data-theme="light"] .cond-meter-card,
+      body.light-theme .cond-meter-card {
+        background: #faf5ff;
+        border: 2px solid #6d28d9 !important;
+        box-shadow: 0 4px 16px rgba(109, 40, 217, 0.1);
+      }
+      .lab-report-box {
+        background: var(--bg-surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md, 10px);
+        padding: var(--sp-4);
+      }
+      [data-theme="light"] .lab-report-box,
+      body.light-theme .lab-report-box {
+        background: #ffffff;
+        border: 2px solid #6d28d9 !important;
+        box-shadow: 0 4px 16px rgba(109, 40, 217, 0.1);
+      }
+      .offer-item-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 8px;
+        padding: 12px 14px;
+        margin-bottom: 8px;
+      }
+      .offer-item-card.accepted {
+        border-color: rgba(16, 185, 129, 0.4);
+        background: rgba(16, 185, 129, 0.05);
+      }
+      .offer-item-card.rejected {
+        border-color: rgba(239, 68, 68, 0.3);
+        background: rgba(239, 68, 68, 0.04);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===== HEADER ===== -->
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="../../index.html">
+          <span class="brand-mark"><span class="material-symbols-outlined">token</span></span>
+          <span>HYBRID<span class="text-secondary">.STORE</span> <span class="badge badge-c2c">CHỢ ĐỒ CŨ</span></span>
+        </a>
+
+        <div class="header-search">
+          <form id="usedSearchForm" action="catalog.html" method="get">
+            <div class="input-group">
+              <span class="icon-left material-symbols-outlined">search</span>
+              <input class="input input-search" name="q" type="search" placeholder="Tìm kiếm đồ cũ Like New tuyển chọn..." />
+            </div>
+          </form>
+        </div>
+
+        <div class="header-actions">
+          <a class="btn btn-secondary hide-sm" href="catalog.html">Xem Danh Mục</a>
+          <button
+            class="icon-btn theme-toggle-btn"
+            id="themeToggleBtn"
+            type="button"
+            aria-label="Chuyển chế độ sáng / tối"
+            title="Chuyển sang giao diện Sáng"
+          >
+            <span class="material-symbols-outlined theme-toggle-icon">light_mode</span>
+          </button>
+          <a class="icon-btn" href="cart.html" aria-label="Giỏ hàng">
+            <span class="material-symbols-outlined">shopping_bag</span>
+            <span class="badge badge-counter" id="cartCount">0</span>
+          </a>
+          <a class="avatar" href="../account/profile.html" title="Tài khoản">
+            <span class="material-symbols-outlined">person</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== BREADCRUMB ===== -->
+    <div class="subnav">
+      <div class="container">
+        <nav aria-label="Breadcrumb">
+          <a href="../../index.html">Trang Chủ</a>
+          <span class="text-faint">/</span>
+          <a href="catalog.html?type=c2c" id="breadCatLink">Đồ Cũ Like New</a>
+          <span class="text-faint">/</span>
+          <span class="active" id="breadProductName">Chi Tiết Sản Phẩm</span>
+        </nav>
+        <div class="subnav-info hide-sm">
+          <span class="text-success" id="subnavSavings">
+            <span class="material-symbols-outlined icon-sm">savings</span> Rẻ hơn đồ mới 27%
+          </span>
+          <span class="text-secondary">
+            <span class="material-symbols-outlined icon-sm">verified</span> Đồng kiểm 100% khi nhận
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <main class="container py-6">
+      <div class="product-detail-grid">
+        <!-- Cột trái: Gallery ảnh thực tế & Báo cáo kiểm định 15 bước -->
+        <div>
+          <div class="detail-gallery-card">
+            <div style="position: absolute; top: 18px; left: 18px; z-index: 2;">
+              <span class="badge badge-c2c" id="mediaBadge">ĐỒ CŨ LIKE NEW 99% • -27%</span>
+            </div>
+            <div class="img-zoom-container" id="zoomContainer" title="Bấm vào để xem ảnh phóng to toàn màn hình">
+              <img id="mainUsedImg" src="" alt="Ảnh sản phẩm thực tế" />
+              <div class="zoom-hint-pill">
+                <span class="material-symbols-outlined icon-xs">zoom_in</span> Xem ảnh lớn
+              </div>
+            </div>
+          </div>
+
+          <!-- Dải thumbnail ảnh chụp 4 góc cạnh -->
+          <div class="detail-thumb-strip" id="thumbStrip">
+            <!-- Render động bằng JS -->
+          </div>
+
+          <!-- Báo cáo Thẩm Định Kỹ Thuật 15 Bước (Lab Report) -->
+          <div class="panel mt-4 p-4 lab-report-box" id="labReportBox">
+            <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+              <strong class="text-xs uppercase text-secondary flex items-center gap-1.5">
+                <span class="material-symbols-outlined icon-sm text-secondary">biotech</span>
+                Báo Cáo Giám Định Kỹ Thuật 15 Bước
+              </strong>
+              <span class="badge badge-success">ĐẠT CHUẨN LOẠI A</span>
+            </div>
+            <div class="grid grid-2 gap-3 text-xs text-muted" id="labReportGrid">
+              <!-- Render động theo đúng ngành hàng -->
+            </div>
+            <div class="mt-3 pt-2 border-top text-2xs text-faint flex items-center justify-between flex-wrap gap-1" style="border-color: rgba(255,255,255,0.06);">
+              <span>Tem niêm phong vỡ Hologram: <strong class="mono text-secondary">ISO-17025-LAB</strong></span>
+              <span class="text-success flex items-center gap-1"><span class="status-dot"></span> Đã đối soát đạt chuẩn</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cột phải: Thông tin, Độ mới, Giá & Trả giá -->
+        <div>
+          <div class="flex items-center gap-2 mb-2 flex-wrap">
+            <div class="flex items-center justify-between gap-2 w-full flex-wrap mb-1">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="badge badge-secondary badge-dot">NGƯỜI BÁN ĐÃ XÁC MINH</span>
+                <span class="text-xs text-muted" id="sellerMeta">Người bán: Nguyễn Văn A (Đã eKYC CCCD • 18 lượt bán)</span>
+              </div>
+              <button class="btn btn-outline btn-xs" id="btnOpenSellerChat" type="button" style="border-radius: 99px; gap: 4px; border-color: var(--primary, #8b5cf6); color: var(--primary-light, #c084fc); font-weight: 700;">
+                <span class="material-symbols-outlined icon-xs">forum</span> Chat Với Người Bán
+              </button>
+            </div>
+          </div>
+
+          <h1 class="page-title mb-2" id="prodTitle" style="font-size: 1.95rem; line-height: 1.3;">Tên Sản Phẩm Cũ</h1>
+
+          <!-- Condition Meter (Thanh đo độ mới) -->
+          <div class="cond-meter-card">
+            <div class="flex items-center justify-between mb-2 text-xs">
+              <span class="fw-600">Thanh đo độ mới (Condition Meter):</span>
+              <strong class="text-secondary mono" id="condLabelText" style="font-size: 14px;">99% (Như Mới Khui Hộp)</strong>
+            </div>
+            <div class="progress progress-secondary" id="condProgressBar" style="--value: 99%; height: 8px;">
+              <div class="progress-bar"></div>
+            </div>
+            <div class="text-xs text-muted mt-2" id="sellerNoteText">
+              Mô tả người bán: <em>"Hàng dùng lướt kỹ lưỡng, đầy đủ hộp và phụ kiện nguyên bản."</em>
+            </div>
+          </div>
+
+          <!-- Giá & Mức rẻ hơn so với đồ mới -->
+          <div class="detail-price-box">
+            <div class="text-xs text-muted fw-600">GIÁ ĐỒ CŨ THANH LÝ:</div>
+            <div class="flex items-baseline gap-3 my-2 flex-wrap">
+              <span class="mono text-gradient detail-price-val" id="productCurrentPrice">0₫</span>
+              <span class="detail-old-price mono" id="productOldPrice">0₫</span>
+              <span class="badge badge-success fw-700" id="productSavingsBadge">Tiết kiệm 8.000.000₫</span>
+            </div>
+            <div class="text-xs text-secondary flex items-center gap-1.5 mt-2">
+              <span class="material-symbols-outlined icon-xs">savings</span>
+              <span id="discountCalloutText">Rẻ hơn đồ mới 27% so với giá Brand Mall xuất xưởng</span>
+            </div>
+          </div>
+
+          <!-- Bộ chọn biến thể (Size / Phiên bản) -->
+          <div class="form-group mb-4">
+            <label class="form-label" id="variantLabel">Tùy Chọn Phiên Bản / Size:</label>
+            <div class="variant-btn-group" id="variantBtnGroup">
+              <!-- Render động -->
+            </div>
+          </div>
+
+          <!-- Nhóm nút hành động: Giỏ hàng, Mua ngay & Trả giá -->
+          <div class="product-actions-group mb-4" style="display: flex; flex-direction: column; gap: 10px;">
+            <div class="flex items-center gap-3">
+              <button class="btn btn-outlined flex-1" id="btnUsedAddCart" type="button" style="padding: 14px; font-weight: 700;" title="Thêm vào giỏ hàng">
+                <span class="material-symbols-outlined icon-sm">add_shopping_cart</span>
+                Thêm Vào Giỏ Hàng
+              </button>
+              <button class="btn btn-primary flex-1" id="btnUsedBuyNow" type="button" style="padding: 14px; font-weight: 700;" title="Mua ngay sản phẩm">
+                <span class="material-symbols-outlined icon-sm">bolt</span>
+                Mua Ngay
+              </button>
+            </div>
+            <button class="btn btn-secondary w-full" id="btnUsedOffer" type="button" style="padding: 14px; font-weight: 700;" title="Thương lượng đề xuất giá khác với người bán">
+              <span class="material-symbols-outlined icon-sm">price_change</span>
+              Thương Lượng Trả Giá Với Người Bán
+            </button>
+          </div>
+
+          <!-- Lịch sử các đề xuất trả giá của người mua -->
+          <div class="panel p-4 mb-4" id="offerTrackerPanel" style="display: none; background: rgba(6, 182, 212, 0.04); border-color: rgba(6, 182, 212, 0.3);">
+            <div class="flex items-center justify-between mb-3">
+              <strong class="text-sm flex items-center gap-1.5 text-secondary">
+                <span class="material-symbols-outlined icon-sm">history_edu</span>
+                Đề Xuất Trả Giá Của Bạn
+              </strong>
+              <span class="badge badge-primary text-xs" id="offerCountBadge">1 đề xuất</span>
+            </div>
+            <div id="offerItemsContainer">
+              <!-- Render động -->
+            </div>
+          </div>
+
+          <!-- Cam kết an toàn & Quyền lợi -->
+          <div class="panel p-4 text-xs text-muted" style="line-height: 1.85;">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="material-symbols-outlined text-success icon-sm">check_circle</span>
+              <strong>Đồng kiểm 100%:</strong> Mở hộp bật nguồn test máy cùng bưu tá trước khi thanh toán.
+            </div>
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="material-symbols-outlined text-secondary icon-sm">published_with_changes</span>
+              <strong>Bảo hành 6 tháng + Đổi trả miễn phí 7 ngày</strong> nếu phát sinh lỗi kỹ thuật.
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary icon-sm">lock_clock</span>
+              <strong>Ký quỹ Escrow 48 Giờ:</strong> Tiền được giữ an toàn trên sàn trong suốt thời gian bạn trải nghiệm.
+            </div>
+          </div>
+
+          <!-- Banner So Sánh Đồ Cũ Like New vs Đồ Mới 100% -->
+          <div class="panel p-3.5 mt-4 flex items-center justify-between gap-3 flex-wrap" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(139, 92, 246, 0.08)); border: 1.5px solid rgba(59, 130, 246, 0.25); border-radius: var(--radius-lg, 12px);">
+            <div class="flex items-center gap-2.5">
+              <span class="material-symbols-outlined text-primary icon-md" style="color: #3b82f6; font-size: 26px;">balance</span>
+              <div>
+                <div class="text-xs fw-700 text-text">Muốn biết đồ Like New tiết kiệm bao nhiêu so với mua mới?</div>
+                <div class="text-2xs text-muted" id="compareSavingsHint">Xem bảng đối chiếu giá trị thực, bảo hành hãng vs bảo hành trạm Lab sàn</div>
+              </div>
+            </div>
+            <button class="btn btn-outline btn-sm" id="btnOpenCompareModal" type="button" style="border-color: #3b82f6; color: #3b82f6; font-weight: 700; white-space: nowrap;">
+              <span class="material-symbols-outlined icon-xs">compare_arrows</span> So Sánh Với Hàng Mới
+            </button>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <!-- ===== KHỐI TABS CHI TIẾT SẢN PHẨM ===== -->
+      <section class="detail-tabs-section">
+        <div class="detail-tabs-header">
+          <button class="detail-tab-btn active" type="button" data-tab="tab-desc">
+            <span class="material-symbols-outlined icon-xs">description</span> Mô Tả Thực Tế
+          </button>
+          <button class="detail-tab-btn" type="button" data-tab="tab-specs">
+            <span class="material-symbols-outlined icon-xs">tune</span> Thông Số Kỹ Thuật
+          </button>
+          <button class="detail-tab-btn" type="button" data-tab="tab-inspection">
+            <span class="material-symbols-outlined icon-xs">biotech</span> Tiêu Chuẩn 15 Bước
+          </button>
+          <button class="detail-tab-btn" type="button" data-tab="tab-reviews">
+            <span class="material-symbols-outlined icon-xs">rate_review</span> Đánh Giá Người Mua (<span id="tabReviewCount">168</span>)
+          </button>
+        </div>
+
+        <div class="detail-tab-body">
+          <!-- Tab 1: Mô tả -->
+          <div class="detail-tab-pane active" id="tab-desc">
+            <div id="tabDescContent"></div>
+          </div>
+
+          <!-- Tab 2: Thông số kỹ thuật -->
+          <div class="detail-tab-pane" id="tab-specs">
+            <div class="specs-table-wrapper">
+              <table class="specs-table" id="specsTable">
+                <tbody>
+                  <!-- Render động -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Tab 3: Tiêu chuẩn kiểm định 15 bước -->
+          <div class="detail-tab-pane" id="tab-inspection">
+            <h3 class="text-base fw-700 mb-3 text-text flex items-center gap-2">
+              <span class="material-symbols-outlined text-secondary">verified</span>
+              Quy Trình Kiểm Định Độc Lập 15 Bước Tại Lab HYBRID.STORE
+            </h3>
+            <p class="text-sm text-muted mb-4 leading-relaxed">
+              Mọi sản phẩm đồ cũ Like New đăng bán bắt buộc phải gửi về 1 trong 3 Trung tâm Kỹ thuật Lab (Hà Nội, Đà Nẵng, TP.HCM) để chuyên viên thẩm định trước khi niêm phong:
+            </p>
+            <div class="grid grid-2 gap-4">
+              <div class="panel p-3" style="background: rgba(255,255,255,0.02);">
+                <strong class="text-xs text-secondary block mb-1">GIAI ĐOẠN 1: NGOẠI QUAN &amp; THẨM MỸ (5 BƯỚC)</strong>
+                <p class="text-xs text-muted mb-0">Soi kính hiển vi kiểm tra vết xước, cấn viền kim loại, độ nứt vỡ mặt kính, độ mài mòn đế giày/vải và kiểm tra ốc vít chưa từng bung mở.</p>
+              </div>
+              <div class="panel p-3" style="background: rgba(255,255,255,0.02);">
+                <strong class="text-xs text-primary block mb-1">GIAI ĐOẠN 2: PHẦN CỨNG &amp; LINH KIỆN (5 BƯỚC)</strong>
+                <p class="text-xs text-muted mb-0">Đo chu kỳ sạc và dung lượng pin thực tế bằng máy chuyên dụng; kiểm tra điểm chết màn hình OLED; test cảm biến Face ID/Vân tay và vi mạch mainboard.</p>
+              </div>
+              <div class="panel p-3" style="background: rgba(255,255,255,0.02);">
+                <strong class="text-xs text-success block mb-1">GIAI ĐOẠN 3: TÍNH NĂNG VẬN HÀNH (3 BƯỚC)</strong>
+                <p class="text-xs text-muted mb-0">Chạy stress-test tải nặng đo nhiệt độ hoạt động, kiểm tra kết nối sóng Wifi/Bluetooth/NFC và chất lượng thu phát âm thanh micro/loa thoại.</p>
+              </div>
+              <div class="panel p-3" style="background: rgba(255,255,255,0.02);">
+                <strong class="text-xs text-warning block mb-1">GIAI ĐOẠN 4: DÁN TEM NIÊM PHONG &amp; ĐÓNG GÓI (2 BƯỚC)</strong>
+                <p class="text-xs text-muted mb-0">Dán tem bảo hành vỡ Hologram chống tháo mở, bọc túi hút ẩm chuyên dụng và kích hoạt chứng chỉ thẩm định số trên hệ thống.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 4: Đánh giá người mua -->
+          <div class="detail-tab-pane" id="tab-reviews">
+            <div class="reviews-grid">
+              <div class="reviews-summary-card">
+                <div class="reviews-summary-score" id="reviewSummaryScore">4.9</div>
+                <div class="stars-container mb-2" style="color: var(--warning, #f59e0b); font-size: 1.2rem;">★★★★★</div>
+                <div class="text-xs text-muted fw-600 mb-3" id="reviewSummaryText">Dựa trên 168 đánh giá giao dịch C2C</div>
+                <span class="badge badge-success text-2xs block mb-3">99.2% ĐÁNH GIÁ TÍCH CỰC</span>
+                <button class="btn btn-primary btn-sm w-full" id="btnOpenReviewModal" type="button" style="font-weight: 700;">
+                  <span class="material-symbols-outlined icon-xs">rate_review</span> Viết Đánh Giá
+                </button>
+              </div>
+              <div class="reviews-content-wrapper" style="min-width: 0;">
+                <div class="review-filter-chips mb-3 flex items-center gap-2 flex-wrap">
+                  <button class="review-filter-chip active" data-rating-filter="all" type="button">Tất Cả (<span id="countReviewAll">3</span>)</button>
+                  <button class="review-filter-chip" data-rating-filter="5" type="button">5 Sao ★ (<span id="countReview5">2</span>)</button>
+                  <button class="review-filter-chip" data-rating-filter="4" type="button">4 Sao ★ (<span id="countReview4">1</span>)</button>
+                  <button class="review-filter-chip" data-rating-filter="photo" type="button"><span class="material-symbols-outlined icon-xs">photo_camera</span> Có Ảnh / Video</button>
+                </div>
+                <div class="reviews-list" id="reviewsListContainer">
+                  <!-- Render động -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== KHỐI SẢN PHẨM TƯƠNG TỰ (RELATED PRODUCTS) ===== -->
+      <section class="related-products-section">
+        <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+          <div>
+            <h2 class="text-xl fw-800 text-text mb-1 flex items-center gap-2">
+              <span class="material-symbols-outlined text-secondary">auto_awesome</span>
+              Sản Phẩm Đồ Cũ Like New Tuyển Chọn Khác
+            </h2>
+            <p class="text-xs text-muted mb-0">Khám phá các sản phẩm cùng danh mục đang có mức giá thanh lý tiết kiệm nhất</p>
+          </div>
+          <a class="btn btn-secondary btn-sm" href="catalog.html?type=c2c">Xem Tất Cả Đồ Cũ →</a>
+        </div>
+        <div class="related-grid" id="relatedProductsGrid">
+          <!-- Render động -->
+        </div>
+      </section>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer" data-component="footer"></footer>
+
+    <!-- Mobile Sticky Buy Bar cho Đồ Cũ Like New -->
+    <div class="mobile-sticky-buy-bar hide-md" id="mobileStickyBuyBar">
+      <div class="sticky-price-info">
+        <span class="text-xs text-muted">Giá Like New:</span>
+        <strong class="mono text-secondary fs-base" id="stickyPrice">0₫</strong>
+      </div>
+      <div class="sticky-actions">
+        <button class="btn btn-outlined btn-sm" id="stickyBtnAddCart" type="button" title="Thêm vào giỏ">
+          <span class="material-symbols-outlined icon-sm">add_shopping_cart</span>
+        </button>
+        <button class="btn btn-secondary btn-sm" id="stickyBtnOffer" type="button" title="Trả Giá">
+          <span class="material-symbols-outlined icon-sm">handshake</span> Trả Giá
+        </button>
+        <button class="btn btn-primary btn-sm" id="stickyBtnBuyNow" type="button">
+          <span class="material-symbols-outlined icon-sm">bolt</span> Mua Ngay
+        </button>
+      </div>
+    </div>
+
+    <!-- ===== MODAL TRẢ GIÁ THÔNG MINH (OFFER MODAL) ===== -->
+    <div class="modal-backdrop" id="usedOfferModal">
+      <div class="modal" role="dialog" aria-modal="true" style="max-width: 500px;">
+        <div class="modal-head">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-secondary">handshake</span>
+            <h4 class="modal-title">Thương Lượng Trả Giá Với Người Bán</h4>
+          </div>
+          <button class="modal-close" type="button" data-close><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <div class="modal-body">
+          <!-- Thông tin tóm tắt sản phẩm -->
+          <div class="flex items-center gap-3 p-3 rounded mb-3" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border);">
+            <img id="modalProductThumb" src="" style="width: 54px; height: 54px; border-radius: 8px; object-fit: cover;" alt="Ảnh sản phẩm" />
+            <div class="flex-1">
+              <div class="text-xs fw-600 line-clamp-1 text-white" id="modalProductName">Tên sản phẩm</div>
+              <div class="text-xs text-muted mt-0.5">Giá niêm yết: <strong class="text-secondary mono" id="modalListedPrice">0₫</strong></div>
+            </div>
+          </div>
+
+          <div class="form-group mb-2">
+            <label class="form-label flex justify-between items-center">
+              <span>Mức giá đề xuất mua (VNĐ) (*)</span>
+              <span class="text-xs text-secondary mono" id="offerDiscountPreview">Tiết kiệm: 0₫ (-10%)</span>
+            </label>
+            <div class="input-group">
+              <span class="icon-left material-symbols-outlined">payments</span>
+              <input class="input mono fw-700" id="inputOfferPrice" type="text" placeholder="Nhập số tiền..." />
+            </div>
+            <span class="form-error" id="offerPriceError" style="display: none; color: var(--danger); font-size: 11px; margin-top: 4px;"></span>
+          </div>
+
+          <!-- Gợi ý nhanh các mức giảm -->
+          <div class="text-xs text-muted mb-1.5">Gợi ý mức trả giá nhanh:</div>
+          <div class="chip-row mb-3" id="quickOfferChips">
+            <button class="chip" type="button" data-percent="5">-5%</button>
+            <button class="chip active" type="button" data-percent="10">-10%</button>
+            <button class="chip" type="button" data-percent="15">-15%</button>
+            <button class="chip" type="button" data-percent="20">-20%</button>
+          </div>
+
+          <!-- Lời nhắn gửi người bán -->
+          <div class="form-group mb-3">
+            <label class="form-label flex justify-between items-center">
+              <span>Lời nhắn gửi người bán</span>
+              <span class="text-xs text-faint">Tăng 80% tỷ lệ đồng ý</span>
+            </label>
+            <textarea class="textarea" id="offerMessageInput" rows="2" placeholder="Ví dụ: Em thiện chí chốt nhanh chuyển khoản Napas 24/7 liền tay ạ..."></textarea>
+            <div class="flex gap-1.5 flex-wrap mt-2" id="quickNoteButtons">
+              <button type="button" class="btn btn-secondary btn-xs quick-note-btn">Chốt nhanh trong ngày</button>
+              <button type="button" class="btn btn-secondary btn-xs quick-note-btn">Chuyển khoản Napas 24/7</button>
+              <button type="button" class="btn btn-secondary btn-xs quick-note-btn">Qua xem test máy trực tiếp</button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn btn-secondary" type="button" data-close>Hủy Bỏ</button>
+          <button class="btn btn-primary" id="btnSubmitOffer" type="button">
+            <span class="material-symbols-outlined icon-xs">send</span> Gửi Đề Nghị Trả Giá
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lightbox phóng to ảnh fullscreen -->
+    <div class="lightbox-modal" id="productLightbox" role="dialog" aria-modal="true">
+      <button class="lightbox-close-btn" id="lightboxCloseBtn" type="button" aria-label="Đóng"><span class="material-symbols-outlined">close</span></button>
+      <img id="lightboxImg" src="" alt="Ảnh sản phẩm phóng to" />
+    </div>
+
+    
+    <!-- Modal So Sánh Sản Phẩm (Product Comparison Matrix) -->
+    <div class="modal-backdrop" id="productCompareModal" style="display: none; align-items: center; justify-content: center; z-index: 10000;">
+      <div class="modal compare-modal-box" role="dialog" aria-modal="true" style="max-width: 840px; width: 92%; max-height: 90vh; overflow-y: auto; padding: 24px;">
+        <div class="modal-head flex items-center justify-between pb-3 mb-4" style="border-bottom: 1px solid var(--border);">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary icon-md">balance</span>
+            <h3 class="modal-title text-base fw-700 m-0">ĐỐI CHIẾU GIÁ TRỊ: ĐỒ CŨ LIKE NEW VS BRAND MALL (MỚI 100%)</h3>
+          </div>
+          <button class="icon-btn" id="closeCompareModalBtn" type="button" aria-label="Đóng"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <div class="modal-body" id="compareModalBody">
+          <!-- Render động ma trận so sánh -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Viết Đánh Giá Sản Phẩm (Review Submission Form) -->
+    <div class="modal-backdrop" id="reviewSubmitModal" style="display: none; align-items: center; justify-content: center; z-index: 10000;">
+      <div class="modal" role="dialog" aria-modal="true" style="max-width: 520px; width: 92%; padding: 24px; border-radius: 16px;">
+        <div class="modal-head flex items-center justify-between pb-3 mb-4" style="border-bottom: 1px solid var(--border);">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-warning icon-md">star</span>
+            <h3 class="modal-title text-base fw-700 m-0">ĐÁNH GIÁ SẢN PHẨM LIKE NEW</h3>
+          </div>
+          <button class="icon-btn" id="closeReviewModalBtn" type="button" aria-label="Đóng"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <form id="reviewSubmitForm">
+          <div class="form-group mb-4 text-center">
+            <label class="form-label text-xs fw-700 block mb-2">MỨC ĐỘ HÀI LÒNG CỦA BẠN:</label>
+            <div class="star-rating-picker justify-center" id="starRatingPicker">
+              <button type="button" class="star-picker-btn active" data-value="1">★</button>
+              <button type="button" class="star-picker-btn active" data-value="2">★</button>
+              <button type="button" class="star-picker-btn active" data-value="3">★</button>
+              <button type="button" class="star-picker-btn active" data-value="4">★</button>
+              <button type="button" class="star-picker-btn active" data-value="5">★</button>
+            </div>
+            <div class="text-xs text-warning fw-700 mt-2" id="starPickerLabel">5.0 ★ Máy đẹp như mới, test chuẩn Lab!</div>
+          </div>
+          <div class="form-group mb-3">
+            <label class="form-label text-xs fw-700">TÊN CỦA BẠN (HOẶC BIỆT DANH):</label>
+            <input type="text" class="form-control text-xs" id="reviewAuthorName" placeholder="VD: Quốc Huy (Đã mua Like New)" required />
+          </div>
+          <div class="form-group mb-3">
+            <label class="form-label text-xs fw-700">NHẬN XÉT CHI TIẾT:</label>
+            <textarea class="form-control text-xs" id="reviewCommentText" rows="3" placeholder="Chia sẻ cảm nhận về ngoại quan, độ nhạy pin, quy trình đồng kiểm cùng bưu tá..." required></textarea>
+          </div>
+          <div class="form-group mb-4">
+            <label class="form-label text-xs fw-700">ĐÍNH KÈM ẢNH ĐẬP HỘP / REVIEW (TÙY CHỌN):</label>
+            <input type="text" class="form-control text-xs" id="reviewPhotoUrl" placeholder="Dán link ảnh chụp máy hoặc test góc cạnh" />
+          </div>
+          <div class="flex gap-2">
+            <button class="btn btn-secondary flex-1" id="btnCancelReview" type="button">Hủy</button>
+            <button class="btn btn-primary flex-1" type="submit" style="font-weight: 700;">Gửi Đánh Giá Ngay</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Khung Chat Trực Tiếp Với Người Bán (Direct Buyer-Seller Chat Drawer) -->
+    <div class="seller-chat-drawer minimized" id="sellerChatDrawer" aria-hidden="true">
+      <div class="seller-chat-header flex items-center justify-between p-3" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(6, 182, 212, 0.15)); border-bottom: 1px solid var(--border);">
+        <div class="flex items-center gap-2.5">
+          <div class="relative">
+            <div class="avatar" style="width: 38px; height: 38px; border-radius: 50%; background: var(--primary, #8b5cf6); display: flex; align-items: center; justify-content: center; font-weight: 700; color: #fff;">
+              <span id="chatSellerAvatar">S</span>
+            </div>
+            <span style="position: absolute; bottom: 0; right: 0; width: 10px; height: 10px; background: #22c55e; border: 2px solid #0f172a; border-radius: 50%;"></span>
+          </div>
+          <div>
+            <strong class="text-xs text-text block line-clamp-1" id="chatSellerName">Người Bán C2C</strong>
+            <span class="text-2xs text-success flex items-center gap-1">
+              <span class="material-symbols-outlined icon-xs">check_circle</span> Đã xác thực eKYC CCCD • Trực tuyến
+            </span>
+          </div>
+        </div>
+        <div class="flex items-center gap-1">
+          <button class="icon-btn text-muted" id="btnMinimizeChat" type="button" title="Thu nhỏ"><span class="material-symbols-outlined">remove</span></button>
+          <button class="icon-btn text-muted" id="btnCloseChat" type="button" title="Đóng chat"><span class="material-symbols-outlined">close</span></button>
+        </div>
+      </div>
+
+      <!-- Mini Product Preview Bar -->
+      <div class="chat-product-preview-bar p-2.5 flex items-center justify-between gap-2" style="background: rgba(255, 255, 255, 0.03); border-bottom: 1px solid var(--border);">
+        <div class="flex items-center gap-2 min-w-0">
+          <img src="" id="chatProdThumb" alt="Product" style="width: 36px; height: 36px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border);" />
+          <div class="min-w-0">
+            <div class="text-2xs fw-700 text-text truncate" id="chatProdTitle">Sản phẩm đang trao đổi</div>
+            <div class="text-2xs text-secondary mono" id="chatProdPrice">0₫</div>
+          </div>
+        </div>
+        <button class="btn btn-outline btn-xs" id="btnSendProductCard" type="button" style="white-space: nowrap; font-size: 10.5px; padding: 4px 8px;">
+          <span class="material-symbols-outlined icon-xs">send</span> Gửi Thẻ
+        </button>
+      </div>
+
+      <!-- Quick Inquiry Chips -->
+      <div class="quick-inquiry-bar p-2 flex gap-1.5 overflow-x-auto" style="border-bottom: 1px solid rgba(255, 255, 255, 0.05); background: rgba(0,0,0,0.1);">
+        <button class="btn btn-secondary btn-2xs quick-chat-chip" type="button" data-msg="Máy còn đầy đủ phụ kiện sạc cáp zin không shop?">Phụ kiện zin?</button>
+        <button class="btn btn-secondary btn-2xs quick-chat-chip" type="button" data-msg="Pin đo thực tế còn được bao nhiêu % thế bạn?">Tình trạng pin?</button>
+        <button class="btn btn-secondary btn-2xs quick-chat-chip" type="button" data-msg="Sàn có hỗ trợ đồng kiểm mở hộp cùng shipper không?">Đồng kiểm 100%?</button>
+        <button class="btn btn-secondary btn-2xs quick-chat-chip" type="button" data-msg="Mình ở gần có thể qua xem máy trực tiếp được không?">Xem trực tiếp?</button>
+      </div>
+
+      <!-- Messages Body -->
+      <div class="seller-chat-messages p-3 flex-1 overflow-y-auto" id="sellerChatMessages" style="display: flex; flex-direction: column; gap: 10px; max-height: 310px;">
+        <div class="text-center my-2">
+          <span class="text-2xs text-muted" style="background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 99px;">
+            🔒 Đang kích hoạt mã hóa bảo mật & Quỹ ký quỹ Escrow 48H
+          </span>
+        </div>
+        <!-- Tin nhắn mở đầu từ người bán -->
+        <div class="seller-chat-bubble seller-msg" style="align-self: flex-start; max-width: 82%; background: rgba(255,255,255,0.06); padding: 10px 12px; border-radius: 12px 12px 12px 2px; font-size: 12px; border: 1px solid var(--border);">
+          Chào bạn! Mình là người bán sản phẩm này. Máy đã được test kỹ 15 bước tại phòng Lab của sàn. Bạn cần hỏi thêm chi tiết nào cứ nhắn mình nhé! 😊
+          <div class="text-3xs text-muted mt-1 text-right">Vừa xong</div>
+        </div>
+      </div>
+
+      <!-- Typing Indicator -->
+      <div id="sellerTypingIndicator" style="display: none; padding: 4px 14px; font-size: 11px; color: var(--text-muted);">
+        <span class="typing-dots">Người bán đang soạn tin<span>.</span><span>.</span><span>.</span></span>
+      </div>
+
+      <!-- Chat Footer -->
+      <form class="seller-chat-footer p-2.5 flex items-center gap-2" id="sellerChatForm" style="border-top: 1px solid var(--border); background: var(--bg-surface);">
+        <input type="text" class="form-control text-xs flex-1" id="chatMessageInput" placeholder="Nhắn tin với người bán..." autocomplete="off" />
+        <button class="btn btn-primary btn-sm" type="submit" style="padding: 8px 12px;">
+          <span class="material-symbols-outlined icon-xs">send</span>
+        </button>
+      </form>
+    </div>
+
+    <div class="toast-stack" id="toastStack"></div>
+
+    <script src="../../js/popup.js"></script>
+    <script src="../../js/auth.js"></script>
+    <script src="../../js/mock_data.js"></script>
+    <script src="../../js/utils.js"></script>
+    <script src="../../js/components.js"></script>
+    <script src="../../js/product-detail-data.js"></script>
+    <script>
+      (function () {
+        Utils.Cart.syncBadge();
+
+        // 1. Phân giải sản phẩm từ URL query (?id=...)
+        const params = new URLSearchParams(window.location.search);
+        const productId = params.get("id");
+        let p = ProductDetailData.resolveProduct(productId);
+
+        // Nếu sản phẩm thuộc Brand Mall, chuyển hướng mượt sang template chuyên biệt Brand Mall
+        if (p && p.type === "mall") {
+          window.location.replace(`product_new.html?id=${encodeURIComponent(p.id)}`);
+          return;
+        }
+
+        // Mặc định fallback nếu không có ID
+        if (!p) {
+          if (typeof PRODUCTS !== "undefined" && Array.isArray(PRODUCTS)) {
+            p = PRODUCTS.find((x) => x.type === "c2c") || PRODUCTS[0];
+          }
+        }
+
+        if (!p) return;
+
+        const originalPrice = p.price || 21990000;
+        const oldPriceVal = p.oldPrice || Math.round(originalPrice * 1.35);
+        const discountPercent = Math.round((1 - originalPrice / oldPriceVal) * 100);
+        const savedAmount = oldPriceVal - originalPrice;
+        const prodShortTitle = p.short || p.name;
+        const condVal = p.cond || 98;
+        const condTitle = p.condText || `Like New ${condVal}%`;
+        const prodFullTitle = `${p.name} (${condTitle})`;
+        const catMeta = ProductDetailData.getCategoryMeta(p.category);
+
+        // 2. Cập nhật Tiêu đề trang & Breadcrumb
+        document.title = `${prodFullTitle} | HYBRID.STORE C2C`;
+        const breadCatLink = document.getElementById("breadCatLink");
+        if (breadCatLink) {
+          breadCatLink.textContent = catMeta.name;
+          breadCatLink.href = `catalog.html?category=${p.category}&type=c2c`;
+        }
+        const breadProductName = document.getElementById("breadProductName");
+        if (breadProductName) breadProductName.textContent = prodShortTitle;
+
+        const subnavSavings = document.getElementById("subnavSavings");
+        if (subnavSavings) {
+          subnavSavings.innerHTML = `<span class="material-symbols-outlined icon-sm">savings</span> Rẻ hơn đồ mới ${discountPercent}%`;
+        }
+
+        // 3. Cập nhật Gallery Ảnh chân thực
+        const mainUsedImg = document.getElementById("mainUsedImg");
+        const galleryImgs = ProductDetailData.getGalleryImages(p);
+        if (mainUsedImg && galleryImgs.length) {
+          mainUsedImg.src = galleryImgs[0];
+          mainUsedImg.alt = p.name;
+        }
+
+        const mediaBadge = document.getElementById("mediaBadge");
+        if (mediaBadge) {
+          mediaBadge.textContent = `ĐỒ CŨ ${condTitle.toUpperCase()} • -${discountPercent}%`;
+        }
+
+        const thumbStrip = document.getElementById("thumbStrip");
+        if (thumbStrip) {
+          if (galleryImgs.length > 1) {
+            thumbStrip.style.display = "flex";
+            thumbStrip.innerHTML = galleryImgs
+              .map(
+                (imgUrl, idx) => `
+                <div class="thumb-slot ${idx === 0 ? "active" : ""}" data-src="${imgUrl}">
+                  <img src="${imgUrl}" alt="Góc chụp ${idx + 1}" />
+                </div>
+              `
+              )
+              .join("");
+
+            thumbStrip.querySelectorAll(".thumb-slot").forEach((slot) => {
+              slot.addEventListener("click", () => {
+                thumbStrip.querySelectorAll(".thumb-slot").forEach((s) => s.classList.remove("active"));
+                slot.classList.add("active");
+                if (mainUsedImg) mainUsedImg.src = slot.dataset.src;
+              });
+            });
+          } else {
+            thumbStrip.style.display = "none";
+            thumbStrip.innerHTML = "";
+          }
+        }
+
+        // 4. Báo cáo kiểm định 15 bước theo đúng ngành hàng
+        const labGrid = document.getElementById("labReportGrid");
+        if (labGrid) {
+          const reportItems = ProductDetailData.getLabReport(p);
+          labGrid.innerHTML = reportItems
+            .map(
+              (item) => `
+              <div class="flex items-start gap-2">
+                <span class="material-symbols-outlined text-secondary icon-xs mt-0.5">${item.icon}</span>
+                <div>
+                  <div class="text-xs text-muted">${item.title}:</div>
+                  <strong class="text-text">${item.value}</strong>
+                </div>
+              </div>
+            `
+            )
+            .join("");
+        }
+
+        // 5. Cập nhật Người bán & Tiêu đề
+        const sellerMeta = document.getElementById("sellerMeta");
+        if (sellerMeta) {
+          const sName = p.seller || p.sellerName || "Việt Dũng (eKYC L2)";
+          sellerMeta.textContent = `Người bán: ${sName} • Đã eKYC CCCD • Đánh giá 5.0★`;
+        }
+
+        const prodTitle = document.getElementById("prodTitle");
+        if (prodTitle) prodTitle.textContent = prodFullTitle;
+
+        // 6. Thanh đo độ mới (Condition Meter)
+        const condLabelText = document.getElementById("condLabelText");
+        if (condLabelText) condLabelText.textContent = `${condVal}% (${p.condLabel || "Rất Đẹp Chuẩn Lab"})`;
+
+        const condProgressBar = document.getElementById("condProgressBar");
+        if (condProgressBar) condProgressBar.style.setProperty("--value", `${condVal}%`);
+
+        const sellerNoteText = document.getElementById("sellerNoteText");
+        if (sellerNoteText) {
+          sellerNoteText.innerHTML = `Mô tả người bán: <em>"${p.desc || p.condLabel || "Hàng dùng lướt kỹ lưỡng, đầy đủ hộp và phụ kiện nguyên bản."}"</em>`;
+        }
+
+        // 7. Giá & Mức tiết kiệm
+        const priceValEl = document.getElementById("productCurrentPrice");
+        if (priceValEl) priceValEl.textContent = Utils.formatCurrency(originalPrice);
+
+        const oldPriceEl = document.getElementById("productOldPrice");
+        if (oldPriceEl) oldPriceEl.textContent = Utils.formatCurrency(oldPriceVal);
+
+        const savingsBadge = document.getElementById("productSavingsBadge");
+        if (savingsBadge) savingsBadge.textContent = `Tiết kiệm ${Utils.formatCurrency(savedAmount)}`;
+
+        const discountCallout = document.getElementById("discountCalloutText");
+        if (discountCallout) {
+          discountCallout.textContent = `Rẻ hơn đồ mới ${discountPercent}% so với giá Brand Mall xuất xưởng`;
+        }
+
+        // 8. Bộ chọn Biến Thể Tương Thích
+        const variantBtnGroup = document.getElementById("variantBtnGroup");
+        const variants = ProductDetailData.getVariants(p);
+        if (variantBtnGroup && variants.length) {
+          variantBtnGroup.innerHTML = variants
+            .map(
+              (v) => `
+              <button class="variant-chip ${v.active ? "active" : ""}" type="button" data-val="${v.value}">
+                ${v.label}
+              </button>
+            `
+            )
+            .join("");
+
+          variantBtnGroup.querySelectorAll(".variant-chip").forEach((chip) => {
+            chip.addEventListener("click", () => {
+              variantBtnGroup.querySelectorAll(".variant-chip").forEach((c) => c.classList.remove("active"));
+              chip.classList.add("active");
+            });
+          });
+        }
+
+        // 9. Chuyển đổi Tabs Chi Tiết
+        const tabBtns = document.querySelectorAll(".detail-tab-btn");
+        const tabPanes = document.querySelectorAll(".detail-tab-pane");
+        tabBtns.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            tabBtns.forEach((b) => b.classList.remove("active"));
+            tabPanes.forEach((pane) => pane.classList.remove("active"));
+
+            btn.classList.add("active");
+            const targetId = btn.dataset.tab;
+            const targetPane = document.getElementById(targetId);
+            if (targetPane) targetPane.classList.add("active");
+          });
+        });
+
+        // Tab 1: Mô tả chi tiết
+        const tabDescContent = document.getElementById("tabDescContent");
+        if (tabDescContent) {
+          tabDescContent.innerHTML = ProductDetailData.getLongDescription(p);
+        }
+
+        // Tab 2: Bảng thông số kỹ thuật (Specs Table)
+        const specsTableBody = document.querySelector("#specsTable tbody");
+        if (specsTableBody) {
+          const specs = ProductDetailData.getSpecsTable(p);
+          specsTableBody.innerHTML = specs
+            .map(
+              (s) => `
+              <tr>
+                <th>${s.label}</th>
+                <td>${s.value}</td>
+              </tr>
+            `
+            )
+            .join("");
+        }
+
+        // Tab 4: Đánh giá khách hàng
+        const reviewsContainer = document.getElementById("reviewsListContainer");
+        if (reviewsContainer) {
+          const reviews = ProductDetailData.getReviews(p);
+          reviewsContainer.innerHTML = reviews
+            .map(
+              (r) => `
+              <div class="review-card">
+                <div class="review-header">
+                  <div class="review-user-info">
+                    <img class="review-avatar" src="${r.avatar}" alt="${r.name}" />
+                    <div>
+                      <strong class="text-sm block text-text">${r.name}</strong>
+                      <span class="text-xs text-muted">${r.date}</span>
+                    </div>
+                  </div>
+                  <div class="flex flex-col items-end">
+                    <div class="stars-container text-xs" style="color: var(--warning, #f59e0b);">★★★★★</div>
+                    <span class="badge badge-secondary text-2xs mt-1">${r.tag}</span>
+                  </div>
+                </div>
+                <div class="review-body">
+                  ${r.comment}
+                </div>
+              </div>
+            `
+            )
+            .join("");
+        }
+
+        // 10. Lưới Sản Phẩm Tương Tự
+        const relatedGrid = document.getElementById("relatedProductsGrid");
+        if (relatedGrid) {
+          const relatedList = ProductDetailData.getRelatedProducts(p, 4);
+          relatedGrid.innerHTML = relatedList
+            .map((item) => {
+              if (typeof Components !== "undefined" && typeof Components.renderProductCard === "function") {
+                return Components.renderProductCard(item, { basePath: "../../" });
+              }
+              const itemImg = window.resolveAssetUrl ? window.resolveAssetUrl(item.img) : item.img;
+              const itemLink = item.type === "mall" ? `product_new.html?id=${item.id}` : `product_used.html?id=${item.id}`;
+              return `
+                <article class="product-card" data-id="${item.id}">
+                  <div class="product-media">
+                    <a href="${itemLink}">
+                      <img src="${itemImg}" alt="${item.name}" loading="lazy" />
+                    </a>
+                  </div>
+                  <div class="product-body">
+                    <span class="product-cat text-secondary">${item.condText || "LIKE NEW"}</span>
+                    <h3 class="product-name line-clamp-2">
+                      <a href="${itemLink}">${item.name}</a>
+                    </h3>
+                    <div class="product-price mt-2">
+                      <span class="price">${Utils.formatCurrency(item.price)}</span>
+                    </div>
+                  </div>
+                </article>
+              `;
+            })
+            .join("");
+        }
+
+        // 11. Các nút hành động Giỏ Hàng & Mua Ngay
+        const btnUsedAddCart = document.getElementById("btnUsedAddCart");
+        if (btnUsedAddCart) {
+          btnUsedAddCart.addEventListener("click", () => {
+            if (!Auth.ensureLogin(() => {
+              Utils.Cart.addItem(p, 1);
+            }, {
+              title: "Đăng Nhập Mua Hàng",
+              message: `Vui lòng đăng nhập tài khoản để thêm "${prodShortTitle}" vào giỏ hàng.`,
+            })) return;
+            Utils.Cart.addItem(p, 1);
+          });
+        }
+
+        const btnUsedBuyNow = document.getElementById("btnUsedBuyNow");
+        if (btnUsedBuyNow) {
+          btnUsedBuyNow.addEventListener("click", () => {
+            if (!Auth.ensureLogin(() => {
+              Utils.Cart.addItem(p, 1);
+              window.location.href = "cart.html";
+            }, {
+              title: "Đăng Nhập Mua Hàng",
+              message: `Vui lòng đăng nhập tài khoản để mua ngay "${prodShortTitle}".`,
+              returnUrl: "cart.html"
+            })) return;
+            Utils.Cart.addItem(p, 1);
+            window.location.href = "cart.html";
+          });
+        }
+
+        // 12. Modal Trả Giá Thông Minh (Smart Offer)
+        // Mobile Sticky Bar
+        const stickyPrice = document.getElementById("stickyPrice");
+        if (stickyPrice) stickyPrice.textContent = Utils.formatCurrency(p.price);
+        const stickyBtnAddCart = document.getElementById("stickyBtnAddCart");
+        if (stickyBtnAddCart && btnUsedAddCart) {
+          stickyBtnAddCart.addEventListener("click", () => btnUsedAddCart.click());
+        }
+        const stickyBtnOffer = document.getElementById("stickyBtnOffer");
+        if (stickyBtnOffer && btnUsedOffer) {
+          stickyBtnOffer.addEventListener("click", () => btnUsedOffer.click());
+        }
+        const stickyBtnBuyNow = document.getElementById("stickyBtnBuyNow");
+        if (stickyBtnBuyNow && btnUsedBuyNow) {
+          stickyBtnBuyNow.addEventListener("click", () => btnUsedBuyNow.click());
+        }
+
+        const btnUsedOffer = document.getElementById("btnUsedOffer");
+        const modalProductName = document.getElementById("modalProductName");
+        const modalListedPrice = document.getElementById("modalListedPrice");
+        const modalProductThumb = document.getElementById("modalProductThumb");
+        const inputOfferPrice = document.getElementById("inputOfferPrice");
+        const offerDiscountPreview = document.getElementById("offerDiscountPreview");
+        const offerPriceError = document.getElementById("offerPriceError");
+        const quickOfferChips = document.querySelectorAll("#quickOfferChips .chip");
+        const offerMessageInput = document.getElementById("offerMessageInput");
+        const quickNoteButtons = document.querySelectorAll(".quick-note-btn");
+        const btnSubmitOffer = document.getElementById("btnSubmitOffer");
+        const offerTrackerPanel = document.getElementById("offerTrackerPanel");
+        const offerItemsContainer = document.getElementById("offerItemsContainer");
+        const offerCountBadge = document.getElementById("offerCountBadge");
+
+        if (modalProductName) modalProductName.textContent = p.name || p.short;
+        if (modalListedPrice) modalListedPrice.textContent = Utils.formatCurrency(originalPrice);
+        if (modalProductThumb && galleryImgs.length) modalProductThumb.src = galleryImgs[0];
+
+        function updateDiscountPreview(num) {
+          if (!offerDiscountPreview) return;
+          if (num <= 0) {
+            offerDiscountPreview.textContent = "Vui lòng nhập giá";
+            return;
+          }
+          if (num >= originalPrice) {
+            offerDiscountPreview.textContent = "Giá đề xuất nên thấp hơn giá niêm yết";
+            offerDiscountPreview.style.color = "var(--danger)";
+          } else {
+            const saving = originalPrice - num;
+            const pct = Math.round((saving / originalPrice) * 100);
+            offerDiscountPreview.textContent = `Tiết kiệm: ${Utils.formatCurrency(saving)} (-${pct}%)`;
+            offerDiscountPreview.style.color = "var(--secondary-300)";
+            if (offerPriceError) offerPriceError.style.display = "none";
+          }
+        }
+
+        // Tự động định dạng tiền khi gõ
+        if (inputOfferPrice) {
+          inputOfferPrice.addEventListener("input", () => {
+            quickOfferChips.forEach((c) => c.classList.remove("active"));
+            const digits = inputOfferPrice.value.replace(/\D/g, "");
+            const num = Number(digits) || 0;
+            if (num > 0) {
+              inputOfferPrice.value = num.toLocaleString("vi-VN");
+            }
+            updateDiscountPreview(num);
+          });
+        }
+
+        // Render lịch sử các đề xuất trả giá
+        function renderOffersTracker() {
+          if (!offerTrackerPanel || !offerItemsContainer) return;
+          const offers = Utils.Offer.getOffers(p.id);
+          if (!offers || offers.length === 0) {
+            offerTrackerPanel.style.display = "none";
+            return;
+          }
+          offerTrackerPanel.style.display = "block";
+          if (offerCountBadge) offerCountBadge.textContent = `${offers.length} đề xuất`;
+
+          offerItemsContainer.innerHTML = offers
+            .map((o) => {
+              const isAccepted = o.status === "accepted";
+              const isRejected = o.status === "rejected";
+              const badgeClass = isAccepted ? "badge-success" : isRejected ? "badge-danger" : "badge-secondary";
+              const statusLabel = isAccepted ? "ĐÃ CHẤP NHẬN" : isRejected ? "TỪ CHỐI" : "ĐANG CHỜ PHẢN HỒI";
+
+              return `
+                <div class="offer-item-card ${isAccepted ? "accepted" : isRejected ? "rejected" : ""}">
+                  <div class="flex items-center justify-between mb-1.5 flex-wrap gap-2">
+                    <div class="flex items-center gap-2">
+                      <span class="mono fw-700 text-white" style="font-size: 15px;">${Utils.formatCurrency(o.offerPrice)}</span>
+                      <span class="badge badge-primary text-xs" style="font-size: 10px;">-${o.discountPercent}%</span>
+                    </div>
+                    <span class="badge ${badgeClass}" style="font-size: 10px;">${statusLabel}</span>
+                  </div>
+                  ${o.message ? `<div class="text-xs text-muted mb-2 font-italic">"${o.message}"</div>` : ""}
+                  <div class="flex items-center justify-between text-xs text-faint flex-wrap gap-2">
+                    <span>Mã thương lượng: <strong class="mono text-muted">${o.id}</strong></span>
+                    ${isAccepted ? `
+                      <button class="btn btn-primary btn-sm btn-buy-offer" data-offer-id="${o.id}" data-price="${o.offerPrice}">
+                        <span class="material-symbols-outlined icon-xs">shopping_bag</span> Mua Với Giá Đã Trả (${Utils.formatCurrency(o.offerPrice)})
+                      </button>
+                    ` : `
+                      <span class="text-xs text-muted flex items-center gap-1">
+                        <span class="material-symbols-outlined icon-xs spin text-secondary">sync</span> Người bán đang xem xét
+                      </span>
+                    `}
+                  </div>
+                </div>
+              `;
+            })
+            .join("");
+
+          // Gắn sự kiện nút Mua Với Giá Đã Trả
+          document.querySelectorAll(".btn-buy-offer").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const offerPrice = Number(btn.dataset.price);
+              const customProduct = {
+                ...p,
+                price: offerPrice,
+                negotiated: true,
+                negotiatedDiscount: p.price - offerPrice,
+              };
+              Utils.Cart.addItem(customProduct, 1);
+              Utils.toast({
+                title: "Đã thêm vào giỏ hàng!",
+                message: `Áp dụng mức giá thương lượng thành công: ${Utils.formatCurrency(offerPrice)}`,
+                type: "success",
+              });
+              setTimeout(() => {
+                window.location.href = "cart.html";
+              }, 600);
+            });
+          });
+        }
+
+        renderOffersTracker();
+
+        // Mở modal trả giá
+        if (btnUsedOffer) {
+          btnUsedOffer.addEventListener("click", () => {
+            if (!Auth.ensureLogin(() => {
+              Utils.openModal("usedOfferModal");
+            }, {
+              title: "Yêu Cầu Đăng Nhập",
+              message: "Vui lòng đăng nhập tài khoản để gửi đề nghị trả giá với người bán.",
+            })) return;
+
+            const default10 = Math.round(originalPrice * 0.9);
+            if (inputOfferPrice) {
+              inputOfferPrice.value = default10.toLocaleString("vi-VN");
+            }
+            updateDiscountPreview(default10);
+            Utils.openModal("usedOfferModal");
+          });
+        }
+
+        // Gợi ý chip mức giảm
+        quickOfferChips.forEach((chip) => {
+          const pct = Number(chip.dataset.percent) || 10;
+          const discounted = Math.round(originalPrice * (1 - pct / 100));
+          chip.textContent = `-${pct}% (${Utils.formatCurrency(discounted)})`;
+          chip.addEventListener("click", () => {
+            quickOfferChips.forEach((c) => c.classList.remove("active"));
+            chip.classList.add("active");
+            if (inputOfferPrice) {
+              inputOfferPrice.value = discounted.toLocaleString("vi-VN");
+            }
+            updateDiscountPreview(discounted);
+          });
+        });
+
+        // Bấm chọn lời nhắn nhanh
+        quickNoteButtons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            if (!offerMessageInput) return;
+            const current = offerMessageInput.value.trim();
+            const textToAdd = btn.textContent.trim();
+            offerMessageInput.value = current ? current + " • " + textToAdd : textToAdd;
+          });
+        });
+
+        // Gửi đề xuất trả giá
+        if (btnSubmitOffer) {
+          btnSubmitOffer.addEventListener("click", () => {
+            const user = Auth.current();
+            if (!Auth.ensureLogin(() => {}, {
+              title: "Yêu Cầu Đăng Nhập",
+              message: "Vui lòng đăng nhập tài khoản để gửi đề xuất trả giá.",
+            })) return;
+
+            const rawPrice = inputOfferPrice ? inputOfferPrice.value.replace(/\D/g, "") : "";
+            const offerPrice = Number(rawPrice) || Math.round(originalPrice * 0.9);
+
+            if (offerPrice >= originalPrice) {
+              Utils.toast("Mức giá đề xuất nên thấp hơn giá niêm yết hiện tại.", "warning");
+              return;
+            }
+            if (offerPrice < originalPrice * 0.5) {
+              Utils.toast("Không thể trả giá thấp hơn 50% giá trị sản phẩm.", "warning");
+              return;
+            }
+
+            const msg = offerMessageInput ? offerMessageInput.value.trim() : "";
+
+            const res = Utils.Offer.submitOffer({
+              productId: p.id,
+              productName: p.name || p.short,
+              originalPrice: originalPrice,
+              offerPrice: offerPrice,
+              message: msg,
+              buyerName: user ? user.fullName : "Khách hàng",
+            });
+
+            Utils.closeModal("usedOfferModal");
+
+            if (res.success) {
+              renderOffersTracker();
+              Utils.toast({
+                title: "Đã gửi đề xuất trả giá thành công!",
+                message: `Đề xuất mức ${Utils.formatCurrency(offerPrice)} (-${res.offer.discountPercent}%) đã được gửi tới người bán.`,
+                type: "success",
+              });
+
+              // Giả lập người bán phản hồi tự động nếu mức giảm <= 15%
+              if (res.offer.discountPercent <= 15) {
+                setTimeout(() => {
+                  Utils.Offer.updateOfferStatus(res.offer.id, "accepted");
+                  renderOffersTracker();
+                  Utils.toast({
+                    title: "🎉 Người bán ĐÃ CHẤP NHẬN đề xuất!",
+                    message: `Người bán đồng ý để lại cho bạn với giá ${Utils.formatCurrency(offerPrice)}. Bấm "Mua Với Giá Đã Trả" để thanh toán ngay!`,
+                    type: "success",
+                  });
+                }, 2500);
+              }
+            }
+          });
+        }
+
+        // 13. Lightbox Phóng To Ảnh
+        const lightbox = document.getElementById("productLightbox");
+        const lightboxImg = document.getElementById("lightboxImg");
+        const lightboxCloseBtn = document.getElementById("lightboxCloseBtn");
+        const zoomContainer = document.getElementById("zoomContainer");
+
+        if (zoomContainer && lightbox && lightboxImg) {
+          zoomContainer.addEventListener("click", () => {
+            lightboxImg.src = mainUsedImg.src;
+            lightbox.classList.add("active");
+          });
+          if (lightboxCloseBtn) {
+            lightboxCloseBtn.addEventListener("click", () => lightbox.classList.remove("active"));
+          }
+          lightbox.addEventListener("click", (e) => {
+            if (e.target === lightbox) lightbox.classList.remove("active");
+          });
+          document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && lightbox.classList.contains("active")) {
+              lightbox.classList.remove("active");
+            }
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>
