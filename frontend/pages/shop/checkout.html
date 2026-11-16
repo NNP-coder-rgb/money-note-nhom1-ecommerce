@@ -25,6 +25,23 @@
     <link rel="stylesheet" href="../../css/master_screens.css" />
 
     <style>
+      /* Bố cục responsive 2 cột chống tràn / cấn khối */
+      .checkout-layout-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 390px;
+        gap: var(--sp-6, 24px);
+        align-items: start;
+      }
+      @media (max-width: 992px) {
+        .checkout-layout-grid {
+          grid-template-columns: 1fr;
+        }
+        .checkout-summary-panel {
+          position: static !important;
+          top: auto !important;
+        }
+      }
+
       /* Tùy chỉnh nâng cao cho giao diện thanh toán chuẩn TMĐT */
       .checkout-section-title {
         font-family: var(--font-head);
@@ -470,7 +487,7 @@
 
       <form id="checkoutMasterForm">
         <!-- BỐ CỤC 2 CỘT: TRÁI (THÔNG TIN & THANH TOÁN), PHẢI (KIỆN HÀNG & TỔNG KẾT) -->
-        <div class="grid grid-2 gap-6" style="grid-template-columns: minmax(0, 1fr) 390px; align-items: start;">
+        <div class="checkout-layout-grid">
           
           <!-- CỘT TRÁI: THÔNG TIN GIAO NHẬN, VẬN CHUYỂN & PHƯƠNG THỨC THANH TOÁN -->
           <div class="checkout-left-col">
@@ -826,6 +843,44 @@
               </div>
             </section>
 
+            
+            <!-- KHỐI YÊU CẦU XUẤT HÓA ĐƠN ĐIỆN TỬ VAT -->
+            <section class="panel p-4 mb-4 vat-invoice-toggle-box" style="background: rgba(59, 130, 246, 0.04); border: 1.5px solid rgba(59, 130, 246, 0.25); border-radius: var(--radius-lg, 12px);">
+              <div class="flex items-center justify-between gap-3">
+                <label class="flex items-center gap-2.5 cursor-pointer m-0" for="vatInvoiceCheck">
+                  <input type="checkbox" id="vatInvoiceCheck" style="width: 18px; height: 18px; accent-color: var(--primary, #3b82f6);" />
+                  <div>
+                    <strong class="text-sm text-text block">Yêu Cầu Xuất Hóa Đơn Điện Tử VAT (Doanh Nghiệp / Cá Nhân)</strong>
+                    <span class="text-2xs text-muted block">Hóa đơn điện tử hợp lệ theo Thông tư 78/2021/TT-BTC gửi qua email trong vòng 24h</span>
+                  </div>
+                </label>
+                <span class="badge badge-primary text-2xs">VAT 8% - 10%</span>
+              </div>
+
+              <div id="vatInvoiceFields" style="display: none; margin-top: 16px; padding-top: 16px; border-top: 1px dashed rgba(255, 255, 255, 0.1);">
+                <div class="grid grid-2 gap-3 mb-3">
+                  <div class="form-group mb-0">
+                    <label class="form-label text-xs fw-600">Tên Doanh Nghiệp / Tổ Chức <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control text-xs" id="vatCompanyName" placeholder="Công ty Cổ phần Công nghệ..." />
+                  </div>
+                  <div class="form-group mb-0">
+                    <label class="form-label text-xs fw-600">Mã Số Thuế (MST) <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control text-xs" id="vatTaxCode" placeholder="0101234567 hoặc 0312345678" />
+                  </div>
+                </div>
+                <div class="grid grid-2 gap-3">
+                  <div class="form-group mb-0">
+                    <label class="form-label text-xs fw-600">Địa Chỉ Trụ Sở Công Ty <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control text-xs" id="vatAddress" placeholder="Số 1 Đại lộ Thăng Long, Mễ Trì, Nam Từ Liêm, Hà Nội" />
+                  </div>
+                  <div class="form-group mb-0">
+                    <label class="form-label text-xs fw-600">Email Nhận Hóa Đơn Điện Tử <span class="text-danger">*</span></label>
+                    <input type="email" class="form-control text-xs" id="vatEmail" placeholder="ketoan@congty.com" />
+                  </div>
+                </div>
+              </div>
+            </section>
+
             <!-- KHỐI 4: 3 TRỤ CỘT CAM KẾT BẢO VỆ NGƯỜI MUA -->
             <div class="cart-trust-grid" style="margin-top: 0; margin-bottom: 24px;">
               <div class="cart-trust-card">
@@ -853,7 +908,7 @@
           </div>
 
           <!-- CỘT PHẢI (STICKY ASIDE): KIỆN HÀNG, MÃ VOUCHER & BẢNG TỔNG KẾT -->
-          <aside class="checkout-right-col" style="position: sticky; top: 90px;">
+          <aside class="checkout-right-col checkout-summary-panel" style="position: sticky; top: 90px;">
             <div class="panel p-5">
               <div class="flex items-center justify-between mb-3 pb-2" style="border-bottom: 1px solid var(--border);">
                 <h3 class="panel-title mb-0 flex items-center gap-1.5 text-sm">
@@ -1434,6 +1489,14 @@
         /* =========================================================================
            6. QUẢN LÝ PHƯƠNG THỨC VẬN CHUYỂN & PHƯƠNG THỨC THANH TOÁN
            ========================================================================= */
+        
+          // Toggle VAT Invoice Fields
+          const vatCheck = document.getElementById("vatInvoiceCheck");
+          const vatFields = document.getElementById("vatInvoiceFields");
+          vatCheck?.addEventListener("change", () => {
+            if (vatFields) vatFields.style.display = vatCheck.checked ? "block" : "none";
+          });
+
         function initShippingAndPayment() {
           // 1. Vận chuyển
           dom.shipCards.forEach(card => {
@@ -1608,7 +1671,7 @@
             // 1. Validate người nhận
             const fullName = dom.recipientName.value.trim();
             const phone = dom.recipientPhone.value.trim().replace(/\s+/g, "");
-            const address = dom.recipientAddress.value.trim();
+            let address = dom.recipientAddress.value.trim();
             const province = dom.selectProvince.value;
             const district = dom.selectDistrict.value;
             const ward = dom.selectWard.value;
@@ -1679,6 +1742,15 @@
                 id: state.orderCode,
                 orderCode: state.orderCode,
                 createdAt: new Date().toISOString(),
+              vatInvoice: (document.getElementById("vatInvoiceCheck")?.checked) ? {
+                required: true,
+                companyName: (document.getElementById("vatCompanyName")?.value || "").trim() || "Công ty Cổ phần Mua Sắm Số",
+                taxCode: (document.getElementById("vatTaxCode")?.value || "").trim() || "0109988776",
+                address: (document.getElementById("vatAddress")?.value || "").trim() || "Hà Nội",
+                email: (document.getElementById("vatEmail")?.value || "").trim() || "ketoan@hybrid.store",
+                invoiceNumber: "HDDT-" + Math.floor(100000 + Math.random() * 900000),
+                issuedDate: new Date().toLocaleDateString("vi-VN"),
+              } : null,
                 status: "delivering",
                 statusLabel: state.paymentMethod === "COD" ? "Đang giao hàng (COD)" : "Đang giao hàng (Đã thanh toán)",
                 statusTone: "secondary",
