@@ -2077,26 +2077,7 @@
     <script src="../../js/components.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // 1. Chuyển đổi giao diện sáng / tối
-        var toggleBtn = document.getElementById("themeToggleBtn");
-        if (toggleBtn) {
-          toggleBtn.addEventListener("click", function () {
-            var current =
-              document.documentElement.getAttribute("data-theme") || "dark";
-            var next = current === "dark" ? "light" : "dark";
-            document.documentElement.setAttribute("data-theme", next);
-            if (next === "light") {
-              document.documentElement.classList.add("light-theme");
-            } else {
-              document.documentElement.classList.remove("light-theme");
-            }
-            try {
-              localStorage.setItem("hybrid_theme", next);
-            } catch (e) {}
-          });
-        }
-
-        // 2. Logic FAQ Accordion
+        // Logic FAQ Accordion
         var faqButtons = document.querySelectorAll(".faq-question");
         function toggleFAQ(btn) {
           var item = btn.closest(".faq-item");
