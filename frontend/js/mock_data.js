@@ -29,29 +29,21 @@ const IMG = {
   fashion_tracksuit: "assets/images/products/bo-quan-ao-ni-nam-thu-dong.png",
   fashion_harley: "assets/images/products/ao-thun-harley-quan-cargo.png",
   fashion_dsquared2: "assets/images/products/ao-thun-dsquared2-icon.png",
-  fashion_sweatshirt:
-    "assets/images/products/ao-sweatshirt-streetwear-oversize.png",
-  fashion_streetwear_set:
-    "assets/images/products/set-do-streetwear-nam-dsquared2.png",
-  fashion_cat_shirt:
-    "assets/images/products/set-so-mi-trang-quan-au-someone.png",
+  fashion_sweatshirt: "assets/images/products/ao-sweatshirt-streetwear-oversize.png",
+  fashion_streetwear_set: "assets/images/products/set-do-streetwear-nam-dsquared2.png",
+  fashion_cat_shirt: "assets/images/products/set-so-mi-trang-quan-au-someone.png",
   fashion_plaid_shirt: "assets/images/products/ao-so-mi-nam-ke-caro.png",
   fashion_hiphop_shirt: "assets/images/products/ao-so-mi-coc-tay-hiphop.png",
-  fashion_mcqueen:
-    "assets/images/products/ao-thun-alexander-mcqueen-graffiti.png",
+  fashion_mcqueen: "assets/images/products/ao-thun-alexander-mcqueen-graffiti.png",
   fashion_cotton_tee: "assets/images/products/ao-thun-cotton-unisex.png",
-  fashion_office_skirt:
-    "assets/images/products/set-cong-so-nu-so-mi-chan-vay.png",
-  fashion_tweed_dress:
-    "assets/images/products/dam-da-tweed-nu-kem-ao-choang.png",
+  fashion_office_skirt: "assets/images/products/set-cong-so-nu-so-mi-chan-vay.png",
+  fashion_tweed_dress: "assets/images/products/dam-da-tweed-nu-kem-ao-choang.png",
   fashion_floral_blouse: "assets/images/products/ao-so-mi-nu-theu-hoa.png",
   fashion_cap: "assets/images/products/mu-luoi-trai-the-thao.png",
 
   // Danh mục Sneakers & Giày Dép (21 ảnh PNG)
-  shoe_fashion_3col:
-    "assets/images/products/giay-the-thao-nam-fashion-3-mau.png",
-  shoe_sneaker_chunky:
-    "assets/images/products/giay-the-thao-nam-sneaker-de-day.png",
+  shoe_fashion_3col: "assets/images/products/giay-the-thao-nam-fashion-3-mau.png",
+  shoe_sneaker_chunky: "assets/images/products/giay-the-thao-nam-sneaker-de-day.png",
   shoe_sneaker_bhitnz: "assets/images/products/giay-sneaker-bhitnz-sport.png",
   shoe_sneaker_tls201: "assets/images/products/giay-sneaker-nam-nu-tls201.png",
   shoe_sneaker_nam: "assets/images/products/giay-sneaker-the-thao-nam.png",
@@ -92,8 +84,7 @@ const IMG = {
   appliance_thermos: "assets/images/products/binh-giu-nhiet.png",
   appliance_hotpot: "assets/images/products/noi-lau-dien-da-nang.png",
   appliance_kitchen_scale: "assets/images/products/can-dien-tu-nha-bep.png",
-  appliance_kitchen_utensils:
-    "assets/images/products/bo-do-gia-dung-da-nang.png",
+  appliance_kitchen_utensils: "assets/images/products/bo-do-gia-dung-da-nang.png",
 
   // Danh mục Đồ Điện Tử & Hi-Tech
   tech_laptop: "assets/images/products/may-tinh-laptop-mong-nhe.png",
@@ -104,31 +95,23 @@ const IMG = {
   audio_kz_iem: "assets/images/products/tai-nghe-kz-edx-lite-iem.png",
   audio_kz_pair: "assets/images/products/tai-nghe-kz-edx-lite-iem-pair.png",
   audio_anker_tws: "assets/images/products/tai-nghe-anker-soundcore-tws.png",
-  audio_bluetooth_headphone:
-    "assets/images/products/tai-nghe-khong-day-bluetooth.png",
+  audio_bluetooth_headphone: "assets/images/products/tai-nghe-khong-day-bluetooth.png",
   audio_bluetooth_speaker: "assets/images/products/loa-bluetooth-bass-tram.png",
 
   // Danh mục Gaming Gear & Bàn Phím Chuột
-  gaming_razer_gold:
-    "assets/images/products/tai-nghe-razer-blackshark-v2-gold.png",
-  gaming_dareu_rgb_headset:
-    "assets/images/products/tai-nghe-gaming-dareu-rgb-7-1.png",
+  gaming_razer_gold: "assets/images/products/tai-nghe-razer-blackshark-v2-gold.png",
+  gaming_dareu_rgb_headset: "assets/images/products/tai-nghe-gaming-dareu-rgb-7-1.png",
   gaming_aula_f75: "assets/images/products/ban-phim-co-aula-f75-rgb.png",
   gaming_twolf_mini: "assets/images/products/ban-phim-co-twolf-mini-rgb.png",
   gaming_art_keycap: "assets/images/products/ban-phim-co-custom-art-keycap.png",
   gaming_retro_knob: "assets/images/products/ban-phim-co-custom-retro-knob.png",
   gaming_keyboard_led: "assets/images/products/ban-phim-co-gaming-led.png",
-  gaming_razer_mouse_white:
-    "assets/images/products/chuot-razer-deathadder-v3-pro-white.png",
-  gaming_logitech_pink:
-    "assets/images/products/chuot-logitech-g-pro-x-superlight-pink.png",
-  gaming_razer_faker_red:
-    "assets/images/products/chuot-razer-deathadder-v3-faker-red.png",
+  gaming_razer_mouse_white: "assets/images/products/chuot-razer-deathadder-v3-pro-white.png",
+  gaming_logitech_pink: "assets/images/products/chuot-logitech-g-pro-x-superlight-pink.png",
+  gaming_razer_faker_red: "assets/images/products/chuot-razer-deathadder-v3-faker-red.png",
   gaming_dareu_em908: "assets/images/products/chuot-gaming-dareu-em908-rgb.png",
-  gaming_hamster_mouse:
-    "assets/images/products/chuot-khong-day-hinh-thu-pink.png",
-  gaming_office_mouse:
-    "assets/images/products/chuot-quang-khong-day-ergonomic.png",
+  gaming_hamster_mouse: "assets/images/products/chuot-khong-day-hinh-thu-pink.png",
+  gaming_office_mouse: "assets/images/products/chuot-quang-khong-day-ergonomic.png",
 
   // Danh mục Đồng Hồ & Phụ Kiện & Đời Sống
   watch_smartwatch: "assets/images/products/dong-ho-thong-minh-smartwatch.png",
@@ -142,8 +125,20 @@ const IMG = {
   lifestyle_candle: "assets/images/products/nen-thom-phong-thu-gian.png",
 
   // Danh mục Máy Ảnh & Quay Chụp
-  camera_mirrorless:
-    "assets/images/products/may-anh-ky-thuat-so-mirrorless.png",
+  camera_mirrorless: "assets/images/products/may-anh-ky-thuat-so-mirrorless.png",
+  camera_canon_eos: "assets/images/products/images.jpg",
+  camera_canon_flash: "assets/images/products/images (1).jpg",
+  camera_lens_tele: "assets/images/products/images (2).jpg",
+  camera_lens_zoom: "assets/images/products/images (3).jpg",
+  camera_mirrorless_white: "assets/images/products/images (4).jpg",
+  camera_osmo_pocket3_stand: "assets/images/products/images (5).jpg",
+  camera_osmo_pocket3_action: "assets/images/products/images (6).jpg",
+  camera_osmo_pocket_selfie: "assets/images/products/images (7).jpg",
+  camera_panasonic_4k: "assets/images/products/images (8).jpg",
+  camera_moza_gimbal: "assets/images/products/images (9).jpg",
+  camera_sony_alpha: "assets/images/products/images (10).jpg",
+  camera_ixy_compact: "assets/images/products/images (11).jpg",
+  camera_canon_r6_body: "assets/images/products/images (18).jpg",
 };
 
 // tone: primary | secondary | tertiary | success  (màu chủ đạo của từng ngành hàng)
@@ -1081,7 +1076,7 @@ const PRODUCTS = [
     desc: "Màu bạc vintage, ống kính trong veo không mốc rễ",
     price: 17200000,
     oldPrice: 24500000,
-    img: IMG.camera_mirrorless,
+    img: IMG.camera_mirrorless_white,
   },
   {
     id: "t7",
@@ -1187,7 +1182,7 @@ const PRODUCTS = [
     price: 1650000,
     oldPrice: 2490000,
     buy: "Mua Ngay",
-    img: IMG.gaming_razer_mouse_white,
+    img: IMG.gaming_office_mouse,
   },
   {
     id: "t13",
@@ -1878,7 +1873,7 @@ const PRODUCTS = [
     price: 38990000,
     off: 5,
     buy: "Mua Ngay",
-    img: IMG.camera_mirrorless,
+    img: IMG.camera_canon_eos,
   },
   {
     id: "cm2",
@@ -1897,7 +1892,7 @@ const PRODUCTS = [
     price: 39500000,
     oldPrice: 49990000,
     buy: "Mua Ngay",
-    img: IMG.camera_mirrorless,
+    img: IMG.camera_lens_zoom,
   },
   {
     id: "cm3",
@@ -1932,7 +1927,7 @@ const PRODUCTS = [
     price: 34500000,
     oldPrice: 42000000,
     buy: "Mua Ngay",
-    img: IMG.camera_mirrorless,
+    img: IMG.camera_ixy_compact,
   },
   {
     id: "cm5",
@@ -1948,7 +1943,8 @@ const PRODUCTS = [
     price: 15890000,
     off: 5,
     buy: "Mua Ngay",
-    img: IMG.camera_mirrorless,
+    img: IMG.camera_osmo_pocket3_stand,
+    images: [IMG.camera_osmo_pocket3_stand, IMG.camera_osmo_pocket3_action, IMG.camera_osmo_pocket_selfie],
   },
   {
     id: "cm6",
@@ -1967,7 +1963,7 @@ const PRODUCTS = [
     price: 18900000,
     oldPrice: 26500000,
     buy: "Mua Ngay",
-    img: IMG.camera_mirrorless,
+    img: IMG.camera_lens_tele,
   },
   {
     id: "cm7",
@@ -1983,7 +1979,7 @@ const PRODUCTS = [
     price: 68900000,
     off: 7,
     buy: "Mua Ngay",
-    img: IMG.camera_mirrorless,
+    img: IMG.camera_canon_flash,
   },
   {
     id: "cm8",
@@ -2002,7 +1998,7 @@ const PRODUCTS = [
     price: 14500000,
     oldPrice: 22900000,
     buy: "Mua Ngay",
-    img: IMG.camera_mirrorless,
+    img: IMG.camera_moza_gimbal,
   },
   {
     id: "f13",
@@ -2067,8 +2063,7 @@ const PRODUCTS = [
     condText: "97% Likenew",
     cond: 97,
     condPrefix: "Nike Store Vincom",
-    condLabel:
-      "Chất vải dù chống rách co giãn tốt, có khóa tháo rời thành quần short",
+    condLabel: "Chất vải dù chống rách co giãn tốt, có khóa tháo rời thành quần short",
     seller: "Tuấn Tú (Đống Đa)",
     sellerName: "Tuấn Tú",
     name: "Quần Túi Hộp Dã Ngoại Nike ACG Smith Summit Cargo Khaki",
@@ -2105,8 +2100,7 @@ const PRODUCTS = [
     condText: "99% Likenew",
     cond: 99,
     condPrefix: "Mua tại Pháp",
-    condLabel:
-      "Len lông cừu nguyên chất cực mềm, thêu logo trái tim đỏ kinh điển",
+    condLabel: "Len lông cừu nguyên chất cực mềm, thêu logo trái tim đỏ kinh điển",
     seller: "Huyền Trang (Cầu Giấy)",
     sellerName: "Huyền Trang",
     name: "Áo Cardigan Len Ami Paris De Coeur Màu Trắng Kem Size M",
@@ -2180,8 +2174,7 @@ const PRODUCTS = [
     condText: "99% Likenew",
     cond: 99,
     condPrefix: "Asics Store Nhật",
-    condLabel:
-      "Mang đúng 1 lần chạy máy trong nhà, đệm Gel êm ái đàn hồi đỉnh cao",
+    condLabel: "Mang đúng 1 lần chạy máy trong nhà, đệm Gel êm ái đàn hồi đỉnh cao",
     seller: "Thanh Bình (Nam Từ Liêm)",
     sellerName: "Thanh Bình",
     name: "Giày Chạy Bộ Asics Gel-Kayano 14 Cream Pure Silver Size 42",
@@ -2255,8 +2248,7 @@ const PRODUCTS = [
     condText: "99% Likenew",
     cond: 99,
     condPrefix: "Samsung Care+ 2 Năm",
-    condLabel:
-      "Màn hình và viền titan không một vết xước, fullbox kèm bút S-Pen zin",
+    condLabel: "Màn hình và viền titan không một vết xước, fullbox kèm bút S-Pen zin",
     seller: "Tiến Đạt (Hà Đông)",
     sellerName: "Tiến Đạt",
     name: "Điện Thoại Samsung Galaxy S24 Ultra 512GB Titanium Gray Bản SSVN",
@@ -2293,8 +2285,7 @@ const PRODUCTS = [
     condText: "99% Likenew",
     cond: 99,
     condPrefix: "Sạc 18 Lần Pin 100%",
-    condLabel:
-      "Bản 16GB RAM đa nhiệm mượt, máy đẹp leng keng không tì vết kèm sạc MagSafe 35W",
+    condLabel: "Bản 16GB RAM đa nhiệm mượt, máy đẹp leng keng không tì vết kèm sạc MagSafe 35W",
     seller: "Ngọc Lan (Thanh Xuân)",
     sellerName: "Ngọc Lan",
     name: "Laptop Apple MacBook Air 15 inch M3 (16GB RAM / 512GB SSD) Midnight",
@@ -2368,8 +2359,7 @@ const PRODUCTS = [
     condText: "98% Likenew",
     cond: 98,
     condPrefix: "Dyson Mall VN",
-    condLabel:
-      "Đầy đủ 7 đầu hút chuyên dụng, đầu laser soi bụi hoạt động hoàn hảo",
+    condLabel: "Đầy đủ 7 đầu hút chuyên dụng, đầu laser soi bụi hoạt động hoàn hảo",
     seller: "Minh Trí (Cầu Giấy)",
     sellerName: "Minh Trí",
     name: "Máy Hút Bụi Cầm Tay Không Dây Dyson V15 Detect Absolute Fluffy",
@@ -2406,8 +2396,7 @@ const PRODUCTS = [
     condText: "97% Likenew",
     cond: 97,
     condPrefix: "Chính Hãng An Miên",
-    condLabel:
-      "Bơm áp suất 15 bar mạnh mẽ, tặng kèm tay pha đáy trần naked portafilter",
+    condLabel: "Bơm áp suất 15 bar mạnh mẽ, tặng kèm tay pha đáy trần naked portafilter",
     seller: "Đức Thịnh (Hoàn Kiếm)",
     sellerName: "Đức Thịnh",
     name: "Máy Pha Cà Phê Espresso Gia Đình DeLonghi Dedica EC685.M Màu Bạc",
@@ -2444,8 +2433,7 @@ const PRODUCTS = [
     condText: "99% Likenew",
     cond: 99,
     condPrefix: "Hurom Nhập Khẩu Hàn",
-    condLabel:
-      "Dùng thử 3 lần cất tủ, lưỡi dao và khoang ép không vết ố màu hoa quả",
+    condLabel: "Dùng thử 3 lần cất tủ, lưỡi dao và khoang ép không vết ố màu hoa quả",
     seller: "Phương Nga (Hai Bà Trưng)",
     sellerName: "Phương Nga",
     name: "Máy Ép Chậm Trục Đứng Hurom H400 Công Nghệ Giữ Nguyên Dưỡng Chất",
@@ -2480,8 +2468,7 @@ const PRODUCTS = [
     condText: "99% Likenew",
     cond: 99,
     condPrefix: "Bose Store Tràng Tiền",
-    condLabel:
-      "Đệm mút êm ái không bong tróc, công nghệ Bose Immersive Audio sống động",
+    condLabel: "Đệm mút êm ái không bong tróc, công nghệ Bose Immersive Audio sống động",
     seller: "Hùng Cường (Thanh Xuân)",
     sellerName: "Hùng Cường",
     name: "Tai Nghe Chống Ồn Bose QuietComfort Ultra Headphones Black Fullbox",
@@ -2516,8 +2503,7 @@ const PRODUCTS = [
     condText: "98% Likenew",
     cond: 98,
     condPrefix: "B&O Rex Arcade",
-    condLabel:
-      "Quai da thật nguyên bản, tích hợp sạc không dây chuẩn Qi trên đỉnh loa",
+    condLabel: "Quai da thật nguyên bản, tích hợp sạc không dây chuẩn Qi trên đỉnh loa",
     seller: "Tuấn Anh (Ba Đình)",
     sellerName: "Tuấn Anh",
     name: "Loa Di Động Hạng Sang Bang & Olufsen Beolit 20 Grey Mist Pin Trâu",
@@ -2544,6 +2530,7 @@ const PRODUCTS = [
     off: 12,
     buy: "Mua Ngay",
     img: IMG.audio_kz_iem,
+    images: [IMG.audio_kz_iem, IMG.audio_kz_pair],
   },
   {
     id: "au14",
@@ -2554,8 +2541,7 @@ const PRODUCTS = [
     condText: "99% Likenew",
     cond: 99,
     condPrefix: "AnhDuy Audio",
-    condLabel:
-      "Dàn loa bookshelf hi-fi đa năng kết nối HDMI eARC, Optical, AirPlay 2",
+    condLabel: "Dàn loa bookshelf hi-fi đa năng kết nối HDMI eARC, Optical, AirPlay 2",
     seller: "Quốc Huy (Tây Hồ)",
     sellerName: "Quốc Huy",
     name: "Cặp Loa Kèm DAC KEF LSX II Hi-Res Không Dây Carbon Black Siêu Lướt",
@@ -2590,8 +2576,7 @@ const PRODUCTS = [
     condText: "99% Likenew",
     cond: 99,
     condPrefix: "Sony Store VN BH 10T",
-    condLabel:
-      "Kèm 2 tay DualSense trắng không trôi cần analog, đầy đủ cáp HDMI 2.1",
+    condLabel: "Kèm 2 tay DualSense trắng không trôi cần analog, đầy đủ cáp HDMI 2.1",
     seller: "Duy Mạnh (Đống Đa)",
     sellerName: "Duy Mạnh",
     name: "Máy Chơi Game Sony PlayStation 5 Slim Standard Disc Edition 1TB",
@@ -2626,8 +2611,7 @@ const PRODUCTS = [
     condText: "98% Likenew",
     cond: 98,
     condPrefix: "Hàng Xách Tay Mỹ",
-    condLabel:
-      "Màn hình OLED 90Hz HDR cực đẹp, pin zin hoạt động trâu 4-8 tiếng",
+    condLabel: "Màn hình OLED 90Hz HDR cực đẹp, pin zin hoạt động trâu 4-8 tiếng",
     seller: "Bảo Nam (Cầu Giấy)",
     sellerName: "Bảo Nam",
     name: "Máy Chơi Game Cầm Tay Valve Steam Deck OLED 512GB Nguyên Túi Zin",
@@ -2664,8 +2648,7 @@ const PRODUCTS = [
     condText: "99% Likenew",
     cond: 99,
     condPrefix: "Hộp Full Phụ Kiện",
-    condLabel:
-      "Vỏ nhôm Anode màu bạc không vết cấn, switch gõ âm creamy đầm tai",
+    condLabel: "Vỏ nhôm Anode màu bạc không vết cấn, switch gõ âm creamy đầm tai",
     seller: "Minh Khôi (Hoàng Mai)",
     sellerName: "Minh Khôi",
     name: "Bàn Phím Cơ Custom Nhôm CNC Rainy 75 Pro RGB Hotswap Snow Yellow",
@@ -2700,8 +2683,7 @@ const PRODUCTS = [
     condText: "98% Likenew",
     cond: 98,
     condPrefix: "Tissot Thụy Sĩ BH 2026",
-    condLabel:
-      "Mặt kính Sapphire nguyên vẹn, máy Powermatic 80 trữ cót 80 giờ chuẩn xác",
+    condLabel: "Mặt kính Sapphire nguyên vẹn, máy Powermatic 80 trữ cót 80 giờ chuẩn xác",
     seller: "Trọng Tấn (Ba Đình)",
     sellerName: "Trọng Tấn",
     name: "Đồng Hồ Nam Tissot PRX Powermatic 80 Ice Blue T137.407.11.351.00",
@@ -2736,8 +2718,7 @@ const PRODUCTS = [
     condText: "99% Likenew",
     cond: 99,
     condPrefix: "Seiko Boutique VN",
-    condLabel:
-      "Kim xăng báo mức cót tinh xảo, kèm dây da bóng zin có khóa bướm chống gãy",
+    condLabel: "Kim xăng báo mức cót tinh xảo, kèm dây da bóng zin có khóa bướm chống gãy",
     seller: "Văn Hùng (Hai Bà Trưng)",
     sellerName: "Văn Hùng",
     name: "Đồng Hồ Cơ Seiko Presage Cocktail Time SSA343J1 Mặt Kính Cong Kính Lồi",
@@ -2774,8 +2755,7 @@ const PRODUCTS = [
     condText: "97% Likenew",
     cond: 97,
     condPrefix: "Gia Bảo Watch",
-    condLabel:
-      "Size 42mm dễ đeo, kim vát sắc sảo mạ vàng hồng thanh lịch chuẩn công sở",
+    condLabel: "Size 42mm dễ đeo, kim vát sắc sảo mạ vàng hồng thanh lịch chuẩn công sở",
     seller: "Minh Hiếu (Tây Hồ)",
     sellerName: "Minh Hiếu",
     name: "Đồng Hồ Tự Động Orient Bambino Gen 4 FAC08003A0 Kính Vòm Cổ Điển",
@@ -2800,7 +2780,7 @@ const PRODUCTS = [
     price: 47990000,
     off: 6,
     buy: "Mua Ngay",
-    img: IMG.camera_mirrorless,
+    img: IMG.camera_sony_alpha,
   },
   {
     id: "cm10",
@@ -2810,8 +2790,7 @@ const PRODUCTS = [
     condText: "99% Likenew",
     cond: 99,
     condPrefix: "Fujifilm VN Chụp 280 Shot",
-    condLabel:
-      "Dán cường lực màn hình từ đầu, thân máy kim loại không một vết xước dăm",
+    condLabel: "Dán cường lực màn hình từ đầu, thân máy kim loại không một vết xước dăm",
     seller: "Trọng Khoa (Cầu Giấy)",
     sellerName: "Trọng Khoa",
     name: "Máy Ảnh Compact Cao Cấp Fujifilm X100VI Silver Cực Hiếm Shot Dưới 300",
@@ -2820,7 +2799,7 @@ const PRODUCTS = [
     price: 42500000,
     oldPrice: 52000000,
     buy: "Mua Ngay",
-    img: IMG.camera_mirrorless,
+    img: IMG.camera_osmo_pocket_selfie,
   },
   {
     id: "cm11",
@@ -2836,7 +2815,7 @@ const PRODUCTS = [
     price: 15890000,
     off: 5,
     buy: "Mua Ngay",
-    img: IMG.camera_mirrorless,
+    img: IMG.camera_osmo_pocket3_action,
   },
   {
     id: "cm12",
@@ -2846,8 +2825,7 @@ const PRODUCTS = [
     condText: "99% Likenew",
     cond: 99,
     condPrefix: "Lê Bảo Minh Chụp 1.8k Shot",
-    condLabel:
-      "Bảo hành LBM đến 2026, cảm biến sạch bong, quay video 4K60p oversampled 6K",
+    condLabel: "Bảo hành LBM đến 2026, cảm biến sạch bong, quay video 4K60p oversampled 6K",
     seller: "Ngọc Sơn (Hoàng Mai)",
     sellerName: "Ngọc Sơn",
     name: "Body Máy Ảnh Chuyên Nghiệp Canon EOS R6 Mark II Like New Fullbox",
@@ -2856,7 +2834,7 @@ const PRODUCTS = [
     price: 46800000,
     oldPrice: 62000000,
     buy: "Mua Ngay",
-    img: IMG.camera_mirrorless,
+    img: IMG.camera_canon_r6_body,
   },
   {
     id: "cm13",
@@ -2873,7 +2851,7 @@ const PRODUCTS = [
     price: 41990000,
     off: 7,
     buy: "Mua Ngay",
-    img: IMG.camera_mirrorless,
+    img: IMG.camera_panasonic_4k,
   },
   {
     id: "cm14",
@@ -2884,8 +2862,7 @@ const PRODUCTS = [
     condText: "98% Likenew",
     cond: 98,
     condPrefix: "Sony Center Hoàn Kiếm",
-    condLabel:
-      "Kính trước sau trong vắt không tì vết, vòng xoay zoom và lấy nét êm ái",
+    condLabel: "Kính trước sau trong vắt không tì vết, vòng xoay zoom và lấy nét êm ái",
     seller: "Quốc Tuấn (Đống Đa)",
     sellerName: "Quốc Tuấn",
     name: "Ống Kính Đa Dụng Sony FE 24-70mm F2.8 GM II (G Master Đời 2 Nhẹ Hơn 22%)",
@@ -2894,7 +2871,7 @@ const PRODUCTS = [
     price: 43500000,
     oldPrice: 56990000,
     buy: "Mua Ngay",
-    img: IMG.camera_mirrorless,
+    img: IMG.camera_lens_zoom,
   },
 ];
 
@@ -3288,6 +3265,8 @@ if (typeof module !== "undefined" && module.exports) {
   module.exports = {
     IMG,
     CATEGORIES,
+    CATEGORIES_MALL,
+    CATEGORIES_C2C,
     PRODUCTS,
     FLASH_SALE,
     TICKER,
@@ -3303,6 +3282,8 @@ if (typeof module !== "undefined" && module.exports) {
 if (typeof window !== "undefined") {
   window.IMG = IMG;
   window.CATEGORIES = CATEGORIES;
+  window.CATEGORIES_MALL = CATEGORIES_MALL;
+  window.CATEGORIES_C2C = CATEGORIES_C2C;
   window.PRODUCTS = PRODUCTS;
   window.FLASH_SALE = FLASH_SALE;
   window.TICKER = TICKER;

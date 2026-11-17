@@ -427,13 +427,32 @@
       var themeBtn = document.getElementById("themeToggleBtn");
       if (themeBtn && !themeBtn.dataset.bound) {
         themeBtn.dataset.bound = "true";
-        themeBtn.addEventListener("click", function () {
+        themeBtn.addEventListener("click", function (e) {
+          if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
           if (
             UtilsRef &&
             UtilsRef.Theme &&
             typeof UtilsRef.Theme.toggle === "function"
           ) {
-            UtilsRef.Theme.toggle();
+            var newTheme = UtilsRef.Theme.toggle();
+            var toastFn =
+              typeof window !== "undefined" && window.toast
+                ? window.toast
+                : UtilsRef && UtilsRef.toast;
+            if (typeof toastFn === "function") {
+              toastFn({
+                title: newTheme === "light" ? "Giao diện Sáng" : "Giao diện Tối",
+                message:
+                  newTheme === "light"
+                    ? "Đã chuyển sang giao diện nền trắng hiện đại"
+                    : "Đã chuyển sang giao diện Midnight Cyber Violet",
+                type: "info",
+                duration: 2000,
+              });
+            }
           } else {
             var isLight =
               document.body.classList.contains("light-theme") ||
