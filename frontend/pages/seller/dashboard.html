@@ -1,0 +1,1767 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kênh Người Bán &amp; Quản Lý Doanh Thu C2C | HYBRID.STORE</title>
+
+    <!-- Chống giật giao diện (Zero-FOUC Theme Init) -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("hybrid_theme") || "dark";
+          document.documentElement.setAttribute("data-theme", t);
+          if (t === "light") document.documentElement.classList.add("light-theme");
+        } catch (e) {}
+      })();
+    </script>
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="stylesheet" href="../../css/base.css?v=4" />
+    <link rel="stylesheet" href="../../css/catalog.css?v=4" />
+    <link rel="stylesheet" href="../../css/master_screens.css?v=4" />
+  </head>
+  <body class="dash-page">
+    <!-- ===== HEADER ===== -->
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="../../index.html">
+          <span class="brand-mark"><span class="material-symbols-outlined">token</span></span>
+          <span>HYBRID<span class="text-secondary">.STORE</span> <span class="badge badge-secondary">KÊNH NGƯỜI BÁN</span></span>
+        </a>
+
+        <div class="header-actions">
+          <a class="btn btn-secondary hide-sm" href="../shop/catalog.html?type=c2c" title="Xem chợ đồ cũ">
+            <span class="material-symbols-outlined icon-xs">storefront</span>
+            Xem Chợ C2C
+          </a>
+          <a class="btn btn-primary" href="post_item.html">
+            <span class="material-symbols-outlined icon-sm">add</span>
+            Đăng Bán Món Mới
+          </a>
+          <button
+            class="icon-btn theme-toggle-btn"
+            id="themeToggleBtn"
+            type="button"
+            aria-label="Chuyển chế độ sáng / tối"
+            title="Chuyển sang giao diện Sáng / Tối"
+          >
+            <span class="material-symbols-outlined theme-toggle-icon">light_mode</span>
+          </button>
+          <a class="avatar" href="../account/profile.html" id="headerUserAvatar" title="Hồ sơ tài khoản">
+            <span class="material-symbols-outlined">store</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== LAYOUT KÊNH NGƯỜI BÁN ===== -->
+    <div class="dash-layout">
+      <!-- SIDEBAR NGƯỜI BÁN -->
+      <aside class="dash-sidebar">
+        <!-- Thẻ thông tin Shop người bán (Động theo Auth.current) -->
+        <div class="seller-profile-card-deluxe mb-3" id="sellerProfileCard">
+          <div class="seller-profile-badge-ring">
+            <div class="seller-avatar-badge" id="sellerAvatarInitials" style="background: linear-gradient(135deg, #8b5cf6, #06b6d4); color: #fff; font-weight: 800; border: 2px solid rgba(255,255,255,0.2);">VD</div>
+          </div>
+          <div style="min-width: 0; flex: 1;">
+            <div class="flex items-center justify-between">
+              <strong class="text-sm text-white block truncate" id="sellerStoreName">Việt Dũng Store</strong>
+              <span class="badge badge-primary" style="font-size: 9px; padding: 2px 6px;">PRO</span>
+            </div>
+            <small class="text-xs text-success flex items-center gap-1 mt-0.5 truncate" id="sellerKycBadge">
+              <span class="material-symbols-outlined icon-xs">verified</span> eKYC CCCD Chip L2
+            </small>
+            <div class="seller-level-progress-bar" title="Tiến trình thăng hạng Đối Tác Kim Cương (85%)">
+              <div class="seller-level-progress-fill"></div>
+            </div>
+          </div>
+        </div>
+
+        <nav class="side-nav">
+          <button class="side-link active" type="button" data-tab="overview">
+            <span class="material-symbols-outlined">dashboard</span>
+            <span>Tổng Quan Gian Hàng</span>
+          </button>
+
+          <button class="side-link" type="button" data-tab="products">
+            <span class="material-symbols-outlined">inventory_2</span>
+            <span>Sản Phẩm Đang Bán</span>
+            <span class="badge badge-counter" id="badgeProdCount">0</span>
+          </button>
+
+          <button class="side-link" type="button" data-tab="orders">
+            <span class="material-symbols-outlined">local_shipping</span>
+            <span>Đơn Cần Giao &amp; Vận Chuyển</span>
+            <span class="badge badge-counter" id="badgeOrderCount">0</span>
+          </button>
+
+          <button class="side-link" type="button" data-tab="offers">
+            <span class="material-symbols-outlined">price_change</span>
+            <span>Đề Nghị Trả Giá</span>
+            <span class="badge badge-counter" id="badgeOfferCount">0</span>
+          </button>
+
+          <button class="side-link" type="button" data-tab="wallet">
+            <span class="material-symbols-outlined">account_balance_wallet</span>
+            <span>Ví Tiền &amp; Rút Napas 24/7</span>
+          </button>
+
+          <div style="height: 1px; background: var(--border, rgba(255,255,255,0.06)); margin: 8px 0;"></div>
+
+          <a class="side-link" href="../buyer/dispute.html">
+            <span class="material-symbols-outlined">support_agent</span>
+            <span>Trung Tâm Khiếu Nại C2C</span>
+          </a>
+
+          <!-- Chỉ hiển thị link Admin nếu người dùng là Admin -->
+          <a class="side-link" href="../admin/admin_system.html" id="sidebarAdminLink" style="display: none;">
+            <span class="material-symbols-outlined text-primary">terminal</span>
+            <span>Quản Trị Master Admin</span>
+          </a>
+        </nav>
+      </aside>
+
+      <!-- VÙNG NỘI DUNG CHÍNH (ĐA TAB ĐỘNG) -->
+      <main class="dash-content">
+        <!-- ============================================================== -->
+        <!-- TAB 1: TỔNG QUAN GIAN HÀNG (OVERVIEW) -->
+        <!-- ============================================================== -->
+        <section class="dash-tab-pane active" id="tab-overview">
+          <!-- Thanh Nhắc Nhở Tác Vụ Cần Xử Lý Gấp -->
+          <div class="action-reminder-card" id="actionReminderCard">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-warning" style="font-size: 28px;">notification_important</span>
+              <div>
+                <strong class="text-sm block text-white">Bạn có 2 đơn hàng cần chuẩn bị &amp; bàn giao bưu tá trước 17:00 chiều nay!</strong>
+                <span class="text-xs text-muted">Đồng thời có 2 đề nghị trả giá của khách sắp hết hạn phản hồi trong 24 giờ.</span>
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <button class="btn btn-warning btn-sm" type="button" onclick="document.querySelector('[data-tab=orders]').click()">
+                Xử Lý Đơn Ngay
+              </button>
+            </div>
+          </div>
+
+          <div class="dash-title-row mb-4">
+            <div>
+              <h1 class="page-title mb-1">Tổng Quan Hoạt Động Bán Hàng</h1>
+              <p class="text-sm text-muted">
+                Theo dõi dòng tiền bán đồ cũ, xử lý đơn khách đặt và đối soát bảo vệ ký quỹ Escrow.
+              </p>
+            </div>
+            <div class="flex gap-2">
+              <button class="btn btn-secondary btn-sm" id="btnQuickWithdraw" type="button">
+                <span class="material-symbols-outlined icon-xs">payments</span>
+                Rút Tiền Napas 24/7
+              </button>
+              <a class="btn btn-primary btn-sm" href="post_item.html">
+                <span class="material-symbols-outlined icon-xs">add</span>
+                Đăng Món Mới
+              </a>
+            </div>
+          </div>
+
+          <!-- 4 Thẻ Stat Cards Deluxe -->
+          <div class="grid grid-4 gap-4 mb-6">
+            <div class="stat-card-deluxe" style="--card-accent: linear-gradient(90deg, #10b981, #06b6d4); --card-color: #34d399;" onclick="document.querySelector('[data-tab=wallet]').click()">
+              <div class="stat-icon-wrap">
+                <span class="material-symbols-outlined">account_balance_wallet</span>
+              </div>
+              <div class="stat-label">Số Dư Ví Khả Dụng</div>
+              <div class="stat-val mono text-gradient" id="overviewBalance">48.250.000₫</div>
+              <div class="stat-sub text-success flex items-center gap-1 mt-2">
+                <span class="material-symbols-outlined icon-xs">verified</span> Rút tiền tức thì 24/7 Napas
+              </div>
+            </div>
+
+            <div class="stat-card-deluxe" style="--card-accent: linear-gradient(90deg, #06b6d4, #8b5cf6); --card-color: #22d3ee;">
+              <div class="stat-icon-wrap">
+                <span class="material-symbols-outlined">payments</span>
+              </div>
+              <div class="stat-label">Doanh Thu Đã Thu Về</div>
+              <div class="stat-val mono text-secondary" id="overviewRevenue">126.800.000₫</div>
+              <div class="stat-sub text-muted flex items-center gap-1 mt-2">
+                <span class="material-symbols-outlined icon-xs">trending_up</span> Tăng +28% so với tháng trước
+              </div>
+            </div>
+
+            <div class="stat-card-deluxe" style="--card-accent: linear-gradient(90deg, #f59e0b, #ef4444); --card-color: #fbbf24;" onclick="document.querySelector('[data-tab=orders]').click()">
+              <div class="stat-icon-wrap">
+                <span class="material-symbols-outlined">local_shipping</span>
+              </div>
+              <div class="stat-label">Đơn Hàng Cần Giao</div>
+              <div class="stat-val mono text-warning" id="overviewPendingOrders">2 Đơn</div>
+              <div class="stat-sub text-warning flex items-center gap-1 mt-2">
+                <span class="material-symbols-outlined icon-xs">alarm</span> Bưu tá hẹn lấy trong 1-2h
+              </div>
+            </div>
+
+            <div class="stat-card-deluxe" style="--card-accent: linear-gradient(90deg, #8b5cf6, #ec4899); --card-color: #c084fc;">
+              <div class="stat-icon-wrap">
+                <span class="material-symbols-outlined">workspace_premium</span>
+              </div>
+              <div class="stat-label">Điểm Tín Nhiệm Shop</div>
+              <div class="stat-val mono text-success">99.8%</div>
+              <div class="stat-sub text-success flex items-center gap-1 mt-2">
+                <span class="material-symbols-outlined icon-xs">grade</span> Hạng Bạch Kim Uy Tín
+              </div>
+            </div>
+          </div>
+
+          <!-- BIỂU ĐỒ DOANH SỐ GMV BÁN HÀNG 7 NGÀY QUA -->
+          <div class="panel p-5 mb-5">
+            <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+              <div>
+                <h3 class="panel-title flex items-center gap-2" style="margin: 0;">
+                  <span class="material-symbols-outlined text-secondary">analytics</span>
+                  Doanh Thu Bán Hàng 7 Ngày Qua (Đơn vị: Triệu VNĐ)
+                </h3>
+                <p class="text-xs text-muted mt-0.5" style="margin: 0;">Tổng GMV tuần đạt 154.500.000₫ • 18 đơn giao thành công</p>
+              </div>
+              <span class="badge badge-success text-2xs fw-700">Tăng trưởng +34.2% YoY</span>
+            </div>
+
+            <!-- SVG Bar & Trendline Chart -->
+            <div style="width: 100%; height: 160px; position: relative;">
+              <svg viewBox="0 0 700 140" style="width: 100%; height: 100%; overflow: visible;">
+                <defs>
+                  <linearGradient id="sellerBarGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.9" />
+                    <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0.5" />
+                  </linearGradient>
+                </defs>
+                <!-- Đường kẻ mờ ngang -->
+                <line x1="40" y1="20" x2="680" y2="20" stroke="rgba(255,255,255,0.06)" stroke-dasharray="4" />
+                <line x1="40" y1="60" x2="680" y2="60" stroke="rgba(255,255,255,0.06)" stroke-dasharray="4" />
+                <line x1="40" y1="100" x2="680" y2="100" stroke="rgba(255,255,255,0.06)" stroke-dasharray="4" />
+
+                <!-- 7 Cột biểu đồ (T2 đến CN) -->
+                <!-- T2: 12.4Tr -->
+                <rect x="70" y="65" width="36" height="45" rx="6" fill="url(#sellerBarGrad)" />
+                <text x="88" y="58" font-size="10" fill="#94a3b8" text-anchor="middle" font-family="monospace">12.4M</text>
+                <text x="88" y="125" font-size="11" fill="#64748b" text-anchor="middle" font-weight="600">Thứ 2</text>
+
+                <!-- T3: 18.2Tr -->
+                <rect x="155" y="45" width="36" height="65" rx="6" fill="url(#sellerBarGrad)" />
+                <text x="173" y="38" font-size="10" fill="#94a3b8" text-anchor="middle" font-family="monospace">18.2M</text>
+                <text x="173" y="125" font-size="11" fill="#64748b" text-anchor="middle" font-weight="600">Thứ 3</text>
+
+                <!-- T4: 14.5Tr -->
+                <rect x="240" y="58" width="36" height="52" rx="6" fill="url(#sellerBarGrad)" />
+                <text x="258" y="50" font-size="10" fill="#94a3b8" text-anchor="middle" font-family="monospace">14.5M</text>
+                <text x="258" y="125" font-size="11" fill="#64748b" text-anchor="middle" font-weight="600">Thứ 4</text>
+
+                <!-- T5: 22.0Tr -->
+                <rect x="325" y="32" width="36" height="78" rx="6" fill="url(#sellerBarGrad)" />
+                <text x="343" y="25" font-size="10" fill="#22d3ee" text-anchor="middle" font-family="monospace" font-weight="bold">22.0M</text>
+                <text x="343" y="125" font-size="11" fill="#64748b" text-anchor="middle" font-weight="600">Thứ 5</text>
+
+                <!-- T6: 28.5Tr -->
+                <rect x="410" y="18" width="36" height="92" rx="6" fill="url(#sellerBarGrad)" />
+                <text x="428" y="12" font-size="10" fill="#22d3ee" text-anchor="middle" font-family="monospace" font-weight="bold">28.5M</text>
+                <text x="428" y="125" font-size="11" fill="#64748b" text-anchor="middle" font-weight="600">Thứ 6</text>
+
+                <!-- T7: 32.1Tr (Đỉnh điểm) -->
+                <rect x="495" y="10" width="36" height="100" rx="6" fill="url(#sellerBarGrad)" />
+                <text x="513" y="4" font-size="10" fill="#a855f7" text-anchor="middle" font-family="monospace" font-weight="bold">32.1M</text>
+                <text x="513" y="125" font-size="11" fill="#a855f7" text-anchor="middle" font-weight="700">Thứ 7</text>
+
+                <!-- CN: 26.8Tr -->
+                <rect x="580" y="24" width="36" height="86" rx="6" fill="url(#sellerBarGrad)" />
+                <text x="598" y="17" font-size="10" fill="#22d3ee" text-anchor="middle" font-family="monospace" font-weight="bold">26.8M</text>
+                <text x="598" y="125" font-size="11" fill="#64748b" text-anchor="middle" font-weight="600">Chủ Nhật</text>
+
+                <!-- Đường Trendline nối các đỉnh cột -->
+                <polyline
+                  points="88,65 173,45 258,58 343,32 428,18 513,10 598,24"
+                  fill="none"
+                  stroke="#f59e0b"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <!-- Chấm tròn trên đường Trendline -->
+                <circle cx="88" cy="65" r="3.5" fill="#f59e0b" stroke="#000" stroke-width="1.5" />
+                <circle cx="173" cy="45" r="3.5" fill="#f59e0b" stroke="#000" stroke-width="1.5" />
+                <circle cx="258" cy="58" r="3.5" fill="#f59e0b" stroke="#000" stroke-width="1.5" />
+                <circle cx="343" cy="32" r="3.5" fill="#f59e0b" stroke="#000" stroke-width="1.5" />
+                <circle cx="428" cy="18" r="3.5" fill="#f59e0b" stroke="#000" stroke-width="1.5" />
+                <circle cx="513" cy="10" r="4.5" fill="#ffffff" stroke="#f59e0b" stroke-width="2" />
+                <circle cx="598" cy="24" r="3.5" fill="#f59e0b" stroke="#000" stroke-width="1.5" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Khối Đơn hàng cần xử lý gấp -->
+          <div class="panel p-5 mb-5">
+            <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-warning">priority_high</span>
+                <h3 class="panel-title" style="margin: 0;">Đơn Hàng Mới Cần Chuẩn Bị &amp; Giao Bưu Tá</h3>
+              </div>
+              <button class="btn btn-ghost btn-sm" type="button" onclick="document.querySelector('[data-tab=orders]').click()">
+                Xem tất cả đơn hàng →
+              </button>
+            </div>
+            <div id="overviewOrdersContainer">
+              <!-- Render động 2 đơn hàng cần giao nhất -->
+            </div>
+          </div>
+
+          <!-- Khối Sản phẩm đang rao bán tóm tắt -->
+          <div class="panel p-5">
+            <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">inventory_2</span>
+                <h3 class="panel-title" style="margin: 0;">Sản Phẩm Đang Rao Bán Gần Đây</h3>
+              </div>
+              <button class="btn btn-ghost btn-sm" type="button" onclick="document.querySelector('[data-tab=products]').click()">
+                Quản lý kho hàng →
+              </button>
+            </div>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Sản phẩm</th>
+                    <th>Danh mục</th>
+                    <th>Giá niêm yết</th>
+                    <th>Độ mới</th>
+                    <th>Trạng thái</th>
+                    <th style="text-align: right;">Thao tác</th>
+                  </tr>
+                </thead>
+                <tbody id="overviewProductsTbody">
+                  <!-- Render động -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- TAB 2: QUẢN LÝ SẢN PHẨM ĐANG BÁN (PRODUCTS) -->
+        <!-- ============================================================== -->
+        <section class="dash-tab-pane" id="tab-products">
+          <div class="dash-title-row mb-4">
+            <div>
+              <h1 class="page-title mb-1">Quản Lý Kho Hàng &amp; Sản Phẩm C2C</h1>
+              <p class="text-sm text-muted">
+                Điều chỉnh giá bán, tạm ẩn/hiển thị món hàng, duyệt đề xuất giá hoặc xóa tin đăng cũ.
+              </p>
+            </div>
+            <a class="btn btn-primary" href="post_item.html">
+              <span class="material-symbols-outlined icon-sm">add</span>
+              Đăng Bán Món Mới
+            </a>
+          </div>
+
+          <!-- Bộ lọc & Thanh tìm kiếm sản phẩm -->
+          <div class="panel p-4 mb-4">
+            <div class="grid grid-3 gap-3">
+              <div class="input-group">
+                <span class="icon-left material-symbols-outlined">search</span>
+                <input class="input" id="searchProductInput" type="text" placeholder="Tìm sản phẩm theo tên..." />
+              </div>
+              <select class="input" id="filterCatSelect">
+                <option value="">Tất cả danh mục ngành hàng</option>
+                <option value="tech">💻 Đồ Điện Tử &amp; Hi-Tech</option>
+                <option value="audio">🎧 Âm Thanh &amp; Tai Nghe Hi-Fi</option>
+                <option value="gaming">🎮 Gaming Gear &amp; Bàn Phím Cơ</option>
+                <option value="camera">📷 Máy Ảnh &amp; Thiết Bị Quay</option>
+                <option value="fashion">👔 Thời Trang &amp; Streetwear</option>
+                <option value="sneakers">👟 Sneakers &amp; Giày Dép</option>
+                <option value="appliances">🏠 Đồ Gia Dụng Smart IoT</option>
+                <option value="watches">⌚ Đồng Hồ &amp; Phụ Kiện</option>
+              </select>
+              <select class="input" id="filterStatusSelect">
+                <option value="">Tất cả trạng thái</option>
+                <option value="active">Đang hiển thị trên sàn</option>
+                <option value="has_offer">Đang có đề nghị trả giá</option>
+                <option value="hidden">Tạm ẩn</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Bảng danh sách sản phẩm toàn diện -->
+          <div class="panel">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="min-width: 280px;">Sản phẩm</th>
+                    <th>Ngành hàng</th>
+                    <th>Giá niêm yết</th>
+                    <th>Độ mới</th>
+                    <th>Trạng thái</th>
+                    <th style="text-align: right; min-width: 220px;">Thao tác</th>
+                  </tr>
+                </thead>
+                <tbody id="allProductsTbody">
+                  <!-- Render động -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- TAB 3: ĐƠN CẦN GIAO & VẬN CHUYỂN (ORDERS) -->
+        <!-- ============================================================== -->
+        <section class="dash-tab-pane" id="tab-orders">
+          <div class="dash-title-row mb-4">
+            <div>
+              <h1 class="page-title mb-1">Quản Lý Đơn Hàng &amp; Vận Chuyển Hỏa Tốc</h1>
+              <p class="text-sm text-muted">
+                Xác nhận chuẩn bị hàng, bàn giao bưu tá và in phiếu gửi hàng chuẩn sàn HYBRID.STORE.
+              </p>
+            </div>
+            <div class="chip-row" id="orderFilterChips">
+              <label class="chip"><input type="radio" name="orderStatusFilter" value="all" checked /> Tất cả đơn (4)</label>
+              <label class="chip"><input type="radio" name="orderStatusFilter" value="pending" /> Chờ lấy hàng (2)</label>
+              <label class="chip"><input type="radio" name="orderStatusFilter" value="delivering" /> Đang vận chuyển (1)</label>
+              <label class="chip"><input type="radio" name="orderStatusFilter" value="completed" /> Đã hoàn thành (1)</label>
+            </div>
+          </div>
+
+          <!-- Bảng danh sách đơn hàng cần giao -->
+          <div class="panel">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Mã Đơn</th>
+                    <th>Khách Mua &amp; Địa Chỉ Nhận</th>
+                    <th>Sản Phẩm</th>
+                    <th>Tiền Ký Quỹ (Escrow)</th>
+                    <th>Đơn Vị VC</th>
+                    <th>Trạng Thái</th>
+                    <th style="text-align: right; min-width: 200px;">Thao tác</th>
+                  </tr>
+                </thead>
+                <tbody id="ordersTbody">
+                  <!-- Render động qua JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- TAB 4: ĐỀ NGHỊ TRẢ GIÁ C2C (OFFERS) -->
+        <!-- ============================================================== -->
+        <section class="dash-tab-pane" id="tab-offers">
+          <div class="dash-title-row mb-4">
+            <div>
+              <h1 class="page-title mb-1">Đề Nghị Trả Giá &amp; Thương Lượng C2C</h1>
+              <p class="text-sm text-muted">
+                Khách hàng đề xuất mức giá mua nhanh. Bạn có 24 giờ để phản hồi trước khi lời đề nghị hết hạn.
+              </p>
+            </div>
+          </div>
+
+          <div class="grid gap-4" id="offersListContainer">
+            <!-- Render động danh sách đề nghị trả giá -->
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- TAB 5: VÍ TIỀN & RÚT TIỀN NAPAS 24/7 (WALLET) -->
+        <!-- ============================================================== -->
+        <section class="dash-tab-pane" id="tab-wallet">
+          <div class="dash-title-row mb-4">
+            <div>
+              <h1 class="page-title mb-1">Ví Người Bán &amp; Rút Tiền Napas 24/7</h1>
+              <p class="text-sm text-muted">
+                Quản lý số dư tiền hàng đã bán, bảo vệ thanh toán ký quỹ Escrow và rút tiền siêu tốc 30 giây.
+              </p>
+            </div>
+            <button class="btn btn-primary" id="btnWalletWithdraw" type="button">
+              <span class="material-symbols-outlined icon-sm">account_balance</span>
+              Rút Tiền Về Ngân Hàng
+            </button>
+          </div>
+
+          <!-- GRID VÍ & THẺ DEBIT CARD ẢO -->
+          <div class="grid grid-3 gap-4 mb-6">
+            <!-- Thẻ Virtual Merchant Card mô phỏng với Chip EMV vàng kim -->
+            <div class="virtual-debit-card">
+              <div class="flex justify-between items-center mb-3">
+                <span class="fw-800 tracking-wider text-xs flex items-center gap-1.5 text-white">
+                  <span class="material-symbols-outlined icon-xs text-secondary">token</span> HYBRID MERCHANT CARD
+                </span>
+                <span class="badge badge-warning text-2xs fw-800 tracking-wider">PLATINUM</span>
+              </div>
+
+              <!-- EMV Chip & Contactless -->
+              <div class="flex items-center gap-3 my-3">
+                <div class="emv-chip" title="EMV Smart Chip Security"></div>
+                <span class="material-symbols-outlined text-white" style="opacity: 0.6; font-size: 20px;" title="Napas Contactless">contactless</span>
+              </div>
+
+              <div class="mono text-white fw-700" style="font-size: 1.15rem; letter-spacing: 3.5px; margin: 12px 0; text-shadow: 0 2px 4px rgba(0,0,0,0.6);">
+                9704 2200 8829 8888
+              </div>
+
+              <div class="flex justify-between items-end pt-1">
+                <div>
+                  <div class="text-2xs text-muted uppercase tracking-wider">CHỦ TÀI KHOẢN</div>
+                  <strong class="text-xs text-white uppercase tracking-wider" id="cardHolderName">NGUYEN NGOC PHUC</strong>
+                </div>
+                <div style="text-align: right;">
+                  <div class="text-2xs text-muted uppercase tracking-wider">NAPAS 24/7 INSTANT</div>
+                  <strong class="mono text-sm text-gradient" id="cardBalanceDisplay">48.250.000₫</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Thống kê Escrow Holding -->
+            <div class="panel p-5 flex flex-col justify-between">
+              <div>
+                <div class="text-xs text-muted mb-1">Tiền Đang Tạm Giữ Ký Quỹ (Escrow)</div>
+                <div class="mono text-secondary" id="walletEscrowHolding" style="font-size: 1.85rem; font-weight: 800;">21.490.000₫</div>
+              </div>
+              <div class="text-xs text-muted mt-3">
+                <span class="material-symbols-outlined icon-xs text-secondary" style="vertical-align: middle;">lock</span>
+                Tự động mở khóa vào số dư khả dụng ngay khi người mua nhận hàng &amp; xác nhận hài lòng.
+              </div>
+            </div>
+
+            <!-- Thống kê Tài khoản nhận tiền -->
+            <div class="panel p-5 flex flex-col justify-between">
+              <div>
+                <div class="text-xs text-muted mb-1">Tài Khoản Ngân Hàng Nhận Tiền</div>
+                <strong class="text-white block mt-1" id="walletBankHolder">NGUYEN NGOC PHUC</strong>
+                <div class="mono text-xs text-muted mt-1" id="walletBankDetails">Techcombank • 1903 6888 8888 8</div>
+              </div>
+              <div class="text-xs text-success flex items-center gap-1 mt-3">
+                <span class="material-symbols-outlined icon-xs">check_circle</span> Đã đối soát Napas liên ngân hàng
+              </div>
+            </div>
+          </div>
+
+          <!-- Lịch sử giao dịch ví -->
+          <div class="panel p-5">
+            <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+              <h3 class="panel-title" style="margin: 0;">Lịch Sử Biến Động Số Dư &amp; Rút Tiền</h3>
+              <span class="text-xs text-muted">Hiển thị các giao dịch hoàn tất gần đây</span>
+            </div>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Thời gian</th>
+                    <th>Mã giao dịch</th>
+                    <th>Loại giao dịch</th>
+                    <th>Số tiền</th>
+                    <th>Trạng thái</th>
+                  </tr>
+                </thead>
+                <tbody id="walletTransactionsTbody">
+                  <!-- Render động -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- MODAL 1: DUYỆT ĐỀ NGHỊ TRẢ GIÁ C2C -->
+    <!-- ============================================================== -->
+    <div class="modal-backdrop" id="approveOfferModal">
+      <div class="modal" role="dialog" aria-modal="true" style="max-width: 500px;">
+        <div class="modal-head">
+          <h4 class="modal-title flex items-center gap-2">
+            <span class="material-symbols-outlined text-secondary">price_change</span>
+            Xét Duyệt Đề Nghị Trả Giá
+          </h4>
+          <button class="modal-close" type="button" data-close><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <div class="modal-body">
+          <div class="panel p-3 mb-3" style="background: var(--bg-surface);">
+            <div class="text-xs text-muted">Sản phẩm:</div>
+            <strong class="text-white block mt-0.5" id="offerModalProdTitle">Body Sony Alpha A7 Mark IV</strong>
+            <div class="flex items-center justify-between text-xs mt-2 pt-2" style="border-top: 1px solid var(--border);">
+              <span>Giá niêm yết: <strong class="mono text-muted" id="offerModalListedPrice">37.800.000₫</strong></span>
+              <span>Khách trả giá: <strong class="mono text-gradient" style="font-size: 1.15rem;" id="offerModalOfferPrice">34.000.000₫</strong></span>
+            </div>
+          </div>
+          <div class="panel p-3 mb-3 text-xs" style="background: rgba(6, 182, 212, 0.05); border: 1px solid rgba(6, 182, 212, 0.25); border-radius: 8px;">
+            <div class="fw-700 text-secondary mb-1 flex items-center gap-1">
+              <span class="material-symbols-outlined icon-xs">chat</span> Lời nhắn từ người mua:
+            </div>
+            <p class="text-muted" id="offerModalBuyerMsg" style="margin: 0; line-height: 1.6;">
+              "Em qua xem máy trực tiếp tại showroom lấy luôn trong chiều nay ạ, bác bớt chút lộc lá cho em nhé!"
+            </p>
+          </div>
+          <p class="text-xs text-muted">
+            Nếu bạn đồng ý, người mua sẽ có <strong>24 giờ</strong> để hoàn tất thanh toán ký quỹ với mức giá ưu đãi này.
+          </p>
+        </div>
+        <div class="modal-foot flex gap-2">
+          <button class="btn btn-outlined btn-sm flex-1" id="btnRejectOffer" type="button">Từ Chối</button>
+          <button class="btn btn-secondary btn-sm flex-1" id="btnCounterOffer" type="button">Báo Giá 35.5Tr</button>
+          <button class="btn btn-primary btn-sm flex-1" id="btnAcceptOffer" type="button">Đồng Ý Bán</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- MODAL 2: RÚT TIỀN NAPAS 24/7 -->
+    <!-- ============================================================== -->
+    <div class="modal-backdrop" id="withdrawModal">
+      <div class="modal" role="dialog" aria-modal="true" style="max-width: 480px;">
+        <div class="modal-head">
+          <h4 class="modal-title flex items-center gap-2">
+            <span class="material-symbols-outlined text-success">account_balance</span>
+            Rút Tiền 24/7 Napas Về Ngân Hàng
+          </h4>
+          <button class="modal-close" type="button" data-close><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <div class="modal-body">
+          <div class="panel p-3 mb-3" style="background: var(--bg-surface)">
+            <div class="text-xs text-muted">Số dư khả dụng hiện tại:</div>
+            <strong class="mono text-gradient" id="modalAvailBalance" style="font-size: 1.45rem;">48.250.000₫</strong>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tài khoản ngân hàng nhận tiền chính chủ</label>
+            <input class="input mono" id="modalBankInfoInput" type="text" value="Techcombank • 1903 6888 8888 8 (NGUYEN NGOC PHUC)" readonly />
+          </div>
+          <div class="form-group">
+            <label class="form-label flex justify-between">
+              <span>Số tiền muốn rút (VNĐ)</span>
+              <button type="button" id="btnWithdrawAll" class="text-xs text-secondary" style="background: none; border: none; cursor: pointer; padding: 0;">Rút tất cả số dư</button>
+            </label>
+            <input class="input mono" id="modalWithdrawAmountInput" type="text" value="20.000.000" />
+            <span class="text-2xs text-muted mt-1 block">Miễn phí giao dịch • Chuyển mạch liên ngân hàng Napas 24/7 trong 30 giây</span>
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn btn-secondary" type="button" data-close>Hủy</button>
+          <button class="btn btn-primary" id="btnConfirmWithdraw" type="button">Xác Nhận Rút Tiền</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- MODAL 3: IN PHIẾU GỬI HÀNG CHUẨN SÀN (SHIPPING LABEL) -->
+    <!-- ============================================================== -->
+    <div class="modal-backdrop" id="shippingLabelModal">
+      <div class="modal" role="dialog" aria-modal="true" style="max-width: 600px;">
+        <div class="modal-head">
+          <h4 class="modal-title flex items-center gap-2">
+            <span class="material-symbols-outlined text-secondary">print</span>
+            Phiếu Gửi Hàng Bưu Tá &amp; Đồng Kiểm
+          </h4>
+          <button class="modal-close" type="button" data-close><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <div class="modal-body">
+          <div class="shipping-label-card" id="printableShippingArea">
+            <div class="shipping-label-head">
+              <div>
+                <strong style="font-size: 1.15rem; letter-spacing: -0.5px;">HYBRID<span style="color: #0891b2;">.STORE</span> LOGISTICS</strong>
+                <div style="font-size: 11px; color: #475569;">Dịch vụ Chuyển Phát Hỏa Tốc Đồng Kiểm 100%</div>
+              </div>
+              <div style="text-align: right;">
+                <span style="background: #0f172a; color: #fff; padding: 4px 8px; border-radius: 4px; font-weight: 700; font-size: 11px;" id="labelCarrierName">VNPOST HỎA TỐC</span>
+              </div>
+            </div>
+
+            <div class="shipping-barcode-box">
+              <span class="barcode-mock">||| | |||| || |||||| | ||||</span>
+              <span class="mono" style="font-size: 12px; font-weight: 700;" id="labelTrackingCode">VNPOST-HN-884920</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 12px; border-bottom: 1px solid #cbd5e1; padding-bottom: 12px; margin-bottom: 12px;">
+              <div>
+                <strong style="color: #475569; display: block; margin-bottom: 4px;">NGƯỜI GỬI (SHOP):</strong>
+                <div style="font-weight: 700;" id="labelSenderName">Việt Dũng Store</div>
+                <div style="color: #334155;">SĐT: 0988 123 456</div>
+                <div style="color: #475569; font-size: 11px;" id="labelSenderAddr">Trạm Kỹ Thuật Sàn HYBRID.STORE, Hoàn Kiếm, HN</div>
+              </div>
+              <div>
+                <strong style="color: #475569; display: block; margin-bottom: 4px;">NGƯỜI NHẬN (KHÁCH HÀNG):</strong>
+                <div style="font-weight: 700;" id="labelBuyerName">Nguyễn Ngọc Phúc</div>
+                <div style="color: #334155;" id="labelBuyerPhone">SĐT: 0912 345 678</div>
+                <div style="color: #475569; font-size: 11px;" id="labelBuyerAddr">Tòa Landmark 72, Phạm Hùng, Hà Nội</div>
+              </div>
+            </div>
+
+            <div style="font-size: 12px; margin-bottom: 12px;">
+              <strong>SẢN PHẨM:</strong>
+              <div style="color: #0f172a; margin-top: 2px;" id="labelProductName">iPhone 15 Pro Max 256GB Titan Tự Nhiên (Like New 99%)</div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; background: #f1f5f9; padding: 10px; border-radius: 6px; font-size: 12px;">
+              <div>
+                <span style="display: block; font-size: 11px; color: #64748b;">TIỀN THU HỘ (COD):</span>
+                <strong style="font-size: 15px; color: #16a34a;">0 VNĐ</strong> <small style="color: #64748b;">(Đã thanh toán Escrow)</small>
+              </div>
+              <div style="text-align: right;">
+                <span style="font-size: 11px; color: #dc2626; font-weight: 700; border: 1px dashed #dc2626; padding: 3px 6px; border-radius: 4px;">CHO XEM HÀNG ĐỒNG KIỂM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-foot flex gap-2">
+          <button class="btn btn-secondary" type="button" data-close>Đóng</button>
+          <button class="btn btn-primary" id="btnPrintLabelConfirm" type="button">
+            <span class="material-symbols-outlined icon-sm">print</span> In Phiếu Này
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- MODAL 4: CHỈNH SỬA GIÁ NHANH SẢN PHẨM -->
+    <!-- ============================================================== -->
+    <div class="modal-backdrop" id="editPriceModal">
+      <div class="modal" role="dialog" aria-modal="true" style="max-width: 440px;">
+        <div class="modal-head">
+          <h4 class="modal-title flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary">edit</span>
+            Chỉnh Sửa Giá Niêm Yết
+          </h4>
+          <button class="modal-close" type="button" data-close><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" id="editPriceProdTitle">Tên sản phẩm</label>
+            <input class="input mono" id="editPriceInput" type="text" placeholder="Nhập giá mới..." />
+            <span class="text-xs text-muted mt-1 block">Giá mới sẽ được đồng bộ ngay tức thì lên sàn giao dịch.</span>
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn btn-secondary" type="button" data-close>Hủy</button>
+          <button class="btn btn-primary" id="btnSaveNewPrice" type="button">Lưu Giá Mới</button>
+        </div>
+      </div>
+    </div>
+
+    
+    <!-- MODAL TẠO VOUCHER SHOP -->
+    <div class="modal-backdrop" id="createVoucherModal" style="display: none; align-items: center; justify-content: center; z-index: 10000;">
+      <div class="modal" role="dialog" aria-modal="true" style="max-width: 520px; width: 92%; padding: 24px; border-radius: 16px;">
+        <div class="modal-head flex items-center justify-between pb-3 mb-4" style="border-bottom: 1px solid var(--border);">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary">add_card</span>
+            <h4 class="modal-title text-base fw-700 m-0">TẠO MÃ GIẢM GIÁ CHO SHOP</h4>
+          </div>
+          <button class="icon-btn" id="closeCreateVoucherBtn" type="button"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <form id="createVoucherForm">
+          <div class="grid grid-2 gap-3 mb-3">
+            <div class="form-group mb-0">
+              <label class="form-label text-xs fw-600">Mã Voucher (In hoa) <span class="text-danger">*</span></label>
+              <input type="text" class="form-control text-xs uppercase mono" id="vCode" placeholder="VD: TECH20K, VIP10" required />
+            </div>
+            <div class="form-group mb-0">
+              <label class="form-label text-xs fw-600">Loại Ưu Đãi</label>
+              <select class="form-control text-xs" id="vType">
+                <option value="fixed">Giảm số tiền cố định (VNĐ)</option>
+                <option value="percent">Giảm theo phần trăm (%)</option>
+                <option value="freeship">Hỗ trợ phí vận chuyển</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid grid-2 gap-3 mb-3">
+            <div class="form-group mb-0">
+              <label class="form-label text-xs fw-600">Mức Giảm <span class="text-danger">*</span></label>
+              <input type="number" class="form-control text-xs" id="vValue" placeholder="VD: 50000 hoặc 10" required />
+            </div>
+            <div class="form-group mb-0">
+              <label class="form-label text-xs fw-600">Đơn Tối Thiểu (VNĐ)</label>
+              <input type="number" class="form-control text-xs" id="vMinSpend" placeholder="VD: 500000" />
+            </div>
+          </div>
+          <div class="form-group mb-4">
+            <label class="form-label text-xs fw-600">Số Lượng Lượt Dùng Tối Đa</label>
+            <input type="number" class="form-control text-xs" id="vUsageLimit" placeholder="VD: 50 lượt" value="50" />
+          </div>
+          <div class="flex gap-2">
+            <button class="btn btn-secondary flex-1" id="btnCancelVoucher" type="button">Hủy</button>
+            <button class="btn btn-primary flex-1" type="submit" style="font-weight: 700;">Kích Hoạt Voucher</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <div class="toast-stack" id="toastStack"></div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer" data-component="footer"></footer>
+
+    <script src="../../js/popup.js"></script>
+    <script src="../../js/auth.js"></script>
+    <script src="../../js/mock_data.js"></script>
+    <script src="../../js/utils.js"></script>
+    <script src="../../js/components.js"></script>
+    <script>
+      (function () {
+        // 1. Kiểm tra đăng nhập
+        if (!Auth.requireLogin({ message: "Vui lòng đăng nhập để truy cập Kênh Người Bán." })) return;
+
+        const currentUser = Auth.current();
+        const isAdmin = currentUser && (currentUser.role === "ADMIN" || currentUser.role === "admin");
+
+        // 2. Cập nhật thông tin Shop người bán
+        const storeNameEl = document.getElementById("sellerStoreName");
+        const avatarBadgeEl = document.getElementById("sellerAvatarInitials");
+        const kycBadgeEl = document.getElementById("sellerKycBadge");
+        const adminLinkEl = document.getElementById("sidebarAdminLink");
+        const walletHolderEl = document.getElementById("walletBankHolder");
+        const cardHolderEl = document.getElementById("cardHolderName");
+        const modalBankInput = document.getElementById("modalBankInfoInput");
+
+        if (currentUser) {
+          const name = currentUser.fullName || currentUser.username || "Người Bán";
+          if (storeNameEl) storeNameEl.textContent = `${name} Store`;
+          if (avatarBadgeEl) {
+            const parts = name.trim().split(" ");
+            avatarBadgeEl.textContent = parts.length >= 2 ? (parts[0][0] + parts[parts.length - 1][0]).toUpperCase() : name.substring(0, 2).toUpperCase();
+          }
+          if (kycBadgeEl) {
+            if (isAdmin) {
+              kycBadgeEl.innerHTML = `<span class="material-symbols-outlined icon-xs text-primary" style="vertical-align: middle;">verified</span> Toàn Quyền Admin Sàn`;
+              kycBadgeEl.className = "text-xs text-primary block truncate fw-700";
+            } else if (currentUser.kycStatus === "VERIFIED" || currentUser.kycVerified) {
+              kycBadgeEl.innerHTML = `● Đã eKYC CCCD Chip L2`;
+              kycBadgeEl.className = "text-xs text-success block truncate";
+            } else {
+              kycBadgeEl.innerHTML = `○ Chưa xác thực eKYC`;
+              kycBadgeEl.className = "text-xs text-warning block truncate";
+            }
+          }
+          if (walletHolderEl) walletHolderEl.textContent = name.toUpperCase();
+          if (cardHolderEl) cardHolderEl.textContent = name.toUpperCase();
+          if (modalBankInput) {
+            modalBankInput.value = `Techcombank • 1903 6888 8888 8 (${name.toUpperCase()})`;
+          }
+        }
+
+        // Chỉ hiển thị link Admin nếu người dùng là Admin
+        if (adminLinkEl && isAdmin) {
+          adminLinkEl.style.display = "flex";
+        }
+
+        // 3. Quản lý Tab Navigation
+        const sideLinks = document.querySelectorAll(".side-link[data-tab]");
+        const tabPanes = document.querySelectorAll(".dash-tab-pane");
+
+        function switchTab(tabId) {
+          sideLinks.forEach((l) => {
+            if (l.dataset.tab === tabId) l.classList.add("active");
+            else l.classList.remove("active");
+          });
+          tabPanes.forEach((pane) => {
+            if (pane.id === `tab-${tabId}`) pane.classList.add("active");
+            else pane.classList.remove("active");
+          });
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        sideLinks.forEach((link) => {
+          link.addEventListener("click", () => {
+            const tabId = link.dataset.tab;
+            if (tabId) switchTab(tabId);
+          });
+        });
+
+        // 4. Quản lý Sản Phẩm (Dữ liệu kết hợp mock data + localStorage)
+        let sellerProducts = [];
+        try {
+          sellerProducts = JSON.parse(localStorage.getItem("hv_seller_products") || "[]");
+        } catch (e) {
+          sellerProducts = [];
+        }
+
+        const defaultSellerItems = [
+          {
+            id: "t1",
+            name: "iPhone 15 Pro Max 256GB Titan Tự Nhiên Like New 99%",
+            category: "tech",
+            catName: "Đồ Điện Tử & Hi-Tech",
+            price: 21990000,
+            cond: 99,
+            condText: "99% Likenew",
+            status: "active",
+            statusLabel: "Đang Hiển Thị",
+            badgeClass: "badge-success",
+            img: "assets/images/products/dien-thoai-smartphone-flagship.png",
+            hasOffer: false,
+          },
+          {
+            id: "au10",
+            name: "Tai nghe Sony WH-1000XM4 Đen Chống Ồn Cao Cấp",
+            category: "audio",
+            catName: "Âm Thanh & Tai Nghe",
+            price: 3500000,
+            cond: 95,
+            condText: "95% Rất Đẹp",
+            status: "active",
+            statusLabel: "Đang Hiển Thị",
+            badgeClass: "badge-success",
+            img: "assets/images/products/tai-nghe-sony-wh-ch520.png",
+            hasOffer: false,
+          },
+          {
+            id: "cm10",
+            name: "Body Sony Alpha A7 Mark IV Fullbox Chính Hãng",
+            category: "camera",
+            catName: "Máy Ảnh & Quay Phim",
+            price: 37800000,
+            cond: 98,
+            condText: "98% Likenew",
+            status: "has_offer",
+            statusLabel: "Có Đề Nghị Trả Giá",
+            badgeClass: "badge-warning",
+            img: "assets/images/products/may-anh-ky-thuat-so-mirrorless.png",
+            hasOffer: true,
+            offeredPrice: 34000000,
+            buyerMsg: "Em qua xem máy trực tiếp tại showroom lấy luôn trong chiều nay ạ, bác bớt chút lộc lá cho em nhé!",
+          },
+          {
+            id: "f1",
+            name: "Set Nam Techwear All Black Chống Nước Form Rộng",
+            category: "fashion",
+            catName: "Thời Trang & Streetwear",
+            price: 2850000,
+            cond: 98,
+            condText: "98% Đẹp",
+            status: "active",
+            statusLabel: "Đang Hiển Thị",
+            badgeClass: "badge-success",
+            img: "assets/images/products/set-nam-techwear-all-black.png",
+            hasOffer: false,
+          },
+        ];
+
+        function getAllProducts() {
+          const list = [
+            ...sellerProducts.map((p) => ({
+              id: p.id,
+              name: p.name,
+              category: p.category || "tech",
+              catName: p.category === "tech" ? "Đồ Điện Tử & Hi-Tech" : p.category === "fashion" ? "Thời Trang & Streetwear" : p.category === "sneakers" ? "Sneakers Hype" : p.category === "audio" ? "Âm Thanh & Tai Nghe" : "Gia Dụng Smart IoT",
+              price: p.price,
+              cond: p.cond || 96,
+              condText: p.condText || `${p.cond || 96}% Likenew`,
+              status: p.status || "active",
+              statusLabel: p.status === "hidden" ? "Tạm Ẩn" : "Đang Hiển Thị",
+              badgeClass: p.status === "hidden" ? "badge-secondary" : "badge-success",
+              img: p.img || (p.images && p.images[0]) || "",
+              hasOffer: false,
+            })),
+            ...defaultSellerItems,
+          ];
+          return list;
+        }
+
+        // 5. Quản lý Đơn Hàng (Orders to Ship)
+        let sellerOrders = [
+          {
+            id: "ORD-20261108-9841",
+            createdAt: "08/11/2026 14:30",
+            status: "delivering",
+            statusLabel: "Đang Vận Chuyển",
+            statusBadge: "badge-secondary",
+            buyerName: "Nguyễn Ngọc Phúc",
+            buyerPhone: "0912 345 678",
+            buyerAddress: "Tòa Keangnam Landmark 72, Phạm Hùng, Mễ Trì, Nam Từ Liêm, Hà Nội",
+            productName: "iPhone 15 Pro Max 256GB Titan Tự Nhiên (Like New 99%)",
+            productImg: "assets/images/products/dien-thoai-smartphone-flagship.png",
+            total: 21490000,
+            carrier: "VNPost Hỏa Tốc",
+            trackingCode: "VNPOST-HN-884920",
+          },
+          {
+            id: "ORD-20261114-8832",
+            createdAt: "14/11/2026 08:15",
+            status: "pending",
+            statusLabel: "Chờ Bưu Tá Lấy Hàng",
+            statusBadge: "badge-warning",
+            buyerName: "Trần Bảo Trâm",
+            buyerPhone: "0987 654 321",
+            buyerAddress: "Số 45 Lê Duẩn, Bến Nghé, Quận 1, TP. Hồ Chí Minh",
+            productName: "Tai nghe Sony WH-1000XM4 Đen Chống Ồn",
+            productImg: "assets/images/products/tai-nghe-sony-wh-ch520.png",
+            total: 3500000,
+            carrier: "GHTK Siêu Tốc 2H",
+            trackingCode: "GHTK-HCM-992140",
+          },
+          {
+            id: "ORD-20261113-7729",
+            createdAt: "13/11/2026 16:40",
+            status: "pending",
+            statusLabel: "Chờ Bưu Tá Lấy Hàng",
+            statusBadge: "badge-warning",
+            buyerName: "Lê Hoàng Long",
+            buyerPhone: "0905 112 233",
+            buyerAddress: "128 Nguyễn Văn Linh, Nam Dương, Hải Châu, Đà Nẵng",
+            productName: "Set Nam Techwear All Black Chống Nước",
+            productImg: "assets/images/products/set-nam-techwear-all-black.png",
+            total: 2850000,
+            carrier: "Viettel Post Express",
+            trackingCode: "VTPOST-DN-551209",
+          },
+          {
+            id: "ORD-20261105-7720",
+            createdAt: "05/11/2026 09:15",
+            status: "completed",
+            statusLabel: "Đã Giao Thành Công",
+            statusBadge: "badge-success",
+            buyerName: "Đặng Minh Quân",
+            buyerPhone: "0934 998 877",
+            buyerAddress: "Khu Đô Thị Ecopark, Văn Giang, Hưng Yên",
+            productName: "Giày Sneaker Chunky Sole Hypebeast 95%",
+            productImg: "assets/images/products/giay-the-thao-nam-sneaker-de-day.png",
+            total: 2250000,
+            carrier: "VNPost Hỏa Tốc",
+            trackingCode: "VNPOST-HY-112349",
+          },
+        ];
+
+        // 6. Quản lý Đề Nghị Trả Giá C2C
+        let sellerOffers = [
+          {
+            id: "off-cm10",
+            prodId: "cm10",
+            prodName: "Body Sony Alpha A7 Mark IV Fullbox Chính Hãng",
+            listedPrice: 37800000,
+            offeredPrice: 34000000,
+            buyerName: "Quang Huy (Hà Nội)",
+            buyerMsg: "Em qua xem máy trực tiếp tại showroom lấy luôn trong chiều nay ạ, bác bớt chút lộc lá cho em nhé!",
+            discountPercent: 10,
+            expiresIn: "còn 18 giờ",
+          },
+          {
+            id: "off-t1",
+            prodId: "t1",
+            prodName: "iPhone 15 Pro Max 256GB Titan Tự Nhiên Like New 99%",
+            listedPrice: 21990000,
+            offeredPrice: 20500000,
+            buyerName: "Hoàng Yến (Hải Phòng)",
+            buyerMsg: "Bác để em tròn 20.5 triệu em cọc chuyển khoản luôn trong tối nay bác nhé!",
+            discountPercent: 7,
+            expiresIn: "còn 22 giờ",
+          },
+        ];
+
+        // 7. Quản lý Số Dư & Lịch Sử Giao Dịch
+        let currentBalance = 48250000;
+        try {
+          const savedBal = localStorage.getItem("hv_seller_balance");
+          if (savedBal !== null && !isNaN(Number(savedBal))) {
+            currentBalance = Number(savedBal);
+          }
+        } catch (e) {}
+
+        let walletTransactions = [
+          {
+            time: "14/11/2026 08:30",
+            code: "TX-NAPAS-881240",
+            type: "Rút tiền Napas 24/7 về Techcombank",
+            amount: -20000000,
+            status: "Hoàn tất 100%",
+            statusBadge: "badge-success",
+          },
+          {
+            time: "12/11/2026 15:20",
+            code: "ESCROW-REL-99214",
+            type: "Tiền hàng mở khóa (Đơn #ORD-7720)",
+            amount: 2250000,
+            status: "Đã vào ví",
+            statusBadge: "badge-success",
+          },
+          {
+            time: "10/11/2026 11:05",
+            code: "TX-NAPAS-771923",
+            type: "Rút tiền Napas 24/7 về Techcombank",
+            amount: -15000000,
+            status: "Hoàn tất 100%",
+            statusBadge: "badge-success",
+          },
+        ];
+
+        try {
+          const savedTx = JSON.parse(localStorage.getItem("hv_seller_transactions") || "null");
+          if (savedTx && Array.isArray(savedTx)) walletTransactions = savedTx;
+        } catch (e) {}
+
+        function updateBalanceUI() {
+          const formatted = Utils.formatCurrency(currentBalance);
+          const overviewBal = document.getElementById("overviewBalance");
+          const walletBal = document.getElementById("cardBalanceDisplay");
+          const modalBal = document.getElementById("modalAvailBalance");
+
+          if (overviewBal) overviewBal.textContent = formatted;
+          if (walletBal) walletBal.textContent = formatted;
+          if (modalBal) modalBal.textContent = formatted;
+        }
+        updateBalanceUI();
+
+        // 8. Render Bảng Sản Phẩm
+        function renderProducts() {
+          const allProds = getAllProducts();
+          const badgeCount = document.getElementById("badgeProdCount");
+          if (badgeCount) badgeCount.textContent = allProds.length;
+
+          // Overview Tbody (Top 4)
+          const ovTbody = document.getElementById("overviewProductsTbody");
+          if (ovTbody) {
+            ovTbody.innerHTML = allProds.slice(0, 4).map((p) => `
+              <tr>
+                <td>
+                  <div class="flex items-center gap-2">
+                    ${p.img ? `<img src="${window.resolveAssetUrl ? window.resolveAssetUrl(p.img) : p.img}" style="width: 38px; height: 38px; border-radius: 6px; object-fit: cover; flex-shrink: 0;" />` : ""}
+                    <strong class="text-xs truncate block" style="max-width: 220px;" title="${p.name}">${p.name}</strong>
+                  </div>
+                </td>
+                <td><span class="text-xs text-muted">${p.catName}</span></td>
+                <td><span class="mono fw-700 text-primary text-xs">${Utils.formatCurrency(p.price)}</span></td>
+                <td><span class="badge badge-secondary text-2xs">${p.condText}</span></td>
+                <td><span class="badge ${p.badgeClass} text-2xs">${p.statusLabel}</span></td>
+                <td style="text-align: right;">
+                  <a href="../shop/product_used.html?id=${p.id}" class="btn btn-ghost btn-xs">Xem tin</a>
+                </td>
+              </tr>
+            `).join("");
+          }
+
+          // Full Products Tbody
+          const searchKw = (document.getElementById("searchProductInput")?.value || "").toLowerCase().trim();
+          const catFilter = document.getElementById("filterCatSelect")?.value || "";
+          const statusFilter = document.getElementById("filterStatusSelect")?.value || "";
+
+          const filtered = allProds.filter((p) => {
+            if (searchKw && !p.name.toLowerCase().includes(searchKw)) return false;
+            if (catFilter && p.category !== catFilter) return false;
+            if (statusFilter && p.status !== statusFilter) return false;
+            return true;
+          });
+
+          const fullTbody = document.getElementById("allProductsTbody");
+          if (fullTbody) {
+            if (!filtered.length) {
+              fullTbody.innerHTML = `<tr><td colspan="6" class="text-center text-muted py-6">Không tìm thấy sản phẩm nào phù hợp bộ lọc.</td></tr>`;
+              return;
+            }
+
+            fullTbody.innerHTML = filtered.map((p) => `
+              <tr>
+                <td>
+                  <div class="flex items-center gap-3">
+                    ${p.img ? `<img src="${window.resolveAssetUrl ? window.resolveAssetUrl(p.img) : p.img}" style="width: 44px; height: 44px; border-radius: 8px; object-fit: cover; flex-shrink: 0; border: 1px solid var(--border);" />` : ""}
+                    <div>
+                      <strong class="text-sm block" style="max-width: 320px; line-height: 1.4;">${p.name}</strong>
+                      <span class="text-2xs text-faint">Mã: ${p.id}</span>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="text-xs text-muted">${p.catName}</span></td>
+                <td><strong class="mono text-primary">${Utils.formatCurrency(p.price)}</strong></td>
+                <td><span class="badge badge-secondary text-xs">${p.condText}</span></td>
+                <td><span class="badge ${p.badgeClass} text-xs">${p.statusLabel}</span></td>
+                <td style="text-align: right;">
+                  <div class="flex items-center justify-end gap-1.5">
+                    <a href="../shop/product_used.html?id=${p.id}" class="btn btn-ghost btn-xs" title="Xem trên sàn">
+                      <span class="material-symbols-outlined icon-xs">visibility</span>
+                    </a>
+                    <button class="btn btn-ghost btn-xs btn-edit-price" type="button" data-id="${p.id}" data-name="${p.name}" data-price="${p.price}" title="Chỉnh sửa giá niêm yết">
+                      <span class="material-symbols-outlined icon-xs text-secondary">edit</span>
+                    </button>
+                    <button class="btn btn-ghost btn-xs btn-toggle-status" type="button" data-id="${p.id}" title="${p.status === 'hidden' ? 'Hiển thị lên sàn' : 'Tạm ẩn món này'}">
+                      <span class="material-symbols-outlined icon-xs ${p.status === 'hidden' ? 'text-success' : 'text-muted'}">
+                        ${p.status === 'hidden' ? 'visibility' : 'visibility_off'}
+                      </span>
+                    </button>
+                    <button class="btn btn-ghost btn-xs btn-delete-prod" type="button" data-id="${p.id}" data-name="${p.name}" title="Xóa món này khỏi gian hàng">
+                      <span class="material-symbols-outlined icon-xs text-danger">delete</span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            `).join("");
+
+            // Gắn sự kiện sửa giá
+            fullTbody.querySelectorAll(".btn-edit-price").forEach((btn) => {
+              btn.addEventListener("click", () => {
+                const id = btn.dataset.id;
+                const name = btn.dataset.name;
+                const price = btn.dataset.price;
+                openEditPriceModal(id, name, price);
+              });
+            });
+
+            // Gắn sự kiện toggle ẩn/hiện
+            fullTbody.querySelectorAll(".btn-toggle-status").forEach((btn) => {
+              btn.addEventListener("click", () => {
+                const id = btn.dataset.id;
+                toggleProductVisibility(id);
+              });
+            });
+
+            // Gắn sự kiện xóa
+            fullTbody.querySelectorAll(".btn-delete-prod").forEach((btn) => {
+              btn.addEventListener("click", () => {
+                const id = btn.dataset.id;
+                const name = btn.dataset.name;
+                deleteProduct(id, name);
+              });
+            });
+          }
+        }
+
+        // 9. Hành Động Sản Phẩm (Sửa giá, Ẩn/Hiện, Xóa)
+        let activeEditProdId = null;
+        function openEditPriceModal(id, name, price) {
+          activeEditProdId = id;
+          const titleEl = document.getElementById("editPriceProdTitle");
+          const inputEl = document.getElementById("editPriceInput");
+          if (titleEl) titleEl.textContent = `Sản phẩm: ${name}`;
+          if (inputEl) inputEl.value = Utils.formatCurrency(Number(price)).replace("₫", "").trim();
+          Utils.openModal("editPriceModal");
+        }
+
+        document.getElementById("btnSaveNewPrice")?.addEventListener("click", () => {
+          const inputEl = document.getElementById("editPriceInput");
+          if (!inputEl || !activeEditProdId) return;
+          const newPrice = Number(inputEl.value.replace(/\D/g, ""));
+          if (newPrice < 10000) {
+            Utils.toast("Giá bán tối thiểu từ 10.000₫!", "warning");
+            return;
+          }
+
+          let updated = false;
+          sellerProducts = sellerProducts.map((p) => {
+            if (p.id === activeEditProdId) {
+              p.price = newPrice;
+              updated = true;
+            }
+            return p;
+          });
+          if (updated) {
+            localStorage.setItem("hv_seller_products", JSON.stringify(sellerProducts));
+          } else {
+            const defItem = defaultSellerItems.find((p) => p.id === activeEditProdId);
+            if (defItem) defItem.price = newPrice;
+          }
+
+          Utils.closeModal("editPriceModal");
+          Utils.toast("Đã cập nhật giá niêm yết mới thành công!", "success");
+          renderProducts();
+        });
+
+        function toggleProductVisibility(id) {
+          let found = false;
+          sellerProducts = sellerProducts.map((p) => {
+            if (p.id === id) {
+              p.status = p.status === "hidden" ? "active" : "hidden";
+              found = true;
+            }
+            return p;
+          });
+          if (found) {
+            localStorage.setItem("hv_seller_products", JSON.stringify(sellerProducts));
+          } else {
+            const defItem = defaultSellerItems.find((p) => p.id === id);
+            if (defItem) {
+              defItem.status = defItem.status === "hidden" ? "active" : "hidden";
+              defItem.statusLabel = defItem.status === "hidden" ? "Tạm Ẩn" : "Đang Hiển Thị";
+              defItem.badgeClass = defItem.status === "hidden" ? "badge-secondary" : "badge-success";
+            }
+          }
+          Utils.toast("Đã chuyển đổi trạng thái hiển thị sản phẩm!", "info");
+          renderProducts();
+        }
+
+        function deleteProduct(id, name) {
+          if (!confirm(`Bạn có chắc chắn muốn xóa "${name}" khỏi gian hàng của mình?`)) return;
+
+          sellerProducts = sellerProducts.filter((p) => p.id !== id);
+          localStorage.setItem("hv_seller_products", JSON.stringify(sellerProducts));
+
+          const defIdx = defaultSellerItems.findIndex((p) => p.id === id);
+          if (defIdx !== -1) defaultSellerItems.splice(defIdx, 1);
+
+          Utils.toast("Đã xóa sản phẩm khỏi gian hàng!", "success");
+          renderProducts();
+        }
+
+        document.getElementById("searchProductInput")?.addEventListener("input", renderProducts);
+        document.getElementById("filterCatSelect")?.addEventListener("change", renderProducts);
+        document.getElementById("filterStatusSelect")?.addEventListener("change", renderProducts);
+
+        // 10. Render Danh Sách Đơn Hàng (Orders to Ship)
+        function renderOrders() {
+          const pendingCount = sellerOrders.filter((o) => o.status === "pending").length;
+          const badgeOrderEl = document.getElementById("badgeOrderCount");
+          const overviewOrdersEl = document.getElementById("overviewPendingOrders");
+          if (badgeOrderEl) badgeOrderEl.textContent = pendingCount;
+          if (overviewOrdersEl) overviewOrdersEl.textContent = `${pendingCount} Đơn`;
+
+          // Overview Urgent Orders Box
+          const ovOrdersBox = document.getElementById("overviewOrdersContainer");
+          if (ovOrdersBox) {
+            const urgentList = sellerOrders.filter((o) => o.status === "pending").slice(0, 2);
+            if (!urgentList.length) {
+              ovOrdersBox.innerHTML = `
+                <div class="text-center py-4 text-muted">
+                  <span class="material-symbols-outlined text-success" style="font-size: 36px;">check_circle</span>
+                  <div class="text-sm mt-1">Tuyệt vời! Hiện tại bạn đã hoàn tất bàn giao tất cả đơn hàng cho bưu tá.</div>
+                </div>
+              `;
+            } else {
+              ovOrdersBox.innerHTML = urgentList.map((o) => `
+                <div class="panel p-3 mb-2 flex items-center justify-between gap-3 flex-wrap" style="background: rgba(255,255,255,0.02); border-color: rgba(255,255,255,0.06);">
+                  <div class="flex items-center gap-3">
+                    <img src="${window.resolveAssetUrl ? window.resolveAssetUrl(o.productImg) : o.productImg}" style="width: 48px; height: 48px; border-radius: 8px; object-fit: cover;" />
+                    <div>
+                      <strong class="text-sm block">${o.productName}</strong>
+                      <div class="text-xs text-muted flex items-center gap-2 mt-0.5">
+                        <span class="mono text-secondary">${o.id}</span> • Khách: <strong>${o.buyerName}</strong> • ${o.buyerPhone}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <strong class="mono text-primary mr-2">${Utils.formatCurrency(o.total)}</strong>
+                    <button class="btn btn-secondary btn-sm btn-print-label" data-id="${o.id}" type="button">
+                      <span class="material-symbols-outlined icon-xs">print</span> In Phiếu
+                    </button>
+                    <button class="btn btn-primary btn-sm btn-dispatch-shipper" data-id="${o.id}" type="button">
+                      <span class="material-symbols-outlined icon-xs">local_shipping</span> Bàn Giao Bưu Tá
+                    </button>
+                  </div>
+                </div>
+              `).join("");
+            }
+          }
+
+          // Full Orders Tbody
+          const selectedFilter = document.querySelector('input[name="orderStatusFilter"]:checked')?.value || "all";
+          const filteredOrders = sellerOrders.filter((o) => {
+            if (selectedFilter === "all") return true;
+            return o.status === selectedFilter;
+          });
+
+          const ordersTbody = document.getElementById("ordersTbody");
+          if (ordersTbody) {
+            ordersTbody.innerHTML = filteredOrders.map((o) => `
+              <tr>
+                <td>
+                  <strong class="mono text-secondary text-sm">${o.id}</strong>
+                  <small class="text-muted block text-2xs mt-0.5">${o.createdAt}</small>
+                </td>
+                <td>
+                  <strong class="text-sm text-white">${o.buyerName}</strong>
+                  <div class="text-xs text-muted">${o.buyerPhone}</div>
+                  <div class="text-2xs text-faint truncate" style="max-width: 200px;" title="${o.buyerAddress}">${o.buyerAddress}</div>
+                </td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <img src="${window.resolveAssetUrl ? window.resolveAssetUrl(o.productImg) : o.productImg}" style="width: 36px; height: 36px; border-radius: 6px; object-fit: cover; flex-shrink: 0;" />
+                    <span class="text-xs truncate block" style="max-width: 180px;">${o.productName}</span>
+                  </div>
+                </td>
+                <td><strong class="mono text-primary">${Utils.formatCurrency(o.total)}</strong></td>
+                <td>
+                  <span class="badge badge-secondary text-xs">${o.carrier}</span>
+                  <small class="mono text-faint block text-2xs mt-0.5">${o.trackingCode}</small>
+                </td>
+                <td><span class="badge ${o.statusBadge} text-xs">${o.statusLabel}</span></td>
+                <td style="text-align: right;">
+                  <div class="flex items-center justify-end gap-1.5">
+                    <button class="btn btn-ghost btn-xs btn-print-label" data-id="${o.id}" type="button" title="In phiếu giao">
+                      <span class="material-symbols-outlined icon-xs">print</span>
+                    </button>
+                    ${o.status === "pending" ? `
+                      <button class="btn btn-primary btn-xs btn-dispatch-shipper" data-id="${o.id}" type="button">
+                        Giao Bưu Tá
+                      </button>
+                    ` : `
+                      <span class="text-2xs text-success flex items-center gap-0.5">
+                        <span class="material-symbols-outlined icon-xs">done_all</span> Đã gửi
+                      </span>
+                    `}
+                  </div>
+                </td>
+              </tr>
+            `).join("");
+
+            // Gắn sự kiện In phiếu
+            ordersTbody.querySelectorAll(".btn-print-label").forEach((btn) => {
+              btn.addEventListener("click", () => {
+                const id = btn.dataset.id;
+                const order = sellerOrders.find((x) => x.id === id);
+                if (order) openShippingLabel(order);
+              });
+            });
+
+            // Gắn sự kiện Bàn giao bưu tá
+            ordersTbody.querySelectorAll(".btn-dispatch-shipper").forEach((btn) => {
+              btn.addEventListener("click", () => {
+                const id = btn.dataset.id;
+                dispatchOrder(id);
+              });
+            });
+          }
+        }
+
+        // Lọc radio đơn hàng
+        document.querySelectorAll('input[name="orderStatusFilter"]').forEach((r) => {
+          r.addEventListener("change", renderOrders);
+        });
+
+        function dispatchOrder(orderId) {
+          const ord = sellerOrders.find((o) => o.id === orderId);
+          if (!ord) return;
+
+          ord.status = "delivering";
+          ord.statusLabel = "Đang Vận Chuyển";
+          ord.statusBadge = "badge-secondary";
+
+          Utils.toast(`Đơn ${orderId} đã bàn giao thành công cho bưu tá ${ord.carrier}! Mã vận đơn: ${ord.trackingCode}`, "success");
+          renderOrders();
+        }
+
+        // 11. Modal In Phiếu Vận Chuyển (Shipping Label)
+        function openShippingLabel(order) {
+          const user = Auth.current();
+          const storeName = user ? `${user.fullName || user.username} Store` : "Việt Dũng Store";
+
+          document.getElementById("labelCarrierName").textContent = order.carrier.toUpperCase();
+          document.getElementById("labelTrackingCode").textContent = order.trackingCode;
+          document.getElementById("labelSenderName").textContent = storeName;
+          document.getElementById("labelBuyerName").textContent = order.buyerName;
+          document.getElementById("labelBuyerPhone").textContent = `SĐT: ${order.buyerPhone}`;
+          document.getElementById("labelBuyerAddr").textContent = order.buyerAddress;
+          document.getElementById("labelProductName").textContent = order.productName;
+
+          Utils.openModal("shippingLabelModal");
+        }
+
+        document.getElementById("btnPrintLabelConfirm")?.addEventListener("click", () => {
+          window.print();
+        });
+
+        // 12. Render Đề Nghị Trả Giá C2C (Offers)
+        function renderOffers() {
+          const badgeOfferEl = document.getElementById("badgeOfferCount");
+          if (badgeOfferEl) badgeOfferEl.textContent = sellerOffers.length;
+
+          const container = document.getElementById("offersListContainer");
+          if (!container) return;
+
+          if (!sellerOffers.length) {
+            container.innerHTML = `
+              <div class="panel p-6 text-center text-muted">
+                <span class="material-symbols-outlined text-secondary" style="font-size: 48px;">chat_bubble_outline</span>
+                <div class="text-sm mt-2">Hiện tại không có đề nghị trả giá nào đang chờ xét duyệt.</div>
+              </div>
+            `;
+            return;
+          }
+
+          container.innerHTML = sellerOffers.map((off) => `
+            <div class="panel p-5">
+              <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+                <div class="flex items-center gap-2">
+                  <span class="badge badge-warning text-xs">ĐỀ NGHỊ MỚI</span>
+                  <span class="text-xs text-muted">Khách hàng: <strong class="text-white">${off.buyerName}</strong></span>
+                </div>
+                <span class="text-xs text-warning flex items-center gap-1">
+                  <span class="material-symbols-outlined icon-xs">schedule</span> ${off.expiresIn}
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between p-3 mb-3" style="background: var(--bg-surface); border-radius: 8px;">
+                <div>
+                  <strong class="text-sm text-white block">${off.prodName}</strong>
+                  <span class="text-xs text-muted">Giá niêm yết: <strong class="mono text-muted">${Utils.formatCurrency(off.listedPrice)}</strong></span>
+                </div>
+                <div style="text-align: right;">
+                  <span class="text-xs text-muted block">Khách đề xuất mua:</span>
+                  <strong class="mono text-gradient" style="font-size: 1.25rem;">${Utils.formatCurrency(off.offeredPrice)}</strong>
+                  <span class="badge badge-success text-2xs" style="margin-left: 6px;">-${off.discountPercent}%</span>
+                </div>
+              </div>
+
+              <div class="panel p-3 mb-3 text-xs" style="background: rgba(6, 182, 212, 0.04); border-color: rgba(6, 182, 212, 0.2);">
+                <div class="fw-700 text-secondary mb-1 flex items-center gap-1">
+                  <span class="material-symbols-outlined icon-xs">chat</span> Lời nhắn từ người mua:
+                </div>
+                <p class="text-muted" style="margin: 0; line-height: 1.6;">"${off.buyerMsg}"</p>
+              </div>
+
+              <div class="flex justify-end gap-2">
+                <button class="btn btn-outlined btn-sm btn-action-reject" data-id="${off.id}" type="button">Từ Chối</button>
+                <button class="btn btn-secondary btn-sm btn-action-counter" data-id="${off.id}" data-name="${off.prodName}" data-offer="${off.offeredPrice}" type="button">
+                  Báo Giá Lại (Counter-Offer)
+                </button>
+                <button class="btn btn-primary btn-sm btn-action-accept" data-id="${off.id}" data-offer="${off.offeredPrice}" type="button">
+                  Đồng Ý Bán
+                </button>
+              </div>
+            </div>
+          `).join("");
+
+          container.querySelectorAll(".btn-action-accept").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const id = btn.dataset.id;
+              const offerPrice = Number(btn.dataset.offer);
+              sellerOffers = sellerOffers.filter((x) => x.id !== id);
+              renderOffers();
+
+        // 13. QUẢN LÝ SHOP VOUCHERS
+        const defaultShopVouchers = [
+          { code: "TECH10K", type: "fixed", value: 10000, minSpend: 200000, used: 18, limit: 50, active: true },
+          { code: "FREESHIP50", type: "freeship", value: 25000, minSpend: 500000, used: 24, limit: 100, active: true },
+          { code: "LIKENEW99", type: "percent", value: 5, minSpend: 2000000, used: 6, limit: 30, active: true },
+        ];
+
+        function getShopVouchers() {
+          try {
+            const saved = localStorage.getItem("hv_shop_vouchers");
+            if (!saved) {
+              localStorage.setItem("hv_shop_vouchers", JSON.stringify(defaultShopVouchers));
+              return defaultShopVouchers;
+            }
+            return JSON.parse(saved);
+          } catch (e) {
+            return defaultShopVouchers;
+          }
+        }
+
+        function renderShopVouchers() {
+          const vouchers = getShopVouchers();
+          const tbody = document.getElementById("shopVouchersTbody");
+          const countEl = document.getElementById("activeVouchersCount");
+          const totalUsedEl = document.getElementById("totalVoucherRedeemed");
+          
+          const activeCount = vouchers.filter(v => v.active).length;
+          const totalUsed = vouchers.reduce((acc, cur) => acc + (cur.used || 0), 0);
+          if (countEl) countEl.textContent = `${activeCount} Mã`;
+          if (totalUsedEl) totalUsedEl.textContent = `${totalUsed} Lượt`;
+
+          if (!tbody) return;
+          tbody.innerHTML = vouchers.map((v, idx) => {
+            const valLabel = v.type === "percent" ? `Giảm ${v.value}%` : v.type === "freeship" ? `Hỗ trợ ${Utils.formatCurrency(v.value)}` : `Giảm ${Utils.formatCurrency(v.value)}`;
+            return `
+              <tr>
+                <td><span class="badge badge-primary mono fw-700" style="font-size: 11px;">${v.code}</span></td>
+                <td><span class="text-xs">${v.type === "percent" ? "Phần Trăm" : v.type === "freeship" ? "Vận Chuyển" : "Tiền Mặt"}</span></td>
+                <td><strong class="text-secondary mono text-xs">${valLabel}</strong></td>
+                <td><span class="mono text-xs">${Utils.formatCurrency(v.minSpend || 0)}</span></td>
+                <td><span class="text-xs text-muted">${v.used || 0} / ${v.limit || "∞"}</span></td>
+                <td>
+                  <span class="badge ${v.active ? 'badge-success' : 'badge-secondary'} text-2xs">
+                    ${v.active ? 'Đang Chạy' : 'Tạm Dừng'}
+                  </span>
+                </td>
+                <td>
+                  <button class="btn btn-ghost btn-xs btn-toggle-v" data-index="${idx}" type="button" title="Bật/Tắt">
+                    <span class="material-symbols-outlined icon-xs">${v.active ? 'pause_circle' : 'play_circle'}</span>
+                  </button>
+                  <button class="btn btn-ghost btn-xs text-danger btn-delete-v" data-index="${idx}" type="button" title="Xóa">
+                    <span class="material-symbols-outlined icon-xs">delete</span>
+                  </button>
+                </td>
+              </tr>
+            `;
+          }).join("");
+
+          tbody.querySelectorAll(".btn-toggle-v").forEach(btn => {
+            btn.addEventListener("click", () => {
+              const i = parseInt(btn.dataset.index, 10);
+              vouchers[i].active = !vouchers[i].active;
+              localStorage.setItem("hv_shop_vouchers", JSON.stringify(vouchers));
+              renderShopVouchers();
+            });
+          });
+
+          tbody.querySelectorAll(".btn-delete-v").forEach(btn => {
+            btn.addEventListener("click", () => {
+              if (confirm("Bạn có chắc muốn xóa mã voucher này không?")) {
+                const i = parseInt(btn.dataset.index, 10);
+                vouchers.splice(i, 1);
+                localStorage.setItem("hv_shop_vouchers", JSON.stringify(vouchers));
+                renderShopVouchers();
+              }
+            });
+          });
+        }
+
+        const btnOpenCreateVoucher = document.getElementById("btnOpenCreateVoucherModal");
+        const createVoucherModalEl = document.getElementById("createVoucherModal");
+        const closeCreateVoucherBtn = document.getElementById("closeCreateVoucherBtn");
+        const btnCancelVoucher = document.getElementById("btnCancelVoucher");
+        const createVoucherForm = document.getElementById("createVoucherForm");
+
+        btnOpenCreateVoucher?.addEventListener("click", () => {
+          if (createVoucherModalEl) createVoucherModalEl.style.display = "flex";
+        });
+        closeCreateVoucherBtn?.addEventListener("click", () => {
+          if (createVoucherModalEl) createVoucherModalEl.style.display = "none";
+        });
+        btnCancelVoucher?.addEventListener("click", () => {
+          if (createVoucherModalEl) createVoucherModalEl.style.display = "none";
+        });
+        createVoucherModalEl?.addEventListener("click", (e) => {
+          if (e.target === createVoucherModalEl) createVoucherModalEl.style.display = "none";
+        });
+
+        createVoucherForm?.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const code = (document.getElementById("vCode")?.value || "").trim().toUpperCase();
+          const type = document.getElementById("vType")?.value || "fixed";
+          const value = parseInt(document.getElementById("vValue")?.value || "0", 10);
+          const minSpend = parseInt(document.getElementById("vMinSpend")?.value || "0", 10);
+          const limit = parseInt(document.getElementById("vUsageLimit")?.value || "50", 10);
+
+          if (!code || value <= 0) {
+            Utils.toast("Vui lòng điền mã hợp lệ và mức giảm lớn hơn 0", "error");
+            return;
+          }
+
+          const vouchers = getShopVouchers();
+          vouchers.unshift({ code, type, value, minSpend, used: 0, limit, active: true });
+          localStorage.setItem("hv_shop_vouchers", JSON.stringify(vouchers));
+
+          if (createVoucherModalEl) createVoucherModalEl.style.display = "none";
+          createVoucherForm.reset();
+          Utils.toast(`Đã kích hoạt thành công mã voucher ${code}!`, "success");
+          renderShopVouchers();
+        });
+
+        renderShopVouchers();
+
+              Utils.toast(`Đã chấp thuận đề xuất bán với mức giá ${Utils.formatCurrency(offerPrice)}! Khách hàng có 24h để thanh toán.`, "success");
+            });
+          });
+
+          container.querySelectorAll(".btn-action-counter").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const id = btn.dataset.id;
+              const counterPrice = prompt("Nhập mức giá bạn muốn thương lượng lại với khách (VNĐ):", "35500000");
+              if (!counterPrice) return;
+              const numPrice = Number(counterPrice.replace(/\D/g, ""));
+              if (numPrice <= 0) return;
+              sellerOffers = sellerOffers.filter((x) => x.id !== id);
+              renderOffers();
+              Utils.toast(`Đã gửi đề xuất thương lượng mức ${Utils.formatCurrency(numPrice)} thành công tới khách hàng!`, "info");
+            });
+          });
+
+          container.querySelectorAll(".btn-action-reject").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const id = btn.dataset.id;
+              sellerOffers = sellerOffers.filter((x) => x.id !== id);
+              renderOffers();
+              Utils.toast("Đã từ chối đề xuất trả giá.", "warning");
+            });
+          });
+        }
+
+        // 13. Render Lịch Sử Ví (Wallet Transactions)
+        function renderWalletTransactions() {
+          const tbody = document.getElementById("walletTransactionsTbody");
+          if (!tbody) return;
+          tbody.innerHTML = walletTransactions.map((tx) => `
+            <tr>
+              <td><span class="text-xs text-muted">${tx.time}</span></td>
+              <td><span class="mono text-secondary text-xs">${tx.code}</span></td>
+              <td><strong class="text-xs text-white">${tx.type}</strong></td>
+              <td>
+                <span class="mono fw-700 text-sm ${tx.amount > 0 ? 'text-success' : 'text-danger'}">
+                  ${tx.amount > 0 ? '+' : ''}${Utils.formatCurrency(tx.amount)}
+                </span>
+              </td>
+              <td><span class="badge ${tx.statusBadge} text-xs">${tx.status}</span></td>
+            </tr>
+          `).join("");
+        }
+
+        // 14. Xử Lý Modal Rút Tiền Napas 24/7
+        const openWithdrawModal = () => {
+          updateBalanceUI();
+          Utils.openModal("withdrawModal");
+        };
+
+        document.getElementById("btnQuickWithdraw")?.addEventListener("click", openWithdrawModal);
+        document.getElementById("btnWalletWithdraw")?.addEventListener("click", openWithdrawModal);
+
+        document.getElementById("btnWithdrawAll")?.addEventListener("click", () => {
+          const input = document.getElementById("modalWithdrawAmountInput");
+          if (input) input.value = Utils.formatCurrency(currentBalance).replace("₫", "").trim();
+        });
+
+        document.getElementById("btnConfirmWithdraw")?.addEventListener("click", () => {
+          const input = document.getElementById("modalWithdrawAmountInput");
+          const val = input ? Number(input.value.replace(/\D/g, "")) : 0;
+
+          if (val < 50000) {
+            Utils.toast("Số tiền rút tối thiểu là 50.000₫!", "warning");
+            return;
+          }
+          if (val > currentBalance) {
+            Utils.toast("Số tiền rút vượt quá số dư khả dụng hiện có!", "warning");
+            return;
+          }
+
+          currentBalance -= val;
+          try {
+            localStorage.setItem("hv_seller_balance", currentBalance);
+          } catch (e) {}
+
+          const now = new Date();
+          const txCode = `TX-NAPAS-${Math.floor(100000 + Math.random() * 900000)}`;
+          const newTx = {
+            time: `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth()+1).toString().padStart(2, '0')}/${now.getFullYear()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`,
+            code: txCode,
+            type: "Rút tiền Napas 24/7 về Techcombank",
+            amount: -val,
+            status: "Hoàn tất 100%",
+            statusBadge: "badge-success",
+          };
+          walletTransactions.unshift(newTx);
+          try {
+            localStorage.setItem("hv_seller_transactions", JSON.stringify(walletTransactions));
+          } catch (e) {}
+
+          updateBalanceUI();
+          renderWalletTransactions();
+          Utils.closeModal("withdrawModal");
+          Utils.toast(`Lệnh chuyển khoản Napas 24/7 ${Utils.formatCurrency(val)} đã được hệ thống thực hiện thành công tức thì!`, "success");
+        });
+
+        // Modal Xét Duyệt Trả Giá (Từ button ở overview)
+        document.getElementById("btnAcceptOffer")?.addEventListener("click", () => {
+          Utils.closeModal("approveOfferModal");
+          Utils.toast("Đã chấp thuận đề xuất trả giá! Khách hàng có 24 giờ để thanh toán đơn hàng.", "success");
+        });
+        document.getElementById("btnCounterOffer")?.addEventListener("click", () => {
+          Utils.closeModal("approveOfferModal");
+          Utils.toast("Đã gửi đề xuất thương lượng lại mức 35.500.000₫ tới khách hàng!", "info");
+        });
+        document.getElementById("btnRejectOffer")?.addEventListener("click", () => {
+          Utils.closeModal("approveOfferModal");
+          Utils.toast("Đã từ chối đề xuất trả giá.", "warning");
+        });
+
+        // 15. Khởi Chạy Ban Đầu
+        renderProducts();
+        renderOrders();
+        renderOffers();
+        renderWalletTransactions();
+      })();
+    </script>
+  </body>
+</html>
