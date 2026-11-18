@@ -1,7 +1,8 @@
 -- ============================================================================
 -- DỰ ÁN: HYBRID.STORE — HỆ THỐNG CƠ SỞ DỮ LIỆU SÀN TMĐT HYBRID TOÀN DIỆN
 -- MÔ HÌNH: Brand Mall (B2C Mới 100%) & Chợ C2C (Like New Tuyển Chọn Kiểm Định)
--- TƯƠNG THÍCH: SQLite 3 / PostgreSQL / MySQL (ANSI SQL Standard)
+-- TƯƠNG THÍCH: SQLite 3 / PostgreSQL / MySQL 8+ (ANSI SQL Standard)
+-- CẬP NHẬT: Chuẩn hóa ERD (T31) — Bổ sung & hoàn thiện escrows, disputes, offers
 -- ============================================================================
 
 PRAGMA foreign_keys = ON;
@@ -170,35 +171,10 @@ CREATE TABLE IF NOT EXISTS product_specs (
 );
 
 -- ============================================================================
--- PHẦN 3: THƯƠNG LƯỢNG & TRẢ GIÁ C2C (OFFER BARGAIN SYSTEM)
+-- PHẦN 3: KHUYẾN MÃI, MÃ GIẢM GIÁ (VOUCHER / COUPON ENGINE)
 -- ============================================================================
 
--- Bảng 10: product_offers (Lịch sử thương lượng giá giữa Người mua & Người bán)
-CREATE TABLE IF NOT EXISTS product_offers (
-    id VARCHAR(36) PRIMARY KEY,
-    product_id VARCHAR(36) NOT NULL,
-    buyer_id VARCHAR(36) NOT NULL,
-    seller_id VARCHAR(36) NOT NULL,
-    original_price BIGINT NOT NULL,                     -- Giá niêm yết tại thời điểm trả giá
-    offered_price BIGINT NOT NULL,                      -- Mức giá người mua đề xuất
-    discount_pct INTEGER NOT NULL,                      -- Tỉ lệ giảm % (vd: -10%)
-    buyer_message TEXT DEFAULT '',                      -- Lời nhắn của người mua
-    seller_note TEXT DEFAULT '',                        -- Phản hồi của người bán
-    status VARCHAR(20) NOT NULL DEFAULT 'pending'       -- Trạng thái thương lượng
-        CHECK (status IN ('pending', 'accepted', 'rejected', 'expired')),
-    expires_at DATETIME NOT NULL,                       -- Thời hạn chấp nhận (vd: trong 24 giờ)
-    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
-    FOREIGN KEY (buyer_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (seller_id) REFERENCES users(id) ON DELETE CASCADE
-);
-
--- ============================================================================
--- PHẦN 4: KHUYẾN MÃI, MÃ GIẢM GIÁ (VOUCHER / COUPON ENGINE)
--- ============================================================================
-
--- Bảng 11: vouchers (Kho phiếu ưu đãi)
+-- Bảng 10: vouchers (Kho phiếu ưu đãi)
 CREATE TABLE IF NOT EXISTS vouchers (
     id VARCHAR(36) PRIMARY KEY,
     code VARCHAR(30) NOT NULL UNIQUE,                   -- FREESHIP, HYBRID50, VIP100...
@@ -217,13 +193,13 @@ CREATE TABLE IF NOT EXISTS vouchers (
 );
 
 -- ============================================================================
--- PHẦN 5: ĐƠN HÀNG, ĐA KIỆN HÀNG (MULTI-VENDOR OMS) & HÀNH TRÌNH VẬN ĐƠN
+-- PHẦN 4: ĐƠN HÀNG, ĐA KIỆN HÀNG (MULTI-VENDOR OMS) & HÀNH TRÌNH VẬN ĐƠN
 -- ============================================================================
 
--- Bảng 12: orders (Hóa đơn mua sắm trung tâm)
+-- Bảng 11: orders (Hóa đơn mua sắm trung tâm)
 CREATE TABLE IF NOT EXISTS orders (
     id VARCHAR(36) PRIMARY KEY,
-    order_code VARCHAR(30) NOT NULL UNIQUE,             -- Mã đơn hiển thị (vd: HYB-8492)
+    order_code VARCHAR(30) NOT NULL UNIQUE,             -- Mã đơn hiển thị (vd: ORD-20261108-9841)
     buyer_id VARCHAR(36) NOT NULL,
     subtotal BIGINT NOT NULL,                           -- Tổng tiền hàng trước giảm giá
     shipping_fee BIGINT NOT NULL DEFAULT 0,             -- Phí vận chuyển
@@ -260,7 +236,7 @@ CREATE TABLE IF NOT EXISTS orders (
     FOREIGN KEY (voucher_id) REFERENCES vouchers(id) ON DELETE SET NULL
 );
 
--- Bảng 13: order_parcels (Tách kiện hàng theo từng Seller / Nhà kho)
+-- Bảng 12: order_parcels (Tách kiện hàng theo từng Seller / Nhà kho)
 CREATE TABLE IF NOT EXISTS order_parcels (
     id VARCHAR(36) PRIMARY KEY,
     order_id VARCHAR(36) NOT NULL,
@@ -279,7 +255,7 @@ CREATE TABLE IF NOT EXISTS order_parcels (
     FOREIGN KEY (seller_id) REFERENCES users(id) ON DELETE RESTRICT
 );
 
--- Bảng 14: order_items (Chi tiết từng món hàng trong đơn)
+-- Bảng 13: order_items (Chi tiết từng món hàng trong đơn)
 CREATE TABLE IF NOT EXISTS order_items (
     id VARCHAR(36) PRIMARY KEY,
     order_id VARCHAR(36) NOT NULL,
@@ -298,7 +274,7 @@ CREATE TABLE IF NOT EXISTS order_items (
     FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE RESTRICT
 );
 
--- Bảng 15: order_tracking_events (Nhật ký hành trình bưu kiện thời gian thực)
+-- Bảng 14: order_tracking_events (Nhật ký hành trình bưu kiện thời gian thực)
 CREATE TABLE IF NOT EXISTS order_tracking_events (
     id VARCHAR(36) PRIMARY KEY,
     parcel_id VARCHAR(36) NOT NULL,
@@ -312,71 +288,235 @@ CREATE TABLE IF NOT EXISTS order_tracking_events (
 );
 
 -- ============================================================================
--- PHẦN 6: VÍ KÝ QUỸ ESCROW & DÒNG TIỀN ĐẢM BẢO GIAO DỊCH 24/7
+-- PHẦN 5: THƯƠNG LƯỢNG & TRẢ GIÁ C2C (OFFERS — CHUẨN HÓA THEO ERD T31)
+-- ============================================================================
+
+-- Bảng 15: offers (Lịch sử thương lượng & trả giá giữa Người mua & Người bán C2C)
+CREATE TABLE IF NOT EXISTS offers (
+    id VARCHAR(36) PRIMARY KEY,
+    offer_code VARCHAR(30) NOT NULL UNIQUE,             -- Mã đề nghị (vd: OFF-20261117-01)
+    product_id VARCHAR(36) NOT NULL,                    -- Sản phẩm C2C được trả giá
+    buyer_id VARCHAR(36) NOT NULL,                      -- Người mua gửi đề nghị
+    seller_id VARCHAR(36) NOT NULL,                     -- Người bán sở hữu sản phẩm
+    order_id VARCHAR(36) DEFAULT NULL,                  -- Đơn hàng phát sinh sau khi chốt giá
+    original_price BIGINT NOT NULL                      -- Giá niêm yết tại thời điểm trả giá (VND)
+        CHECK (original_price > 0),
+    offered_price BIGINT NOT NULL                       -- Mức giá người mua đề xuất (VND)
+        CHECK (offered_price > 0),
+    counter_price BIGINT DEFAULT NULL                   -- Mức giá người bán đề nghị lại (Counter-offer)
+        CHECK (counter_price IS NULL OR counter_price > 0),
+    final_agreed_price BIGINT DEFAULT NULL              -- Giá chốt cuối cùng khi hai bên đồng thuận
+        CHECK (final_agreed_price IS NULL OR final_agreed_price > 0),
+    discount_pct INTEGER NOT NULL                       -- Tỉ lệ giảm % so với giá niêm yết (0% - 50%)
+        CHECK (discount_pct BETWEEN 0 AND 50),
+    buyer_message TEXT DEFAULT '',                      -- Lời nhắn của người mua
+    seller_note TEXT DEFAULT '',                        -- Phản hồi của người bán
+    status VARCHAR(20) NOT NULL DEFAULT 'pending'       -- Trạng thái thương lượng
+        CHECK (status IN ('pending', 'countered', 'accepted', 'rejected', 'expired', 'cancelled')),
+    expires_at DATETIME NOT NULL,                       -- Thời hạn hiệu lực (mặc định +24h)
+    responded_at DATETIME DEFAULT NULL,                 -- Thời điểm người bán phản hồi
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT chk_offers_distinct_parties
+        CHECK (buyer_id <> seller_id),
+    CONSTRAINT chk_offers_price_bounds
+        CHECK (offered_price <= original_price AND offered_price * 2 >= original_price),
+    CONSTRAINT chk_offers_counter_bounds
+        CHECK (counter_price IS NULL OR (counter_price > offered_price AND counter_price <= original_price)),
+    CONSTRAINT chk_offers_final_bounds
+        CHECK (final_agreed_price IS NULL OR (final_agreed_price >= offered_price AND final_agreed_price <= original_price)),
+    CONSTRAINT chk_offers_countered_requires_price
+        CHECK (status <> 'countered' OR (counter_price IS NOT NULL AND responded_at IS NOT NULL)),
+    CONSTRAINT chk_offers_accepted_requires_final
+        CHECK (status <> 'accepted' OR (final_agreed_price IS NOT NULL AND responded_at IS NOT NULL)),
+    CONSTRAINT chk_offers_rejected_requires_ts
+        CHECK (status <> 'rejected' OR responded_at IS NOT NULL),
+    CONSTRAINT chk_offers_expiry_valid
+        CHECK (expires_at > created_at),
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
+    FOREIGN KEY (buyer_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (seller_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE SET NULL
+);
+
+-- ============================================================================
+-- PHẦN 6: KÝ QUỸ ESCROW & DÒNG TIỀN ĐẢM BẢO GIAO DỊCH 24/7 (THEO ERD T31)
 -- ============================================================================
 
 -- Bảng 16: escrow_wallets (Ví tài khoản ký quỹ của người dùng & người bán)
 CREATE TABLE IF NOT EXISTS escrow_wallets (
     id VARCHAR(36) PRIMARY KEY,
     user_id VARCHAR(36) NOT NULL UNIQUE,
-    available_balance BIGINT NOT NULL DEFAULT 0,        -- Số dư khả dụng có thể rút (VND)
-    locked_balance BIGINT NOT NULL DEFAULT 0,           -- Số tiền đang tạm giữ trong các đơn hàng mở
-    total_withdrawn BIGINT NOT NULL DEFAULT 0,          -- Lũy kế số tiền đã rút về ngân hàng
+    available_balance BIGINT NOT NULL DEFAULT 0         -- Số dư khả dụng có thể rút (VND)
+        CHECK (available_balance >= 0),
+    locked_balance BIGINT NOT NULL DEFAULT 0            -- Số tiền đang tạm giữ trong các đơn hàng mở
+        CHECK (locked_balance >= 0),
+    total_withdrawn BIGINT NOT NULL DEFAULT 0           -- Lũy kế số tiền đã rút về ngân hàng
+        CHECK (total_withdrawn >= 0),
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
--- Bảng 17: escrow_transactions (Sổ cái biến động số dư ký quỹ)
+-- Bảng 17: escrows (Hợp đồng ký quỹ trung gian theo từng đơn hàng — chuẩn ERD T31)
+CREATE TABLE IF NOT EXISTS escrows (
+    id VARCHAR(36) PRIMARY KEY,
+    escrow_code VARCHAR(40) NOT NULL UNIQUE,            -- Mã hợp đồng ký quỹ (vd: ESC-20261108-9841)
+    order_id VARCHAR(36) NOT NULL UNIQUE,               -- 1 đơn hàng có tối đa 1 bản ghi ký quỹ
+    buyer_id VARCHAR(36) NOT NULL,                      -- Người mua nộp tiền ký quỹ
+    seller_id VARCHAR(36) NOT NULL,                     -- Người bán thụ hưởng khi giải ngân
+    seller_wallet_id VARCHAR(36) DEFAULT NULL,          -- Ví ký quỹ của người bán
+    amount BIGINT NOT NULL                              -- Tổng số tiền ký quỹ (VND)
+        CHECK (amount > 0),
+    platform_fee BIGINT NOT NULL DEFAULT 0              -- Phí dịch vụ sàn (VND)
+        CHECK (platform_fee >= 0),
+    net_payout_amount BIGINT NOT NULL DEFAULT 0         -- Số tiền thực nhận giải ngân cho người bán
+        CHECK (net_payout_amount >= 0),
+    refunded_amount BIGINT NOT NULL DEFAULT 0           -- Số tiền hoàn trả cho người mua (nếu có)
+        CHECK (refunded_amount >= 0),
+    payment_channel VARCHAR(30) NOT NULL DEFAULT 'NAPAS_ESCROW'
+        CHECK (payment_channel IN ('NAPAS_ESCROW', 'VIETQR', 'CARD', 'WALLET')),
+    bank_reference_code VARCHAR(60) DEFAULT '',         -- Mã đối soát cổng thanh toán Napas/VietQR
+    status VARCHAR(25) NOT NULL DEFAULT 'pending_deposit'
+        CHECK (status IN (
+            'pending_deposit',                          -- Chờ người mua chuyển tiền vào quỹ
+            'holding',                                  -- Đang tạm giữ an toàn (chờ giao & đồng kiểm)
+            'frozen',                                   -- Đang đóng băng do phát sinh tranh chấp
+            'released',                                 -- Đã giải ngân cho người bán
+            'refunded',                                 -- Đã hoàn tiền 100% cho người mua
+            'partially_refunded',                       -- Hoàn 1 phần cho người mua, giải ngân phần còn lại
+            'cancelled'                                 -- Hủy trước khi nạp tiền ký quỹ
+        )),
+    hold_reason TEXT DEFAULT '',                        -- Ghi chú lý do tạm giữ / đóng băng
+    held_at DATETIME DEFAULT NULL,                      -- Thời điểm tiền vào quỹ ký quỹ
+    auto_release_at DATETIME DEFAULT NULL,              -- Hạn tự động giải ngân nếu không khiếu nại
+    frozen_at DATETIME DEFAULT NULL,                    -- Thời điểm đóng băng khi mở tranh chấp
+    released_at DATETIME DEFAULT NULL,                  -- Thời điểm giải ngân cho người bán
+    refunded_at DATETIME DEFAULT NULL,                  -- Thời điểm hoàn tiền cho người mua
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT chk_escrows_distinct_parties
+        CHECK (buyer_id <> seller_id),
+    CONSTRAINT chk_escrows_fee_lte_amount
+        CHECK (platform_fee <= amount),
+    CONSTRAINT chk_escrows_refund_lte_amount
+        CHECK (refunded_amount <= amount),
+    CONSTRAINT chk_escrows_balance_invariant
+        CHECK (net_payout_amount + platform_fee + refunded_amount <= amount),
+    CONSTRAINT chk_escrows_holding_ts
+        CHECK (status <> 'holding' OR held_at IS NOT NULL),
+    CONSTRAINT chk_escrows_frozen_ts
+        CHECK (status <> 'frozen' OR frozen_at IS NOT NULL),
+    CONSTRAINT chk_escrows_released_payout
+        CHECK (status <> 'released' OR (released_at IS NOT NULL AND net_payout_amount > 0)),
+    CONSTRAINT chk_escrows_full_refund
+        CHECK (status <> 'refunded' OR (refunded_at IS NOT NULL AND refunded_amount = amount AND net_payout_amount = 0)),
+    CONSTRAINT chk_escrows_partial_refund
+        CHECK (status <> 'partially_refunded' OR (refunded_at IS NOT NULL AND refunded_amount > 0 AND refunded_amount < amount)),
+    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE RESTRICT,
+    FOREIGN KEY (buyer_id) REFERENCES users(id) ON DELETE RESTRICT,
+    FOREIGN KEY (seller_id) REFERENCES users(id) ON DELETE RESTRICT,
+    FOREIGN KEY (seller_wallet_id) REFERENCES escrow_wallets(id) ON DELETE SET NULL
+);
+
+-- Bảng 18: escrow_transactions (Sổ cái biến động số dư ký quỹ)
 CREATE TABLE IF NOT EXISTS escrow_transactions (
     id VARCHAR(36) PRIMARY KEY,
     wallet_id VARCHAR(36) NOT NULL,
+    escrow_id VARCHAR(36) DEFAULT NULL,                 -- Tham chiếu hợp đồng ký quỹ tương ứng
     order_id VARCHAR(36) DEFAULT NULL,
     transaction_code VARCHAR(40) NOT NULL UNIQUE,       -- TX-ESC-2026-XXXX
     transaction_type VARCHAR(20) NOT NULL               -- Loại giao dịch
-        CHECK (transaction_type IN ('deposit', 'hold_order', 'release_payout', 'refund_buyer', 'withdrawal')),
-    amount BIGINT NOT NULL,                             -- Số tiền biến động (+/-)
-    balance_after BIGINT NOT NULL,                      -- Số dư sau khi giao dịch thành công
+        CHECK (transaction_type IN ('deposit', 'hold_order', 'freeze_dispute', 'release_payout', 'refund_buyer', 'withdrawal')),
+    amount BIGINT NOT NULL                              -- Số tiền biến động (+/-), khác 0
+        CHECK (amount <> 0),
+    balance_after BIGINT NOT NULL                       -- Số dư khả dụng sau khi giao dịch thành công
+        CHECK (balance_after >= 0),
     memo TEXT NOT NULL,                                 -- Nội dung khớp lệnh
     bank_reference_code VARCHAR(50) DEFAULT '',         -- Mã chuẩn chi Napas/VietQR
     status VARCHAR(20) NOT NULL DEFAULT 'completed'
         CHECK (status IN ('pending', 'completed', 'failed')),
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (wallet_id) REFERENCES escrow_wallets(id) ON DELETE CASCADE,
+    FOREIGN KEY (escrow_id) REFERENCES escrows(id) ON DELETE SET NULL,
     FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE SET NULL
 );
 
 -- ============================================================================
--- PHẦN 7: PHÒNG TRỌNG TÀI TRANH CHẤP 3 BÊN (DISPUTE ARBITRATION ROOM)
+-- PHẦN 7: PHÒNG TRỌNG TÀI TRANH CHẤP 3 BÊN (DISPUTES — CHUẨN HÓA THEO ERD T31)
 -- ============================================================================
 
--- Bảng 18: disputes (Hồ sơ vụ việc khiếu nại tranh chấp)
+-- Bảng 19: disputes (Hồ sơ vụ việc khiếu nại & phân xử tranh chấp)
 CREATE TABLE IF NOT EXISTS disputes (
     id VARCHAR(36) PRIMARY KEY,
-    dispute_code VARCHAR(30) NOT NULL UNIQUE,           -- DSP-2026-001
-    order_id VARCHAR(36) NOT NULL UNIQUE,               -- 1 đơn hàng chỉ có 1 hồ sơ tranh chấp
-    buyer_id VARCHAR(36) NOT NULL,
-    seller_id VARCHAR(36) NOT NULL,
-    reason VARCHAR(150) NOT NULL,                       -- Hàng không đúng mô tả, sai phụ kiện, máy lỗi nguồn...
+    dispute_code VARCHAR(30) NOT NULL UNIQUE,           -- Mã hồ sơ tranh chấp (vd: DSP-20261108-01)
+    order_id VARCHAR(36) NOT NULL UNIQUE,               -- 1 đơn hàng chỉ có 1 hồ sơ tranh chấp chính thức
+    escrow_id VARCHAR(36) DEFAULT NULL,                 -- Giao dịch ký quỹ bị đóng băng liên quan
+    buyer_id VARCHAR(36) NOT NULL,                      -- Bên khiếu nại (Người mua)
+    seller_id VARCHAR(36) NOT NULL,                     -- Bên bị khiếu nại (Người bán)
+    reason_category VARCHAR(40) NOT NULL DEFAULT 'not_as_described'
+        CHECK (reason_category IN (
+            'not_as_described',                         -- Hàng không đúng mô tả / cam kết Like New
+            'damaged_in_transit',                       -- Hư hại / cấn móp trong quá trình vận chuyển
+            'missing_accessories',                      -- Thiếu phụ kiện / hộp / giấy kiểm định
+            'counterfeit',                              -- Nghi vấn hàng giả / không chính hãng
+            'defective_hardware',                       -- Lỗi phần cứng / không hoạt động
+            'not_received',                             -- Chưa nhận được hàng dù báo đã giao
+            'other'                                     -- Lý do khác
+        )),
+    reason VARCHAR(150) NOT NULL,                       -- Tiêu đề tóm tắt lý do khiếu nại
     description TEXT NOT NULL,                          -- Tường trình chi tiết của người mua
-    requested_refund BIGINT NOT NULL,                   -- Số tiền người mua yêu cầu hoàn lại
-    approved_refund BIGINT DEFAULT 0,                   -- Số tiền Admin sàn phê duyệt hoàn
-    status VARCHAR(30) NOT NULL DEFAULT 'pending'       -- Trạng thái giải quyết
-        CHECK (status IN ('pending', 'seller_responded', 'in_arbitration', 'resolved', 'closed')),
-    arbitrator_admin_id VARCHAR(36) DEFAULT NULL,       -- Admin phụ trách phán quyết
-    admin_decision_summary TEXT DEFAULT '',             -- Tóm tắt phán quyết trọng tài
-    solution_code VARCHAR(30) DEFAULT ''                -- 'full_refund', 'partial_refund', 'reject_claim'
-        CHECK (solution_code IN ('', 'full_refund', 'partial_refund', 'reject_claim')),
-    resolved_at DATETIME DEFAULT NULL,
+    requested_refund BIGINT NOT NULL                    -- Số tiền người mua yêu cầu hoàn (VND)
+        CHECK (requested_refund >= 0),
+    approved_refund BIGINT NOT NULL DEFAULT 0           -- Số tiền Trọng tài phê duyệt hoàn (VND)
+        CHECK (approved_refund >= 0),
+    status VARCHAR(30) NOT NULL DEFAULT 'pending'       -- Trạng thái vòng đời giải quyết
+        CHECK (status IN (
+            'pending',                                  -- Mới tạo, chờ người bán phản hồi
+            'seller_responded',                         -- Người bán đã giải trình / đề xuất hòa giải
+            'in_arbitration',                           -- Đang phân xử 3 bên có Trọng tài sàn
+            'resolved',                                 -- Đã chốt phán quyết, chờ/đang thi hành
+            'rejected',                                 -- Bác bỏ khiếu nại (không đủ căn cứ)
+            'closed',                                   -- Đã hoàn tất thi hành và đóng hồ sơ
+            'withdrawn'                                 -- Người mua chủ động rút khiếu nại
+        )),
+    priority VARCHAR(15) NOT NULL DEFAULT 'normal'      -- Mức độ ưu tiên xử lý SLA
+        CHECK (priority IN ('low', 'normal', 'high', 'urgent')),
+    arbitrator_admin_id VARCHAR(36) DEFAULT NULL,       -- Trọng tài viên / Admin phụ trách
+    admin_decision_summary TEXT DEFAULT '',             -- Biên bản tóm tắt phán quyết trọng tài
+    solution_code VARCHAR(30) NOT NULL DEFAULT ''       -- Phương án phán quyết cuối cùng
+        CHECK (solution_code IN (
+            '',
+            'full_refund',                              -- Hoàn tiền 100% & thu hồi hàng
+            'partial_refund',                           -- Hoàn tiền một phần, người mua giữ hàng
+            'exchange_1_to_1',                          -- Đổi máy / sản phẩm 1:1 khác
+            'voucher_compensation',                     -- Bồi thường voucher & giữ sản phẩm
+            'reject_claim'                              -- Từ chối yêu cầu, giải ngân cho người bán
+        )),
+    sla_deadline_at DATETIME DEFAULT NULL,              -- Hạn chót SLA xử lý (thường +48h)
+    resolved_at DATETIME DEFAULT NULL,                  -- Thời điểm ra phán quyết
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT chk_disputes_distinct_parties
+        CHECK (buyer_id <> seller_id),
+    CONSTRAINT chk_disputes_arbitrator_neutral
+        CHECK (arbitrator_admin_id IS NULL OR (arbitrator_admin_id <> buyer_id AND arbitrator_admin_id <> seller_id)),
+    CONSTRAINT chk_disputes_approved_lte_requested
+        CHECK (approved_refund <= requested_refund),
+    CONSTRAINT chk_disputes_resolved_consistency
+        CHECK (status NOT IN ('resolved', 'closed') OR (resolved_at IS NOT NULL AND solution_code <> '')),
+    CONSTRAINT chk_disputes_rejected_consistency
+        CHECK (status <> 'rejected' OR (resolved_at IS NOT NULL AND solution_code = 'reject_claim' AND approved_refund = 0)),
+    CONSTRAINT chk_disputes_refund_solution_amount
+        CHECK (solution_code NOT IN ('full_refund', 'partial_refund') OR approved_refund > 0),
     FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE RESTRICT,
+    FOREIGN KEY (escrow_id) REFERENCES escrows(id) ON DELETE SET NULL,
     FOREIGN KEY (buyer_id) REFERENCES users(id) ON DELETE RESTRICT,
     FOREIGN KEY (seller_id) REFERENCES users(id) ON DELETE RESTRICT,
     FOREIGN KEY (arbitrator_admin_id) REFERENCES users(id) ON DELETE SET NULL
 );
 
--- Bảng 19: dispute_evidences (Bằng chứng ảnh, video mở hộp đồng kiểm)
+-- Bảng 20: dispute_evidences (Bằng chứng ảnh, video mở hộp đồng kiểm)
 CREATE TABLE IF NOT EXISTS dispute_evidences (
     id VARCHAR(36) PRIMARY KEY,
     dispute_id VARCHAR(36) NOT NULL,
@@ -385,13 +525,13 @@ CREATE TABLE IF NOT EXISTS dispute_evidences (
     media_type VARCHAR(20) NOT NULL DEFAULT 'image'     -- 'image' | 'video' | 'pdf'
         CHECK (media_type IN ('image', 'video', 'pdf')),
     title VARCHAR(150) NOT NULL,                        -- Video mở hộp, Ảnh góc cấn máy, Biên bản đồng kiểm...
-    file_size_kb INTEGER DEFAULT 0,
+    file_size_kb INTEGER DEFAULT 0 CHECK (file_size_kb >= 0),
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (dispute_id) REFERENCES disputes(id) ON DELETE CASCADE,
     FOREIGN KEY (uploaded_by_user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
--- Bảng 20: dispute_messages (Nhật ký trao đổi 3 bên trực tiếp trong phòng khiếu nại)
+-- Bảng 21: dispute_messages (Nhật ký trao đổi 3 bên trực tiếp trong phòng khiếu nại)
 CREATE TABLE IF NOT EXISTS dispute_messages (
     id VARCHAR(36) PRIMARY KEY,
     dispute_id VARCHAR(36) NOT NULL,
@@ -409,7 +549,7 @@ CREATE TABLE IF NOT EXISTS dispute_messages (
 -- PHẦN 8: ĐÁNH GIÁ, DANH SÁCH YÊU THÍCH & HỆ THỐNG THÔNG BÁO
 -- ============================================================================
 
--- Bảng 21: product_reviews (Đánh giá chất lượng từ người mua thực tế)
+-- Bảng 22: product_reviews (Đánh giá chất lượng từ người mua thực tế)
 CREATE TABLE IF NOT EXISTS product_reviews (
     id VARCHAR(36) PRIMARY KEY,
     product_id VARCHAR(36) NOT NULL,
@@ -427,7 +567,7 @@ CREATE TABLE IF NOT EXISTS product_reviews (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
--- Bảng 22: wishlists (Danh sách sản phẩm yêu thích)
+-- Bảng 23: wishlists (Danh sách sản phẩm yêu thích)
 CREATE TABLE IF NOT EXISTS wishlists (
     id VARCHAR(36) PRIMARY KEY,
     user_id VARCHAR(36) NOT NULL,
@@ -438,7 +578,7 @@ CREATE TABLE IF NOT EXISTS wishlists (
     FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
 );
 
--- Bảng 23: notifications (Trung tâm thông báo cá nhân đa kênh)
+-- Bảng 24: notifications (Trung tâm thông báo cá nhân đa kênh)
 CREATE TABLE IF NOT EXISTS notifications (
     id VARCHAR(36) PRIMARY KEY,
     user_id VARCHAR(36) NOT NULL,
@@ -471,12 +611,29 @@ CREATE INDEX IF NOT EXISTS idx_orders_created ON orders(created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_order_items_order ON order_items(order_id);
 CREATE INDEX IF NOT EXISTS idx_order_items_product ON order_items(product_id);
 
-CREATE INDEX IF NOT EXISTS idx_offers_product ON product_offers(product_id);
-CREATE INDEX IF NOT EXISTS idx_offers_buyer ON product_offers(buyer_id);
-CREATE INDEX IF NOT EXISTS idx_offers_seller ON product_offers(seller_id);
+-- Indexes cho bảng offers
+CREATE INDEX IF NOT EXISTS idx_offers_product_status ON offers(product_id, status);
+CREATE INDEX IF NOT EXISTS idx_offers_buyer_status ON offers(buyer_id, status);
+CREATE INDEX IF NOT EXISTS idx_offers_seller_status ON offers(seller_id, status);
+CREATE INDEX IF NOT EXISTS idx_offers_status_expires ON offers(status, expires_at);
+CREATE INDEX IF NOT EXISTS idx_offers_order ON offers(order_id);
 
+-- Indexes cho bảng escrows & escrow_transactions
+CREATE INDEX IF NOT EXISTS idx_escrows_buyer_status ON escrows(buyer_id, status);
+CREATE INDEX IF NOT EXISTS idx_escrows_seller_status ON escrows(seller_id, status);
+CREATE INDEX IF NOT EXISTS idx_escrows_status_autorelease ON escrows(status, auto_release_at);
+CREATE INDEX IF NOT EXISTS idx_escrow_tx_wallet ON escrow_transactions(wallet_id, created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_escrow_tx_escrow ON escrow_transactions(escrow_id);
+
+-- Indexes cho bảng disputes, dispute_evidences, dispute_messages
 CREATE INDEX IF NOT EXISTS idx_disputes_order ON disputes(order_id);
-CREATE INDEX IF NOT EXISTS idx_disputes_status ON disputes(status);
+CREATE INDEX IF NOT EXISTS idx_disputes_escrow ON disputes(escrow_id);
+CREATE INDEX IF NOT EXISTS idx_disputes_buyer ON disputes(buyer_id);
+CREATE INDEX IF NOT EXISTS idx_disputes_seller ON disputes(seller_id);
+CREATE INDEX IF NOT EXISTS idx_disputes_queue ON disputes(status, priority, sla_deadline_at);
+CREATE INDEX IF NOT EXISTS idx_disputes_arbitrator ON disputes(arbitrator_admin_id);
+CREATE INDEX IF NOT EXISTS idx_dispute_evidences_dispute ON dispute_evidences(dispute_id);
+CREATE INDEX IF NOT EXISTS idx_dispute_messages_dispute ON dispute_messages(dispute_id, created_at);
 
 CREATE INDEX IF NOT EXISTS idx_reviews_product ON product_reviews(product_id);
 CREATE INDEX IF NOT EXISTS idx_wishlists_user ON wishlists(user_id);
