@@ -117,6 +117,11 @@
             <span>Trung Tâm Khiếu Nại C2C</span>
           </a>
 
+          <a class="side-link" href="../../index.html" title="Chuyển sang giao diện người mua hàng">
+            <span class="material-symbols-outlined text-secondary">storefront</span>
+            <span>Vào Sàn Mua Sắm</span>
+          </a>
+
           <!-- Chỉ hiển thị link Admin nếu người dùng là Admin -->
           <a class="side-link" href="../admin/admin_system.html" id="sidebarAdminLink" style="display: none;">
             <span class="material-symbols-outlined text-primary">terminal</span>
@@ -804,6 +809,7 @@
     <script src="../../js/mock_data.js"></script>
     <script src="../../js/utils.js"></script>
     <script src="../../js/components.js"></script>
+    <script src="../../js/app.js"></script>
     <script>
       (function () {
         // 1. Kiểm tra đăng nhập
@@ -1121,7 +1127,7 @@
               <tr>
                 <td>
                   <div class="flex items-center gap-2">
-                    ${p.img ? `<img src="${window.resolveAssetUrl ? window.resolveAssetUrl(p.img) : p.img}" style="width: 38px; height: 38px; border-radius: 6px; object-fit: cover; flex-shrink: 0;" />` : ""}
+                    ${p.img ? `<img src="${window.resolveAssetUrl ? window.resolveAssetUrl(p.img) : p.img}" alt="${escapeHtml(p.name || 'Sản phẩm')}" style="width: 38px; height: 38px; border-radius: 6px; object-fit: cover; flex-shrink: 0;" />` : ""}
                     <strong class="text-xs truncate block" style="max-width: 220px;" title="${p.name}">${p.name}</strong>
                   </div>
                 </td>
@@ -1159,7 +1165,7 @@
               <tr>
                 <td>
                   <div class="flex items-center gap-3">
-                    ${p.img ? `<img src="${window.resolveAssetUrl ? window.resolveAssetUrl(p.img) : p.img}" style="width: 44px; height: 44px; border-radius: 8px; object-fit: cover; flex-shrink: 0; border: 1px solid var(--border);" />` : ""}
+                    ${p.img ? `<img src="${window.resolveAssetUrl ? window.resolveAssetUrl(p.img) : p.img}" alt="${escapeHtml(p.name || 'Sản phẩm')}" style="width: 44px; height: 44px; border-radius: 8px; object-fit: cover; flex-shrink: 0; border: 1px solid var(--border);" />` : ""}
                     <div>
                       <strong class="text-sm block" style="max-width: 320px; line-height: 1.4;">${p.name}</strong>
                       <span class="text-2xs text-faint">Mã: ${p.id}</span>
@@ -1323,7 +1329,7 @@
               ovOrdersBox.innerHTML = urgentList.map((o) => `
                 <div class="panel p-3 mb-2 flex items-center justify-between gap-3 flex-wrap" style="background: rgba(255,255,255,0.02); border-color: rgba(255,255,255,0.06);">
                   <div class="flex items-center gap-3">
-                    <img src="${window.resolveAssetUrl ? window.resolveAssetUrl(o.productImg) : o.productImg}" style="width: 48px; height: 48px; border-radius: 8px; object-fit: cover;" />
+                    <img src="${window.resolveAssetUrl ? window.resolveAssetUrl(o.productImg) : o.productImg}" alt="${escapeHtml(o.productName || 'Đơn hàng')}" style="width: 48px; height: 48px; border-radius: 8px; object-fit: cover;" />
                     <div>
                       <strong class="text-sm block">${o.productName}</strong>
                       <div class="text-xs text-muted flex items-center gap-2 mt-0.5">
@@ -1367,7 +1373,7 @@
                 </td>
                 <td>
                   <div class="flex items-center gap-2">
-                    <img src="${window.resolveAssetUrl ? window.resolveAssetUrl(o.productImg) : o.productImg}" style="width: 36px; height: 36px; border-radius: 6px; object-fit: cover; flex-shrink: 0;" />
+                    <img src="${window.resolveAssetUrl ? window.resolveAssetUrl(o.productImg) : o.productImg}" alt="${escapeHtml(o.productName || 'Đơn hàng')}" style="width: 36px; height: 36px; border-radius: 6px; object-fit: cover; flex-shrink: 0;" />
                     <span class="text-xs truncate block" style="max-width: 180px;">${o.productName}</span>
                   </div>
                 </td>

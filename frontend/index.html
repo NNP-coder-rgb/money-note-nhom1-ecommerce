@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      HYBRID.STORE — Sàn TMĐT Bán Lẻ Hàng Mới &amp; Đồ Cũ Tiết Kiệm 50%
-    </title>
+    <title>HYBRID.STORE — Sàn TMĐT Bán Lẻ Hàng Mới &amp; Đồ Cũ Tiết Kiệm 50%</title>
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#8b5cf6" />
 
     <!-- Chống giật giao diện (Zero-FOUC Theme Init) -->
     <script>
@@ -13,8 +13,7 @@
         try {
           var t = localStorage.getItem("hybrid_theme") || "dark";
           document.documentElement.setAttribute("data-theme", t);
-          if (t === "light")
-            document.documentElement.classList.add("light-theme");
+          if (t === "light") document.documentElement.classList.add("light-theme");
         } catch (e) {}
       })();
     </script>
@@ -119,9 +118,7 @@
         background: #6d28d9 !important;
       }
       @supports not selector(::-webkit-scrollbar) {
-        #chipBar,
-        .chip-scroll,
-        .subnav .container {
+        #chipBar, .chip-scroll, .subnav .container {
           scrollbar-width: thin !important;
           scrollbar-color: rgba(139, 92, 246, 0.35) transparent !important;
         }
@@ -327,19 +324,13 @@
             >HYBRID<span class="text-secondary">.STORE</span>
             <span class="badge">v3.2</span>
             <small
-              ><span class="status-dot"></span> Hàng Mới 100% & Đồ Cũ Tuyển
-              Chọn</small
+              ><span class="status-dot"></span> Hàng Mới 100% & Đồ Cũ Tuyển Chọn</small
             >
           </span>
         </a>
 
         <div class="header-search">
-          <form
-            id="homeSearchForm"
-            action="pages/shop/catalog.html"
-            method="GET"
-            style="margin: 0; width: 100%"
-          >
+          <form id="homeSearchForm" action="pages/shop/catalog.html" method="GET" style="margin: 0; width: 100%;">
             <div class="input-group">
               <span class="icon-left material-symbols-outlined">search</span>
               <input
@@ -352,11 +343,7 @@
               />
             </div>
           </form>
-          <div
-            class="search-dropdown"
-            id="searchDropdown"
-            style="display: none"
-          ></div>
+          <div class="search-dropdown" id="searchDropdown" style="display: none;"></div>
         </div>
 
         <div class="header-actions">
@@ -379,9 +366,7 @@
             aria-label="Chuyển chế độ sáng / tối"
             title="Chuyển sang giao diện Sáng"
           >
-            <span class="material-symbols-outlined theme-toggle-icon"
-              >light_mode</span
-            >
+            <span class="material-symbols-outlined theme-toggle-icon">light_mode</span>
           </button>
           <a class="icon-btn" href="pages/shop/cart.html" aria-label="Giỏ hàng">
             <span class="material-symbols-outlined">shopping_bag</span>
@@ -422,19 +407,12 @@
             <img
               src="assets/images/banners/hero-banner.svg"
               alt="HYBRID.STORE — Đại Siêu Thị Mall Chính Hãng & Đồ Cũ Đồng Kiểm 100%"
-              style="
-                width: 100%;
-                height: auto;
-                border-radius: var(--radius-xl);
-                object-fit: cover;
-              "
+              style="width: 100%; height: auto; border-radius: var(--radius-xl); object-fit: cover;"
             />
             <div class="hero-content">
               <div class="hero-badge-row">
                 <span class="badge badge-primary flex items-center gap-1">
-                  <span class="material-symbols-outlined icon-xs"
-                    >storefront</span
-                  >
+                  <span class="material-symbols-outlined icon-xs">storefront</span>
                   HỆ THỐNG MUA SẮM TOÀN QUỐC
                 </span>
                 <span class="badge badge-success flex items-center gap-1">
@@ -445,53 +423,35 @@
 
               <h1 class="hero-title">
                 Đại Siêu Thị Mua Sắm Trực Tuyến Hàng Đầu
-                <span class="hero-highlight"
-                  >Thời Trang • Giày Dép • Điện Tử • Gia Dụng</span
-                >
+                <span class="hero-highlight">Thời Trang • Giày Dép • Điện Tử • Gia Dụng</span>
               </h1>
 
               <p class="hero-desc">
-                Trải nghiệm mua sắm an tâm với 100% hàng mới chính hãng nguyên
-                seal từ Brand Mall, hoặc lựa chọn đồ cũ Like New tuyển chọn tiết
-                kiệm từ 20% đến 50% cùng chính sách đồng kiểm tận tay.
+                Trải nghiệm mua sắm an tâm với 100% hàng mới chính hãng nguyên seal từ Brand Mall, hoặc lựa chọn đồ cũ Like New tuyển chọn tiết kiệm từ 20% đến 50% cùng chính sách đồng kiểm tận tay.
               </p>
 
               <!-- Các dòng cam kết căn chỉnh đều -->
               <div class="hero-features-row">
                 <div class="hero-feature-item">
-                  <span class="material-symbols-outlined text-success icon-sm"
-                    >check_circle</span
-                  >
+                  <span class="material-symbols-outlined text-success icon-sm">check_circle</span>
                   <span>Đồng kiểm 100% khi nhận</span>
                 </div>
                 <div class="hero-feature-item">
-                  <span class="material-symbols-outlined text-secondary icon-sm"
-                    >verified</span
-                  >
+                  <span class="material-symbols-outlined text-secondary icon-sm">verified</span>
                   <span>Bảo hành tới 12 tháng</span>
                 </div>
                 <div class="hero-feature-item">
-                  <span class="material-symbols-outlined text-primary icon-sm"
-                    >sync_alt</span
-                  >
+                  <span class="material-symbols-outlined text-primary icon-sm">sync_alt</span>
                   <span>Đổi trả 7 ngày miễn phí</span>
                 </div>
               </div>
 
               <div class="btn-group">
-                <a
-                  class="btn btn-primary"
-                  href="pages/shop/catalog.html?type=mall"
-                >
-                  <span class="material-symbols-outlined icon-sm"
-                    >verified</span
-                  >
+                <a class="btn btn-primary" href="pages/shop/catalog.html?type=mall">
+                  <span class="material-symbols-outlined icon-sm">verified</span>
                   <span>Sàn Đồ Mới Mall 100%</span>
                 </a>
-                <a
-                  class="btn btn-secondary"
-                  href="pages/shop/catalog.html?type=c2c"
-                >
+                <a class="btn btn-secondary" href="pages/shop/catalog.html?type=c2c">
                   <span class="material-symbols-outlined icon-sm">savings</span>
                   <span>Chợ Đồ Cũ Like New</span>
                 </a>
@@ -512,9 +472,8 @@
                 </div>
                 <h3>Hàng Mới Chính Hãng &amp; Đồ Cũ Tuyển Chọn</h3>
                 <p class="text-sm text-muted mt-2">
-                  Đầy đủ hóa đơn, bảo hành chính hãng cho hàng mới. Mọi sản phẩm
-                  đồ cũ đều được kiểm tra kỹ và hiển thị rõ mức giá rẻ hơn đồ
-                  mới.
+                  Đầy đủ hóa đơn, bảo hành chính hãng cho hàng mới. Mọi sản phẩm đồ cũ
+                  đều được kiểm tra kỹ và hiển thị rõ mức giá rẻ hơn đồ mới.
                 </p>
               </div>
               <div class="mini-stats">
@@ -530,9 +489,7 @@
             </div>
 
             <div class="panel">
-              <div class="label-caps mb-4">
-                Chỉ mục 8 đại ngành hàng trọng tâm
-              </div>
+              <div class="label-caps mb-4">Chỉ mục 8 đại ngành hàng trọng tâm</div>
               <div class="cat-jump-grid" id="catJump"></div>
             </div>
           </div>
@@ -549,9 +506,8 @@
             <div class="label-caps mt-4">Cam kết 01</div>
             <h3 class="pillar-title">Hàng Mới Chính Hãng 100%</h3>
             <p class="text-sm text-muted">
-              Phân phối trực tiếp từ các thương hiệu hàng đầu, nguyên hộp,
-              nguyên seal với đầy đủ chế độ bảo hành chính hãng từ 12 đến 24
-              tháng trên toàn quốc.
+              Phân phối trực tiếp từ các thương hiệu hàng đầu, nguyên hộp, nguyên seal
+              với đầy đủ chế độ bảo hành chính hãng từ 12 đến 24 tháng trên toàn quốc.
             </p>
           </div>
           <div class="panel tone-secondary">
@@ -561,23 +517,19 @@
             <div class="label-caps mt-4">Cam kết 02</div>
             <h3 class="pillar-title">Đồ Cũ Rẻ Hơn Từ 20% Đến 50%</h3>
             <p class="text-sm text-muted">
-              Đồ cũ Like New từ 90% đến 99% được kiểm tra ngoại quan và tính
-              năng kỹ lưỡng, giá rẻ hơn đồ mới tương ứng theo từng sản phẩm để
-              bạn tiết kiệm tối đa.
+              Đồ cũ Like New từ 90% đến 99% được kiểm tra ngoại quan và tính năng kỹ lưỡng,
+              giá rẻ hơn đồ mới tương ứng theo từng sản phẩm để bạn tiết kiệm tối đa.
             </p>
           </div>
           <div class="panel tone-success">
             <span class="icon-box"
-              ><span class="material-symbols-outlined"
-                >local_shipping</span
-              ></span
+              ><span class="material-symbols-outlined">local_shipping</span></span
             >
             <div class="label-caps mt-4">Cam kết 03</div>
             <h3 class="pillar-title">Đồng Kiểm &amp; Đổi Trả Dễ Dàng</h3>
             <p class="text-sm text-muted">
-              Giao hàng nhanh toàn quốc, khách hàng được kiểm tra hàng thoải mái
-              trước khi thanh toán. Hỗ trợ đổi trả miễn phí trong 7 ngày nếu
-              không ưng ý.
+              Giao hàng nhanh toàn quốc, khách hàng được kiểm tra hàng thoải mái trước
+              khi thanh toán. Hỗ trợ đổi trả miễn phí trong 7 ngày nếu không ưng ý.
             </p>
           </div>
         </div>
@@ -622,42 +574,17 @@
       </section>
 
       <!-- ===== BỘ CHUYỂN ĐỔI CHUYÊN MỤC ĐỒ MỚI VS ĐỒ CŨ ===== -->
-      <section
-        class="container section pb-0"
-        id="sectionTypeSelector"
-        style="padding-bottom: 0"
-      >
-        <div
-          class="catalog-type-tabs"
-          style="margin-top: 0; margin-bottom: var(--sp-6)"
-        >
-          <button
-            class="type-tab-btn active"
-            id="homeTabAll"
-            data-type="all"
-            type="button"
-            title="Xem tất cả ngành hàng song hành"
-          >
+      <section class="container section pb-0" id="sectionTypeSelector" style="padding-bottom: 0;">
+        <div class="catalog-type-tabs" style="margin-top: 0; margin-bottom: var(--sp-6);">
+          <button class="type-tab-btn active" id="homeTabAll" data-type="all" type="button" title="Xem tất cả ngành hàng song hành">
             <span class="material-symbols-outlined">grid_view</span>
             <span>✨ Tất Cả Ngành Hàng (Hybrid 130+)</span>
           </button>
-          <button
-            class="type-tab-btn"
-            id="homeTabMall"
-            data-type="mall"
-            type="button"
-            title="Chuyên mục 100% Brand Mall chính hãng"
-          >
+          <button class="type-tab-btn" id="homeTabMall" data-type="mall" type="button" title="Chuyên mục 100% Brand Mall chính hãng">
             <span class="material-symbols-outlined text-primary">verified</span>
             <span>🛍️ Sàn Hàng Mới 100% (Brand Mall)</span>
           </button>
-          <button
-            class="type-tab-btn"
-            id="homeTabC2c"
-            data-type="c2c"
-            type="button"
-            title="Chuyên mục Đồ cũ Like New thẩm định Lab AI"
-          >
+          <button class="type-tab-btn" id="homeTabC2c" data-type="c2c" type="button" title="Chuyên mục Đồ cũ Like New thẩm định Lab AI">
             <span class="material-symbols-outlined text-secondary">eco</span>
             <span>♻️ Chợ Đồ Cũ Tuyển Chọn (C2C Like New)</span>
           </button>
@@ -682,11 +609,10 @@
               >
             </h3>
             <p class="mt-4">
-              Mỗi đơn hàng gửi đi đều được đóng gói cẩn thận và dán tem niêm
-              phong. Người mua được mở gói hàng kiểm tra cùng shipper trước khi
-              thanh toán. Hàng mới cam kết 100% nguyên seal; đồ cũ Like New được
-              mô tả chính xác tình trạng và hình ảnh thực tế, giúp bạn hoàn toàn
-              an tâm khi lựa chọn.
+              Mỗi đơn hàng gửi đi đều được đóng gói cẩn thận và dán tem niêm phong.
+              Người mua được mở gói hàng kiểm tra cùng shipper trước khi thanh toán.
+              Hàng mới cam kết 100% nguyên seal; đồ cũ Like New được mô tả chính xác
+              tình trạng và hình ảnh thực tế, giúp bạn hoàn toàn an tâm khi lựa chọn.
             </p>
           </div>
           <div class="insurance-items">
@@ -708,7 +634,9 @@
                 >published_with_changes</span
               >
               <div>
-                <strong class="text-sm fw-600">Hỗ Trợ Đổi Trả 7 Ngày</strong>
+                <strong class="text-sm fw-600"
+                  >Hỗ Trợ Đổi Trả 7 Ngày</strong
+                >
                 <div class="text-xs text-muted">
                   Đổi mới hoặc hoàn tiền 100% nếu phát sinh lỗi
                 </div>
@@ -863,45 +791,24 @@
             <div class="form-group">
               <label class="form-label flex justify-between items-center">
                 <span>Hình ảnh sản phẩm (Chụp 4 góc cạnh + Tem máy) (*)</span>
-                <span class="text-xs text-muted" id="modalPostImgCount"
-                  >0/6 ảnh đã chọn</span
-                >
+                <span class="text-xs text-muted" id="modalPostImgCount">0/6 ảnh đã chọn</span>
               </label>
-              <input
-                type="file"
-                id="modalPostFileInput"
-                multiple
-                accept="image/*"
-                style="display: none"
-              />
-              <div
-                class="upload-box"
-                id="modalPostDropzone"
-                style="cursor: pointer; transition: all 0.2s ease"
-              >
-                <span class="material-symbols-outlined icon-lg text-primary"
-                  >add_a_photo</span
-                >
-                <div class="fw-600 text-sm" id="modalPostDropzoneText">
-                  Bấm để chọn ảnh từ máy hoặc kéo thả vào đây
-                </div>
-                <div class="text-xs text-faint">
-                  Hỗ trợ JPG, PNG, WEBP (Tự động nén tối ưu) • Có thể bấm Ctrl+V
-                  để dán ảnh
-                </div>
+              <input type="file" id="modalPostFileInput" multiple accept="image/*" style="display: none;" />
+              <div class="upload-box" id="modalPostDropzone" style="cursor: pointer; transition: all 0.2s ease;">
+                <span class="material-symbols-outlined icon-lg text-primary">add_a_photo</span>
+                <div class="fw-600 text-sm" id="modalPostDropzoneText">Bấm để chọn ảnh từ máy hoặc kéo thả vào đây</div>
+                <div class="text-xs text-faint">Hỗ trợ JPG, PNG, WEBP (Tự động nén tối ưu) • Có thể bấm Ctrl+V để dán ảnh</div>
               </div>
-              <div
-                id="modalPostPreviewStrip"
-                class="flex gap-2 mt-2"
-                style="display: none; overflow-x: auto; padding: 4px 0"
-              ></div>
+              <div id="modalPostPreviewStrip" class="flex gap-2 mt-2" style="display: none; overflow-x: auto; padding: 4px 0;"></div>
             </div>
           </div>
           <div class="modal-foot">
             <button class="btn btn-secondary" type="button" data-close>
               Hủy
             </button>
-            <button class="btn btn-primary" type="submit">Đăng Bán Ngay</button>
+            <button class="btn btn-primary" type="submit">
+              Đăng Bán Ngay
+            </button>
           </div>
         </form>
       </div>
@@ -913,6 +820,7 @@
     <script src="js/utils.js"></script>
     <script src="js/mock_data.js"></script>
     <script src="js/components.js"></script>
+    <script src="js/app.js"></script>
     <script src="js/index.js"></script>
   </body>
 </html>

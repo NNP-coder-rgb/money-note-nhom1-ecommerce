@@ -148,30 +148,30 @@ html.light-theme,
 body.light-theme {
   /* Neutral — Đảo ngược cho nền sáng với độ tương phản cao, phân tầng rõ rệt */
   --neutral-0: #050811;
-  --neutral-50: #090d16; /* Text đậm chính, sắc nét trên nền sáng */
-  --neutral-100: #0f172a; /* Tiêu đề & heading */
-  --neutral-200: #1e293b; /* Body text đậm */
-  --neutral-300: #334155; /* Text muted dễ đọc, không mờ nhạt */
-  --neutral-400: #475569; /* Text phụ rõ nét */
-  --neutral-500: #64748b; /* Placeholder / icon phụ */
-  --neutral-600: #94a3b8; /* Border đậm */
-  --neutral-700: #cbd5e1; /* Border chuẩn của card & component */
-  --neutral-800: #e2e8f0; /* Nền pill, tag, khối nổi phụ */
-  --neutral-850: #edf2f7; /* Nền phân tách khối */
-  --neutral-900: #ffffff; /* Nền trắng chuẩn */
+  --neutral-50: #090d16;      /* Text đậm chính, sắc nét trên nền sáng */
+  --neutral-100: #0f172a;     /* Tiêu đề & heading */
+  --neutral-200: #1e293b;     /* Body text đậm */
+  --neutral-300: #334155;     /* Text muted dễ đọc, không mờ nhạt */
+  --neutral-400: #475569;     /* Text phụ rõ nét */
+  --neutral-500: #64748b;     /* Placeholder / icon phụ */
+  --neutral-600: #94a3b8;     /* Border đậm */
+  --neutral-700: #cbd5e1;     /* Border chuẩn của card & component */
+  --neutral-800: #e2e8f0;     /* Nền pill, tag, khối nổi phụ */
+  --neutral-850: #edf2f7;     /* Nền phân tách khối */
+  --neutral-900: #ffffff;     /* Nền trắng chuẩn */
 
   /* Màu ngữ nghĩa - độ tương phản cao, không bị bợt trên nền trắng */
-  --success: #15803d; /* Xanh lá đậm chuẩn WCAG AA */
-  --warning: #b45309; /* Vàng hổ phách đậm */
-  --danger: #dc2626; /* Đỏ tươi rõ nét */
-  --info: #0284c7; /* Xanh dương đậm */
+  --success: #15803d;         /* Xanh lá đậm chuẩn WCAG AA */
+  --warning: #b45309;         /* Vàng hổ phách đậm */
+  --danger: #dc2626;          /* Đỏ tươi rõ nét */
+  --info: #0284c7;            /* Xanh dương đậm */
 
   /* Alias giao diện nền sáng — Nền body Slate-100 giúp card trắng #ffffff nổi khối tuyệt đối */
-  --bg-body: #f1f5f9; /* Slate-100 dịu mắt, phân định dứt khoát với card trắng */
-  --bg-surface: #ffffff; /* Nền thanh header, sidebar, panel */
-  --bg-card: #ffffff; /* Nền card sản phẩm, item */
-  --bg-elevated: #e2e8f0; /* Nền khối con, pill, tag */
-  --bg-input: #ffffff; /* Nền ô gõ chữ */
+  --bg-body: #f1f5f9;         /* Slate-100 dịu mắt, phân định dứt khoát với card trắng */
+  --bg-surface: #ffffff;      /* Nền thanh header, sidebar, panel */
+  --bg-card: #ffffff;         /* Nền card sản phẩm, item */
+  --bg-elevated: #e2e8f0;     /* Nền khối con, pill, tag */
+  --bg-input: #ffffff;        /* Nền ô gõ chữ */
 
   --border: #e2e8f0;
   --border-strong: #cbd5e1;
@@ -222,12 +222,9 @@ body.light-theme {
   );
 
   /* Bóng đổ nền sáng rõ nét phân tách cấu trúc */
-  --shadow-sm:
-    0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.05);
-  --shadow-md:
-    0 4px 16px -2px rgba(15, 23, 42, 0.1), 0 2px 6px -1px rgba(15, 23, 42, 0.06);
-  --shadow-glow:
-    0 0 0 1.5px rgba(109, 40, 217, 0.35), 0 8px 24px rgba(109, 40, 217, 0.12);
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 4px 16px -2px rgba(15, 23, 42, 0.1), 0 2px 6px -1px rgba(15, 23, 42, 0.06);
+  --shadow-glow: 0 0 0 1.5px rgba(109, 40, 217, 0.35), 0 8px 24px rgba(109, 40, 217, 0.12);
 }
 
 /* ---------- Reset ---------- */
@@ -691,9 +688,7 @@ small,
   place-items: center;
   border-radius: 12px;
   background: linear-gradient(135deg, #a855f7 0%, #6366f1 50%, #06b6d4 100%);
-  box-shadow:
-    0 0 18px rgba(168, 85, 247, 0.45),
-    0 0 10px rgba(6, 182, 212, 0.35);
+  box-shadow: 0 0 18px rgba(168, 85, 247, 0.45), 0 0 10px rgba(6, 182, 212, 0.35);
   position: relative;
   flex-shrink: 0;
   text-decoration: none;
@@ -710,18 +705,14 @@ small,
   line-height: 1;
 }
 .brand-mark:hover {
-  box-shadow:
-    0 0 24px rgba(168, 85, 247, 0.6),
-    0 0 14px rgba(6, 182, 212, 0.45);
+  box-shadow: 0 0 24px rgba(168, 85, 247, 0.6), 0 0 14px rgba(6, 182, 212, 0.45);
 }
 .brand-mark-lg {
   width: 56px;
   height: 56px;
   padding: 2px;
   border-radius: 16px;
-  box-shadow:
-    0 0 26px rgba(168, 85, 247, 0.55),
-    0 0 14px rgba(6, 182, 212, 0.4);
+  box-shadow: 0 0 26px rgba(168, 85, 247, 0.55), 0 0 14px rgba(6, 182, 212, 0.4);
 }
 .brand-mark-lg .material-symbols-outlined {
   border-radius: 14px;
@@ -1356,9 +1347,7 @@ body.light-theme .theme-toggle-btn:hover {
 .product-card:hover {
   transform: translateY(-4px);
   border-color: rgba(139, 92, 246, 0.65);
-  box-shadow:
-    0 10px 25px -4px rgba(0, 0, 0, 0.5),
-    0 0 20px rgba(139, 92, 246, 0.35);
+  box-shadow: 0 10px 25px -4px rgba(0, 0, 0, 0.5), 0 0 20px rgba(139, 92, 246, 0.35);
 }
 .product-media {
   position: relative;
@@ -2987,9 +2976,7 @@ body.light-theme .product-card {
 [data-theme="light"] .product-card:hover,
 body.light-theme .product-card:hover {
   border-color: var(--tone, #6d28d9) !important;
-  box-shadow:
-    0 12px 28px -4px rgba(15, 23, 42, 0.14),
-    0 0 0 1.5px var(--tone, #6d28d9) !important;
+  box-shadow: 0 12px 28px -4px rgba(15, 23, 42, 0.14), 0 0 0 1.5px var(--tone, #6d28d9) !important;
 }
 
 [data-theme="light"] .product-media,
@@ -4059,18 +4046,9 @@ body.light-theme .btn-outlined:hover {
   animation: pulseGreen 2s infinite;
 }
 @keyframes pulseGreen {
-  0% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7);
-  }
-  70% {
-    transform: scale(1);
-    box-shadow: 0 0 0 8px rgba(52, 211, 153, 0);
-  }
-  100% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0);
-  }
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(52, 211, 153, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
 }
 
 .live-chat-window {
@@ -4189,21 +4167,11 @@ body.light-theme .btn-outlined:hover {
   background: var(--text-muted);
   animation: typingBounce 1.2s infinite ease-in-out;
 }
-.chat-typing .typing-dots span:nth-child(2) {
-  animation-delay: 0.2s;
-}
-.chat-typing .typing-dots span:nth-child(3) {
-  animation-delay: 0.4s;
-}
+.chat-typing .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+.chat-typing .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
 @keyframes typingBounce {
-  0%,
-  80%,
-  100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-5px);
-  }
+  0%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-5px); }
 }
 
 .chat-quick-replies {
@@ -4288,7 +4256,7 @@ body.light-theme .btn-outlined:hover {
   border-color: rgba(239, 68, 68, 0.5);
 }
 .product-wishlist-btn.active .material-symbols-outlined {
-  font-variation-settings: "FILL" 1;
+  font-variation-settings: 'FILL' 1;
 }
 
 /* ---------------- 6b. PRODUCT COMPARE BUTTON ---------------- */
@@ -4553,18 +4521,12 @@ main,
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.25) 10%,
-    transparent 10.01%
-  );
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.25) 10%, transparent 10.01%);
   background-repeat: no-repeat;
   background-position: 50%;
   transform: scale(10, 10);
   opacity: 0;
-  transition:
-    transform 0.4s,
-    opacity 0.6s;
+  transition: transform 0.4s, opacity 0.6s;
   pointer-events: none;
 }
 .btn:active::after {
@@ -4652,18 +4614,10 @@ body.light-theme .product-card:hover {
 
 /* Hiệu ứng nảy tim Wishlist */
 @keyframes heartPop {
-  0% {
-    transform: scale(1);
-  }
-  35% {
-    transform: scale(1.38) rotate(-10deg);
-  }
-  65% {
-    transform: scale(0.88) rotate(6deg);
-  }
-  100% {
-    transform: scale(1) rotate(0deg);
-  }
+  0% { transform: scale(1); }
+  35% { transform: scale(1.38) rotate(-10deg); }
+  65% { transform: scale(0.88) rotate(6deg); }
+  100% { transform: scale(1) rotate(0deg); }
 }
 .product-wishlist-btn.active {
   animation: heartPop 0.45s var(--ease-bounce);
@@ -4697,17 +4651,9 @@ body.light-theme .product-card:hover {
 
 /* Checkbox & Radio Pop */
 @keyframes checkPop {
-  0% {
-    transform: scale(0.6);
-    opacity: 0;
-  }
-  70% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
+  0% { transform: scale(0.6); opacity: 0; }
+  70% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
 }
 .check input:checked {
   animation: checkPop 0.22s var(--ease-bounce);
@@ -4753,9 +4699,7 @@ body.light-theme .product-card:hover {
 
 /* Accordion Head & Chevron */
 .accordion-head {
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 .accordion-head::after {
   transition: transform 0.35s var(--ease-spring) !important;
@@ -4781,35 +4725,21 @@ body.light-theme .product-card:hover {
 .drawer-cart.active .drawer-cart-item {
   animation: cartItemSlideIn 0.35s var(--ease-spring) both;
 }
-.drawer-cart.active .drawer-cart-item:nth-child(1) {
-  animation-delay: 0.03s;
-}
-.drawer-cart.active .drawer-cart-item:nth-child(2) {
-  animation-delay: 0.07s;
-}
-.drawer-cart.active .drawer-cart-item:nth-child(3) {
-  animation-delay: 0.11s;
-}
-.drawer-cart.active .drawer-cart-item:nth-child(4) {
-  animation-delay: 0.15s;
-}
-.drawer-cart.active .drawer-cart-item:nth-child(5) {
-  animation-delay: 0.19s;
-}
+.drawer-cart.active .drawer-cart-item:nth-child(1) { animation-delay: 0.03s; }
+.drawer-cart.active .drawer-cart-item:nth-child(2) { animation-delay: 0.07s; }
+.drawer-cart.active .drawer-cart-item:nth-child(3) { animation-delay: 0.11s; }
+.drawer-cart.active .drawer-cart-item:nth-child(4) { animation-delay: 0.15s; }
+.drawer-cart.active .drawer-cart-item:nth-child(5) { animation-delay: 0.19s; }
 
 .drawer-cart-item {
-  transition:
-    background-color 0.2s ease,
-    transform 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 .qty-btn:active {
   transform: scale(0.85);
   transition-duration: 0.06s;
 }
 .drawer-item-del-btn {
-  transition:
-    transform 0.2s var(--ease-spring),
-    color 0.2s ease;
+  transition: transform 0.2s var(--ease-spring), color 0.2s ease;
 }
 .drawer-item-del-btn:hover {
   transform: scale(1.18);
@@ -4891,18 +4821,9 @@ body.light-theme .product-card:hover {
   transform: translateX(4px);
 }
 @keyframes unreadPulse {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7);
-  }
-  70% {
-    transform: scale(1.15);
-    box-shadow: 0 0 0 6px rgba(139, 92, 246, 0);
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0);
-  }
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7); }
+  70% { transform: scale(1.15); box-shadow: 0 0 0 6px rgba(139, 92, 246, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); }
 }
 .notif-unread-dot {
   animation: unreadPulse 2.4s infinite ease-in-out;
@@ -4910,13 +4831,8 @@ body.light-theme .product-card:hover {
 
 /* 9. WIDGET LIVE CHAT 24/7 (LIVE CHAT PHYSICS) */
 @keyframes floatBreathing {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
 }
 .live-chat-floating-btn {
   animation: floatBreathing 3.2s ease-in-out infinite;
@@ -5035,23 +4951,15 @@ body.light-theme .product-card:hover {
 }
 
 .bottom-nav-item {
-  transition:
-    color 0.2s ease,
-    transform 0.2s var(--ease-spring) !important;
+  transition: color 0.2s ease, transform 0.2s var(--ease-spring) !important;
 }
 .bottom-nav-item:active {
   transform: scale(0.92);
 }
 @keyframes iconBounce {
-  0% {
-    transform: scale(0.9);
-  }
-  50% {
-    transform: scale(1.22);
-  }
-  100% {
-    transform: scale(1.1);
-  }
+  0% { transform: scale(0.9); }
+  50% { transform: scale(1.22); }
+  100% { transform: scale(1.1); }
 }
 .bottom-nav-item.active .material-symbols-outlined {
   animation: iconBounce 0.32s var(--ease-bounce);
@@ -5059,12 +4967,8 @@ body.light-theme .product-card:hover {
 
 /* 13. SKELETON LOADING SHIMMER HIỆN ĐẠI */
 @keyframes skeletonShimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
 .skeleton,
 .skeleton-box {
@@ -5087,9 +4991,8 @@ body.light-theme .product-card:hover {
 .reveal-on-scroll {
   opacity: 0;
   transform: translateY(22px);
-  transition:
-    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
@@ -5207,21 +5110,11 @@ body.light-theme .product-card:hover {
 
 /* 17. HIỆU ỨNG THÊM VÀO GIỎ HÀNG & HẠT BAY (CART BOUNCE & FLYING DOT) */
 @keyframes cartBadgeBounce {
-  0% {
-    transform: scale(1);
-  }
-  25% {
-    transform: scale(1.48) rotate(-9deg);
-  }
-  50% {
-    transform: scale(0.88) rotate(5deg);
-  }
-  75% {
-    transform: scale(1.18) rotate(-2deg);
-  }
-  100% {
-    transform: scale(1) rotate(0deg);
-  }
+  0% { transform: scale(1); }
+  25% { transform: scale(1.48) rotate(-9deg); }
+  50% { transform: scale(0.88) rotate(5deg); }
+  75% { transform: scale(1.18) rotate(-2deg); }
+  100% { transform: scale(1) rotate(0deg); }
 }
 
 .badge-bounce,
@@ -5239,22 +5132,15 @@ body.light-theme .product-card:hover {
   box-shadow: 0 0 14px var(--primary-300);
   pointer-events: none;
   z-index: 99999;
-  transition:
-    transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1),
-    opacity 0.65s ease;
+  transition: transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1),
+              opacity 0.65s ease;
 }
 
 /* 18. DÒNG CHẢY GRADIENT ĐỘNG & MẠCH XUNG (DYNAMIC FLOW GRADIENTS & PULSES) */
 @keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .headline-gradient,
@@ -5266,8 +5152,7 @@ body.light-theme .product-card:hover {
 }
 
 @keyframes boltPulse {
-  0%,
-  100% {
+  0%, 100% {
     transform: scale(1);
     filter: drop-shadow(0 0 3px rgba(249, 115, 22, 0.4));
   }
@@ -5283,13 +5168,8 @@ body.light-theme .product-card:hover {
 }
 
 @keyframes unitTick {
-  0% {
-    transform: translateY(-4px) scale(1.1);
-    color: var(--primary-300);
-  }
-  100% {
-    transform: translateY(0) scale(1);
-  }
+  0% { transform: translateY(-4px) scale(1.1); color: var(--primary-300); }
+  100% { transform: translateY(0) scale(1); }
 }
 
 .countdown-unit.tick {
@@ -5299,12 +5179,11 @@ body.light-theme .product-card:hover {
 /* 19. THANH HEADER KÍNH MỜ NÂNG ĐỘ CAO KHI CUỘN (HEADER GLASSMORPHISM ELEVATION) */
 .site-header,
 .dash-topbar {
-  transition:
-    padding 0.3s ease,
-    background 0.3s ease,
-    backdrop-filter 0.3s ease,
-    box-shadow 0.3s ease,
-    border-color 0.3s ease;
+  transition: padding 0.3s ease,
+              background 0.3s ease,
+              backdrop-filter 0.3s ease,
+              box-shadow 0.3s ease,
+              border-color 0.3s ease;
 }
 
 .site-header.scrolled,
@@ -5331,10 +5210,7 @@ body.light-theme .dash-topbar.scrolled {
 img.smooth-fade {
   opacity: 0;
   filter: blur(4px);
-  transition:
-    opacity 0.4s ease,
-    filter 0.4s ease,
-    transform 0.55s var(--ease-spring) !important;
+  transition: opacity 0.4s ease, filter 0.4s ease, transform 0.55s var(--ease-spring) !important;
 }
 
 img.smooth-fade.loaded {
@@ -5377,10 +5253,9 @@ img.smooth-fade.loaded {
 .panel.tone-secondary,
 .panel.tone-success,
 .panel.tone-tertiary {
-  transition:
-    transform 0.3s var(--ease-spring),
-    box-shadow 0.3s var(--ease-spring),
-    border-color 0.28s ease !important;
+  transition: transform 0.3s var(--ease-spring),
+              box-shadow 0.3s var(--ease-spring),
+              border-color 0.28s ease !important;
 }
 
 .panel.tone-primary:hover,
@@ -5413,11 +5288,10 @@ body,
 .select,
 .textarea,
 .table-card {
-  transition:
-    background-color 0.28s cubic-bezier(0.4, 0, 0.2, 1),
-    border-color 0.28s cubic-bezier(0.4, 0, 0.2, 1),
-    color 0.28s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* 24. CHUẨN TRUY CẬP (ACCESSIBILITY: PREFERS-REDUCED-MOTION) */
@@ -5449,9 +5323,7 @@ body,
   gap: 14px;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
   z-index: 9990;
-  transition:
-    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 0.3s ease;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
   opacity: 0;
   pointer-events: none;
 }
@@ -5537,3 +5409,5 @@ body.light-theme .compare-dock-bar {
   font-size: 13px;
   background: var(--bg-card);
 }
+
+

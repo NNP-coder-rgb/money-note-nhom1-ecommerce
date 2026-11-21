@@ -11,8 +11,7 @@
         try {
           var t = localStorage.getItem("hybrid_theme") || "dark";
           document.documentElement.setAttribute("data-theme", t);
-          if (t === "light")
-            document.documentElement.classList.add("light-theme");
+          if (t === "light") document.documentElement.classList.add("light-theme");
         } catch (e) {}
       })();
     </script>
@@ -39,19 +38,16 @@
       .cart-header-bar {
         margin-bottom: 26px;
       }
-
       .cart-header-title {
         margin-bottom: 8px;
         font-size: 1.55rem;
       }
-
       .cart-header-desc {
         line-height: 1.6;
         color: var(--text-muted);
         font-size: var(--fs-sm);
         max-width: 680px;
       }
-
       .countdown-pill {
         display: inline-flex;
         align-items: center;
@@ -74,7 +70,6 @@
         gap: 16px;
         margin-bottom: 28px;
       }
-
       .order-stat-card {
         background: var(--bg-surface);
         border: 1px solid var(--border);
@@ -83,18 +78,13 @@
         display: flex;
         align-items: center;
         gap: 16px;
-        transition:
-          transform var(--speed-fast),
-          border-color var(--speed-fast),
-          box-shadow var(--speed-fast);
+        transition: transform var(--speed-fast), border-color var(--speed-fast), box-shadow var(--speed-fast);
       }
-
       .order-stat-card:hover {
         transform: translateY(-2px);
         border-color: var(--primary-500);
         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
       }
-
       .order-stat-icon-wrap {
         width: 48px;
         height: 48px;
@@ -115,7 +105,6 @@
         overflow-x: auto;
         scrollbar-width: thin;
       }
-
       .order-tab-btn {
         padding: 10px 18px;
         background: transparent;
@@ -132,18 +121,15 @@
         border-radius: var(--radius-md) var(--radius-md) 0 0;
         transition: all var(--speed-fast);
       }
-
       .order-tab-btn:hover {
         color: var(--text);
         background: rgba(255, 255, 255, 0.03);
       }
-
       .order-tab-btn.active {
         color: var(--primary-400);
         border-bottom-color: var(--primary-500);
         background: rgba(139, 92, 246, 0.08);
       }
-
       .order-tab-btn .badge {
         font-size: 11px;
         padding: 3px 8px;
@@ -166,12 +152,9 @@
         border: 1px solid var(--border);
         padding: 24px 28px;
         margin-bottom: 30px;
-        transition:
-          box-shadow var(--speed-fast),
-          border-color var(--speed-fast);
+        transition: box-shadow var(--speed-fast), border-color var(--speed-fast);
         overflow: hidden;
       }
-
       .order-card:hover {
         border-color: rgba(139, 92, 246, 0.45);
         box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
@@ -200,14 +183,12 @@
         border-radius: var(--radius-lg);
         margin-bottom: 22px;
       }
-
       @media (max-width: 640px) {
         .order-tracking-bar {
           grid-template-columns: repeat(2, 1fr);
           row-gap: 14px;
         }
       }
-
       .order-track-step {
         display: flex;
         align-items: center;
@@ -216,17 +197,14 @@
         color: var(--text-faint);
         transition: color var(--speed-fast);
       }
-
       .order-track-step.done {
         color: var(--text);
         font-weight: 600;
       }
-
       .order-track-step.active {
         color: var(--secondary-300);
         font-weight: 700;
       }
-
       .order-track-circle {
         width: 26px;
         height: 26px;
@@ -240,13 +218,11 @@
         color: var(--text-muted);
         flex-shrink: 0;
       }
-
       .order-track-step.done .order-track-circle {
         background: var(--success);
         border-color: var(--success);
         color: #ffffff;
       }
-
       .order-track-step.active .order-track-circle {
         background: var(--primary-600);
         border-color: var(--primary-400);
@@ -254,25 +230,14 @@
         box-shadow: 0 0 10px rgba(139, 92, 246, 0.7);
         animation: pulseTrack 2s infinite;
       }
-
       @keyframes pulseTrack {
-        0%,
-        100% {
-          box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.5);
-        }
-
-        50% {
-          box-shadow: 0 0 0 6px rgba(139, 92, 246, 0);
-        }
+        0%, 100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.5); }
+        50% { box-shadow: 0 0 0 6px rgba(139, 92, 246, 0); }
       }
 
       /* Shipper banner */
       .shipper-dispatch-card {
-        background: linear-gradient(
-          135deg,
-          rgba(34, 197, 94, 0.08) 0%,
-          rgba(139, 92, 246, 0.06) 100%
-        );
+        background: linear-gradient(135deg, rgba(34, 197, 94, 0.08) 0%, rgba(139, 92, 246, 0.06) 100%);
         border: 1px solid rgba(34, 197, 94, 0.3);
         border-radius: var(--radius-lg);
         padding: 16px 20px;
@@ -283,7 +248,6 @@
         flex-wrap: wrap;
         gap: 16px;
       }
-
       .shipper-avatar {
         width: 44px;
         height: 44px;
@@ -295,7 +259,6 @@
         color: var(--success);
         flex-shrink: 0;
       }
-
       .shipper-live-dot {
         width: 8px;
         height: 8px;
@@ -304,25 +267,15 @@
         display: inline-block;
         animation: blinkLive 1.5s infinite;
       }
-
       @keyframes blinkLive {
-        0%,
-        100% {
-          opacity: 1;
-          transform: scale(1);
-        }
-
-        50% {
-          opacity: 0.4;
-          transform: scale(0.8);
-        }
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.4; transform: scale(0.8); }
       }
 
       /* Danh sách sản phẩm trong Card */
       .order-items-wrapper {
         margin-bottom: 22px;
       }
-
       .order-item-row {
         display: flex;
         align-items: center;
@@ -330,7 +283,6 @@
         padding: 16px 0;
         border-bottom: 1px solid rgba(255, 255, 255, 0.06);
       }
-
       .order-item-row:last-child {
         border-bottom: none;
         padding-bottom: 4px;
@@ -344,7 +296,6 @@
         margin-top: 18px;
         margin-bottom: 24px;
       }
-
       .order-meta-card {
         background: rgba(255, 255, 255, 0.02);
         border: 1px solid var(--border);
@@ -354,7 +305,6 @@
         flex-direction: column;
         gap: 10px;
       }
-
       .order-meta-title {
         font-size: 13px;
         font-weight: 700;
@@ -364,7 +314,6 @@
         align-items: center;
         gap: 8px;
       }
-
       .order-info-line {
         display: flex;
         justify-content: space-between;
@@ -393,7 +342,6 @@
         padding-bottom: 22px;
         position: relative;
       }
-
       .timeline-checkpoint:not(:last-child)::after {
         content: "";
         position: absolute;
@@ -403,11 +351,9 @@
         width: 2px;
         background: var(--border);
       }
-
       .timeline-checkpoint.done:not(:last-child)::after {
         background: rgba(34, 197, 94, 0.4);
       }
-
       .checkpoint-dot {
         width: 28px;
         height: 28px;
@@ -420,20 +366,17 @@
         z-index: 1;
         transition: all var(--speed-fast);
       }
-
       .timeline-checkpoint.active .checkpoint-dot {
         background: var(--primary-600);
         border-color: var(--primary-300);
         color: #fff;
         box-shadow: 0 0 12px rgba(139, 92, 246, 0.7);
       }
-
       .timeline-checkpoint.done .checkpoint-dot {
         background: var(--success);
         border-color: transparent;
         color: #fff;
       }
-
       .timeline-checkpoint.cancelled .checkpoint-dot {
         background: var(--danger);
         border-color: transparent;
@@ -450,11 +393,8 @@
         display: inline-flex;
         align-items: center;
         border-radius: var(--radius-sm);
-        transition:
-          color var(--speed-fast),
-          background var(--speed-fast);
+        transition: color var(--speed-fast), background var(--speed-fast);
       }
-
       .btn-copy-code:hover {
         color: var(--secondary-300);
         background: rgba(255, 255, 255, 0.08);
@@ -469,14 +409,12 @@
         font-family: Arial, sans-serif;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
       }
-
       .vat-invoice-sheet table {
         width: 100%;
         border-collapse: collapse;
         margin-top: 12px;
         margin-bottom: 12px;
       }
-
       .vat-invoice-sheet th,
       .vat-invoice-sheet td {
         border: 1px solid #d1d5db;
@@ -484,12 +422,10 @@
         font-size: 12px;
         text-align: left;
       }
-
       .vat-invoice-sheet th {
         background: #f3f4f6;
         font-weight: 700;
       }
-
       .vat-stamp {
         border: 2px solid #ef4444;
         color: #ef4444;
@@ -504,24 +440,18 @@
 
       /* Biên bản kiểm định trong Modal Chi Tiết Đơn Hàng */
       .inspection-card-wrap {
-        background: linear-gradient(
-          135deg,
-          rgba(139, 92, 246, 0.08) 0%,
-          rgba(34, 197, 94, 0.06) 100%
-        );
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(34, 197, 94, 0.06) 100%);
         border: 1px solid rgba(139, 92, 246, 0.3);
         border-radius: var(--radius-lg);
         padding: 18px 20px;
         margin-bottom: 20px;
       }
-
       .inspection-steps-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         gap: 12px;
         margin-top: 12px;
       }
-
       .inspection-step-pill {
         background: rgba(255, 255, 255, 0.03);
         border: 1px solid var(--border);
@@ -534,25 +464,18 @@
       }
     </style>
   </head>
-
   <body>
     <!-- ===== HEADER (Task T13) ===== -->
     <header class="site-header site-header--marketplace" id="siteHeader">
       <div class="container">
         <a class="brand" href="../../index.html">
-          <span class="brand-mark"
-            ><span class="material-symbols-outlined">token</span></span
-          >
-          <span
-            >HYBRID<span class="text-secondary">.STORE</span>
-            <span class="badge">ĐƠN MUA</span></span
-          >
+          <span class="brand-mark"><span class="material-symbols-outlined">token</span></span>
+          <span>HYBRID<span class="text-secondary">.STORE</span> <span class="badge">ĐƠN MUA</span></span>
         </a>
 
         <div class="header-actions">
           <a class="btn btn-secondary hide-sm" href="../shop/catalog.html">
-            <span class="material-symbols-outlined icon-sm">storefront</span>
-            Mua Sắm Thêm
+            <span class="material-symbols-outlined icon-sm">storefront</span> Mua Sắm Thêm
           </a>
           <button
             class="icon-btn theme-toggle-btn"
@@ -561,25 +484,13 @@
             aria-label="Chuyển chế độ sáng / tối"
             title="Chuyển sang giao diện Sáng"
           >
-            <span class="material-symbols-outlined theme-toggle-icon"
-              >light_mode</span
-            >
+            <span class="material-symbols-outlined theme-toggle-icon">light_mode</span>
           </button>
-          <a
-            class="icon-btn"
-            href="../shop/cart.html"
-            aria-label="Giỏ hàng"
-            title="Giỏ hàng"
-          >
+          <a class="icon-btn" href="../shop/cart.html" aria-label="Giỏ hàng" title="Giỏ hàng">
             <span class="material-symbols-outlined">shopping_bag</span>
             <span class="badge badge-counter" id="cartCount">0</span>
           </a>
-          <a
-            class="avatar"
-            id="avatarBtn"
-            href="../account/profile.html"
-            title="Tài khoản"
-          >
+          <a class="avatar" id="avatarBtn" href="../account/profile.html" title="Tài khoản">
             <span class="material-symbols-outlined">person</span>
           </a>
         </div>
@@ -591,31 +502,20 @@
       <div class="container flex items-center justify-between flex-wrap gap-3">
         <nav class="breadcrumb-nav" aria-label="Đường dẫn trang">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a href="../../index.html">Trang Chủ</a>
-            </li>
-            <li class="breadcrumb-item">
-              <a href="../account/profile.html">Tài Khoản</a>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page">
-              Quản Lý Đơn Mua &amp; Đồng Kiểm
-            </li>
+            <li class="breadcrumb-item"><a href="../../index.html">Trang Chủ</a></li>
+            <li class="breadcrumb-item"><a href="../account/profile.html">Tài Khoản</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Quản Lý Đơn Mua &amp; Đồng Kiểm</li>
           </ol>
         </nav>
         <div class="subnav-info hide-sm">
           <span class="text-success flex items-center gap-1">
-            <span class="material-symbols-outlined icon-sm">verified_user</span>
-            Đồng kiểm 100% cùng bưu tá
+            <span class="material-symbols-outlined icon-sm">verified_user</span> Đồng kiểm 100% cùng bưu tá
           </span>
           <span class="text-secondary flex items-center gap-1">
-            <span class="material-symbols-outlined icon-sm"
-              >published_with_changes</span
-            >
-            Đổi trả 7 ngày miễn phí
+            <span class="material-symbols-outlined icon-sm">published_with_changes</span> Đổi trả 7 ngày miễn phí
           </span>
           <span class="text-warning flex items-center gap-1">
-            <span class="material-symbols-outlined icon-sm">security</span> Bảo
-            hiểm vận chuyển 100%
+            <span class="material-symbols-outlined icon-sm">security</span> Bảo hiểm vận chuyển 100%
           </span>
         </div>
       </div>
@@ -623,20 +523,14 @@
 
     <main class="container order-container-main">
       <!-- 1. TIÊU ĐỀ TRANG & ĐẾM NGƯỢC -->
-      <div
-        class="cart-header-bar flex items-center justify-between flex-wrap gap-4"
-      >
+      <div class="cart-header-bar flex items-center justify-between flex-wrap gap-4">
         <div>
           <h1 class="cart-header-title flex items-center gap-2">
-            <span class="material-symbols-outlined cart-title-icon text-primary"
-              >local_shipping</span
-            >
+            <span class="material-symbols-outlined cart-title-icon text-primary">local_shipping</span>
             Quản Lý Đơn Mua &amp; Trung Tâm Đồng Kiểm
           </h1>
           <p class="cart-header-desc">
-            Theo dõi chi tiết hành trình bưu phẩm theo thời gian thực, xem biên
-            bản kiểm định 15 bước, mở hộp đồng kiểm ngoại quan cùng shipper và
-            kích hoạt bảo hành điện tử chính hãng.
+            Theo dõi chi tiết hành trình bưu phẩm theo thời gian thực, xem biên bản kiểm định 15 bước, mở hộp đồng kiểm ngoại quan cùng shipper và kích hoạt bảo hành điện tử chính hãng.
           </p>
         </div>
         <div class="countdown-pill" id="trialCountdownPill">
@@ -648,13 +542,7 @@
       <!-- 2. KHỐI 4 THỐNG KÊ TỔNG QUAN -->
       <div class="order-stats-grid">
         <div class="order-stat-card">
-          <div
-            class="order-stat-icon-wrap"
-            style="
-              background: rgba(139, 92, 246, 0.15);
-              color: var(--primary-400);
-            "
-          >
+          <div class="order-stat-icon-wrap" style="background: rgba(139, 92, 246, 0.15); color: var(--primary-400);">
             <span class="material-symbols-outlined">receipt_long</span>
           </div>
           <div>
@@ -664,53 +552,32 @@
         </div>
 
         <div class="order-stat-card">
-          <div
-            class="order-stat-icon-wrap"
-            style="background: rgba(59, 130, 246, 0.15); color: #60a5fa"
-          >
+          <div class="order-stat-icon-wrap" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;">
             <span class="material-symbols-outlined">local_shipping</span>
           </div>
           <div>
             <div class="text-xs text-muted">Đang Vận Chuyển</div>
-            <div
-              class="fw-700 text-lg mono text-secondary"
-              id="statDeliveringOrders"
-            >
-              0
-            </div>
+            <div class="fw-700 text-lg mono text-secondary" id="statDeliveringOrders">0</div>
           </div>
         </div>
 
         <div class="order-stat-card">
-          <div
-            class="order-stat-icon-wrap"
-            style="background: rgba(34, 197, 94, 0.15); color: var(--success)"
-          >
+          <div class="order-stat-icon-wrap" style="background: rgba(34, 197, 94, 0.15); color: var(--success);">
             <span class="material-symbols-outlined">verified</span>
           </div>
           <div>
             <div class="text-xs text-muted">Đã Giao Thành Công</div>
-            <div
-              class="fw-700 text-lg mono text-success"
-              id="statCompletedOrders"
-            >
-              0
-            </div>
+            <div class="fw-700 text-lg mono text-success" id="statCompletedOrders">0</div>
           </div>
         </div>
 
         <div class="order-stat-card">
-          <div
-            class="order-stat-icon-wrap"
-            style="background: rgba(245, 158, 11, 0.15); color: var(--warning)"
-          >
+          <div class="order-stat-icon-wrap" style="background: rgba(245, 158, 11, 0.15); color: var(--warning);">
             <span class="material-symbols-outlined">stars</span>
           </div>
           <div>
             <div class="text-xs text-muted">Điểm VIP Tích Lũy</div>
-            <div class="fw-700 text-lg mono text-warning" id="statVipPoints">
-              1,500 đ
-            </div>
+            <div class="fw-700 text-lg mono text-warning" id="statVipPoints">1,500 đ</div>
           </div>
         </div>
       </div>
@@ -718,30 +585,25 @@
       <!-- 3. THANH TABS LỌC TRẠNG THÁI ĐƠN HÀNG (5 TABS CHUẨN E-COMMERCE) -->
       <div class="order-tabs-bar" id="orderTabsBar">
         <button class="order-tab-btn active" data-filter="all" type="button">
-          Tất Cả Đơn
-          <span class="badge badge-secondary" id="tabCountAll">0</span>
+          Tất Cả Đơn <span class="badge badge-secondary" id="tabCountAll">0</span>
         </button>
         <button class="order-tab-btn" data-filter="pending" type="button">
-          Chờ Xử Lý &amp; Đóng Gói
-          <span class="badge badge-secondary" id="tabCountPending">0</span>
+          Chờ Xử Lý &amp; Đóng Gói <span class="badge badge-secondary" id="tabCountPending">0</span>
         </button>
         <button class="order-tab-btn" data-filter="delivering" type="button">
-          Đang Vận Chuyển
-          <span class="badge badge-secondary" id="tabCountDelivering">0</span>
+          Đang Vận Chuyển <span class="badge badge-secondary" id="tabCountDelivering">0</span>
         </button>
         <button class="order-tab-btn" data-filter="completed" type="button">
-          Đã Giao Thành Công
-          <span class="badge badge-secondary" id="tabCountCompleted">0</span>
+          Đã Giao Thành Công <span class="badge badge-secondary" id="tabCountCompleted">0</span>
         </button>
         <button class="order-tab-btn" data-filter="cancelled" type="button">
-          Đã Hủy
-          <span class="badge badge-secondary" id="tabCountCancelled">0</span>
+          Đã Hủy <span class="badge badge-secondary" id="tabCountCancelled">0</span>
         </button>
       </div>
 
       <!-- 4. THANH TÌM KIẾM ĐƠN HÀNG & BỘ SẮP XẾP -->
       <div class="order-search-box">
-        <div class="input-group" style="flex: 1; min-width: 260px">
+        <div class="input-group" style="flex: 1; min-width: 260px;">
           <span class="icon-left material-symbols-outlined">search</span>
           <input
             id="orderSearchInput"
@@ -752,11 +614,7 @@
         </div>
         <div class="flex items-center gap-2">
           <span class="text-xs text-muted hide-sm">Sắp xếp:</span>
-          <select
-            id="orderSortSelect"
-            class="input input-sm"
-            style="width: auto"
-          >
+          <select id="orderSortSelect" class="input input-sm" style="width: auto;">
             <option value="newest">Đơn mới nhất</option>
             <option value="oldest">Đơn cũ nhất</option>
             <option value="price-desc">Giá trị cao nhất</option>
@@ -771,42 +629,19 @@
       </div>
 
       <!-- GIAO DIỆN KHI KHÔNG CÓ ĐƠN HÀNG PHÙ HỢP -->
-      <div id="ordersEmptyState" style="display: none">
+      <div id="ordersEmptyState" style="display: none;">
         <div class="cart-empty-box panel p-8 text-center my-6">
-          <span
-            class="material-symbols-outlined cart-empty-icon"
-            style="
-              font-size: 64px;
-              color: var(--text-faint);
-              margin-bottom: 16px;
-            "
-            >inventory_2</span
-          >
-          <h2
-            style="
-              font-family: var(--font-head);
-              font-size: 1.4rem;
-              margin-bottom: 8px;
-            "
-          >
-            Không tìm thấy đơn hàng nào
-          </h2>
-          <p
-            class="text-muted text-sm mb-4"
-            style="max-width: 480px; margin-inline: auto; line-height: 1.6"
-          >
-            Bạn chưa có đơn hàng nào trong danh mục này hoặc từ khóa tìm kiếm
-            không khớp. Hãy tiếp tục khám phá kho máy công nghệ chất lượng tại
-            HYBRID.STORE!
+          <span class="material-symbols-outlined cart-empty-icon" style="font-size: 64px; color: var(--text-faint); margin-bottom: 16px;">inventory_2</span>
+          <h2 style="font-family: var(--font-head); font-size: 1.4rem; margin-bottom: 8px;">Không tìm thấy đơn hàng nào</h2>
+          <p class="text-muted text-sm mb-4" style="max-width: 480px; margin-inline: auto; line-height: 1.6;">
+            Bạn chưa có đơn hàng nào trong danh mục này hoặc từ khóa tìm kiếm không khớp. Hãy tiếp tục khám phá kho máy công nghệ chất lượng tại HYBRID.STORE!
           </p>
           <div class="flex justify-center gap-3 flex-wrap">
             <a href="../shop/catalog.html" class="btn btn-primary">
-              <span class="material-symbols-outlined icon-sm">storefront</span>
-              Khám Phá Sản Phẩm Ngay
+              <span class="material-symbols-outlined icon-sm">storefront</span> Khám Phá Sản Phẩm Ngay
             </a>
             <a href="../../index.html" class="btn btn-outlined">
-              <span class="material-symbols-outlined icon-sm">home</span> Về
-              Trang Chủ
+              <span class="material-symbols-outlined icon-sm">home</span> Về Trang Chủ
             </a>
           </div>
         </div>
@@ -814,25 +649,12 @@
     </main>
 
     <!-- ===== MODAL 1: THEO DÕI CHI TIẾT ĐƠN HÀNG (FULL ORDER DETAILS & INSPECTION CERTIFICATE) ===== -->
-    <div class="modal-backdrop" id="orderDetailModal" style="display: none">
-      <div
-        class="modal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="orderDetailModalTitle"
-        style="max-width: 780px; max-height: 90vh; overflow-y: auto"
-      >
-        <div
-          class="modal-head flex items-center justify-between pb-3"
-          style="border-bottom: 1px solid var(--border)"
-        >
+    <div class="modal-backdrop" id="orderDetailModal" style="display: none;">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="orderDetailModalTitle" style="max-width: 780px; max-height: 90vh; overflow-y: auto;">
+        <div class="modal-head flex items-center justify-between pb-3" style="border-bottom: 1px solid var(--border);">
           <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-primary"
-              >assignment</span
-            >
-            <h3 class="modal-title text-sm fw-700" id="orderDetailModalTitle">
-              Chi Tiết Đơn Hàng &amp; Biên Bản Đồng Kiểm
-            </h3>
+            <span class="material-symbols-outlined text-primary">assignment</span>
+            <h3 class="modal-title text-sm fw-700" id="orderDetailModalTitle">Chi Tiết Đơn Hàng &amp; Biên Bản Đồng Kiểm</h3>
           </div>
           <button class="icon-btn" type="button" data-close title="Đóng">
             <span class="material-symbols-outlined">close</span>
@@ -841,65 +663,32 @@
         <div class="modal-body py-4" id="orderDetailModalBody">
           <!-- Render động chi tiết đơn hàng -->
         </div>
-        <div
-          class="modal-foot flex justify-between items-center pt-3 flex-wrap gap-2"
-          style="border-top: 1px solid var(--border)"
-        >
+        <div class="modal-foot flex justify-between items-center pt-3 flex-wrap gap-2" style="border-top: 1px solid var(--border);">
           <div class="flex items-center gap-2 flex-wrap">
-            <button
-              class="btn btn-secondary btn-sm"
-              id="btnPrintOrderDetail"
-              type="button"
-            >
-              <span class="material-symbols-outlined icon-xs">print</span> In
-              Chi Tiết Đơn
+            <button class="btn btn-secondary btn-sm" id="btnPrintOrderDetail" type="button">
+              <span class="material-symbols-outlined icon-xs">print</span> In Chi Tiết Đơn
             </button>
-            <button
-              class="btn btn-ghost btn-sm"
-              id="btnDetailOpenInvoice"
-              type="button"
-            >
-              <span class="material-symbols-outlined icon-xs text-secondary"
-                >receipt_long</span
-              >
-              Xem Hóa Đơn VAT
+            <button class="btn btn-ghost btn-sm" id="btnDetailOpenInvoice" type="button">
+              <span class="material-symbols-outlined icon-xs text-secondary">receipt_long</span> Xem Hóa Đơn VAT
             </button>
           </div>
           <div class="flex items-center gap-2 flex-wrap">
-            <button
-              class="btn btn-primary btn-sm"
-              id="btnDetailTrackShipper"
-              type="button"
-            >
-              <span class="material-symbols-outlined icon-xs">route</span> Theo
-              Dõi Vận Đơn
+            <button class="btn btn-primary btn-sm" id="btnDetailTrackShipper" type="button">
+              <span class="material-symbols-outlined icon-xs">route</span> Theo Dõi Vận Đơn
             </button>
-            <button class="btn btn-secondary btn-sm" type="button" data-close>
-              Đóng
-            </button>
+            <button class="btn btn-secondary btn-sm" type="button" data-close>Đóng</button>
           </div>
         </div>
       </div>
     </div>
 
     <!-- ===== MODAL 2: CHI TIẾT HÀNH TRÌNH VẬN ĐƠN (DYNAMIC REALTIME TIMELINE) ===== -->
-    <div class="modal-backdrop" id="trackingModal" style="display: none">
-      <div
-        class="modal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="trackModalTitle"
-        style="max-width: 580px"
-      >
-        <div
-          class="modal-head flex items-center justify-between pb-3"
-          style="border-bottom: 1px solid var(--border)"
-        >
+    <div class="modal-backdrop" id="trackingModal" style="display: none;">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="trackModalTitle" style="max-width: 580px;">
+        <div class="modal-head flex items-center justify-between pb-3" style="border-bottom: 1px solid var(--border);">
           <div class="flex items-center gap-2">
             <span class="material-symbols-outlined text-primary">route</span>
-            <h3 class="modal-title text-sm fw-700" id="trackModalTitle">
-              Chi Tiết Hành Trình Vận Chuyển
-            </h3>
+            <h3 class="modal-title text-sm fw-700" id="trackModalTitle">Chi Tiết Hành Trình Vận Chuyển</h3>
           </div>
           <button class="icon-btn" type="button" data-close title="Đóng">
             <span class="material-symbols-outlined">close</span>
@@ -907,133 +696,58 @@
         </div>
         <div class="modal-body py-4">
           <!-- BẢNG TỔNG QUAN VẬN ĐƠN -->
-          <div
-            class="panel p-3 mb-4"
-            style="
-              background: var(--bg-surface);
-              border: 1px solid var(--border);
-              border-radius: var(--radius-md);
-            "
-          >
-            <div
-              class="flex justify-between items-center text-xs flex-wrap gap-2"
-            >
+          <div class="panel p-3 mb-4" style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-md);">
+            <div class="flex justify-between items-center text-xs flex-wrap gap-2">
               <div class="flex items-center gap-2">
                 <span>Mã Vận Đơn:</span>
-                <strong class="mono text-secondary" id="trackCodeText"
-                  >VNPOST-HN-884920</strong
-                >
-                <button
-                  class="btn-copy-code"
-                  id="btnCopyTrackCode"
-                  title="Sao chép mã vận đơn"
-                  type="button"
-                >
-                  <span class="material-symbols-outlined icon-xs"
-                    >content_copy</span
-                  >
+                <strong class="mono text-secondary" id="trackCodeText">VNPOST-HN-884920</strong>
+                <button class="btn-copy-code" id="btnCopyTrackCode" title="Sao chép mã vận đơn" type="button">
+                  <span class="material-symbols-outlined icon-xs">content_copy</span>
                 </button>
               </div>
-              <span class="badge badge-success" id="trackMethodBadge"
-                >Giao Hỏa Tốc 2 Giờ</span
-              >
+              <span class="badge badge-success" id="trackMethodBadge">Giao Hỏa Tốc 2 Giờ</span>
             </div>
-            <div
-              class="text-xs text-muted mt-2 flex justify-between items-center flex-wrap gap-2"
-            >
-              <div>
-                Đơn vị vận chuyển:
-                <strong class="text-white" id="trackCarrierText"
-                  >VNPost Hỏa Tốc</strong
-                >
-              </div>
-              <div>
-                Dự kiến phát:
-                <strong class="text-secondary" id="trackEstimatedText"
-                  >Hôm nay trước 17:30</strong
-                >
-              </div>
+            <div class="text-xs text-muted mt-2 flex justify-between items-center flex-wrap gap-2">
+              <div>Đơn vị vận chuyển: <strong class="text-white" id="trackCarrierText">VNPost Hỏa Tốc</strong></div>
+              <div>Dự kiến phát: <strong class="text-secondary" id="trackEstimatedText">Hôm nay trước 17:30</strong></div>
             </div>
           </div>
 
           <!-- LỘ TRÌNH DYNAMIC CHECKPOINTS -->
-          <div
-            class="tracking-timeline-box"
-            id="trackingTimelineContent"
-            style="padding-left: 6px"
-          >
+          <div class="tracking-timeline-box" id="trackingTimelineContent" style="padding-left: 6px;">
             <!-- Render động bằng JS theo từng trạng thái đơn hàng -->
           </div>
 
           <!-- KHỐI LIÊN HỆ BƯU TÁ TRONG MODAL -->
-          <div
-            class="panel p-3 mt-3 flex items-center justify-between gap-3"
-            id="modalShipperBox"
-            style="
-              background: rgba(139, 92, 246, 0.08);
-              border: 1px solid rgba(139, 92, 246, 0.25);
-              border-radius: var(--radius-md);
-            "
-          >
+          <div class="panel p-3 mt-3 flex items-center justify-between gap-3" id="modalShipperBox" style="background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.25); border-radius: var(--radius-md);">
             <div class="flex items-center gap-3">
               <div class="shipper-avatar">
                 <span class="material-symbols-outlined">delivery_dining</span>
               </div>
               <div>
-                <div class="text-xs fw-700 text-white" id="modalShipperName">
-                  Bưu tá: Nguyễn Văn Hùng
-                </div>
-                <div class="text-xs text-muted" id="modalShipperPhone">
-                  Hotline: 0981 234 567 (Đội Hỏa Tốc)
-                </div>
+                <div class="text-xs fw-700 text-white" id="modalShipperName">Bưu tá: Nguyễn Văn Hùng</div>
+                <div class="text-xs text-muted" id="modalShipperPhone">Hotline: 0981 234 567 (Đội Hỏa Tốc)</div>
               </div>
             </div>
-            <button
-              class="btn btn-secondary btn-sm"
-              id="btnCallShipperModal"
-              type="button"
-            >
-              <span class="material-symbols-outlined icon-xs text-success"
-                >call</span
-              >
-              Gọi Bưu Tá
+            <button class="btn btn-secondary btn-sm" id="btnCallShipperModal" type="button">
+              <span class="material-symbols-outlined icon-xs text-success">call</span> Gọi Bưu Tá
             </button>
           </div>
         </div>
-        <div
-          class="modal-foot flex justify-between items-center pt-3"
-          style="border-top: 1px solid var(--border)"
-        >
+        <div class="modal-foot flex justify-between items-center pt-3" style="border-top: 1px solid var(--border);">
           <span class="text-xs text-muted flex items-center gap-1">
-            <span class="material-symbols-outlined icon-xs text-success"
-              >shield</span
-            >
-            Bảo hiểm bưu gửi 100%
+            <span class="material-symbols-outlined icon-xs text-success">shield</span> Bảo hiểm bưu gửi 100%
           </span>
-          <button class="btn btn-secondary btn-sm" type="button" data-close>
-            Đóng
-          </button>
+          <button class="btn btn-secondary btn-sm" type="button" data-close>Đóng</button>
         </div>
       </div>
     </div>
 
     <!-- ===== MODAL 3: ĐÁNH GIÁ & XÁC NHẬN HÀI LÒNG (+500 ĐIỂM VIP) ===== -->
-    <div class="modal-backdrop" id="reviewModal" style="display: none">
-      <div
-        class="modal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="reviewModalTitle"
-        style="max-width: 520px"
-      >
-        <div
-          class="modal-head flex items-center justify-between pb-3"
-          style="border-bottom: 1px solid var(--border)"
-        >
-          <h3
-            class="modal-title flex items-center gap-2 text-sm fw-700"
-            id="reviewModalTitle"
-          >
+    <div class="modal-backdrop" id="reviewModal" style="display: none;">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="reviewModalTitle" style="max-width: 520px;">
+        <div class="modal-head flex items-center justify-between pb-3" style="border-bottom: 1px solid var(--border);">
+          <h3 class="modal-title flex items-center gap-2 text-sm fw-700" id="reviewModalTitle">
             <span class="material-symbols-outlined text-success">verified</span>
             Xác Nhận Hài Lòng &amp; Nhận +500 Điểm VIP
           </h3>
@@ -1042,99 +756,41 @@
           </button>
         </div>
         <div class="modal-body py-4">
-          <div
-            class="panel p-3 mb-3"
-            style="
-              background: rgba(34, 197, 94, 0.1);
-              border: 1px solid rgba(34, 197, 94, 0.3);
-            "
-          >
+          <div class="panel p-3 mb-3" style="background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3);">
             <div class="flex items-center gap-2 text-xs text-success fw-600">
-              <span class="material-symbols-outlined icon-xs"
-                >check_circle</span
-              >
+              <span class="material-symbols-outlined icon-xs">check_circle</span>
               Đồng kiểm ngoại quan thành công cùng bưu tá!
             </div>
             <p class="text-xs text-muted mt-1">
-              Bạn đã mở hộp kiểm tra đúng model, ngoại quan máy không trầy xước
-              và đã bật nguồn hoạt động bình thường trước khi ký nhận.
+              Bạn đã mở hộp kiểm tra đúng model, ngoại quan máy không trầy xước và đã bật nguồn hoạt động bình thường trước khi ký nhận.
             </p>
           </div>
 
-          <p class="text-xs text-muted mb-2">
-            Đánh giá mức độ hài lòng về thiết bị và dịch vụ giao nhận:
-          </p>
+          <p class="text-xs text-muted mb-2">Đánh giá mức độ hài lòng về thiết bị và dịch vụ giao nhận:</p>
 
           <div class="text-center my-3">
-            <div
-              class="flex justify-center gap-2"
-              id="starRatingGroup"
-              style="cursor: pointer"
-            >
-              <span
-                class="material-symbols-outlined text-warning"
-                data-rating="1"
-                style="font-size: 32px"
-                >star</span
-              >
-              <span
-                class="material-symbols-outlined text-warning"
-                data-rating="2"
-                style="font-size: 32px"
-                >star</span
-              >
-              <span
-                class="material-symbols-outlined text-warning"
-                data-rating="3"
-                style="font-size: 32px"
-                >star</span
-              >
-              <span
-                class="material-symbols-outlined text-warning"
-                data-rating="4"
-                style="font-size: 32px"
-                >star</span
-              >
-              <span
-                class="material-symbols-outlined text-warning"
-                data-rating="5"
-                style="font-size: 32px"
-                >star</span
-              >
+            <div class="flex justify-center gap-2" id="starRatingGroup" style="cursor: pointer;">
+              <span class="material-symbols-outlined text-warning" data-rating="1" style="font-size: 32px;">star</span>
+              <span class="material-symbols-outlined text-warning" data-rating="2" style="font-size: 32px;">star</span>
+              <span class="material-symbols-outlined text-warning" data-rating="3" style="font-size: 32px;">star</span>
+              <span class="material-symbols-outlined text-warning" data-rating="4" style="font-size: 32px;">star</span>
+              <span class="material-symbols-outlined text-warning" data-rating="5" style="font-size: 32px;">star</span>
             </div>
-            <strong class="text-xs text-secondary mt-1 block" id="starLabel"
-              >5/5 — Rất Hài Lòng Về Máy &amp; Đồng Kiểm</strong
-            >
+            <strong class="text-xs text-secondary mt-1 block" id="starLabel">5/5 — Rất Hài Lòng Về Máy &amp; Đồng Kiểm</strong>
           </div>
 
           <div class="form-group mb-3">
-            <label class="form-label text-xs"
-              >Điểm nổi bật bạn ấn tượng nhất:</label
-            >
+            <label class="form-label text-xs">Điểm nổi bật bạn ấn tượng nhất:</label>
             <div class="flex flex-wrap gap-2 text-xs">
-              <label class="badge badge-secondary" style="cursor: pointer"
-                ><input type="checkbox" checked style="margin-right: 4px" /> Máy
-                đúng chuẩn mô tả</label
-              >
-              <label class="badge badge-secondary" style="cursor: pointer"
-                ><input type="checkbox" checked style="margin-right: 4px" /> Tem
-                niêm phong nguyên vẹn</label
-              >
-              <label class="badge badge-secondary" style="cursor: pointer"
-                ><input type="checkbox" checked style="margin-right: 4px" />
-                Shipper nhiệt tình đợi đồng kiểm</label
-              >
-              <label class="badge badge-secondary" style="cursor: pointer"
-                ><input type="checkbox" style="margin-right: 4px" /> Đóng gói
-                chống sốc 3 lớp</label
-              >
+              <label class="badge badge-secondary" style="cursor: pointer;"><input type="checkbox" checked style="margin-right: 4px;" /> Máy đúng chuẩn mô tả</label>
+              <label class="badge badge-secondary" style="cursor: pointer;"><input type="checkbox" checked style="margin-right: 4px;" /> Tem niêm phong nguyên vẹn</label>
+              <label class="badge badge-secondary" style="cursor: pointer;"><input type="checkbox" checked style="margin-right: 4px;" /> Shipper nhiệt tình đợi đồng kiểm</label>
+              <label class="badge badge-secondary" style="cursor: pointer;"><input type="checkbox" style="margin-right: 4px;" /> Đóng gói chống sốc 3 lớp</label>
             </div>
           </div>
 
           <div class="form-group mb-2">
-            <label class="form-label text-xs" for="reviewComment"
-              >Cảm nhận chi tiết của bạn (Tùy chọn):</label
-            >
+            <label class="form-label text-xs" for="reviewComment">Cảm nhận chi tiết của bạn (Tùy chọn):</label>
             <textarea
               class="textarea"
               id="reviewComment"
@@ -1143,42 +799,20 @@
             ></textarea>
           </div>
         </div>
-        <div
-          class="modal-foot flex justify-end gap-2 pt-3"
-          style="border-top: 1px solid var(--border)"
-        >
-          <button class="btn btn-secondary btn-sm" type="button" data-close>
-            Đóng
-          </button>
-          <button
-            class="btn btn-primary btn-sm"
-            id="btnSubmitReview"
-            type="button"
-          >
-            <span class="material-symbols-outlined icon-xs">stars</span> Gửi
-            Đánh Giá &amp; Tích +500 Điểm VIP
+        <div class="modal-foot flex justify-end gap-2 pt-3" style="border-top: 1px solid var(--border);">
+          <button class="btn btn-secondary btn-sm" type="button" data-close>Đóng</button>
+          <button class="btn btn-primary btn-sm" id="btnSubmitReview" type="button">
+            <span class="material-symbols-outlined icon-xs">stars</span> Gửi Đánh Giá &amp; Tích +500 Điểm VIP
           </button>
         </div>
       </div>
     </div>
 
     <!-- ===== MODAL 4: HỦY ĐƠN HÀNG (REALISTIC CANCELLATION FLOW) ===== -->
-    <div class="modal-backdrop" id="cancelModal" style="display: none">
-      <div
-        class="modal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="cancelModalTitle"
-        style="max-width: 480px"
-      >
-        <div
-          class="modal-head flex items-center justify-between pb-3"
-          style="border-bottom: 1px solid var(--border)"
-        >
-          <h3
-            class="modal-title flex items-center gap-2 text-sm fw-700 text-danger"
-            id="cancelModalTitle"
-          >
+    <div class="modal-backdrop" id="cancelModal" style="display: none;">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="cancelModalTitle" style="max-width: 480px;">
+        <div class="modal-head flex items-center justify-between pb-3" style="border-bottom: 1px solid var(--border);">
+          <h3 class="modal-title flex items-center gap-2 text-sm fw-700 text-danger" id="cancelModalTitle">
             <span class="material-symbols-outlined">cancel</span>
             Xác Nhận Hủy Đơn Hàng
           </h3>
@@ -1188,134 +822,42 @@
         </div>
         <div class="modal-body py-4">
           <p class="text-xs text-muted mb-3">
-            Vui lòng chọn lý do hủy đơn hàng để giúp HYBRID.STORE cải thiện chất
-            lượng phục vụ:
+            Vui lòng chọn lý do hủy đơn hàng để giúp HYBRID.STORE cải thiện chất lượng phục vụ:
           </p>
 
           <div class="flex flex-col gap-2 mb-4" id="cancelReasonOptions">
-            <label
-              class="panel p-3 flex items-center gap-3"
-              style="
-                cursor: pointer;
-                background: var(--bg-surface);
-                border: 1px solid var(--border);
-              "
-            >
-              <input
-                type="radio"
-                name="cancelReason"
-                value="Tôi muốn thay đổi địa chỉ hoặc số điện thoại nhận hàng"
-                checked
-              />
-              <span class="text-xs"
-                >Tôi muốn thay đổi địa chỉ hoặc số điện thoại nhận hàng</span
-              >
+            <label class="panel p-3 flex items-center gap-3" style="cursor: pointer; background: var(--bg-surface); border: 1px solid var(--border);">
+              <input type="radio" name="cancelReason" value="Tôi muốn thay đổi địa chỉ hoặc số điện thoại nhận hàng" checked />
+              <span class="text-xs">Tôi muốn thay đổi địa chỉ hoặc số điện thoại nhận hàng</span>
             </label>
-            <label
-              class="panel p-3 flex items-center gap-3"
-              style="
-                cursor: pointer;
-                background: var(--bg-surface);
-                border: 1px solid var(--border);
-              "
-            >
-              <input
-                type="radio"
-                name="cancelReason"
-                value="Tôi muốn đổi sang model, màu sắc hoặc dung lượng khác"
-              />
-              <span class="text-xs"
-                >Tôi muốn đổi sang model, màu sắc hoặc dung lượng khác</span
-              >
+            <label class="panel p-3 flex items-center gap-3" style="cursor: pointer; background: var(--bg-surface); border: 1px solid var(--border);">
+              <input type="radio" name="cancelReason" value="Tôi muốn đổi sang model, màu sắc hoặc dung lượng khác" />
+              <span class="text-xs">Tôi muốn đổi sang model, màu sắc hoặc dung lượng khác</span>
             </label>
-            <label
-              class="panel p-3 flex items-center gap-3"
-              style="
-                cursor: pointer;
-                background: var(--bg-surface);
-                border: 1px solid var(--border);
-              "
-            >
-              <input
-                type="radio"
-                name="cancelReason"
-                value="Thời gian giao hàng dự kiến không phù hợp với lịch trình của tôi"
-              />
-              <span class="text-xs"
-                >Thời gian giao hàng dự kiến không phù hợp với lịch trình</span
-              >
+            <label class="panel p-3 flex items-center gap-3" style="cursor: pointer; background: var(--bg-surface); border: 1px solid var(--border);">
+              <input type="radio" name="cancelReason" value="Thời gian giao hàng dự kiến không phù hợp với lịch trình của tôi" />
+              <span class="text-xs">Thời gian giao hàng dự kiến không phù hợp với lịch trình</span>
             </label>
-            <label
-              class="panel p-3 flex items-center gap-3"
-              style="
-                cursor: pointer;
-                background: var(--bg-surface);
-                border: 1px solid var(--border);
-              "
-            >
-              <input
-                type="radio"
-                name="cancelReason"
-                value="Tôi tìm thấy sản phẩm giá ưu đãi hơn ở nơi khác"
-              />
-              <span class="text-xs"
-                >Tôi tìm thấy sản phẩm giá ưu đãi hơn ở nơi khác</span
-              >
+            <label class="panel p-3 flex items-center gap-3" style="cursor: pointer; background: var(--bg-surface); border: 1px solid var(--border);">
+              <input type="radio" name="cancelReason" value="Tôi tìm thấy sản phẩm giá ưu đãi hơn ở nơi khác" />
+              <span class="text-xs">Tôi tìm thấy sản phẩm giá ưu đãi hơn ở nơi khác</span>
             </label>
-            <label
-              class="panel p-3 flex items-center gap-3"
-              style="
-                cursor: pointer;
-                background: var(--bg-surface);
-                border: 1px solid var(--border);
-              "
-            >
-              <input
-                type="radio"
-                name="cancelReason"
-                value="Lý do cá nhân / Chưa có nhu cầu nhận máy lúc này"
-              />
-              <span class="text-xs"
-                >Lý do cá nhân / Chưa có nhu cầu nhận máy lúc này</span
-              >
+            <label class="panel p-3 flex items-center gap-3" style="cursor: pointer; background: var(--bg-surface); border: 1px solid var(--border);">
+              <input type="radio" name="cancelReason" value="Lý do cá nhân / Chưa có nhu cầu nhận máy lúc này" />
+              <span class="text-xs">Lý do cá nhân / Chưa có nhu cầu nhận máy lúc này</span>
             </label>
           </div>
 
-          <div
-            class="panel p-3 text-xs text-warning"
-            style="
-              background: rgba(245, 158, 11, 0.08);
-              border: 1px solid rgba(245, 158, 11, 0.25);
-            "
-          >
+          <div class="panel p-3 text-xs text-warning" style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.25);">
             <div class="fw-700 flex items-center gap-1 mb-1">
-              <span class="material-symbols-outlined icon-xs">info</span> Lưu ý
-              khi hủy đơn:
+              <span class="material-symbols-outlined icon-xs">info</span> Lưu ý khi hủy đơn:
             </div>
-            <div>
-              Mã giảm giá hoặc voucher đã áp dụng sẽ được hoàn trả tự động vào
-              ví ưu đãi của bạn. Đơn thanh toán chuyển khoản trước sẽ được hoàn
-              tiền qua Napas 24/7 trong 1-3 ngày làm việc.
-            </div>
+            <div>Mã giảm giá hoặc voucher đã áp dụng sẽ được hoàn trả tự động vào ví ưu đãi của bạn. Đơn thanh toán chuyển khoản trước sẽ được hoàn tiền qua Napas 24/7 trong 1-3 ngày làm việc.</div>
           </div>
         </div>
-        <div
-          class="modal-foot flex justify-end gap-2 pt-3"
-          style="border-top: 1px solid var(--border)"
-        >
-          <button class="btn btn-secondary btn-sm" type="button" data-close>
-            Giữ Lại Đơn
-          </button>
-          <button
-            class="btn btn-primary btn-sm btn-danger-action"
-            id="btnConfirmCancelOrder"
-            type="button"
-            style="
-              background: var(--danger);
-              border-color: var(--danger);
-              color: #fff;
-            "
-          >
+        <div class="modal-foot flex justify-end gap-2 pt-3" style="border-top: 1px solid var(--border);">
+          <button class="btn btn-secondary btn-sm" type="button" data-close>Giữ Lại Đơn</button>
+          <button class="btn btn-primary btn-sm btn-danger-action" id="btnConfirmCancelOrder" type="button" style="background: var(--danger); border-color: var(--danger); color: #fff;">
             Xác Nhận Hủy Đơn
           </button>
         </div>
@@ -1323,25 +865,11 @@
     </div>
 
     <!-- ===== MODAL 5: HÓA ĐƠN ĐIỆN TỬ VAT (PREVIEW & IN HÓA ĐƠN) ===== -->
-    <div class="modal-backdrop" id="invoiceModal" style="display: none">
-      <div
-        class="modal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="invoiceModalTitle"
-        style="max-width: 680px; max-height: 90vh; overflow-y: auto"
-      >
-        <div
-          class="modal-head flex items-center justify-between pb-3"
-          style="border-bottom: 1px solid var(--border)"
-        >
-          <h3
-            class="modal-title flex items-center gap-2 text-sm fw-700"
-            id="invoiceModalTitle"
-          >
-            <span class="material-symbols-outlined text-primary"
-              >receipt_long</span
-            >
+    <div class="modal-backdrop" id="invoiceModal" style="display: none;">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="invoiceModalTitle" style="max-width: 680px; max-height: 90vh; overflow-y: auto;">
+        <div class="modal-head flex items-center justify-between pb-3" style="border-bottom: 1px solid var(--border);">
+          <h3 class="modal-title flex items-center gap-2 text-sm fw-700" id="invoiceModalTitle">
+            <span class="material-symbols-outlined text-primary">receipt_long</span>
             Hóa Đơn Giá Trị Gia Tăng Điện Tử (VAT e-Invoice)
           </h3>
           <button class="icon-btn" type="button" data-close title="Đóng">
@@ -1350,57 +878,12 @@
         </div>
         <div class="modal-body py-4">
           <div class="vat-invoice-sheet" id="vatInvoicePrintArea">
-            <div
-              style="
-                text-align: center;
-                border-bottom: 2px solid #e5e7eb;
-                padding-bottom: 12px;
-                margin-bottom: 14px;
-              "
-            >
-              <div
-                style="
-                  font-size: 11px;
-                  text-transform: uppercase;
-                  letter-spacing: 1px;
-                  color: #4b5563;
-                "
-              >
-                CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
-              </div>
-              <div
-                style="
-                  font-size: 10px;
-                  font-style: italic;
-                  color: #6b7280;
-                  margin-bottom: 8px;
-                "
-              >
-                Độc lập - Tự do - Hạnh phúc
-              </div>
-              <h2
-                style="
-                  font-size: 18px;
-                  font-weight: 800;
-                  color: #111827;
-                  margin: 0;
-                "
-              >
-                HÓA ĐƠN GIÁ TRỊ GIA TĂNG (VAT)
-              </h2>
-              <div style="font-size: 11px; color: #6b7280">
-                (Bản thể hiện của hóa đơn điện tử hợp lệ)
-              </div>
-              <div
-                style="
-                  display: flex;
-                  justify-content: center;
-                  gap: 16px;
-                  font-size: 11px;
-                  margin-top: 6px;
-                  color: #374151;
-                "
-              >
+            <div style="text-align: center; border-bottom: 2px solid #e5e7eb; padding-bottom: 12px; margin-bottom: 14px;">
+              <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #4b5563;">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
+              <div style="font-size: 10px; font-style: italic; color: #6b7280; margin-bottom: 8px;">Độc lập - Tự do - Hạnh phúc</div>
+              <h2 style="font-size: 18px; font-weight: 800; color: #111827; margin: 0;">HÓA ĐƠN GIÁ TRỊ GIA TĂNG (VAT)</h2>
+              <div style="font-size: 11px; color: #6b7280;">(Bản thể hiện của hóa đơn điện tử hợp lệ)</div>
+              <div style="display: flex; justify-content: center; gap: 16px; font-size: 11px; margin-top: 6px; color: #374151;">
                 <span>Ký hiệu: <strong>HB/26E</strong></span>
                 <span>Mẫu số: <strong>01GTKT0/001</strong></span>
                 <span>Số HĐ: <strong id="invNumber">0008492</strong></span>
@@ -1409,61 +892,20 @@
             </div>
 
             <!-- THÔNG TIN BÊN BÁN & BÊN MUA -->
-            <div
-              style="
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
-                font-size: 11px;
-                margin-bottom: 12px;
-              "
-            >
-              <div
-                style="
-                  background: #f9fafb;
-                  padding: 10px;
-                  border-radius: 6px;
-                  border: 1px solid #e5e7eb;
-                "
-              >
-                <strong
-                  style="color: #4f46e5; display: block; margin-bottom: 4px"
-                  >ĐƠN VỊ BÁN HÀNG:</strong
-                >
-                <div>
-                  <strong>CÔNG TY CỔ PHẦN CÔNG NGHỆ HYBRID.STORE</strong>
-                </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 11px; margin-bottom: 12px;">
+              <div style="background: #f9fafb; padding: 10px; border-radius: 6px; border: 1px solid #e5e7eb;">
+                <strong style="color: #4f46e5; display: block; margin-bottom: 4px;">ĐƠN VỊ BÁN HÀNG:</strong>
+                <div><strong>CÔNG TY CỔ PHẦN CÔNG NGHỆ HYBRID.STORE</strong></div>
                 <div>Mã số thuế: <strong>0109887766</strong></div>
-                <div>
-                  Địa chỉ: Tầng 1, Tòa Keangnam Landmark 72, Nam Từ Liêm, Hà Nội
-                </div>
+                <div>Địa chỉ: Tầng 1, Tòa Keangnam Landmark 72, Nam Từ Liêm, Hà Nội</div>
                 <div>Hotline: 1900 8899 • Email: billing@hybridstore.vn</div>
               </div>
-              <div
-                style="
-                  background: #f9fafb;
-                  padding: 10px;
-                  border-radius: 6px;
-                  border: 1px solid #e5e7eb;
-                "
-              >
-                <strong
-                  style="color: #4f46e5; display: block; margin-bottom: 4px"
-                  >KHÁCH HÀNG (NGƯỜI MUA):</strong
-                >
+              <div style="background: #f9fafb; padding: 10px; border-radius: 6px; border: 1px solid #e5e7eb;">
+                <strong style="color: #4f46e5; display: block; margin-bottom: 4px;">KHÁCH HÀNG (NGƯỜI MUA):</strong>
                 <div>Họ tên: <strong id="invBuyerName">Khách Hàng</strong></div>
-                <div>
-                  Số điện thoại:
-                  <strong id="invBuyerPhone">0912 345 678</strong>
-                </div>
-                <div>
-                  Địa chỉ nhận:
-                  <span id="invBuyerAddress">Keangnam Landmark 72</span>
-                </div>
-                <div>
-                  Hình thức thanh toán:
-                  <strong id="invPaymentMethod">Napas 24/7 / COD</strong>
-                </div>
+                <div>Số điện thoại: <strong id="invBuyerPhone">0912 345 678</strong></div>
+                <div>Địa chỉ nhận: <span id="invBuyerAddress">Keangnam Landmark 72</span></div>
+                <div>Hình thức thanh toán: <strong id="invPaymentMethod">Napas 24/7 / COD</strong></div>
               </div>
             </div>
 
@@ -1471,14 +913,12 @@
             <table>
               <thead>
                 <tr>
-                  <th style="width: 36px; text-align: center">STT</th>
+                  <th style="width: 36px; text-align: center;">STT</th>
                   <th>Tên Hàng Hóa, Dịch Vụ</th>
-                  <th style="width: 50px; text-align: center">ĐVT</th>
-                  <th style="width: 50px; text-align: center">SL</th>
-                  <th style="width: 100px; text-align: right">Đơn Giá</th>
-                  <th style="width: 110px; text-align: right">
-                    Thành Tiền (VND)
-                  </th>
+                  <th style="width: 50px; text-align: center;">ĐVT</th>
+                  <th style="width: 50px; text-align: center;">SL</th>
+                  <th style="width: 100px; text-align: right;">Đơn Giá</th>
+                  <th style="width: 110px; text-align: right;">Thành Tiền (VND)</th>
                 </tr>
               </thead>
               <tbody id="invItemsTbody">
@@ -1486,110 +926,45 @@
               </tbody>
               <tfoot>
                 <tr>
-                  <td colspan="5" style="text-align: right; font-weight: 600">
-                    Tổng tiền hàng (chưa VAT):
-                  </td>
-                  <td
-                    style="text-align: right; font-weight: 600"
-                    id="invSubtotal"
-                  >
-                    0₫
-                  </td>
+                  <td colspan="5" style="text-align: right; font-weight: 600;">Tổng tiền hàng (chưa VAT):</td>
+                  <td style="text-align: right; font-weight: 600;" id="invSubtotal">0₫</td>
                 </tr>
                 <tr>
-                  <td colspan="5" style="text-align: right; font-weight: 600">
-                    Thuế GTGT (VAT 8% đã bao gồm):
-                  </td>
-                  <td style="text-align: right; font-weight: 600" id="invTax">
-                    0₫
-                  </td>
+                  <td colspan="5" style="text-align: right; font-weight: 600;">Thuế GTGT (VAT 8% đã bao gồm):</td>
+                  <td style="text-align: right; font-weight: 600;" id="invTax">0₫</td>
                 </tr>
                 <tr>
-                  <td colspan="5" style="text-align: right; font-weight: 600">
-                    Phí vận chuyển bưu điện:
-                  </td>
-                  <td
-                    style="text-align: right; font-weight: 600"
-                    id="invShipping"
-                  >
-                    0₫
-                  </td>
+                  <td colspan="5" style="text-align: right; font-weight: 600;">Phí vận chuyển bưu điện:</td>
+                  <td style="text-align: right; font-weight: 600;" id="invShipping">0₫</td>
                 </tr>
                 <tr>
-                  <td colspan="5" style="text-align: right; font-weight: 600">
-                    Voucher khuyến mãi sàn:
-                  </td>
-                  <td
-                    style="text-align: right; font-weight: 600; color: #16a34a"
-                    id="invDiscount"
-                  >
-                    -0₫
-                  </td>
+                  <td colspan="5" style="text-align: right; font-weight: 600;">Voucher khuyến mãi sàn:</td>
+                  <td style="text-align: right; font-weight: 600; color: #16a34a;" id="invDiscount">-0₫</td>
                 </tr>
-                <tr style="background: #f3f4f6">
-                  <td
-                    colspan="5"
-                    style="text-align: right; font-weight: 800; font-size: 13px"
-                  >
-                    TỔNG CỘNG THANH TOÁN:
-                  </td>
-                  <td
-                    style="
-                      text-align: right;
-                      font-weight: 800;
-                      font-size: 13px;
-                      color: #4f46e5;
-                    "
-                    id="invTotal"
-                  >
-                    0₫
-                  </td>
+                <tr style="background: #f3f4f6;">
+                  <td colspan="5" style="text-align: right; font-weight: 800; font-size: 13px;">TỔNG CỘNG THANH TOÁN:</td>
+                  <td style="text-align: right; font-weight: 800; font-size: 13px; color: #4f46e5;" id="invTotal">0₫</td>
                 </tr>
               </tfoot>
             </table>
 
-            <div
-              style="
-                display: flex;
-                justify-content: space-between;
-                align-items: flex-end;
-                margin-top: 14px;
-              "
-            >
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 14px;">
               <div class="vat-stamp">
                 ✔ ĐÃ KÝ ĐIỆN TỬ BỞI HYBRID.STORE JSC<br />
-                <span
-                  style="font-size: 9px; font-weight: normal; color: #6b7280"
-                  id="invSignDate"
-                  >Ngày ký: 08/11/2026</span
-                >
+                <span style="font-size: 9px; font-weight: normal; color: #6b7280;" id="invSignDate">Ngày ký: 08/11/2026</span>
               </div>
-              <div style="text-align: center; font-size: 11px">
-                <div style="font-weight: 700">ĐẠI DIỆN BÊN BÁN HÀNG</div>
-                <div style="color: #6b7280; font-style: italic">
-                  (Ký điện tử bởi Tổng Giám Đốc)
-                </div>
-                <div style="margin-top: 16px; font-weight: 700; color: #4f46e5">
-                  HYBRID.STORE VIỆT NAM
-                </div>
+              <div style="text-align: center; font-size: 11px;">
+                <div style="font-weight: 700;">ĐẠI DIỆN BÊN BÁN HÀNG</div>
+                <div style="color: #6b7280; font-style: italic;">(Ký điện tử bởi Tổng Giám Đốc)</div>
+                <div style="margin-top: 16px; font-weight: 700; color: #4f46e5;">HYBRID.STORE VIỆT NAM</div>
               </div>
             </div>
           </div>
         </div>
-        <div
-          class="modal-foot flex justify-between items-center pt-3"
-          style="border-top: 1px solid var(--border)"
-        >
-          <button class="btn btn-secondary btn-sm" type="button" data-close>
-            Đóng
-          </button>
-          <button
-            class="btn btn-primary btn-sm"
-            id="btnPrintInvoice"
-            type="button"
-          >
-            <span class="material-symbols-outlined icon-xs">print</span> In /
-            Tải Hóa Đơn PDF
+        <div class="modal-foot flex justify-between items-center pt-3" style="border-top: 1px solid var(--border);">
+          <button class="btn btn-secondary btn-sm" type="button" data-close>Đóng</button>
+          <button class="btn btn-primary btn-sm" id="btnPrintInvoice" type="button">
+            <span class="material-symbols-outlined icon-xs">print</span> In / Tải Hóa Đơn PDF
           </button>
         </div>
       </div>
@@ -1606,17 +981,13 @@
     <script src="../../js/mock_data.js"></script>
     <script src="../../js/utils.js"></script>
     <script src="../../js/components.js"></script>
+    <script src="../../js/app.js"></script>
     <script>
       (function () {
         "use strict";
 
         // 1. Kiểm tra đăng nhập nếu có Auth
-        if (
-          typeof Auth !== "undefined" &&
-          !Auth.requireLogin({
-            message: "Vui lòng đăng nhập để xem danh sách đơn mua.",
-          })
-        ) {
+        if (typeof Auth !== "undefined" && !Auth.requireLogin({ message: "Vui lòng đăng nhập để xem danh sách đơn mua." })) {
           return;
         }
 
@@ -1638,24 +1009,18 @@
           statVipPoints: document.getElementById("statVipPoints"),
           // Modal Chi Tiết Đơn Hàng (Order Detail Modal)
           orderDetailModal: document.getElementById("orderDetailModal"),
-          orderDetailModalTitle: document.getElementById(
-            "orderDetailModalTitle",
-          ),
+          orderDetailModalTitle: document.getElementById("orderDetailModalTitle"),
           orderDetailModalBody: document.getElementById("orderDetailModalBody"),
           btnPrintOrderDetail: document.getElementById("btnPrintOrderDetail"),
           btnDetailOpenInvoice: document.getElementById("btnDetailOpenInvoice"),
-          btnDetailTrackShipper: document.getElementById(
-            "btnDetailTrackShipper",
-          ),
+          btnDetailTrackShipper: document.getElementById("btnDetailTrackShipper"),
           // Modal tracking
           trackingModal: document.getElementById("trackingModal"),
           trackCodeText: document.getElementById("trackCodeText"),
           trackCarrierText: document.getElementById("trackCarrierText"),
           trackMethodBadge: document.getElementById("trackMethodBadge"),
           trackEstimatedText: document.getElementById("trackEstimatedText"),
-          trackingTimelineContent: document.getElementById(
-            "trackingTimelineContent",
-          ),
+          trackingTimelineContent: document.getElementById("trackingTimelineContent"),
           btnCopyTrackCode: document.getElementById("btnCopyTrackCode"),
           modalShipperBox: document.getElementById("modalShipperBox"),
           modalShipperName: document.getElementById("modalShipperName"),
@@ -1666,9 +1031,7 @@
           btnSubmitReview: document.getElementById("btnSubmitReview"),
           // Modal cancel
           cancelModal: document.getElementById("cancelModal"),
-          btnConfirmCancelOrder: document.getElementById(
-            "btnConfirmCancelOrder",
-          ),
+          btnConfirmCancelOrder: document.getElementById("btnConfirmCancelOrder"),
           // Modal invoice
           invoiceModal: document.getElementById("invoiceModal"),
           btnPrintInvoice: document.getElementById("btnPrintInvoice"),
@@ -1703,10 +1066,9 @@
             savedOrders = [];
           }
 
-          const mockList =
-            typeof MOCK_ORDERS !== "undefined" && Array.isArray(MOCK_ORDERS)
-              ? MOCK_ORDERS
-              : [];
+          const mockList = (typeof MOCK_ORDERS !== "undefined" && Array.isArray(MOCK_ORDERS))
+            ? MOCK_ORDERS
+            : [];
 
           const map = new Map();
           savedOrders.forEach((o) => {
@@ -1764,14 +1126,7 @@
           }
           try {
             const d = new Date(dateVal);
-            return (
-              d.toLocaleDateString("vi-VN") +
-              " " +
-              d.toLocaleTimeString("vi-VN", {
-                hour: "2-digit",
-                minute: "2-digit",
-              })
-            );
+            return d.toLocaleDateString("vi-VN") + " " + d.toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" });
           } catch (e) {
             return "Hôm nay";
           }
@@ -1784,57 +1139,35 @@
           // Cập nhật số lượng đếm trên các tabs & thống kê
           const countAll = allOrders.length;
           const countPending = allOrders.filter(
-            (o) =>
-              o.status === "pending" ||
-              o.status === "confirmed" ||
-              o.status === "processing",
+            (o) => o.status === "pending" || o.status === "confirmed" || o.status === "processing"
           ).length;
-          const countDelivering = allOrders.filter(
-            (o) => o.status === "delivering",
-          ).length;
-          const countCompleted = allOrders.filter(
-            (o) => o.status === "completed",
-          ).length;
-          const countCancelled = allOrders.filter(
-            (o) => o.status === "cancelled",
-          ).length;
+          const countDelivering = allOrders.filter((o) => o.status === "delivering").length;
+          const countCompleted = allOrders.filter((o) => o.status === "completed").length;
+          const countCancelled = allOrders.filter((o) => o.status === "cancelled").length;
 
           if (dom.tabCountAll) dom.tabCountAll.textContent = countAll;
-          if (dom.tabCountPending)
-            dom.tabCountPending.textContent = countPending;
-          if (dom.tabCountDelivering)
-            dom.tabCountDelivering.textContent = countDelivering;
-          if (dom.tabCountCompleted)
-            dom.tabCountCompleted.textContent = countCompleted;
-          if (dom.tabCountCancelled)
-            dom.tabCountCancelled.textContent = countCancelled;
+          if (dom.tabCountPending) dom.tabCountPending.textContent = countPending;
+          if (dom.tabCountDelivering) dom.tabCountDelivering.textContent = countDelivering;
+          if (dom.tabCountCompleted) dom.tabCountCompleted.textContent = countCompleted;
+          if (dom.tabCountCancelled) dom.tabCountCancelled.textContent = countCancelled;
 
           if (dom.statTotalOrders) dom.statTotalOrders.textContent = countAll;
-          if (dom.statDeliveringOrders)
-            dom.statDeliveringOrders.textContent = countDelivering;
-          if (dom.statCompletedOrders)
-            dom.statCompletedOrders.textContent = countCompleted;
+          if (dom.statDeliveringOrders) dom.statDeliveringOrders.textContent = countDelivering;
+          if (dom.statCompletedOrders) dom.statCompletedOrders.textContent = countCompleted;
 
           // Điểm VIP tích lũy
           let userPoints = 1500;
           try {
             userPoints = Number(localStorage.getItem("hv_user_points")) || 1500;
           } catch (e) {}
-          if (dom.statVipPoints)
-            dom.statVipPoints.textContent =
-              userPoints.toLocaleString("vi-VN") + " đ";
+          if (dom.statVipPoints) dom.statVipPoints.textContent = userPoints.toLocaleString("vi-VN") + " đ";
 
           // Lọc theo Tab
           let filtered = allOrders.filter((o) => {
             if (currentFilter === "pending") {
-              return (
-                o.status === "pending" ||
-                o.status === "confirmed" ||
-                o.status === "processing"
-              );
+              return o.status === "pending" || o.status === "confirmed" || o.status === "processing";
             }
-            if (currentFilter === "delivering")
-              return o.status === "delivering";
+            if (currentFilter === "delivering") return o.status === "delivering";
             if (currentFilter === "completed") return o.status === "completed";
             if (currentFilter === "cancelled") return o.status === "cancelled";
             return true;
@@ -1844,29 +1177,14 @@
           if (searchKeyword) {
             const kw = searchKeyword.toLowerCase();
             filtered = filtered.filter((o) => {
-              const idMatch = (o.id || o.orderCode || "")
-                .toLowerCase()
-                .includes(kw);
-              const trackMatch = (o.trackingCode || "")
-                .toLowerCase()
-                .includes(kw);
+              const idMatch = (o.id || o.orderCode || "").toLowerCase().includes(kw);
+              const trackMatch = (o.trackingCode || "").toLowerCase().includes(kw);
               const carrierMatch = (o.carrier || "").toLowerCase().includes(kw);
-              const recipientMatch = (
-                (o.shippingAddress && o.shippingAddress.fullName) ||
-                ""
-              )
-                .toLowerCase()
-                .includes(kw);
+              const recipientMatch = (o.shippingAddress && o.shippingAddress.fullName || "").toLowerCase().includes(kw);
               const itemsMatch = (o.items || []).some((item) =>
-                (item.name || "").toLowerCase().includes(kw),
+                (item.name || "").toLowerCase().includes(kw)
               );
-              return (
-                idMatch ||
-                trackMatch ||
-                carrierMatch ||
-                recipientMatch ||
-                itemsMatch
-              );
+              return idMatch || trackMatch || carrierMatch || recipientMatch || itemsMatch;
             });
           }
 
@@ -1876,10 +1194,8 @@
             const timeB = new Date(b.createdAt || 0).getTime();
             if (currentSort === "newest") return timeB - timeA;
             if (currentSort === "oldest") return timeA - timeB;
-            if (currentSort === "price-desc")
-              return (b.total || 0) - (a.total || 0);
-            if (currentSort === "price-asc")
-              return (a.total || 0) - (b.total || 0);
+            if (currentSort === "price-desc") return (b.total || 0) - (a.total || 0);
+            if (currentSort === "price-asc") return (a.total || 0) - (b.total || 0);
             return timeB - timeA;
           });
 
@@ -1893,78 +1209,63 @@
           dom.ordersEmptyState.style.display = "none";
 
           // Sinh mã HTML cho từng đơn hàng
-          dom.ordersListContainer.innerHTML = filtered
-            .map((order) => {
-              const orderId = order.id || order.orderCode;
-              const status = order.status || "delivering";
-              const isCompleted = status === "completed";
-              const isDelivering = status === "delivering";
-              const isPending =
-                status === "pending" ||
-                status === "confirmed" ||
-                status === "processing";
-              const isCancelled = status === "cancelled";
+          dom.ordersListContainer.innerHTML = filtered.map((order) => {
+            const orderId = order.id || order.orderCode;
+            const status = order.status || "delivering";
+            const isCompleted = status === "completed";
+            const isDelivering = status === "delivering";
+            const isPending = status === "pending" || status === "confirmed" || status === "processing";
+            const isCancelled = status === "cancelled";
 
-              let stepIndex = order.stepIndex || 1;
-              if (isCompleted) stepIndex = 4;
-              else if (isDelivering) stepIndex = 3;
-              else if (isPending) stepIndex = 2;
+            let stepIndex = order.stepIndex || 1;
+            if (isCompleted) stepIndex = 4;
+            else if (isDelivering) stepIndex = 3;
+            else if (isPending) stepIndex = 2;
 
-              // Badges trạng thái
-              let statusBadgeHtml = "";
-              if (isCompleted) {
-                statusBadgeHtml = `<span class="badge badge-success flex items-center gap-1"><span class="material-symbols-outlined icon-xs">verified</span> ĐÃ GIAO THÀNH CÔNG</span>`;
-              } else if (isDelivering) {
-                statusBadgeHtml = `<span class="badge badge-secondary flex items-center gap-1"><span class="material-symbols-outlined icon-xs">local_shipping</span> ĐANG GIAO HỎA TỐC</span>`;
-              } else if (isCancelled) {
-                statusBadgeHtml = `<span class="badge badge-danger flex items-center gap-1"><span class="material-symbols-outlined icon-xs">cancel</span> ĐÃ HỦY ĐƠN</span>`;
-              } else {
-                statusBadgeHtml = `<span class="badge badge-warning flex items-center gap-1"><span class="material-symbols-outlined icon-xs">hourglass_top</span> ĐANG XỬ LÝ &amp; ĐÓNG GÓI</span>`;
-              }
+            // Badges trạng thái
+            let statusBadgeHtml = "";
+            if (isCompleted) {
+              statusBadgeHtml = `<span class="badge badge-success flex items-center gap-1"><span class="material-symbols-outlined icon-xs">verified</span> ĐÃ GIAO THÀNH CÔNG</span>`;
+            } else if (isDelivering) {
+              statusBadgeHtml = `<span class="badge badge-secondary flex items-center gap-1"><span class="material-symbols-outlined icon-xs">local_shipping</span> ĐANG GIAO HỎA TỐC</span>`;
+            } else if (isCancelled) {
+              statusBadgeHtml = `<span class="badge badge-danger flex items-center gap-1"><span class="material-symbols-outlined icon-xs">cancel</span> ĐÃ HỦY ĐƠN</span>`;
+            } else {
+              statusBadgeHtml = `<span class="badge badge-warning flex items-center gap-1"><span class="material-symbols-outlined icon-xs">hourglass_top</span> ĐANG XỬ LÝ &amp; ĐÓNG GÓI</span>`;
+            }
 
-              // Badge phương thức thanh toán
-              let paymentBadgeHtml = "";
-              const isCod =
-                order.paymentMethod === "COD" ||
-                (order.paymentLabel && order.paymentLabel.includes("COD"));
-              if (isCod) {
-                paymentBadgeHtml = `
+            // Badge phương thức thanh toán
+            let paymentBadgeHtml = "";
+            const isCod = order.paymentMethod === "COD" || (order.paymentLabel && order.paymentLabel.includes("COD"));
+            if (isCod) {
+              paymentBadgeHtml = `
                 <span class="badge badge-warning flex items-center gap-1" title="Khách thanh toán tiền mặt sau khi đồng kiểm cùng bưu tá">
                   <span class="material-symbols-outlined icon-xs">payments</span> COD • Thu tiền khi giao (100% Đồng kiểm)
                 </span>
               `;
-              } else if (order.paymentMethod === "CARD") {
-                paymentBadgeHtml = `
+            } else if (order.paymentMethod === "CARD") {
+              paymentBadgeHtml = `
                 <span class="badge badge-success flex items-center gap-1">
                   <span class="material-symbols-outlined icon-xs">credit_card</span> Đã thanh toán Thẻ Quốc Tế
                 </span>
               `;
-              } else {
-                paymentBadgeHtml = `
+            } else {
+              paymentBadgeHtml = `
                 <span class="badge badge-success flex items-center gap-1">
                   <span class="material-symbols-outlined icon-xs">check_circle</span> Đã thanh toán Napas 24/7
                 </span>
               `;
-              }
+            }
 
-              // Danh sách mặt hàng
-              const itemsHtml = (order.items || [])
-                .map((item) => {
-                  const isUsed = item.type === "c2c";
-                  const rawImg =
-                    item.img ||
-                    item.image ||
-                    "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200";
-                  const imgSrc =
-                    typeof window !== "undefined" && window.resolveAssetUrl
-                      ? window.resolveAssetUrl(rawImg)
-                      : rawImg;
-                  const qty = item.qty || item.quantity || 1;
-                  const detailUrl = isUsed
-                    ? `../shop/product_used.html?id=${item.id}`
-                    : `../shop/product_new.html?id=${item.id}`;
+            // Danh sách mặt hàng
+            const itemsHtml = (order.items || []).map((item) => {
+              const isUsed = item.type === "c2c";
+              const rawImg = item.img || item.image || "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200";
+              const imgSrc = typeof window !== "undefined" && window.resolveAssetUrl ? window.resolveAssetUrl(rawImg) : rawImg;
+              const qty = item.qty || item.quantity || 1;
+              const detailUrl = isUsed ? `../shop/product_used.html?id=${item.id}` : `../shop/product_new.html?id=${item.id}`;
 
-                  return `
+              return `
                 <div class="order-item-row">
                   <a href="${detailUrl}">
                     <img src="${imgSrc}" alt="${item.name}" style="width: 76px; height: 76px; border-radius: 10px; object-fit: cover; border: 1px solid var(--border);" />
@@ -1995,26 +1296,20 @@
                   </div>
                 </div>
               `;
-                })
-                .join("");
+            }).join("");
 
-              // Thông tin địa chỉ & vận chuyển
-              const addr = order.shippingAddress || {};
-              const carrier = order.carrier || "VNPost Hỏa Tốc";
-              const trackingCode =
-                order.trackingCode ||
-                "VNPOST-" + Math.floor(100000 + Math.random() * 900000);
-              const recipientName = addr.fullName || "Khách Hàng";
-              const recipientPhone = addr.phone || "0912 345 678";
-              const fullAddress =
-                addr.fullAddress ||
-                addr.address ||
-                "Tòa Keangnam Landmark 72, Nam Từ Liêm, Hà Nội";
+            // Thông tin địa chỉ & vận chuyển
+            const addr = order.shippingAddress || {};
+            const carrier = order.carrier || "VNPost Hỏa Tốc";
+            const trackingCode = order.trackingCode || ("VNPOST-" + Math.floor(100000 + Math.random() * 900000));
+            const recipientName = addr.fullName || "Khách Hàng";
+            const recipientPhone = addr.phone || "0912 345 678";
+            const fullAddress = addr.fullAddress || addr.address || "Tòa Keangnam Landmark 72, Nam Từ Liêm, Hà Nội";
 
-              // Shipper banner giả lập nếu đơn đang giao
-              let shipperDispatchHtml = "";
-              if (isDelivering) {
-                shipperDispatchHtml = `
+            // Shipper banner giả lập nếu đơn đang giao
+            let shipperDispatchHtml = "";
+            if (isDelivering) {
+              shipperDispatchHtml = `
                 <div class="shipper-dispatch-card">
                   <div class="flex items-center gap-3">
                     <div class="shipper-avatar">
@@ -2040,12 +1335,12 @@
                   </div>
                 </div>
               `;
-              }
+            }
 
-              // Thanh Stepper tiến trình (Nếu không bị hủy)
-              let stepperHtml = "";
-              if (!isCancelled) {
-                stepperHtml = `
+            // Thanh Stepper tiến trình (Nếu không bị hủy)
+            let stepperHtml = "";
+            if (!isCancelled) {
+              stepperHtml = `
                 <div class="order-tracking-bar">
                   <div class="order-track-step ${stepIndex >= 1 ? (stepIndex > 1 ? "done" : "active") : ""}">
                     <div class="order-track-circle">${stepIndex > 1 ? "✓" : "1"}</div>
@@ -2077,8 +1372,8 @@
                   </div>
                 </div>
               `;
-              } else {
-                stepperHtml = `
+            } else {
+              stepperHtml = `
                 <div class="panel p-4 mb-4 flex items-center justify-between gap-3 text-xs" style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: var(--radius-lg);">
                   <div class="flex items-center gap-3 text-danger">
                     <span class="material-symbols-outlined icon-md">cancel</span>
@@ -2090,9 +1385,9 @@
                   <span class="badge badge-outlined">Hoàn tất hủy</span>
                 </div>
               `;
-              }
+            }
 
-              return `
+            return `
               <div class="order-card" data-order-id="${orderId}">
                 <!-- ĐẦU CARD: MÃ ĐƠN, NGÀY ĐẶT & TRẠNG THÁI -->
                 <div class="order-card-header">
@@ -2234,8 +1529,7 @@
                 </div>
               </div>
             `;
-            })
-            .join("");
+          }).join("");
 
           // Gắn sự kiện cho các nút
           bindOrderEvents();
@@ -2320,21 +1614,14 @@
         // 5. Mở Modal Chi Tiết Đơn Hàng (Order Detail Modal)
         function openOrderDetailModal(orderId) {
           const allOrders = getAllOrders();
-          const order = allOrders.find(
-            (o) => o.id === orderId || o.orderCode === orderId,
-          );
+          const order = allOrders.find((o) => (o.id === orderId || o.orderCode === orderId));
           if (!order) return;
 
           activeDetailOrderId = orderId;
           const addr = order.shippingAddress || {};
-          const fullAddr =
-            addr.fullAddress ||
-            addr.address ||
-            "Tòa Keangnam Landmark 72, Hà Nội";
+          const fullAddr = addr.fullAddress || addr.address || "Tòa Keangnam Landmark 72, Hà Nội";
           const carrier = order.carrier || "VNPost Hỏa Tốc";
-          const trackingCode =
-            order.trackingCode ||
-            "VNPOST-" + Math.floor(100000 + Math.random() * 900000);
+          const trackingCode = order.trackingCode || ("VNPOST-" + Math.floor(100000 + Math.random() * 900000));
           const isCompleted = order.status === "completed";
           const isDelivering = order.status === "delivering";
           const isCancelled = order.status === "cancelled";
@@ -2347,11 +1634,7 @@
           } else if (isCancelled) {
             statusTitle = "Đơn Hàng Đã Hủy";
             statusBadgeClass = "badge-danger";
-          } else if (
-            order.status === "pending" ||
-            order.status === "confirmed" ||
-            order.status === "processing"
-          ) {
+          } else if (order.status === "pending" || order.status === "confirmed" || order.status === "processing") {
             statusTitle = "Đang Xử Lý & Kiểm Định Kỹ Thuật";
             statusBadgeClass = "badge-warning";
           }
@@ -2361,21 +1644,14 @@
           }
 
           // Sinh danh sách hàng hóa
-          const itemsTableHtml = (order.items || [])
-            .map((item, idx) => {
-              const isUsed = item.type === "c2c";
-              const rawImg =
-                item.img ||
-                item.image ||
-                "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200";
-              const imgSrc =
-                typeof window !== "undefined" && window.resolveAssetUrl
-                  ? window.resolveAssetUrl(rawImg)
-                  : rawImg;
-              const qty = item.qty || item.quantity || 1;
-              const sub = item.price * qty;
+          const itemsTableHtml = (order.items || []).map((item, idx) => {
+            const isUsed = item.type === "c2c";
+            const rawImg = item.img || item.image || "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200";
+            const imgSrc = typeof window !== "undefined" && window.resolveAssetUrl ? window.resolveAssetUrl(rawImg) : rawImg;
+            const qty = item.qty || item.quantity || 1;
+            const sub = item.price * qty;
 
-              return `
+            return `
               <div class="flex items-center gap-4 py-3" style="border-bottom: 1px solid rgba(255, 255, 255, 0.06);">
                 <img src="${imgSrc}" alt="${item.name}" style="width: 64px; height: 64px; border-radius: 8px; object-fit: cover; border: 1px solid var(--border);" />
                 <div class="flex-1" style="min-width: 0;">
@@ -2394,8 +1670,7 @@
                 </div>
               </div>
             `;
-            })
-            .join("");
+          }).join("");
 
           const bodyHtml = `
             <!-- KHỐI 1: TỔNG QUAN TRẠNG THÁI & MÃ ĐƠN -->
@@ -2498,15 +1773,11 @@
                   <span class="text-muted">Phí bưu điện:</span>
                   <span class="mono text-success">${order.shippingFee ? formatMoney(order.shippingFee) : "Miễn Phí (Freeship)"}</span>
                 </div>
-                ${
-                  order.discount
-                    ? `
+                ${order.discount ? `
                   <div class="flex justify-between items-center mb-1">
                     <span class="text-muted">Voucher giảm giá:</span>
                     <span class="mono text-success">-${formatMoney(order.discount)}</span>
-                  </div>`
-                    : ""
-                }
+                  </div>` : ""}
                 <div class="flex justify-between items-center mb-1">
                   <span class="text-muted">Bảo hiểm vận chuyển:</span>
                   <span class="mono text-success">0₫ (Đài thọ 100%)</span>
@@ -2526,16 +1797,14 @@
           // Cài đặt nút Xem Hóa Đơn VAT và Theo Dõi Bưu Tá trong modal chi tiết
           if (dom.btnDetailOpenInvoice) {
             dom.btnDetailOpenInvoice.onclick = () => {
-              if (dom.orderDetailModal)
-                dom.orderDetailModal.style.display = "none";
+              if (dom.orderDetailModal) dom.orderDetailModal.style.display = "none";
               openInvoiceModal(orderId);
             };
           }
 
           if (dom.btnDetailTrackShipper) {
             dom.btnDetailTrackShipper.onclick = () => {
-              if (dom.orderDetailModal)
-                dom.orderDetailModal.style.display = "none";
+              if (dom.orderDetailModal) dom.orderDetailModal.style.display = "none";
               openTrackingModal(orderId);
             };
           }
@@ -2552,14 +1821,11 @@
         // Sao chép vào clipboard
         function copyToClipboard(text, successMsg) {
           if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard
-              .writeText(text)
-              .then(() => {
-                showToast(successMsg, "success");
-              })
-              .catch(() => {
-                fallbackCopy(text, successMsg);
-              });
+            navigator.clipboard.writeText(text).then(() => {
+              showToast(successMsg, "success");
+            }).catch(() => {
+              fallbackCopy(text, successMsg);
+            });
           } else {
             fallbackCopy(text, successMsg);
           }
@@ -2592,9 +1858,7 @@
 
         // Gọi bưu tá
         function callShipper(phone, name) {
-          const confirmCall = confirm(
-            `Bạn có muốn thực hiện cuộc gọi đến bưu tá ${name} (${phone}) ngay bây giờ không?`,
-          );
+          const confirmCall = confirm(`Bạn có muốn thực hiện cuộc gọi đến bưu tá ${name} (${phone}) ngay bây giờ không?`);
           if (confirmCall) {
             showToast(`Đang kết nối tới bưu tá ${name} (${phone})...`, "info");
             setTimeout(() => {
@@ -2606,50 +1870,32 @@
         // 6. Mở Modal Theo Dõi Vận Đơn (Tạo lộ trình động theo thời gian thực)
         function openTrackingModal(orderId) {
           const allOrders = getAllOrders();
-          const order = allOrders.find(
-            (o) => o.id === orderId || o.orderCode === orderId,
-          );
+          const order = allOrders.find((o) => (o.id === orderId || o.orderCode === orderId));
           if (!order) return;
 
           const carrier = order.carrier || "VNPost Hỏa Tốc";
-          const trackingCode =
-            order.trackingCode ||
-            "VNPOST-" + Math.floor(100000 + Math.random() * 900000);
-          const isExpress =
-            (order.shippingMethod &&
-              order.shippingMethod.includes("Hỏa Tốc")) ||
-            carrier.includes("Hỏa Tốc");
+          const trackingCode = order.trackingCode || ("VNPOST-" + Math.floor(100000 + Math.random() * 900000));
+          const isExpress = (order.shippingMethod && order.shippingMethod.includes("Hỏa Tốc")) || carrier.includes("Hỏa Tốc");
           const isCompleted = order.status === "completed";
           const isCancelled = order.status === "cancelled";
-          const isPending =
-            order.status === "pending" ||
-            order.status === "confirmed" ||
-            order.status === "processing";
+          const isPending = order.status === "pending" || order.status === "confirmed" || order.status === "processing";
 
           if (dom.trackCodeText) dom.trackCodeText.textContent = trackingCode;
           if (dom.trackCarrierText) dom.trackCarrierText.textContent = carrier;
           if (dom.trackMethodBadge) {
-            dom.trackMethodBadge.textContent = isExpress
-              ? "Giao Hỏa Tốc 2 Giờ"
-              : "Giao Tiêu Chuẩn Toàn Quốc";
-            dom.trackMethodBadge.className = isExpress
-              ? "badge badge-success"
-              : "badge badge-secondary";
+            dom.trackMethodBadge.textContent = isExpress ? "Giao Hỏa Tốc 2 Giờ" : "Giao Tiêu Chuẩn Toàn Quốc";
+            dom.trackMethodBadge.className = isExpress ? "badge badge-success" : "badge badge-secondary";
           }
           if (dom.trackEstimatedText) {
             dom.trackEstimatedText.textContent = isCompleted
               ? "Đã giao thành công"
-              : order.estimatedDelivery ||
-                (isExpress ? "Hôm nay trước 17:30" : "Dự kiến 2-3 ngày tới");
+              : (order.estimatedDelivery || (isExpress ? "Hôm nay trước 17:30" : "Dự kiến 2-3 ngày tới"));
           }
 
           // Nút copy mã trong modal
           if (dom.btnCopyTrackCode) {
             dom.btnCopyTrackCode.onclick = () => {
-              copyToClipboard(
-                trackingCode,
-                "Đã sao chép mã vận đơn: " + trackingCode,
-              );
+              copyToClipboard(trackingCode, "Đã sao chép mã vận đơn: " + trackingCode);
             };
           }
 
@@ -2802,9 +2048,7 @@
         }
 
         // 7. Xử lý đánh giá sao trong Modal Review
-        const starEls = document.querySelectorAll(
-          "#starRatingGroup .material-symbols-outlined",
-        );
+        const starEls = document.querySelectorAll("#starRatingGroup .material-symbols-outlined");
         let selectedStars = 5;
         const starLabels = [
           "",
@@ -2842,27 +2086,41 @@
             if (activeReviewOrderId) {
               const allOrders = getAllOrders();
               const targetOrder = allOrders.find(
-                (o) =>
-                  o.id === activeReviewOrderId ||
-                  o.orderCode === activeReviewOrderId,
+                (o) => o.id === activeReviewOrderId || o.orderCode === activeReviewOrderId
               );
               if (targetOrder) {
                 targetOrder.status = "completed";
                 targetOrder.stepIndex = 4;
                 targetOrder.reviewRating = selectedStars;
-                targetOrder.reviewComment = document.getElementById(
-                  "reviewComment",
-                )
-                  ? document.getElementById("reviewComment").value.trim()
-                  : "";
+                targetOrder.reviewComment = document.getElementById("reviewComment") ? document.getElementById("reviewComment").value.trim() : "";
                 targetOrder.completedAt = new Date().toISOString();
                 saveOrders(allOrders);
+
+                // Đồng bộ đánh giá ngược về trang chi tiết sản phẩm
+                try {
+                  const curUser = (typeof Auth !== "undefined" && Auth.current()) ? Auth.current() : { fullName: "Khách hàng đã mua" };
+                  (targetOrder.items || []).forEach((it) => {
+                    const storageKey = "hv_user_reviews_" + it.id;
+                    const existing = JSON.parse(localStorage.getItem(storageKey) || "[]");
+                    existing.unshift({
+                      name: curUser.fullName || "Khách hàng đã xác thực",
+                      avatar: curUser.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100",
+                      rating: selectedStars,
+                      date: "Đã mua hàng • Vừa xong",
+                      comment: targetOrder.reviewComment || "Sản phẩm dùng rất ưng ý, đúng mô tả và đồng kiểm cùng bưu tá trước khi nhận hàng!",
+                      tag: "ĐÃ MUA HÀNG",
+                      verified: true,
+                    });
+                    localStorage.setItem(storageKey, JSON.stringify(existing));
+                  });
+                } catch (revErr) {
+                  console.warn("Lỗi lưu đánh giá sản phẩm:", revErr);
+                }
               }
 
               // Cộng điểm VIP vào tài khoản
               try {
-                let curPoints =
-                  Number(localStorage.getItem("hv_user_points")) || 1500;
+                let curPoints = Number(localStorage.getItem("hv_user_points")) || 1500;
                 curPoints += 500;
                 localStorage.setItem("hv_user_points", curPoints);
               } catch (e) {}
@@ -2870,10 +2128,7 @@
 
             renderOrders();
 
-            showToast(
-              "Chúc mừng! Đơn hàng đã hoàn tất và bạn nhận được +500 điểm thưởng VIP!",
-              "success",
-            );
+            showToast("Chúc mừng! Đơn hàng đã hoàn tất và bạn nhận được +500 điểm thưởng VIP!", "success");
           });
         }
 
@@ -2882,18 +2137,12 @@
           dom.btnConfirmCancelOrder.addEventListener("click", () => {
             if (!activeCancelOrderId) return;
 
-            const selectedRadio = document.querySelector(
-              'input[name="cancelReason"]:checked',
-            );
-            const reason = selectedRadio
-              ? selectedRadio.value
-              : "Người mua yêu cầu hủy đơn";
+            const selectedRadio = document.querySelector('input[name="cancelReason"]:checked');
+            const reason = selectedRadio ? selectedRadio.value : "Người mua yêu cầu hủy đơn";
 
             const allOrders = getAllOrders();
             const targetOrder = allOrders.find(
-              (o) =>
-                o.id === activeCancelOrderId ||
-                o.orderCode === activeCancelOrderId,
+              (o) => o.id === activeCancelOrderId || o.orderCode === activeCancelOrderId
             );
 
             if (targetOrder) {
@@ -2906,55 +2155,36 @@
             if (dom.cancelModal) dom.cancelModal.style.display = "none";
             renderOrders();
 
-            showToast(
-              "Đã hủy đơn hàng thành công. Voucher giảm giá đã được hoàn lại vào ví!",
-              "info",
-            );
+            showToast("Đã hủy đơn hàng thành công. Voucher giảm giá đã được hoàn lại vào ví!", "info");
           });
         }
 
         // 9. Xem Hóa Đơn Điện Tử VAT
         function openInvoiceModal(orderId) {
           const allOrders = getAllOrders();
-          const order = allOrders.find(
-            (o) => o.id === orderId || o.orderCode === orderId,
-          );
+          const order = allOrders.find((o) => o.id === orderId || o.orderCode === orderId);
           if (!order) return;
 
           const addr = order.shippingAddress || {};
-          const fullAddr =
-            addr.fullAddress ||
-            addr.address ||
-            "Tòa Keangnam Landmark 72, Hà Nội";
+          const fullAddr = addr.fullAddress || addr.address || "Tòa Keangnam Landmark 72, Hà Nội";
           const dStr = formatDateStr(order.createdAt);
 
-          if (dom.invNumber)
-            dom.invNumber.textContent =
-              "HD-" +
-              (order.id || order.orderCode || "0008492")
-                .replace(/[^0-9]/g, "")
-                .slice(-7);
+          if (dom.invNumber) dom.invNumber.textContent = "HD-" + (order.id || order.orderCode || "0008492").replace(/[^0-9]/g, "").slice(-7);
           if (dom.invDate) dom.invDate.textContent = dStr;
-          if (dom.invBuyerName)
-            dom.invBuyerName.textContent = addr.fullName || "Khách Hàng";
-          if (dom.invBuyerPhone)
-            dom.invBuyerPhone.textContent = addr.phone || "0912 345 678";
+          if (dom.invBuyerName) dom.invBuyerName.textContent = addr.fullName || "Khách Hàng";
+          if (dom.invBuyerPhone) dom.invBuyerPhone.textContent = addr.phone || "0912 345 678";
           if (dom.invBuyerAddress) dom.invBuyerAddress.textContent = fullAddr;
           if (dom.invPaymentMethod) {
-            dom.invPaymentMethod.textContent =
-              order.paymentMethod === "COD"
-                ? "Thanh toán khi nhận (COD)"
-                : "Chuyển khoản Napas 24/7";
+            dom.invPaymentMethod.textContent = order.paymentMethod === "COD" ? "Thanh toán khi nhận (COD)" : "Chuyển khoản Napas 24/7";
           }
           if (dom.invSignDate) dom.invSignDate.textContent = "Ngày ký: " + dStr;
 
           // Render các dòng hàng hóa
           if (dom.invItemsTbody) {
-            dom.invItemsTbody.innerHTML = (order.items || [])
-              .map((item, idx) => {
-                const qty = item.qty || item.quantity || 1;
-                const sub = item.price * qty;
-                return `
+            dom.invItemsTbody.innerHTML = (order.items || []).map((item, idx) => {
+              const qty = item.qty || item.quantity || 1;
+              const sub = item.price * qty;
+              return `
                 <tr>
                   <td style="text-align: center;">${idx + 1}</td>
                   <td>
@@ -2967,27 +2197,19 @@
                   <td style="text-align: right; font-weight: 700;">${formatMoney(sub)}</td>
                 </tr>
               `;
-              })
-              .join("");
+            }).join("");
           }
 
           const subtotal = order.subtotal || order.total || 0;
-          const tax = Math.round((subtotal * 0.08) / 1.08); // VAT 8% bóc tách
+          const tax = Math.round(subtotal * 0.08 / 1.08); // VAT 8% bóc tách
           const shipping = order.shippingFee || 0;
           const discount = order.discount || 0;
-          const total = order.total || subtotal + shipping - discount;
+          const total = order.total || (subtotal + shipping - discount);
 
-          if (dom.invSubtotal)
-            dom.invSubtotal.textContent = formatMoney(subtotal - tax);
+          if (dom.invSubtotal) dom.invSubtotal.textContent = formatMoney(subtotal - tax);
           if (dom.invTax) dom.invTax.textContent = formatMoney(tax);
-          if (dom.invShipping)
-            dom.invShipping.textContent = shipping
-              ? formatMoney(shipping)
-              : "0₫ (Freeship)";
-          if (dom.invDiscount)
-            dom.invDiscount.textContent = discount
-              ? `-${formatMoney(discount)}`
-              : "-0₫";
+          if (dom.invShipping) dom.invShipping.textContent = shipping ? formatMoney(shipping) : "0₫ (Freeship)";
+          if (dom.invDiscount) dom.invDiscount.textContent = discount ? `-${formatMoney(discount)}` : "-0₫";
           if (dom.invTotal) dom.invTotal.textContent = formatMoney(total);
 
           if (dom.invoiceModal) dom.invoiceModal.style.display = "flex";
@@ -3003,18 +2225,13 @@
         // 10. Xử lý Mua Lại (Re-order)
         function handleReorder(orderId) {
           const allOrders = getAllOrders();
-          const order = allOrders.find(
-            (o) => o.id === orderId || o.orderCode === orderId,
-          );
+          const order = allOrders.find((o) => o.id === orderId || o.orderCode === orderId);
           if (order && order.items && order.items.length > 0) {
             if (typeof Utils !== "undefined" && Utils.Cart) {
               order.items.forEach((item) => {
                 Utils.Cart.addItem(item);
               });
-              showToast(
-                `Đã thêm ${order.items.length} sản phẩm vào giỏ hàng!`,
-                "success",
-              );
+              showToast(`Đã thêm ${order.items.length} sản phẩm vào giỏ hàng!`, "success");
               setTimeout(() => {
                 window.location.href = "../shop/cart.html";
               }, 700);
@@ -3028,8 +2245,7 @@
         // 11. Đóng tất cả các Modal khi click nút [data-close] hoặc backdrop
         document.querySelectorAll("[data-close]").forEach((btn) => {
           btn.addEventListener("click", () => {
-            if (dom.orderDetailModal)
-              dom.orderDetailModal.style.display = "none";
+            if (dom.orderDetailModal) dom.orderDetailModal.style.display = "none";
             if (dom.trackingModal) dom.trackingModal.style.display = "none";
             if (dom.reviewModal) dom.reviewModal.style.display = "none";
             if (dom.cancelModal) dom.cancelModal.style.display = "none";
@@ -3038,13 +2254,7 @@
         });
 
         // Click ngoài backdrop để đóng modal
-        [
-          dom.orderDetailModal,
-          dom.trackingModal,
-          dom.reviewModal,
-          dom.cancelModal,
-          dom.invoiceModal,
-        ].forEach((modal) => {
+        [dom.orderDetailModal, dom.trackingModal, dom.reviewModal, dom.cancelModal, dom.invoiceModal].forEach((modal) => {
           if (modal) {
             modal.addEventListener("click", (e) => {
               if (e.target === modal) {
@@ -3087,14 +2297,8 @@
           setInterval(() => {
             if (totalSeconds > 0) {
               totalSeconds--;
-              const h = String(Math.floor(totalSeconds / 3600)).padStart(
-                2,
-                "0",
-              );
-              const m = String(Math.floor((totalSeconds % 3600) / 60)).padStart(
-                2,
-                "0",
-              );
+              const h = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
+              const m = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
               const s = String(totalSeconds % 60).padStart(2, "0");
               countdownText.textContent = `${h}:${m}:${s}`;
             }

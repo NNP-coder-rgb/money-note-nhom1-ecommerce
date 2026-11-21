@@ -11,8 +11,7 @@
         try {
           var t = localStorage.getItem("hybrid_theme") || "dark";
           document.documentElement.setAttribute("data-theme", t);
-          if (t === "light")
-            document.documentElement.classList.add("light-theme");
+          if (t === "light") document.documentElement.classList.add("light-theme");
         } catch (e) {}
       })();
     </script>
@@ -31,17 +30,13 @@
     <header class="site-header">
       <div class="container">
         <a class="brand" href="../../index.html">
-          <span class="brand-mark"
-            ><span class="material-symbols-outlined">token</span></span
-          >
+          <span class="brand-mark"><span class="material-symbols-outlined">token</span></span>
           <span>HYBRID<span class="text-secondary">.STORE</span></span>
         </a>
 
         <nav class="nav">
           <a href="auth_login.html">Đăng nhập</a>
-          <a href="auth_register.html" class="active" aria-current="page"
-            >Đăng ký</a
-          >
+          <a href="auth_register.html" class="active" aria-current="page">Đăng ký</a>
         </nav>
 
         <div class="header-actions">
@@ -52,9 +47,7 @@
             title="Chuyển chế độ Sáng / Tối"
             aria-label="Chuyển đổi giao diện"
           >
-            <span class="material-symbols-outlined theme-toggle-icon"
-              >light_mode</span
-            >
+            <span class="material-symbols-outlined theme-toggle-icon">light_mode</span>
           </button>
           <a class="icon-btn" href="../../index.html" title="Về trang chủ">
             <span class="material-symbols-outlined">home</span>
@@ -66,20 +59,13 @@
     <!-- ===== NỘI DUNG FORM ĐĂNG KÝ Ở GIỮA ===== -->
     <main class="auth-page">
       <div class="container">
-        <div class="auth-wrap" style="max-width: 580px; margin: 0 auto">
+        <div class="auth-wrap" style="max-width: 580px; margin: 0 auto;">
           <!-- Logo nhận diện thương hiệu trung tâm -->
           <div class="auth-logo-center">
-            <a
-              href="../../index.html"
-              class="brand-mark brand-mark-lg"
-              aria-label="HYBRID.STORE"
-              title="Về trang chủ HYBRID.STORE"
-            >
+            <a href="../../index.html" class="brand-mark brand-mark-lg" aria-label="HYBRID.STORE" title="Về trang chủ HYBRID.STORE">
               <span class="material-symbols-outlined">token</span>
             </a>
-            <h1 class="auth-logo-title">
-              HYBRID<span class="text-secondary">.STORE</span>
-            </h1>
+            <h1 class="auth-logo-title">HYBRID<span class="text-secondary">.STORE</span></h1>
             <p class="auth-logo-sub">Tạo tài khoản mới để bắt đầu giao dịch</p>
           </div>
 
@@ -98,14 +84,10 @@
                   />
                   <div class="role-top">
                     <span class="role-icon">
-                      <span class="material-symbols-outlined"
-                        >shopping_bag</span
-                      >
+                      <span class="material-symbols-outlined">shopping_bag</span>
                     </span>
                     <span class="role-check">
-                      <span class="material-symbols-outlined icon-sm"
-                        >check</span
-                      >
+                      <span class="material-symbols-outlined icon-sm">check</span>
                     </span>
                   </div>
                   <h2>Người Mua</h2>
@@ -119,9 +101,7 @@
                       <span class="material-symbols-outlined">storefront</span>
                     </span>
                     <span class="role-check">
-                      <span class="material-symbols-outlined icon-sm"
-                        >check</span
-                      >
+                      <span class="material-symbols-outlined icon-sm">check</span>
                     </span>
                   </div>
                   <h2>Người Bán</h2>
@@ -157,9 +137,7 @@
                     Số điện thoại <span class="req">*</span>
                   </label>
                   <div class="input-group">
-                    <span class="icon-left material-symbols-outlined"
-                      >smartphone</span
-                    >
+                    <span class="icon-left material-symbols-outlined">smartphone</span>
                     <input
                       class="input mono"
                       id="phoneInput"
@@ -176,9 +154,7 @@
                     Email <span class="req">*</span>
                   </label>
                   <div class="input-group">
-                    <span class="icon-left material-symbols-outlined"
-                      >mail</span
-                    >
+                    <span class="icon-left material-symbols-outlined">mail</span>
                     <input
                       class="input"
                       id="emailInput"
@@ -196,9 +172,7 @@
                   Mã giới thiệu <span class="text-faint">(Tùy chọn)</span>
                 </label>
                 <div class="input-group">
-                  <span class="icon-left material-symbols-outlined"
-                    >confirmation_number</span
-                  >
+                  <span class="icon-left material-symbols-outlined">confirmation_number</span>
                   <input
                     class="input mono input-upper input-accent"
                     id="referralInput"
@@ -228,20 +202,14 @@
                     type="button"
                     aria-label="Hiện/ẩn mật khẩu"
                   >
-                    <span
-                      class="material-symbols-outlined"
-                      id="passwordToggleIcon"
-                      >visibility</span
-                    >
+                    <span class="material-symbols-outlined" id="passwordToggleIcon">visibility</span>
                   </button>
                 </div>
                 <div class="strength" id="strengthMeter" data-level="0">
                   <span></span><span></span><span></span><span></span>
                 </div>
                 <span class="form-error"></span>
-                <p class="form-hint">
-                  Tối thiểu 8 ký tự, nên có chữ hoa, số và ký tự đặc biệt.
-                </p>
+                <p class="form-hint">Tối thiểu 8 ký tự, nên có chữ hoa, số và ký tự đặc biệt.</p>
               </div>
 
               <div class="form-group">
@@ -249,9 +217,7 @@
                   Nhập lại mật khẩu <span class="req">*</span>
                 </label>
                 <div class="input-group">
-                  <span class="icon-left material-symbols-outlined"
-                    >lock_reset</span
-                  >
+                  <span class="icon-left material-symbols-outlined">lock_reset</span>
                   <input
                     class="input"
                     id="confirmInput"
@@ -273,30 +239,22 @@
               <div class="cat-grid">
                 <label class="cat-chip">
                   <input type="checkbox" name="category" value="sneakers" />
-                  <span class="material-symbols-outlined icon-lg text-secondary"
-                    >steps</span
-                  >
+                  <span class="material-symbols-outlined icon-lg text-secondary">steps</span>
                   <span class="name">Sneakers</span>
                 </label>
                 <label class="cat-chip">
                   <input type="checkbox" name="category" value="fashion" />
-                  <span class="material-symbols-outlined icon-lg text-primary"
-                    >checkroom</span
-                  >
+                  <span class="material-symbols-outlined icon-lg text-primary">checkroom</span>
                   <span class="name">Thời Trang</span>
                 </label>
                 <label class="cat-chip">
                   <input type="checkbox" name="category" value="tech" />
-                  <span class="material-symbols-outlined icon-lg text-secondary"
-                    >devices</span
-                  >
+                  <span class="material-symbols-outlined icon-lg text-secondary">devices</span>
                   <span class="name">Đồ Điện Tử</span>
                 </label>
                 <label class="cat-chip">
                   <input type="checkbox" name="category" value="appliances" />
-                  <span class="material-symbols-outlined icon-lg text-tertiary"
-                    >coffee_maker</span
-                  >
+                  <span class="material-symbols-outlined icon-lg text-tertiary">coffee_maker</span>
                   <span class="name">Gia Dụng</span>
                 </label>
               </div>
@@ -306,22 +264,7 @@
             <div class="form-group">
               <label class="check">
                 <input type="checkbox" id="termsCheck" />
-                <span
-                  >Tôi đồng ý với
-                  <a
-                    href="../info/terms_of_service.html"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >Điều khoản dịch vụ</a
-                  >
-                  và
-                  <a
-                    href="../info/privacy_policy.html"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >Chính sách bảo mật</a
-                  >.</span
-                >
+                <span>Tôi đồng ý với <a href="../info/terms_of_service.html" target="_blank" rel="noopener noreferrer">Điều khoản dịch vụ</a> và <a href="../info/privacy_policy.html" target="_blank" rel="noopener noreferrer">Chính sách bảo mật</a>.</span>
               </label>
               <span class="form-error"></span>
             </div>
@@ -337,12 +280,7 @@
                 <span>TẠO TÀI KHOẢN NGAY</span>
               </button>
               <div class="form-links">
-                <span
-                  >Đã có tài khoản?
-                  <a href="auth_login.html" class="fw-600"
-                    >Đăng nhập ngay</a
-                  ></span
-                >
+                <span>Đã có tài khoản? <a href="auth_login.html" class="fw-600">Đăng nhập ngay</a></span>
               </div>
             </div>
           </form>
@@ -354,25 +292,11 @@
     <footer class="site-footer">
       <div class="container footer-bar">
         <div class="footer-badges">
-          <span
-            ><span class="material-symbols-outlined icon-sm text-secondary"
-              >verified_user</span
-            >ISO/IEC 27001 Certified</span
-          >
-          <span
-            ><span class="material-symbols-outlined icon-sm text-secondary"
-              >gavel</span
-            >ISO/IEC 27701 Privacy</span
-          >
-          <span
-            ><span class="material-symbols-outlined icon-sm text-secondary"
-              >shield</span
-            >SOC 2 Type II Audited</span
-          >
+          <span><span class="material-symbols-outlined icon-sm text-secondary">verified_user</span>ISO/IEC 27001 Certified</span>
+          <span><span class="material-symbols-outlined icon-sm text-secondary">gavel</span>ISO/IEC 27701 Privacy</span>
+          <span><span class="material-symbols-outlined icon-sm text-secondary">shield</span>SOC 2 Type II Audited</span>
         </div>
-        <span class="text-xs text-faint"
-          >© 2026 HYBRID.STORE. All rights reserved.</span
-        >
+        <span class="text-xs text-faint">© 2026 HYBRID.STORE. All rights reserved.</span>
       </div>
     </footer>
 
@@ -380,6 +304,8 @@
     <script src="../../js/popup.js"></script>
     <script src="../../js/auth.js"></script>
     <script src="../../js/utils.js"></script>
+    <script src="../../js/components.js"></script>
+    <script src="../../js/app.js"></script>
     <script src="../../js/register.js"></script>
   </body>
 </html>

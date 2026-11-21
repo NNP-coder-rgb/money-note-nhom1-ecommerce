@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chính Sách Bảo Mật &amp; Bảo Vệ Dữ Liệu Cá Nhân | HYBRID.STORE</title>
+
+    <!-- Chống giật giao diện (Zero-FOUC Theme Init) -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("hybrid_theme") || "dark";
+          document.documentElement.setAttribute("data-theme", t);
+          if (t === "light") document.documentElement.classList.add("light-theme");
+        } catch (e) {}
+      })();
+    </script>
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="stylesheet" href="../../css/base.css" />
+    <link rel="stylesheet" href="../../css/catalog.css" />
+    <link rel="stylesheet" href="../../css/master_screens.css" />
+    <link rel="stylesheet" href="../../css/policy.css" />
+  </head>
+  <body>
+    <!-- ===== HEADER ===== -->
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="../../index.html">
+          <span class="brand-mark"><span class="material-symbols-outlined">token</span></span>
+          <span>HYBRID<span class="text-secondary">.STORE</span> <span class="badge">BẢO MẬT</span></span>
+        </a>
+
+        <div class="header-actions">
+          <button
+            class="icon-btn theme-toggle-btn"
+            id="themeToggleBtn"
+            type="button"
+            title="Chuyển chế độ Sáng / Tối"
+            aria-label="Chuyển đổi giao diện"
+          >
+            <span class="material-symbols-outlined theme-toggle-icon">light_mode</span>
+          </button>
+          <a class="btn btn-secondary hide-sm" href="../shop/catalog.html">Xem Sản Phẩm</a>
+          <a class="avatar" href="../account/profile.html" title="Tài khoản">
+            <span class="material-symbols-outlined">person</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== BREADCRUMB ===== -->
+    <div class="subnav">
+      <div class="container">
+        <nav aria-label="Breadcrumb">
+          <a href="../../index.html">Trang Chủ</a>
+          <span class="text-faint">/</span>
+          <span class="active">Chính Sách Bảo Mật</span>
+        </nav>
+        <div class="subnav-info hide-sm">
+          <span class="text-secondary"><span class="material-symbols-outlined icon-sm">shield</span> Nghị định 13/2023/NĐ-CP</span>
+          <span class="text-success"><span class="material-symbols-outlined icon-sm">lock</span> ISO/IEC 27001 &amp; AES-256</span>
+        </div>
+      </div>
+    </div>
+
+    <main class="policy-page">
+      <!-- Tiêu đề trang -->
+      <div class="policy-hero">
+        <span class="badge badge-success">CHÍNH SÁCH BẢO MẬT &amp; BẢO VỆ DỮ LIỆU CÁ NHÂN</span>
+        <h1>Chính Sách Bảo Mật HYBRID.STORE</h1>
+        <p>Tuân thủ tuyệt đối Nghị định 13/2023/NĐ-CP của Chính phủ • Áp dụng tiêu chuẩn an toàn thông tin quốc tế ISO/IEC 27001, mã hóa phần cứng HSM/AES-256 và bảo mật quyền riêng tư ISO/IEC 27701.</p>
+      </div>
+
+      <!-- Khối thống kê & huy hiệu an ninh -->
+      <div class="policy-stat-row">
+        <div class="policy-stat-item">
+          <span class="material-symbols-outlined policy-stat-icon text-success">verified_user</span>
+          <div class="policy-stat-val">NĐ 13/2023/NĐ-CP</div>
+          <div class="policy-stat-lbl">Tuân thủ triệt để bảo vệ dữ liệu cá nhân</div>
+        </div>
+        <div class="policy-stat-item">
+          <span class="material-symbols-outlined policy-stat-icon text-primary">enhanced_encryption</span>
+          <div class="policy-stat-val">AES-256 &amp; TLS 1.3</div>
+          <div class="policy-stat-lbl">Mã hóa đầu cuối &amp; lưu trữ bảo mật HSM</div>
+        </div>
+        <div class="policy-stat-item">
+          <span class="material-symbols-outlined policy-stat-icon text-secondary">gavel</span>
+          <div class="policy-stat-val">ISO/IEC 27701</div>
+          <div class="policy-stat-lbl">Hệ thống quản lý quyền riêng tư quốc tế</div>
+        </div>
+        <div class="policy-stat-item">
+          <span class="material-symbols-outlined policy-stat-icon text-tertiary">do_not_disturb_on</span>
+          <div class="policy-stat-val">0% Bán Dữ Liệu</div>
+          <div class="policy-stat-lbl">Tuyệt đối không chia sẻ cho bên thứ ba rác</div>
+        </div>
+      </div>
+
+      <!-- Mục lục nhanh -->
+      <nav class="policy-toc" aria-label="Mục lục chính sách bảo mật">
+        <div class="policy-toc-title">
+          <span class="material-symbols-outlined icon-xs">list_alt</span> Mục Lục Chính Sách Nhanh
+        </div>
+        <ul class="policy-toc-list">
+          <li><a class="policy-toc-link" href="#dieu-1">Điều 1. Căn cứ pháp lý &amp; Tiêu chuẩn</a></li>
+          <li><a class="policy-toc-link" href="#dieu-2">Điều 2. Các loại dữ liệu thu thập</a></li>
+          <li><a class="policy-toc-link" href="#dieu-3">Điều 3. Mục đích xử lý dữ liệu</a></li>
+          <li><a class="policy-toc-link" href="#dieu-4">Điều 4. Cơ chế mã hóa &amp; Lưu trữ</a></li>
+          <li><a class="policy-toc-link" href="#dieu-5">Điều 5. Chia sẻ bên thứ ba</a></li>
+          <li><a class="policy-toc-link" href="#dieu-6">Điều 6. Quyền của chủ thể dữ liệu</a></li>
+          <li><a class="policy-toc-link" href="#dieu-7">Điều 7. Cookie &amp; Thiết bị riêng biệt</a></li>
+          <li><a class="policy-toc-link" href="#dieu-8">Điều 8. Cán bộ DPO &amp; Khiếu nại</a></li>
+        </ul>
+      </nav>
+
+      <!-- Khối tóm tắt cam kết bảo mật -->
+      <div class="policy-intro-box">
+        <div class="policy-intro-title">
+          <span class="material-symbols-outlined">security</span> Tuyên Bố Cam Kết Bảo Mật Quyền Riêng Tư (Privacy Commitment)
+        </div>
+        <p class="policy-intro-desc">
+          Tại <strong>HYBRID.STORE</strong>, sự an toàn dữ liệu và quyền riêng tư cá nhân của khách hàng là ưu tiên cao nhất trong kiến trúc phát triển hệ thống.
+          Chúng tôi chỉ thu thập các dữ liệu thực sự cần thiết nhằm thực hiện giao dịch, thẩm định eKYC CCCD để ngăn chặn gian lận và nâng cao trải nghiệm mua sắm.
+          Mọi dữ liệu sinh trắc học và căn cước công dân đều được băm mật mã và mã hóa phân lập tại mô-đun phần cứng an toàn (HSM), 
+          tuyệt đối không bị thương mại hóa dưới bất kỳ hình thức nào.
+        </p>
+      </div>
+
+      <!-- Điều 1 -->
+      <section class="policy-card policy-card-secondary" id="dieu-1">
+        <div class="policy-card-head">
+          <h2 class="policy-card-title">
+            <span class="material-symbols-outlined text-secondary">gavel</span>
+            Điều 1. Căn Cứ Pháp Lý &amp; Tiêu Chuẩn Bảo Mật Quốc Tế
+          </h2>
+          <span class="badge badge-secondary">TIÊU CHUẨN PHÁP LÝ</span>
+        </div>
+        <div class="policy-item-list">
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-secondary">verified</span>
+              1.1. Tuân Thủ Nghị Định 13/2023/NĐ-CP
+            </div>
+            <p class="policy-item-desc">
+              Chính sách bảo mật này được ban hành căn cứ theo <strong>Nghị định số 13/2023/NĐ-CP</strong> ngày 17/04/2023 của Chính phủ về Bảo vệ Dữ liệu Cá nhân, Luật An toàn Thông tin Mạng số 86/2015/QH13, Luật Giao dịch Điện tử số 20/2023/QH15 và các văn bản hướng dẫn thi hành của Bộ Thông tin &amp; Truyền thông, Bộ Công an.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-secondary">lock</span>
+              1.2. Chứng Nhận Hệ Thống Quản Lý An Toàn Thông Tin ISO/IEC 27001:2022
+            </div>
+            <p class="policy-item-desc">
+              Toàn bộ hạ tầng máy chủ, hệ thống cơ sở dữ liệu và quy trình vận hành của HYBRID.STORE đạt tiêu chuẩn quốc tế <strong>ISO/IEC 27001:2022</strong> (ISMS) về kiểm soát rủi ro bảo mật thông tin, sao lưu dự phòng tự động và ngăn ngừa xâm nhập trái phép.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-secondary">shield_person</span>
+              1.3. Tiêu Chuẩn Quản Lý Quyền Riêng Tư ISO/IEC 27701 &amp; SOC 2 Type II
+            </div>
+            <p class="policy-item-desc">
+              Nền tảng được kiểm toán độc lập định kỳ hàng quý theo chuẩn <strong>ISO/IEC 27701:2019</strong> (PIMS — Privacy Information Management System) và sở hữu báo cáo kiểm toán bảo mật <strong>SOC 2 Type II</strong> đảm bảo tính toàn vẹn, tính bí mật và tính sẵn sàng của dữ liệu người dùng.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-secondary">credit_card</span>
+              1.4. Chuẩn Bảo Mật Thanh Toán PCI-DSS Cấp Độ 1
+            </div>
+            <p class="policy-item-desc">
+              Hệ thống xử lý thanh toán qua cổng Napas 24/7, VietQR và liên kết ngân hàng đáp ứng tiêu chuẩn khắt khe <strong>PCI-DSS Cấp độ 1 (Level 1)</strong> — cấp độ bảo mật thanh toán thẻ và ngân hàng cao nhất hiện nay.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Điều 2 -->
+      <section class="policy-card policy-card-primary" id="dieu-2">
+        <div class="policy-card-head">
+          <h2 class="policy-card-title">
+            <span class="material-symbols-outlined text-primary">folder_shared</span>
+            Điều 2. Các Loại Dữ Liệu Cá Nhân Thu Thập
+          </h2>
+          <span class="badge badge-primary">MINH BẠCH THU THẬP</span>
+        </div>
+        <div class="policy-item-list">
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-primary">person</span>
+              2.1. Dữ Liệu Cá Nhân Cơ Bản
+            </div>
+            <p class="policy-item-desc">
+              Bao gồm: Họ và tên, số điện thoại di động chính chủ, địa chỉ email, địa chỉ bưu chính nhận hàng và thanh toán. Những thông tin này do người dùng chủ động cung cấp khi tạo tài khoản hoặc cập nhật trong trang Cá nhân.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-primary">badge</span>
+              2.2. Dữ Liệu Định Danh eKYC C06 (CCCD Gắn Chip)
+            </div>
+            <p class="policy-item-desc">
+              Đối với người bán sản phẩm cũ C2C và người thực hiện rút tiền: Số thẻ CCCD, hình ảnh chụp 2 mặt thẻ CCCD gắn chip (theo chuẩn mã đọc máy ICAO 9303), ngày cấp, nơi cấp và dữ liệu khuôn mặt kiểm tra thực thể sống (Facial Liveness Check).
+            </p>
+            <div class="policy-callout policy-callout-primary">
+              <span class="material-symbols-outlined policy-callout-icon text-primary">verified_user</span>
+              <div>
+                <strong>Quy tắc bảo mật CCCD:</strong> Toàn bộ ảnh CCCD sau khi tải lên lập tức được đóng dấu mờ kỹ thuật số (Digital Watermark) độc quyền chống làm giả, mã hóa băm một chiều (Hash SHA-256) và gửi đối soát bảo mật với cổng C06. Hệ thống <strong>không lưu trữ ảnh thô không mã hóa</strong> trên máy chủ công cộng.
+              </div>
+            </div>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-primary">account_balance</span>
+              2.3. Dữ Liệu Tài Chính &amp; Lịch Sử Đơn Hàng
+            </div>
+            <p class="policy-item-desc">
+              Bao gồm: Tên ngân hàng thụ hưởng, số tài khoản ngân hàng (lưu trữ theo định dạng ẩn / masked: ví dụ <code>1903 **** **** 8888</code>), lịch sử mua hàng, lịch sử ký quỹ Escrow, mã vận đơn và bản ghi âm/chat hỗ trợ khiếu nại.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-primary">devices</span>
+              2.4. Dữ Liệu Kỹ Thuật &amp; Thiết Bị
+            </div>
+            <p class="policy-item-desc">
+              Bao gồm: Địa chỉ IP truy cập, nhật ký kết nối (Log timestamp), loại trình duyệt, hệ điều hành thiết bị. Thông tin này được sử dụng để phát hiện đăng nhập bất thường, ngăn chặn tấn công DDoS và lưu trữ tài khoản Google độc lập theo từng thiết bị theo nhu cầu cá nhân hóa của người dùng.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Điều 3 -->
+      <section class="policy-card policy-card-success" id="dieu-3">
+        <div class="policy-card-head">
+          <h2 class="policy-card-title">
+            <span class="material-symbols-outlined text-success">task_alt</span>
+            Điều 3. Mục Đích Thu Thập &amp; Xử Lý Dữ Liệu
+          </h2>
+          <span class="badge badge-success">MỤC ĐÍCH RÕ RÀNG</span>
+        </div>
+        <div class="policy-item-list">
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-success">shopping_cart_checkout</span>
+              3.1. Thực Hiện Hợp Đồng Mua Bán &amp; Giao Nhận Hàng Hóa
+            </div>
+            <p class="policy-item-desc">
+              Xác nhận và xử lý đơn hàng, điều phối shipper vận chuyển hỏa tốc 2H hoặc chuyển phát toàn quốc, tổ chức quy trình đồng kiểm ngoại quan tại địa chỉ của khách hàng.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-success">shield</span>
+              3.2. Định Danh &amp; Phòng Chống Gian Lận C2C
+            </div>
+            <p class="policy-item-desc">
+              Thẩm định tư cách pháp lý của người bán đồ cũ Like New nhằm loại bỏ hoàn toàn tình trạng buôn bán hàng giả, hàng nhái, hàng dính mã độc hoặc tài sản do trộm cắp mà có; bảo vệ tuyệt đối an toàn dòng tiền cho người mua.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-success">savings</span>
+              3.3. Quản Lý Ký Quỹ Escrow &amp; Thanh Toán Napas 24/7
+            </div>
+            <p class="policy-item-desc">
+              Khóa tiền ký quỹ trung gian an toàn trong suốt 48 giờ thử máy; thực hiện giải ngân về tài khoản ngân hàng của người bán hoặc hoàn tiền tự động 100% trong 30 giây khi có tranh chấp hợp lệ.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-success">support_agent</span>
+              3.4. Chăm Sóc Khách Hàng &amp; Trọng Tài Tranh Chấp
+            </div>
+            <p class="policy-item-desc">
+              Cung cấp tư vấn kỹ thuật 24/7, kích hoạt bảo hành điện tử chính hãng và phục vụ làm bằng chứng xác thực trong phòng phân xử trọng tài 3 bên trực tuyến.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Điều 4 -->
+      <section class="policy-card policy-card-secondary" id="dieu-4">
+        <div class="policy-card-head">
+          <h2 class="policy-card-title">
+            <span class="material-symbols-outlined text-secondary">enhanced_encryption</span>
+            Điều 4. Cơ Chế Lưu Trữ, Mã Hóa &amp; Biện Pháp Bảo Mật
+          </h2>
+          <span class="badge badge-secondary">CÔNG NGHỆ BẢO MẬT</span>
+        </div>
+        <div class="policy-item-list">
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-secondary">vpn_key</span>
+              4.1. Mã Hóa Đầu Cuối TLS 1.3 &amp; Lưu Trữ AES-256
+            </div>
+            <p class="policy-item-desc">
+              Mọi dữ liệu truyền tải giữa trình duyệt web và máy chủ được mã hóa bởi giao thức bảo mật cao nhất hiện nay <strong>TLS 1.3</strong> với chứng chỉ SSL EV 2048-bit. Dữ liệu khi lưu trữ tại ổ cứng máy chủ (Data at Rest) được mã hóa bằng thuật toán tiêu chuẩn quân sự <strong>AES-256 bit</strong>.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-secondary">lock_clock</span>
+              4.2. Kho Bảo Mật Phần Cứng Chuyên Dụng (HSM Vault)
+            </div>
+            <p class="policy-item-desc">
+              Thông tin eKYC và số CCCD được lưu trữ trong phân vùng độc lập có sự bảo vệ của mô-đun phần cứng bảo mật <strong>Hardware Security Module (HSM)</strong>. Khóa giải mã được phân mảnh theo cơ chế chia sẻ bí mật đa chữ ký (Multi-Signature Key Management), ngăn chặn việc truy cập trái phép ngay cả từ nhân sự nội bộ.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-secondary">policy</span>
+              4.3. Phân Quyền Truy Cập Nghiêm Ngặt (RBAC) &amp; Nhật Ký Bất Biến
+            </div>
+            <p class="policy-item-desc">
+              Áp dụng mô hình phân quyền theo vai trò (Role-Based Access Control). Mọi thao tác tra cứu, chỉnh sửa thông tin thành viên đều được ghi lại vào hệ thống nhật ký kiểm toán (Audit Logs) bất biến theo thời gian thực để phục vụ đối soát định kỳ.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-secondary">history_toggle_off</span>
+              4.4. Thời Hạn Lưu Trữ Dữ Liệu
+            </div>
+            <p class="policy-item-desc">
+              Dữ liệu cá nhân được lưu trữ trong suốt thời gian tài khoản hoạt động. Khi người dùng gửi yêu cầu đóng tài khoản, toàn bộ dữ liệu định danh và ảnh CCCD sẽ được hủy vĩnh viễn sau 30 ngày đối soát không còn khiếu nại tài chính (ngoại trừ các chứng từ hóa đơn kế toán phải lưu trữ 10 năm theo Luật Kế toán Việt Nam).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Điều 5 -->
+      <section class="policy-card policy-card-danger" id="dieu-5">
+        <div class="policy-card-head">
+          <h2 class="policy-card-title">
+            <span class="material-symbols-outlined text-danger">share_reviews</span>
+            Điều 5. Cam Kết Chia Sẻ Dữ Liệu Với Bên Thứ Ba
+          </h2>
+          <span class="badge badge-danger">NGHIÊM CẤM RÒ RỈ</span>
+        </div>
+        <div class="policy-item-list">
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-danger">do_not_disturb_on</span>
+              5.1. Cam Kết Tuyệt Đối Không Bán Hoặc Tiếp Thị Rác
+            </div>
+            <p class="policy-item-desc">
+              HYBRID.STORE <strong>TUYỆT ĐỐI KHÔNG BÁN, KHÔNG CHO THUÊ, KHÔNG CHIA SẺ</strong> cơ sở dữ liệu khách hàng cho bất kỳ công ty quảng cáo, môi giới chứng khoán, bảo hiểm hoặc bên thứ ba nào vì mục đích tiếp thị rác (Spam).
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-danger">local_shipping</span>
+              5.2. Chia Sẻ Tối Thiểu Với Đối Tác Vận Chuyển Hỏa Tốc
+            </div>
+            <p class="policy-item-desc">
+              Nhân viên giao nhận (shipper) chỉ được cung cấp: <em>Họ tên, Số điện thoại và Địa chỉ giao hàng</em> trên phiếu gửi để phục vụ công tác giao hàng và đồng kiểm. Shipper không được cấp quyền xem thông tin CCCD hay tài khoản ngân hàng của khách hàng.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-danger">account_balance</span>
+              5.3. Cổng Thanh Toán Liên Ngân Hàng Napas
+            </div>
+            <p class="policy-item-desc">
+              Khi thanh toán, dữ liệu được truyền trực tiếp qua cổng mã hóa an toàn của Công ty Cổ phần Thanh toán Quốc gia Việt Nam (Napas) và ngân hàng phát hành thẻ. Sàn không lưu trữ thông tin mật khẩu OTP hoặc mã CVV/CVC của thẻ ngân hàng.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-danger">balance</span>
+              5.4. Yêu Cầu Của Cơ Quan Nhà Nước Có Thẩm Quyền
+            </div>
+            <p class="policy-item-desc">
+              Chúng tôi chỉ cung cấp thông tin cá nhân của người dùng khi có văn bản yêu cầu chính thức từ Cơ quan Cảnh sát Điều tra, Viện Kiểm sát Nhân dân hoặc Tòa án Nhân dân theo đúng trình tự pháp luật quy định.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Điều 6 -->
+      <section class="policy-card policy-card-primary" id="dieu-6">
+        <div class="policy-card-head">
+          <h2 class="policy-card-title">
+            <span class="material-symbols-outlined text-primary">how_to_reg</span>
+            Điều 6. Toàn Bộ Quyền Của Chủ Thể Dữ Liệu
+          </h2>
+          <span class="badge badge-primary">QUYỀN LỢI NGƯỜI DÙNG</span>
+        </div>
+        <p class="policy-item-desc mb-3">
+          Theo quy định tại Điều 9 Nghị định 13/2023/NĐ-CP, người dùng với tư cách là Chủ thể dữ liệu sở hữu đầy đủ các quyền hợp pháp sau:
+        </p>
+
+        <div class="policy-table-wrapper">
+          <table class="policy-table">
+            <thead>
+              <tr>
+                <th>Quyền Của Bạn</th>
+                <th>Mô Tả Ý Nghĩa</th>
+                <th>Cách Thực Hiện Trên HYBRID.STORE</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Quyền Được Biết</strong></td>
+                <td>Được thông báo rõ ràng về loại dữ liệu thu thập, mục đích và thời gian lưu trữ.</td>
+                <td>Hiển thị công khai trong Chính sách bảo mật và thông báo trước khi eKYC.</td>
+              </tr>
+              <tr>
+                <td><strong>2. Quyền Đồng Ý</strong></td>
+                <td>Được tự do quyết định đồng ý hoặc không đồng ý cho phép xử lý dữ liệu.</td>
+                <td>Checkbox tự nguyện khi đăng ký tài khoản và thực hiện đơn hàng.</td>
+              </tr>
+              <tr>
+                <td><strong>3. Quyền Truy Cập &amp; Xem</strong></td>
+                <td>Được xem lại toàn bộ hồ sơ dữ liệu cá nhân đang được lưu trữ trên sàn.</td>
+                <td>Truy cập trang <code>profile.html</code> bất kỳ lúc nào để tra cứu.</td>
+              </tr>
+              <tr>
+                <td><strong>4. Quyền Chỉnh Sửa</strong></td>
+                <td>Yêu cầu cập nhật, chỉnh sửa thông tin chưa chính xác.</td>
+                <td>Tự chỉnh sửa SĐT, địa chỉ nhận hàng, tài khoản ngân hàng trong trang Cá nhân.</td>
+              </tr>
+              <tr>
+                <td><strong>5. Quyền Yêu Cầu Xóa ("Quyền Được Quên")</strong></td>
+                <td>Yêu cầu xóa toàn bộ dữ liệu cá nhân khi không còn nhu cầu giao dịch.</td>
+                <td>Gửi yêu cầu hủy tài khoản qua Trung tâm hỗ trợ hoặc email DPO.</td>
+              </tr>
+              <tr>
+                <td><strong>6. Quyền Hạn Chế Xử Lý</strong></td>
+                <td>Yêu cầu tạm dừng xử lý dữ liệu trong thời gian tranh chấp khiếu nại.</td>
+                <td>Gửi thông báo tạm dừng qua phòng phân xử trọng tài 3 bên.</td>
+              </tr>
+              <tr>
+                <td><strong>7. Quyền Rút Lại Đồng Ý</strong></td>
+                <td>Rút lại sự đồng ý đã cấp trước đó về nhận tin tức quảng cáo, cookie.</td>
+                <td>Tắt thông báo trong trang cài đặt hoặc xóa cookie trình duyệt.</td>
+              </tr>
+              <tr>
+                <td><strong>8. Quyền Khiếu Nại &amp; Bồi Thường</strong></td>
+                <td>Khiếu nại tới cơ quan quản lý nhà nước nếu phát hiện vi phạm bảo mật.</td>
+                <td>Gửi thư trực tiếp tới DPO hoặc Cục An toàn thông tin (Bộ TT&amp;TT).</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Điều 7 -->
+      <section class="policy-card policy-card-secondary" id="dieu-7">
+        <div class="policy-card-head">
+          <h2 class="policy-card-title">
+            <span class="material-symbols-outlined text-secondary">cookie</span>
+            Điều 7. Chính Sách Cookie &amp; Quản Lý Thiết Bị Riêng Biệt
+          </h2>
+          <span class="badge badge-secondary">LƯU TRỮ TRÌNH DUYỆT</span>
+        </div>
+        <div class="policy-item-list">
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-secondary">widgets</span>
+              7.1. Các Loại Cookie Cần Thiết Được Sử Dụng
+            </div>
+            <p class="policy-item-desc">
+              Sàn sử dụng Cookie và bộ nhớ cục bộ (LocalStorage) cho các mục đích thiết yếu: duy trì phiên đăng nhập an toàn, ghi nhớ giỏ hàng, lưu tùy chọn giao diện Sáng / Tối (<code>hybrid_theme</code>) và token chống giả mạo yêu cầu (CSRF Token).
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-secondary">phonelink_lock</span>
+              7.2. Cơ Chế Đăng Nhập Tài Khoản Google Độc Lập Theo Từng Thiết Bị
+            </div>
+            <p class="policy-item-desc">
+              Nhằm bảo vệ quyền riêng tư cá nhân khi người dùng truy cập từ nhiều thiết bị khác nhau (máy tính cá nhân, điện thoại di động, máy tính công cộng), hệ thống áp dụng cơ chế lưu trữ tài khoản Google độc lập theo từng thiết bị (<code>hv_browser_google_account</code>). 
+              Mỗi thiết bị được tự do đăng nhập và ghi nhớ tài khoản Google riêng mà không bị ép buộc đồng bộ tài khoản mặc định. Người dùng có toàn quyền bấm <strong>"Xóa tài khoản đã lưu trên máy này"</strong> bất cứ khi nào rời khỏi thiết bị.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-secondary">delete_sweep</span>
+              7.3. Quyền Kiểm Soát &amp; Xóa Cookie Của Người Dùng
+            </div>
+            <p class="policy-item-desc">
+              Khách hàng có thể dễ dàng quản lý, vô hiệu hóa hoặc xóa toàn bộ Cookie bất kỳ lúc nào trong phần cài đặt quyền riêng tư của trình duyệt (Chrome, Safari, Edge, Firefox). Việc xóa cookie chỉ làm đăng xuất phiên làm việc mà không làm mất thông tin tài khoản hay lịch sử đơn hàng của bạn.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Điều 8 -->
+      <section class="policy-card policy-card-success" id="dieu-8">
+        <div class="policy-card-head">
+          <h2 class="policy-card-title">
+            <span class="material-symbols-outlined text-success">contact_support</span>
+            Điều 8. Cán Bộ Phụ Trách Bảo Vệ Dữ Liệu (DPO) &amp; Kênh Tiếp Nhận
+          </h2>
+          <span class="badge badge-success">HỖ TRỢ TRỰC TIẾP 24/7</span>
+        </div>
+        <div class="policy-item-list">
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-success">badge</span>
+              8.1. Cán Bộ Bảo Vệ Dữ Liệu Cá Nhân (Data Protection Officer - DPO)
+            </div>
+            <p class="policy-item-desc">
+              HYBRID.STORE thành lập Bộ phận An toàn Thông tin chuyên trách và bổ nhiệm Cán bộ Bảo vệ Dữ liệu Cá nhân (DPO) trực thuộc Ban Điều Hành Toàn Sàn để tiếp nhận, giải quyết mọi yêu cầu về quyền của chủ thể dữ liệu.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-success">call</span>
+              8.2. Đầu Mối Liên Hệ Trực Tiếp
+            </div>
+            <p class="policy-item-desc">
+              • <strong>Email Cán bộ DPO:</strong> <a href="mailto:dpo@hybridstore.vn" class="text-secondary fw-600">dpo@hybridstore.vn</a><br />
+              • <strong>Email Bộ phận An toàn Thông tin (InfoSec):</strong> <a href="mailto:infosec@hybridstore.vn" class="text-secondary fw-600">infosec@hybridstore.vn</a><br />
+              • <strong>Hotline bảo mật khẩn cấp (24/7):</strong> <span class="mono text-success fw-700">1900 8899 (Nhánh 3)</span><br />
+              • <strong>Địa chỉ Trụ sở chính:</strong> Tầng 1, Keangnam Landmark 72, Đường Phạm Hùng, Q. Nam Từ Liêm, TP. Hà Nội.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-success">timer</span>
+              8.3. Thời Gian Tiếp Nhận &amp; Phản Hồi
+            </div>
+            <p class="policy-item-desc">
+              Mọi yêu cầu truy xuất dữ liệu, sửa đổi thông tin hoặc rút lại sự đồng ý sẽ được Ban DPO phản hồi văn bản xác nhận trong vòng <strong>24 đến 48 giờ</strong> kể từ thời điểm tiếp nhận qua các kênh chính thức.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Nút điều hướng chân trang -->
+      <div class="policy-bottom-nav">
+        <a class="btn btn-secondary" href="../../index.html">
+          <span class="material-symbols-outlined icon-xs">arrow_back</span> Về Trang Chủ
+        </a>
+        <div class="flex items-center gap-3 flex-wrap">
+          <a class="btn btn-ghost" href="terms_of_service.html">Điều Khoản Dịch Vụ →</a>
+          <a class="btn btn-ghost" href="warranty_policy.html">Chính Sách Bảo Hành →</a>
+          <a class="btn btn-ghost" href="return_policy.html">Chính Sách Đổi Trả →</a>
+        </div>
+      </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer mt-8" data-component="footer"></footer>
+    <script src="../../js/utils.js"></script>
+    <script src="../../js/components.js"></script>
+    <script src="../../js/app.js"></script>
+  </body>
+</html>

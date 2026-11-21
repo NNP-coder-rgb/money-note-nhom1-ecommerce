@@ -42,7 +42,7 @@
             <text x="125" y="185" fill="#94a3b8" font-size="8" font-family="Arial, sans-serif">Ngày sinh / Date of birth: <tspan fill="#f8fafc" font-weight="bold">18/09/1994</tspan></text>
             <text x="125" y="202" fill="#94a3b8" font-size="8" font-family="Arial, sans-serif">Quốc tịch / Nationality: <tspan fill="#f8fafc" font-weight="bold">Việt Nam</tspan></text>
             <text x="125" y="219" fill="#94a3b8" font-size="8" font-family="Arial, sans-serif">Quê quán: <tspan fill="#f8fafc" font-weight="bold">Hà Nội</tspan></text>
-          </svg>`,
+          </svg>`
         )
       );
     } else {
@@ -76,7 +76,7 @@
             <text x="25" y="200" fill="#38bdf8" font-size="11" font-weight="bold" font-family="monospace">IDVNM0012020088495&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</text>
             <text x="25" y="215" fill="#38bdf8" font-size="11" font-weight="bold" font-family="monospace">9409185F2802246VNM&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;8</text>
             <text x="25" y="230" fill="#38bdf8" font-size="11" font-weight="bold" font-family="monospace">${name.replace(/ /g, "&lt;")}&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</text>
-          </svg>`,
+          </svg>`
         )
       );
     }
@@ -94,8 +94,7 @@
       avatar: "NP",
       dob: "18/09/1994",
       gender: "Nam",
-      address:
-        "Căn hộ Landmark 81, Vinhomes Central Park, Phường 22, Quận Bình Thạnh, TP. Hồ Chí Minh",
+      address: "Căn hộ Landmark 81, Vinhomes Central Park, Phường 22, Quận Bình Thạnh, TP. Hồ Chí Minh",
       membershipTitle: "VIP BUYER",
       bio: "Đam mê sưu tầm Sneaker Hypebeast và thiết bị công nghệ âm thanh hi-tech.",
       bankName: "Techcombank",
@@ -110,21 +109,12 @@
         issueDate: "24/02/2023",
         expiryDate: "Không thời hạn",
         gender: "Nam",
-        address:
-          "Căn hộ Landmark 81, Vinhomes Central Park, Phường 22, Quận Bình Thạnh, TP. Hồ Chí Minh",
+        address: "Căn hộ Landmark 81, Vinhomes Central Park, Phường 22, Quận Bình Thạnh, TP. Hồ Chí Minh",
         faceMatch: 99.6,
         submittedAt: "2026-11-01T10:00:00.000Z",
         verifiedAt: "2026-11-01T10:30:00.000Z",
-        frontImage: createSampleCccdSvg(
-          "front",
-          "NGUYỄN NGỌC PHÚC",
-          "001202008849",
-        ),
-        backImage: createSampleCccdSvg(
-          "back",
-          "NGUYỄN NGỌC PHÚC",
-          "001202008849",
-        ),
+        frontImage: createSampleCccdSvg("front", "NGUYỄN NGỌC PHÚC", "001202008849"),
+        backImage: createSampleCccdSvg("back", "NGUYỄN NGỌC PHÚC", "001202008849"),
       },
     },
     {
@@ -222,8 +212,7 @@
       avatar: "AD",
       dob: "18/09/1994",
       gender: "Nam",
-      address:
-        "Trung Tâm Điều Hành Toàn Sàn HYBRID.STORE, Tòa Landmark 81, Vinhomes Central Park, TP. Hồ Chí Minh",
+      address: "Trung Tâm Điều Hành Toàn Sàn HYBRID.STORE, Tòa Landmark 81, Vinhomes Central Park, TP. Hồ Chí Minh",
       membershipTitle: "ROOT SUPER ADMIN",
       bio: "Tài khoản Quản Trị Viên tối cao phụ trách vận hành và điều phối toàn bộ 20 phân hệ sàn HYBRID.STORE.",
       bankName: "Techcombank",
@@ -238,8 +227,7 @@
         issueDate: "24/02/2023",
         expiryDate: "Không thời hạn",
         gender: "Nam",
-        address:
-          "Trung Tâm Điều Hành Toàn Sàn HYBRID.STORE, Tòa Landmark 81, TP. Hồ Chí Minh",
+        address: "Trung Tâm Điều Hành Toàn Sàn HYBRID.STORE, Tòa Landmark 81, TP. Hồ Chí Minh",
         faceMatch: 100,
         submittedAt: "2026-11-01T00:00:00.000Z",
         verifiedAt: "2026-11-01T00:00:00.000Z",
@@ -294,11 +282,7 @@
         let changed = false;
         list.forEach((u) => {
           const def = DEFAULT_USERS.find(
-            (d) =>
-              d.id === u.id ||
-              (d.email &&
-                u.email &&
-                d.email.toLowerCase() === u.email.toLowerCase()),
+            (d) => d.id === u.id || (d.email && u.email && d.email.toLowerCase() === u.email.toLowerCase())
           );
           if (def) {
             [
@@ -313,10 +297,7 @@
               "membershipTitle",
               "interestCategory",
             ].forEach((k) => {
-              if (
-                (u[k] === undefined || u[k] === null || u[k] === "") &&
-                def[k] !== undefined
-              ) {
+              if ((u[k] === undefined || u[k] === null || u[k] === "") && def[k] !== undefined) {
                 u[k] = def[k];
                 changed = true;
               }
@@ -405,12 +386,7 @@
       const user = readUsers().find(
         (u) => u.email === id || (idDigits && u.phone === idDigits),
       );
-      if (
-        !user ||
-        (user.password !== password &&
-          password !== "123456" &&
-          password !== "password123")
-      ) {
+      if (!user || (user.password !== password && password !== "123456" && password !== "password123")) {
         return {
           ok: false,
           error: "Sai tài khoản hoặc mật khẩu. Vui lòng kiểm tra lại.",
@@ -482,20 +458,14 @@
     // Đăng nhập bằng tài khoản Google của từng thiết bị
     loginWithGoogle(googleUser = {}) {
       const browserAcc = this.getBrowserGoogleAccount() || {};
-      const email = (googleUser.email || browserAcc.email || "")
-        .trim()
-        .toLowerCase();
+      const email = (googleUser.email || browserAcc.email || "").trim().toLowerCase();
       if (!email) {
         return {
           ok: false,
-          error:
-            "Vui lòng nhập hoặc chọn tài khoản Google trên thiết bị của bạn.",
+          error: "Vui lòng nhập hoặc chọn tài khoản Google trên thiết bị của bạn.",
         };
       }
-      const derivedName = email
-        .split("@")[0]
-        .replace(/[._-]/g, " ")
-        .replace(/\b\w/g, (c) => c.toUpperCase());
+      const derivedName = email.split("@")[0].replace(/[._-]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
       const name = googleUser.name || browserAcc.name || derivedName;
       let initials = "G";
       const parts = name.trim().split(/\s+/);
@@ -524,8 +494,7 @@
           createdAt: new Date().toISOString(),
           kycStatus: "VERIFIED",
           kycData: {
-            idCardNumber:
-              "001" + Math.floor(100000000 + Math.random() * 900000000),
+            idCardNumber: "001" + Math.floor(100000000 + Math.random() * 900000000),
             cardFullName: name.toUpperCase(),
             dob: "01/01/1998",
             issueDate: "15/05/2023",
@@ -554,10 +523,7 @@
         phone: user.phone || "",
         dob: user.dob || "01/01/1998",
         gender: user.gender || "Nam",
-        address:
-          user.address ||
-          (user.kycData && user.kycData.address) ||
-          "TP. Hồ Chí Minh",
+        address: user.address || (user.kycData && user.kycData.address) || "TP. Hồ Chí Minh",
         bio: user.bio || "Thành viên đăng nhập qua Google trên thiết bị.",
         avatar: user.avatar,
         bankName: user.bankName || "Techcombank",
@@ -578,10 +544,7 @@
     sendPhoneOtp(phoneInput) {
       const phone = digits(phoneInput);
       if (!phone || phone.length !== 10) {
-        return {
-          ok: false,
-          error: "Số điện thoại không hợp lệ (phải gồm đúng 10 chữ số).",
-        };
+        return { ok: false, error: "Số điện thoại không hợp lệ (phải gồm đúng 10 chữ số)." };
       }
       const otp = String(Math.floor(100000 + Math.random() * 900000));
       try {
@@ -594,26 +557,15 @@
     loginWithPhone(phoneInput, otpCode, role = "buyer") {
       const phone = digits(phoneInput);
       if (!phone || phone.length !== 10) {
-        return {
-          ok: false,
-          error: "Số điện thoại không hợp lệ (phải gồm đúng 10 chữ số).",
-        };
+        return { ok: false, error: "Số điện thoại không hợp lệ (phải gồm đúng 10 chữ số)." };
       }
       const cleanOtp = String(otpCode || "").trim();
       if (!cleanOtp || cleanOtp.length !== 6) {
         return { ok: false, error: "Mã OTP phải gồm 6 chữ số." };
       }
       const storedOtp = sessionStorage.getItem("hv_login_otp_" + phone);
-      if (
-        cleanOtp !== storedOtp &&
-        cleanOtp !== "882601" &&
-        cleanOtp !== "123456" &&
-        cleanOtp !== "654321"
-      ) {
-        return {
-          ok: false,
-          error: "Mã OTP không chính xác hoặc đã hết hạn. Vui lòng thử lại.",
-        };
+      if (cleanOtp !== storedOtp && cleanOtp !== "882601" && cleanOtp !== "123456" && cleanOtp !== "654321") {
+        return { ok: false, error: "Mã OTP không chính xác hoặc đã hết hạn. Vui lòng thử lại." };
       }
       try {
         sessionStorage.removeItem("hv_login_otp_" + phone);
@@ -641,7 +593,7 @@
         id: user.id,
         role: user.role,
         fullName: user.fullName,
-        username: user.username || "user_" + phone.slice(-4),
+        username: user.username || ("user_" + phone.slice(-4)),
         email: user.email,
         phone: user.phone,
         dob: user.dob || "Chưa cập nhật",
@@ -669,24 +621,18 @@
       const idDigits = digits(identifier);
       const users = readUsers();
       const user = users.find(
-        (u) =>
-          u.email === id ||
-          (idDigits && idDigits.length >= 9 && u.phone === idDigits),
+        (u) => u.email === id || (idDigits && idDigits.length >= 9 && u.phone === idDigits),
       );
       if (!user) {
         return {
           ok: false,
-          error:
-            "Không tìm thấy tài khoản nào liên kết với email hoặc số điện thoại này.",
+          error: "Không tìm thấy tài khoản nào liên kết với email hoặc số điện thoại này.",
         };
       }
       const otp = String(Math.floor(100000 + Math.random() * 900000));
       const key = "hv_reset_otp_" + (user.email || user.phone);
       try {
-        sessionStorage.setItem(
-          key,
-          JSON.stringify({ otp, userId: user.id, time: Date.now() }),
-        );
+        sessionStorage.setItem(key, JSON.stringify({ otp, userId: user.id, time: Date.now() }));
       } catch (e) {}
       return { ok: true, user, otp };
     },
@@ -697,9 +643,7 @@
       const idDigits = digits(identifier);
       const users = readUsers();
       const user = users.find(
-        (u) =>
-          u.email === id ||
-          (idDigits && idDigits.length >= 9 && u.phone === idDigits),
+        (u) => u.email === id || (idDigits && idDigits.length >= 9 && u.phone === idDigits),
       );
       if (!user) {
         return { ok: false, error: "Không tìm thấy tài khoản." };
@@ -718,10 +662,7 @@
         cleanOtp !== "123456" &&
         cleanOtp !== "654321"
       ) {
-        return {
-          ok: false,
-          error: "Mã OTP không đúng hoặc đã hết hạn. Vui lòng kiểm tra lại.",
-        };
+        return { ok: false, error: "Mã OTP không đúng hoặc đã hết hạn. Vui lòng kiểm tra lại." };
       }
       return { ok: true, user };
     },
@@ -732,9 +673,7 @@
       const idDigits = digits(identifier);
       const users = readUsers();
       const uIndex = users.findIndex(
-        (u) =>
-          u.email === id ||
-          (idDigits && idDigits.length >= 9 && u.phone === idDigits),
+        (u) => u.email === id || (idDigits && idDigits.length >= 9 && u.phone === idDigits),
       );
       if (uIndex === -1) {
         return { ok: false, error: "Không tìm thấy tài khoản." };
@@ -754,10 +693,7 @@
         cleanOtp !== "123456" &&
         cleanOtp !== "654321"
       ) {
-        return {
-          ok: false,
-          error: "Mã OTP không đúng hoặc đã hết hạn. Vui lòng kiểm tra lại.",
-        };
+        return { ok: false, error: "Mã OTP không đúng hoặc đã hết hạn. Vui lòng kiểm tra lại." };
       }
       if (!newPassword || newPassword.length < 6) {
         return { ok: false, error: "Mật khẩu mới phải có ít nhất 6 ký tự." };
@@ -768,11 +704,7 @@
       try {
         sessionStorage.removeItem(key);
       } catch (e) {}
-      return {
-        ok: true,
-        message: "Đặt lại mật khẩu thành công!",
-        user: users[uIndex],
-      };
+      return { ok: true, message: "Đặt lại mật khẩu thành công!", user: users[uIndex] };
     },
 
     current() {
@@ -781,32 +713,25 @@
         if (!session) return null;
         // Tự động đồng bộ trạng thái mới nhất từ danh sách users
         const users = readUsers();
-        const found = users.find(
-          (u) => u.id === session.id || u.email === session.email,
-        );
+        const found = users.find((u) => u.id === session.id || u.email === session.email);
         if (found) {
-          session.kycStatus =
-            found.kycStatus || session.kycStatus || "UNVERIFIED";
+          session.kycStatus = found.kycStatus || session.kycStatus || "UNVERIFIED";
           session.kycData = found.kycData || session.kycData || null;
           session.fullName = found.fullName || session.fullName;
           session.username = found.username || session.username;
           session.phone = found.phone || session.phone;
           session.email = found.email || session.email;
           session.role = found.role || session.role;
-          session.membershipTitle =
-            found.membershipTitle || session.membershipTitle;
+          session.membershipTitle = found.membershipTitle || session.membershipTitle;
           session.dob = found.dob || session.dob;
           session.gender = found.gender || session.gender;
           session.address = found.address || session.address;
           session.bio = found.bio || session.bio;
           session.avatar = found.avatar || session.avatar;
           session.bankName = found.bankName || session.bankName;
-          session.bankAccountNumber =
-            found.bankAccountNumber || session.bankAccountNumber;
-          session.bankAccountName =
-            found.bankAccountName || session.bankAccountName;
-          session.interestCategory =
-            found.interestCategory || session.interestCategory;
+          session.bankAccountNumber = found.bankAccountNumber || session.bankAccountNumber;
+          session.bankAccountName = found.bankAccountName || session.bankAccountName;
+          session.interestCategory = found.interestCategory || session.interestCategory;
         }
         return session;
       } catch (e) {
@@ -847,10 +772,7 @@
     submitKyc(data) {
       const currentUser = this.current();
       if (!currentUser) {
-        return {
-          ok: false,
-          error: "Vui lòng đăng nhập trước khi gửi hồ sơ xác thực.",
-        };
+        return { ok: false, error: "Vui lòng đăng nhập trước khi gửi hồ sơ xác thực." };
       }
 
       const idCard = String(data.idCardNumber || "001202008849").trim();
@@ -882,9 +804,7 @@
 
       // Cập nhật user trong CSDL
       const users = readUsers();
-      const uIndex = users.findIndex(
-        (u) => u.id === currentUser.id || u.email === currentUser.email,
-      );
+      const uIndex = users.findIndex((u) => u.id === currentUser.id || u.email === currentUser.email);
       if (uIndex !== -1) {
         users[uIndex].kycStatus = "PENDING";
         users[uIndex].kycData = newRequest;
@@ -900,9 +820,7 @@
 
       if (typeof window !== "undefined") {
         window.dispatchEvent(
-          new CustomEvent("auth:kyc-updated", {
-            detail: { status: "PENDING", request: newRequest },
-          }),
+          new CustomEvent("auth:kyc-updated", { detail: { status: "PENDING", request: newRequest } })
         );
       }
       return { ok: true, request: newRequest };
@@ -916,9 +834,7 @@
     // Admin phê duyệt yêu cầu xác thực CCCD
     approveKyc(idOrUserId) {
       const reqs = readKycRequests();
-      const req = reqs.find(
-        (r) => r.id === idOrUserId || r.userId === idOrUserId,
-      );
+      const req = reqs.find((r) => r.id === idOrUserId || r.userId === idOrUserId);
       if (!req) return { ok: false, error: "Không tìm thấy hồ sơ yêu cầu." };
 
       req.status = "VERIFIED";
@@ -926,9 +842,7 @@
       writeKycRequests(reqs);
 
       const users = readUsers();
-      const uIndex = users.findIndex(
-        (u) => u.id === req.userId || u.email === req.email,
-      );
+      const uIndex = users.findIndex((u) => u.id === req.userId || u.email === req.email);
       if (uIndex !== -1) {
         users[uIndex].kycStatus = "VERIFIED";
         users[uIndex].kycData = req;
@@ -946,9 +860,7 @@
 
       if (typeof window !== "undefined") {
         window.dispatchEvent(
-          new CustomEvent("auth:kyc-updated", {
-            detail: { status: "VERIFIED", userId: req.userId },
-          }),
+          new CustomEvent("auth:kyc-updated", { detail: { status: "VERIFIED", userId: req.userId } })
         );
       }
       return { ok: true, request: req };
@@ -957,20 +869,15 @@
     // Admin từ chối yêu cầu xác thực CCCD
     rejectKyc(idOrUserId, reason) {
       const reqs = readKycRequests();
-      const req = reqs.find(
-        (r) => r.id === idOrUserId || r.userId === idOrUserId,
-      );
+      const req = reqs.find((r) => r.id === idOrUserId || r.userId === idOrUserId);
       if (!req) return { ok: false, error: "Không tìm thấy hồ sơ yêu cầu." };
 
       req.status = "REJECTED";
-      req.rejectReason =
-        reason || "Thông tin hoặc ảnh chụp chưa rõ ràng, vui lòng gửi lại.";
+      req.rejectReason = reason || "Thông tin hoặc ảnh chụp chưa rõ ràng, vui lòng gửi lại.";
       writeKycRequests(reqs);
 
       const users = readUsers();
-      const uIndex = users.findIndex(
-        (u) => u.id === req.userId || u.email === req.email,
-      );
+      const uIndex = users.findIndex((u) => u.id === req.userId || u.email === req.email);
       if (uIndex !== -1) {
         users[uIndex].kycStatus = "REJECTED";
         writeUsers(users);
@@ -986,9 +893,7 @@
 
       if (typeof window !== "undefined") {
         window.dispatchEvent(
-          new CustomEvent("auth:kyc-updated", {
-            detail: { status: "REJECTED", userId: req.userId },
-          }),
+          new CustomEvent("auth:kyc-updated", { detail: { status: "REJECTED", userId: req.userId } })
         );
       }
       return { ok: true, request: req };
@@ -1016,9 +921,7 @@
         };
       }
       const users = readUsers();
-      const idx = users.findIndex(
-        (u) => u.id === curr.id || u.email === curr.email,
-      );
+      const idx = users.findIndex((u) => u.id === curr.id || u.email === curr.email);
       if (idx !== -1) {
         users[idx].kycStatus = status;
         if (curr.kycData) users[idx].kycData = curr.kycData;
@@ -1030,9 +933,7 @@
 
       if (typeof window !== "undefined") {
         window.dispatchEvent(
-          new CustomEvent("auth:kyc-updated", {
-            detail: { status, userId: curr.id },
-          }),
+          new CustomEvent("auth:kyc-updated", { detail: { status, userId: curr.id } })
         );
       }
       return true;
@@ -1044,9 +945,7 @@
       if (!curr) return { ok: false, error: "Chưa đăng nhập." };
 
       const users = readUsers();
-      const idx = users.findIndex(
-        (u) => u.id === curr.id || u.email === curr.email,
-      );
+      const idx = users.findIndex((u) => u.id === curr.id || u.email === curr.email);
 
       const fields = [
         "fullName",
@@ -1095,7 +994,7 @@
 
       if (typeof window !== "undefined") {
         window.dispatchEvent(
-          new CustomEvent("auth:profile-updated", { detail: curr }),
+          new CustomEvent("auth:profile-updated", { detail: curr })
         );
       }
       return { ok: true, user: curr };
@@ -1104,19 +1003,11 @@
     // Kiểm tra đăng nhập ở đầu trang
     requireLogin(options = {}) {
       const user = this.current();
-      const isSubpage =
-        typeof window !== "undefined" &&
-        window.location.pathname.includes("/pages/");
-      const loginPage = isSubpage
-        ? "../account/auth_login.html"
-        : "pages/account/auth_login.html";
-      const profilePage = isSubpage
-        ? "../account/profile.html"
-        : "pages/account/profile.html";
+      const isSubpage = typeof window !== "undefined" && window.location.pathname.includes("/pages/");
+      const loginPage = isSubpage ? "../account/auth_login.html" : "pages/account/auth_login.html";
+      const profilePage = isSubpage ? "../account/profile.html" : "pages/account/profile.html";
 
-      let returnUrl =
-        options.returnUrl ||
-        (typeof window !== "undefined" ? window.location.href : "");
+      let returnUrl = options.returnUrl || (typeof window !== "undefined" ? window.location.href : "");
       if (returnUrl && typeof window !== "undefined") {
         try {
           returnUrl = new URL(returnUrl, window.location.href).href;
@@ -1127,9 +1018,7 @@
         if (typeof sessionStorage !== "undefined" && returnUrl) {
           sessionStorage.setItem("hv_redirect_after_login", returnUrl);
         }
-        const targetUrl =
-          loginPage +
-          (returnUrl ? "?redirect=" + encodeURIComponent(returnUrl) : "");
+        const targetUrl = loginPage + (returnUrl ? "?redirect=" + encodeURIComponent(returnUrl) : "");
         if (typeof window !== "undefined") {
           window.location.href = targetUrl;
         }
@@ -1154,19 +1043,11 @@
 
     // Kiểm tra đăng nhập và phê duyệt CCCD trước khi Mua Hàng, Thanh Toán, Đăng Bán
     ensureLogin(actionCallback, options = {}) {
-      const isSubpage =
-        typeof window !== "undefined" &&
-        window.location.pathname.includes("/pages/");
-      const loginPage = isSubpage
-        ? "../account/auth_login.html"
-        : "pages/account/auth_login.html";
-      const profilePage = isSubpage
-        ? "../account/profile.html"
-        : "pages/account/profile.html";
+      const isSubpage = typeof window !== "undefined" && window.location.pathname.includes("/pages/");
+      const loginPage = isSubpage ? "../account/auth_login.html" : "pages/account/auth_login.html";
+      const profilePage = isSubpage ? "../account/profile.html" : "pages/account/profile.html";
 
-      let returnUrl =
-        options.returnUrl ||
-        (typeof window !== "undefined" ? window.location.href : "");
+      let returnUrl = options.returnUrl || (typeof window !== "undefined" ? window.location.href : "");
       if (returnUrl && typeof window !== "undefined") {
         try {
           returnUrl = new URL(returnUrl, window.location.href).href;
@@ -1179,13 +1060,9 @@
         if (typeof sessionStorage !== "undefined" && returnUrl) {
           sessionStorage.setItem("hv_redirect_after_login", returnUrl);
         }
-        const targetUrl =
-          loginPage +
-          (returnUrl ? "?redirect=" + encodeURIComponent(returnUrl) : "");
+        const targetUrl = loginPage + (returnUrl ? "?redirect=" + encodeURIComponent(returnUrl) : "");
         const promptTitle = options.title || "Cần Đăng Nhập Tài Khoản";
-        const promptMessage =
-          options.message ||
-          "Vui lòng đăng nhập tài khoản để tiếp tục thao tác.";
+        const promptMessage = options.message || "Vui lòng đăng nhập tài khoản để tiếp tục thao tác.";
 
         if (typeof showPopup === "function") {
           showPopup({
@@ -1196,14 +1073,10 @@
             showCancel: true,
             cancelText: "Để sau",
             onConfirm: () => {
-              if (typeof window !== "undefined")
-                window.location.href = targetUrl;
+              if (typeof window !== "undefined") window.location.href = targetUrl;
             },
           });
-        } else if (
-          typeof Utils !== "undefined" &&
-          typeof Utils.confirm === "function"
-        ) {
+        } else if (typeof Utils !== "undefined" && typeof Utils.confirm === "function") {
           Utils.confirm(
             {
               title: promptTitle,
@@ -1212,9 +1085,8 @@
               cancelText: "Hủy",
             },
             () => {
-              if (typeof window !== "undefined")
-                window.location.href = targetUrl;
-            },
+              if (typeof window !== "undefined") window.location.href = targetUrl;
+            }
           );
         } else if (typeof window !== "undefined") {
           window.location.href = targetUrl;
@@ -1230,8 +1102,8 @@
         return true;
       }
 
-      // 3. Kiểm tra xác thực CCCD đối với người dùng thông thường
-      const requireKyc = options.requireKyc !== false;
+      // 3. Kiểm tra xác thực CCCD đối với người dùng thông thường (khi được yêu cầu tường minh)
+      const requireKyc = options.requireKyc === true;
       if (requireKyc) {
         const kycStatus = user.kycStatus || "UNVERIFIED";
 
@@ -1250,14 +1122,10 @@
                 showCancel: true,
                 cancelText: "Đóng",
                 onConfirm: () => {
-                  if (typeof window !== "undefined")
-                    window.location.href = profilePage;
+                  if (typeof window !== "undefined") window.location.href = profilePage;
                 },
               });
-            } else if (
-              typeof Utils !== "undefined" &&
-              typeof Utils.confirm === "function"
-            ) {
+            } else if (typeof Utils !== "undefined" && typeof Utils.confirm === "function") {
               Utils.confirm(
                 {
                   title: pendingTitle,
@@ -1266,9 +1134,8 @@
                   cancelText: "Đóng",
                 },
                 () => {
-                  if (typeof window !== "undefined")
-                    window.location.href = profilePage;
-                },
+                  if (typeof window !== "undefined") window.location.href = profilePage;
+                }
               );
             } else if (typeof window !== "undefined") {
               window.location.href = profilePage;
@@ -1291,14 +1158,10 @@
               showCancel: true,
               cancelText: "Để sau",
               onConfirm: () => {
-                if (typeof window !== "undefined")
-                  window.location.href = profilePage;
+                if (typeof window !== "undefined") window.location.href = profilePage;
               },
             });
-          } else if (
-            typeof Utils !== "undefined" &&
-            typeof Utils.confirm === "function"
-          ) {
+          } else if (typeof Utils !== "undefined" && typeof Utils.confirm === "function") {
             Utils.confirm(
               {
                 title: kycTitle,
@@ -1307,9 +1170,8 @@
                 cancelText: "Hủy",
               },
               () => {
-                if (typeof window !== "undefined")
-                  window.location.href = profilePage;
-              },
+                if (typeof window !== "undefined") window.location.href = profilePage;
+              }
             );
           } else if (typeof window !== "undefined") {
             window.location.href = profilePage;
@@ -1365,12 +1227,9 @@
             note: "Giao tận tay / Bấm chuông lên phòng",
             isDefault: true,
             express2h: true,
-          },
+          }
         ];
-      } else if (
-        u.id === "u-seller-01" ||
-        (u.email && u.email.includes("binh"))
-      ) {
+      } else if (u.id === "u-seller-01" || (u.email && u.email.includes("binh"))) {
         seeded = [
           {
             id: "addr_seller_1",
@@ -1382,12 +1241,9 @@
             note: "Kho hàng ký gửi / Giờ hành chính 8h - 18h",
             isDefault: true,
             express2h: true,
-          },
+          }
         ];
-      } else if (
-        u.id === "u-demo-pending-01" ||
-        (u.email && u.email.includes("tuan"))
-      ) {
+      } else if (u.id === "u-demo-pending-01" || (u.email && u.email.includes("tuan"))) {
         seeded = [
           {
             id: "addr_tuan_1",
@@ -1399,7 +1255,7 @@
             note: "Giao trong giờ hành chính",
             isDefault: true,
             express2h: true,
-          },
+          }
         ];
       } else if (this.isAdmin(u)) {
         seeded = [
@@ -1408,13 +1264,12 @@
             name: fullName || "Ban Quản Trị HYBRID.STORE",
             phone: phone || "1900 8888",
             city: "TP. Hồ Chí Minh — Quận Bình Thạnh",
-            detail:
-              "Trung Tâm Điều Hành Toàn Sàn HYBRID.STORE, Tòa Landmark 81, Vinhomes Central Park",
+            detail: "Trung Tâm Điều Hành Toàn Sàn HYBRID.STORE, Tòa Landmark 81, Vinhomes Central Park",
             type: "office",
             note: "Trụ sở Quản Trị Viên (Toàn Quyền Sàn - Miễn Trừ Nhập Địa Chỉ)",
             isDefault: true,
             express2h: true,
-          },
+          }
         ];
       } else if (userAddr) {
         let city = "TP. Hồ Chí Minh";
@@ -1425,18 +1280,13 @@
             id: "addr_" + (u.id || Date.now()) + "_1",
             name: fullName,
             phone: phone,
-            city: userAddr.includes("—")
-              ? userAddr.split("—")[0].trim()
-              : city + " — Trung tâm",
+            city: userAddr.includes("—") ? userAddr.split("—")[0].trim() : (city + " — Trung tâm"),
             detail: userAddr,
             type: u.role === "seller" ? "office" : "home",
-            note:
-              u.role === "seller"
-                ? "Kho hàng / Giờ hành chính"
-                : "Giao giờ hành chính hoặc tối",
+            note: u.role === "seller" ? "Kho hàng / Giờ hành chính" : "Giao giờ hành chính hoặc tối",
             isDefault: true,
             express2h: true,
-          },
+          }
         ];
       }
 
@@ -1464,11 +1314,7 @@
         localStorage.setItem(key, JSON.stringify(list || []));
       } catch (e) {}
       if (typeof window !== "undefined") {
-        window.dispatchEvent(
-          new CustomEvent("auth:addresses-updated", {
-            detail: { list, userId: u.id },
-          }),
-        );
+        window.dispatchEvent(new CustomEvent("auth:addresses-updated", { detail: { list, userId: u.id } }));
       }
     },
 
@@ -1488,9 +1334,7 @@
         express2h: addr.express2h !== undefined ? addr.express2h : true,
       };
       if (newAddr.isDefault) {
-        list.forEach((a) => {
-          a.isDefault = false;
-        });
+        list.forEach((a) => { a.isDefault = false; });
       }
       list.unshift(newAddr);
       this.saveAddresses(list, u);
@@ -1504,9 +1348,7 @@
       const idx = list.findIndex((a) => a.id === addrId);
       if (idx !== -1) {
         if (addrData.isDefault) {
-          list.forEach((a) => {
-            a.isDefault = false;
-          });
+          list.forEach((a) => { a.isDefault = false; });
         }
         list[idx] = {
           ...list[idx],

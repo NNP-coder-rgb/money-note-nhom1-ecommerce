@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - Không Tìm Thấy Trang | HYBRID.STORE</title>
+
+    <!-- Chống giật giao diện (Zero-FOUC Theme Init) -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("hybrid_theme") || "dark";
+          document.documentElement.setAttribute("data-theme", t);
+          if (t === "light") document.documentElement.classList.add("light-theme");
+        } catch (e) {}
+      })();
+    </script>
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="stylesheet" href="../../css/base.css" />
+    <link rel="stylesheet" href="../../css/catalog.css" />
+    <link rel="stylesheet" href="../../css/master_screens.css" />
+  </head>
+  <body>
+    <!-- ===== HEADER ===== -->
+    <header class="site-header site-header--marketplace" id="siteHeader">
+      <div class="container">
+        <a class="brand" href="../../index.html">
+          <span class="brand-mark"><span class="material-symbols-outlined">token</span></span>
+          <span>HYBRID<span class="text-secondary">.STORE</span></span>
+        </a>
+
+        <div class="header-actions">
+          <a class="btn btn-secondary hide-sm" href="../shop/catalog.html">
+            <span class="material-symbols-outlined icon-xs">storefront</span> Mua Sắm
+          </a>
+          <button
+            class="icon-btn theme-toggle-btn"
+            id="themeToggleBtn"
+            type="button"
+            aria-label="Chuyển chế độ sáng / tối"
+            title="Chuyển sang giao diện Sáng / Tối"
+          >
+            <span class="material-symbols-outlined theme-toggle-icon">light_mode</span>
+          </button>
+          <a class="icon-btn" href="../shop/cart.html" aria-label="Giỏ hàng" title="Giỏ hàng">
+            <span class="material-symbols-outlined">shopping_bag</span>
+            <span class="badge badge-counter" id="cartCount">0</span>
+          </a>
+          <a class="avatar" id="avatarBtn" href="../account/profile.html" title="Tài khoản">
+            <span class="material-symbols-outlined">person</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="notfound-hero-box">
+        <div class="glitch-404">404</div>
+        <h1 class="page-title mb-2 text-center" style="font-size: 1.85rem;">
+          Úi, Trang Này Không Tồn Tại Hoặc Đã Bị Di Dời!
+        </h1>
+        <p class="text-muted text-center max-w-lg mb-4" style="max-width: 580px; line-height: 1.6;">
+          Món hàng có thể đã được người khác chốt đơn mua nhanh, hoặc đường dẫn truy cập đã thay đổi. Đừng lo, HYBRID.STORE luôn có hàng ngàn sản phẩm công nghệ, thời trang chính hãng và đồ cũ giá hời đang chờ bạn!
+        </p>
+
+        <!-- Tìm kiếm trực tiếp -->
+        <form action="../shop/catalog.html" method="GET" class="input-group mb-5" style="max-width: 480px; width: 100%;">
+          <span class="icon-left material-symbols-outlined">search</span>
+          <input
+            type="text"
+            name="q"
+            class="input"
+            placeholder="Tìm kiếm sản phẩm khác (ví dụ: iPhone, Jordan, Sony...)"
+            style="height: 48px;"
+          />
+          <button type="submit" class="btn btn-primary" style="height: 48px; padding-inline: 20px;">
+            Tìm Kiếm
+          </button>
+        </form>
+
+        <div class="flex items-center gap-3 flex-wrap justify-center mb-6">
+          <a class="btn btn-primary" href="../../index.html">
+            <span class="material-symbols-outlined icon-xs">home</span>
+            Về Trang Chủ HYBRID
+          </a>
+          <a class="btn btn-secondary" href="../shop/catalog.html?type=c2c">
+            <span class="material-symbols-outlined icon-xs">recycling</span>
+            Khám Phá Chợ Đồ Cũ C2C
+          </a>
+          <a class="btn btn-outlined" href="../shop/catalog.html?type=mall">
+            <span class="material-symbols-outlined icon-xs">verified</span>
+            Xem Hàng Brand Mall Mới 100%
+          </a>
+        </div>
+      </div>
+
+      <!-- GỢI Ý CÁC SẢN PHẨM THỊNH HÀNH -->
+      <section class="mb-8">
+        <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-warning">local_fire_department</span>
+            <h2 class="section-title" style="margin: 0; font-size: 1.25rem;">Gợi Ý Sản Phẩm Đang Được Săn Đón</h2>
+          </div>
+          <a href="../shop/catalog.html" class="text-xs text-secondary fw-700">Xem tất cả sản phẩm →</a>
+        </div>
+        <div class="grid grid-4 gap-4" id="trendingProductsGrid">
+          <!-- Render động -->
+        </div>
+      </section>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer mt-8" data-component="footer"></footer>
+
+    <div class="toast-stack" id="toastStack"></div>
+
+    <!-- Scripts -->
+    <script src="../../js/popup.js"></script>
+    <script src="../../js/auth.js"></script>
+    <script src="../../js/mock_data.js"></script>
+    <script src="../../js/utils.js"></script>
+    <script src="../../js/components.js"></script>
+    <script src="../../js/app.js"></script>
+    <script>
+      (function () {
+        "use strict";
+
+        // Render 4 sản phẩm gợi ý
+        const grid = document.getElementById("trendingProductsGrid");
+        if (grid && typeof PRODUCTS !== "undefined" && Array.isArray(PRODUCTS)) {
+          const sample = PRODUCTS.slice(0, 4);
+          grid.innerHTML = sample.map((p) => {
+            const isMall = p.type === "mall";
+            const priceStr = Utils.formatCurrency(p.price);
+            const rawImg = p.img || p.image;
+            const imgSrc = typeof window !== "undefined" && window.resolveAssetUrl ? window.resolveAssetUrl(rawImg) : rawImg;
+            const linkHref = isMall
+              ? "../shop/product_new.html?id=" + encodeURIComponent(p.id)
+              : "../shop/product_used.html?id=" + encodeURIComponent(p.id);
+
+            return `
+              <div class="product-card">
+                <a href="${linkHref}" class="product-card-thumb-wrap block" style="position: relative; overflow: hidden; border-radius: 8px; aspect-ratio: 1;">
+                  <img src="${imgSrc}" alt="${p.name}" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" />
+                  <span class="badge ${isMall ? 'badge-primary' : 'badge-secondary'}" style="position: absolute; top: 8px; left: 8px; font-size: 10px;">
+                    ${isMall ? 'BRAND MALL' : 'LIKE NEW ' + (p.condition || '99%')}
+                  </span>
+                </a>
+                <div class="p-3">
+                  <h3 class="text-xs fw-700 line-clamp-2 mb-1" style="min-height: 32px;">
+                    <a href="${linkHref}" class="text-white hover-underline">${p.name}</a>
+                  </h3>
+                  <div class="mono fw-700 text-gradient mb-2">${priceStr}</div>
+                  <a href="${linkHref}" class="btn btn-outlined btn-sm is-full">
+                    Xem Chi Tiết
+                  </a>
+                </div>
+              </div>
+            `;
+          }).join("");
+        }
+
+        // Cập nhật số giỏ hàng
+        if (typeof Cart !== "undefined" && Cart.getCount) {
+          const cEl = document.getElementById("cartCount");
+          if (cEl) cEl.textContent = Cart.getCount();
+        }
+      })();
+    </script>
+  </body>
+</html>

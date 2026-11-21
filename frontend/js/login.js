@@ -1,8 +1,41 @@
 // login.js — xử lý đăng nhập mật khẩu, đăng nhập Google, SMS OTP và khôi phục mật khẩu
 (function () {
-  const HOME_PAGE = window.location.pathname.includes("/pages/")
-    ? "../../index.html"
-    : "index.html";
+  const isSubpage = typeof window !== "undefined" && window.location.pathname.includes("/pages/");
+  const HOME_PAGE = isSubpage ? "../../index.html" : "index.html";
+  const SELLER_PAGE = isSubpage ? "../seller/dashboard.html" : "pages/seller/dashboard.html";
+  const ADMIN_PAGE = isSubpage ? "../admin/admin_system.html" : "pages/admin/admin_system.html";
+
+  // Hàm xác định đích đến mặc định theo vai trò tài khoản (Role-based Navigation)
+  function getRoleDefaultTarget(user, selectedRole) {
+    const roleVal = ((user && user.role) || selectedRole || "buyer").toLowerCase();
+    if (roleVal === "seller") return SELLER_PAGE;
+    if (roleVal === "admin") return ADMIN_PAGE;
+    return HOME_PAGE;
+  }
+
+  // Hàm lấy nhãn nút xác nhận trên popup thông báo
+  function getConfirmButtonLabel(explicitTarget, user, selectedRole) {
+    if (explicitTarget && explicitTarget !== HOME_PAGE && explicitTarget !== SELLER_PAGE && explicitTarget !== ADMIN_PAGE) {
+      return "Tiếp tục";
+    }
+    const roleVal = ((user && user.role) || selectedRole || "buyer").toLowerCase();
+    if (roleVal === "seller") return "Vào Kênh Người Bán";
+    if (roleVal === "admin") return "Vào Cổng Quản Trị";
+    return "Vào trang chủ";
+  }
+
+  // Thông điệp chào mừng tương ứng theo vai trò
+  function getWelcomeMessage(user, selectedRole) {
+    const name = (user && (user.fullName || user.username)) || "bạn";
+    const roleVal = ((user && user.role) || selectedRole || "buyer").toLowerCase();
+    if (roleVal === "seller") {
+      return `Chào mừng Người Bán ${name} quay lại Kênh Quản Lý Gian Hàng!`;
+    }
+    if (roleVal === "admin") {
+      return `Chào mừng Quản trị viên ${name} quay lại Master Admin Portal!`;
+    }
+    return `Chào mừng ${name} quay lại mua sắm tại Hybrid Store.`;
+  }
 
   // Elements: Form đăng nhập mật khẩu
   const form = document.getElementById("vaultLoginForm");
@@ -31,32 +64,22 @@
   // Elements: Google Login & Account Management
   const btnGoogleLogin = document.getElementById("btnGoogleLogin");
   const googleLoginBtnText = document.getElementById("googleLoginBtnText");
-  const browserGoogleEmailDisplay = document.getElementById(
-    "browserGoogleEmailDisplay",
-  );
+  const browserGoogleEmailDisplay = document.getElementById("browserGoogleEmailDisplay");
   const googleAccountStatus = document.getElementById("googleAccountStatus");
-  const btnSwitchGoogleAccount = document.getElementById(
-    "btnSwitchGoogleAccount",
-  );
+  const btnSwitchGoogleAccount = document.getElementById("btnSwitchGoogleAccount");
 
   // Elements: Google Modal
   const googleAuthModal = document.getElementById("googleAuthModal");
   const btnCloseGoogleModal = document.getElementById("btnCloseGoogleModal");
-  const currentBrowserGoogleCard = document.getElementById(
-    "currentBrowserGoogleCard",
-  );
+  const currentBrowserGoogleCard = document.getElementById("currentBrowserGoogleCard");
   const modalGoogleAvatar = document.getElementById("modalGoogleAvatar");
   const modalGoogleName = document.getElementById("modalGoogleName");
   const modalGoogleEmail = document.getElementById("modalGoogleEmail");
-  const btnConfirmCurrentGoogle = document.getElementById(
-    "btnConfirmCurrentGoogle",
-  );
+  const btnConfirmCurrentGoogle = document.getElementById("btnConfirmCurrentGoogle");
   const customGoogleEmail = document.getElementById("customGoogleEmail");
   const customGoogleName = document.getElementById("customGoogleName");
   const rememberCustomGoogle = document.getElementById("rememberCustomGoogle");
-  const btnSubmitCustomGoogle = document.getElementById(
-    "btnSubmitCustomGoogle",
-  );
+  const btnSubmitCustomGoogle = document.getElementById("btnSubmitCustomGoogle");
 
   // Elements: Forgot Password Modal & Wizard Steps
   const linkForgotPassword = document.getElementById("linkForgotPassword");
@@ -76,9 +99,7 @@
   const btnBackToStep1 = document.getElementById("btnBackToStep1");
   const btnVerifyForgotOtp = document.getElementById("btnVerifyForgotOtp");
   const forgotNewPassword = document.getElementById("forgotNewPassword");
-  const forgotConfirmPassword = document.getElementById(
-    "forgotConfirmPassword",
-  );
+  const forgotConfirmPassword = document.getElementById("forgotConfirmPassword");
   const forgotStep3Error = document.getElementById("forgotStep3Error");
   const btnSubmitNewPassword = document.getElementById("btnSubmitNewPassword");
 
@@ -93,9 +114,7 @@
   // Lấy đường dẫn chuyển hướng sau đăng nhập (từ query ?redirect= hoặc sessionStorage)
   function getRedirectTarget() {
     try {
-      const urlParam = new URLSearchParams(window.location.search).get(
-        "redirect",
-      );
+      const urlParam = new URLSearchParams(window.location.search).get("redirect");
       if (urlParam) return decodeURIComponent(urlParam);
       const stored = sessionStorage.getItem("hv_redirect_after_login");
       if (stored) return stored;
@@ -105,13 +124,14 @@
 
   const initialRedirect = getRedirectTarget();
 
-  // Đã đăng nhập rồi thì chuyển hướng về trang trước hoặc trang chủ
+  // Đã đăng nhập rồi thì chuyển hướng về trang trước hoặc trang tương ứng theo vai trò
   if (typeof Auth !== "undefined" && Auth.current()) {
+    const cur = Auth.current();
     if (initialRedirect) {
       sessionStorage.removeItem("hv_redirect_after_login");
       window.location.href = initialRedirect;
     } else {
-      window.location.href = HOME_PAGE;
+      window.location.href = getRoleDefaultTarget(cur);
     }
     return;
   }
@@ -182,13 +202,68 @@
     seller: "ĐĂNG NHẬP NGƯỜI BÁN",
   };
   let role = "buyer";
-  if (btnText) btnText.textContent = BTN_LABEL.buyer;
+
+  // Đọc role từ URL query (ví dụ ?role=seller khi bấm từ nút "Kênh Người Bán" hoặc sau đăng ký)
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const queryRole = urlParams.get("role");
+    if (queryRole === "seller" || queryRole === "buyer") {
+      role = queryRole;
+    }
+  } catch (e) {}
+
+  const roleDestText = document.getElementById("roleDestinationText");
+  function updateRoleDestHint(currentRole) {
+    if (!roleDestText) return;
+    const r = String(currentRole || "buyer").toLowerCase();
+    if (r === "seller") {
+      roleDestText.innerHTML = 'Sau khi đăng nhập sẽ vào: <strong class="text-warning">Kênh Quản Lý Gian Hàng (Seller Dashboard)</strong>';
+    } else if (r === "admin") {
+      roleDestText.innerHTML = 'Sau khi đăng nhập sẽ vào: <strong class="text-primary">Master Admin Command Portal</strong>';
+    } else {
+      roleDestText.innerHTML = 'Sau khi đăng nhập sẽ vào: <strong class="text-secondary">Trang Chủ Mua Sắm (Marketplace)</strong>';
+    }
+  }
+
+  if (btnText) btnText.textContent = BTN_LABEL[role] || BTN_LABEL.buyer;
+  updateRoleDestHint(role);
   roleBtns.forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.role === role);
     btn.addEventListener("click", () => {
       roleBtns.forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
       role = btn.dataset.role;
       if (btnText) btnText.textContent = BTN_LABEL[role];
+      updateRoleDestHint(role);
+    });
+  });
+
+  // Gắn sự kiện cho các chip tài khoản kiểm thử nhanh (Demo Accounts)
+  const demoChips = document.querySelectorAll("#demoAccountsChips [data-demo-id]");
+  demoChips.forEach((chip) => {
+    chip.addEventListener("click", () => {
+      const demoRole = chip.dataset.demoRole;
+      const demoId = chip.dataset.demoId;
+      const demoPwd = chip.dataset.demoPwd;
+
+      // Chuyển tab sang Mật khẩu nếu đang ở OTP
+      if (tabLoginPassword && tabLoginPassword.click) {
+        tabLoginPassword.click();
+      }
+
+      // Kích hoạt vai trò tương ứng nếu có nút role
+      if (demoRole === "seller" || demoRole === "buyer") {
+        role = demoRole;
+        roleBtns.forEach((b) => b.classList.toggle("active", b.dataset.role === role));
+        if (btnText) btnText.textContent = BTN_LABEL[role];
+        updateRoleDestHint(role);
+      } else if (demoRole === "admin") {
+        updateRoleDestHint("admin");
+      }
+
+      if (idInput) idInput.value = demoId;
+      if (pwd) pwd.value = demoPwd;
+      if (submitBtn) submitBtn.focus();
     });
   });
 
@@ -227,12 +302,8 @@
   }
 
   function clearErrors() {
-    form
-      .querySelectorAll(".has-error")
-      .forEach((g) => g.classList.remove("has-error"));
-    form
-      .querySelectorAll(".is-invalid")
-      .forEach((i) => i.classList.remove("is-invalid"));
+    form.querySelectorAll(".has-error").forEach((g) => g.classList.remove("has-error"));
+    form.querySelectorAll(".is-invalid").forEach((i) => i.classList.remove("is-invalid"));
   }
 
   form.addEventListener("submit", (e) => {
@@ -281,24 +352,27 @@
       }
 
       const targetAfterLogin = getRedirectTarget();
+      const destination = targetAfterLogin || getRoleDefaultTarget(res.user, role);
+      const confirmLabel = getConfirmButtonLabel(targetAfterLogin, res.user, role);
 
       if (typeof showPopup === "function") {
         showPopup({
           type: "success",
           title: "Đăng nhập thành công!",
-          message: "Chào mừng " + res.user.fullName + " quay lại.",
-          confirmText: targetAfterLogin ? "Tiếp tục" : "Vào trang chủ",
+          message: getWelcomeMessage(res.user, role),
+          confirmText: confirmLabel,
           onConfirm: () => {
             if (targetAfterLogin) {
               sessionStorage.removeItem("hv_redirect_after_login");
-              window.location.href = targetAfterLogin;
-            } else {
-              window.location.href = HOME_PAGE;
             }
+            window.location.href = destination;
           },
         });
       } else {
-        window.location.href = targetAfterLogin || HOME_PAGE;
+        if (targetAfterLogin) {
+          sessionStorage.removeItem("hv_redirect_after_login");
+        }
+        window.location.href = destination;
       }
     }, 600);
   });
@@ -315,11 +389,7 @@
           .replace(/>/g, "&gt;");
 
   function updateGoogleAccountUI() {
-    if (
-      typeof Auth === "undefined" ||
-      typeof Auth.getBrowserGoogleAccount !== "function"
-    )
-      return;
+    if (typeof Auth === "undefined" || typeof Auth.getBrowserGoogleAccount !== "function") return;
     const browserAcc = Auth.getBrowserGoogleAccount();
     const googleHintRow = document.getElementById("googleHintRow");
     const currentCard = document.getElementById("currentBrowserGoogleCard");
@@ -334,11 +404,8 @@
       if (currentCard) currentCard.style.display = "flex";
       if (orDivider) orDivider.style.display = "block";
       if (modalGoogleEmail) modalGoogleEmail.textContent = browserAcc.email;
-      if (modalGoogleName)
-        modalGoogleName.textContent =
-          browserAcc.name || browserAcc.email.split("@")[0];
-      if (modalGoogleAvatar)
-        modalGoogleAvatar.textContent = browserAcc.avatar || "G";
+      if (modalGoogleName) modalGoogleName.textContent = browserAcc.name || browserAcc.email.split("@")[0];
+      if (modalGoogleAvatar) modalGoogleAvatar.textContent = browserAcc.avatar || "G";
       if (modalDesc) {
         modalDesc.innerHTML = `Tài khoản Google đang được lưu trên thiết bị này:`;
       }
@@ -354,9 +421,7 @@
       }
     }
     if (customGoogleEmail && !customGoogleEmail.value) {
-      customGoogleEmail.placeholder = browserAcc
-        ? browserAcc.email
-        : "ten-cua-ban@gmail.com";
+      customGoogleEmail.placeholder = browserAcc ? browserAcc.email : "ten-cua-ban@gmail.com";
     }
   }
 
@@ -372,7 +437,7 @@
         atob(base64)
           .split("")
           .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
-          .join(""),
+          .join("")
       );
       return JSON.parse(jsonPayload);
     } catch (e) {
@@ -383,12 +448,7 @@
   // Khởi tạo Google Identity Services (GIS) nếu có Google Client ID
   function initGoogleIdentityServices() {
     const clientId = localStorage.getItem("hv_google_client_id");
-    if (
-      clientId &&
-      window.google &&
-      window.google.accounts &&
-      window.google.accounts.id
-    ) {
+    if (clientId && window.google && window.google.accounts && window.google.accounts.id) {
       try {
         window.google.accounts.id.initialize({
           client_id: clientId,
@@ -426,6 +486,8 @@
   function handleGoogleLoginSuccess(userSession) {
     hideModal(googleAuthModal);
     const targetAfterLogin = getRedirectTarget();
+    const destination = targetAfterLogin || getRoleDefaultTarget(userSession, role);
+    const confirmLabel = getConfirmButtonLabel(targetAfterLogin, userSession, role);
 
     if (typeof showPopup === "function") {
       showPopup({
@@ -436,19 +498,21 @@
           userSession.fullName +
           " (" +
           userSession.email +
-          ")!",
-        confirmText: targetAfterLogin ? "Tiếp tục" : "Vào trang chủ",
+          ")! " +
+          getWelcomeMessage(userSession, role),
+        confirmText: confirmLabel,
         onConfirm: () => {
           if (targetAfterLogin) {
             sessionStorage.removeItem("hv_redirect_after_login");
-            window.location.href = targetAfterLogin;
-          } else {
-            window.location.href = HOME_PAGE;
           }
+          window.location.href = destination;
         },
       });
     } else {
-      window.location.href = targetAfterLogin || HOME_PAGE;
+      if (targetAfterLogin) {
+        sessionStorage.removeItem("hv_redirect_after_login");
+      }
+      window.location.href = destination;
     }
   }
 
@@ -560,27 +624,15 @@
         notify({
           type: "warning",
           title: "Email không hợp lệ",
-          message:
-            "Vui lòng nhập địa chỉ Google Email hợp lệ (ví dụ: ten-cua-ban@gmail.com).",
+          message: "Vui lòng nhập địa chỉ Google Email hợp lệ (ví dụ: ten-cua-ban@gmail.com).",
         });
         customGoogleEmail.focus();
         return;
       }
 
       const inputName = customGoogleName ? customGoogleName.value.trim() : "";
-      const derivedName =
-        inputName ||
-        email
-          .split("@")[0]
-          .replace(/[._-]/g, " ")
-          .replace(/\b\w/g, (c) => c.toUpperCase());
-      const avatarInitials =
-        derivedName
-          .split(" ")
-          .map((w) => w[0])
-          .join("")
-          .slice(0, 2)
-          .toUpperCase() || "G";
+      const derivedName = inputName || email.split("@")[0].replace(/[._-]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+      const avatarInitials = derivedName.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase() || "G";
 
       const newGoogleAcc = {
         email: email,
@@ -664,12 +716,7 @@
       notify({
         type: "success",
         title: "Mã OTP SMS Đã Gửi",
-        message:
-          "Mã xác thực gửi tới " +
-          res.phone +
-          ": <strong>" +
-          res.otp +
-          "</strong>",
+        message: "Mã xác thực gửi tới " + res.phone + ": <strong>" + res.otp + "</strong>",
       });
 
       startPhoneOtpCooldown(60);
@@ -687,15 +734,13 @@
       const otpVal = phoneOtpCode ? phoneOtpCode.value.trim() : "";
 
       if (!phoneVal) {
-        if (phoneInputError)
-          phoneInputError.textContent = "Vui lòng nhập số điện thoại.";
+        if (phoneInputError) phoneInputError.textContent = "Vui lòng nhập số điện thoại.";
         if (otpPhoneNumber) otpPhoneNumber.focus();
         return;
       }
 
       if (!otpVal) {
-        if (phoneOtpCodeError)
-          phoneOtpCodeError.textContent = "Vui lòng nhập mã OTP 6 số.";
+        if (phoneOtpCodeError) phoneOtpCodeError.textContent = "Vui lòng nhập mã OTP 6 số.";
         if (phoneOtpCode) phoneOtpCode.focus();
         return;
       }
@@ -720,6 +765,8 @@
         }
 
         const targetAfterLogin = getRedirectTarget();
+        const destination = targetAfterLogin || getRoleDefaultTarget(res.user, role);
+        const confirmLabel = getConfirmButtonLabel(targetAfterLogin, res.user, role);
 
         if (typeof showPopup === "function") {
           showPopup({
@@ -728,21 +775,21 @@
             message:
               "Xác thực SĐT " +
               res.user.phone +
-              " thành công. Chào mừng " +
-              res.user.fullName +
-              "!",
-            confirmText: targetAfterLogin ? "Tiếp tục" : "Vào trang chủ",
+              " thành công. " +
+              getWelcomeMessage(res.user, role),
+            confirmText: confirmLabel,
             onConfirm: () => {
               if (targetAfterLogin) {
                 sessionStorage.removeItem("hv_redirect_after_login");
-                window.location.href = targetAfterLogin;
-              } else {
-                window.location.href = HOME_PAGE;
               }
+              window.location.href = destination;
             },
           });
         } else {
-          window.location.href = targetAfterLogin || HOME_PAGE;
+          if (targetAfterLogin) {
+            sessionStorage.removeItem("hv_redirect_after_login");
+          }
+          window.location.href = destination;
         }
       }, 500);
     });
@@ -801,9 +848,7 @@
       const val = forgotIdentifier.value.trim();
 
       if (!val) {
-        if (forgotStep1Error)
-          forgotStep1Error.textContent =
-            "Vui lòng nhập email hoặc số điện thoại đã đăng ký.";
+        if (forgotStep1Error) forgotStep1Error.textContent = "Vui lòng nhập email hoặc số điện thoại đã đăng ký.";
         forgotIdentifier.focus();
         return;
       }
@@ -845,9 +890,7 @@
       const code = forgotOtpCode.value.trim();
 
       if (!code || code.length !== 6) {
-        if (forgotStep2Error)
-          forgotStep2Error.textContent =
-            "Vui lòng nhập đúng mã OTP gồm 6 chữ số.";
+        if (forgotStep2Error) forgotStep2Error.textContent = "Vui lòng nhập đúng mã OTP gồm 6 chữ số.";
         forgotOtpCode.focus();
         return;
       }
@@ -879,16 +922,13 @@
       const p2 = forgotConfirmPassword.value;
 
       if (!p1 || p1.length < 6) {
-        if (forgotStep3Error)
-          forgotStep3Error.textContent =
-            "Mật khẩu mới phải có tối thiểu 6 ký tự.";
+        if (forgotStep3Error) forgotStep3Error.textContent = "Mật khẩu mới phải có tối thiểu 6 ký tự.";
         forgotNewPassword.focus();
         return;
       }
 
       if (p1 !== p2) {
-        if (forgotStep3Error)
-          forgotStep3Error.textContent = "Mật khẩu xác nhận không khớp.";
+        if (forgotStep3Error) forgotStep3Error.textContent = "Mật khẩu xác nhận không khớp.";
         forgotConfirmPassword.focus();
         return;
       }
@@ -913,8 +953,7 @@
         showPopup({
           type: "success",
           title: "Đổi mật khẩu thành công!",
-          message:
-            "Mật khẩu tài khoản của bạn đã được cập nhật thành công. Thông tin đăng nhập đã được điền sẵn.",
+          message: "Mật khẩu tài khoản của bạn đã được cập nhật thành công. Thông tin đăng nhập đã được điền sẵn.",
           confirmText: "Đăng Nhập Ngay",
           onConfirm: () => {
             if (submitBtn) submitBtn.click();

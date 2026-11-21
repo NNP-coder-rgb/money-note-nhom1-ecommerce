@@ -59,7 +59,7 @@
         <nav>
           <a href="../../index.html">Trang Chủ</a>
           <span class="text-faint">/</span>
-          <a href="#">Tài Khoản</a>
+          <a href="profile.html">Tài Khoản</a>
           <span class="text-faint">/</span>
           <span class="active">Hồ Sơ Cá Nhân</span>
         </nav>
@@ -241,6 +241,13 @@
                   4. Sổ Địa Chỉ Giao Nhận Hỏa Tốc
                 </span>
                 <span class="material-symbols-outlined icon-xs">chevron_right</span>
+              </button>
+              <button class="profile-menu-item" type="button" onclick="document.getElementById('sectionWishlist').scrollIntoView({behavior:'smooth'})">
+                <span class="flex items-center gap-2">
+                  <span class="material-symbols-outlined icon-sm text-danger">favorite</span>
+                  5. Sản Phẩm Yêu Thích &amp; Đã Lưu
+                </span>
+                <span class="badge badge-counter" id="menuWishlistCount" style="margin-left: auto;">0</span>
               </button>
             </nav>
             <div class="mt-3 pt-3 border-top">
@@ -485,6 +492,73 @@
             </div>
           </section>
 
+          <!-- THẺ ĐẶC BIỆT DÀNH RIÊNG CHO NGƯỜI BÁN: CỔNG ĐIỀU HÀNH KÊNH NGƯỜI BÁN (SELLER CENTER) -->
+          <section class="panel p-5 mb-5" id="sectionSellerDossier" style="display: none; border-color: rgba(245, 158, 11, 0.45); box-shadow: 0 4px 24px rgba(245, 158, 11, 0.12); background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.07), transparent 70%);">
+            <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-warning" style="font-size: 28px;">storefront</span>
+                <div>
+                  <h3 class="panel-title flex items-center gap-2">
+                    2. Cổng Quản Lý Gian Hàng &amp; Kênh Người Bán
+                    <span class="badge badge-warning">SELLER CENTER</span>
+                  </h3>
+                  <div class="text-xs text-muted">QUẢN LÝ GIAN HÀNG C2C // THEO DÕI ĐƠN HÀNG // ĐĂNG BÁN // PHẢN HỒI TRẢ GIÁ</div>
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="badge badge-success"><span class="material-symbols-outlined icon-xs">store</span> GIAN HÀNG ĐANG HOẠT ĐỘNG</span>
+              </div>
+            </div>
+
+            <!-- Khối banner chuyển tiếp sang Kênh Người Bán -->
+            <div class="panel p-4" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(15, 23, 42, 0.7)); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: var(--radius-lg);">
+              <div class="flex items-center justify-between mb-3 flex-wrap gap-3">
+                <div style="max-width: 620px;">
+                  <h4 class="text-sm fw-700 text-warning flex items-center gap-2 mb-1" style="font-size: 15px;">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    BẢNG ĐIỀU KHIỂN KÊNH QUẢN LÝ GIAN HÀNG (SELLER DASHBOARD)
+                  </h4>
+                  <p class="text-xs text-muted mb-0" style="line-height: 1.5;">
+                    Truy cập trung tâm quản lý bán hàng chuyên nghiệp: Xử lý đơn hàng chờ bàn giao bưu tá, quản lý danh sách sản phẩm đang bán, đăng bán sản phẩm mới, xét duyệt trả giá của khách và quản lý ví tiền ký quỹ Napas 24/7.
+                  </p>
+                </div>
+                <a href="../seller/dashboard.html" class="btn btn-warning btn-md flex items-center gap-2" style="font-weight: 700; box-shadow: 0 4px 16px rgba(245, 158, 11, 0.35); white-space: nowrap;">
+                  <span class="material-symbols-outlined icon-sm">storefront</span>
+                  <span>VÀO KÊNH NGƯỜI BÁN NGAY</span>
+                  <span class="material-symbols-outlined icon-sm">arrow_forward</span>
+                </a>
+              </div>
+
+              <!-- Lưới 4 lối tắt chuyển nhanh vào các tính năng người bán -->
+              <div class="text-2xs fw-700 text-warning mb-2 mt-4 flex items-center gap-1">
+                <span class="material-symbols-outlined icon-xs">near_me</span>
+                LỐI TẮT TRUY CẬP TRỰC TIẾP TỪNG TÁC VỤ GIAN HÀNG:
+              </div>
+              <div class="grid grid-4 gap-2 text-center">
+                <a href="../seller/dashboard.html" class="admin-quick-card" title="Xem tổng quan doanh thu và đơn hàng cần bàn giao">
+                  <span class="material-symbols-outlined text-warning">analytics</span>
+                  <strong>1. Tổng Quan Shop</strong>
+                  <small>Doanh thu &amp; đơn mới</small>
+                </a>
+                <a href="../seller/dashboard.html#orders" class="admin-quick-card" title="Theo dõi và đóng gói đơn hàng">
+                  <span class="material-symbols-outlined text-success">local_shipping</span>
+                  <strong>2. Quản Lý Đơn</strong>
+                  <small>Đóng gói &amp; giao bưu tá</small>
+                </a>
+                <a href="../seller/post_item.html" class="admin-quick-card" title="Đăng tải món đồ cũ tuyển chọn mới lên sàn">
+                  <span class="material-symbols-outlined text-primary">add_circle</span>
+                  <strong>3. Đăng Bán Món Mới</strong>
+                  <small>Nén ảnh &amp; phân loại</small>
+                </a>
+                <a href="../seller/dashboard.html#offers" class="admin-quick-card" title="Thương lượng và chốt giá đề nghị với khách mua">
+                  <span class="material-symbols-outlined text-secondary">handshake</span>
+                  <strong>4. Trả Giá C2C</strong>
+                  <small>Đề xuất từ người mua</small>
+                </a>
+              </div>
+            </div>
+          </section>
+
           <!-- THẺ 2: ĐỊNH DANH CCCD GẮN CHIP (ICAO 9303) -->
           <section class="panel p-5 mb-5" id="sectionCccd">
             <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
@@ -652,6 +726,28 @@
             <!-- Danh sách địa chỉ nhận hàng động -->
             <div id="addressListContainer">
               <!-- Render động bằng JS -->
+            </div>
+          </section>
+
+          <!-- THẺ 5: DANH SÁCH SẢN PHẨM YÊU THÍCH (WISHLIST) -->
+          <section class="panel p-5 mb-5" id="sectionWishlist">
+            <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+              <div>
+                <h3 class="panel-title flex items-center gap-2">
+                  <span class="material-symbols-outlined text-danger">favorite</span>
+                  5. Danh Sách Sản Phẩm Yêu Thích &amp; Đã Lưu
+                  <span class="badge badge-primary text-xs" id="wishlistCountBadge">0 món</span>
+                </h3>
+                <div class="text-xs text-muted">DANH SÁCH CÁC MÓN ĐỒ BRAND MALL &amp; LIKE NEW BẠN ĐÃ THẢ TIM</div>
+              </div>
+              <a href="../shop/catalog.html" class="btn btn-outlined btn-sm">
+                <span class="material-symbols-outlined icon-xs">storefront</span> Khám Phá Thêm Món Mới
+              </a>
+            </div>
+
+            <!-- Lưới Sản Phẩm Wishlist -->
+            <div class="wishlist-grid-deluxe" id="wishlistContainer">
+              <!-- Render động qua JS -->
             </div>
           </section>
         </div>
@@ -1244,6 +1340,7 @@
 
           // Cập nhật trạng thái hiển thị
           const secAdmin = document.getElementById("sectionAdminDossier");
+          const secSeller = document.getElementById("sectionSellerDossier");
           const secCccd = document.getElementById("sectionCccd");
           const secBank = document.getElementById("sectionBank");
           const secAddress = document.getElementById("sectionAddress");
@@ -1254,6 +1351,7 @@
           if (isAdminUser) {
             // ĐẶC QUYỀN ROOT ADMIN: Ẩn hoàn toàn các phần CCCD, Ngân hàng, Sổ địa chỉ
             if (secAdmin) secAdmin.style.display = "block";
+            if (secSeller) secSeller.style.display = "none";
             if (secCccd) secCccd.style.display = "none";
             if (secBank) secBank.style.display = "none";
             if (secAddress) secAddress.style.display = "none";
@@ -1366,14 +1464,36 @@
             document.getElementById("avatarBadgeIcon").innerHTML = `<span class="material-symbols-outlined icon-sm text-primary">admin_panel_settings</span>`;
           } else {
             // NGƯỜI DÙNG THÔNG THƯỜNG (BUYER / SELLER)
+            const isSellerUser = u.role === "seller" || u.role === "SELLER";
             if (secAdmin) secAdmin.style.display = "none";
+            if (secSeller) secSeller.style.display = isSellerUser ? "block" : "none";
             if (secCccd) secCccd.style.display = "block";
             if (secBank) secBank.style.display = "block";
             if (secAddress) secAddress.style.display = "block";
 
-            // Menu cho người dùng thông thường (TUYỆT ĐỐI KHÔNG HIỂN THỊ LINK MASTER ADMIN)
+            // Menu cho người dùng thông thường
             if (navMenu) {
+              const sellerMenuItem = isSellerUser
+                ? `
+                <a class="profile-menu-item text-warning fw-700" href="../seller/dashboard.html" style="text-decoration: none;">
+                  <span class="flex items-center gap-2">
+                    <span class="material-symbols-outlined icon-sm">storefront</span>
+                    Kênh Quản Lý Gian Hàng (Shop)
+                  </span>
+                  <span class="material-symbols-outlined icon-xs">arrow_forward</span>
+                </a>
+                <button class="profile-menu-item" type="button" onclick="document.getElementById('sectionSellerDossier').scrollIntoView({behavior:'smooth'})">
+                  <span class="flex items-center gap-2">
+                    <span class="material-symbols-outlined icon-sm text-warning">dashboard</span>
+                    Lối Tắt Kênh Bán Hàng
+                  </span>
+                  <span class="material-symbols-outlined icon-xs">chevron_right</span>
+                </button>
+                `
+                : "";
+
               navMenu.innerHTML = `
+                ${sellerMenuItem}
                 <button class="profile-menu-item active" type="button" onclick="document.getElementById('sectionPersonalInfo').scrollIntoView({behavior:'smooth'})">
                   <span class="flex items-center gap-2">
                     <span class="material-symbols-outlined icon-sm">person</span>
@@ -2300,6 +2420,114 @@
         // Khởi tạo danh sách địa chỉ
         renderAddresses();
 
+        // ==========================================
+        // 5. RENDER DANH SÁCH YÊU THÍCH (WISHLIST)
+        // ==========================================
+        function renderWishlist() {
+          const container = document.getElementById("wishlistContainer");
+          const countBadge = document.getElementById("wishlistCountBadge");
+          const menuCount = document.getElementById("menuWishlistCount");
+          if (!container) return;
+
+          const items = typeof Wishlist !== "undefined" ? Wishlist.getItems() : [];
+          const allProds = typeof PRODUCTS !== "undefined" ? PRODUCTS : [];
+          // Nếu chưa có items nào được thả tim, tạo sẵn 2 items mẫu (m1, u1) để người dùng xem giao diện
+          if (items.length === 0 && typeof Wishlist !== "undefined" && !localStorage.getItem("hv_wishlist_initialized")) {
+            Wishlist.toggle("m1");
+            Wishlist.toggle("u1");
+            try { localStorage.setItem("hv_wishlist_initialized", "true"); } catch(e) {}
+          }
+          const currentItems = typeof Wishlist !== "undefined" ? Wishlist.getItems() : [];
+          const wishProds = allProds.filter(p => currentItems.some(id => String(id) === String(p.id)));
+
+          if (countBadge) countBadge.textContent = wishProds.length + " món";
+          if (menuCount) menuCount.textContent = wishProds.length;
+
+          if (wishProds.length === 0) {
+            container.innerHTML = `
+              <div class="panel p-6 text-center" style="grid-column: 1 / -1; background: rgba(255,255,255,0.02); border-radius: var(--radius-lg);">
+                <span class="material-symbols-outlined text-danger" style="font-size: 56px; opacity: 0.8;">favorite_border</span>
+                <h4 class="text-sm font-bold text-white mt-2">Danh sách yêu thích đang trống</h4>
+                <p class="text-xs text-muted max-w-sm mx-auto my-2" style="line-height: 1.6;">
+                  Hãy thả tim những sản phẩm công nghệ hoặc thời trang bạn quan tâm để dễ dàng theo dõi biến động giá và đặt mua nhanh!
+                </p>
+                <a href="../shop/catalog.html" class="btn btn-primary btn-sm mt-2">
+                  <span class="material-symbols-outlined icon-xs">storefront</span> Khám Phá Sản Phẩm Ngay
+                </a>
+              </div>
+            `;
+            return;
+          }
+
+          container.innerHTML = wishProds.map(p => {
+            const isMall = p.type === "mall";
+            const priceStr = Utils.formatCurrency ? Utils.formatCurrency(p.price) : p.price + "₫";
+            const rawImg = p.img || p.image;
+            const imgSrc = typeof window !== "undefined" && window.resolveAssetUrl ? window.resolveAssetUrl(rawImg) : rawImg;
+            const linkHref = isMall
+              ? "../shop/product_new.html?id=" + encodeURIComponent(p.id)
+              : "../shop/product_used.html?id=" + encodeURIComponent(p.id);
+
+            return `
+              <div class="wishlist-item-card">
+                <div style="position: relative; border-radius: 8px; overflow: hidden; aspect-ratio: 1; margin-bottom: 12px;">
+                  <a href="${linkHref}">
+                    <img src="${imgSrc}" alt="${p.name}" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" />
+                  </a>
+                  <span class="badge ${isMall ? 'badge-primary' : 'badge-secondary'}" style="position: absolute; top: 8px; left: 8px; font-size: 10px;">
+                    ${isMall ? 'BRAND MALL' : 'LIKE NEW ' + (p.condition || '99%')}
+                  </span>
+                  <button type="button" class="btn-remove-wishlist" data-id="${p.id}" title="Xóa khỏi danh sách yêu thích" style="position: absolute; top: 8px; right: 8px; width: 28px; height: 28px; border-radius: 50%; background: rgba(0,0,0,0.6); color: #ef4444; border: none; cursor: pointer; display: grid; place-items: center;">
+                    <span class="material-symbols-outlined icon-xs">close</span>
+                  </button>
+                </div>
+                <h4 class="text-xs fw-700 line-clamp-2 mb-1" style="min-height: 32px;">
+                  <a href="${linkHref}" class="text-white hover-underline">${p.name}</a>
+                </h4>
+                <div class="mono text-gradient fw-700 mb-3" style="font-size: 14px;">${priceStr}</div>
+                <div class="flex gap-2 mt-auto">
+                  <button class="btn btn-primary btn-sm flex-1 btn-wishlist-add-cart" type="button" data-id="${p.id}">
+                    <span class="material-symbols-outlined icon-xs">add_shopping_cart</span> Thêm Vào Giỏ
+                  </button>
+                  <a href="${linkHref}" class="btn btn-outlined btn-sm" title="Xem chi tiết">
+                    <span class="material-symbols-outlined icon-xs">visibility</span>
+                  </a>
+                </div>
+              </div>
+            `;
+          }).join("");
+
+          // Gắn sự kiện xóa và thêm giỏ
+          container.querySelectorAll(".btn-remove-wishlist").forEach(btn => {
+            btn.addEventListener("click", () => {
+              const pid = btn.dataset.id;
+              if (typeof Wishlist !== "undefined") {
+                Wishlist.toggle(pid);
+                renderWishlist();
+                if (typeof Utils !== "undefined" && Utils.toast) {
+                  Utils.toast("Đã bỏ sản phẩm khỏi danh sách yêu thích.", "info");
+                }
+              }
+            });
+          });
+
+          container.querySelectorAll(".btn-wishlist-add-cart").forEach(btn => {
+            btn.addEventListener("click", () => {
+              const pid = btn.dataset.id;
+              const targetProd = allProds.find(p => String(p.id) === String(pid));
+              if (targetProd && typeof Cart !== "undefined") {
+                Cart.add(targetProd, 1);
+                if (typeof Utils !== "undefined" && Utils.toast) {
+                  Utils.toast("Đã thêm " + targetProd.name + " vào giỏ hàng!", "success");
+                }
+              }
+            });
+          });
+        }
+
+        window.addEventListener("wishlist:updated", renderWishlist);
+        renderWishlist();
+
         // 6. Nút ngân hàng, đăng xuất
         document.getElementById("btnAddBank").addEventListener("click", () => {
           // Mở tab ngân hàng trong modal chỉnh sửa hồ sơ
@@ -2321,7 +2549,10 @@
             },
             () => {
               Auth.logout();
-              window.location.href = "../../index.html";
+              Utils.toast("Đã đăng xuất thành công.", "info");
+              setTimeout(() => {
+                window.location.href = "auth_login.html";
+              }, 300);
             }
           );
         });
@@ -2368,6 +2599,7 @@
     </script>
 
     <script src="../../js/components.js"></script>
+    <script src="../../js/app.js"></script>
     <!-- ===== MODAL 4: PHÓNG TO ẢNH CCCD ===== -->
     <div class="modal-backdrop" id="cccdImageViewerModal" role="dialog" aria-modal="true" onclick="if(event.target===this)Utils.closeModal('cccdImageViewerModal')">
       <div class="modal" style="max-width: 650px;">

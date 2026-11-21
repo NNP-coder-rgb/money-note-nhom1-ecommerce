@@ -70,6 +70,48 @@
       .replace(/ss/g, seconds);
   }
 
+  /**
+   * Tự động chuẩn hóa đường dẫn tương đối của tài nguyên tĩnh (hình ảnh, tài liệu)
+   * Giúp tệp hiển thị đúng trên cả trang chủ (root) lẫn các trang con (pages/shop/, pages/buyer/, ...)
+   * @param {string} url - Đường dẫn tài nguyên (vd: 'assets/images/products/foo.png')
+   * @param {string} [customBasePath] - Tùy chọn đường dẫn cơ sở
+   * @returns {string} Đường dẫn tương đối đã điều chỉnh phù hợp ngữ cảnh trang
+   */
+  function resolveAssetUrl(url, customBasePath) {
+    if (!url) return "";
+    if (
+      url.indexOf("http://") === 0 ||
+      url.indexOf("https://") === 0 ||
+      url.indexOf("data:") === 0 ||
+      url.indexOf("/") === 0 ||
+      url.indexOf("#") === 0
+    ) {
+      return url;
+    }
+    if (customBasePath !== undefined && customBasePath !== null) {
+      return customBasePath + url;
+    }
+    if (typeof window !== "undefined" && window.location && window.location.pathname) {
+      var pathname = window.location.pathname.replace(/\\/g, "/");
+      if (
+        pathname.indexOf("/pages/shop/") !== -1 ||
+        pathname.indexOf("/pages/account/") !== -1 ||
+        pathname.indexOf("/pages/seller/") !== -1 ||
+        pathname.indexOf("/pages/admin/") !== -1 ||
+        pathname.indexOf("/pages/buyer/") !== -1 ||
+        pathname.indexOf("/test/") !== -1
+      ) {
+        if (url.indexOf("../../") === 0) return url;
+        return "../../" + url;
+      }
+      if (pathname.indexOf("/pages/") !== -1) {
+        if (url.indexOf("../") === 0) return url;
+        return "../" + url;
+      }
+    }
+    return url;
+  }
+
   /* =========================================================================
      2. THÔNG BÁO & MODAL (toast, openModal, closeModal, confirm)
      ========================================================================= */
@@ -474,6 +516,21 @@
      ========================================================================= */
 
   /**
+   * Loại bỏ dấu tiếng Việt để phục vụ tìm kiếm không dấu
+   * @param {string} str
+   * @returns {string}
+   */
+  function removeVietnameseTones(str) {
+    if (!str || typeof str !== "string") return "";
+    return str
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/đ/g, "d")
+      .replace(/Đ/g, "D")
+      .toLowerCase();
+  }
+
+  /**
    * Lọc danh sách sản phẩm theo nhiều điều kiện đồng thời
    * @param {Array<object>} list - Mảng sản phẩm cần lọc
    * @param {object} criteria - Điều kiện lọc:
@@ -520,7 +577,18 @@
         const cleanFull = fullText.replace(/['’\-_.]/g, "");
         const cleanKw = keyword.replace(/['’\-_.]/g, "");
 
-        if (!fullText.includes(keyword) && !cleanFull.includes(cleanKw)) return false;
+        const fullTextNoTone = removeVietnameseTones(fullText);
+        const kwNoTone = removeVietnameseTones(keyword);
+        const cleanFullNoTone = removeVietnameseTones(cleanFull);
+        const cleanKwNoTone = removeVietnameseTones(cleanKw);
+
+        const isMatch =
+          fullText.includes(keyword) ||
+          cleanFull.includes(cleanKw) ||
+          fullTextNoTone.includes(kwNoTone) ||
+          cleanFullNoTone.includes(cleanKwNoTone);
+
+        if (!isMatch) return false;
       }
 
       // 2. Danh mục (category)
@@ -784,6 +852,13 @@
         });
       }
       Cart.saveItems(items);
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(
+          new CustomEvent("cart:item-added", {
+            detail: { product, qty: numQty, variant },
+          }),
+        );
+      }
       if (typeof toast === "function") {
         toast({
           title: "Đã thêm vào giỏ hàng",
@@ -1008,11 +1083,98 @@
       }
       return user;
     },
+    isAdmin(user) {
+      if (typeof window !== "undefined" && window.Auth && typeof window.Auth.isAdmin === "function" && window.Auth !== Auth) {
+        return window.Auth.isAdmin(user);
+      }
+      const u = user || Auth.current();
+      return !!(u && (u.role === "ADMIN" || u.role === "admin"));
+    },
+    isVerified(user) {
+      if (typeof window !== "undefined" && window.Auth && typeof window.Auth.isVerified === "function" && window.Auth !== Auth) {
+        return window.Auth.isVerified(user);
+      }
+      const u = user || Auth.current();
+      if (!u) return false;
+      if (u.role === "ADMIN" || u.role === "admin") return true;
+      return (u.ekycStatus === "verified" || u.kycStatus === "VERIFIED");
+    },
+    getUserAddressKey(user) {
+      if (typeof window !== "undefined" && window.Auth && typeof window.Auth.getUserAddressKey === "function" && window.Auth !== Auth) {
+        return window.Auth.getUserAddressKey(user);
+      }
+      const u = user || Auth.current();
+      if (!u) return "hv_user_addresses_guest";
+      const uid = u.id || (u.email ? u.email.replace(/[@.]/g, "_") : "default");
+      return "hv_user_addresses_" + uid;
+    },
+    getAddresses(user) {
+      if (typeof window !== "undefined" && window.Auth && typeof window.Auth.getAddresses === "function" && window.Auth !== Auth) {
+        return window.Auth.getAddresses(user);
+      }
+      const u = user || Auth.current();
+      if (!u) return [];
+      const key = Auth.getUserAddressKey(u);
+      try {
+        const raw = localStorage.getItem(key);
+        if (raw) {
+          const list = JSON.parse(raw);
+          if (Array.isArray(list) && list.length > 0) return list;
+        }
+      } catch (e) {}
+
+      // Đặc quyền Admin: Tự động cấp địa chỉ Trụ Sở Quản Trị Viên Toàn Sàn nếu chưa có địa chỉ riêng
+      const isAdminUser = u.role === "ADMIN" || u.role === "admin";
+      const userAddr = isAdminUser
+        ? "Trung Tâm Điều Hành Toàn Sàn HYBRID.STORE, Landmark 81, Vinhomes Central Park"
+        : (u.address || "Căn hộ Landmark 81, Vinhomes Central Park, Phường 22, Quận Bình Thạnh, TP. Hồ Chí Minh");
+
+      const seed = [
+        {
+          id: "addr_" + (u.id || "main") + "_1",
+          name: u.fullName || (isAdminUser ? "Ban Quản Trị HYBRID.STORE" : "Khách Hàng"),
+          phone: u.phone || (isAdminUser ? "1900 8888" : "0901234567"),
+          city: "TP. Hồ Chí Minh — Quận Bình Thạnh",
+          detail: userAddr,
+          type: isAdminUser || u.role === "seller" ? "office" : "home",
+          note: isAdminUser ? "Trụ sở Quản Trị Viên (Toàn Quyền Sàn - Miễn Trừ Nhập Địa Chỉ)" : "Giao tận tay / Giờ hành chính",
+          isDefault: true,
+          express2h: true,
+        },
+      ];
+      try {
+        localStorage.setItem(key, JSON.stringify(seed));
+      } catch (e) {}
+      return seed;
+    },
+    hasAddress(user) {
+      if (typeof window !== "undefined" && window.Auth && typeof window.Auth.hasAddress === "function" && window.Auth !== Auth) {
+        return window.Auth.hasAddress(user);
+      }
+      const u = user || Auth.current();
+      if (!u) return false;
+      if (u.role === "ADMIN" || u.role === "admin") return true;
+      const list = this.getAddresses(u);
+      return Array.isArray(list) && list.length > 0;
+    },
+    saveAddresses(list, user) {
+      if (typeof window !== "undefined" && window.Auth && typeof window.Auth.saveAddresses === "function" && window.Auth !== Auth) {
+        return window.Auth.saveAddresses(list, user);
+      }
+      const u = user || Auth.current();
+      if (!u) return;
+      const key = Auth.getUserAddressKey(u);
+      try {
+        localStorage.setItem(key, JSON.stringify(list || []));
+      } catch (e) {}
+      return list;
+    },
     requireLogin(options = {}) {
       if (typeof window !== "undefined" && window.Auth && typeof window.Auth.requireLogin === "function" && window.Auth !== Auth) {
         return window.Auth.requireLogin(options);
       }
-      if (!Auth.current()) {
+      const cur = Auth.current();
+      if (!cur) {
         const isSubpage = typeof window !== "undefined" && window.location.pathname.includes("/pages/");
         const loginPage = isSubpage ? "../account/auth_login.html" : "pages/account/auth_login.html";
         let returnUrl = options.returnUrl || (typeof window !== "undefined" ? window.location.href : "");
@@ -1028,6 +1190,9 @@
           window.location.href = loginPage + (returnUrl ? "?redirect=" + encodeURIComponent(returnUrl) : "");
         }
         return false;
+      }
+      if (cur.role === "ADMIN" || cur.role === "admin") {
+        return true; // Admin có mọi quyền không bị ràng buộc
       }
       return true;
     },
@@ -1225,10 +1390,30 @@
       return mode;
     },
 
-    toggle() {
+    toggle(showNotification = true) {
       const current = this.get();
       const next = current === "light" ? "dark" : "light";
-      return this.set(next);
+      const result = this.set(next);
+      if (showNotification && typeof document !== "undefined") {
+        const toastFn =
+          typeof toast === "function"
+            ? toast
+            : typeof Toast !== "undefined" && typeof Toast.show === "function"
+              ? Toast.show
+              : null;
+        if (toastFn) {
+          toastFn({
+            title: next === "light" ? "Giao diện Sáng" : "Giao diện Tối",
+            message:
+              next === "light"
+                ? "Đã chuyển sang giao diện nền trắng hiện đại"
+                : "Đã chuyển sang giao diện Midnight Cyber Violet",
+            type: "info",
+            duration: 2000,
+          });
+        }
+      }
+      return result;
     },
 
     apply(theme) {
@@ -1271,30 +1456,283 @@
       const theme = this.get();
       this.apply(theme);
 
-      // Lắng nghe sự kiện click nút chuyển đổi giao diện
+      // Lắng nghe sự kiện click nút chuyển đổi giao diện (Event Delegation)
       document.addEventListener("click", (e) => {
         const btn = e.target.closest(".theme-toggle-btn, #themeToggleBtn");
         if (btn) {
+          // Nếu nút đã được gán sự kiện trực tiếp bởi components.js, bỏ qua để tránh gọi đúp
+          if (btn.dataset.bound === "true") return;
           e.preventDefault();
-          const newTheme = Theme.toggle();
-          if (typeof toast === "function") {
-            toast({
-              title: newTheme === "light" ? "Giao diện Sáng" : "Giao diện Tối",
-              message:
-                newTheme === "light"
-                  ? "Đã chuyển sang giao diện nền trắng hiện đại"
-                  : "Đã chuyển sang giao diện Midnight Cyber Violet",
-              type: "info",
-              duration: 2000,
-            });
-          }
+          Theme.toggle(true);
         }
       });
     },
   };
 
   /* =========================================================================
-     11. XUẤT RA TOÀN CỤC VÀ MODULE (CHO NODE.JS / TRÌNH DUYỆT)
+     11. DANH SÁCH YÊU THÍCH (Wishlist)
+     ========================================================================= */
+  const WISHLIST_STORAGE_KEY = "hv_wishlist_items";
+
+  const Wishlist = {
+    getItems() {
+      if (typeof localStorage === "undefined") return [];
+      try {
+        return JSON.parse(localStorage.getItem(WISHLIST_STORAGE_KEY)) || [];
+      } catch (e) {
+        return [];
+      }
+    },
+    has(productId) {
+      if (!productId) return false;
+      const items = Wishlist.getItems();
+      return items.some((id) => String(id) === String(productId));
+    },
+    toggle(productId) {
+      if (!productId) return false;
+      const items = Wishlist.getItems();
+      const strId = String(productId);
+      const idx = items.findIndex((id) => String(id) === strId);
+      let isAdded = false;
+      if (idx >= 0) {
+        items.splice(idx, 1);
+        isAdded = false;
+      } else {
+        items.push(strId);
+        isAdded = true;
+      }
+      if (typeof localStorage !== "undefined") {
+        try {
+          localStorage.setItem(WISHLIST_STORAGE_KEY, JSON.stringify(items));
+        } catch (e) {}
+      }
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(
+          new CustomEvent("wishlist:updated", {
+            detail: { items, isAdded, productId: strId },
+          }),
+        );
+      }
+      return isAdded;
+    },
+    count() {
+      return Wishlist.getItems().length;
+    },
+  };
+
+  /* =========================================================================
+     12. DỮ LIỆU ĐỊA GIỚI HÀNH CHÍNH VIỆT NAM (Vietnam Administrative Locations)
+     ========================================================================= */
+  const VIETNAM_LOCATIONS = [
+    {
+      name: "Hà Nội",
+      districts: [
+        { name: "Quận Nam Từ Liêm", wards: ["Phường Mễ Trì", "Phường Mỹ Đình 1", "Phường Mỹ Đình 2", "Phường Đại Mỗ", "Phường Trung Văn", "Phường Tây Mỗ"] },
+        { name: "Quận Cầu Giấy", wards: ["Phường Dịch Vọng Hậu", "Phường Nghĩa Tân", "Phường Yên Hòa", "Phường Quan Hoa", "Phường Mai Dịch", "Phường Dịch Vọng"] },
+        { name: "Quận Hoàn Kiếm", wards: ["Phường Tràng Tiền", "Phường Hàng Trống", "Phường Hàng Bạc", "Phường Lý Thái Tổ", "Phường Cửa Đông", "Phường Hàng Gai"] },
+        { name: "Quận Ba Đình", wards: ["Phường Điện Bàn", "Phường Đội Cấn", "Phường Giảng Võ", "Phường Kim Mã", "Phường Liễu Giai", "Phường Quán Thánh"] },
+        { name: "Quận Đống Đa", wards: ["Phường Láng Hạ", "Phường Ô Chợ Dừa", "Phường Kim Liên", "Phường Trung Tự", "Phường Cát Linh", "Phường Khâm Thiên"] },
+        { name: "Quận Thanh Xuân", wards: ["Phường Nhân Chính", "Phường Khương Mai", "Phường Thanh Xuân Bắc", "Phường Hạ Đình", "Phường Khương Trung"] },
+        { name: "Quận Hai Bà Trưng", wards: ["Phường Bạch Đằng", "Phường Bách Khoa", "Phường Đồng Tâm", "Phường Lê Đại Hành", "Phường Minh Khai"] },
+        { name: "Huyện Đông Anh", wards: ["Thị trấn Đông Anh", "Xã Kim Chung", "Xã Hải Bối", "Xã Vĩnh Ngọc"] },
+        { name: "Quận Long Biên", wards: ["Phường Bồ Đề", "Phường Gia Thụy", "Phường Ngọc Lâm", "Phường Thượng Thanh"] },
+      ],
+    },
+    {
+      name: "TP. Hồ Chí Minh",
+      districts: [
+        { name: "Quận 1", wards: ["Phường Bến Nghé", "Phường Bến Thành", "Phường Đa Kao", "Phường Tân Định", "Phường Phạm Ngũ Lão", "Phường Cô Giang"] },
+        { name: "Quận 3", wards: ["Phường Võ Thị Sáu", "Phường 1", "Phường 2", "Phường 3", "Phường 4", "Phường 5", "Phường 9", "Phường 11"] },
+        { name: "Quận Bình Thạnh", wards: ["Phường 22", "Phường 25", "Phường 19", "Phường 17", "Phường 26", "Phường 27", "Phường 15"] },
+        { name: "TP. Thủ Đức", wards: ["Phường Thảo Điền", "Phường An Phú", "Phường Linh Trung", "Phường Hiệp Phú", "Phường Tam Bình", "Phường Bình Thọ"] },
+        { name: "Quận 7", wards: ["Phường Tân Phong", "Phường Phú Mỹ", "Phường Tân Quy", "Phường Tân Hưng", "Phường Tân Thuận Đông"] },
+        { name: "Quận 10", wards: ["Phường 12", "Phường 14", "Phường 15", "Phường 10", "Phường 1", "Phường 6"] },
+        { name: "Quận Tân Bình", wards: ["Phường 2", "Phường 4", "Phường 13", "Phường 15", "Phường 8", "Phường 12"] },
+        { name: "Quận Phú Nhuận", wards: ["Phường 1", "Phường 2", "Phường 7", "Phường 9", "Phường 15"] },
+      ],
+    },
+    {
+      name: "Đà Nẵng",
+      districts: [
+        { name: "Quận Hải Châu", wards: ["Phường Thạch Thang", "Phường Hải Châu 1", "Phường Hải Châu 2", "Phường Bình Hiên", "Phường Hòa Cường Bắc", "Phường Hòa Thuận Đông"] },
+        { name: "Quận Ngũ Hành Sơn", wards: ["Phường Hòa Hải", "Phường Hòa Quý", "Phường Khuê Mỹ", "Phường Mỹ An"] },
+        { name: "Quận Sơn Trà", wards: ["Phường An Hải Bắc", "Phường An Hải Đông", "Phường Phước Mỹ", "Phường Nại Hiên Đông", "Phường Thọ Quang"] },
+        { name: "Quận Thanh Khê", wards: ["Phường Vĩnh Trung", "Phường Tam Thuận", "Phường Tân Chính", "Phường Chính Gián", "Phường An Khê"] },
+        { name: "Quận Liên Chiểu", wards: ["Phường Hòa Khánh Bắc", "Phường Hòa Khánh Nam", "Phường Hòa Minh"] },
+      ],
+    },
+    {
+      name: "Hải Phòng",
+      districts: [
+        { name: "Quận Hồng Bàng", wards: ["Phường Hoàng Văn Thụ", "Phường Minh Khai", "Phường Phan Bội Châu", "Phường Quán Toan"] },
+        { name: "Quận Ngô Quyền", wards: ["Phường Lạc Viên", "Phường Cầu Đất", "Phường Máy Chai", "Phường Đằng Giang"] },
+        { name: "Quận Lê Chân", wards: ["Phường An Biên", "Phường Cát Dài", "Phường Hàng Kênh", "Phường Niệm Nghĩa"] },
+      ],
+    },
+    {
+      name: "Cần Thơ",
+      districts: [
+        { name: "Quận Ninh Kiều", wards: ["Phường Tân An", "Phường An Cư", "Phường An Khánh", "Phường Xuân Khánh", "Phường Hưng Lợi"] },
+        { name: "Quận Cái Răng", wards: ["Phường Lê Bình", "Phường Hưng Phú", "Phường Ba Láng", "Phường Phú Thứ"] },
+        { name: "Quận Bình Thủy", wards: ["Phường Bình Thủy", "Phường Trà Nóc", "Phường An Thới", "Phường Bùi Hữu Nghĩa"] },
+      ],
+    },
+    {
+      name: "Bình Dương",
+      districts: [
+        { name: "TP. Thủ Dầu Một", wards: ["Phường Phú Hòa", "Phường Hiệp Thành", "Phường Định Hòa", "Phường Phú Cường"] },
+        { name: "TP. Dĩ An", wards: ["Phường Dĩ An", "Phường Tân Bình", "Phường An Bình", "Phường Đông Hòa"] },
+        { name: "TP. Thuận An", wards: ["Phường Lái Thiêu", "Phường An Phú", "Phường Bình Hòa", "Phường Vĩnh Phú"] },
+      ],
+    },
+    {
+      name: "Đồng Nai",
+      districts: [
+        { name: "TP. Biên Hòa", wards: ["Phường Quyết Thắng", "Phường Thống Nhất", "Phường Tân Phong", "Phường Trảng Dài", "Phường Hố Nai"] },
+        { name: "Huyện Long Thành", wards: ["Thị trấn Long Thành", "Xã Lộc An", "Xã Bình Sơn", "Xã An Phước"] },
+      ],
+    },
+  ];
+
+  const VietnamLocations = {
+    data: VIETNAM_LOCATIONS,
+    getProvinces() {
+      return VIETNAM_LOCATIONS.map((p) => p.name);
+    },
+    getDistricts(provinceName) {
+      const p = VIETNAM_LOCATIONS.find((item) => item.name === provinceName);
+      return p ? p.districts.map((d) => d.name) : [];
+    },
+    getWards(provinceName, districtName) {
+      const p = VIETNAM_LOCATIONS.find((item) => item.name === provinceName);
+      if (!p) return [];
+      const d = p.districts.find((item) => item.name === districtName);
+      return d ? d.wards : [];
+    },
+    setupSelects({ provinceSelect, districtSelect, wardSelect, onAddressChange }) {
+      if (!provinceSelect || !districtSelect || !wardSelect) return;
+
+      provinceSelect.innerHTML =
+        '<option value="">-- Chọn Tỉnh / Thành Phố --</option>' +
+        VietnamLocations.getProvinces()
+          .map((p) => `<option value="${p}">${p}</option>`)
+          .join("");
+
+      districtSelect.innerHTML = '<option value="">-- Chọn Quận / Huyện --</option>';
+      wardSelect.innerHTML = '<option value="">-- Chọn Phường / Xã --</option>';
+      districtSelect.disabled = true;
+      wardSelect.disabled = true;
+
+      provinceSelect.addEventListener("change", () => {
+        const prov = provinceSelect.value;
+        if (!prov) {
+          districtSelect.innerHTML = '<option value="">-- Chọn Quận / Huyện --</option>';
+          districtSelect.disabled = true;
+          wardSelect.innerHTML = '<option value="">-- Chọn Phường / Xã --</option>';
+          wardSelect.disabled = true;
+        } else {
+          const dists = VietnamLocations.getDistricts(prov);
+          districtSelect.innerHTML =
+            '<option value="">-- Chọn Quận / Huyện --</option>' +
+            dists.map((d) => `<option value="${d}">${d}</option>`).join("");
+          districtSelect.disabled = false;
+          wardSelect.innerHTML = '<option value="">-- Chọn Phường / Xã --</option>';
+          wardSelect.disabled = true;
+        }
+        if (typeof onAddressChange === "function") onAddressChange();
+      });
+
+      districtSelect.addEventListener("change", () => {
+        const prov = provinceSelect.value;
+        const dist = districtSelect.value;
+        if (!dist) {
+          wardSelect.innerHTML = '<option value="">-- Chọn Phường / Xã --</option>';
+          wardSelect.disabled = true;
+        } else {
+          const wards = VietnamLocations.getWards(prov, dist);
+          wardSelect.innerHTML =
+            '<option value="">-- Chọn Phường / Xã --</option>' +
+            wards.map((w) => `<option value="${w}">${w}</option>`).join("");
+          wardSelect.disabled = false;
+        }
+        if (typeof onAddressChange === "function") onAddressChange();
+      });
+
+      wardSelect.addEventListener("change", () => {
+        if (typeof onAddressChange === "function") onAddressChange();
+      });
+    },
+  };
+
+  /* =========================================================================
+     13. BỘ NÉN ẢNH PHÍA CLIENT (Client-side Canvas Image Compressor)
+     ========================================================================= */
+  function compressImage(file, options = {}) {
+    const maxWidth = options.maxWidth || 1200;
+    const maxHeight = options.maxHeight || 1200;
+    const quality = options.quality !== undefined ? options.quality : 0.78;
+
+    return new Promise((resolve, reject) => {
+      if (!file) {
+        return reject(new Error("File không hợp lệ"));
+      }
+      if (typeof window === "undefined" || typeof document === "undefined" || typeof FileReader === "undefined") {
+        return resolve({
+          dataUrl: "",
+          originalSize: file.size || 0,
+          compressedSize: 0,
+          ratio: 0,
+        });
+      }
+      const originalSize = file.size || 0;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          let width = img.width;
+          let height = img.height;
+
+          if (width > maxWidth || height > maxHeight) {
+            const aspect = width / height;
+            if (aspect > 1) {
+              width = maxWidth;
+              height = Math.round(maxWidth / aspect);
+            } else {
+              height = maxHeight;
+              width = Math.round(maxHeight * aspect);
+            }
+          }
+
+          const canvas = document.createElement("canvas");
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, width, height);
+
+          const dataUrl = canvas.toDataURL("image/jpeg", quality);
+          const base64Len = dataUrl.length - (dataUrl.indexOf(",") + 1);
+          const compressedSize = Math.round((base64Len * 3) / 4);
+          const ratio = originalSize > 0 ? Math.round((1 - compressedSize / originalSize) * 100) : 0;
+
+          resolve({
+            dataUrl,
+            width,
+            height,
+            originalSize,
+            compressedSize,
+            ratio: Math.max(0, ratio),
+          });
+        };
+        img.onerror = () => reject(new Error("Không thể nạp hình ảnh"));
+        img.src = e.target.result;
+      };
+      reader.onerror = () => reject(new Error("Lỗi khi đọc file"));
+      reader.readAsDataURL(file);
+    });
+  }
+
+  /* =========================================================================
+     14. XUẤT RA TOÀN CỤC VÀ MODULE (CHO NODE.JS / TRÌNH DUYỆT)
      ========================================================================= */
 
   function escapeHtml(str) {
@@ -1311,6 +1749,7 @@
     escapeHtml,
     formatCurrency,
     formatDate,
+    resolveAssetUrl,
     toast,
     openModal,
     closeModal,
@@ -1326,6 +1765,10 @@
     Offer,
     Theme,
     getUsedDiscountPercent,
+    Wishlist,
+    VietnamLocations,
+    removeVietnameseTones,
+    compressImage,
   };
 
   const $ = (sel, root) => (root || document).querySelector(sel);
@@ -1340,6 +1783,7 @@
     // Gắn trực tiếp lên window để gọi tự nhiên: formatCurrency(...), toast(...), ...
     window.formatCurrency = formatCurrency;
     window.formatDate = formatDate;
+    window.resolveAssetUrl = resolveAssetUrl;
     window.toast = toast;
     window.openModal = openModal;
     window.closeModal = closeModal;
@@ -1360,6 +1804,10 @@
     window.Offer = Offer;
     window.Theme = Theme;
     window.getUsedDiscountPercent = getUsedDiscountPercent;
+    window.Wishlist = Wishlist;
+    window.VietnamLocations = VietnamLocations;
+    window.removeVietnameseTones = removeVietnameseTones;
+    window.compressImage = compressImage;
 
     // Tự động khởi tạo Theme & Giỏ hàng khi trang tải xong (nếu chạy trong trình duyệt)
     if (typeof document !== "undefined") {

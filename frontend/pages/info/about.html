@@ -3,10 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      Giới Thiệu HYBRID.STORE — Nền Tảng Mua Sắm &amp; Thẩm Định Chất Lượng Tiên
-      Phong
-    </title>
+    <title>Giới Thiệu HYBRID.STORE — Nền Tảng Mua Sắm &amp; Thẩm Định Chất Lượng Tiên Phong</title>
 
     <!-- Chống giật giao diện (Zero-FOUC Theme Init) -->
     <script>
@@ -14,8 +11,7 @@
         try {
           var t = localStorage.getItem("hybrid_theme") || "dark";
           document.documentElement.setAttribute("data-theme", t);
-          if (t === "light")
-            document.documentElement.classList.add("light-theme");
+          if (t === "light") document.documentElement.classList.add("light-theme");
         } catch (e) {}
       })();
     </script>
@@ -178,9 +174,7 @@
         border-radius: var(--radius-xl);
         padding: 24px 20px;
         text-align: center;
-        transition:
-          transform var(--t-fast) ease,
-          border-color var(--t-fast) ease;
+        transition: transform var(--t-fast) ease, border-color var(--t-fast) ease;
       }
       .stat-card:hover {
         transform: translateY(-4px);
@@ -315,29 +309,18 @@
         justify-content: space-between;
         position: relative;
         overflow: hidden;
-        transition:
-          transform var(--t-fast) ease,
-          border-color var(--t-fast) ease,
-          box-shadow var(--t-fast) ease;
+        transition: transform var(--t-fast) ease, border-color var(--t-fast) ease, box-shadow var(--t-fast) ease;
       }
       .model-card:hover {
         transform: translateY(-4px);
         box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
       }
       .model-card--mall {
-        background: linear-gradient(
-          135deg,
-          rgba(139, 92, 246, 0.08),
-          rgba(99, 102, 241, 0.03)
-        );
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(99, 102, 241, 0.03));
         border-color: rgba(139, 92, 246, 0.35);
       }
       .model-card--c2c {
-        background: linear-gradient(
-          135deg,
-          rgba(6, 182, 212, 0.08),
-          rgba(16, 185, 129, 0.03)
-        );
+        background: linear-gradient(135deg, rgba(6, 182, 212, 0.08), rgba(16, 185, 129, 0.03));
         border-color: rgba(6, 182, 212, 0.35);
       }
       [data-theme="light"] .model-card--mall,
@@ -397,10 +380,7 @@
         padding: 24px 22px;
         display: flex;
         flex-direction: column;
-        transition:
-          transform var(--t-fast) ease,
-          border-color var(--t-fast) ease,
-          box-shadow var(--t-fast) ease;
+        transition: transform var(--t-fast) ease, border-color var(--t-fast) ease, box-shadow var(--t-fast) ease;
       }
       .pledge-card:hover {
         transform: translateY(-4px);
@@ -483,9 +463,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        transition:
-          transform var(--t-fast),
-          border-color var(--t-fast);
+        transition: transform var(--t-fast), border-color var(--t-fast);
       }
       .stepper-item:hover {
         transform: translateY(-3px);
@@ -626,9 +604,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        transition:
-          transform var(--t-fast) ease,
-          border-color var(--t-fast) ease;
+        transition: transform var(--t-fast) ease, border-color var(--t-fast) ease;
       }
       .showroom-card:hover {
         transform: translateY(-3px);
@@ -719,9 +695,7 @@
         align-items: center;
         justify-content: center;
         gap: 6px;
-        transition:
-          transform var(--t-fast) ease,
-          border-color var(--t-fast) ease;
+        transition: transform var(--t-fast) ease, border-color var(--t-fast) ease;
       }
       .partner-card:hover {
         transform: translateY(-2px);
@@ -817,11 +791,7 @@
 
       /* 9. CTA Box */
       .cta-box {
-        background: linear-gradient(
-          135deg,
-          rgba(139, 92, 246, 0.14),
-          rgba(6, 182, 212, 0.1)
-        );
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.14), rgba(6, 182, 212, 0.1));
         border: 1.5px solid rgba(139, 92, 246, 0.4);
         border-radius: var(--radius-xl);
         padding: 44px 28px;
@@ -842,13 +812,8 @@
     <header class="site-header">
       <div class="container">
         <a class="brand" href="../../index.html">
-          <span class="brand-mark"
-            ><span class="material-symbols-outlined">token</span></span
-          >
-          <span
-            >HYBRID<span class="text-secondary">.STORE</span>
-            <span class="badge">GIỚI THIỆU</span></span
-          >
+          <span class="brand-mark"><span class="material-symbols-outlined">token</span></span>
+          <span>HYBRID<span class="text-secondary">.STORE</span> <span class="badge">GIỚI THIỆU</span></span>
         </a>
 
         <div class="header-actions">
@@ -859,13 +824,9 @@
             title="Chuyển chế độ Sáng / Tối"
             aria-label="Chuyển đổi giao diện"
           >
-            <span class="material-symbols-outlined theme-toggle-icon"
-              >light_mode</span
-            >
+            <span class="material-symbols-outlined theme-toggle-icon">light_mode</span>
           </button>
-          <a class="btn btn-secondary hide-sm" href="../shop/catalog.html"
-            >Xem Sản Phẩm</a
-          >
+          <a class="btn btn-secondary hide-sm" href="../shop/catalog.html">Xem Sản Phẩm</a>
           <a class="avatar" href="../account/profile.html" title="Tài khoản">
             <span class="material-symbols-outlined">person</span>
           </a>
@@ -879,19 +840,11 @@
         <nav>
           <a href="../../index.html">Trang Chủ</a>
           <span class="text-faint">/</span>
-          <span class="active"
-            >Giới Thiệu &amp; Thẩm Định Chất Lượng HYBRID.STORE</span
-          >
+          <span class="active">Giới Thiệu &amp; Thẩm Định Chất Lượng HYBRID.STORE</span>
         </nav>
         <div class="subnav-info hide-sm">
-          <span class="text-success"
-            ><span class="material-symbols-outlined icon-sm">verified</span>
-            Đồng Kiểm 100% Tận Tay</span
-          >
-          <span class="text-secondary"
-            ><span class="material-symbols-outlined icon-sm">storefront</span> 3
-            Showroom &amp; TT Kỹ Thuật</span
-          >
+          <span class="text-success"><span class="material-symbols-outlined icon-sm">verified</span> Đồng Kiểm 100% Tận Tay</span>
+          <span class="text-secondary"><span class="material-symbols-outlined icon-sm">storefront</span> 3 Showroom &amp; TT Kỹ Thuật</span>
         </div>
       </div>
     </div>
@@ -899,38 +852,20 @@
     <main class="container py-8">
       <!-- 1. HERO BANNER: THƯƠNG HIỆU & SỨ MỆNH -->
       <section class="about-hero">
-        <span class="badge badge-solid mb-3"
-          >HỆ THỐNG MUA SẮM THƯƠNG MẠI ĐIỆN TỬ TIÊN PHONG</span
-        >
+        <span class="badge badge-solid mb-3">HỆ THỐNG MUA SẮM THƯƠNG MẠI ĐIỆN TỬ TIÊN PHONG</span>
         <h1 class="about-hero-title">
           Tái Định Nghĩa Mua Sắm: Hàng Mới Chính Hãng &amp; Đồ Cũ Thẩm Định
         </h1>
         <p class="about-hero-desc">
-          <strong>HYBRID.STORE</strong> được kiến tạo để giải quyết triệt để rủi
-          ro lớn nhất của người mua hàng trực tuyến:
-          <em>"hàng nhận không giống hình"</em> và
-          <em>"lo sợ mua phải đồ cũ dựng, linh kiện đã qua sửa chữa"</em>. Chúng
-          tôi kết hợp song hành giữa phân phối
-          <strong>Brand Mall 100% Nguyên Seal</strong> và nền tảng
-          <strong>Chợ Đồ Cũ Like New Được Kiểm Định 15 Bước</strong>, áp dụng
-          đặc quyền <strong>đồng kiểm 100% cùng shipper</strong> trước khi trả
-          tiền.
+          <strong>HYBRID.STORE</strong> được kiến tạo để giải quyết triệt để rủi ro lớn nhất của người mua hàng trực tuyến: <em>"hàng nhận không giống hình"</em> và <em>"lo sợ mua phải đồ cũ dựng, linh kiện đã qua sửa chữa"</em>. Chúng tôi kết hợp song hành giữa phân phối <strong>Brand Mall 100% Nguyên Seal</strong> và nền tảng <strong>Chợ Đồ Cũ Like New Được Kiểm Định 15 Bước</strong>, áp dụng đặc quyền <strong>đồng kiểm 100% cùng shipper</strong> trước khi trả tiền.
         </p>
 
         <div class="flex items-center justify-center gap-3 flex-wrap">
-          <a
-            class="btn btn-primary"
-            href="../shop/catalog.html"
-            style="padding: 12px 26px; font-weight: 700"
-          >
+          <a class="btn btn-primary" href="../shop/catalog.html" style="padding: 12px 26px; font-weight: 700;">
             <span class="material-symbols-outlined icon-sm">shopping_bag</span>
             Khám Phá Danh Mục Sản Phẩm
           </a>
-          <a
-            class="btn btn-secondary"
-            href="../seller/post_item.html"
-            style="padding: 12px 24px; font-weight: 700"
-          >
+          <a class="btn btn-secondary" href="../seller/post_item.html" style="padding: 12px 24px; font-weight: 700;">
             <span class="material-symbols-outlined icon-sm">sell</span>
             Đăng Bán Đồ Cũ Like New
           </a>
@@ -945,9 +880,7 @@
           </div>
           <div class="stat-val mono text-gradient">150.000+</div>
           <div class="stat-label">Khách Hàng Toàn Quốc</div>
-          <div class="stat-sub">
-            Mua sắm tin cậy &amp; tái mua cao trên toàn hệ sinh thái
-          </div>
+          <div class="stat-sub">Mua sắm tin cậy &amp; tái mua cao trên toàn hệ sinh thái</div>
         </div>
 
         <div class="stat-card">
@@ -956,9 +889,7 @@
           </div>
           <div class="stat-val mono text-gradient">99.8%</div>
           <div class="stat-label">Đồng Kiểm Thành Công</div>
-          <div class="stat-sub">
-            Khách hàng mở hộp nghiệm thu ưng ý cùng nhân viên giao hàng
-          </div>
+          <div class="stat-sub">Khách hàng mở hộp nghiệm thu ưng ý cùng nhân viên giao hàng</div>
         </div>
 
         <div class="stat-card">
@@ -967,9 +898,7 @@
           </div>
           <div class="stat-val mono text-gradient">15/15</div>
           <div class="stat-label">Tiêu Chí Thẩm Định</div>
-          <div class="stat-sub">
-            Quy trình test máy thực tế khắt khe cho từng sản phẩm cũ
-          </div>
+          <div class="stat-sub">Quy trình test máy thực tế khắt khe cho từng sản phẩm cũ</div>
         </div>
 
         <div class="stat-card">
@@ -978,25 +907,17 @@
           </div>
           <div class="stat-val mono text-gradient">3 Showroom</div>
           <div class="stat-label">Hà Nội • ĐN • TP.HCM</div>
-          <div class="stat-sub">
-            Không gian trải nghiệm thực tế và bảo hành trực tiếp
-          </div>
+          <div class="stat-sub">Không gian trải nghiệm thực tế và bảo hành trực tiếp</div>
         </div>
       </section>
 
       <!-- 3. MÔ HÌNH KINH DOANH SONG HÀNH (HYBRID SHOPPING MODEL) -->
       <section class="about-section">
         <div class="about-section-head">
-          <span class="badge badge-primary mb-2"
-            >MÔ HÌNH THƯƠNG MẠI ĐỘC BẢN</span
-          >
-          <h2 class="about-section-title">
-            Hai Trụ Cột Sản Phẩm Song Hành Cân Bằng
-          </h2>
+          <span class="badge badge-primary mb-2">MÔ HÌNH THƯƠNG MẠI ĐỘC BẢN</span>
+          <h2 class="about-section-title">Hai Trụ Cột Sản Phẩm Song Hành Cân Bằng</h2>
           <p class="about-section-desc">
-            Không như các sàn thương mại điện tử hỗn tạp, HYBRID.STORE phân tách
-            rạch ròi giữa phân khúc Hàng Mới Tuyệt Đối và Đồ Cũ Có Kiểm Định,
-            giúp khách hàng đưa ra quyết định mua sắm tối ưu ngân sách.
+            Không như các sàn thương mại điện tử hỗn tạp, HYBRID.STORE phân tách rạch ròi giữa phân khúc Hàng Mới Tuyệt Đối và Đồ Cũ Có Kiểm Định, giúp khách hàng đưa ra quyết định mua sắm tối ưu ngân sách.
           </p>
         </div>
 
@@ -1006,75 +927,38 @@
             <div>
               <div class="policy-card-top-row">
                 <span class="policy-type-pill mall">
-                  <span class="material-symbols-outlined icon-xs"
-                    >verified</span
-                  >
+                  <span class="material-symbols-outlined icon-xs">verified</span>
                   Brand Mall 100%
                 </span>
                 <span class="policy-benefit-badge mall">
-                  <span class="material-symbols-outlined icon-xs"
-                    >verified</span
-                  >
+                  <span class="material-symbols-outlined icon-xs">verified</span>
                   Chính Hãng Phân Phối
                 </span>
               </div>
-              <h3 class="text-lg fw-700 text-text mb-2">
-                Hàng Mới Phân Phối Chính Thức
-              </h3>
-              <p class="text-xs text-muted" style="line-height: 1.6">
-                Dành cho khách hàng tìm kiếm sự hoàn hảo tuyệt đối. Mọi sản phẩm
-                đều nguyên seal nhà sản xuất, nguồn gốc minh bạch từ các nhà
-                phân phối ủy quyền cấp 1 tại Việt Nam.
+              <h3 class="text-lg fw-700 text-text mb-2">Hàng Mới Phân Phối Chính Thức</h3>
+              <p class="text-xs text-muted" style="line-height: 1.6;">
+                Dành cho khách hàng tìm kiếm sự hoàn hảo tuyệt đối. Mọi sản phẩm đều nguyên seal nhà sản xuất, nguồn gốc minh bạch từ các nhà phân phối ủy quyền cấp 1 tại Việt Nam.
               </p>
 
               <ul class="model-feature-list">
                 <li class="model-feature-item">
-                  <span
-                    class="material-symbols-outlined text-success icon-sm"
-                    style="flex-shrink: 0; margin-top: 2px"
-                    >check_circle</span
-                  >
-                  <span
-                    ><strong>100% Nguyên Hộp Nguyên Seal:</strong> Chưa từng
-                    khui hộp, bảo hành điện tử chính hãng từ 12 đến 24
-                    tháng.</span
-                  >
+                  <span class="material-symbols-outlined text-success icon-sm" style="flex-shrink: 0; margin-top: 2px;">check_circle</span>
+                  <span><strong>100% Nguyên Hộp Nguyên Seal:</strong> Chưa từng khui hộp, bảo hành điện tử chính hãng từ 12 đến 24 tháng.</span>
                 </li>
                 <li class="model-feature-item">
-                  <span
-                    class="material-symbols-outlined text-success icon-sm"
-                    style="flex-shrink: 0; margin-top: 2px"
-                    >check_circle</span
-                  >
-                  <span
-                    ><strong>Đầy Đủ Hóa Đơn VAT &amp; Chứng Từ:</strong> Hợp lệ
-                    khấu trừ doanh nghiệp và bảo hành tại mọi trung tâm ủy quyền
-                    toàn quốc.</span
-                  >
+                  <span class="material-symbols-outlined text-success icon-sm" style="flex-shrink: 0; margin-top: 2px;">check_circle</span>
+                  <span><strong>Đầy Đủ Hóa Đơn VAT &amp; Chứng Từ:</strong> Hợp lệ khấu trừ doanh nghiệp và bảo hành tại mọi trung tâm ủy quyền toàn quốc.</span>
                 </li>
                 <li class="model-feature-item">
-                  <span
-                    class="material-symbols-outlined text-success icon-sm"
-                    style="flex-shrink: 0; margin-top: 2px"
-                    >check_circle</span
-                  >
-                  <span
-                    ><strong>Đổi Mới 1-1 Trong 07 Ngày:</strong> Nếu phát sinh
-                    lỗi kỹ thuật từ nhà sản xuất, đổi mới ngay không chờ đợi sửa
-                    chữa.</span
-                  >
+                  <span class="material-symbols-outlined text-success icon-sm" style="flex-shrink: 0; margin-top: 2px;">check_circle</span>
+                  <span><strong>Đổi Mới 1-1 Trong 07 Ngày:</strong> Nếu phát sinh lỗi kỹ thuật từ nhà sản xuất, đổi mới ngay không chờ đợi sửa chữa.</span>
                 </li>
               </ul>
             </div>
 
             <div class="pt-4 border-top flex items-center justify-between">
-              <span class="text-xs text-muted"
-                >Giá niêm yết cạnh tranh kèm ưu đãi</span
-              >
-              <a
-                class="btn btn-primary btn-sm"
-                href="../shop/catalog.html?type=mall"
-              >
+              <span class="text-xs text-muted">Giá niêm yết cạnh tranh kèm ưu đãi</span>
+              <a class="btn btn-primary btn-sm" href="../shop/catalog.html?type=mall">
                 Xem Hàng Mall →
               </a>
             </div>
@@ -1085,9 +969,7 @@
             <div>
               <div class="policy-card-top-row">
                 <span class="policy-type-pill c2c">
-                  <span class="material-symbols-outlined icon-xs"
-                    >recycling</span
-                  >
+                  <span class="material-symbols-outlined icon-xs">recycling</span>
                   Đồ Cũ Like New
                 </span>
                 <span class="policy-benefit-badge c2c">
@@ -1095,63 +977,30 @@
                   Tiết Kiệm 20% — 50%
                 </span>
               </div>
-              <h3 class="text-lg fw-700 text-text mb-2">
-                Chợ Đồ Cũ Like New Thẩm Định 15 Bước
-              </h3>
-              <p class="text-xs text-muted" style="line-height: 1.6">
-                Giải pháp thông minh cho người sành công nghệ và thời trang. Sở
-                hữu các siêu phẩm Like New với mức giá rẻ hơn đồ mới từ 20% đến
-                50%, an tâm tuyệt đối nhờ màng niêm phong kiểm tra.
+              <h3 class="text-lg fw-700 text-text mb-2">Chợ Đồ Cũ Like New Thẩm Định 15 Bước</h3>
+              <p class="text-xs text-muted" style="line-height: 1.6;">
+                Giải pháp thông minh cho người sành công nghệ và thời trang. Sở hữu các siêu phẩm Like New với mức giá rẻ hơn đồ mới từ 20% đến 50%, an tâm tuyệt đối nhờ màng niêm phong kiểm tra.
               </p>
 
               <ul class="model-feature-list">
                 <li class="model-feature-item">
-                  <span
-                    class="material-symbols-outlined text-secondary icon-sm"
-                    style="flex-shrink: 0; margin-top: 2px"
-                    >check_circle</span
-                  >
-                  <span
-                    ><strong>Test Máy Kỹ Thuật 15 Tiêu Chí:</strong> Kiểm tra bo
-                    mạch zin, pin &gt; 85%, màn hình không ám ố, dán tem QR
-                    chống tráo hàng.</span
-                  >
+                  <span class="material-symbols-outlined text-secondary icon-sm" style="flex-shrink: 0; margin-top: 2px;">check_circle</span>
+                  <span><strong>Test Máy Kỹ Thuật 15 Tiêu Chí:</strong> Kiểm tra bo mạch zin, pin &gt; 85%, màn hình không ám ố, dán tem QR chống tráo hàng.</span>
                 </li>
                 <li class="model-feature-item">
-                  <span
-                    class="material-symbols-outlined text-secondary icon-sm"
-                    style="flex-shrink: 0; margin-top: 2px"
-                    >check_circle</span
-                  >
-                  <span
-                    ><strong>Bảo Hành 6 - 12 Tháng Tại Sàn:</strong> Hỗ trợ kỹ
-                    thuật phần cứng, tiếp nhận bảo hành tại 3 trung tâm Showroom
-                    toàn quốc.</span
-                  >
+                  <span class="material-symbols-outlined text-secondary icon-sm" style="flex-shrink: 0; margin-top: 2px;">check_circle</span>
+                  <span><strong>Bảo Hành 6 - 12 Tháng Tại Sàn:</strong> Hỗ trợ kỹ thuật phần cứng, tiếp nhận bảo hành tại 3 trung tâm Showroom toàn quốc.</span>
                 </li>
                 <li class="model-feature-item">
-                  <span
-                    class="material-symbols-outlined text-secondary icon-sm"
-                    style="flex-shrink: 0; margin-top: 2px"
-                    >check_circle</span
-                  >
-                  <span
-                    ><strong>Thương Lượng Trả Giá Trực Tiếp:</strong> Đề xuất
-                    mức giá mong muốn với người bán qua công cụ trả giá thông
-                    minh.</span
-                  >
+                  <span class="material-symbols-outlined text-secondary icon-sm" style="flex-shrink: 0; margin-top: 2px;">check_circle</span>
+                  <span><strong>Thương Lượng Trả Giá Trực Tiếp:</strong> Đề xuất mức giá mong muốn với người bán qua công cụ trả giá thông minh.</span>
                 </li>
               </ul>
             </div>
 
             <div class="pt-4 border-top flex items-center justify-between">
-              <span class="text-xs text-muted"
-                >Tiết kiệm chi phí, trải nghiệm đỉnh cao</span
-              >
-              <a
-                class="btn btn-secondary btn-sm"
-                href="../shop/catalog.html?type=c2c"
-              >
+              <span class="text-xs text-muted">Tiết kiệm chi phí, trải nghiệm đỉnh cao</span>
+              <a class="btn btn-secondary btn-sm" href="../shop/catalog.html?type=c2c">
                 Săn Đồ Cũ Like New →
               </a>
             </div>
@@ -1162,14 +1011,10 @@
       <!-- 4. SÁU CAM KẾT VÀNG CHO KHÁCH HÀNG (CORE VALUES) -->
       <section class="about-section">
         <div class="about-section-head">
-          <span class="badge badge-solid mb-2"
-            >CHÍNH SÁCH BẢO VỆ NGƯỜI MUA</span
-          >
+          <span class="badge badge-solid mb-2">CHÍNH SÁCH BẢO VỆ NGƯỜI MUA</span>
           <h2 class="about-section-title">6 Cam Kết Vàng Vận Hành Minh Bạch</h2>
           <p class="about-section-desc">
-            Chúng tôi xây dựng hệ thống quy chuẩn chặt chẽ để khách hàng ở bất
-            kỳ tỉnh thành nào cũng được tận hưởng dịch vụ an toàn và chuyên
-            nghiệp nhất.
+            Chúng tôi xây dựng hệ thống quy chuẩn chặt chẽ để khách hàng ở bất kỳ tỉnh thành nào cũng được tận hưởng dịch vụ an toàn và chuyên nghiệp nhất.
           </p>
         </div>
 
@@ -1184,9 +1029,7 @@
             </div>
             <h3 class="pledge-title">Đồng Kiểm 100% Cùng Shipper</h3>
             <p class="pledge-desc">
-              Khách hàng được quyền mở hộp, cầm nắm sản phẩm, bật nguồn test màn
-              hình và các tính năng cơ bản trước khi thanh toán. Không đúng mô
-              tả hoàn trả 0₫ phí.
+              Khách hàng được quyền mở hộp, cầm nắm sản phẩm, bật nguồn test màn hình và các tính năng cơ bản trước khi thanh toán. Không đúng mô tả hoàn trả 0₫ phí.
             </p>
           </div>
 
@@ -1200,9 +1043,7 @@
             </div>
             <h3 class="pledge-title">Tem Niêm Phong QR Màng Vỡ</h3>
             <p class="pledge-desc">
-              Mỗi sản phẩm cũ sau khi test xong đều được dán tem niêm phong màng
-              vỡ có mã QR dẫn trực tiếp tới video &amp; biên bản kiểm tra 15
-              bước của kỹ thuật viên.
+              Mỗi sản phẩm cũ sau khi test xong đều được dán tem niêm phong màng vỡ có mã QR dẫn trực tiếp tới video &amp; biên bản kiểm tra 15 bước của kỹ thuật viên.
             </p>
           </div>
 
@@ -1216,9 +1057,7 @@
             </div>
             <h3 class="pledge-title">Thanh Toán Minh Bạch &amp; Tiện Lợi</h3>
             <p class="pledge-desc">
-              Hỗ trợ chuyển khoản nhanh Napas 24/7, quét mã VietQR tự động khớp
-              lệnh 0 giây, hoặc thanh toán tiền mặt khi nhận hàng (COD) không
-              phát sinh phụ phí.
+              Hỗ trợ chuyển khoản nhanh Napas 24/7, quét mã VietQR tự động khớp lệnh 0 giây, hoặc thanh toán tiền mặt khi nhận hàng (COD) không phát sinh phụ phí.
             </p>
           </div>
 
@@ -1232,9 +1071,7 @@
             </div>
             <h3 class="pledge-title">Định Danh Người Bán eKYC CCCD</h3>
             <p class="pledge-desc">
-              100% người bán đồ cũ bắt buộc phải xác thực Căn cước công dân gắn
-              chip 2 mặt và được Ban Quản Trị đối soát, loại bỏ hoàn toàn gian
-              lận hoặc hàng giả.
+              100% người bán đồ cũ bắt buộc phải xác thực Căn cước công dân gắn chip 2 mặt và được Ban Quản Trị đối soát, loại bỏ hoàn toàn gian lận hoặc hàng giả.
             </p>
           </div>
 
@@ -1242,17 +1079,13 @@
           <div class="pledge-card">
             <div class="pledge-card-top">
               <span class="icon-box tone-tertiary">
-                <span class="material-symbols-outlined"
-                  >published_with_changes</span
-                >
+                <span class="material-symbols-outlined">published_with_changes</span>
               </span>
               <span class="pledge-num">#05</span>
             </div>
             <h3 class="pledge-title">Bảo Hành &amp; Đổi Trả Trong 7 Ngày</h3>
             <p class="pledge-desc">
-              Chính sách bao test trải nghiệm 7 ngày đổi mới hoặc hoàn tiền nếu
-              có lỗi kỹ thuật; bảo hành điện tử chính hãng từ 6 đến 24 tháng
-              theo từng ngành hàng.
+              Chính sách bao test trải nghiệm 7 ngày đổi mới hoặc hoàn tiền nếu có lỗi kỹ thuật; bảo hành điện tử chính hãng từ 6 đến 24 tháng theo từng ngành hàng.
             </p>
           </div>
 
@@ -1266,9 +1099,7 @@
             </div>
             <h3 class="pledge-title">3 Showroom &amp; Trung Tâm Kỹ Thuật</h3>
             <p class="pledge-desc">
-              Hệ thống không gian trải nghiệm thực tế và tiếp nhận bảo hành trực
-              tiếp tại Hà Nội, Đà Nẵng và TP.HCM, hỗ trợ kỹ thuật tận tâm không
-              phải chờ đợi gửi bưu điện.
+              Hệ thống không gian trải nghiệm thực tế và tiếp nhận bảo hành trực tiếp tại Hà Nội, Đà Nẵng và TP.HCM, hỗ trợ kỹ thuật tận tâm không phải chờ đợi gửi bưu điện.
             </p>
           </div>
         </div>
@@ -1278,12 +1109,9 @@
       <section class="about-section">
         <div class="about-section-head">
           <span class="badge badge-secondary mb-2">TRẢI NGHIỆM ĐƠN GIẢN</span>
-          <h2 class="about-section-title">
-            Quy Trình Mua Bán 5 Bước Minh Bạch
-          </h2>
+          <h2 class="about-section-title">Quy Trình Mua Bán 5 Bước Minh Bạch</h2>
           <p class="about-section-desc">
-            Từ lúc tìm kiếm sản phẩm đến khi nhận hàng tận tay chỉ với vài thao
-            tác trực quan, an tâm và nhanh gọn.
+            Từ lúc tìm kiếm sản phẩm đến khi nhận hàng tận tay chỉ với vài thao tác trực quan, an tâm và nhanh gọn.
           </p>
         </div>
 
@@ -1291,46 +1119,31 @@
           <div class="stepper-item">
             <div class="stepper-num">01</div>
             <strong class="text-xs mb-1">Chọn Sản Phẩm</strong>
-            <span class="text-xs text-muted"
-              >Xem ảnh thật, thông số độ mới % và biên bản thẩm định tình trạng
-              chi tiết.</span
-            >
+            <span class="text-xs text-muted">Xem ảnh thật, thông số độ mới % và biên bản thẩm định tình trạng chi tiết.</span>
           </div>
 
           <div class="stepper-item">
             <div class="stepper-num">02</div>
             <strong class="text-xs mb-1">Thương Lượng Trả Giá</strong>
-            <span class="text-xs text-muted"
-              >Đề xuất mức giá mong muốn trực tiếp với người bán đồ cũ qua công
-              cụ trả giá.</span
-            >
+            <span class="text-xs text-muted">Đề xuất mức giá mong muốn trực tiếp với người bán đồ cũ qua công cụ trả giá.</span>
           </div>
 
           <div class="stepper-item">
             <div class="stepper-num">03</div>
             <strong class="text-xs mb-1">Kiểm Định Kỹ Thuật</strong>
-            <span class="text-xs text-muted"
-              >Chuyên viên kỹ thuật test toàn diện 15 tiêu chí và dán tem niêm
-              phong QR.</span
-            >
+            <span class="text-xs text-muted">Chuyên viên kỹ thuật test toàn diện 15 tiêu chí và dán tem niêm phong QR.</span>
           </div>
 
           <div class="stepper-item">
             <div class="stepper-num">04</div>
             <strong class="text-xs mb-1">Thanh Toán Linh Hoạt</strong>
-            <span class="text-xs text-muted"
-              >Quét mã VietQR/Napas tự động hoặc lựa chọn thanh toán tiền mặt
-              COD khi nhận.</span
-            >
+            <span class="text-xs text-muted">Quét mã VietQR/Napas tự động hoặc lựa chọn thanh toán tiền mặt COD khi nhận.</span>
           </div>
 
           <div class="stepper-item">
             <div class="stepper-num">05</div>
             <strong class="text-xs mb-1">Đồng Kiểm &amp; Nhận Hàng</strong>
-            <span class="text-xs text-muted"
-              >Mở hộp test thực tế cùng shipper, kích hoạt gói bảo hành điện tử
-              chính thức.</span
-            >
+            <span class="text-xs text-muted">Mở hộp test thực tế cùng shipper, kích hoạt gói bảo hành điện tử chính thức.</span>
           </div>
         </div>
       </section>
@@ -1339,250 +1152,112 @@
       <section class="about-section">
         <div class="about-section-head">
           <span class="badge badge-solid mb-2">TIÊU CHUẨN CHUYÊN GIA</span>
-          <h2 class="about-section-title">
-            Bảng Quy Chuẩn Kiểm Tra Kỹ Thuật 15 Bước
-          </h2>
+          <h2 class="about-section-title">Bảng Quy Chuẩn Kiểm Tra Kỹ Thuật 15 Bước</h2>
           <p class="about-section-desc">
-            Quy trình test máy thực tế được xây dựng bởi các chuyên gia kỹ thuật
-            phần cứng, áp dụng bắt buộc cho từng nhóm ngành hàng đồ cũ trước khi
-            xuất bán.
+            Quy trình test máy thực tế được xây dựng bởi các chuyên gia kỹ thuật phần cứng, áp dụng bắt buộc cho từng nhóm ngành hàng đồ cũ trước khi xuất bán.
           </p>
         </div>
 
         <!-- Bộ lọc tab nhanh theo ngành hàng -->
         <div class="lab-filter-bar">
-          <button class="lab-filter-btn active" data-filter="all" type="button">
-            Tất Cả 15 Bước
-          </button>
-          <button class="lab-filter-btn" data-filter="tech" type="button">
-            Đồ Điện Tử &amp; Hi-Tech (05)
-          </button>
-          <button class="lab-filter-btn" data-filter="sneakers" type="button">
-            Giày Sneakers Hype (04)
-          </button>
-          <button class="lab-filter-btn" data-filter="fashion" type="button">
-            Thời Trang Thiết Kế (03)
-          </button>
-          <button class="lab-filter-btn" data-filter="iot" type="button">
-            Gia Dụng Thông Minh (03)
-          </button>
+          <button class="lab-filter-btn active" data-filter="all" type="button">Tất Cả 15 Bước</button>
+          <button class="lab-filter-btn" data-filter="tech" type="button">Đồ Điện Tử &amp; Hi-Tech (05)</button>
+          <button class="lab-filter-btn" data-filter="sneakers" type="button">Giày Sneakers Hype (04)</button>
+          <button class="lab-filter-btn" data-filter="fashion" type="button">Thời Trang Thiết Kế (03)</button>
+          <button class="lab-filter-btn" data-filter="iot" type="button">Gia Dụng Thông Minh (03)</button>
         </div>
 
         <div class="lab-table-container">
           <table class="lab-table" aria-label="Bảng 15 bước kiểm tra kỹ thuật">
             <thead>
               <tr>
-                <th style="width: 100px; text-align: center">STT</th>
-                <th style="width: 320px">Hạng Mục Kiểm Tra &amp; Ngành Hàng</th>
+                <th style="width: 100px; text-align: center;">STT</th>
+                <th style="width: 320px;">Hạng Mục Kiểm Tra &amp; Ngành Hàng</th>
                 <th>Thao Tác Thực Tế &amp; Tiêu Chuẩn Nghiệm Thu Xuất Bán</th>
               </tr>
             </thead>
             <tbody id="labTableBody">
               <!-- Hi-Tech (1-5) -->
               <tr data-cat="tech">
-                <td style="text-align: center">
-                  <span class="badge badge-primary">Bước 01</span>
-                </td>
-                <td>
-                  <strong>Đo dung lượng pin &amp; Tốc độ sạc nhanh</strong>
-                  <span class="badge badge-outline text-xs">Hi-Tech</span>
-                </td>
-                <td>
-                  Đo dung lượng thực tế qua chu kỳ xả nạp; yêu cầu dung lượng
-                  pin đạt &gt; 85%, nhận diện chuẩn sạc nhanh không nóng bất
-                  thường.
-                </td>
+                <td style="text-align: center;"><span class="badge badge-primary">Bước 01</span></td>
+                <td><strong>Đo dung lượng pin &amp; Tốc độ sạc nhanh</strong> <span class="badge badge-outline text-xs">Hi-Tech</span></td>
+                <td>Đo dung lượng thực tế qua chu kỳ xả nạp; yêu cầu dung lượng pin đạt &gt; 85%, nhận diện chuẩn sạc nhanh không nóng bất thường.</td>
               </tr>
               <tr data-cat="tech">
-                <td style="text-align: center">
-                  <span class="badge badge-primary">Bước 02</span>
-                </td>
-                <td>
-                  <strong>Soi ngoại quan, ốc máy &amp; chống ẩm</strong>
-                  <span class="badge badge-outline text-xs">Hi-Tech</span>
-                </td>
-                <td>
-                  Kiểm tra vết trầy xước, soi chân ốc đít zin chưa toét đầu,
-                  kiểm tra quỳ tím bên trong chưa đổi màu (không dính ẩm/vào
-                  nước).
-                </td>
+                <td style="text-align: center;"><span class="badge badge-primary">Bước 02</span></td>
+                <td><strong>Soi ngoại quan, ốc máy &amp; chống ẩm</strong> <span class="badge badge-outline text-xs">Hi-Tech</span></td>
+                <td>Kiểm tra vết trầy xước, soi chân ốc đít zin chưa toét đầu, kiểm tra quỳ tím bên trong chưa đổi màu (không dính ẩm/vào nước).</td>
               </tr>
               <tr data-cat="tech">
-                <td style="text-align: center">
-                  <span class="badge badge-primary">Bước 03</span>
-                </td>
-                <td>
-                  <strong>Test cảm ứng &amp; Màn hình hiển thị</strong>
-                  <span class="badge badge-outline text-xs">Hi-Tech</span>
-                </td>
-                <td>
-                  Vuốt biểu tượng kiểm tra toàn dải cảm ứng; soi nền trắng/đen
-                  kiểm tra điểm chết pixel, ám ố, sọc màn và bóng mờ burn-in.
-                </td>
+                <td style="text-align: center;"><span class="badge badge-primary">Bước 03</span></td>
+                <td><strong>Test cảm ứng &amp; Màn hình hiển thị</strong> <span class="badge badge-outline text-xs">Hi-Tech</span></td>
+                <td>Vuốt biểu tượng kiểm tra toàn dải cảm ứng; soi nền trắng/đen kiểm tra điểm chết pixel, ám ố, sọc màn và bóng mờ burn-in.</td>
               </tr>
               <tr data-cat="tech">
-                <td style="text-align: center">
-                  <span class="badge badge-primary">Bước 04</span>
-                </td>
-                <td>
-                  <strong>Kiểm tra sóng, loa, mic &amp; cảm biến</strong>
-                  <span class="badge badge-outline text-xs">Hi-Tech</span>
-                </td>
-                <td>
-                  Lắp SIM test đàm thoại loa trong/ngoài trong trẻo; đo tốc độ
-                  5G, Wi-Fi; kiểm tra độ nhạy Face ID/Vân tay và cảm biến tiệm
-                  cận.
-                </td>
+                <td style="text-align: center;"><span class="badge badge-primary">Bước 04</span></td>
+                <td><strong>Kiểm tra sóng, loa, mic &amp; cảm biến</strong> <span class="badge badge-outline text-xs">Hi-Tech</span></td>
+                <td>Lắp SIM test đàm thoại loa trong/ngoài trong trẻo; đo tốc độ 5G, Wi-Fi; kiểm tra độ nhạy Face ID/Vân tay và cảm biến tiệm cận.</td>
               </tr>
               <tr data-cat="tech">
-                <td style="text-align: center">
-                  <span class="badge badge-primary">Bước 05</span>
-                </td>
-                <td>
-                  <strong>Chạy thử tải nặng &amp; Quay video 4K</strong>
-                  <span class="badge badge-outline text-xs">Hi-Tech</span>
-                </td>
-                <td>
-                  Bật quay video 4K liên tục 10 phút, kiểm tra chống rung quang
-                  học, tản nhiệt ổn định, máy không bị giật lag hay sập nguồn.
-                </td>
+                <td style="text-align: center;"><span class="badge badge-primary">Bước 05</span></td>
+                <td><strong>Chạy thử tải nặng &amp; Quay video 4K</strong> <span class="badge badge-outline text-xs">Hi-Tech</span></td>
+                <td>Bật quay video 4K liên tục 10 phút, kiểm tra chống rung quang học, tản nhiệt ổn định, máy không bị giật lag hay sập nguồn.</td>
               </tr>
 
               <!-- Sneakers (6-9) -->
               <tr data-cat="sneakers">
-                <td style="text-align: center">
-                  <span class="badge badge-secondary">Bước 06</span>
-                </td>
-                <td>
-                  <strong>Thẩm định chất liệu da &amp; Form mũi giày</strong>
-                  <span class="badge badge-outline text-xs">Sneakers</span>
-                </td>
-                <td>
-                  Kiểm tra độ đàn hồi chất da/vải dệt, độ cong chuẩn của mũi
-                  giày, đường may viền đều đặn không có chỉ thừa hay méo form.
-                </td>
+                <td style="text-align: center;"><span class="badge badge-secondary">Bước 06</span></td>
+                <td><strong>Thẩm định chất liệu da &amp; Form mũi giày</strong> <span class="badge badge-outline text-xs">Sneakers</span></td>
+                <td>Kiểm tra độ đàn hồi chất da/vải dệt, độ cong chuẩn của mũi giày, đường may viền đều đặn không có chỉ thừa hay méo form.</td>
               </tr>
               <tr data-cat="sneakers">
-                <td style="text-align: center">
-                  <span class="badge badge-secondary">Bước 07</span>
-                </td>
-                <td>
-                  <strong>Kiểm tra chỉ khâu Strobel &amp; Lót đệm</strong>
-                  <span class="badge badge-outline text-xs">Sneakers</span>
-                </td>
-                <td>
-                  Nhấc lót giày soi đường chỉ may Strobel dưới đế; kiểm tra họa
-                  tiết in logo trên lót và độ dày đệm lót insole nguyên bản.
-                </td>
+                <td style="text-align: center;"><span class="badge badge-secondary">Bước 07</span></td>
+                <td><strong>Kiểm tra chỉ khâu Strobel &amp; Lót đệm</strong> <span class="badge badge-outline text-xs">Sneakers</span></td>
+                <td>Nhấc lót giày soi đường chỉ may Strobel dưới đế; kiểm tra họa tiết in logo trên lót và độ dày đệm lót insole nguyên bản.</td>
               </tr>
               <tr data-cat="sneakers">
-                <td style="text-align: center">
-                  <span class="badge badge-secondary">Bước 08</span>
-                </td>
-                <td>
-                  <strong>Đo độ êm nảy đệm Air / Bọt Boost</strong>
-                  <span class="badge badge-outline text-xs">Sneakers</span>
-                </td>
-                <td>
-                  Thử lực đàn hồi khi nén, kiểm tra áp suất túi khí Air không xì
-                  xẹp, hạt bọt Boost/React đàn hồi êm ái khi vận động.
-                </td>
+                <td style="text-align: center;"><span class="badge badge-secondary">Bước 08</span></td>
+                <td><strong>Đo độ êm nảy đệm Air / Bọt Boost</strong> <span class="badge badge-outline text-xs">Sneakers</span></td>
+                <td>Thử lực đàn hồi khi nén, kiểm tra áp suất túi khí Air không xì xẹp, hạt bọt Boost/React đàn hồi êm ái khi vận động.</td>
               </tr>
               <tr data-cat="sneakers">
-                <td style="text-align: center">
-                  <span class="badge badge-secondary">Bước 09</span>
-                </td>
-                <td>
-                  <strong>Đối soát mã size tag &amp; Phụ kiện hộp</strong>
-                  <span class="badge badge-outline text-xs">Sneakers</span>
-                </td>
-                <td>
-                  Đối chiếu mã số UPC/EAN trên tem nhiệt trong giày với tem hộp
-                  chính hãng; kiểm tra đầy đủ dây giày phụ, tag hãng đi kèm.
-                </td>
+                <td style="text-align: center;"><span class="badge badge-secondary">Bước 09</span></td>
+                <td><strong>Đối soát mã size tag &amp; Phụ kiện hộp</strong> <span class="badge badge-outline text-xs">Sneakers</span></td>
+                <td>Đối chiếu mã số UPC/EAN trên tem nhiệt trong giày với tem hộp chính hãng; kiểm tra đầy đủ dây giày phụ, tag hãng đi kèm.</td>
               </tr>
 
               <!-- Thời trang (10-12) -->
               <tr data-cat="fashion">
-                <td style="text-align: center">
-                  <span class="badge badge-warning">Bước 10</span>
-                </td>
-                <td>
-                  <strong>Thẩm định sợi vải &amp; Khả năng kháng nước</strong>
-                  <span class="badge badge-outline text-xs">Thời Trang</span>
-                </td>
-                <td>
-                  Kiểm tra độ bền sợi dệt, độ co giãn, bề mặt vải không xù lông;
-                  test hạt nước lăn lá sen trên áo khoác chống thấm Gore-Tex.
-                </td>
+                <td style="text-align: center;"><span class="badge badge-warning">Bước 10</span></td>
+                <td><strong>Thẩm định sợi vải &amp; Khả năng kháng nước</strong> <span class="badge badge-outline text-xs">Thời Trang</span></td>
+                <td>Kiểm tra độ bền sợi dệt, độ co giãn, bề mặt vải không xù lông; test hạt nước lăn lá sen trên áo khoác chống thấm Gore-Tex.</td>
               </tr>
               <tr data-cat="fashion">
-                <td style="text-align: center">
-                  <span class="badge badge-warning">Bước 11</span>
-                </td>
-                <td>
-                  <strong>Kiểm tra khóa kéo YKK &amp; Cúc kim loại</strong>
-                  <span class="badge badge-outline text-xs">Thời Trang</span>
-                </td>
-                <td>
-                  Kéo thử khóa kéo YKK/Riri trơn tru không cấn răng; kiểm tra
-                  cúc bấm, đinh tán kim loại dập logo sắc nét chống gỉ sét.
-                </td>
+                <td style="text-align: center;"><span class="badge badge-warning">Bước 11</span></td>
+                <td><strong>Kiểm tra khóa kéo YKK &amp; Cúc kim loại</strong> <span class="badge badge-outline text-xs">Thời Trang</span></td>
+                <td>Kéo thử khóa kéo YKK/Riri trơn tru không cấn răng; kiểm tra cúc bấm, đinh tán kim loại dập logo sắc nét chống gỉ sét.</td>
               </tr>
               <tr data-cat="fashion">
-                <td style="text-align: center">
-                  <span class="badge badge-warning">Bước 12</span>
-                </td>
-                <td>
-                  <strong>Vệ sinh hơi nước nóng &amp; Khử mùi thơm</strong>
-                  <span class="badge badge-outline text-xs">Thời Trang</span>
-                </td>
-                <td>
-                  Hấp ủi hơi nước định hình form áo quần, loại bỏ hoàn toàn vi
-                  khuẩn và mùi ẩm mốc trước khi đóng gói túi zip chuyên dụng.
-                </td>
+                <td style="text-align: center;"><span class="badge badge-warning">Bước 12</span></td>
+                <td><strong>Vệ sinh hơi nước nóng &amp; Khử mùi thơm</strong> <span class="badge badge-outline text-xs">Thời Trang</span></td>
+                <td>Hấp ủi hơi nước định hình form áo quần, loại bỏ hoàn toàn vi khuẩn và mùi ẩm mốc trước khi đóng gói túi zip chuyên dụng.</td>
               </tr>
 
               <!-- Smart IoT (13-15) -->
               <tr data-cat="iot">
-                <td style="text-align: center">
-                  <span class="badge badge-success">Bước 13</span>
-                </td>
-                <td>
-                  <strong>Test lực hút &amp; Độ êm của động cơ</strong>
-                  <span class="badge badge-outline text-xs">Smart IoT</span>
-                </td>
-                <td>
-                  Chạy thử máy hút bụi, máy lọc không khí ở các cấp độ gió; đo
-                  lực hút mạnh mẽ và đảm bảo động cơ hoạt động êm, không mùi
-                  khét.
-                </td>
+                <td style="text-align: center;"><span class="badge badge-success">Bước 13</span></td>
+                <td><strong>Test lực hút &amp; Độ êm của động cơ</strong> <span class="badge badge-outline text-xs">Smart IoT</span></td>
+                <td>Chạy thử máy hút bụi, máy lọc không khí ở các cấp độ gió; đo lực hút mạnh mẽ và đảm bảo động cơ hoạt động êm, không mùi khét.</td>
               </tr>
               <tr data-cat="iot">
-                <td style="text-align: center">
-                  <span class="badge badge-success">Bước 14</span>
-                </td>
-                <td>
-                  <strong>Test cảm biến chống rơi &amp; Điều khiển App</strong>
-                  <span class="badge badge-outline text-xs">Smart IoT</span>
-                </td>
-                <td>
-                  Cho robot hút bụi chạy thử trên bàn kiểm tra cảm biến chống
-                  rơi vực; kết nối ứng dụng điện thoại điều khiển mượt mà.
-                </td>
+                <td style="text-align: center;"><span class="badge badge-success">Bước 14</span></td>
+                <td><strong>Test cảm biến chống rơi &amp; Điều khiển App</strong> <span class="badge badge-outline text-xs">Smart IoT</span></td>
+                <td>Cho robot hút bụi chạy thử trên bàn kiểm tra cảm biến chống rơi vực; kết nối ứng dụng điện thoại điều khiển mượt mà.</td>
               </tr>
               <tr data-cat="iot">
-                <td style="text-align: center">
-                  <span class="badge badge-success">Bước 15</span>
-                </td>
-                <td>
-                  <strong>Kiểm tra an toàn điện &amp; Tự ngắt sạc</strong>
-                  <span class="badge badge-outline text-xs">Smart IoT</span>
-                </td>
-                <td>
-                  Kiểm tra dây nguồn không hở điện, đo củ sạc adapter chính hãng
-                  và kiểm tra rơ-le tự ngắt sạc khi pin đầy chống chai nổ.
-                </td>
+                <td style="text-align: center;"><span class="badge badge-success">Bước 15</span></td>
+                <td><strong>Kiểm tra an toàn điện &amp; Tự ngắt sạc</strong> <span class="badge badge-outline text-xs">Smart IoT</span></td>
+                <td>Kiểm tra dây nguồn không hở điện, đo củ sạc adapter chính hãng và kiểm tra rơ-le tự ngắt sạc khi pin đầy chống chai nổ.</td>
               </tr>
             </tbody>
           </table>
@@ -1593,13 +1268,9 @@
       <section class="about-section">
         <div class="about-section-head">
           <span class="badge badge-primary mb-2">ĐIỂM HẸN TRẢI NGHIỆM</span>
-          <h2 class="about-section-title">
-            Hệ Thống 3 Showroom &amp; Trung Tâm Kỹ Thuật
-          </h2>
+          <h2 class="about-section-title">Hệ Thống 3 Showroom &amp; Trung Tâm Kỹ Thuật</h2>
           <p class="about-section-desc">
-            Không chỉ là không gian mua sắm sang trọng, mỗi Showroom của
-            HYBRID.STORE là một trạm kiểm định thực tế nơi bạn có thể trực tiếp
-            test máy, gửi bảo hành hoặc giao nhận hàng hỏa tốc.
+            Không chỉ là không gian mua sắm sang trọng, mỗi Showroom của HYBRID.STORE là một trạm kiểm định thực tế nơi bạn có thể trực tiếp test máy, gửi bảo hành hoặc giao nhận hàng hỏa tốc.
           </p>
         </div>
 
@@ -1608,57 +1279,32 @@
           <div class="showroom-card">
             <div>
               <div class="showroom-badge">
-                <span class="material-symbols-outlined icon-xs"
-                  >location_city</span
-                >
+                <span class="material-symbols-outlined icon-xs">location_city</span>
                 TRUNG TÂM MIỀN BẮC • HÀ NỘI
               </div>
-              <h3 class="showroom-name">
-                Showroom &amp; TT Kỹ Thuật Keangnam Landmark 72
-              </h3>
+              <h3 class="showroom-name">Showroom &amp; TT Kỹ Thuật Keangnam Landmark 72</h3>
               <p class="showroom-address">
-                Tầng 1, Tòa tháp Keangnam Landmark 72, Đường Phạm Hùng, Phường
-                Mễ Trì, Quận Nam Từ Liêm, TP. Hà Nội
+                Tầng 1, Tòa tháp Keangnam Landmark 72, Đường Phạm Hùng, Phường Mễ Trì, Quận Nam Từ Liêm, TP. Hà Nội
               </p>
               <div class="showroom-meta">
                 <div class="flex items-center gap-2">
-                  <span class="material-symbols-outlined icon-xs text-secondary"
-                    >schedule</span
-                  >
-                  <span
-                    >Mở cửa: <strong>08:00 - 22:00</strong> (Tất cả các
-                    ngày)</span
-                  >
+                  <span class="material-symbols-outlined icon-xs text-secondary">schedule</span>
+                  <span>Mở cửa: <strong>08:00 - 22:00</strong> (Tất cả các ngày)</span>
                 </div>
                 <div class="flex items-center gap-2">
-                  <span class="material-symbols-outlined icon-xs text-success"
-                    >call</span
-                  >
-                  <span
-                    >Hotline:
-                    <strong class="mono text-text">024 7300 8899</strong></span
-                  >
+                  <span class="material-symbols-outlined icon-xs text-success">call</span>
+                  <span>Hotline: <strong class="mono text-text">024 7300 8899</strong></span>
                 </div>
                 <div class="flex items-center gap-2">
-                  <span class="material-symbols-outlined icon-xs text-primary"
-                    >local_shipping</span
-                  >
-                  <span
-                    >Giao hỏa tốc: <strong>2 giờ</strong> nội thành Hà Nội</span
-                  >
+                  <span class="material-symbols-outlined icon-xs text-primary">local_shipping</span>
+                  <span>Giao hỏa tốc: <strong>2 giờ</strong> nội thành Hà Nội</span>
                 </div>
               </div>
             </div>
             <div class="showroom-features">
-              <span class="badge badge-sm badge-secondary"
-                >Trải nghiệm máy trực tiếp</span
-              >
-              <span class="badge badge-sm badge-primary"
-                >Thẩm định kỹ thuật tại chỗ</span
-              >
-              <span class="badge badge-sm badge-success"
-                >Bảo hành 1-1 lấy ngay</span
-              >
+              <span class="badge badge-sm badge-secondary">Trải nghiệm máy trực tiếp</span>
+              <span class="badge badge-sm badge-primary">Thẩm định kỹ thuật tại chỗ</span>
+              <span class="badge badge-sm badge-success">Bảo hành 1-1 lấy ngay</span>
             </div>
           </div>
 
@@ -1666,58 +1312,32 @@
           <div class="showroom-card">
             <div>
               <div class="showroom-badge">
-                <span class="material-symbols-outlined icon-xs"
-                  >location_city</span
-                >
+                <span class="material-symbols-outlined icon-xs">location_city</span>
                 TRUNG TÂM MIỀN TRUNG • ĐÀ NẴNG
               </div>
-              <h3 class="showroom-name">
-                Showroom &amp; TT Kỹ Thuật FPT Complex Đà Nẵng
-              </h3>
+              <h3 class="showroom-name">Showroom &amp; TT Kỹ Thuật FPT Complex Đà Nẵng</h3>
               <p class="showroom-address">
-                Tòa nhà FPT Complex, Đường Nam Kỳ Khởi Nghĩa, Khu Đô Thị Công
-                Nghệ FPT City, Quận Ngũ Hành Sơn, TP. Đà Nẵng
+                Tòa nhà FPT Complex, Đường Nam Kỳ Khởi Nghĩa, Khu Đô Thị Công Nghệ FPT City, Quận Ngũ Hành Sơn, TP. Đà Nẵng
               </p>
               <div class="showroom-meta">
                 <div class="flex items-center gap-2">
-                  <span class="material-symbols-outlined icon-xs text-secondary"
-                    >schedule</span
-                  >
-                  <span
-                    >Mở cửa: <strong>08:00 - 22:00</strong> (Tất cả các
-                    ngày)</span
-                  >
+                  <span class="material-symbols-outlined icon-xs text-secondary">schedule</span>
+                  <span>Mở cửa: <strong>08:00 - 22:00</strong> (Tất cả các ngày)</span>
                 </div>
                 <div class="flex items-center gap-2">
-                  <span class="material-symbols-outlined icon-xs text-success"
-                    >call</span
-                  >
-                  <span
-                    >Hotline:
-                    <strong class="mono text-text">0236 730 8899</strong></span
-                  >
+                  <span class="material-symbols-outlined icon-xs text-success">call</span>
+                  <span>Hotline: <strong class="mono text-text">0236 730 8899</strong></span>
                 </div>
                 <div class="flex items-center gap-2">
-                  <span class="material-symbols-outlined icon-xs text-primary"
-                    >local_shipping</span
-                  >
-                  <span
-                    >Giao hỏa tốc: <strong>2 giờ</strong> nội thành Đà
-                    Nẵng</span
-                  >
+                  <span class="material-symbols-outlined icon-xs text-primary">local_shipping</span>
+                  <span>Giao hỏa tốc: <strong>2 giờ</strong> nội thành Đà Nẵng</span>
                 </div>
               </div>
             </div>
             <div class="showroom-features">
-              <span class="badge badge-sm badge-secondary"
-                >Khu trải nghiệm Hi-Tech</span
-              >
-              <span class="badge badge-sm badge-primary"
-                >Tiếp nhận ký gửi đồ cũ</span
-              >
-              <span class="badge badge-sm badge-success"
-                >Dán tem niêm phong QR</span
-              >
+              <span class="badge badge-sm badge-secondary">Khu trải nghiệm Hi-Tech</span>
+              <span class="badge badge-sm badge-primary">Tiếp nhận ký gửi đồ cũ</span>
+              <span class="badge badge-sm badge-success">Dán tem niêm phong QR</span>
             </div>
           </div>
 
@@ -1725,57 +1345,32 @@
           <div class="showroom-card">
             <div>
               <div class="showroom-badge">
-                <span class="material-symbols-outlined icon-xs"
-                  >location_city</span
-                >
+                <span class="material-symbols-outlined icon-xs">location_city</span>
                 TRUNG TÂM MIỀN NAM • TP. HỒ CHÍ MINH
               </div>
-              <h3 class="showroom-name">
-                Showroom &amp; TT Kỹ Thuật Bitexco Financial Tower
-              </h3>
+              <h3 class="showroom-name">Showroom &amp; TT Kỹ Thuật Bitexco Financial Tower</h3>
               <p class="showroom-address">
-                Tầng trệt, Tòa nhà Tài chính Bitexco, Số 2 Đường Hải Triều,
-                Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh
+                Tầng trệt, Tòa nhà Tài chính Bitexco, Số 2 Đường Hải Triều, Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh
               </p>
               <div class="showroom-meta">
                 <div class="flex items-center gap-2">
-                  <span class="material-symbols-outlined icon-xs text-secondary"
-                    >schedule</span
-                  >
-                  <span
-                    >Mở cửa: <strong>08:00 - 22:00</strong> (Tất cả các
-                    ngày)</span
-                  >
+                  <span class="material-symbols-outlined icon-xs text-secondary">schedule</span>
+                  <span>Mở cửa: <strong>08:00 - 22:00</strong> (Tất cả các ngày)</span>
                 </div>
                 <div class="flex items-center gap-2">
-                  <span class="material-symbols-outlined icon-xs text-success"
-                    >call</span
-                  >
-                  <span
-                    >Hotline:
-                    <strong class="mono text-text">028 7300 8899</strong></span
-                  >
+                  <span class="material-symbols-outlined icon-xs text-success">call</span>
+                  <span>Hotline: <strong class="mono text-text">028 7300 8899</strong></span>
                 </div>
                 <div class="flex items-center gap-2">
-                  <span class="material-symbols-outlined icon-xs text-primary"
-                    >local_shipping</span
-                  >
-                  <span
-                    >Giao hỏa tốc: <strong>2 giờ</strong> nội thành TP.HCM</span
-                  >
+                  <span class="material-symbols-outlined icon-xs text-primary">local_shipping</span>
+                  <span>Giao hỏa tốc: <strong>2 giờ</strong> nội thành TP.HCM</span>
                 </div>
               </div>
             </div>
             <div class="showroom-features">
-              <span class="badge badge-sm badge-secondary"
-                >Flagship Store chuẩn quốc tế</span
-              >
-              <span class="badge badge-sm badge-primary"
-                >Phòng Lab kiểm tra phần cứng</span
-              >
-              <span class="badge badge-sm badge-success"
-                >Giao dịch mua bán trực tiếp</span
-              >
+              <span class="badge badge-sm badge-secondary">Flagship Store chuẩn quốc tế</span>
+              <span class="badge badge-sm badge-primary">Phòng Lab kiểm tra phần cứng</span>
+              <span class="badge badge-sm badge-success">Giao dịch mua bán trực tiếp</span>
             </div>
           </div>
         </div>
@@ -1785,67 +1380,40 @@
       <section class="about-section">
         <div class="about-section-head">
           <span class="badge badge-secondary mb-2">MẠNG LƯỚI ĐỒNG HÀNH</span>
-          <h2 class="about-section-title">
-            Đối Tác Phân Phối &amp; Hạ Tầng Thanh Toán
-          </h2>
+          <h2 class="about-section-title">Đối Tác Phân Phối &amp; Hạ Tầng Thanh Toán</h2>
           <p class="about-section-desc">
-            Hợp tác cùng các tập đoàn công nghệ hàng đầu và hệ thống ngân hàng
-            quốc gia để đảm bảo sản phẩm chuẩn hãng và giao dịch thông suốt.
+            Hợp tác cùng các tập đoàn công nghệ hàng đầu và hệ thống ngân hàng quốc gia để đảm bảo sản phẩm chuẩn hãng và giao dịch thông suốt.
           </p>
         </div>
 
         <div class="partner-logos-grid">
           <div class="partner-card">
-            <span
-              class="material-symbols-outlined text-primary"
-              style="font-size: 28px"
-              >verified</span
-            >
+            <span class="material-symbols-outlined text-primary" style="font-size: 28px;">verified</span>
             <div class="partner-name">Apple Authorised</div>
             <div class="partner-type">Phân phối chính thức</div>
           </div>
           <div class="partner-card">
-            <span
-              class="material-symbols-outlined text-secondary"
-              style="font-size: 28px"
-              >videocam</span
-            >
+            <span class="material-symbols-outlined text-secondary" style="font-size: 28px;">videocam</span>
             <div class="partner-name">Sony Vietnam</div>
             <div class="partner-type">Đối tác máy ảnh &amp; âm thanh</div>
           </div>
           <div class="partner-card">
-            <span
-              class="material-symbols-outlined text-success"
-              style="font-size: 28px"
-              >air</span
-            >
+            <span class="material-symbols-outlined text-success" style="font-size: 28px;">air</span>
             <div class="partner-name">Dyson Official</div>
             <div class="partner-type">Gia dụng thông minh cao cấp</div>
           </div>
           <div class="partner-card">
-            <span
-              class="material-symbols-outlined text-warning"
-              style="font-size: 28px"
-              >smartphone</span
-            >
+            <span class="material-symbols-outlined text-warning" style="font-size: 28px;">smartphone</span>
             <div class="partner-name">Samsung Vina</div>
             <div class="partner-type">Thiết bị di động &amp; màn hình</div>
           </div>
           <div class="partner-card">
-            <span
-              class="material-symbols-outlined text-primary"
-              style="font-size: 28px"
-              >account_balance</span
-            >
+            <span class="material-symbols-outlined text-primary" style="font-size: 28px;">account_balance</span>
             <div class="partner-name">Napas 24/7</div>
             <div class="partner-type">Cổng thanh toán quốc gia</div>
           </div>
           <div class="partner-card">
-            <span
-              class="material-symbols-outlined text-secondary"
-              style="font-size: 28px"
-              >local_shipping</span
-            >
+            <span class="material-symbols-outlined text-secondary" style="font-size: 28px;">local_shipping</span>
             <div class="partner-name">GHTK &amp; Viettel Post</div>
             <div class="partner-type">Vận chuyển &amp; đồng kiểm</div>
           </div>
@@ -1858,16 +1426,11 @@
           <span class="badge badge-primary mb-2">HỎI ĐÁP THƯỜNG GẶP</span>
           <h2 class="about-section-title">Thắc Mắc Phổ Biến Của Khách Hàng</h2>
           <p class="about-section-desc">
-            Giải đáp cặn kẽ mọi câu hỏi thường gặp về quy trình đồng kiểm, bảo
-            hành và cách thức mua bán tại HYBRID.STORE.
+            Giải đáp cặn kẽ mọi câu hỏi thường gặp về quy trình đồng kiểm, bảo hành và cách thức mua bán tại HYBRID.STORE.
           </p>
         </div>
 
-        <div
-          class="faq-list"
-          role="region"
-          aria-label="Danh sách câu hỏi thường gặp"
-        >
+        <div class="faq-list" role="region" aria-label="Danh sách câu hỏi thường gặp">
           <!-- FAQ 1 -->
           <div class="faq-item active">
             <button
@@ -1877,27 +1440,11 @@
               aria-controls="faq-ans-1"
               id="faq-btn-1"
             >
-              <span
-                >1. Mô hình của HYBRID.STORE có điểm gì khác biệt so với các sàn
-                thương mại điện tử thông thường?</span
-              >
-              <span class="material-symbols-outlined faq-icon"
-                >expand_more</span
-              >
+              <span>1. Mô hình của HYBRID.STORE có điểm gì khác biệt so với các sàn thương mại điện tử thông thường?</span>
+              <span class="material-symbols-outlined faq-icon">expand_more</span>
             </button>
-            <div
-              class="faq-answer"
-              id="faq-ans-1"
-              role="region"
-              aria-labelledby="faq-btn-1"
-            >
-              Khác với các sàn mở để người bán tự do đăng hàng không kiểm soát
-              chất lượng, HYBRID.STORE đóng vai trò là bên thứ ba kiểm định và
-              bảo chứng độc lập. Mỗi món hàng cũ đăng bán đều phải qua chuyên
-              viên kỹ thuật test thực tế 15 bước, dán tem niêm phong màng vỡ có
-              mã QR và khách hàng luôn được
-              <strong>đồng kiểm 100% mở hộp xem máy cùng shipper</strong> trước
-              khi trả tiền.
+            <div class="faq-answer" id="faq-ans-1" role="region" aria-labelledby="faq-btn-1">
+              Khác với các sàn mở để người bán tự do đăng hàng không kiểm soát chất lượng, HYBRID.STORE đóng vai trò là bên thứ ba kiểm định và bảo chứng độc lập. Mỗi món hàng cũ đăng bán đều phải qua chuyên viên kỹ thuật test thực tế 15 bước, dán tem niêm phong màng vỡ có mã QR và khách hàng luôn được <strong>đồng kiểm 100% mở hộp xem máy cùng shipper</strong> trước khi trả tiền.
             </div>
           </div>
 
@@ -1910,26 +1457,11 @@
               aria-controls="faq-ans-2"
               id="faq-btn-2"
             >
-              <span
-                >2. Quyền lợi đồng kiểm 100% cùng shipper diễn ra cụ thể như thế
-                nào?</span
-              >
-              <span class="material-symbols-outlined faq-icon"
-                >expand_more</span
-              >
+              <span>2. Quyền lợi đồng kiểm 100% cùng shipper diễn ra cụ thể như thế nào?</span>
+              <span class="material-symbols-outlined faq-icon">expand_more</span>
             </button>
-            <div
-              class="faq-answer"
-              id="faq-ans-2"
-              role="region"
-              aria-labelledby="faq-btn-2"
-            >
-              Khi nhân viên giao hàng tới, bạn được quyền bóc hộp carton bảo vệ,
-              cầm trực tiếp sản phẩm trên tay, kiểm tra ngoại quan vết xước, bật
-              nguồn thử nghiệm các tính năng cơ bản như cảm ứng, camera, loa và
-              đối chiếu số serial/IMEI với hồ sơ niêm phong. Nếu cảm thấy không
-              đúng như mô tả, bạn có quyền từ chối nhận hàng tại chỗ với 0₫ phụ
-              phí.
+            <div class="faq-answer" id="faq-ans-2" role="region" aria-labelledby="faq-btn-2">
+              Khi nhân viên giao hàng tới, bạn được quyền bóc hộp carton bảo vệ, cầm trực tiếp sản phẩm trên tay, kiểm tra ngoại quan vết xước, bật nguồn thử nghiệm các tính năng cơ bản như cảm ứng, camera, loa và đối chiếu số serial/IMEI với hồ sơ niêm phong. Nếu cảm thấy không đúng như mô tả, bạn có quyền từ chối nhận hàng tại chỗ với 0₫ phụ phí.
             </div>
           </div>
 
@@ -1942,25 +1474,11 @@
               aria-controls="faq-ans-3"
               id="faq-btn-3"
             >
-              <span
-                >3. Làm sao tôi kiểm tra được nguồn gốc và tình trạng thật của
-                sản phẩm cũ Like New?</span
-              >
-              <span class="material-symbols-outlined faq-icon"
-                >expand_more</span
-              >
+              <span>3. Làm sao tôi kiểm tra được nguồn gốc và tình trạng thật của sản phẩm cũ Like New?</span>
+              <span class="material-symbols-outlined faq-icon">expand_more</span>
             </button>
-            <div
-              class="faq-answer"
-              id="faq-ans-3"
-              role="region"
-              aria-labelledby="faq-btn-3"
-            >
-              Mỗi sản phẩm cũ tại HYBRID.STORE đều đi kèm mã định danh hồ sơ kỹ
-              thuật riêng. Trên tem niêm phong của máy có mã QR, bạn chỉ cần
-              dùng camera điện thoại quét để xem toàn bộ video test máy, thông
-              số dung lượng pin thực tế, biên bản kiểm tra ốc vít chưa toét và
-              ảnh chụp độ mới chi tiết trước khi đóng gói.
+            <div class="faq-answer" id="faq-ans-3" role="region" aria-labelledby="faq-btn-3">
+              Mỗi sản phẩm cũ tại HYBRID.STORE đều đi kèm mã định danh hồ sơ kỹ thuật riêng. Trên tem niêm phong của máy có mã QR, bạn chỉ cần dùng camera điện thoại quét để xem toàn bộ video test máy, thông số dung lượng pin thực tế, biên bản kiểm tra ốc vít chưa toét và ảnh chụp độ mới chi tiết trước khi đóng gói.
             </div>
           </div>
 
@@ -1973,26 +1491,11 @@
               aria-controls="faq-ans-4"
               id="faq-btn-4"
             >
-              <span
-                >4. Chính sách bảo hành và đổi trả trong 7 ngày được xử lý ra
-                sao?</span
-              >
-              <span class="material-symbols-outlined faq-icon"
-                >expand_more</span
-              >
+              <span>4. Chính sách bảo hành và đổi trả trong 7 ngày được xử lý ra sao?</span>
+              <span class="material-symbols-outlined faq-icon">expand_more</span>
             </button>
-            <div
-              class="faq-answer"
-              id="faq-ans-4"
-              role="region"
-              aria-labelledby="faq-btn-4"
-            >
-              Đối với hàng mới Brand Mall, bạn nhận đầy đủ bảo hành chính hãng
-              theo chính sách của nhà phân phối tại Việt Nam. Đối với đồ cũ Like
-              New, HYBRID.STORE cung cấp gói bảo hành từ 6 đến 12 tháng tại 3
-              Showroom &amp; Trung tâm kỹ thuật toàn quốc, cùng chính sách 1 đổi
-              1 hoặc hoàn tiền 100% trong 7 ngày nếu phát sinh bất kỳ lỗi phần
-              cứng nào.
+            <div class="faq-answer" id="faq-ans-4" role="region" aria-labelledby="faq-btn-4">
+              Đối với hàng mới Brand Mall, bạn nhận đầy đủ bảo hành chính hãng theo chính sách của nhà phân phối tại Việt Nam. Đối với đồ cũ Like New, HYBRID.STORE cung cấp gói bảo hành từ 6 đến 12 tháng tại 3 Showroom &amp; Trung tâm kỹ thuật toàn quốc, cùng chính sách 1 đổi 1 hoặc hoàn tiền 100% trong 7 ngày nếu phát sinh bất kỳ lỗi phần cứng nào.
             </div>
           </div>
 
@@ -2005,26 +1508,11 @@
               aria-controls="faq-ans-5"
               id="faq-btn-5"
             >
-              <span
-                >5. Tôi có thể đến trực tiếp các Showroom để trải nghiệm và mua
-                hàng không?</span
-              >
-              <span class="material-symbols-outlined faq-icon"
-                >expand_more</span
-              >
+              <span>5. Tôi có thể đến trực tiếp các Showroom để trải nghiệm và mua hàng không?</span>
+              <span class="material-symbols-outlined faq-icon">expand_more</span>
             </button>
-            <div
-              class="faq-answer"
-              id="faq-ans-5"
-              role="region"
-              aria-labelledby="faq-btn-5"
-            >
-              Hoàn toàn được. Chúng tôi mở cửa 3 Showroom trải nghiệm &amp;
-              Trung tâm kỹ thuật tại Keangnam Landmark 72 (Hà Nội), Bitexco
-              Financial Tower (TP.HCM) và FPT Complex (Đà Nẵng) từ 08:00 đến
-              22:00 tất cả các ngày trong tuần. Bạn có thể ghé trực tiếp để tự
-              tay trải nghiệm sản phẩm, nhờ kỹ thuật viên tư vấn hoặc nhận máy
-              trực tiếp.
+            <div class="faq-answer" id="faq-ans-5" role="region" aria-labelledby="faq-btn-5">
+              Hoàn toàn được. Chúng tôi mở cửa 3 Showroom trải nghiệm &amp; Trung tâm kỹ thuật tại Keangnam Landmark 72 (Hà Nội), Bitexco Financial Tower (TP.HCM) và FPT Complex (Đà Nẵng) từ 08:00 đến 22:00 tất cả các ngày trong tuần. Bạn có thể ghé trực tiếp để tự tay trải nghiệm sản phẩm, nhờ kỹ thuật viên tư vấn hoặc nhận máy trực tiếp.
             </div>
           </div>
         </div>
@@ -2033,35 +1521,20 @@
       <!-- 10. KÊU GỌI HÀNH ĐỘNG (CTA BOX) -->
       <section class="about-section">
         <div class="cta-box">
-          <span class="badge badge-solid mb-3"
-            >MUA SẮM THÔNG MINH CÙNG HYBRID.STORE</span
-          >
-          <h2 class="about-section-title" style="font-size: 1.75rem">
+          <span class="badge badge-solid mb-3">MUA SẮM THÔNG MINH CÙNG HYBRID.STORE</span>
+          <h2 class="about-section-title" style="font-size: 1.75rem;">
             Sẵn Sàng Trải Nghiệm Mua Sắm An Toàn Tuyệt Đối?
           </h2>
-          <p
-            class="text-xs text-muted mb-6"
-            style="max-width: 600px; margin-inline: auto; line-height: 1.8"
-          >
-            Khám phá ngay bộ sưu tập hàng hiệu mới nguyên seal chính hãng hoặc
-            săn các siêu phẩm công nghệ Like New tiết kiệm đến 50% cùng đặc
-            quyền đồng kiểm an tâm tận tay.
+          <p class="text-xs text-muted mb-6" style="max-width: 600px; margin-inline: auto; line-height: 1.8;">
+            Khám phá ngay bộ sưu tập hàng hiệu mới nguyên seal chính hãng hoặc săn các siêu phẩm công nghệ Like New tiết kiệm đến 50% cùng đặc quyền đồng kiểm an tâm tận tay.
           </p>
 
           <div class="flex items-center justify-center gap-4 flex-wrap">
-            <a
-              class="btn btn-primary"
-              href="../shop/catalog.html?type=mall"
-              style="padding: 12px 24px; font-weight: 700"
-            >
+            <a class="btn btn-primary" href="../shop/catalog.html?type=mall" style="padding: 12px 24px; font-weight: 700;">
               <span class="material-symbols-outlined icon-sm">verified</span>
               Khám Phá Brand Mall Hàng Mới 100%
             </a>
-            <a
-              class="btn btn-secondary"
-              href="../shop/catalog.html?type=c2c"
-              style="padding: 12px 24px; font-weight: 700"
-            >
+            <a class="btn btn-secondary" href="../shop/catalog.html?type=c2c" style="padding: 12px 24px; font-weight: 700;">
               <span class="material-symbols-outlined icon-sm">savings</span>
               Săn Đồ Cũ Like New Tiết Kiệm Đến 50%
             </a>
@@ -2075,9 +1548,10 @@
 
     <script src="../../js/utils.js"></script>
     <script src="../../js/components.js"></script>
+    <script src="../../js/app.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // Logic FAQ Accordion
+        // Logic FAQ Accordion (Theme toggle được quản lý tự động bởi utils.js)
         var faqButtons = document.querySelectorAll(".faq-question");
         function toggleFAQ(btn) {
           var item = btn.closest(".faq-item");
@@ -2100,13 +1574,7 @@
             toggleFAQ(btn);
           });
           btn.addEventListener("keydown", function (e) {
-            if (
-              e.key === "Enter" ||
-              e.key === " " ||
-              e.key === "Spacebar" ||
-              e.keyCode === 32 ||
-              e.keyCode === 13
-            ) {
+            if (e.key === "Enter" || e.key === " " || e.key === "Spacebar" || e.keyCode === 32 || e.keyCode === 13) {
               e.preventDefault();
               toggleFAQ(btn);
             }
@@ -2121,9 +1589,7 @@
           btn.addEventListener("click", function () {
             var filter = btn.getAttribute("data-filter");
 
-            filterBtns.forEach(function (b) {
-              b.classList.remove("active");
-            });
+            filterBtns.forEach(function (b) { b.classList.remove("active"); });
             btn.classList.add("active");
 
             tableRows.forEach(function (row) {

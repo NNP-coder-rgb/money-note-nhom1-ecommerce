@@ -346,6 +346,7 @@
   display: inline-flex;
   white-space: nowrap;
   animation: marquee 32s linear infinite;
+  will-change: transform;
 }
 .ticker-inner:hover {
   animation-play-state: paused;
@@ -369,8 +370,11 @@
   background: var(--tone);
 }
 @keyframes marquee {
-  to {
-    transform: translateX(-50%);
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
@@ -386,18 +390,9 @@
   display: flex;
   align-items: center;
   overflow: hidden;
-  background:
-    radial-gradient(
-      circle at 85% 30%,
-      rgba(139, 92, 246, 0.22),
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 20% 80%,
-      rgba(6, 182, 212, 0.15),
-      transparent 45%
-    ),
-    #0d0d1a;
+  background: radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.22), transparent 50%),
+              radial-gradient(circle at 20% 80%, rgba(6, 182, 212, 0.15), transparent 45%),
+              #0d0d1a;
   border: 1px solid rgba(139, 92, 246, 0.35);
   border-radius: var(--radius-xl);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
@@ -411,9 +406,7 @@
   object-position: center right;
   opacity: 0.22;
   filter: saturate(0.85) contrast(1.05);
-  transition:
-    transform 0.6s var(--ease),
-    opacity 0.4s var(--ease);
+  transition: transform 0.6s var(--ease), opacity 0.4s var(--ease);
 }
 .hero-main:hover > img {
   transform: scale(1.03);
@@ -520,6 +513,11 @@
   text-align: center;
   background: var(--neutral-900);
   border-radius: var(--radius-sm);
+  transition: transform 0.25s var(--ease-spring), box-shadow 0.25s var(--ease-spring);
+}
+.mini-stat:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 .mini-stat strong {
   display: block;
@@ -544,14 +542,23 @@
   background: var(--bg-elevated);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  transition: border-color var(--t-fast);
+  transition: transform 0.24s var(--ease-spring),
+              border-color 0.2s ease,
+              background-color 0.2s ease,
+              box-shadow 0.24s var(--ease-spring) !important;
 }
 .cat-jump:hover {
   color: var(--text);
   border-color: var(--tone);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 }
 .cat-jump .material-symbols-outlined {
   color: var(--tone);
+  transition: transform 0.3s var(--ease-bounce);
+}
+.cat-jump:hover .material-symbols-outlined {
+  transform: scale(1.15) rotate(6deg);
 }
 .cat-jump strong {
   display: block;
@@ -729,18 +736,14 @@
 }
 .section .product-card:hover {
   border-color: var(--tone, var(--primary-400)) !important;
-  box-shadow:
-    0 10px 26px -4px rgba(0, 0, 0, 0.55),
-    0 0 22px var(--tone, rgba(139, 92, 246, 0.4)) !important;
+  box-shadow: 0 10px 26px -4px rgba(0, 0, 0, 0.55), 0 0 22px var(--tone, rgba(139, 92, 246, 0.4)) !important;
 }
 .flash-panel .product-card {
   border: 1.5px solid rgba(168, 85, 247, 0.32) !important;
 }
 .flash-panel .product-card:hover {
   border-color: var(--primary-400) !important;
-  box-shadow:
-    0 10px 26px -4px rgba(0, 0, 0, 0.55),
-    0 0 22px rgba(168, 85, 247, 0.45) !important;
+  box-shadow: 0 10px 26px -4px rgba(0, 0, 0, 0.55), 0 0 22px rgba(168, 85, 247, 0.45) !important;
 }
 
 /* ---------- Thẻ sản phẩm (phần thêm cho base.css) ---------- */
@@ -989,7 +992,12 @@ body.light-theme .tone-purple {
 
 [data-theme="light"] .headline-gradient,
 body.light-theme .headline-gradient {
-  background: linear-gradient(90deg, #6d28d9, #0284c7, #15803d);
+  background: linear-gradient(
+    90deg,
+    #6d28d9,
+    #0284c7,
+    #15803d
+  );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -1055,18 +1063,9 @@ body.light-theme .ticker-item strong {
 
 [data-theme="light"] .hero-main,
 body.light-theme .hero-main {
-  background:
-    radial-gradient(
-      circle at 85% 30%,
-      rgba(109, 40, 217, 0.08),
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 20% 80%,
-      rgba(2, 132, 199, 0.06),
-      transparent 45%
-    ),
-    #ffffff;
+  background: radial-gradient(circle at 85% 30%, rgba(109, 40, 217, 0.08), transparent 50%),
+              radial-gradient(circle at 20% 80%, rgba(2, 132, 199, 0.06), transparent 45%),
+              #ffffff;
   border: 2.5px solid #6d28d9 !important; /* Khung viền màu tím đậm rõ nét dứt khoát */
   box-shadow: 0 10px 36px rgba(109, 40, 217, 0.16);
 }
@@ -1246,9 +1245,7 @@ body.light-theme .cat-links .note {
 body.light-theme .flash-panel {
   background: #faf5ff; /* Nền tím nhạt thanh lịch */
   border: 2.5px solid #6d28d9 !important; /* Khung viền màu tím đậm rõ nét dứt khoát */
-  box-shadow:
-    0 8px 32px rgba(109, 40, 217, 0.16),
-    0 0 0 1px #6d28d9;
+  box-shadow: 0 8px 32px rgba(109, 40, 217, 0.16), 0 0 0 1px #6d28d9;
 }
 
 [data-theme="light"] .flash-head,
@@ -1272,9 +1269,7 @@ body.light-theme .section .product-card {
 [data-theme="light"] .section .product-card:hover,
 body.light-theme .section .product-card:hover {
   border-color: var(--tone, #6d28d9) !important;
-  box-shadow:
-    0 12px 28px -4px rgba(15, 23, 42, 0.14),
-    0 0 0 1.5px var(--tone, #6d28d9) !important;
+  box-shadow: 0 12px 28px -4px rgba(15, 23, 42, 0.14), 0 0 0 1.5px var(--tone, #6d28d9) !important;
 }
 
 [data-theme="light"] .flash-panel .product-card,
@@ -1286,9 +1281,7 @@ body.light-theme .flash-panel .product-card {
 [data-theme="light"] .flash-panel .product-card:hover,
 body.light-theme .flash-panel .product-card:hover {
   border-color: #5b21b6 !important;
-  box-shadow:
-    0 12px 28px -4px rgba(109, 40, 217, 0.25),
-    0 0 0 2px #5b21b6 !important;
+  box-shadow: 0 12px 28px -4px rgba(109, 40, 217, 0.25), 0 0 0 2px #5b21b6 !important;
 }
 
 [data-theme="light"] .media-tag,
@@ -1309,16 +1302,8 @@ body.light-theme .product-media .badge-secondary {
   font-weight: 700;
 }
 
-[data-theme="light"]
-  .product-media
-  .badge:not(.badge-secondary):not(.badge-solid):not(
-    .badge-solid-secondary
-  ):not(.badge-limited),
-body.light-theme
-  .product-media
-  .badge:not(.badge-secondary):not(.badge-solid):not(
-    .badge-solid-secondary
-  ):not(.badge-limited) {
+[data-theme="light"] .product-media .badge:not(.badge-secondary):not(.badge-solid):not(.badge-solid-secondary):not(.badge-limited),
+body.light-theme .product-media .badge:not(.badge-secondary):not(.badge-solid):not(.badge-solid-secondary):not(.badge-limited) {
   background: rgba(15, 23, 42, 0.9);
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.2);

@@ -11,8 +11,7 @@
         try {
           var t = localStorage.getItem("hybrid_theme") || "dark";
           document.documentElement.setAttribute("data-theme", t);
-          if (t === "light")
-            document.documentElement.classList.add("light-theme");
+          if (t === "light") document.documentElement.classList.add("light-theme");
         } catch (e) {}
       })();
     </script>
@@ -30,33 +29,21 @@
     <header class="site-header">
       <div class="container">
         <a class="brand" href="../../index.html">
-          <span class="brand-mark"
-            ><span class="material-symbols-outlined">token</span></span
-          >
-          <span
-            >HYBRID<span class="text-secondary">.STORE</span>
-            <span class="badge badge-mall">BRAND MALL</span></span
-          >
+          <span class="brand-mark"><span class="material-symbols-outlined">token</span></span>
+          <span>HYBRID<span class="text-secondary">.STORE</span> <span class="badge badge-mall">BRAND MALL</span></span>
         </a>
 
         <div class="header-search">
           <form id="mallSearchForm" action="catalog.html" method="get">
             <div class="input-group">
               <span class="icon-left material-symbols-outlined">search</span>
-              <input
-                class="input input-search"
-                name="q"
-                type="search"
-                placeholder="Tìm sản phẩm mới chính hãng Mall..."
-              />
+              <input class="input input-search" name="q" type="search" placeholder="Tìm sản phẩm mới chính hãng Mall..." />
             </div>
           </form>
         </div>
 
         <div class="header-actions">
-          <a class="btn btn-secondary hide-sm" href="catalog.html"
-            >Xem Danh Mục</a
-          >
+          <a class="btn btn-secondary hide-sm" href="catalog.html">Xem Danh Mục</a>
           <button
             class="icon-btn theme-toggle-btn"
             id="themeToggleBtn"
@@ -64,9 +51,7 @@
             aria-label="Chuyển chế độ sáng / tối"
             title="Chuyển sang giao diện Sáng"
           >
-            <span class="material-symbols-outlined theme-toggle-icon"
-              >light_mode</span
-            >
+            <span class="material-symbols-outlined theme-toggle-icon">light_mode</span>
           </button>
           <a class="icon-btn" href="cart.html" aria-label="Giỏ hàng">
             <span class="material-symbols-outlined">shopping_bag</span>
@@ -85,23 +70,13 @@
         <nav aria-label="Breadcrumb">
           <a href="../../index.html">Trang Chủ</a>
           <span class="text-faint">/</span>
-          <a href="catalog.html?type=mall" id="breadCatLink"
-            >Brand Mall Hàng Mới</a
-          >
+          <a href="catalog.html?type=mall" id="breadCatLink">Brand Mall Hàng Mới</a>
           <span class="text-faint">/</span>
           <span class="active" id="breadProductName">Chi Tiết Sản Phẩm</span>
         </nav>
         <div class="subnav-info hide-sm">
-          <span class="text-success"
-            ><span class="material-symbols-outlined icon-sm">verified</span>
-            Phân phối chính hãng 100%</span
-          >
-          <span class="text-secondary"
-            ><span class="material-symbols-outlined icon-sm"
-              >local_shipping</span
-            >
-            Giao hỏa tốc 2H &amp; Đồng kiểm</span
-          >
+          <span class="text-success"><span class="material-symbols-outlined icon-sm">verified</span> Phân phối chính hãng 100%</span>
+          <span class="text-secondary"><span class="material-symbols-outlined icon-sm">local_shipping</span> Giao hỏa tốc 2H &amp; Đồng kiểm</span>
         </div>
       </div>
     </div>
@@ -111,21 +86,13 @@
         <!-- Cột trái: Gallery ảnh sản phẩm & Cam kết -->
         <div>
           <div class="detail-gallery-card">
-            <div style="position: absolute; top: 18px; left: 18px; z-index: 2">
-              <span class="badge badge-solid"
-                ><span class="material-symbols-outlined icon-xs">verified</span>
-                BRAND MALL MỚI 100%</span
-              >
+            <div style="position: absolute; top: 18px; left: 18px; z-index: 2;">
+              <span class="badge badge-solid"><span class="material-symbols-outlined icon-xs">verified</span> BRAND MALL MỚI 100%</span>
             </div>
-            <div
-              class="img-zoom-container"
-              id="zoomContainer"
-              title="Bấm vào để xem ảnh phóng to toàn màn hình"
-            >
+            <div class="img-zoom-container" id="zoomContainer" title="Bấm vào để xem ảnh phóng to toàn màn hình">
               <img id="mainNewImg" src="" alt="Ảnh sản phẩm" />
               <div class="zoom-hint-pill">
-                <span class="material-symbols-outlined icon-xs">zoom_in</span>
-                Xem ảnh lớn
+                <span class="material-symbols-outlined icon-xs">zoom_in</span> Xem ảnh lớn
               </div>
             </div>
           </div>
@@ -138,31 +105,14 @@
           <!-- Thẻ Cam Kết Phân Phối Chính Hãng -->
           <div class="detail-trust-card">
             <h4 class="text-sm fw-700 mb-3 flex items-center gap-2">
-              <span class="material-symbols-outlined text-primary"
-                >verified_user</span
-              >
+              <span class="material-symbols-outlined text-primary">verified_user</span>
               Cam Kết Tiêu Chuẩn Brand Mall
             </h4>
-            <ul
-              class="text-xs text-muted"
-              style="line-height: 1.9; padding-left: 18px; margin: 0"
-            >
-              <li>
-                <strong>Mới 100% Nguyên Seal:</strong> Chưa qua kích hoạt hay sử
-                dụng, nguyên đai nguyên kiện.
-              </li>
-              <li>
-                <strong>Bồi Thường 500%:</strong> Cam kết hoàn tiền và đền gấp 5
-                lần nếu phát hiện hàng giả mạo.
-              </li>
-              <li>
-                <strong>Bảo Hành Hãng:</strong> Kích hoạt bảo hành điện tử chính
-                hãng 12–24 tháng toàn quốc.
-              </li>
-              <li>
-                <strong>Hóa Đơn VAT:</strong> Hóa đơn điện tử chính thức cấp
-                trong 24 giờ kể từ khi nhận hàng.
-              </li>
+            <ul class="text-xs text-muted" style="line-height: 1.9; padding-left: 18px; margin: 0;">
+              <li><strong>Mới 100% Nguyên Seal:</strong> Chưa qua kích hoạt hay sử dụng, nguyên đai nguyên kiện.</li>
+              <li><strong>Bồi Thường 500%:</strong> Cam kết hoàn tiền và đền gấp 5 lần nếu phát hiện hàng giả mạo.</li>
+              <li><strong>Bảo Hành Hãng:</strong> Kích hoạt bảo hành điện tử chính hãng 12–24 tháng toàn quốc.</li>
+              <li><strong>Hóa Đơn VAT:</strong> Hóa đơn điện tử chính thức cấp trong 24 giờ kể từ khi nhận hàng.</li>
             </ul>
           </div>
         </div>
@@ -170,71 +120,37 @@
         <!-- Cột phải: Thông tin sản phẩm, Giá & Mua hàng -->
         <div>
           <div class="mall-seal-badge mb-2" id="brandBadge">
-            <span class="material-symbols-outlined icon-xs">verified</span>
-            CHÍNH HÃNG BRAND MALL • NGUYÊN SEAL
+            <span class="material-symbols-outlined icon-xs">verified</span> CHÍNH HÃNG BRAND MALL • NGUYÊN SEAL
           </div>
 
-          <h1
-            class="page-title mb-2"
-            id="prodTitle"
-            style="font-size: 1.95rem; line-height: 1.3"
-          >
-            Tên Sản Phẩm
-          </h1>
+          <h1 class="page-title mb-2" id="prodTitle" style="font-size: 1.95rem; line-height: 1.3;">Tên Sản Phẩm</h1>
 
           <!-- Đánh giá sao & trạng thái kho -->
-          <div
-            class="flex items-center gap-3 text-sm text-muted mb-4 flex-wrap"
-          >
-            <div
-              class="stars-container"
-              id="productStarsBox"
-              style="color: var(--warning, #f59e0b)"
-            >
-              ★★★★★
-            </div>
-            <span class="text-warning fw-700" id="productRatingScore"
-              >4.9 / 5.0</span
-            >
+          <div class="flex items-center gap-3 text-sm text-muted mb-4 flex-wrap">
+            <div class="stars-container" id="productStarsBox" style="color: var(--warning, #f59e0b);">★★★★★</div>
+            <span class="text-warning fw-700" id="productRatingScore">4.9 / 5.0</span>
             <span id="productReviewCount">(185 đánh giá chính hãng)</span>
             <span class="text-faint">•</span>
-            <span class="text-success flex items-center gap-1"
-              ><span class="status-dot"></span> Sẵn sàng giao ngay</span
-            >
+            <span class="text-success flex items-center gap-1"><span class="status-dot"></span> Sẵn sàng giao ngay</span>
           </div>
 
           <!-- Khối Giá Niêm Yết & Ưu Đãi -->
           <div class="detail-price-box">
-            <div class="text-xs text-muted fw-600">
-              GIÁ NIÊM YẾT CHÍNH HÃNG:
-            </div>
+            <div class="text-xs text-muted fw-600">GIÁ NIÊM YẾT CHÍNH HÃNG:</div>
             <div class="flex items-baseline gap-3 my-2 flex-wrap">
-              <span
-                class="mono text-gradient detail-price-val"
-                id="productCurrentPrice"
-                >0₫</span
-              >
+              <span class="mono text-gradient detail-price-val" id="productCurrentPrice">0₫</span>
               <span class="detail-old-price mono" id="productOldPrice">0₫</span>
-              <span class="badge badge-success fw-700" id="productDiscountBadge"
-                >-15% ƯU ĐÃI</span
-              >
+              <span class="badge badge-success fw-700" id="productDiscountBadge">-15% ƯU ĐÃI</span>
             </div>
             <div class="text-xs text-secondary flex items-center gap-1.5 mt-2">
-              <span class="material-symbols-outlined icon-xs"
-                >local_shipping</span
-              >
-              <span
-                >Miễn phí giao hàng hỏa tốc 2H • Đồng kiểm 100% mở hộp cùng bưu
-                tá</span
-              >
+              <span class="material-symbols-outlined icon-xs">local_shipping</span>
+              <span>Miễn phí giao hàng hỏa tốc 2H • Đồng kiểm 100% mở hộp cùng bưu tá</span>
             </div>
           </div>
 
           <!-- Bộ chọn biến thể (Size / Bộ nhớ / Màu sắc) -->
           <div class="form-group mb-4">
-            <label class="form-label" id="variantLabel"
-              >Tùy Chọn Phiên Bản / Kích Thước:</label
-            >
+            <label class="form-label" id="variantLabel">Tùy Chọn Phiên Bản / Kích Thước:</label>
             <div class="variant-btn-group" id="variantBtnGroup">
               <!-- Render động bằng JS -->
             </div>
@@ -242,121 +158,43 @@
 
           <!-- Số lượng & Nút Mua Hàng -->
           <div class="flex items-center gap-4 mb-5 flex-wrap">
-            <div class="qty-control" style="height: 48px">
-              <button
-                class="qty-btn"
-                id="btnQtyDec"
-                type="button"
-                style="width: 42px; height: 48px"
-                aria-label="Giảm"
-              >
-                −
-              </button>
-              <input
-                class="qty-input"
-                id="detailQtyInput"
-                type="text"
-                value="1"
-                readonly
-                style="width: 52px; height: 48px"
-              />
-              <button
-                class="qty-btn"
-                id="btnQtyInc"
-                type="button"
-                style="width: 42px; height: 48px"
-                aria-label="Tăng"
-              >
-                +
-              </button>
+            <div class="qty-control" style="height: 48px;">
+              <button class="qty-btn" id="btnQtyDec" type="button" style="width: 42px; height: 48px;" aria-label="Giảm">−</button>
+              <input class="qty-input" id="detailQtyInput" type="text" value="1" readonly style="width: 52px; height: 48px;" />
+              <button class="qty-btn" id="btnQtyInc" type="button" style="width: 42px; height: 48px;" aria-label="Tăng">+</button>
             </div>
-            <button
-              class="btn btn-secondary flex-1"
-              id="btnMallAddCart"
-              type="button"
-              style="padding: 14px; font-weight: 700"
-            >
-              <span class="material-symbols-outlined icon-sm"
-                >add_shopping_cart</span
-              >
+            <button class="btn btn-secondary flex-1" id="btnMallAddCart" type="button" style="padding: 14px; font-weight: 700;">
+              <span class="material-symbols-outlined icon-sm">add_shopping_cart</span>
               Thêm Vào Giỏ Hàng
             </button>
-            <button
-              class="btn btn-primary flex-1"
-              id="btnMallBuyNow"
-              type="button"
-              style="padding: 14px; font-weight: 700"
-            >
+            <button class="btn btn-primary flex-1" id="btnMallBuyNow" type="button" style="padding: 14px; font-weight: 700;">
               <span class="material-symbols-outlined icon-sm">bolt</span>
               Mua Ngay
             </button>
           </div>
 
           <!-- Điểm Nổi Bật & Cam Kết -->
-          <div
-            class="panel p-4"
-            style="
-              background: var(--bg-card);
-              border-radius: var(--radius-lg, 12px);
-            "
-          >
+          <div class="panel p-4" style="background: var(--bg-card); border-radius: var(--radius-lg, 12px);">
             <h4 class="text-sm fw-700 mb-2 flex items-center gap-2">
-              <span class="material-symbols-outlined text-success"
-                >fact_check</span
-              >
+              <span class="material-symbols-outlined text-success">fact_check</span>
               Đặc Điểm &amp; Quyền Lợi Khách Hàng:
             </h4>
-            <ul
-              class="text-xs text-muted"
-              id="prodHighlightsList"
-              style="line-height: 2; padding-left: 20px; margin: 0"
-            >
+            <ul class="text-xs text-muted" id="prodHighlightsList" style="line-height: 2; padding-left: 20px; margin: 0;">
               <!-- Render động -->
             </ul>
           </div>
 
           <!-- Banner So Sánh Đồ Mới vs Đồ Cũ Like New -->
-          <div
-            class="panel p-3.5 mt-4 flex items-center justify-between gap-3 flex-wrap"
-            style="
-              background: linear-gradient(
-                135deg,
-                rgba(6, 182, 212, 0.08),
-                rgba(139, 92, 246, 0.08)
-              );
-              border: 1.5px solid rgba(6, 182, 212, 0.25);
-              border-radius: var(--radius-lg, 12px);
-            "
-          >
+          <div class="panel p-3.5 mt-4 flex items-center justify-between gap-3 flex-wrap" style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.08), rgba(139, 92, 246, 0.08)); border: 1.5px solid rgba(6, 182, 212, 0.25); border-radius: var(--radius-lg, 12px);">
             <div class="flex items-center gap-2.5">
-              <span
-                class="material-symbols-outlined text-cyan icon-md"
-                style="color: #06b6d4; font-size: 26px"
-                >compare_arrows</span
-              >
+              <span class="material-symbols-outlined text-cyan icon-md" style="color: #06b6d4; font-size: 26px;">compare_arrows</span>
               <div>
-                <div class="text-xs fw-700 text-text">
-                  Băn khoăn giữa Mua Mới hay Like New?
-                </div>
-                <div class="text-2xs text-muted" id="compareSavingsHint">
-                  So sánh trực tiếp giá bán, bảo hành và kiểm định để tiết kiệm
-                  tới 40%
-                </div>
+                <div class="text-xs fw-700 text-text">Băn khoăn giữa Mua Mới hay Like New?</div>
+                <div class="text-2xs text-muted" id="compareSavingsHint">So sánh trực tiếp giá bán, bảo hành và kiểm định để tiết kiệm tới 40%</div>
               </div>
             </div>
-            <button
-              class="btn btn-outline btn-sm"
-              id="btnOpenCompareModal"
-              type="button"
-              style="
-                border-color: #06b6d4;
-                color: #06b6d4;
-                font-weight: 700;
-                white-space: nowrap;
-              "
-            >
-              <span class="material-symbols-outlined icon-xs">balance</span> So
-              Sánh Với Like New
+            <button class="btn btn-outline btn-sm" id="btnOpenCompareModal" type="button" style="border-color: #06b6d4; color: #06b6d4; font-weight: 700; white-space: nowrap;">
+              <span class="material-symbols-outlined icon-xs">balance</span> So Sánh Với Like New
             </button>
           </div>
         </div>
@@ -365,39 +203,17 @@
       <!-- ===== KHỐI TABS THÔNG TIN CHI TIẾT (Mô tả, Thông số kỹ thuật, Đồng kiểm, Đánh giá) ===== -->
       <section class="detail-tabs-section">
         <div class="detail-tabs-header">
-          <button
-            class="detail-tab-btn active mall-tab"
-            type="button"
-            data-tab="tab-desc"
-          >
-            <span class="material-symbols-outlined icon-xs">description</span>
-            Mô Tả Chi Tiết
+          <button class="detail-tab-btn active mall-tab" type="button" data-tab="tab-desc">
+            <span class="material-symbols-outlined icon-xs">description</span> Mô Tả Chi Tiết
           </button>
-          <button
-            class="detail-tab-btn mall-tab"
-            type="button"
-            data-tab="tab-specs"
-          >
-            <span class="material-symbols-outlined icon-xs">tune</span> Thông Số
-            Kỹ Thuật
+          <button class="detail-tab-btn mall-tab" type="button" data-tab="tab-specs">
+            <span class="material-symbols-outlined icon-xs">tune</span> Thông Số Kỹ Thuật
           </button>
-          <button
-            class="detail-tab-btn mall-tab"
-            type="button"
-            data-tab="tab-shipping"
-          >
-            <span class="material-symbols-outlined icon-xs"
-              >local_shipping</span
-            >
-            Quy Trình Đồng Kiểm
+          <button class="detail-tab-btn mall-tab" type="button" data-tab="tab-shipping">
+            <span class="material-symbols-outlined icon-xs">local_shipping</span> Quy Trình Đồng Kiểm
           </button>
-          <button
-            class="detail-tab-btn mall-tab"
-            type="button"
-            data-tab="tab-reviews"
-          >
-            <span class="material-symbols-outlined icon-xs">rate_review</span>
-            Đánh Giá Thực Tế (<span id="tabReviewCount">185</span>)
+          <button class="detail-tab-btn mall-tab" type="button" data-tab="tab-reviews">
+            <span class="material-symbols-outlined icon-xs">rate_review</span> Đánh Giá Thực Tế (<span id="tabReviewCount">185</span>)
           </button>
         </div>
 
@@ -421,63 +237,28 @@
           <!-- Tab 3: Quy trình đồng kiểm -->
           <div class="detail-tab-pane" id="tab-shipping">
             <h3 class="text-base fw-700 mb-3 text-text flex items-center gap-2">
-              <span class="material-symbols-outlined text-secondary"
-                >fact_check</span
-              >
+              <span class="material-symbols-outlined text-secondary">fact_check</span>
               Quy Trình Giao Nhận &amp; Đồng Kiểm Bưu Tá 100%
             </h3>
             <p class="text-sm text-muted mb-4 leading-relaxed">
-              Mọi đơn hàng Brand Mall xuất kho đều được đóng gói theo tiêu chuẩn
-              an toàn 3 lớp bảo vệ chuyên dụng:
+              Mọi đơn hàng Brand Mall xuất kho đều được đóng gói theo tiêu chuẩn an toàn 3 lớp bảo vệ chuyên dụng:
             </p>
             <div class="grid grid-2 gap-4">
-              <div
-                class="panel p-3"
-                style="background: rgba(255, 255, 255, 0.02)"
-              >
-                <strong class="text-xs text-primary block mb-1"
-                  >BƯỚC 1: ĐÓNG GÓI NIÊM PHONG</strong
-                >
-                <p class="text-xs text-muted mb-0">
-                  Hộp carton cứng 3 lớp, chèn xốp bóng khí chống sốc và dán băng
-                  keo an ninh niêm phong vỡ có logo HYBRID.STORE.
-                </p>
+              <div class="panel p-3" style="background: rgba(255,255,255,0.02);">
+                <strong class="text-xs text-primary block mb-1">BƯỚC 1: ĐÓNG GÓI NIÊM PHONG</strong>
+                <p class="text-xs text-muted mb-0">Hộp carton cứng 3 lớp, chèn xốp bóng khí chống sốc và dán băng keo an ninh niêm phong vỡ có logo HYBRID.STORE.</p>
               </div>
-              <div
-                class="panel p-3"
-                style="background: rgba(255, 255, 255, 0.02)"
-              >
-                <strong class="text-xs text-secondary block mb-1"
-                  >BƯỚC 2: VẬN CHUYỂN HỎA TỐC 2H</strong
-                >
-                <p class="text-xs text-muted mb-0">
-                  Đội ngũ shipper hỏa tốc giao tận tay khách hàng trong vòng 120
-                  phút nội thành, có định vị bưu kiện thời gian thực.
-                </p>
+              <div class="panel p-3" style="background: rgba(255,255,255,0.02);">
+                <strong class="text-xs text-secondary block mb-1">BƯỚC 2: VẬN CHUYỂN HỎA TỐC 2H</strong>
+                <p class="text-xs text-muted mb-0">Đội ngũ shipper hỏa tốc giao tận tay khách hàng trong vòng 120 phút nội thành, có định vị bưu kiện thời gian thực.</p>
               </div>
-              <div
-                class="panel p-3"
-                style="background: rgba(255, 255, 255, 0.02)"
-              >
-                <strong class="text-xs text-success block mb-1"
-                  >BƯỚC 3: MỞ HỘP ĐỒNG KIỂM TẠI CHỖ</strong
-                >
-                <p class="text-xs text-muted mb-0">
-                  Khách hàng được mở hộp bưu phẩm, đối chiếu tem seal nguyên
-                  vẹn, số Serial / IMEI và phụ kiện cùng nhân viên giao hàng.
-                </p>
+              <div class="panel p-3" style="background: rgba(255,255,255,0.02);">
+                <strong class="text-xs text-success block mb-1">BƯỚC 3: MỞ HỘP ĐỒNG KIỂM TẠI CHỖ</strong>
+                <p class="text-xs text-muted mb-0">Khách hàng được mở hộp bưu phẩm, đối chiếu tem seal nguyên vẹn, số Serial / IMEI và phụ kiện cùng nhân viên giao hàng.</p>
               </div>
-              <div
-                class="panel p-3"
-                style="background: rgba(255, 255, 255, 0.02)"
-              >
-                <strong class="text-xs text-warning block mb-1"
-                  >BƯỚC 4: KÝ BIÊN BẢN &amp; DÙNG THỬ 48H</strong
-                >
-                <p class="text-xs text-muted mb-0">
-                  Sau khi nhận hàng, khách hàng có 48 giờ thử nghiệm. Tiền thanh
-                  toán được giữ an toàn tại tài khoản ký quỹ trung gian Escrow.
-                </p>
+              <div class="panel p-3" style="background: rgba(255,255,255,0.02);">
+                <strong class="text-xs text-warning block mb-1">BƯỚC 4: KÝ BIÊN BẢN &amp; DÙNG THỬ 48H</strong>
+                <p class="text-xs text-muted mb-0">Sau khi nhận hàng, khách hàng có 48 giờ thử nghiệm. Tiền thanh toán được giữ an toàn tại tài khoản ký quỹ trung gian Escrow.</p>
               </div>
             </div>
           </div>
@@ -486,71 +267,20 @@
           <div class="detail-tab-pane" id="tab-reviews">
             <div class="reviews-grid">
               <div class="reviews-summary-card">
-                <div class="reviews-summary-score" id="reviewSummaryScore">
-                  4.9
-                </div>
-                <div
-                  class="stars-container mb-2"
-                  style="color: var(--warning, #f59e0b); font-size: 1.2rem"
-                >
-                  ★★★★★
-                </div>
-                <div
-                  class="text-xs text-muted fw-600 mb-3"
-                  id="reviewSummaryText"
-                >
-                  Dựa trên 185 đánh giá đã mua hàng
-                </div>
-                <span class="badge badge-success text-2xs block mb-3"
-                  >100% KHÁCH HÀNG HÀI LÒNG</span
-                >
-                <button
-                  class="btn btn-primary btn-sm w-full"
-                  id="btnOpenReviewModal"
-                  type="button"
-                  style="font-weight: 700"
-                >
-                  <span class="material-symbols-outlined icon-xs"
-                    >rate_review</span
-                  >
-                  Viết Đánh Giá
+                <div class="reviews-summary-score" id="reviewSummaryScore">4.9</div>
+                <div class="stars-container mb-2" style="color: var(--warning, #f59e0b); font-size: 1.2rem;">★★★★★</div>
+                <div class="text-xs text-muted fw-600 mb-3" id="reviewSummaryText">Dựa trên 185 đánh giá đã mua hàng</div>
+                <span class="badge badge-success text-2xs block mb-3">100% KHÁCH HÀNG HÀI LÒNG</span>
+                <button class="btn btn-primary btn-sm w-full" id="btnOpenReviewModal" type="button" style="font-weight: 700;">
+                  <span class="material-symbols-outlined icon-xs">rate_review</span> Viết Đánh Giá
                 </button>
               </div>
-              <div class="reviews-content-wrapper" style="min-width: 0">
-                <div
-                  class="review-filter-chips mb-3 flex items-center gap-2 flex-wrap"
-                >
-                  <button
-                    class="review-filter-chip active"
-                    data-rating-filter="all"
-                    type="button"
-                  >
-                    Tất Cả (<span id="countReviewAll">3</span>)
-                  </button>
-                  <button
-                    class="review-filter-chip"
-                    data-rating-filter="5"
-                    type="button"
-                  >
-                    5 Sao ★ (<span id="countReview5">2</span>)
-                  </button>
-                  <button
-                    class="review-filter-chip"
-                    data-rating-filter="4"
-                    type="button"
-                  >
-                    4 Sao ★ (<span id="countReview4">1</span>)
-                  </button>
-                  <button
-                    class="review-filter-chip"
-                    data-rating-filter="photo"
-                    type="button"
-                  >
-                    <span class="material-symbols-outlined icon-xs"
-                      >photo_camera</span
-                    >
-                    Có Ảnh / Video
-                  </button>
+              <div class="reviews-content-wrapper" style="min-width: 0;">
+                <div class="review-filter-chips mb-3 flex items-center gap-2 flex-wrap">
+                  <button class="review-filter-chip active" data-rating-filter="all" type="button">Tất Cả (<span id="countReviewAll">3</span>)</button>
+                  <button class="review-filter-chip" data-rating-filter="5" type="button">5 Sao ★ (<span id="countReview5">2</span>)</button>
+                  <button class="review-filter-chip" data-rating-filter="4" type="button">4 Sao ★ (<span id="countReview4">1</span>)</button>
+                  <button class="review-filter-chip" data-rating-filter="photo" type="button"><span class="material-symbols-outlined icon-xs">photo_camera</span> Có Ảnh / Video</button>
                 </div>
                 <div class="reviews-list" id="reviewsListContainer">
                   <!-- Render động -->
@@ -566,19 +296,12 @@
         <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
           <div>
             <h2 class="text-xl fw-800 text-text mb-1 flex items-center gap-2">
-              <span class="material-symbols-outlined text-primary"
-                >auto_awesome</span
-              >
+              <span class="material-symbols-outlined text-primary">auto_awesome</span>
               Sản Phẩm Cùng Phân Khúc / Danh Mục
             </h2>
-            <p class="text-xs text-muted mb-0">
-              Tuyển chọn các sản phẩm chất lượng cao tương tự đang được săn đón
-              trên sàn
-            </p>
+            <p class="text-xs text-muted mb-0">Tuyển chọn các sản phẩm chất lượng cao tương tự đang được săn đón trên sàn</p>
           </div>
-          <a class="btn btn-secondary btn-sm" href="catalog.html"
-            >Xem Tất Cả Trong Danh Mục →</a
-          >
+          <a class="btn btn-secondary btn-sm" href="catalog.html">Xem Tất Cả Trong Danh Mục →</a>
         </div>
         <div class="related-grid" id="relatedProductsGrid">
           <!-- Render động -->
@@ -596,87 +319,31 @@
         <strong class="mono text-primary fs-base" id="stickyPrice">0₫</strong>
       </div>
       <div class="sticky-actions">
-        <button
-          class="btn btn-outlined btn-sm"
-          id="stickyBtnAddCart"
-          type="button"
-          title="Thêm vào giỏ"
-        >
-          <span class="material-symbols-outlined icon-sm"
-            >add_shopping_cart</span
-          >
+        <button class="btn btn-outlined btn-sm" id="stickyBtnAddCart" type="button" title="Thêm vào giỏ">
+          <span class="material-symbols-outlined icon-sm">add_shopping_cart</span>
         </button>
-        <button
-          class="btn btn-primary btn-sm"
-          id="stickyBtnBuyNow"
-          type="button"
-        >
+        <button class="btn btn-primary btn-sm" id="stickyBtnBuyNow" type="button">
           <span class="material-symbols-outlined icon-sm">bolt</span> Mua Ngay
         </button>
       </div>
     </div>
 
     <!-- Lightbox phóng to ảnh fullscreen -->
-    <div
-      class="lightbox-modal"
-      id="productLightbox"
-      role="dialog"
-      aria-modal="true"
-    >
-      <button
-        class="lightbox-close-btn"
-        id="lightboxCloseBtn"
-        type="button"
-        aria-label="Đóng"
-      >
-        <span class="material-symbols-outlined">close</span>
-      </button>
+    <div class="lightbox-modal" id="productLightbox" role="dialog" aria-modal="true">
+      <button class="lightbox-close-btn" id="lightboxCloseBtn" type="button" aria-label="Đóng"><span class="material-symbols-outlined">close</span></button>
       <img id="lightboxImg" src="" alt="Ảnh sản phẩm phóng to" />
     </div>
 
+    
     <!-- Modal So Sánh Sản Phẩm (Product Comparison Matrix) -->
-    <div
-      class="modal-backdrop"
-      id="productCompareModal"
-      style="
-        display: none;
-        align-items: center;
-        justify-content: center;
-        z-index: 10000;
-      "
-    >
-      <div
-        class="modal compare-modal-box"
-        role="dialog"
-        aria-modal="true"
-        style="
-          max-width: 840px;
-          width: 92%;
-          max-height: 90vh;
-          overflow-y: auto;
-          padding: 24px;
-        "
-      >
-        <div
-          class="modal-head flex items-center justify-between pb-3 mb-4"
-          style="border-bottom: 1px solid var(--border)"
-        >
+    <div class="modal-backdrop" id="productCompareModal" style="display: none; align-items: center; justify-content: center; z-index: 10000;">
+      <div class="modal compare-modal-box" role="dialog" aria-modal="true" style="max-width: 840px; width: 92%; max-height: 90vh; overflow-y: auto; padding: 24px;">
+        <div class="modal-head flex items-center justify-between pb-3 mb-4" style="border-bottom: 1px solid var(--border);">
           <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-secondary icon-md"
-              >balance</span
-            >
-            <h3 class="modal-title text-base fw-700 m-0">
-              ĐỐI CHIẾU GIÁ TRỊ: BRAND MALL (MỚI 100%) VS LIKE NEW (98-99%)
-            </h3>
+            <span class="material-symbols-outlined text-secondary icon-md">balance</span>
+            <h3 class="modal-title text-base fw-700 m-0">ĐỐI CHIẾU GIÁ TRỊ: BRAND MALL (MỚI 100%) VS LIKE NEW (98-99%)</h3>
           </div>
-          <button
-            class="icon-btn"
-            id="closeCompareModalBtn"
-            type="button"
-            aria-label="Đóng"
-          >
-            <span class="material-symbols-outlined">close</span>
-          </button>
+          <button class="icon-btn" id="closeCompareModalBtn" type="button" aria-label="Đóng"><span class="material-symbols-outlined">close</span></button>
         </div>
         <div class="modal-body" id="compareModalBody">
           <!-- Render động ma trận so sánh -->
@@ -685,138 +352,42 @@
     </div>
 
     <!-- Modal Viết Đánh Giá Sản Phẩm (Review Submission Form) -->
-    <div
-      class="modal-backdrop"
-      id="reviewSubmitModal"
-      style="
-        display: none;
-        align-items: center;
-        justify-content: center;
-        z-index: 10000;
-      "
-    >
-      <div
-        class="modal"
-        role="dialog"
-        aria-modal="true"
-        style="max-width: 520px; width: 92%; padding: 24px; border-radius: 16px"
-      >
-        <div
-          class="modal-head flex items-center justify-between pb-3 mb-4"
-          style="border-bottom: 1px solid var(--border)"
-        >
+    <div class="modal-backdrop" id="reviewSubmitModal" style="display: none; align-items: center; justify-content: center; z-index: 10000;">
+      <div class="modal" role="dialog" aria-modal="true" style="max-width: 520px; width: 92%; padding: 24px; border-radius: 16px;">
+        <div class="modal-head flex items-center justify-between pb-3 mb-4" style="border-bottom: 1px solid var(--border);">
           <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-warning icon-md"
-              >star</span
-            >
+            <span class="material-symbols-outlined text-warning icon-md">star</span>
             <h3 class="modal-title text-base fw-700 m-0">ĐÁNH GIÁ SẢN PHẨM</h3>
           </div>
-          <button
-            class="icon-btn"
-            id="closeReviewModalBtn"
-            type="button"
-            aria-label="Đóng"
-          >
-            <span class="material-symbols-outlined">close</span>
-          </button>
+          <button class="icon-btn" id="closeReviewModalBtn" type="button" aria-label="Đóng"><span class="material-symbols-outlined">close</span></button>
         </div>
         <form id="reviewSubmitForm">
           <div class="form-group mb-4 text-center">
-            <label class="form-label text-xs fw-700 block mb-2"
-              >MỨC ĐỘ HÀI LÒNG CỦA BẠN:</label
-            >
-            <div
-              class="star-rating-picker justify-center"
-              id="starRatingPicker"
-            >
-              <button
-                type="button"
-                class="star-picker-btn active"
-                data-value="1"
-              >
-                ★
-              </button>
-              <button
-                type="button"
-                class="star-picker-btn active"
-                data-value="2"
-              >
-                ★
-              </button>
-              <button
-                type="button"
-                class="star-picker-btn active"
-                data-value="3"
-              >
-                ★
-              </button>
-              <button
-                type="button"
-                class="star-picker-btn active"
-                data-value="4"
-              >
-                ★
-              </button>
-              <button
-                type="button"
-                class="star-picker-btn active"
-                data-value="5"
-              >
-                ★
-              </button>
+            <label class="form-label text-xs fw-700 block mb-2">MỨC ĐỘ HÀI LÒNG CỦA BẠN:</label>
+            <div class="star-rating-picker justify-center" id="starRatingPicker">
+              <button type="button" class="star-picker-btn active" data-value="1">★</button>
+              <button type="button" class="star-picker-btn active" data-value="2">★</button>
+              <button type="button" class="star-picker-btn active" data-value="3">★</button>
+              <button type="button" class="star-picker-btn active" data-value="4">★</button>
+              <button type="button" class="star-picker-btn active" data-value="5">★</button>
             </div>
-            <div class="text-xs text-warning fw-700 mt-2" id="starPickerLabel">
-              5.0 ★ Tuyệt vời, vượt mong đợi!
-            </div>
+            <div class="text-xs text-warning fw-700 mt-2" id="starPickerLabel">5.0 ★ Tuyệt vời, vượt mong đợi!</div>
           </div>
           <div class="form-group mb-3">
-            <label class="form-label text-xs fw-700"
-              >TÊN CỦA BẠN (HOẶC BIỆT DANH):</label
-            >
-            <input
-              type="text"
-              class="form-control text-xs"
-              id="reviewAuthorName"
-              placeholder="VD: Hoàng Long (Đã mua hàng)"
-              required
-            />
+            <label class="form-label text-xs fw-700">TÊN CỦA BẠN (HOẶC BIỆT DANH):</label>
+            <input type="text" class="form-control text-xs" id="reviewAuthorName" placeholder="VD: Hoàng Long (Đã mua hàng)" required />
           </div>
           <div class="form-group mb-3">
             <label class="form-label text-xs fw-700">NHẬN XÉT CHI TIẾT:</label>
-            <textarea
-              class="form-control text-xs"
-              id="reviewCommentText"
-              rows="3"
-              placeholder="Chia sẻ cảm nhận về đóng gói, thời gian giao nhận, chất lượng sản phẩm thực tế..."
-              required
-            ></textarea>
+            <textarea class="form-control text-xs" id="reviewCommentText" rows="3" placeholder="Chia sẻ cảm nhận về đóng gói, thời gian giao nhận, chất lượng sản phẩm thực tế..." required></textarea>
           </div>
           <div class="form-group mb-4">
-            <label class="form-label text-xs fw-700"
-              >ĐÍNH KÈM ẢNH ĐẬP HỘP / REVIEW (TÙY CHỌN):</label
-            >
-            <input
-              type="text"
-              class="form-control text-xs"
-              id="reviewPhotoUrl"
-              placeholder="Dán link ảnh đập hộp hoặc gõ 'unbox.jpg' để minh họa ảnh thực tế"
-            />
+            <label class="form-label text-xs fw-700">ĐÍNH KÈM ẢNH ĐẬP HỘP / REVIEW (TÙY CHỌN):</label>
+            <input type="text" class="form-control text-xs" id="reviewPhotoUrl" placeholder="Dán link ảnh đập hộp hoặc gõ 'unbox.jpg' để minh họa ảnh thực tế" />
           </div>
           <div class="flex gap-2">
-            <button
-              class="btn btn-secondary flex-1"
-              id="btnCancelReview"
-              type="button"
-            >
-              Hủy
-            </button>
-            <button
-              class="btn btn-primary flex-1"
-              type="submit"
-              style="font-weight: 700"
-            >
-              Gửi Đánh Giá Ngay
-            </button>
+            <button class="btn btn-secondary flex-1" id="btnCancelReview" type="button">Hủy</button>
+            <button class="btn btn-primary flex-1" type="submit" style="font-weight: 700;">Gửi Đánh Giá Ngay</button>
           </div>
         </form>
       </div>
@@ -842,9 +413,7 @@
 
         // Nếu sản phẩm thuộc C2C, chuyển hướng mượt sang template chuyên biệt C2C
         if (product && product.type === "c2c") {
-          window.location.replace(
-            `product_used.html?id=${encodeURIComponent(product.id)}`,
-          );
+          window.location.replace(`product_used.html?id=${encodeURIComponent(product.id)}`);
           return;
         }
 
@@ -860,11 +429,8 @@
         const title = product.name;
         const shortTitle = product.short || product.name;
         const brandName = product.sub || "CHÍNH HÃNG BRAND MALL";
-        const oldPriceVal =
-          product.oldPrice ||
-          Math.round(product.price * (1 + (product.off || 15) / 100));
-        const offPercent =
-          product.off || Math.round((1 - product.price / oldPriceVal) * 100);
+        const oldPriceVal = product.oldPrice || Math.round(product.price * (1 + (product.off || 15) / 100));
+        const offPercent = product.off || Math.round((1 - product.price / oldPriceVal) * 100);
         const catMeta = ProductDetailData.getCategoryMeta(product.category);
 
         // 2. Cập nhật Tiêu đề trang & Breadcrumb
@@ -895,15 +461,13 @@
                 <div class="thumb-slot ${idx === 0 ? "active mall-active" : ""}" data-src="${imgUrl}">
                   <img src="${imgUrl}" alt="Góc chụp ${idx + 1}" />
                 </div>
-              `,
+              `
               )
               .join("");
 
             thumbStrip.querySelectorAll(".thumb-slot").forEach((slot) => {
               slot.addEventListener("click", () => {
-                thumbStrip
-                  .querySelectorAll(".thumb-slot")
-                  .forEach((s) => s.classList.remove("active", "mall-active"));
+                thumbStrip.querySelectorAll(".thumb-slot").forEach((s) => s.classList.remove("active", "mall-active"));
                 slot.classList.add("active", "mall-active");
                 if (mainNewImg) mainNewImg.src = slot.dataset.src;
               });
@@ -929,35 +493,27 @@
           ratingBox.innerHTML = Utils.renderStars(ratingVal, { html: true });
         }
         const ratingScore = document.getElementById("productRatingScore");
-        if (ratingScore)
-          ratingScore.textContent = `${ratingVal.toFixed(1)} / 5.0`;
+        if (ratingScore) ratingScore.textContent = `${ratingVal.toFixed(1)} / 5.0`;
 
-        const reviewCountText =
-          product.reviews ||
-          `(${Math.floor(ratingVal * 38)} nhận xét chính hãng)`;
+        const reviewCountText = product.reviews || `(${Math.floor(ratingVal * 38)} nhận xét chính hãng)`;
         const reviewCountEl = document.getElementById("productReviewCount");
         if (reviewCountEl) reviewCountEl.textContent = reviewCountText;
 
         const tabReviewCount = document.getElementById("tabReviewCount");
-        if (tabReviewCount)
-          tabReviewCount.textContent =
-            (product.reviews ? product.reviews.replace(/\D/g, "") : 185) || 185;
+        if (tabReviewCount) tabReviewCount.textContent = (product.reviews ? product.reviews.replace(/\D/g, "") : 185) || 185;
 
         // 5. Giá tiền & Ưu đãi
         const priceValEl = document.getElementById("productCurrentPrice");
-        if (priceValEl)
-          priceValEl.textContent = Utils.formatCurrency(product.price);
+        if (priceValEl) priceValEl.textContent = Utils.formatCurrency(product.price);
 
         const oldPriceEl = document.getElementById("productOldPrice");
-        if (oldPriceEl)
-          oldPriceEl.textContent = Utils.formatCurrency(oldPriceVal);
+        if (oldPriceEl) oldPriceEl.textContent = Utils.formatCurrency(oldPriceVal);
 
         const discountBadge = document.getElementById("productDiscountBadge");
         if (discountBadge) discountBadge.textContent = `-${offPercent}% ƯU ĐÃI`;
 
         const stickyPrice = document.getElementById("stickyPrice");
-        if (stickyPrice)
-          stickyPrice.textContent = Utils.formatCurrency(product.price);
+        if (stickyPrice) stickyPrice.textContent = Utils.formatCurrency(product.price);
 
         // 6. Bộ chọn Biến Thể Tương Thích
         const variantBtnGroup = document.getElementById("variantBtnGroup");
@@ -969,15 +525,13 @@
               <button class="variant-chip ${v.active ? "active" : ""}" type="button" data-val="${v.value}">
                 ${v.label}
               </button>
-            `,
+            `
             )
             .join("");
 
           variantBtnGroup.querySelectorAll(".variant-chip").forEach((chip) => {
             chip.addEventListener("click", () => {
-              variantBtnGroup
-                .querySelectorAll(".variant-chip")
-                .forEach((c) => c.classList.remove("active"));
+              variantBtnGroup.querySelectorAll(".variant-chip").forEach((c) => c.classList.remove("active"));
               chip.classList.add("active");
             });
           });
@@ -1013,8 +567,7 @@
         // Tab 1: Mô tả chi tiết
         const tabDescContent = document.getElementById("tabDescContent");
         if (tabDescContent) {
-          tabDescContent.innerHTML =
-            ProductDetailData.getLongDescription(product);
+          tabDescContent.innerHTML = ProductDetailData.getLongDescription(product);
         }
 
         // Tab 2: Bảng thông số kỹ thuật (Specs Table)
@@ -1028,32 +581,22 @@
                 <th>${s.label}</th>
                 <td>${s.value}</td>
               </tr>
-            `,
+            `
             )
             .join("");
         }
 
         // ===== 8b. HỆ THỐNG SO SÁNH SẢN PHẨM TRỰC QUAN (PRODUCT COMPARISON) =====
-        const btnOpenCompareModal = document.getElementById(
-          "btnOpenCompareModal",
-        );
-        const productCompareModal = document.getElementById(
-          "productCompareModal",
-        );
-        const closeCompareModalBtn = document.getElementById(
-          "closeCompareModalBtn",
-        );
+        const btnOpenCompareModal = document.getElementById("btnOpenCompareModal");
+        const productCompareModal = document.getElementById("productCompareModal");
+        const closeCompareModalBtn = document.getElementById("closeCompareModalBtn");
         const compareModalBody = document.getElementById("compareModalBody");
 
         if (btnOpenCompareModal && productCompareModal) {
           btnOpenCompareModal.addEventListener("click", () => {
-            const compData = ProductDetailData.getComparisonData
-              ? ProductDetailData.getComparisonData(product)
-              : null;
+            const compData = ProductDetailData.getComparisonData ? ProductDetailData.getComparisonData(product) : null;
             if (!compData || !compareModalBody) return;
-            const savingsFormatted = Utils.formatCurrency(
-              compData.savingsAmount,
-            );
+            const savingsFormatted = Utils.formatCurrency(compData.savingsAmount);
             compareModalBody.innerHTML = `
               <div class="compare-grid-layout mb-4">
                 <div class="compare-criteria-col hide-mobile">
@@ -1116,18 +659,14 @@
             productCompareModal.style.display = "none";
           });
           productCompareModal.addEventListener("click", (e) => {
-            if (e.target === productCompareModal)
-              productCompareModal.style.display = "none";
+            if (e.target === productCompareModal) productCompareModal.style.display = "none";
           });
         }
 
         // ===== 8c. HỆ THỐNG ĐÁNH GIÁ & LỌC SAO (STAR FILTER & REVIEW SUBMISSION) =====
-        const btnOpenReviewModal =
-          document.getElementById("btnOpenReviewModal");
+        const btnOpenReviewModal = document.getElementById("btnOpenReviewModal");
         const reviewSubmitModal = document.getElementById("reviewSubmitModal");
-        const closeReviewModalBtn = document.getElementById(
-          "closeReviewModalBtn",
-        );
+        const closeReviewModalBtn = document.getElementById("closeReviewModalBtn");
         const btnCancelReview = document.getElementById("btnCancelReview");
         const reviewSubmitForm = document.getElementById("reviewSubmitForm");
         const starRatingPicker = document.getElementById("starRatingPicker");
@@ -1135,8 +674,7 @@
         let selectedStars = 5;
 
         if (starRatingPicker) {
-          const starButtons =
-            starRatingPicker.querySelectorAll(".star-picker-btn");
+          const starButtons = starRatingPicker.querySelectorAll(".star-picker-btn");
           const labels = {
             1: "1.0 ★ Rất không hài lòng",
             2: "2.0 ★ Chưa hài lòng",
@@ -1151,54 +689,33 @@
                 const val = parseInt(b.dataset.value, 10);
                 b.classList.toggle("active", val <= selectedStars);
               });
-              if (starPickerLabel)
-                starPickerLabel.textContent =
-                  labels[selectedStars] || `${selectedStars}.0 ★`;
+              if (starPickerLabel) starPickerLabel.textContent = labels[selectedStars] || `${selectedStars}.0 ★`;
             });
           });
         }
 
         if (btnOpenReviewModal && reviewSubmitModal) {
           btnOpenReviewModal.addEventListener("click", () => {
-            if (
-              !Auth.ensureLogin(
-                () => {
-                  reviewSubmitModal.style.display = "flex";
-                },
-                {
-                  title: "Đăng Nhập Viết Đánh Giá",
-                  message:
-                    "Vui lòng đăng nhập để gửi đánh giá xác thực cho sản phẩm này.",
-                },
-              )
-            )
-              return;
+            if (!Auth.ensureLogin(() => {
+              reviewSubmitModal.style.display = "flex";
+            }, {
+              title: "Đăng Nhập Viết Đánh Giá",
+              message: "Vui lòng đăng nhập để gửi đánh giá xác thực cho sản phẩm này.",
+            })) return;
             reviewSubmitModal.style.display = "flex";
           });
-          closeReviewModalBtn?.addEventListener(
-            "click",
-            () => (reviewSubmitModal.style.display = "none"),
-          );
-          btnCancelReview?.addEventListener(
-            "click",
-            () => (reviewSubmitModal.style.display = "none"),
-          );
+          closeReviewModalBtn?.addEventListener("click", () => reviewSubmitModal.style.display = "none");
+          btnCancelReview?.addEventListener("click", () => reviewSubmitModal.style.display = "none");
           reviewSubmitModal.addEventListener("click", (e) => {
-            if (e.target === reviewSubmitModal)
-              reviewSubmitModal.style.display = "none";
+            if (e.target === reviewSubmitModal) reviewSubmitModal.style.display = "none";
           });
         }
 
-        const reviewStorageKey =
-          "hv_user_reviews_" + (product ? product.id : "default");
+        const reviewStorageKey = "hv_user_reviews_" + (product ? product.id : "default");
         function getCombinedReviews() {
-          const defaultList = ProductDetailData.getReviews
-            ? ProductDetailData.getReviews(product)
-            : [];
+          const defaultList = ProductDetailData.getReviews ? ProductDetailData.getReviews(product) : [];
           try {
-            const userAdded = JSON.parse(
-              localStorage.getItem(reviewStorageKey) || "[]",
-            );
+            const userAdded = JSON.parse(localStorage.getItem(reviewStorageKey) || "[]");
             return userAdded.concat(defaultList);
           } catch (e) {
             return defaultList;
@@ -1212,8 +729,7 @@
             if (currentRatingFilter === "all") return true;
             if (currentRatingFilter === "5") return r.rating === 5;
             if (currentRatingFilter === "4") return r.rating === 4;
-            if (currentRatingFilter === "photo")
-              return Boolean(r.hasPhoto || r.photo);
+            if (currentRatingFilter === "photo") return Boolean(r.hasPhoto || r.photo);
             return true;
           });
 
@@ -1235,13 +751,11 @@
             return;
           }
 
-          container.innerHTML = filtered
-            .map(
-              (r) => `
+          container.innerHTML = filtered.map((r) => `
             <div class="review-card">
               <div class="review-header">
                 <div class="review-user-info">
-                  <img class="review-avatar" src="${r.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100"}" alt="${r.name}" />
+                  <img class="review-avatar" src="${r.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100'}" alt="${r.name}" />
                   <div>
                     <strong class="text-sm block text-text">${r.name}</strong>
                     <span class="text-xs text-muted">${r.date}</span>
@@ -1259,16 +773,12 @@
                 ${r.photo ? `<div class="mt-2"><img src="${r.photo}" alt="Ảnh review" style="max-width: 140px; border-radius: 8px; border: 1px solid var(--border);" /></div>` : ""}
               </div>
             </div>
-          `,
-            )
-            .join("");
+          `).join("");
         }
 
         document.querySelectorAll(".review-filter-chip").forEach((chip) => {
           chip.addEventListener("click", () => {
-            document
-              .querySelectorAll(".review-filter-chip")
-              .forEach((c) => c.classList.remove("active"));
+            document.querySelectorAll(".review-filter-chip").forEach((c) => c.classList.remove("active"));
             chip.classList.add("active");
             currentRatingFilter = chip.dataset.ratingFilter || "all";
             renderFilteredReviews();
@@ -1280,11 +790,10 @@
           const authorInput = document.getElementById("reviewAuthorName");
           const commentInput = document.getElementById("reviewCommentText");
           const photoInput = document.getElementById("reviewPhotoUrl");
-
+          
           const newRev = {
             name: (authorInput?.value || "Khách Hàng").trim(),
-            avatar:
-              "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100",
+            avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100",
             rating: selectedStars,
             tag: "Đã xác thực Napas • Khách mua Brand Mall",
             date: "Vừa xong",
@@ -1294,19 +803,14 @@
           };
 
           try {
-            const list = JSON.parse(
-              localStorage.getItem(reviewStorageKey) || "[]",
-            );
+            const list = JSON.parse(localStorage.getItem(reviewStorageKey) || "[]");
             list.unshift(newRev);
             localStorage.setItem(reviewStorageKey, JSON.stringify(list));
           } catch (err) {}
 
           reviewSubmitModal.style.display = "none";
           reviewSubmitForm.reset();
-          Utils.toast(
-            "Cảm ơn bạn! Đánh giá đã được ghi nhận và hiển thị ngay.",
-            "success",
-          );
+          Utils.toast("Cảm ơn bạn! Đánh giá đã được ghi nhận và hiển thị ngay.", "success");
           currentRatingFilter = "all";
           document.querySelectorAll(".review-filter-chip").forEach((c) => {
             c.classList.toggle("active", c.dataset.ratingFilter === "all");
@@ -1322,21 +826,11 @@
           const relatedList = ProductDetailData.getRelatedProducts(product, 4);
           relatedGrid.innerHTML = relatedList
             .map((item) => {
-              if (
-                typeof Components !== "undefined" &&
-                typeof Components.renderProductCard === "function"
-              ) {
-                return Components.renderProductCard(item, {
-                  basePath: "../../",
-                });
+              if (typeof Components !== "undefined" && typeof Components.renderProductCard === "function") {
+                return Components.renderProductCard(item, { basePath: "../../" });
               }
-              const itemImg = window.resolveAssetUrl
-                ? window.resolveAssetUrl(item.img)
-                : item.img;
-              const itemLink =
-                item.type === "mall"
-                  ? `product_new.html?id=${item.id}`
-                  : `product_used.html?id=${item.id}`;
+              const itemImg = window.resolveAssetUrl ? window.resolveAssetUrl(item.img) : item.img;
+              const itemLink = item.type === "mall" ? `product_new.html?id=${item.id}` : `product_used.html?id=${item.id}`;
               return `
                 <article class="product-card" data-id="${item.id}">
                   <div class="product-media">
@@ -1379,18 +873,12 @@
         if (btnAddCart) {
           btnAddCart.addEventListener("click", () => {
             const qty = parseInt(qtyInput.value, 10) || 1;
-            if (
-              !Auth.ensureLogin(
-                () => {
-                  Utils.Cart.addItem(product, qty);
-                },
-                {
-                  title: "Đăng Nhập Mua Hàng",
-                  message: `Vui lòng đăng nhập tài khoản để thêm "${shortTitle}" vào giỏ hàng.`,
-                },
-              )
-            )
-              return;
+            if (!Auth.ensureLogin(() => {
+              Utils.Cart.addItem(product, qty);
+            }, {
+              title: "Đăng Nhập Mua Hàng",
+              message: `Vui lòng đăng nhập tài khoản để thêm "${shortTitle}" vào giỏ hàng.`,
+            })) return;
             Utils.Cart.addItem(product, qty);
           });
         }
@@ -1399,20 +887,14 @@
         if (btnBuyNow) {
           btnBuyNow.addEventListener("click", () => {
             const qty = parseInt(qtyInput.value, 10) || 1;
-            if (
-              !Auth.ensureLogin(
-                () => {
-                  Utils.Cart.addItem(product, qty);
-                  window.location.href = "cart.html";
-                },
-                {
-                  title: "Đăng Nhập Mua Hàng",
-                  message: `Vui lòng đăng nhập tài khoản để mua ngay "${shortTitle}".`,
-                  returnUrl: "cart.html",
-                },
-              )
-            )
-              return;
+            if (!Auth.ensureLogin(() => {
+              Utils.Cart.addItem(product, qty);
+              window.location.href = "cart.html";
+            }, {
+              title: "Đăng Nhập Mua Hàng",
+              message: `Vui lòng đăng nhập tài khoản để mua ngay "${shortTitle}".`,
+              returnUrl: "cart.html"
+            })) return;
             Utils.Cart.addItem(product, qty);
             window.location.href = "cart.html";
           });
@@ -1440,9 +922,7 @@
             lightbox.classList.add("active");
           });
           if (lightboxCloseBtn) {
-            lightboxCloseBtn.addEventListener("click", () =>
-              lightbox.classList.remove("active"),
-            );
+            lightboxCloseBtn.addEventListener("click", () => lightbox.classList.remove("active"));
           }
           lightbox.addEventListener("click", (e) => {
             if (e.target === lightbox) lightbox.classList.remove("active");

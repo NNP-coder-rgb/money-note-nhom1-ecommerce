@@ -21,37 +21,33 @@
 
   /* ---------------- TRẠNG THÁI CATALOG ---------------- */
   const urlParams = new URLSearchParams(window.location.search);
-  const rawCat = (
-    urlParams.get("cat") ||
-    urlParams.get("category") ||
-    "all"
-  ).toLowerCase();
+  const rawCat = (urlParams.get("cat") || urlParams.get("category") || "all").toLowerCase();
   const catAliases = {
-    all: "all",
-    fashion: "fashion",
+    "all": "all",
+    "fashion": "fashion",
     "thoi-trang": "fashion",
-    apparel: "fashion",
-    sneakers: "sneakers",
-    giay: "sneakers",
+    "apparel": "fashion",
+    "sneakers": "sneakers",
+    "giay": "sneakers",
     "giay-dep": "sneakers",
-    shoes: "sneakers",
-    tech: "tech",
+    "shoes": "sneakers",
+    "tech": "tech",
     "dien-thoai": "tech",
-    laptop: "tech",
-    electronics: "tech",
-    appliances: "appliances",
+    "laptop": "tech",
+    "electronics": "tech",
+    "appliances": "appliances",
     "gia-dung": "appliances",
-    home: "appliances",
-    audio: "audio",
+    "home": "appliances",
+    "audio": "audio",
     "am-thanh": "audio",
     "tai-nghe": "audio",
-    gaming: "gaming",
+    "gaming": "gaming",
     "ban-phim": "gaming",
-    chuot: "gaming",
-    watches: "watches",
+    "chuot": "gaming",
+    "watches": "watches",
     "dong-ho": "watches",
     "phu-kien": "watches",
-    camera: "camera",
+    "camera": "camera",
     "may-anh": "camera",
   };
   const initialCategory = catAliases[rawCat] || rawCat;
@@ -137,17 +133,13 @@
       btnHeaderPost.addEventListener("click", (e) => {
         if (!Auth.current()) {
           e.preventDefault();
-          Auth.ensureLogin(
-            () => {
-              window.location.href = "../seller/post_item.html";
-            },
-            {
-              title: "Đăng Bán Đồ Cũ",
-              message:
-                "Vui lòng đăng nhập tài khoản người bán để đăng tin bán đồ cũ.",
-              returnUrl: "../seller/post_item.html",
-            },
-          );
+          Auth.ensureLogin(() => {
+            window.location.href = "../seller/post_item.html";
+          }, {
+            title: "Đăng Bán Đồ Cũ",
+            message: "Vui lòng đăng nhập tài khoản người bán để đăng tin bán đồ cũ.",
+            returnUrl: "../seller/post_item.html"
+          });
         }
       });
     }
@@ -171,18 +163,13 @@
 
   /* ---------------- TIỆN ÍCH TẠO THẺ SẢN PHẨM ---------------- */
   function createProductCardHTML(p) {
-    if (
-      typeof Components !== "undefined" &&
-      typeof Components.renderProductCard === "function"
-    ) {
+    if (typeof Components !== "undefined" && typeof Components.renderProductCard === "function") {
       return Components.renderProductCard(p);
     }
     const isMall = p.type === "mall";
     const title = p.short || p.name;
     const formattedPrice = Utils.formatCurrency(p.price);
-    const formattedOldPrice = p.oldPrice
-      ? Utils.formatCurrency(p.oldPrice)
-      : "";
+    const formattedOldPrice = p.oldPrice ? Utils.formatCurrency(p.oldPrice) : "";
     const starsHtml = Utils.renderStars(p.rating || 4.5, { html: true });
     const starsText = Utils.renderStars(p.rating || 4.5);
 
@@ -192,22 +179,18 @@
         p.id +
         '">' +
         '<div class="product-media">' +
-        '<a href="product_new.html?id=' +
-        p.id +
-        '">' +
+        '<a href="product_new.html?id=' + p.id + '">' +
         '<img src="' +
         (window.resolveAssetUrl ? window.resolveAssetUrl(p.img) : p.img) +
         '" alt="' +
         title +
         '" loading="lazy">' +
-        "</a>" +
+        '</a>' +
         '<div class="product-tags">' +
         '<span class="badge badge-solid">' +
         p.badge +
         "</span>" +
-        (p.off
-          ? '<span class="badge badge-success">-' + p.off + "%</span>"
-          : "") +
+        (p.off ? '<span class="badge badge-success">-' + p.off + "%</span>" : "") +
         "</div>" +
         (p.tag ? '<span class="media-tag">' + p.tag + "</span>" : "") +
         "</div>" +
@@ -218,11 +201,9 @@
         '<h3 class="product-name line-clamp-2" title="' +
         p.name +
         '">' +
-        '<a href="product_new.html?id=' +
-        p.id +
-        '" class="text-hover-primary">' +
+        '<a href="product_new.html?id=' + p.id + '" class="text-hover-primary">' +
         p.name +
-        "</a>" +
+        '</a>' +
         "</h3>" +
         '<div class="stars-container">' +
         starsHtml +
@@ -231,9 +212,7 @@
         '<span class="price">' +
         formattedPrice +
         "</span>" +
-        (formattedOldPrice
-          ? '<span class="price-old">' + formattedOldPrice + "</span>"
-          : "") +
+        (formattedOldPrice ? '<span class="price-old">' + formattedOldPrice + "</span>" : "") +
         "</div>" +
         "</div>" +
         '<div class="product-actions">' +
@@ -249,38 +228,28 @@
     }
 
     // Hàng C2C Đồ cũ / đã qua sử dụng
-    const discount = p.oldPrice
-      ? Math.round((1 - p.price / p.oldPrice) * 100)
-      : 0;
+    const discount = p.oldPrice ? Math.round((1 - p.price / p.oldPrice) * 100) : 0;
     const savedAmount = p.oldPrice ? p.oldPrice - p.price : 0;
-    const badgeCls = p.limited
-      ? "badge badge-limited"
-      : "badge badge-solid-secondary";
+    const badgeCls = p.limited ? "badge badge-limited" : "badge badge-solid-secondary";
     return (
       '<article class="product-card" data-id="' +
       p.id +
       '">' +
       '<div class="product-media">' +
-      '<a href="product_used.html?id=' +
-      p.id +
-      '">' +
+      '<a href="product_used.html?id=' + p.id + '">' +
       '<img src="' +
       (window.resolveAssetUrl ? window.resolveAssetUrl(p.img) : p.img) +
       '" alt="' +
       title +
       '" loading="lazy">' +
-      "</a>" +
+      '</a>' +
       '<div class="product-tags">' +
       '<span class="' +
       badgeCls +
       '">' +
       (p.badge || "ĐỒ CŨ LIKE NEW") +
       "</span>" +
-      (discount > 0
-        ? '<span class="badge badge-success">Rẻ hơn đồ mới ' +
-          discount +
-          "%</span>"
-        : "") +
+      (discount > 0 ? '<span class="badge badge-success">Rẻ hơn đồ mới ' + discount + '%</span>' : '') +
       '<span class="badge badge-secondary">' +
       (p.condText || p.cond + "% Mới") +
       "</span>" +
@@ -310,29 +279,17 @@
       '<h3 class="product-name line-clamp-2" title="' +
       p.name +
       '">' +
-      '<a href="product_used.html?id=' +
-      p.id +
-      '" class="text-hover-primary">' +
+      '<a href="product_used.html?id=' + p.id + '" class="text-hover-primary">' +
       p.name +
-      "</a>" +
+      '</a>' +
       "</h3>" +
       '<div class="product-price mt-2">' +
       '<span class="price">' +
       formattedPrice +
       "</span>" +
-      (formattedOldPrice
-        ? '<span class="price-old" title="Giá hàng mới 100%">Giá mới: ' +
-          formattedOldPrice +
-          "</span>"
-        : "") +
+      (formattedOldPrice ? '<span class="price-old" title="Giá hàng mới 100%">Giá mới: ' + formattedOldPrice + '</span>' : '') +
       "</div>" +
-      (discount > 0
-        ? '<div class="text-xs text-success fw-600 mt-1">Tiết kiệm ' +
-          discount +
-          "% (" +
-          Utils.formatCurrency(savedAmount) +
-          ") so với mua mới</div>"
-        : "") +
+      (discount > 0 ? '<div class="text-xs text-success fw-600 mt-1">Tiết kiệm ' + discount + '% (' + Utils.formatCurrency(savedAmount) + ') so với mua mới</div>' : '') +
       "</div>" +
       '<div class="product-actions c2c-actions" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">' +
       '<button class="btn btn-outlined btn-sm" type="button" data-action="add-cart" data-id="' +
@@ -378,9 +335,7 @@
         camera: "Máy Ảnh",
       };
       chips.push({
-        label:
-          "Ngành: " +
-          (catNames[state.filters.category] || state.filters.category),
+        label: "Ngành: " + (catNames[state.filters.category] || state.filters.category),
         clear: () => {
           state.filters.category = "all";
           syncFilterInputs();
@@ -391,11 +346,7 @@
 
     if (state.filters.type && state.filters.type !== "all") {
       chips.push({
-        label:
-          "Loại: " +
-          (state.filters.type === "mall"
-            ? "Hàng Mới 100%"
-            : "Đồ Cũ / Like New"),
+        label: "Loại: " + (state.filters.type === "mall" ? "Hàng Mới 100%" : "Đồ Cũ / Like New"),
         clear: () => {
           state.filters.type = "all";
           syncFilterInputs();
@@ -407,10 +358,7 @@
     if (state.filters.minPrice != null || state.filters.maxPrice != null) {
       let priceLabel = "Giá: ";
       if (state.filters.minPrice && state.filters.maxPrice) {
-        priceLabel +=
-          Utils.formatCurrency(state.filters.minPrice) +
-          " - " +
-          Utils.formatCurrency(state.filters.maxPrice);
+        priceLabel += Utils.formatCurrency(state.filters.minPrice) + " - " + Utils.formatCurrency(state.filters.maxPrice);
       } else if (state.filters.minPrice) {
         priceLabel += "≥ " + Utils.formatCurrency(state.filters.minPrice);
       } else {
@@ -459,7 +407,7 @@
           '<button type="button" data-chip-idx="' +
           idx +
           '" title="Xóa điều kiện">&times;</button>' +
-          "</span>",
+          "</span>"
       )
       .join("");
 
@@ -501,7 +449,11 @@
 
     // Các nút số trang
     for (let p = 1; p <= totalPages; p++) {
-      if (p === 1 || p === totalPages || (p >= page - 1 && p <= page + 1)) {
+      if (
+        p === 1 ||
+        p === totalPages ||
+        (p >= page - 1 && p <= page + 1)
+      ) {
         buttonsHtml +=
           '<button type="button" class="page-btn' +
           (p === page ? " active" : "") +
@@ -514,8 +466,7 @@
         (p === page - 2 && page > 3) ||
         (p === page + 2 && page < totalPages - 2)
       ) {
-        buttonsHtml +=
-          '<span class="page-btn" style="border:none;background:none;pointer-events:none;">...</span>';
+        buttonsHtml += '<span class="page-btn" style="border:none;background:none;pointer-events:none;">...</span>';
       }
     }
 
@@ -545,11 +496,7 @@
     $$("button[data-page]", dom.paginationBar).forEach((btn) => {
       btn.addEventListener("click", () => {
         const targetPage = Number(btn.dataset.page);
-        if (
-          targetPage >= 1 &&
-          targetPage <= totalPages &&
-          targetPage !== page
-        ) {
+        if (targetPage >= 1 && targetPage <= totalPages && targetPage !== page) {
           state.page = targetPage;
           render();
           const targetEl = $("#catalogMainTop");
@@ -563,62 +510,57 @@
   function render() {
     try {
       // BƯỚC 1: LỌC ĐA ĐIỀU KIỆN bằng filterProducts
-      const filtered = Utils.filterProducts(PRODUCTS, state.filters);
+    const filtered = Utils.filterProducts(PRODUCTS, state.filters);
 
-      // BƯỚC 2: SẮP XẾP bằng sortProducts
-      const sorted = Utils.sortProducts(filtered, state.sortKey);
+    // BƯỚC 2: SẮP XẾP bằng sortProducts
+    const sorted = Utils.sortProducts(filtered, state.sortKey);
 
-      // BƯỚC 3: PHÂN TRANG bằng paginate
-      const paginated = Utils.paginate(sorted, state.page, state.pageSize);
-      state.page = paginated.page; // đồng bộ lại nếu page bị clamp
+    // BƯỚC 3: PHÂN TRANG bằng paginate
+    const paginated = Utils.paginate(sorted, state.page, state.pageSize);
+    state.page = paginated.page; // đồng bộ lại nếu page bị clamp
 
-      // BƯỚC 4: RENDER DANH SÁCH SẢN PHẨM
-      if (dom.grid) {
-        if (paginated.items.length === 0) {
-          dom.grid.innerHTML =
-            '<div class="empty-state">' +
-            '<div class="empty-state-icon"><span class="material-symbols-outlined">inventory_2</span></div>' +
-            '<h3 class="empty-state-title">Không tìm thấy sản phẩm nào</h3>' +
-            '<p class="empty-state-desc">Hãy thử thay đổi khoảng giá, xóa từ khóa tìm kiếm hoặc chọn danh mục khác.</p>' +
-            '<button type="button" class="btn btn-primary btn-sm mt-3" id="emptyResetBtn">' +
-            '<span class="material-symbols-outlined icon-sm">restart_alt</span> Xóa Toàn Bộ Bộ Lọc' +
-            "</button>" +
-            "</div>";
-          const emptyBtn = $("#emptyResetBtn");
-          if (emptyBtn) emptyBtn.addEventListener("click", resetAllFilters);
-        } else {
-          dom.grid.innerHTML = paginated.items
-            .map(createProductCardHTML)
-            .join("");
-        }
+    // BƯỚC 4: RENDER DANH SÁCH SẢN PHẨM
+    if (dom.grid) {
+      if (paginated.items.length === 0) {
+        dom.grid.innerHTML =
+          '<div class="empty-state">' +
+          '<div class="empty-state-icon"><span class="material-symbols-outlined">inventory_2</span></div>' +
+          '<h3 class="empty-state-title">Không tìm thấy sản phẩm nào</h3>' +
+          '<p class="empty-state-desc">Hãy thử thay đổi khoảng giá, xóa từ khóa tìm kiếm hoặc chọn danh mục khác.</p>' +
+          '<button type="button" class="btn btn-primary btn-sm mt-3" id="emptyResetBtn">' +
+          '<span class="material-symbols-outlined icon-sm">restart_alt</span> Xóa Toàn Bộ Bộ Lọc' +
+          "</button>" +
+          "</div>";
+        const emptyBtn = $("#emptyResetBtn");
+        if (emptyBtn) emptyBtn.addEventListener("click", resetAllFilters);
+      } else {
+        dom.grid.innerHTML = paginated.items.map(createProductCardHTML).join("");
       }
+    }
 
-      // BƯỚC 5: CẬP NHẬT SỐ LƯỢNG KẾT QUẢ
-      if (dom.countText) {
-        dom.countText.innerHTML =
-          "Tìm thấy <strong>" +
-          paginated.total +
-          "</strong> sản phẩm" +
-          (paginated.totalPages > 1
-            ? " (Trang " + paginated.page + "/" + paginated.totalPages + ")"
-            : "");
-      }
-      if (dom.mobileToolbarCount) {
-        dom.mobileToolbarCount.textContent = paginated.total + " sản phẩm";
-      }
-      // Cập nhật trạng thái active trên subnav
-      if (dom.subnavLinks && dom.subnavLinks.length) {
-        dom.subnavLinks.forEach((link) => {
-          link.classList.toggle(
-            "active",
-            link.dataset.cat === state.filters.category,
-          );
-        });
-      }
+    // BƯỚC 5: CẬP NHẬT SỐ LƯỢNG KẾT QUẢ
+    if (dom.countText) {
+      dom.countText.innerHTML =
+        "Tìm thấy <strong>" +
+        paginated.total +
+        "</strong> sản phẩm" +
+        (paginated.totalPages > 1
+          ? " (Trang " + paginated.page + "/" + paginated.totalPages + ")"
+          : "");
+    }
+    if (dom.mobileToolbarCount) {
+      dom.mobileToolbarCount.textContent = paginated.total + " sản phẩm";
+    }
+    // Cập nhật trạng thái active trên subnav
+    if (dom.subnavLinks && dom.subnavLinks.length) {
+      dom.subnavLinks.forEach((link) => {
+        link.classList.toggle("active", link.dataset.cat === state.filters.category);
+      });
+    }
 
-      // BƯỚC 6: RENDER CHIPS VÀ THANH PHÂN TRANG
-      renderActiveFilterChips();
-      renderPagination(paginated);
+    // BƯỚC 6: RENDER CHIPS VÀ THANH PHÂN TRANG
+    renderActiveFilterChips();
+    renderPagination(paginated);
     } catch (err) {
       console.error("[CATALOG RENDER ERROR]", err);
       if (dom.countText) {
@@ -657,11 +599,9 @@
     });
 
     if (dom.minPriceInput)
-      dom.minPriceInput.value =
-        state.filters.minPrice != null ? state.filters.minPrice : "";
+      dom.minPriceInput.value = state.filters.minPrice != null ? state.filters.minPrice : "";
     if (dom.maxPriceInput)
-      dom.maxPriceInput.value =
-        state.filters.maxPrice != null ? state.filters.maxPrice : "";
+      dom.maxPriceInput.value = state.filters.maxPrice != null ? state.filters.maxPrice : "";
   }
 
   function resetAllFilters() {
@@ -697,53 +637,20 @@
   function renderSubnav(type) {
     const subnav = $("#catalogSubnav");
     if (!subnav) return;
-    const list =
-      type === "mall"
-        ? typeof CATEGORIES_MALL !== "undefined"
-          ? CATEGORIES_MALL
-          : CATEGORIES
-        : type === "c2c"
-          ? typeof CATEGORIES_C2C !== "undefined"
-            ? CATEGORIES_C2C
-            : CATEGORIES
-          : CATEGORIES;
-    const allLabel =
-      type === "mall"
-        ? "Tất Cả Hàng Mới"
-        : type === "c2c"
-          ? "Tất Cả Đồ Cũ"
-          : "Tất Cả Ngành Hàng";
+    const list = type === "mall"
+      ? (typeof CATEGORIES_MALL !== "undefined" ? CATEGORIES_MALL : CATEGORIES)
+      : (type === "c2c" ? (typeof CATEGORIES_C2C !== "undefined" ? CATEGORIES_C2C : CATEGORIES) : CATEGORIES);
+    const allLabel = type === "mall" ? "Tất Cả Hàng Mới" : (type === "c2c" ? "Tất Cả Đồ Cũ" : "Tất Cả Ngành Hàng");
 
     subnav.innerHTML =
-      '<a href="catalog.html?type=' +
-      type +
-      '" class="' +
-      (state.filters.category === "all" ? "active" : "") +
-      '" data-cat="all">' +
-      '<span class="status-dot"></span>' +
-      allLabel +
-      "</a>" +
-      list
-        .map(
-          (c) =>
-            '<a href="catalog.html?type=' +
-            type +
-            "&cat=" +
-            c.id +
-            '" class="' +
-            (state.filters.category === c.id ? "active" : "") +
-            '" data-cat="' +
-            c.id +
-            '">' +
-            '<span class="material-symbols-outlined icon-sm text-' +
-            c.tone +
-            '">' +
-            c.icon +
-            "</span>" +
-            (c.chip || c.tile || c.title) +
-            "</a>",
-        )
-        .join("");
+      '<a href="catalog.html?type=' + type + '" class="' + (state.filters.category === "all" ? "active" : "") + '" data-cat="all">' +
+      '<span class="status-dot"></span>' + allLabel +
+      '</a>' +
+      list.map((c) =>
+        '<a href="catalog.html?type=' + type + '&cat=' + c.id + '" class="' + (state.filters.category === c.id ? "active" : "") + '" data-cat="' + c.id + '">' +
+        '<span class="material-symbols-outlined icon-sm text-' + c.tone + '">' + c.icon + '</span>' + (c.chip || c.tile || c.title) +
+        '</a>'
+      ).join("");
 
     // Gắn sự kiện click cho các link subnav vừa tạo
     $$("#catalogSubnav a").forEach((a) => {
@@ -754,9 +661,7 @@
         state.page = 1;
         syncFilterInputs();
         render();
-        $$("#catalogSubnav a").forEach((l) =>
-          l.classList.toggle("active", l === a),
-        );
+        $$("#catalogSubnav a").forEach((l) => l.classList.toggle("active", l === a));
         try {
           const url = new URL(window.location.href);
           if (cat === "all") {
@@ -773,68 +678,41 @@
   function renderSidebarCategories(type) {
     const container = $("#filterCategoryOptions");
     if (!container) return;
-    const list =
-      type === "mall"
-        ? typeof CATEGORIES_MALL !== "undefined"
-          ? CATEGORIES_MALL
-          : CATEGORIES
-        : type === "c2c"
-          ? typeof CATEGORIES_C2C !== "undefined"
-            ? CATEGORIES_C2C
-            : CATEGORIES
-          : CATEGORIES;
+    const list = type === "mall"
+      ? (typeof CATEGORIES_MALL !== "undefined" ? CATEGORIES_MALL : CATEGORIES)
+      : (type === "c2c" ? (typeof CATEGORIES_C2C !== "undefined" ? CATEGORIES_C2C : CATEGORIES) : CATEGORIES);
 
-    const totalCount =
-      type === "mall"
-        ? PRODUCTS.filter((p) => p.type === "mall").length
-        : type === "c2c"
-          ? PRODUCTS.filter((p) => p.type === "c2c").length
-          : PRODUCTS.length;
+    const totalCount = type === "mall"
+      ? PRODUCTS.filter((p) => p.type === "mall").length
+      : (type === "c2c" ? PRODUCTS.filter((p) => p.type === "c2c").length : PRODUCTS.length);
 
     const labelEl = $("#filterCategoryLabel");
     if (labelEl) {
-      labelEl.textContent =
-        type === "mall"
-          ? "Ngành Hàng Đồ Mới (Brand Mall)"
-          : type === "c2c"
-            ? "Ngành Hàng Đồ Cũ (Like New)"
-            : "Ngành Hàng";
+      labelEl.textContent = type === "mall"
+        ? "Ngành Hàng Đồ Mới (Brand Mall)"
+        : (type === "c2c" ? "Ngành Hàng Đồ Cũ (Like New)" : "Ngành Hàng");
     }
 
     container.innerHTML =
       '<label class="filter-radio-item">' +
-      '<input type="radio" name="filterCategory" value="all" ' +
-      (state.filters.category === "all" ? "checked" : "") +
-      " />" +
-      "<span>Tất Cả Ngành Hàng</span>" +
-      '<span class="filter-item-count">' +
-      totalCount +
-      "</span>" +
-      "</label>" +
-      list
-        .map((c) => {
-          const count = PRODUCTS.filter((p) => {
-            const matchCat = p.category === c.id;
-            const matchType = type === "all" ? true : p.type === type;
-            return matchCat && matchType;
-          }).length;
-          return (
-            '<label class="filter-radio-item">' +
-            '<input type="radio" name="filterCategory" value="' +
-            c.id +
-            '" ' +
-            (state.filters.category === c.id ? "checked" : "") +
-            " />" +
-            "<span>" +
-            (c.chip || c.tile || c.title) +
-            "</span>" +
-            '<span class="filter-item-count">' +
-            count +
-            "</span>" +
-            "</label>"
-          );
-        })
-        .join("");
+      '<input type="radio" name="filterCategory" value="all" ' + (state.filters.category === "all" ? "checked" : "") + ' />' +
+      '<span>Tất Cả Ngành Hàng</span>' +
+      '<span class="filter-item-count">' + totalCount + '</span>' +
+      '</label>' +
+      list.map((c) => {
+        const count = PRODUCTS.filter((p) => {
+          const matchCat = p.category === c.id;
+          const matchType = type === "all" ? true : p.type === type;
+          return matchCat && matchType;
+        }).length;
+        return (
+          '<label class="filter-radio-item">' +
+          '<input type="radio" name="filterCategory" value="' + c.id + '" ' + (state.filters.category === c.id ? "checked" : "") + ' />' +
+          '<span>' + (c.chip || c.tile || c.title) + '</span>' +
+          '<span class="filter-item-count">' + count + '</span>' +
+          '</label>'
+        );
+      }).join("");
 
     // Cập nhật lại dom.categoryRadios và sự kiện
     dom.categoryRadios = $$("input[name='filterCategory']", container);
@@ -845,10 +723,7 @@
           state.page = 1;
           render();
           $$("#catalogSubnav a").forEach((a) => {
-            a.classList.toggle(
-              "active",
-              a.dataset.cat === state.filters.category,
-            );
+            a.classList.toggle("active", a.dataset.cat === state.filters.category);
           });
           try {
             const url = new URL(window.location.href);
@@ -857,11 +732,7 @@
             } else {
               url.searchParams.set("cat", state.filters.category);
             }
-            window.history.pushState(
-              { cat: state.filters.category },
-              "",
-              url.toString(),
-            );
+            window.history.pushState({ cat: state.filters.category }, "", url.toString());
           } catch (err) {}
         }
       });
@@ -874,16 +745,13 @@
     if (!titleEl || !descEl) return;
     if (type === "mall") {
       titleEl.innerHTML = "Sàn Hàng Mới 100% Chính Hãng (Brand Mall)";
-      descEl.innerHTML =
-        "Trung tâm phân phối chính thức từ các thương hiệu hàng đầu: <strong>100% nguyên seal nguyên hộp FPT/VNA</strong>, bảo hành chính hãng 12 - 24 tháng, đổi trả 7 ngày miễn phí và đồng kiểm mở hộp cùng shipper.";
+      descEl.innerHTML = "Trung tâm phân phối chính thức từ các thương hiệu hàng đầu: <strong>100% nguyên seal nguyên hộp FPT/VNA</strong>, bảo hành chính hãng 12 - 24 tháng, đổi trả 7 ngày miễn phí và đồng kiểm mở hộp cùng shipper.";
     } else if (type === "c2c") {
       titleEl.innerHTML = "Chợ Đồ Cũ & Pass Đồ Like New Thẩm Định Kỹ Thuật";
-      descEl.innerHTML =
-        "Thị trường đồ cũ tuyển chọn 95% - 99%: <strong>Đã kiểm định vi mạch, pin thực tế và chiếu đèn UV tem giày</strong>. Tiết kiệm từ 30% đến 50% so với mua mới, hỗ trợ trả giá trực tiếp với người bán đã eKYC.";
+      descEl.innerHTML = "Thị trường đồ cũ tuyển chọn 95% - 99%: <strong>Đã kiểm định vi mạch, pin thực tế và chiếu đèn UV tem giày</strong>. Tiết kiệm từ 30% đến 50% so với mua mới, hỗ trợ trả giá trực tiếp với người bán đã eKYC.";
     } else {
       titleEl.innerHTML = "Siêu Thị Công Nghệ & Thời Trang Tuyển Chọn";
-      descEl.innerHTML =
-        "Trải nghiệm mua sắm thông minh: <strong>100% Brand Mall chính hãng nguyên seal</strong> song hành cùng <strong>Chợ Đồ Cũ Like New kiểm định kỹ thuật 15 bước</strong>. Kiểm tra mở hộp cùng shipper trước khi trả tiền, hoàn tiền 100% tức thì qua Napas 24/7.";
+      descEl.innerHTML = "Trải nghiệm mua sắm thông minh: <strong>100% Brand Mall chính hãng nguyên seal</strong> song hành cùng <strong>Chợ Đồ Cũ Like New kiểm định kỹ thuật 15 bước</strong>. Kiểm tra mở hộp cùng shipper trước khi trả tiền, hoàn tiền 100% tức thì qua Napas 24/7.";
     }
   }
 
@@ -915,9 +783,7 @@
     updateHeroSpotlight(newType);
 
     // 6. Cập nhật Breadcrumb
-    const breadcrumbCurrent = document.querySelector(
-      ".catalog-breadcrumb span:last-child",
-    );
+    const breadcrumbCurrent = document.querySelector(".catalog-breadcrumb span:last-child");
     if (breadcrumbCurrent) {
       if (newType === "mall") {
         breadcrumbCurrent.textContent = "Sàn Đồ Mới 100% (Brand Mall)";
@@ -958,9 +824,7 @@
     }
 
     if (dom.keywordInput) {
-      dom.keywordInput.addEventListener("input", (e) =>
-        handleSearch(e.target.value),
-      );
+      dom.keywordInput.addEventListener("input", (e) => handleSearch(e.target.value));
     }
     if (dom.headerSearch) {
       dom.headerSearch.addEventListener("input", (e) => {
@@ -983,11 +847,7 @@
             } else {
               url.searchParams.set("cat", state.filters.category);
             }
-            window.history.pushState(
-              { cat: state.filters.category },
-              "",
-              url.toString(),
-            );
+            window.history.pushState({ cat: state.filters.category }, "", url.toString());
           } catch (err) {}
         }
       });
@@ -1047,12 +907,8 @@
     // 4. Khoảng giá nhập tay
     if (dom.applyPriceBtn) {
       dom.applyPriceBtn.addEventListener("click", () => {
-        const min = dom.minPriceInput.value
-          ? Number(dom.minPriceInput.value)
-          : null;
-        const max = dom.maxPriceInput.value
-          ? Number(dom.maxPriceInput.value)
-          : null;
+        const min = dom.minPriceInput.value ? Number(dom.minPriceInput.value) : null;
+        const max = dom.maxPriceInput.value ? Number(dom.maxPriceInput.value) : null;
         if (min != null && max != null && min > max) {
           Utils.toast("Giá tối thiểu không được lớn hơn giá tối đa", "warning");
           return;
@@ -1082,10 +938,8 @@
           const max = btn.dataset.max ? Number(btn.dataset.max) : null;
           state.filters.minPrice = min;
           state.filters.maxPrice = max;
-          if (dom.minPriceInput)
-            dom.minPriceInput.value = min != null ? min : "";
-          if (dom.maxPriceInput)
-            dom.maxPriceInput.value = max != null ? max : "";
+          if (dom.minPriceInput) dom.minPriceInput.value = min != null ? min : "";
+          if (dom.maxPriceInput) dom.maxPriceInput.value = max != null ? max : "";
         }
         state.page = 1;
         render();
@@ -1096,8 +950,7 @@
     dom.ratingRadios.forEach((radio) => {
       radio.addEventListener("change", (e) => {
         if (e.target.checked) {
-          state.filters.minRating =
-            e.target.value === "all" ? null : Number(e.target.value);
+          state.filters.minRating = e.target.value === "all" ? null : Number(e.target.value);
           state.page = 1;
           render();
         }
@@ -1108,8 +961,7 @@
     dom.condRadios.forEach((radio) => {
       radio.addEventListener("change", (e) => {
         if (e.target.checked) {
-          state.filters.minCond =
-            e.target.value === "all" ? null : Number(e.target.value);
+          state.filters.minCond = e.target.value === "all" ? null : Number(e.target.value);
           state.page = 1;
           render();
         }
@@ -1155,73 +1007,46 @@
       const title = product.short || product.name;
 
       if (action === "add-cart") {
-        if (
-          !Auth.ensureLogin(
-            (user) => {
-              Utils.Cart.addItem(product, 1);
-            },
-            {
-              title: "Đăng Nhập Mua Hàng",
-              message:
-                'Vui lòng đăng nhập tài khoản để thêm "' +
-                title +
-                '" vào giỏ hàng.',
-            },
-          )
-        ) {
+        if (!Auth.ensureLogin((user) => {
+          Utils.Cart.addItem(product, 1);
+        }, {
+          title: "Đăng Nhập Mua Hàng",
+          message: 'Vui lòng đăng nhập tài khoản để thêm "' + title + '" vào giỏ hàng.',
+        })) {
           return;
         }
       } else if (action === "buy") {
-        if (
-          !Auth.ensureLogin(
-            (user) => {
-              Utils.Cart.addItem(product, 1);
-              window.location.href = "cart.html";
-            },
-            {
-              title: "Đăng Nhập Mua Hàng",
-              message:
-                'Vui lòng đăng nhập tài khoản để mua ngay "' + title + '".',
-              returnUrl: "cart.html",
-            },
-          )
-        ) {
+        if (!Auth.ensureLogin((user) => {
+          Utils.Cart.addItem(product, 1);
+          window.location.href = "cart.html";
+        }, {
+          title: "Đăng Nhập Mua Hàng",
+          message: 'Vui lòng đăng nhập tài khoản để mua ngay "' + title + '".',
+          returnUrl: "cart.html"
+        })) {
           return;
         }
       } else if (action === "offer") {
-        if (
-          !Auth.ensureLogin(
-            (user) => {
-              currentOfferProduct = product;
-              const pTitle = $("#offerProduct");
-              const pSeller = $("#offerSeller");
-              const pCond = $("#offerCond");
-              const pPrice = $("#offerCurrent");
-              const pInput = $("#offerPrice");
+        if (!Auth.ensureLogin((user) => {
+          currentOfferProduct = product;
+          const pTitle = $("#offerProduct");
+          const pSeller = $("#offerSeller");
+          const pCond = $("#offerCond");
+          const pPrice = $("#offerCurrent");
+          const pInput = $("#offerPrice");
 
-              if (pTitle) pTitle.textContent = title;
-              if (pSeller)
-                pSeller.textContent =
-                  product.sellerName || product.seller || "-";
-              if (pCond) pCond.textContent = (product.cond || 99) + "%";
-              if (pPrice)
-                pPrice.textContent = Utils.formatCurrency(product.price);
-              if (pInput)
-                pInput.value = Math.round(product.price * 0.95).toLocaleString(
-                  "vi-VN",
-                );
+          if (pTitle) pTitle.textContent = title;
+          if (pSeller) pSeller.textContent = product.sellerName || product.seller || "-";
+          if (pCond) pCond.textContent = (product.cond || 99) + "%";
+          if (pPrice) pPrice.textContent = Utils.formatCurrency(product.price);
+          if (pInput)
+            pInput.value = Math.round(product.price * 0.95).toLocaleString("vi-VN");
 
-              Utils.openModal("offerModal");
-            },
-            {
-              title: "Yêu Cầu Đăng Nhập",
-              message:
-                'Vui lòng đăng nhập tài khoản để gửi đề nghị trả giá cho "' +
-                title +
-                '".',
-            },
-          )
-        ) {
+          Utils.openModal("offerModal");
+        }, {
+          title: "Yêu Cầu Đăng Nhập",
+          message: 'Vui lòng đăng nhập tài khoản để gửi đề nghị trả giá cho "' + title + '".',
+        })) {
           return;
         }
       }
@@ -1233,8 +1058,7 @@
       offerForm.addEventListener("submit", (e) => {
         e.preventDefault();
         const priceInput = $("#offerPrice");
-        const value =
-          parseInt(String(priceInput.value || "").replace(/\D/g, ""), 10) || 0;
+        const value = parseInt(String(priceInput.value || "").replace(/\D/g, ""), 10) || 0;
         if (value <= 0) {
           Utils.toast("Vui lòng nhập mức giá đề xuất hợp lệ!", "error");
           return;
@@ -1242,14 +1066,12 @@
 
         Utils.closeModal("offerModal");
         Utils.toast(
-          "Đã gửi đề xuất trả giá " +
+          'Đã gửi đề xuất trả giá ' +
             Utils.formatCurrency(value) +
             ' cho "' +
-            (currentOfferProduct
-              ? currentOfferProduct.short || currentOfferProduct.name
-              : "sản phẩm") +
+            (currentOfferProduct ? currentOfferProduct.short || currentOfferProduct.name : "sản phẩm") +
             '"!',
-          "success",
+          "success"
         );
       });
     }
@@ -1274,9 +1096,7 @@
       btn.addEventListener("click", () => {
         if (!currentOfferProduct) return;
         const percent = Number(btn.dataset.quick);
-        const newPrice = Math.round(
-          currentOfferProduct.price * (1 + percent / 100),
-        );
+        const newPrice = Math.round(currentOfferProduct.price * (1 + percent / 100));
         const input = $("#offerPrice");
         if (input) input.value = newPrice.toLocaleString("vi-VN");
       });
@@ -1297,16 +1117,12 @@
   /* ---------------- CUỘN NGANG KÉO THẢ CHO SUBNAV ---------------- */
   function enableHorizontalDrag(el) {
     if (!el) return;
-    el.addEventListener(
-      "wheel",
-      (e) => {
-        if (e.deltaY !== 0 && el.scrollWidth > el.clientWidth) {
-          e.preventDefault();
-          el.scrollLeft += e.deltaY;
-        }
-      },
-      { passive: false },
-    );
+    el.addEventListener("wheel", (e) => {
+      if (e.deltaY !== 0 && el.scrollWidth > el.clientWidth) {
+        e.preventDefault();
+        el.scrollLeft += e.deltaY;
+      }
+    }, { passive: false });
 
     let isDown = false;
     let startX = 0;
@@ -1335,45 +1151,37 @@
       el.scrollLeft = scrollLeft - walk;
     });
 
-    el.addEventListener(
-      "click",
-      (e) => {
-        if (hasDragged) {
-          e.preventDefault();
-          e.stopPropagation();
-        }
-      },
-      true,
-    );
+    el.addEventListener("click", (e) => {
+      if (hasDragged) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
   }
 
   /* ---------------- KHỞI CHẠY ---------------- */
   /* ---------------- TÍNH TOÁN DỮ LIỆU ĐẾM SỐ LƯỢNG CHO SIDEBAR ---------------- */
   function updateSidebarCounts() {
     const counts = {
-      "cat-all": PRODUCTS.length,
-      "cat-fashion": PRODUCTS.filter((p) => p.category === "fashion").length,
-      "cat-sneakers": PRODUCTS.filter((p) => p.category === "sneakers").length,
-      "cat-tech": PRODUCTS.filter((p) => p.category === "tech").length,
-      "cat-appliances": PRODUCTS.filter((p) => p.category === "appliances")
-        .length,
-      "cat-audio": PRODUCTS.filter((p) => p.category === "audio").length,
-      "cat-gaming": PRODUCTS.filter((p) => p.category === "gaming").length,
-      "cat-watches": PRODUCTS.filter((p) => p.category === "watches").length,
-      "cat-camera": PRODUCTS.filter((p) => p.category === "camera").length,
-      "type-all": PRODUCTS.length,
-      "type-mall": PRODUCTS.filter((p) => p.type === "mall").length,
-      "type-c2c": PRODUCTS.filter((p) => p.type === "c2c").length,
-      "cond-all": PRODUCTS.filter((p) => p.type === "c2c").length,
-      "cond-98": PRODUCTS.filter((p) => p.type === "c2c" && (p.cond || 0) >= 98)
-        .length,
-      "cond-95": PRODUCTS.filter((p) => p.type === "c2c" && (p.cond || 0) >= 95)
-        .length,
-      "cond-90": PRODUCTS.filter((p) => p.type === "c2c" && (p.cond || 0) >= 90)
-        .length,
+      'cat-all': PRODUCTS.length,
+      'cat-fashion': PRODUCTS.filter((p) => p.category === 'fashion').length,
+      'cat-sneakers': PRODUCTS.filter((p) => p.category === 'sneakers').length,
+      'cat-tech': PRODUCTS.filter((p) => p.category === 'tech').length,
+      'cat-appliances': PRODUCTS.filter((p) => p.category === 'appliances').length,
+      'cat-audio': PRODUCTS.filter((p) => p.category === 'audio').length,
+      'cat-gaming': PRODUCTS.filter((p) => p.category === 'gaming').length,
+      'cat-watches': PRODUCTS.filter((p) => p.category === 'watches').length,
+      'cat-camera': PRODUCTS.filter((p) => p.category === 'camera').length,
+      'type-all': PRODUCTS.length,
+      'type-mall': PRODUCTS.filter((p) => p.type === 'mall').length,
+      'type-c2c': PRODUCTS.filter((p) => p.type === 'c2c').length,
+      'cond-all': PRODUCTS.filter((p) => p.type === 'c2c').length,
+      'cond-98': PRODUCTS.filter((p) => p.type === 'c2c' && (p.cond || 0) >= 98).length,
+      'cond-95': PRODUCTS.filter((p) => p.type === 'c2c' && (p.cond || 0) >= 95).length,
+      'cond-90': PRODUCTS.filter((p) => p.type === 'c2c' && (p.cond || 0) >= 90).length,
     };
 
-    $$("[data-count-key]").forEach((el) => {
+    $$('[data-count-key]').forEach((el) => {
       const key = el.dataset.countKey;
       if (counts[key] !== undefined) {
         el.textContent = counts[key];
@@ -1384,18 +1192,13 @@
   /* ---------------- XỬ LÝ DRAWER BỘ LỌC CHO MOBILE ---------------- */
   function setupMobileFilter() {
     if (!dom.mobileToggleBtn) return;
-    const sidebar = $(".filter-sidebar");
-    dom.mobileToggleBtn.addEventListener("click", () => {
+    const sidebar = $('.filter-sidebar');
+    dom.mobileToggleBtn.addEventListener('click', () => {
       if (!sidebar) return;
-      const isOpen = sidebar.classList.toggle("is-open");
-      dom.mobileToggleBtn.setAttribute(
-        "aria-expanded",
-        isOpen ? "true" : "false",
-      );
+      const isOpen = sidebar.classList.toggle('is-open');
+      dom.mobileToggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       if (dom.mobileFilterBtnText) {
-        dom.mobileFilterBtnText.textContent = isOpen
-          ? "Đóng Bộ Lọc"
-          : "Mở Bộ Lọc Tìm Kiếm";
+        dom.mobileFilterBtnText.textContent = isOpen ? 'Đóng Bộ Lọc' : 'Mở Bộ Lọc Tìm Kiếm';
       }
     });
   }
@@ -1404,37 +1207,31 @@
   function setupViewMode() {
     const grid = dom.grid;
     if (!grid) return;
-    const saved = localStorage.getItem("hybrid_catalog_view") || "grid";
+    const saved = localStorage.getItem('hybrid_catalog_view') || 'grid';
 
     function setMode(mode) {
-      if (mode === "compact") {
-        grid.classList.add("compact-view");
-        if (dom.viewModeGrid) dom.viewModeGrid.classList.remove("active");
-        if (dom.viewModeCompact) dom.viewModeCompact.classList.add("active");
-        try {
-          localStorage.setItem("hybrid_catalog_view", "compact");
-        } catch (e) {}
+      if (mode === 'compact') {
+        grid.classList.add('compact-view');
+        if (dom.viewModeGrid) dom.viewModeGrid.classList.remove('active');
+        if (dom.viewModeCompact) dom.viewModeCompact.classList.add('active');
+        try { localStorage.setItem('hybrid_catalog_view', 'compact'); } catch (e) {}
       } else {
-        grid.classList.remove("compact-view");
-        if (dom.viewModeGrid) dom.viewModeGrid.classList.add("active");
-        if (dom.viewModeCompact) dom.viewModeCompact.classList.remove("active");
-        try {
-          localStorage.setItem("hybrid_catalog_view", "grid");
-        } catch (e) {}
+        grid.classList.remove('compact-view');
+        if (dom.viewModeGrid) dom.viewModeGrid.classList.add('active');
+        if (dom.viewModeCompact) dom.viewModeCompact.classList.remove('active');
+        try { localStorage.setItem('hybrid_catalog_view', 'grid'); } catch (e) {}
       }
     }
 
-    if (saved === "compact") setMode("compact");
-    if (dom.viewModeGrid)
-      dom.viewModeGrid.addEventListener("click", () => setMode("grid"));
-    if (dom.viewModeCompact)
-      dom.viewModeCompact.addEventListener("click", () => setMode("compact"));
+    if (saved === 'compact') setMode('compact');
+    if (dom.viewModeGrid) dom.viewModeGrid.addEventListener('click', () => setMode('grid'));
+    if (dom.viewModeCompact) dom.viewModeCompact.addEventListener('click', () => setMode('compact'));
   }
 
   /* ---------------- XỬ LÝ NÚT YÊU THÍCH (WISHLIST) & XÓA TẤT CẢ LỌC ---------------- */
   function setupCatalogExtras() {
     if (dom.clearAllBtn) {
-      dom.clearAllBtn.addEventListener("click", resetAllFilters);
+      dom.clearAllBtn.addEventListener('click', resetAllFilters);
     }
   }
 
@@ -1466,10 +1263,7 @@
         for (let i = 0; i < 3; i++) {
           const item = compareList[i];
           if (item) {
-            const imgSrc =
-              (typeof window !== "undefined" && window.resolveAssetUrl
-                ? window.resolveAssetUrl(item.img)
-                : item.img) || "";
+            const imgSrc = (typeof window !== "undefined" && window.resolveAssetUrl ? window.resolveAssetUrl(item.img) : item.img) || "";
             html += `
               <div class="compare-dock-thumb" title="${Utils.escapeHtml(item.name)}">
                 <img src="${imgSrc}" alt="${Utils.escapeHtml(item.name)}" />
@@ -1502,20 +1296,14 @@
           Utils.toast("Đã bỏ sản phẩm khỏi bảng so sánh.", "info");
         } else {
           if (compareList.length >= 3) {
-            Utils.toast(
-              "Bạn chỉ có thể so sánh tối đa 3 sản phẩm cùng lúc!",
-              "warning",
-            );
+            Utils.toast("Bạn chỉ có thể so sánh tối đa 3 sản phẩm cùng lúc!", "warning");
             return;
           }
           const allProds = typeof PRODUCTS !== "undefined" ? PRODUCTS : [];
           const found = allProds.find((p) => String(p.id) === String(id));
           if (found) {
             compareList.push(found);
-            Utils.toast(
-              `Đã thêm "${found.short || found.name}" vào bảng so sánh!`,
-              "success",
-            );
+            Utils.toast(`Đã thêm "${found.short || found.name}" vào bảng so sánh!`, "success");
           }
         }
         updateCompareUI();
@@ -1543,10 +1331,7 @@
     if (btnOpen && modal && modalBody) {
       btnOpen.addEventListener("click", () => {
         if (compareList.length < 2) {
-          Utils.toast(
-            "Vui lòng chọn ít nhất 2 sản phẩm để so sánh đối chiếu!",
-            "warning",
-          );
+          Utils.toast("Vui lòng chọn ít nhất 2 sản phẩm để so sánh đối chiếu!", "warning");
           return;
         }
 
@@ -1556,94 +1341,66 @@
               <thead>
                 <tr>
                   <th style="width: 140px;">Tiêu Chí</th>
-                  ${compareList
-                    .map(
-                      (p) => `
+                  ${compareList.map((p) => `
                     <th style="text-align: center; min-width: 200px;">
                       <img src="${(typeof window !== "undefined" && window.resolveAssetUrl ? window.resolveAssetUrl(p.img) : p.img) || ""}" style="width: 90px; height: 90px; object-fit: cover; border-radius: 8px; margin: 0 auto 8px; display: block; border: 1px solid var(--border);" alt="${Utils.escapeHtml(p.name)}" />
                       <div class="text-xs fw-700 line-clamp-2" style="color: var(--text);">${Utils.escapeHtml(p.name)}</div>
                     </th>
-                  `,
-                    )
-                    .join("")}
+                  `).join("")}
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <th>Phân Khúc</th>
-                  ${compareList
-                    .map(
-                      (p) => `
+                  ${compareList.map((p) => `
                     <td style="text-align: center;">
                       ${p.type === "mall" ? '<span class="badge badge-mall">HÀNG MỚI MALL 100%</span>' : `<span class="badge badge-c2c">ĐỒ CŨ ${p.cond || 99}% MỚI</span>`}
                     </td>
-                  `,
-                    )
-                    .join("")}
+                  `).join("")}
                 </tr>
                 <tr>
                   <th>Giá Bán</th>
-                  ${compareList
-                    .map(
-                      (p) => `
+                  ${compareList.map((p) => `
                     <td style="text-align: center;">
                       <strong class="mono text-primary" style="font-size: 15px;">${Utils.formatCurrency(p.price)}</strong>
                       ${p.oldPrice ? `<div class="mono text-muted text-xs line-through">${Utils.formatCurrency(p.oldPrice)}</div>` : ""}
                     </td>
-                  `,
-                    )
-                    .join("")}
+                  `).join("")}
                 </tr>
                 <tr>
                   <th>Tình Trạng</th>
-                  ${compareList
-                    .map(
-                      (p) => `
+                  ${compareList.map((p) => `
                     <td>
                       ${p.type === "mall" ? "Nguyên hộp, nguyên seal chưa kích hoạt" : `Máy Like New ${p.cond || 99}%, không cấn móp, linh kiện nguyên bản`}
                     </td>
-                  `,
-                    )
-                    .join("")}
+                  `).join("")}
                 </tr>
                 <tr>
                   <th>Bảo Hành</th>
-                  ${compareList
-                    .map(
-                      (p) => `
+                  ${compareList.map((p) => `
                     <td>
                       ${p.type === "mall" ? "Bảo hành 12-24 tháng chính hãng tại trung tâm ủy quyền" : "Bảo hành 6 tháng kỹ thuật Hybrid + Đổi trả 7 ngày"}
                     </td>
-                  `,
-                    )
-                    .join("")}
+                  `).join("")}
                 </tr>
                 <tr>
                   <th>Đồng Kiểm</th>
-                  ${compareList
-                    .map(
-                      (p) => `
+                  ${compareList.map((p) => `
                     <td>
                       <span class="text-success fw-600">✓ Đồng kiểm ngoại quan &amp; thử nguồn</span><br/>
                       <small class="text-muted">${p.type === "mall" ? "Hỏa tốc 2 giờ tại HN & HCM" : "Giao hàng tiêu chuẩn 1-2 ngày"}</small>
                     </td>
-                  `,
-                    )
-                    .join("")}
+                  `).join("")}
                 </tr>
                 <tr>
                   <th>Chi Tiết</th>
-                  ${compareList
-                    .map(
-                      (p) => `
+                  ${compareList.map((p) => `
                     <td style="text-align: center;">
                       <a href="${p.type === "mall" ? `product_new.html?id=${p.id}` : `product_used.html?id=${p.id}`}" class="btn btn-primary btn-xs is-full">
                         <span class="material-symbols-outlined icon-2xs">visibility</span> Xem Sản Phẩm
                       </a>
                     </td>
-                  `,
-                    )
-                    .join("")}
+                  `).join("")}
                 </tr>
               </tbody>
             </table>
@@ -1654,8 +1411,7 @@
     }
 
     [btnClose, btnCloseFoot].forEach((btn) => {
-      if (btn)
-        btn.addEventListener("click", () => (modal.style.display = "none"));
+      if (btn) btn.addEventListener("click", () => (modal.style.display = "none"));
     });
     if (modal) {
       modal.addEventListener("click", (e) => {
