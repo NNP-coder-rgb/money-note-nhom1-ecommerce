@@ -928,6 +928,44 @@
       </div>
     </div>
 
+    <!-- ===== DOCK SO SÁNH SẢN PHẨM NỔI (FLOATING COMPARE DOCK) ===== -->
+    <div class="compare-dock-bar" id="compareDockBar">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary" style="font-size: 22px;">balance</span>
+        <strong class="text-xs fw-700" style="white-space: nowrap;">So Sánh (<span id="compareCountText">0</span>/3)</strong>
+      </div>
+      <div class="compare-dock-thumbs" id="compareDockThumbs"></div>
+      <div class="flex items-center gap-2">
+        <button class="btn btn-primary btn-xs" id="btnOpenCompareModal" type="button" style="padding: 6px 14px; font-weight: 700;">
+          <span class="material-symbols-outlined icon-2xs">compare_arrows</span> So Sánh Ngay
+        </button>
+        <button class="btn btn-ghost btn-xs text-muted" id="btnClearCompare" type="button" title="Xóa tất cả">
+          <span class="material-symbols-outlined icon-2xs">close</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ===== MODAL BẢNG MA TRẬN SO SÁNH (COMPARE MATRIX MODAL) ===== -->
+    <div class="modal-backdrop" id="compareMatrixModal" style="display: none;" role="dialog" aria-modal="true">
+      <div class="modal" style="max-width: 960px; max-height: 90vh; overflow-y: auto;">
+        <div class="modal-head flex items-center justify-between pb-3" style="border-bottom: 1px solid var(--border);">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary">balance</span>
+            <h3 class="modal-title text-sm fw-700">Bảng So Sánh Thông Số &amp; Mức Giá Chi Tiết</h3>
+          </div>
+          <button class="modal-close" id="btnCloseCompareModal" type="button" aria-label="Đóng">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div class="modal-body py-4" id="compareMatrixBody">
+          <!-- Render động bằng catalog.js -->
+        </div>
+        <div class="modal-foot flex justify-end gap-2 pt-3" style="border-top: 1px solid var(--border);">
+          <button class="btn btn-secondary btn-sm" id="btnCloseCompareFoot" type="button">Đóng Bảng So Sánh</button>
+        </div>
+      </div>
+    </div>
+
     <!-- ===== FOOTER ===== -->
     <footer class="site-footer" data-component="footer"></footer>
 
@@ -937,6 +975,7 @@
     <script src="../../js/mock_data.js"></script>
     <script src="../../js/utils.js"></script>
     <script src="../../js/components.js"></script>
+    <script src="../../js/app.js"></script>
     <script src="../../js/catalog.js"></script>
   </body>
 </html>

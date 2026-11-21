@@ -25,29 +25,14 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--secondary-400),
-    var(--primary-400),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, var(--secondary-400), var(--primary-400), transparent);
   box-shadow: 0 0 16px var(--secondary-400);
   animation: scanMove 2.5s infinite ease-in-out;
 }
 @keyframes scanMove {
-  0% {
-    top: 0%;
-    opacity: 0.3;
-  }
-  50% {
-    top: 96%;
-    opacity: 1;
-  }
-  100% {
-    top: 0%;
-    opacity: 0.3;
-  }
+  0% { top: 0%; opacity: 0.3; }
+  50% { top: 96%; opacity: 1; }
+  100% { top: 0%; opacity: 0.3; }
 }
 .otp-input-group {
   display: flex;
@@ -93,11 +78,7 @@
 
 /* ---------- 08: AI Valuation Box ---------- */
 .ai-scan-card {
-  background: linear-gradient(
-    135deg,
-    rgba(139, 92, 246, 0.15),
-    rgba(34, 211, 238, 0.08)
-  );
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(34, 211, 238, 0.08));
   border: 1px solid rgba(139, 92, 246, 0.3);
   border-radius: var(--radius-lg);
   padding: var(--sp-5);
@@ -173,15 +154,9 @@
   height: 100%;
   background: var(--accent, var(--primary-500));
 }
-.admin-stat-card.tone-cyan::after {
-  background: var(--secondary-400);
-}
-.admin-stat-card.tone-green::after {
-  background: var(--success);
-}
-.admin-stat-card.tone-coral::after {
-  background: var(--tertiary-500);
-}
+.admin-stat-card.tone-cyan::after { background: var(--secondary-400); }
+.admin-stat-card.tone-green::after { background: var(--success); }
+.admin-stat-card.tone-coral::after { background: var(--tertiary-500); }
 .admin-stat-card .stat-label {
   font-size: var(--fs-xs);
   color: var(--text-muted);
@@ -354,20 +329,12 @@
 .address-card.is-default {
   opacity: 1;
   border: 1.5px solid rgba(139, 92, 246, 0.85);
-  background: linear-gradient(
-    135deg,
-    rgba(139, 92, 246, 0.14) 0%,
-    rgba(139, 92, 246, 0.04) 100%
-  );
-  box-shadow:
-    0 0 20px rgba(139, 92, 246, 0.25),
-    inset 0 0 12px rgba(139, 92, 246, 0.06);
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.14) 0%, rgba(139, 92, 246, 0.04) 100%);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.25), inset 0 0 12px rgba(139, 92, 246, 0.06);
 }
 .address-card.is-default:hover {
   border-color: rgba(139, 92, 246, 1);
-  box-shadow:
-    0 0 26px rgba(139, 92, 246, 0.35),
-    inset 0 0 14px rgba(139, 92, 246, 0.08);
+  box-shadow: 0 0 26px rgba(139, 92, 246, 0.35), inset 0 0 14px rgba(139, 92, 246, 0.08);
 }
 .address-card.is-default .badge-primary {
   box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
@@ -428,9 +395,7 @@
   color: var(--primary-300);
   overflow: hidden;
   box-shadow: 0 0 20px rgba(139, 92, 246, 0.25);
-  transition:
-    transform var(--t-fast),
-    border-color var(--t-fast);
+  transition: transform var(--t-fast), border-color var(--t-fast);
 }
 .profile-avatar-wrap:hover .profile-avatar-img {
   border-color: var(--secondary-400);
@@ -767,11 +732,7 @@
    Feature 2: VietQR / Napas 24/7 Payment Box Components
    ===================================================================== */
 .vietqr-container {
-  background: linear-gradient(
-    135deg,
-    rgba(139, 92, 246, 0.06),
-    rgba(6, 182, 212, 0.04)
-  );
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.06), rgba(6, 182, 212, 0.04));
   border: 1px solid rgba(139, 92, 246, 0.35);
   border-radius: var(--radius-lg);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
@@ -939,9 +900,7 @@ body.light-theme .ekyc-upload-box {
   cursor: pointer;
   display: grid;
   place-items: center;
-  transition:
-    background var(--speed-fast),
-    color var(--speed-fast);
+  transition: background var(--speed-fast), color var(--speed-fast);
 }
 .qty-btn:hover {
   background: var(--neutral-700);
@@ -1155,11 +1114,7 @@ body.light-theme .cart-trust-card {
 }
 .cart-header-title {
   font-family: var(--font-head);
-  font-size: clamp(
-    1.2rem,
-    2.2vw,
-    1.4rem
-  ) !important; /* Cỡ chữ vừa phải, thanh lịch */
+  font-size: clamp(1.2rem, 2.2vw, 1.4rem) !important; /* Cỡ chữ vừa phải, thanh lịch */
   font-weight: 700 !important;
   color: var(--text);
   line-height: 1.3;
@@ -1433,9 +1388,7 @@ html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
 }
-*,
-*::before,
-*::after {
+*, *::before, *::after {
   box-sizing: border-box;
 }
 body {
@@ -1443,9 +1396,7 @@ body {
   max-width: 100vw;
   width: 100%;
 }
-img,
-video,
-svg {
+img, video, svg {
   max-width: 100%;
   height: auto;
 }
@@ -1455,13 +1406,7 @@ svg {
   outline: 2px solid var(--primary-400);
   outline-offset: 2px;
 }
-.btn,
-.icon-btn,
-.chip,
-.badge,
-.side-link,
-.nav-link,
-.tab-btn {
+.btn, .icon-btn, .chip, .badge, .side-link, .nav-link, .tab-btn {
   transition: all var(--t-fast) cubic-bezier(0.4, 0, 0.2, 1);
 }
 .btn:hover:not(:disabled) {
@@ -1591,17 +1536,10 @@ svg {
 }
 
 /* 9. Card Lift Hover Effect */
-.product-card,
-.card,
-.panel-card,
-.stat-card {
-  transition:
-    transform var(--t-fast) ease,
-    box-shadow var(--t-fast) ease,
-    border-color var(--t-fast) ease;
+.product-card, .card, .panel-card, .stat-card {
+  transition: transform var(--t-fast) ease, box-shadow var(--t-fast) ease, border-color var(--t-fast) ease;
 }
-.product-card:hover,
-.card:hover {
+.product-card:hover, .card:hover {
   border-color: rgba(139, 92, 246, 0.35);
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
 }
@@ -2079,10 +2017,7 @@ body.light-theme .cccd-upload-box:hover {
   gap: var(--sp-3);
   min-height: 160px;
   min-width: 0;
-  transition:
-    transform var(--t-fast),
-    border-color var(--t-fast),
-    box-shadow var(--t-fast);
+  transition: transform var(--t-fast), border-color var(--t-fast), box-shadow var(--t-fast);
 }
 .sitemap-card:hover {
   transform: translateY(-2px);
@@ -2160,15 +2095,11 @@ body.light-theme .cccd-upload-box:hover {
   margin-bottom: var(--sp-6);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
   position: relative;
-  transition:
-    border-color var(--t-fast),
-    box-shadow var(--t-fast);
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
 }
 .admin-card-block:hover {
   border-color: rgba(139, 92, 246, 0.35);
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.35),
-    0 0 16px rgba(139, 92, 246, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), 0 0 16px rgba(139, 92, 246, 0.1);
 }
 .admin-block-header {
   display: flex;
@@ -2298,10 +2229,7 @@ body.light-theme .chart-axis-text {
   fill: #475569;
 }
 .chart-bar-rect {
-  transition:
-    transform 0.2s ease,
-    opacity 0.2s ease,
-    filter 0.2s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease, filter 0.2s ease;
   cursor: pointer;
 }
 .chart-bar-rect:hover {
@@ -2323,9 +2251,7 @@ body.light-theme .chart-axis-text {
   white-space: nowrap;
   display: none;
   transform: translate(-50%, -115%);
-  transition:
-    opacity 0.15s ease,
-    transform 0.15s ease;
+  transition: opacity 0.15s ease, transform 0.15s ease;
 }
 .chart-legend-row {
   display: flex;
@@ -2749,11 +2675,7 @@ body.light-theme .admin-quick-card:hover {
 
 /* 3. Khối Giá & Ưu Đãi */
 .detail-price-box {
-  background: linear-gradient(
-    135deg,
-    rgba(139, 92, 246, 0.09) 0%,
-    rgba(6, 182, 212, 0.06) 100%
-  );
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.09) 0%, rgba(6, 182, 212, 0.06) 100%);
   border: 1px solid rgba(139, 92, 246, 0.3);
   border-radius: var(--radius-xl, 16px);
   padding: 20px 24px;
@@ -3163,11 +3085,7 @@ body.light-theme .review-body {
 
 .side-link.active {
   color: #ffffff;
-  background: linear-gradient(
-    135deg,
-    rgba(139, 92, 246, 0.9),
-    rgba(6, 182, 212, 0.9)
-  );
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.9), rgba(6, 182, 212, 0.9));
   border-color: rgba(34, 211, 238, 0.4);
   box-shadow: 0 4px 16px rgba(139, 92, 246, 0.35);
 }
@@ -3213,8 +3131,7 @@ body.light-theme .review-body {
   border: 2px dashed #94a3b8;
   border-radius: 12px;
   padding: 20px;
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 .shipping-label-head {
   display: flex;
@@ -3291,9 +3208,7 @@ body.light-theme .side-link.active {
   overflow: hidden;
   background: #020617;
   border: 1px solid rgba(34, 211, 238, 0.3);
-  box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.4),
-    inset 0 0 40px rgba(6, 182, 212, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 0 40px rgba(6, 182, 212, 0.15);
 }
 .ai-viewfinder-img {
   width: 100%;
@@ -3307,9 +3222,7 @@ body.light-theme .side-link.active {
   right: 0;
   height: 3px;
   background: linear-gradient(90deg, transparent 0%, #22d3ee 50%, #a855f7 100%);
-  box-shadow:
-    0 0 16px #22d3ee,
-    0 0 30px #a855f7;
+  box-shadow: 0 0 16px #22d3ee, 0 0 30px #a855f7;
   pointer-events: none;
   z-index: 10;
   display: none;
@@ -3319,18 +3232,9 @@ body.light-theme .side-link.active {
   animation: aiLaserPulse 1.8s ease-in-out infinite;
 }
 @keyframes aiLaserPulse {
-  0% {
-    top: 4%;
-    opacity: 0.9;
-  }
-  50% {
-    top: 94%;
-    opacity: 1;
-  }
-  100% {
-    top: 4%;
-    opacity: 0.9;
-  }
+  0% { top: 4%; opacity: 0.9; }
+  50% { top: 94%; opacity: 1; }
+  100% { top: 4%; opacity: 0.9; }
 }
 
 /* Các góc ngắm HUD */
@@ -3342,30 +3246,10 @@ body.light-theme .side-link.active {
   pointer-events: none;
   z-index: 5;
 }
-.hud-corner-tl {
-  top: 12px;
-  left: 12px;
-  border-right: none;
-  border-bottom: none;
-}
-.hud-corner-tr {
-  top: 12px;
-  right: 12px;
-  border-left: none;
-  border-bottom: none;
-}
-.hud-corner-bl {
-  bottom: 12px;
-  left: 12px;
-  border-right: none;
-  border-top: none;
-}
-.hud-corner-br {
-  bottom: 12px;
-  right: 12px;
-  border-left: none;
-  border-top: none;
-}
+.hud-corner-tl { top: 12px; left: 12px; border-right: none; border-bottom: none; }
+.hud-corner-tr { top: 12px; right: 12px; border-left: none; border-bottom: none; }
+.hud-corner-bl { bottom: 12px; left: 12px; border-right: none; border-top: none; }
+.hud-corner-br { bottom: 12px; right: 12px; border-left: none; border-top: none; }
 
 /* Bounding tags trên kính ngắm */
 .hud-tag {
@@ -3406,21 +3290,13 @@ body.light-theme .side-link.active {
 }
 .pricing-strategy-card.selected {
   border-color: var(--secondary-400, #22d3ee);
-  background: linear-gradient(
-    145deg,
-    rgba(6, 182, 212, 0.12),
-    rgba(139, 92, 246, 0.12)
-  );
+  background: linear-gradient(145deg, rgba(6, 182, 212, 0.12), rgba(139, 92, 246, 0.12));
   box-shadow: 0 4px 15px rgba(6, 182, 212, 0.25);
 }
 
 /* Thẻ Xem Trước Trực Tiếp Khi Đăng Bán (Live Preview Card) */
 .live-preview-box {
-  background: linear-gradient(
-    145deg,
-    rgba(255, 255, 255, 0.03),
-    rgba(255, 255, 255, 0.01)
-  );
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-xl, 16px);
   padding: 18px;
@@ -3434,11 +3310,7 @@ body.light-theme .side-link.active {
   justify-content: space-between;
   gap: 14px;
   padding: 14px 18px;
-  background: linear-gradient(
-    135deg,
-    rgba(245, 158, 11, 0.12),
-    rgba(239, 68, 68, 0.06)
-  );
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(239, 68, 68, 0.06));
   border: 1px solid rgba(245, 158, 11, 0.3);
   border-radius: var(--radius-lg, 12px);
   margin-bottom: var(--sp-5, 20px);
@@ -3462,11 +3334,7 @@ body.light-theme .side-link.active {
   right: -20%;
   width: 260px;
   height: 260px;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.18) 0%,
-    transparent 60%
-  );
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.18) 0%, transparent 60%);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -3532,6 +3400,11 @@ body.light-theme .action-reminder-card {
   }
 }
 
+
+
+
+
+
 /* ==========================================================================
    16. PHÒNG PHÂN XỬ 3 BÊN DELUXE & KÊNH NGƯỜI BÁN HIỆN ĐẠI (HYBRID.STORE 2026)
    ========================================================================== */
@@ -3547,12 +3420,7 @@ body.light-theme .action-reminder-card {
   right: -5%;
   width: 500px;
   height: 500px;
-  background: radial-gradient(
-    circle,
-    rgba(139, 92, 246, 0.12) 0%,
-    rgba(6, 182, 212, 0.05) 50%,
-    transparent 70%
-  );
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, rgba(6, 182, 212, 0.05) 50%, transparent 70%);
   pointer-events: none;
   z-index: 0;
   filter: blur(40px);
@@ -3564,11 +3432,7 @@ body.light-theme .action-reminder-card {
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
   padding: 18px 24px;
-  background: linear-gradient(
-    135deg,
-    rgba(21, 21, 38, 0.95),
-    rgba(14, 14, 26, 0.95)
-  );
+  background: linear-gradient(135deg, rgba(21, 21, 38, 0.95), rgba(14, 14, 26, 0.95));
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -3623,18 +3487,9 @@ body.light-theme .action-reminder-card {
   animation: stepPulse 2s infinite ease-in-out;
 }
 @keyframes stepPulse {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 12px rgba(245, 158, 11, 0.5);
-  }
-  50% {
-    transform: scale(1.08);
-    box-shadow: 0 0 22px rgba(245, 158, 11, 0.85);
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 12px rgba(245, 158, 11, 0.5);
-  }
+  0% { transform: scale(1); box-shadow: 0 0 12px rgba(245, 158, 11, 0.5); }
+  50% { transform: scale(1.08); box-shadow: 0 0 22px rgba(245, 158, 11, 0.85); }
+  100% { transform: scale(1); box-shadow: 0 0 12px rgba(245, 158, 11, 0.5); }
 }
 
 .step-node-info strong {
@@ -3680,17 +3535,8 @@ body.light-theme .action-reminder-card {
 .video-overlay-scanline {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.35) 50%),
-    linear-gradient(
-      90deg,
-      rgba(255, 0, 0, 0.04),
-      rgba(0, 255, 0, 0.02),
-      rgba(0, 0, 255, 0.04)
-    );
-  background-size:
-    100% 3px,
-    3px 100%;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.35) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.04));
+  background-size: 100% 3px, 3px 100%;
   pointer-events: none;
 }
 .video-play-btn-pulse {
@@ -3746,11 +3592,7 @@ body.light-theme .action-reminder-card {
 
 /* Tem Niêm Phong QR Hologram */
 .qr-seal-card {
-  background: linear-gradient(
-    135deg,
-    rgba(16, 185, 129, 0.08),
-    rgba(6, 182, 212, 0.05)
-  );
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(6, 182, 212, 0.05));
   border: 1.5px solid rgba(16, 185, 129, 0.35);
   border-radius: var(--radius-lg, 12px);
   padding: 14px;
@@ -3764,32 +3606,18 @@ body.light-theme .action-reminder-card {
   left: -100%;
   width: 50%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.15),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
   transform: skewX(-25deg);
   animation: qrShimmer 4s infinite;
 }
 @keyframes qrShimmer {
-  0% {
-    left: -100%;
-  }
-  30%,
-  100% {
-    left: 160%;
-  }
+  0% { left: -100%; }
+  30%, 100% { left: 160%; }
 }
 
 /* Thẻ Đóng Băng Ký Quỹ Escrow Vault */
 .escrow-vault-card {
-  background: linear-gradient(
-    135deg,
-    rgba(139, 92, 246, 0.12),
-    rgba(245, 158, 11, 0.06)
-  );
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(245, 158, 11, 0.06));
   border: 1.5px solid rgba(139, 92, 246, 0.4);
   border-radius: var(--radius-lg, 12px);
   padding: 14px 16px;
@@ -3834,9 +3662,7 @@ body.light-theme .action-reminder-card {
   margin-top: 8px;
   border: 1.5px solid rgba(255, 255, 255, 0.15);
   cursor: pointer;
-  transition:
-    transform 0.2s ease,
-    border-color 0.2s ease;
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 .chat-bubble-evidence-img:hover {
   transform: scale(1.04);
@@ -3855,11 +3681,7 @@ body.light-theme .action-reminder-card {
   box-shadow: 0 4px 16px rgba(139, 92, 246, 0.2);
 }
 .settlement-option-item.selected {
-  background: linear-gradient(
-    135deg,
-    rgba(139, 92, 246, 0.14),
-    rgba(6, 182, 212, 0.08)
-  ) !important;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.14), rgba(6, 182, 212, 0.08)) !important;
   border-color: #8b5cf6 !important;
   box-shadow: 0 6px 20px rgba(139, 92, 246, 0.28) !important;
 }
@@ -3868,28 +3690,19 @@ body.light-theme .action-reminder-card {
 
 /* Cải tiến 4 Thẻ Stat Cards Kênh Người Bán */
 .stat-card-deluxe {
-  background: linear-gradient(
-    135deg,
-    rgba(21, 21, 38, 0.9),
-    rgba(15, 15, 28, 0.9)
-  );
+  background: linear-gradient(135deg, rgba(21, 21, 38, 0.9), rgba(15, 15, 28, 0.9));
   border: 1.5px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-xl, 16px);
   padding: 20px;
   position: relative;
   overflow: hidden;
-  transition:
-    transform 0.25s var(--ease-spring),
-    border-color 0.25s ease,
-    box-shadow 0.25s ease;
+  transition: transform 0.25s var(--ease-spring), border-color 0.25s ease, box-shadow 0.25s ease;
   cursor: pointer;
 }
 .stat-card-deluxe:hover {
   transform: translateY(-4px);
   border-color: rgba(139, 92, 246, 0.5);
-  box-shadow:
-    0 12px 30px rgba(0, 0, 0, 0.35),
-    0 0 20px rgba(139, 92, 246, 0.15);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35), 0 0 20px rgba(139, 92, 246, 0.15);
 }
 .stat-card-deluxe::before {
   content: "";
@@ -3914,11 +3727,7 @@ body.light-theme .action-reminder-card {
 
 /* Thẻ Hồ Sơ Người Bán Mini Trong Sidebar */
 .seller-profile-card-deluxe {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.04),
-    rgba(255, 255, 255, 0.015)
-  );
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015));
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-lg, 12px);
   padding: 14px;
@@ -3954,16 +3763,9 @@ body.light-theme .action-reminder-card {
 
 /* Thẻ Virtual Debit Card Titanium */
 .virtual-debit-card {
-  background: linear-gradient(
-    135deg,
-    #090916 0%,
-    #1e1b4b 45%,
-    #0e7490 100%
-  ) !important;
+  background: linear-gradient(135deg, #090916 0%, #1e1b4b 45%, #0e7490 100%) !important;
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  box-shadow:
-    0 16px 40px rgba(0, 0, 0, 0.55),
-    inset 0 1px 1px rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.3) !important;
 }
 .emv-chip {
   width: 40px;
@@ -4007,6 +3809,7 @@ body.light-theme .seller-profile-card-deluxe {
   border-color: #e2e8f0;
 }
 
+
 /* ==========================================================================
    17. CHI TIẾT NÂNG CAO PHÒNG PHÂN XỬ & ĐỐI SOÁT TRỌNG TÀI (HYBRID 2026)
    ========================================================================== */
@@ -4040,11 +3843,7 @@ body.light-theme .seller-profile-card-deluxe {
   border-color: rgba(255, 255, 255, 0.2);
 }
 .dispute-case-tab-btn.active {
-  background: linear-gradient(
-    135deg,
-    rgba(139, 92, 246, 0.2),
-    rgba(6, 182, 212, 0.15)
-  );
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(6, 182, 212, 0.15));
   border-color: #8b5cf6;
   color: #c4b5fd;
   box-shadow: 0 0 15px rgba(139, 92, 246, 0.25);
@@ -4052,11 +3851,7 @@ body.light-theme .seller-profile-card-deluxe {
 
 /* Thẻ Biên Bản Đồng Kiểm Bưu Tá Trong Cột 1 */
 .co-inspection-card {
-  background: linear-gradient(
-    135deg,
-    rgba(59, 130, 246, 0.08),
-    rgba(16, 185, 129, 0.05)
-  );
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(16, 185, 129, 0.05));
   border: 1.5px solid rgba(59, 130, 246, 0.35);
   border-radius: var(--radius-lg, 12px);
   padding: 14px;
@@ -4130,23 +3925,11 @@ body.light-theme .seller-profile-card-deluxe {
   background: var(--text-muted, #94a3b8);
   animation: typingBounce 1.4s infinite ease-in-out both;
 }
-.typing-dots span:nth-child(1) {
-  animation-delay: -0.32s;
-}
-.typing-dots span:nth-child(2) {
-  animation-delay: -0.16s;
-}
+.typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+.typing-dots span:nth-child(2) { animation-delay: -0.16s; }
 @keyframes typingBounce {
-  0%,
-  80%,
-  100% {
-    transform: scale(0);
-    opacity: 0.4;
-  }
-  40% {
-    transform: scale(1);
-    opacity: 1;
-  }
+  0%, 80%, 100% { transform: scale(0); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
 }
 
 /* Tin nhắn voice note */
@@ -4218,7 +4001,7 @@ body.light-theme .seller-profile-card-deluxe {
   font-family: var(--font-mono, monospace);
   font-size: 11px;
   color: rgba(255, 255, 255, 0.85);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
 }
 .video-target-box {
   position: absolute;
@@ -4335,29 +4118,21 @@ body.light-theme .electronic-sign-pad {
   border-color: #cbd5e1;
 }
 
+
 /* ==========================================================================
    18. HỆ THỐNG TÍNH NĂNG TMĐT HOÀN CHỈNH (PRODUCTION-GRADE E-COMMERCE 2026)
    ========================================================================== */
 
 /* ---------- 1. SKELETON LOADING / SHIMMER EFFECT ---------- */
 .skeleton {
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.04) 25%,
-    rgba(255, 255, 255, 0.08) 50%,
-    rgba(255, 255, 255, 0.04) 75%
-  );
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.04) 25%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.04) 75%);
   background-size: 200% 100%;
   animation: shimmerSkeleton 1.6s infinite;
   border-radius: var(--radius-md, 8px);
 }
 @keyframes shimmerSkeleton {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 .skeleton-text {
   height: 14px;
@@ -4395,12 +4170,8 @@ body.light-theme .electronic-sign-pad {
   animation: slideDownBanner 0.3s ease;
 }
 @keyframes slideDownBanner {
-  from {
-    transform: translateY(-100%);
-  }
-  to {
-    transform: translateY(0);
-  }
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
 }
 
 /* ---------- 3. SO SÁNH SẢN PHẨM (PRODUCT COMPARISON MATRIX) ---------- */
@@ -4431,19 +4202,11 @@ body.light-theme .electronic-sign-pad {
 }
 .compare-item-card.mall-highlight {
   border-color: rgba(59, 130, 246, 0.4);
-  background: linear-gradient(
-    180deg,
-    rgba(59, 130, 246, 0.08) 0%,
-    transparent 100%
-  );
+  background: linear-gradient(180deg, rgba(59, 130, 246, 0.08) 0%, transparent 100%);
 }
 .compare-item-card.used-highlight {
   border-color: rgba(6, 182, 212, 0.4);
-  background: linear-gradient(
-    180deg,
-    rgba(6, 182, 212, 0.08) 0%,
-    transparent 100%
-  );
+  background: linear-gradient(180deg, rgba(6, 182, 212, 0.08) 0%, transparent 100%);
 }
 .compare-row {
   display: flex;
@@ -4470,9 +4233,7 @@ body.light-theme .electronic-sign-pad {
   flex-direction: column;
   z-index: 9999;
   overflow: hidden;
-  transition:
-    transform 0.3s var(--ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1)),
-    opacity 0.25s ease;
+  transition: transform 0.3s var(--ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1)), opacity 0.25s ease;
 }
 .seller-chat-drawer.minimized {
   transform: translateY(120%);
@@ -4481,11 +4242,7 @@ body.light-theme .electronic-sign-pad {
 }
 .seller-chat-header {
   padding: 14px 18px;
-  background: linear-gradient(
-    135deg,
-    rgba(6, 182, 212, 0.15),
-    rgba(139, 92, 246, 0.15)
-  );
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(139, 92, 246, 0.15));
   border-bottom: 1px solid var(--border, rgba(255, 255, 255, 0.1));
   display: flex;
   align-items: center;
@@ -4511,9 +4268,7 @@ body.light-theme .electronic-sign-pad {
   font-size: 32px;
   color: var(--text-faint, #64748b);
   cursor: pointer;
-  transition:
-    transform 0.15s ease,
-    color 0.15s ease;
+  transition: transform 0.15s ease, color 0.15s ease;
   user-select: none;
 }
 .star-pick-btn:hover,
@@ -4558,9 +4313,7 @@ body.light-theme .electronic-sign-pad {
   display: flex;
   flex-direction: column;
   position: relative;
-  transition:
-    transform 0.25s ease,
-    border-color 0.25s ease;
+  transition: transform 0.25s ease, border-color 0.25s ease;
 }
 .wishlist-item-card:hover {
   transform: translateY(-3px);
@@ -4604,7 +4357,7 @@ body.light-theme .electronic-sign-pad {
 .courier-gps-grid-pattern {
   position: absolute;
   inset: 0;
-  background-image:
+  background-image: 
     linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
   background-size: 32px 32px;
@@ -4630,13 +4383,8 @@ body.light-theme .electronic-sign-pad {
   animation: courierBob 2s infinite ease-in-out;
 }
 @keyframes courierBob {
-  0%,
-  100% {
-    transform: translate(-50%, -50%) scale(1);
-  }
-  50% {
-    transform: translate(-50%, -58%) scale(1.08);
-  }
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -58%) scale(1.08); }
 }
 
 /* ---------- 9. IN PHIẾU GỬI HÀNG CHUẨN BƯU CỤC A6 (SHIPPING LABEL) ---------- */
@@ -4654,8 +4402,7 @@ body.light-theme .electronic-sign-pad {
   body * {
     visibility: hidden;
   }
-  .shipping-label-a6,
-  .shipping-label-a6 * {
+  .shipping-label-a6, .shipping-label-a6 * {
     visibility: visible;
   }
   .shipping-label-a6 {
@@ -4683,7 +4430,6 @@ body.light-theme .electronic-sign-pad {
   font-family: var(--font-mono, monospace);
   background: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 50%, #f43f5e 100%);
   -webkit-background-clip: text;
-  background-clip: text;
   -webkit-text-fill-color: transparent;
   line-height: 1;
   margin-bottom: 12px;

@@ -11,8 +11,7 @@
         try {
           var t = localStorage.getItem("hybrid_theme") || "dark";
           document.documentElement.setAttribute("data-theme", t);
-          if (t === "light")
-            document.documentElement.classList.add("light-theme");
+          if (t === "light") document.documentElement.classList.add("light-theme");
         } catch (e) {}
       })();
     </script>
@@ -31,13 +30,8 @@
     <header class="site-header">
       <div class="container">
         <a class="brand" href="../../index.html">
-          <span class="brand-mark"
-            ><span class="material-symbols-outlined">token</span></span
-          >
-          <span
-            >HYBRID<span class="text-secondary">.STORE</span>
-            <span class="badge">ĐIỀU KHOẢN</span></span
-          >
+          <span class="brand-mark"><span class="material-symbols-outlined">token</span></span>
+          <span>HYBRID<span class="text-secondary">.STORE</span> <span class="badge">ĐIỀU KHOẢN</span></span>
         </a>
 
         <div class="header-actions">
@@ -48,13 +42,9 @@
             title="Chuyển chế độ Sáng / Tối"
             aria-label="Chuyển đổi giao diện"
           >
-            <span class="material-symbols-outlined theme-toggle-icon"
-              >light_mode</span
-            >
+            <span class="material-symbols-outlined theme-toggle-icon">light_mode</span>
           </button>
-          <a class="btn btn-secondary hide-sm" href="../shop/catalog.html"
-            >Xem Sản Phẩm</a
-          >
+          <a class="btn btn-secondary hide-sm" href="../shop/catalog.html">Xem Sản Phẩm</a>
           <a class="avatar" href="../account/profile.html" title="Tài khoản">
             <span class="material-symbols-outlined">person</span>
           </a>
@@ -65,20 +55,14 @@
     <!-- ===== BREADCRUMB ===== -->
     <div class="subnav">
       <div class="container">
-        <nav>
+        <nav aria-label="Breadcrumb">
           <a href="../../index.html">Trang Chủ</a>
           <span class="text-faint">/</span>
           <span class="active">Điều Khoản Dịch Vụ</span>
         </nav>
         <div class="subnav-info hide-sm">
-          <span class="text-secondary"
-            ><span class="material-symbols-outlined icon-sm">gavel</span> Pháp
-            lý minh bạch</span
-          >
-          <span class="text-success"
-            ><span class="material-symbols-outlined icon-sm">verified</span>
-            Hiệu lực từ 2026</span
-          >
+          <span class="text-secondary"><span class="material-symbols-outlined icon-sm">gavel</span> Căn cứ NĐ 52/2013/NĐ-CP &amp; 85/2021/NĐ-CP</span>
+          <span class="text-success"><span class="material-symbols-outlined icon-sm">verified</span> Hiệu lực thống nhất 2026</span>
         </div>
       </div>
     </div>
@@ -86,251 +70,439 @@
     <main class="policy-page">
       <!-- Tiêu đề trang -->
       <div class="policy-hero">
-        <span class="badge badge-primary"
-          >QUY CHẾ HOẠT ĐỘNG SÀN THƯƠNG MẠI ĐIỆN TỬ</span
-        >
-        <h1>Điều Khoản Dịch Vụ HYBRID.STORE</h1>
-        <p>
-          Cập nhật hiệu lực Tháng 03/2026 • Áp dụng thống nhất cho toàn bộ người
-          mua và người bán trên nền tảng.
-        </p>
+        <span class="badge badge-primary">QUY CHẾ HOẠT ĐỘNG SÀN GIAO DỊCH THƯƠNG MẠI ĐIỆN TỬ</span>
+        <h1>Điều Khoản &amp; Điều Kiện Dịch Vụ HYBRID.STORE</h1>
+        <p>Cập nhật hiệu lực Tháng 03/2026 • Áp dụng thống nhất cho toàn bộ Người Mua, Người Bán và Đối Tác Vận Hành trên toàn bộ hệ thống nền tảng HYBRID.STORE.</p>
       </div>
+
+      <!-- Khối thống kê & cam kết cốt lõi -->
+      <div class="policy-stat-row">
+        <div class="policy-stat-item">
+          <span class="material-symbols-outlined policy-stat-icon text-primary">verified</span>
+          <div class="policy-stat-val">100% Chính Hãng</div>
+          <div class="policy-stat-lbl">Đền bù 500% nếu phát hiện giả mạo</div>
+        </div>
+        <div class="policy-stat-item">
+          <span class="material-symbols-outlined policy-stat-icon text-secondary">biotech</span>
+          <div class="policy-stat-val">15 Bước Thẩm Định</div>
+          <div class="policy-stat-lbl">Kiểm định chuyên sâu C2C Like New</div>
+        </div>
+        <div class="policy-stat-item">
+          <span class="material-symbols-outlined policy-stat-icon text-success">account_balance_wallet</span>
+          <div class="policy-stat-val">Escrow Ký Quỹ</div>
+          <div class="policy-stat-lbl">Thanh toán Napas 24/7 bảo vệ 48H</div>
+        </div>
+        <div class="policy-stat-item">
+          <span class="material-symbols-outlined policy-stat-icon text-tertiary">fact_check</span>
+          <div class="policy-stat-val">Đồng Kiểm 100%</div>
+          <div class="policy-stat-lbl">Mở hộp kiểm tra ngoại quan cùng shipper</div>
+        </div>
+      </div>
+
+      <!-- Mục lục điều khoản nhanh -->
+      <nav class="policy-toc" aria-label="Mục lục điều khoản">
+        <div class="policy-toc-title">
+          <span class="material-symbols-outlined icon-xs">list_alt</span> Mục Lục Điều Khoản Nhanh
+        </div>
+        <ul class="policy-toc-list">
+          <li><a class="policy-toc-link" href="#dieu-1">Điều 1. Giải thích từ ngữ</a></li>
+          <li><a class="policy-toc-link" href="#dieu-2">Điều 2. Tài khoản &amp; eKYC CCCD</a></li>
+          <li><a class="policy-toc-link" href="#dieu-3">Điều 3. Hàng Mới Brand Mall</a></li>
+          <li><a class="policy-toc-link" href="#dieu-4">Điều 4. Chợ C2C &amp; Trả Giá</a></li>
+          <li><a class="policy-toc-link" href="#dieu-5">Điều 5. Thanh toán &amp; Đồng kiểm</a></li>
+          <li><a class="policy-toc-link" href="#dieu-6">Điều 6. Vận chuyển Hỏa tốc 2H</a></li>
+          <li><a class="policy-toc-link" href="#dieu-7">Điều 7. Trọng tài &amp; Khiếu nại</a></li>
+          <li><a class="policy-toc-link" href="#dieu-8">Điều 8. Quản trị &amp; Quyền hạn</a></li>
+        </ul>
+      </nav>
 
       <!-- Khối tóm tắt nguyên tắc cốt lõi -->
       <div class="policy-intro-box">
         <div class="policy-intro-title">
-          <span class="material-symbols-outlined">shield</span> Cam Kết Nguyên
-          Tắc Cốt Lõi Của HYBRID.STORE
+          <span class="material-symbols-outlined">shield</span> Mô Hình Sàn Thương Mại Điện Tử Hybrid Tiên Phong
         </div>
         <p class="policy-intro-desc">
-          HYBRID.STORE là nền tảng thương mại điện tử kết hợp giữa
-          <strong>Flagship Brand Mall</strong> (Hàng mới 100% nguyên seal) và
-          <strong>Chợ C2C Trao Đổi Đồ Cũ Tuyển Chọn</strong> (Sneakers Hype,
-          Techwear, Điện tử Hi-Tech, Gia dụng thông minh). Mọi giao dịch trên
-          sàn đều tuân thủ nguyên tắc định danh người dùng minh bạch, kiểm định
-          chất lượng chặt chẽ và thanh toán Napas 24/7 an toàn.
+          HYBRID.STORE là nền tảng thương mại điện tử kết hợp hai phân hệ giao dịch bổ trợ: 
+          <strong>(1) Flagship Brand Mall</strong> phân phối thiết bị công nghệ, điện thoại, máy tính, âm thanh mới 100% nguyên seal chính hãng và 
+          <strong>(2) Chợ Trao Đổi Đồ Cũ Tuyển Chọn C2C</strong> có sự tham gia giám định của đội ngũ Kỹ sư Kiểm định 15 bước độc lập.
+          Mọi giao dịch trên sàn đều bắt buộc định danh tài khoản, giữ tiền ký quỹ trung gian an toàn (Escrow) và bảo đảm quyền đồng kiểm 100% khi nhận hàng.
         </p>
       </div>
 
       <!-- Điều 1 -->
-      <section class="policy-card policy-card-secondary">
+      <section class="policy-card policy-card-secondary" id="dieu-1">
         <div class="policy-card-head">
           <h2 class="policy-card-title">
-            <span class="material-symbols-outlined text-secondary">badge</span>
-            Điều 1. Định Danh Người Dùng &amp; Xác Thực Tài Khoản (CCCD Gắn
-            Chip)
+            <span class="material-symbols-outlined text-secondary">menu_book</span>
+            Điều 1. Định Nghĩa &amp; Giải Thích Từ Ngữ
           </h2>
-          <span class="badge badge-secondary">BẮT BUỘC ĐỊNH DANH</span>
+          <span class="badge badge-secondary">THUẬT NGỮ CHÍNH THỨC</span>
         </div>
         <div class="policy-item-list">
           <div class="policy-item">
             <div class="policy-item-title">
-              <span class="material-symbols-outlined icon-xs text-secondary"
-                >person_check</span
-              >
-              1.1. Yêu Cầu Định Danh Cá Nhân
+              <span class="material-symbols-outlined icon-xs text-secondary">token</span>
+              1.1. Sàn HYBRID.STORE
             </div>
             <p class="policy-item-desc">
-              Để kích hoạt toàn bộ tính năng mua sắm và đăng bán đồ cũ trên sàn,
-              người dùng bắt buộc phải đăng ký tài khoản chính chủ và hoàn tất
-              xác thực thông tin
-              <strong>Căn cước công dân (CCCD) gắn chip</strong> theo tiêu chuẩn
-              thẩm định an toàn ICAO 9303.
+              Là nền tảng ứng dụng web thương mại điện tử hoạt động tại tên miền chính thức của hệ thống, cung cấp không gian giao dịch trực tuyến cho các nhà phân phối chính hãng (Brand Mall) và cá nhân người dùng bán lại sản phẩm công nghệ (C2C Like New).
             </p>
           </div>
 
           <div class="policy-item">
             <div class="policy-item-title">
-              <span class="material-symbols-outlined icon-xs text-secondary"
-                >admin_panel_settings</span
-              >
-              1.2. Phê Duyệt Bởi Ban Quản Trị
+              <span class="material-symbols-outlined icon-xs text-secondary">verified</span>
+              1.2. Phân Hệ Brand Mall (Hàng Mới 100%)
             </div>
             <p class="policy-item-desc">
-              Hồ sơ CCCD sau khi gửi sẽ được Ban Quản Trị đối soát và phê duyệt
-              trong vòng <strong>15–30 phút</strong>. Tài khoản ở trạng thái
-              <em>Chờ xét duyệt</em> hoặc <em>Chưa xác thực</em> sẽ tạm thời bị
-              khóa quyền tạo đơn mua và đăng bài thanh lý đồ cũ.
+              Là gian hàng phân phối sản phẩm mới xuất xưởng 100%, nguyên hộp, nguyên seal niêm phong, đi kèm đầy đủ hóa đơn điện tử giá trị gia tăng (VAT) và áp dụng chế độ bảo hành chính hãng từ 12 đến 24 tháng theo tiêu chuẩn của Apple, Samsung, Sony, Dell, ASUS, v.v.
             </p>
           </div>
 
           <div class="policy-item">
             <div class="policy-item-title">
-              <span class="material-symbols-outlined icon-xs text-secondary"
-                >lock</span
-              >
-              1.3. Bảo Mật Thông Tin &amp; Mã Hóa AES-256
+              <span class="material-symbols-outlined icon-xs text-secondary">published_with_changes</span>
+              1.3. Phân Hệ Chợ Đồ Cũ Tuyển Chọn (C2C Like New)
             </div>
             <p class="policy-item-desc">
-              HYBRID.STORE cam kết mã hóa dữ liệu định danh theo tiêu chuẩn
-              <strong>AES-256</strong>, tuyệt đối không tiết lộ thông tin cá
-              nhân cho bên thứ ba ngoại trừ yêu cầu từ cơ quan có thẩm quyền
-              theo quy định của pháp luật Việt Nam.
+              Là không gian giao dịch giữa cá nhân với cá nhân (Customer to Customer). Mọi sản phẩm cũ đăng bán bắt buộc phải trải qua thẩm định tình trạng, phân loại độ mới minh bạch (99%, 98%, 95%) và chịu sự kiểm soát kỹ thuật nghiêm ngặt trước khi đến tay người mua.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-secondary">biotech</span>
+              1.4. Quy Trình Kiểm Định Kỹ Thuật 15 Bước
+            </div>
+            <p class="policy-item-desc">
+              Là quy trình giám định độc lập được thực hiện bởi các chuyên viên kỹ thuật của sàn tại 3 Trung tâm Lab (Hà Nội, Đà Nẵng, TP.HCM), bao gồm kiểm tra ngoại quan dưới kính lúp, đo chu kỳ và độ chai pin, test màn hình cảm ứng - điểm chết pixel, vi mạch mainboard, Face ID / Touch ID, camera chống rung OIS và dán tem niêm phong Hologram chống tháo mở.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-secondary">account_balance_wallet</span>
+              1.5. Cơ Chế Ký Quỹ Escrow &amp; Giải Ngân 48 Giờ
+            </div>
+            <p class="policy-item-desc">
+              Là cơ chế bảo vệ giao dịch: toàn bộ số tiền thanh toán của người mua được khóa an toàn tại tài khoản trung gian ký quỹ (Escrow) của HYBRID.STORE. Tiền chỉ được chuyển trả cho người bán khi người mua đã nhận hàng, đồng kiểm hài lòng và không phát sinh khiếu nại trong vòng 48 giờ.
             </p>
           </div>
         </div>
       </section>
 
       <!-- Điều 2 -->
-      <section class="policy-card policy-card-primary">
+      <section class="policy-card policy-card-primary" id="dieu-2">
         <div class="policy-card-head">
           <h2 class="policy-card-title">
-            <span class="material-symbols-outlined text-primary"
-              >storefront</span
-            >
-            Điều 2. Tiêu Chuẩn Hàng Hóa &amp; Cơ Chế Đăng Bán
+            <span class="material-symbols-outlined text-primary">badge</span>
+            Điều 2. Điều Kiện Tài Khoản &amp; Định Danh eKYC CCCD Gắn Chip
           </h2>
-          <span class="badge badge-primary">TIÊU CHUẨN CHẤT LƯỢNG</span>
+          <span class="badge badge-primary">TIÊU CHUẨN ĐỊNH DANH AN TOÀN</span>
         </div>
         <div class="policy-item-list">
           <div class="policy-item">
             <div class="policy-item-title">
-              <span class="material-symbols-outlined icon-xs text-primary"
-                >category</span
-              >
-              2.1. Phân Định Rõ Ràng 2 Nhóm Hàng Hóa
+              <span class="material-symbols-outlined icon-xs text-primary">person_add</span>
+              2.1. Đăng Ký Tài Khoản &amp; Độ Tuổi
             </div>
             <p class="policy-item-desc">
-              • <strong>Hàng Mới 100% Brand Mall:</strong> Sản phẩm mới nguyên
-              seal, tem bảo hành chính hãng từ nhà phân phối hoặc Flagship Store
-              ủy quyền.<br />
-              • <strong>Đồ Cũ Pass C2C (Like New):</strong> Sản phẩm đã qua sử
-              dụng, phải kê khai độ mới chính xác (%) và mô tả trung thực mọi
-              vết trầy xước, phụ kiện đi kèm.
+              Người dùng tham gia sàn phải từ đủ 15 tuổi trở lên có đầy đủ năng lực hành vi dân sự theo quy định của pháp luật Việt Nam. Mỗi cá nhân chỉ được sử dụng một (01) số điện thoại và một (01) địa chỉ email để thiết lập tài khoản giao dịch chính chủ.
             </p>
           </div>
 
           <div class="policy-item">
             <div class="policy-item-title">
-              <span class="material-symbols-outlined icon-xs text-danger"
-                >verified_user</span
-              >
-              2.2. Nghiêm Cấm Hàng Giả, Hàng Nhái (Anti-Fake Policy)
+              <span class="material-symbols-outlined icon-xs text-primary">fingerprint</span>
+              2.2. Bắt Buộc Định Danh eKYC C06 (CCCD Gắn Chip) Cho Người Bán
             </div>
             <p class="policy-item-desc">
-              HYBRID.STORE áp dụng chính sách
-              <strong>Zero Tolerance</strong> đối với hàng nhái (Replica, Fake,
-              Super Fake). Bất kỳ thành viên nào cố tình đăng bán hàng giả sẽ bị
-              khóa tài khoản vĩnh viễn và chuyển hồ sơ xử lý theo quy định pháp
-              luật.
+              Để bảo vệ tuyệt đối cộng đồng mua sắm khỏi hành vi lừa đảo hoặc rao bán hàng dựng / hàng trộm cắp, mọi thành viên muốn đăng tin bán sản phẩm C2C, rút tiền ví hoặc tham gia chương trình trả giá giá trị cao bắt buộc phải hoàn tất xác thực <strong>Căn cước công dân gắn chip (CCCD)</strong> qua công nghệ nhận diện khuôn mặt sinh trắc học (Liveness Check) và đối soát chuẩn ICAO 9303.
             </p>
           </div>
 
           <div class="policy-item">
             <div class="policy-item-title">
-              <span class="material-symbols-outlined icon-xs text-primary"
-                >biotech</span
-              >
-              2.3. Thẩm Định &amp; Kiểm Tra Kỹ Thuật Độc Lập
+              <span class="material-symbols-outlined icon-xs text-primary">lock_clock</span>
+              2.3. Thời Gian Phê Duyệt &amp; Trạng Thái Hồ Sơ
             </div>
             <p class="policy-item-desc">
-              Các sản phẩm giá trị cao (Sneakers Hype hiếm, MacBook, máy ảnh
-              Sony, thiết bị điện tử) đều phải trải qua quy trình kiểm tra kỹ
-              thuật 15 bước và dán tem niêm phong trước khi giao đến tay người
-              mua.
+              Hồ sơ eKYC gửi lên sẽ được đội ngũ thẩm duyệt trong thời gian từ <strong>15 đến 30 phút</strong> (hoạt động 24/7). Khi ở trạng thái <em>Chưa xác thực</em> hoặc <em>Từ chối do ảnh mờ</em>, quyền đăng bán sản phẩm và tạo đơn hàng có giá trị trên 5.000.000đ sẽ tạm thời bị khóa nhằm ngăn ngừa rủi ro.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-primary">admin_panel_settings</span>
+              2.4. Miễn Trừ Ràng Buộc Đối Với Quản Trị Viên Tối Cao (Master Admin)
+            </div>
+            <p class="policy-item-desc">
+              Theo kiến trúc điều hành hệ thống, tài khoản Quản Trị Viên Tối Cao (Master Admin — <code>admin@hybrid.store</code>) nắm giữ toàn quyền can thiệp, giám sát, trọng tài và bảo trì toàn bộ 20 phân hệ sàn. Master Admin được tự động miễn trừ toàn bộ thủ tục xác thực CCCD, miễn trừ khai báo địa chỉ cá nhân và sở hữu quyền truy cập trực tiếp Trung tâm Chỉ huy Điều hành (Command Center Gateway).
             </p>
           </div>
         </div>
       </section>
 
       <!-- Điều 3 -->
-      <section class="policy-card policy-card-success">
+      <section class="policy-card policy-card-success" id="dieu-3">
         <div class="policy-card-head">
           <h2 class="policy-card-title">
-            <span class="material-symbols-outlined text-success">payments</span>
-            Điều 3. Thanh Toán &amp; Cơ Chế Đồng Kiểm Khi Nhận Hàng
+            <span class="material-symbols-outlined text-success">verified</span>
+            Điều 3. Quy Chế Giao Dịch Phân Hệ Flagship Brand Mall
           </h2>
-          <span class="badge badge-success">GIAO DỊCH MINH BẠCH</span>
+          <span class="badge badge-success">CHÍNH HÃNG 100%</span>
         </div>
         <div class="policy-item-list">
           <div class="policy-item">
             <div class="policy-item-title">
-              <span class="material-symbols-outlined icon-xs text-success"
-                >account_balance</span
-              >
-              3.1. Phương Thức Thanh Toán Napas 24/7
+              <span class="material-symbols-outlined icon-xs text-success">check_circle</span>
+              3.1. Cam Kết Nguồn Gốc &amp; Bồi Thường 500%
             </div>
             <p class="policy-item-desc">
-              Sàn hỗ trợ chuyển khoản ngân hàng qua cổng
-              <strong>Napas 24/7</strong> (Vietcombank, Techcombank, MB Bank,
-              VPBank, ACB...), quét mã VietQR và ví thanh toán số dư tài khoản.
+              100% sản phẩm gắn huy hiệu <strong>Brand Mall</strong> đều là hàng mới xuất xưởng, nhập khẩu chính ngạch hoặc ủy quyền phân phối từ các thương hiệu hàng đầu thế giới. Nếu khách hàng chứng minh được sản phẩm là hàng giả, hàng nhái hoặc không rõ nguồn gốc xuất xứ, sàn cam kết hoàn tiền 100% và bồi thường gấp 5 lần (500%) giá trị đơn hàng.
             </p>
           </div>
 
           <div class="policy-item">
             <div class="policy-item-title">
-              <span class="material-symbols-outlined icon-xs text-success"
-                >fact_check</span
-              >
-              3.2. Quyền Lợi Đồng Kiểm 100%
+              <span class="material-symbols-outlined icon-xs text-success">receipt_long</span>
+              3.2. Hóa Đơn Điện Tử VAT &amp; Bảo Hành Hãng
             </div>
             <p class="policy-item-desc">
-              Người mua khi nhận hàng có quyền
-              <strong>mở hộp kiểm tra ngoại quan cùng shipper</strong> trước khi
-              nhận. Nếu phát hiện sản phẩm vỡ hỏng, sai model hoặc không đúng
-              cam kết, người mua có quyền từ chối nhận hàng ngay lập tức.
+              Mọi đơn hàng Brand Mall đều được tự động phát hành <strong>Hóa đơn điện tử VAT</strong> theo đúng mã số thuế hoặc thông tin cá nhân của người mua trong vòng 24 giờ kể từ thời điểm giao hàng thành công. Sản phẩm được kích hoạt bảo hành điện tử chính hãng 12–24 tháng trên toàn hệ thống Trung tâm Bảo hành của hãng tại Việt Nam.
             </p>
           </div>
 
           <div class="policy-item">
             <div class="policy-item-title">
-              <span class="material-symbols-outlined icon-xs text-success"
-                >timer</span
-              >
-              3.3. Thời Gian Nghiệm Thu 48 Giờ
+              <span class="material-symbols-outlined icon-xs text-success">autorenew</span>
+              3.3. Chính Sách 1 Đổi 1 Trong 7 Ngày
             </div>
             <p class="policy-item-desc">
-              Sau khi nhận hàng, người mua có <strong>48 giờ</strong> để trải
-              nghiệm tính năng tại nhà. Sau khi bấm
-              <em>"Xác Nhận Hài Lòng"</em> (hoặc hết hạn 48 giờ không khiếu
-              nại), hệ thống sẽ tiến hành giải ngân tiền hàng về tài khoản ngân
-              hàng của người bán.
+              Trong vòng <strong>07 ngày</strong> kể từ khi nhận hàng, nếu sản phẩm phát sinh lỗi phần cứng do nhà sản xuất (lỗi nguồn, lỗi sọc màn hình, lỗi mainboard...), khách hàng được đổi mới ngay lập tức một sản phẩm mới 100% nguyên seal cùng model, màu sắc hoặc hoàn tiền 100% nếu sản phẩm đã hết hàng tồn kho.
             </p>
           </div>
         </div>
       </section>
 
       <!-- Điều 4 -->
-      <section class="policy-card">
+      <section class="policy-card policy-card-secondary" id="dieu-4">
         <div class="policy-card-head">
           <h2 class="policy-card-title">
-            <span class="material-symbols-outlined text-tertiary"
-              >support_agent</span
-            >
-            Điều 4. Giải Quyết Khiếu Nại &amp; Phân Xử Tranh Chấp
+            <span class="material-symbols-outlined text-secondary">storefront</span>
+            Điều 4. Quy Chế Chợ Đồ Cũ Like New C2C &amp; Tính Năng Trả Giá
           </h2>
-          <span class="badge badge-secondary">HỖ TRỢ 24/7</span>
+          <span class="badge badge-secondary">MINH BẠCH TÌNH TRẠNG</span>
         </div>
+
         <div class="policy-item-list">
           <div class="policy-item">
             <div class="policy-item-title">
-              <span class="material-symbols-outlined icon-xs text-secondary"
-                >forum</span
-              >
-              4.1. Kênh Xử Lý Tranh Chấp Trực Tiếp 3 Bên
+              <span class="material-symbols-outlined icon-xs text-secondary">fact_check</span>
+              4.1. Tiêu Chuẩn Phân Loại Độ Mới (Like New %)
             </div>
             <p class="policy-item-desc">
-              Trong trường hợp phát sinh bất đồng về chất lượng hàng cũ, hai bên
-              sẽ tham gia phòng phân xử trực tiếp 3 bên gồm:
-              <strong
-                >Người Mua — Người Bán — Giám Định Viên Thẩm Định của
-                sàn</strong
-              >.
+              Người bán khi đăng sản phẩm cũ bắt buộc phải phân loại chính xác theo bảng tiêu chuẩn kỹ thuật thống nhất của sàn:
+            </p>
+            <div class="policy-table-wrapper">
+              <table class="policy-table">
+                <thead>
+                  <tr>
+                    <th>Độ Mới</th>
+                    <th>Ngoại Quan Sản Phẩm</th>
+                    <th>Tình Trạng Kỹ Thuật</th>
+                    <th>Bảo Hành Sàn</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong class="text-success">Like New 99%</strong></td>
+                    <td>Đẹp như mới, không trầy xước, phụ kiện zin đầy đủ</td>
+                    <td>Pin &ge; 90%, nguyên bản 100%, chưa qua sửa chữa</td>
+                    <td>Bảo hành phần cứng 12 tháng</td>
+                  </tr>
+                  <tr>
+                    <td><strong class="text-secondary">Like New 98%</strong></td>
+                    <td>Xước răm lông mèo cực nhẹ ở viền kim loại, màn hình đẹp</td>
+                    <td>Pin 85% - 90%, mọi tính năng hoạt động trơn tru</td>
+                    <td>Bảo hành phần cứng 06 tháng</td>
+                  </tr>
+                  <tr>
+                    <td><strong class="text-tertiary">Like New 95%</strong></td>
+                    <td>Có cấn nhẹ ngoại quan do sử dụng, không móp méo</td>
+                    <td>Linh kiện zin đã được kỹ thuật viên đo đạc an toàn</td>
+                    <td>Bảo hành phần cứng 03 tháng</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-secondary">price_change</span>
+              4.2. Cơ Chế Đề Nghị Trả Giá (Offer Price)
+            </div>
+            <p class="policy-item-desc">
+              Đối với các sản phẩm đồ cũ C2C, người mua có quyền gửi <strong>Đề nghị trả giá</strong> (mức giá tối thiểu không thấp hơn 50% giá niêm phong để tránh hành vi phá hoại). Khi người bán bấm <em>Đồng Ý</em>, một đơn hàng thỏa thuận sẽ tự động được khởi tạo và giữ chỗ cho người mua trong vòng 12 giờ.
             </p>
           </div>
 
           <div class="policy-item">
             <div class="policy-item-title">
-              <span class="material-symbols-outlined icon-xs text-secondary"
-                >balance</span
-              >
-              4.2. Bằng Chứng Đối Soát &amp; Quyết Định Cuối Cùng
+              <span class="material-symbols-outlined icon-xs text-danger">gpp_bad</span>
+              4.3. Chính Sách Không Khoan Nhượng Đối Với Hàng Giả (Zero-Tolerance)
             </div>
             <p class="policy-item-desc">
-              Căn cứ phân xử dựa trên video mở hộp (Unbox video), biên bản kiểm
-              tra thực tế và hình ảnh chụp chi tiết khi người bán xuất kho. Phán
-              quyết của Ban Thẩm Định Kỹ Thuật là quyết định giải quyết cuối
-              cùng.
+              Sàn nghiêm cấm tuyệt đối việc rao bán hàng nhái, hàng dựng, tráo linh kiện (Rep 1:1, Super Fake, máy dính iCloud ẩn, khóa MDM...). Tài khoản vi phạm sẽ bị khóa vĩnh viễn, tịch thu toàn bộ số dư ký quỹ để đền bù thiệt hại cho bên mua và chuyển hồ sơ sang Cơ quan Cảnh sát Điều tra theo Bộ luật Hình sự.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Điều 5 -->
+      <section class="policy-card policy-card-primary" id="dieu-5">
+        <div class="policy-card-head">
+          <h2 class="policy-card-title">
+            <span class="material-symbols-outlined text-primary">payments</span>
+            Điều 5. Phương Thức Thanh Toán, Ký Quỹ Escrow &amp; Đồng Kiểm
+          </h2>
+          <span class="badge badge-primary">AN TOÀN TUYỆT ĐỐI</span>
+        </div>
+        <div class="policy-item-list">
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-primary">credit_card</span>
+              5.1. Kênh Thanh Toán Napas 24/7 &amp; VietQR
+            </div>
+            <p class="policy-item-desc">
+              Sàn tích hợp cổng chuyển tiền liên ngân hàng <strong>Napas 24/7</strong> và quét mã VietQR tự động khớp lệnh qua các ngân hàng lớn (Vietcombank, Techcombank, MB Bank, VPBank, ACB...). Giao dịch thành công chỉ sau 30 giây với biên nhận điện tử có mã tham chiếu giao dịch độc nhất.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-primary">inventory_2</span>
+              5.2. Quyền Lợi Đồng Kiểm 100% Khi Nhận Hàng
+            </div>
+            <p class="policy-item-desc">
+              Người mua khi nhận hàng từ nhân viên giao vận (shipper) <strong>ĐƯỢC QUYỀN MỞ HỘP ĐỒNG KIỂM NGOẠI QUAN</strong> cùng shipper trước khi nhận hàng. Kiểm tra kỹ số IMEI/Serial, tình trạng trầy xước, tem niêm phong và các phụ kiện đi kèm theo mô tả bài đăng. Nếu phát hiện sai sót, người mua từ chối nhận hàng mà không mất bất kỳ chi phí nào.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-primary">schedule</span>
+              5.3. Thời Gian Nghiệm Thu 48 Giờ
+            </div>
+            <p class="policy-item-desc">
+              Sau khi nhận hàng, người mua có trọn vẹn <strong>48 giờ trải nghiệm</strong> tính năng tại nhà. Khi người mua bấm <em>"Xác Nhận Hài Lòng"</em> (hoặc sau 48 giờ hệ thống tự động ghi nhận khi không có khiếu nại), số tiền ký quỹ sẽ được giải ngân ngay lập tức vào tài khoản ngân hàng của người bán.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Điều 6 -->
+      <section class="policy-card policy-card-success" id="dieu-6">
+        <div class="policy-card-head">
+          <h2 class="policy-card-title">
+            <span class="material-symbols-outlined text-success">local_shipping</span>
+            Điều 6. Vận Chuyển Hỏa Tốc 2H &amp; Giao Hàng Toàn Quốc
+          </h2>
+          <span class="badge badge-success">GIAO NHANH AN TOÀN</span>
+        </div>
+        <div class="policy-item-list">
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-success">bolt</span>
+              6.1. Dịch Vụ Vận Chuyển Hỏa Tốc 2H Nội Thành
+            </div>
+            <p class="policy-item-desc">
+              Áp dụng cho các đơn hàng có địa chỉ người gửi và người nhận cùng trong phạm vi nội thành Hà Nội, Đà Nẵng hoặc TP. Hồ Chí Minh. Shipper chuyên biệt giao hàng tận tay người mua trong vòng tối đa <strong>120 phút</strong> kể từ khi người bán bàn giao bưu phẩm.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-success">package_2</span>
+              6.2. Tiêu Chuẩn Đóng Gói Niêm Phong Chống Sốc
+            </div>
+            <p class="policy-item-desc">
+              Mọi sản phẩm gửi qua mạng lưới bưu chính đều phải được bọc tối thiểu 3 lớp xốp khí chống va đập, đóng hộp carton cứng cáp và dán băng keo an ninh niêm phong vỡ có logo HYBRID.STORE. Nếu bưu phẩm khi đến tay có dấu hiệu bị rách vỡ băng keo, khách hàng từ chối nhận hàng để sàn xử lý bảo hiểm hàng hóa.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Điều 7 -->
+      <section class="policy-card policy-card-danger" id="dieu-7">
+        <div class="policy-card-head">
+          <h2 class="policy-card-title">
+            <span class="material-symbols-outlined text-danger">balance</span>
+            Điều 7. Trọng Tài Phân Xử Khiếu Nại &amp; Hoàn Tiền Tức Thì
+          </h2>
+          <span class="badge badge-danger">BẢO VỆ NGƯỜI TIÊU DÙNG</span>
+        </div>
+        <div class="policy-item-list">
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-danger">forum</span>
+              7.1. Phòng Phân Xử Trực Tuyến 3 Bên
+            </div>
+            <p class="policy-item-desc">
+              Khi phát sinh khiếu nại trong vòng 48 giờ sau nhận hàng, hệ thống tự động tạm dừng việc giải ngân và kích hoạt <strong>Phòng phân xử 3 bên</strong> gồm: <em>Người Mua — Người Bán — Chuyên Viên Giám Định Pháp Lý Sàn</em>. Cả hai bên có thể tải lên hình ảnh, video unbox và kết quả kiểm tra kỹ thuật.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-danger">rule</span>
+              7.2. Căn Cứ Đánh Giá &amp; Quyết Định Trọng Tài
+            </div>
+            <p class="policy-item-desc">
+              Phán quyết trọng tài được căn cứ trên biên bản kiểm định 15 bước ban đầu, video quay mở hộp liên tục không cắt ghép của người mua và đối soát tem niêm phong. Quyết định của Trọng tài HYBRID.STORE là phán quyết có hiệu lực thi hành bắt buộc đối với số tiền ký quỹ đang được lưu giữ.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-danger">sync</span>
+              7.3. Hoàn Tiền Tức Thì Qua Napas 24/7
+            </div>
+            <p class="policy-item-desc">
+              Ngay khi có phán quyết trả hàng hoàn tiền, hệ thống sẽ thực hiện lệnh hoàn tiền tự động 100% về tài khoản ngân hàng của người mua qua cổng Napas 24/7 trong vòng <strong>30 giây</strong> sau khi người bán hoặc trung tâm giám định nhận lại hàng hoàn nguyên vẹn.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Điều 8 -->
+      <section class="policy-card" id="dieu-8">
+        <div class="policy-card-head">
+          <h2 class="policy-card-title">
+            <span class="material-symbols-outlined text-secondary">admin_panel_settings</span>
+            Điều 8. Quyền Hạn Ban Quản Trị &amp; Điều Khoản Thi Hành
+          </h2>
+          <span class="badge badge-secondary">HIỆU LỰC PHÁP LÝ</span>
+        </div>
+        <div class="policy-item-list">
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-secondary">security</span>
+              8.1. Quyền Giám Sát &amp; Ngăn Chặn Gian Lận
+            </div>
+            <p class="policy-item-desc">
+              Ban Quản Trị sàn có toàn quyền tạm khóa hoặc đình chỉ vĩnh viễn các tài khoản có hành vi gian lận thông tin eKYC, tạo đơn hàng ảo thao túng giá thị trường, rửa tiền hoặc có lời lẽ khiếm nhã, đe dọa thành viên khác trên hệ thống.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <div class="policy-item-title">
+              <span class="material-symbols-outlined icon-xs text-secondary">edit_note</span>
+              8.2. Quyền Sửa Đổi Bổ Sung Quy Chế
+            </div>
+            <p class="policy-item-desc">
+              HYBRID.STORE bảo lưu quyền cập nhật, điều chỉnh quy chế này để phù hợp với sự thay đổi của pháp luật và công nghệ. Mọi nội dung thay đổi sẽ được thông báo công khai trước ít nhất <strong>07 ngày</strong> trên trang chủ và qua email đăng ký của người dùng trước khi chính thức áp dụng.
             </p>
           </div>
         </div>
@@ -339,16 +511,12 @@
       <!-- Nút điều hướng chân trang -->
       <div class="policy-bottom-nav">
         <a class="btn btn-secondary" href="../../index.html">
-          <span class="material-symbols-outlined icon-xs">arrow_back</span> Về
-          Trang Chủ
+          <span class="material-symbols-outlined icon-xs">arrow_back</span> Về Trang Chủ
         </a>
-        <div class="flex items-center gap-3">
-          <a class="btn btn-ghost" href="warranty_policy.html"
-            >Chính Sách Bảo Hành →</a
-          >
-          <a class="btn btn-ghost" href="return_policy.html"
-            >Chính Sách Đổi Trả →</a
-          >
+        <div class="flex items-center gap-3 flex-wrap">
+          <a class="btn btn-ghost" href="privacy_policy.html">Chính Sách Bảo Mật →</a>
+          <a class="btn btn-ghost" href="warranty_policy.html">Chính Sách Bảo Hành →</a>
+          <a class="btn btn-ghost" href="return_policy.html">Chính Sách Đổi Trả →</a>
         </div>
       </div>
     </main>
@@ -357,5 +525,6 @@
     <footer class="site-footer mt-8" data-component="footer"></footer>
     <script src="../../js/utils.js"></script>
     <script src="../../js/components.js"></script>
+    <script src="../../js/app.js"></script>
   </body>
 </html>

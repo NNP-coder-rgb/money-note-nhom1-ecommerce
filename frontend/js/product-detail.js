@@ -5,19 +5,13 @@
   "use strict";
 
   const $ = (sel, root) => (root || document).querySelector(sel);
-  const $$ = (sel, root) =>
-    Array.from((root || document).querySelectorAll(sel));
+  const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
 
   // Lấy ID sản phẩm từ URL (?id=...)
   const params = new URLSearchParams(window.location.search);
-  const productId =
-    params.get("id") ||
-    (typeof PRODUCTS !== "undefined" && PRODUCTS[0] ? PRODUCTS[0].id : null);
+  const productId = params.get("id") || (typeof PRODUCTS !== "undefined" && PRODUCTS[0] ? PRODUCTS[0].id : null);
 
-  const product =
-    typeof PRODUCTS !== "undefined"
-      ? PRODUCTS.find((p) => p.id === productId) || PRODUCTS[0]
-      : null;
+  const product = (typeof PRODUCTS !== "undefined") ? PRODUCTS.find((p) => p.id === productId) || PRODUCTS[0] : null;
 
   if (!product) {
     console.error("Không tìm thấy sản phẩm:", productId);
@@ -75,10 +69,7 @@
         : product.off || 0;
 
     // Breadcrumb
-    const catObj =
-      typeof CATEGORIES !== "undefined"
-        ? CATEGORIES.find((c) => c.id === product.category)
-        : null;
+    const catObj = typeof CATEGORIES !== "undefined" ? CATEGORIES.find((c) => c.id === product.category) : null;
     if (dom.breadCatLink) {
       dom.breadCatLink.textContent = catObj ? catObj.chip : "Danh Mục";
       dom.breadCatLink.href = `catalog.html?category=${product.category}`;
@@ -88,10 +79,7 @@
     }
 
     // Tiêu đề & Danh mục
-    if (dom.productCategoryText)
-      dom.productCategoryText.textContent = catObj
-        ? catObj.chip
-        : product.category;
+    if (dom.productCategoryText) dom.productCategoryText.textContent = catObj ? catObj.chip : product.category;
     if (dom.productSellerText) {
       dom.productSellerText.textContent = isUsed
         ? `Người bán: ${product.seller || "Đã xác minh uy tín"}`
@@ -117,15 +105,10 @@
     }
 
     // Ảnh chính & Thumbnails - Đảm bảo chỉ hiển thị ảnh của chính sản phẩm
-    const resolvedProductImg =
-      typeof window !== "undefined" && window.resolveAssetUrl
-        ? window.resolveAssetUrl(product.img)
-        : product.img;
-    const images =
-      typeof ProductDetailData !== "undefined" &&
-      ProductDetailData.getGalleryImages
-        ? ProductDetailData.getGalleryImages(product)
-        : [resolvedProductImg].filter(Boolean);
+    const resolvedProductImg = typeof window !== "undefined" && window.resolveAssetUrl ? window.resolveAssetUrl(product.img) : product.img;
+    const images = (typeof ProductDetailData !== "undefined" && ProductDetailData.getGalleryImages)
+      ? ProductDetailData.getGalleryImages(product)
+      : [resolvedProductImg].filter(Boolean);
 
     if (dom.mainImage && images.length) dom.mainImage.src = images[0];
 
@@ -144,9 +127,7 @@
 
         $$(".thumb-item", dom.thumbStrip).forEach((item) => {
           item.addEventListener("click", () => {
-            $$(".thumb-item", dom.thumbStrip).forEach((t) =>
-              t.classList.remove("active"),
-            );
+            $$(".thumb-item", dom.thumbStrip).forEach((t) => t.classList.remove("active"));
             item.classList.add("active");
             if (dom.mainImage) dom.mainImage.src = item.dataset.img;
           });
@@ -162,21 +143,17 @@
     if (dom.productStarsBox && typeof Utils !== "undefined") {
       dom.productStarsBox.innerHTML = Utils.renderStars(rating, { html: true });
     }
-    if (dom.productRatingScore)
-      dom.productRatingScore.textContent = rating.toFixed(1);
+    if (dom.productRatingScore) dom.productRatingScore.textContent = rating.toFixed(1);
     if (dom.productReviewCount) {
       dom.productReviewCount.textContent = `(${Math.floor(rating * 35)} nhận xét)`;
     }
 
     // Giá tiền & Tiết kiệm
-    if (dom.productCurrentPrice)
-      dom.productCurrentPrice.textContent = Utils.formatCurrency(product.price);
+    if (dom.productCurrentPrice) dom.productCurrentPrice.textContent = Utils.formatCurrency(product.price);
 
     if (isUsed && product.oldPrice) {
       if (dom.productOldPrice) {
-        dom.productOldPrice.textContent = Utils.formatCurrency(
-          product.oldPrice,
-        );
+        dom.productOldPrice.textContent = Utils.formatCurrency(product.oldPrice);
       }
       if (dom.usedSavingCallout && dom.usedSavingText) {
         dom.usedSavingCallout.style.display = "inline-flex";
@@ -218,35 +195,12 @@
     const isUsed = product.type === "c2c";
 
     const specs = [
-      {
-        label: "Phân loại sản phẩm",
-        val: isUsed
-          ? `Đồ cũ Like New (${product.condText || "99%"})`
-          : "Hàng Mới 100% Nguyên Seal",
-      },
+      { label: "Phân loại sản phẩm", val: isUsed ? `Đồ cũ Like New (${product.condText || "99%"})` : "Hàng Mới 100% Nguyên Seal" },
       { label: "Thương hiệu", val: product.sub || "Chính Hãng Phân Phối" },
-      {
-        label: "Tình trạng ngoại quan",
-        val: isUsed
-          ? product.condLabel || "Rất đẹp, không trầy xước cấn móp"
-          : "Mới 100% trong hộp nguyên seal",
-      },
-      {
-        label: "Chế độ bảo hành",
-        val: isUsed
-          ? "Bảo hành 6 tháng tại hệ thống + Đổi trả 7 ngày"
-          : "Bảo hành chính hãng 12 - 24 tháng toàn quốc",
-      },
-      {
-        label: "Chính sách đồng kiểm",
-        val: "Được mở hộp kiểm tra ngoại quan cùng shipper trước khi nhận",
-      },
-      {
-        label: "Đóng gói bao gồm",
-        val: isUsed
-          ? "Thân máy + Phụ kiện đi kèm + Phiếu bảo hành"
-          : "Hộp seal đầy đủ phụ kiện theo tiêu chuẩn hãng",
-      },
+      { label: "Tình trạng ngoại quan", val: isUsed ? (product.condLabel || "Rất đẹp, không trầy xước cấn móp") : "Mới 100% trong hộp nguyên seal" },
+      { label: "Chế độ bảo hành", val: isUsed ? "Bảo hành 6 tháng tại hệ thống + Đổi trả 7 ngày" : "Bảo hành chính hãng 12 - 24 tháng toàn quốc" },
+      { label: "Chính sách đồng kiểm", val: "Được mở hộp kiểm tra ngoại quan cùng shipper trước khi nhận" },
+      { label: "Đóng gói bao gồm", val: isUsed ? "Thân máy + Phụ kiện đi kèm + Phiếu bảo hành" : "Hộp seal đầy đủ phụ kiện theo tiêu chuẩn hãng" },
     ];
 
     dom.specsTable.innerHTML = specs
@@ -294,9 +248,7 @@
   function renderRelatedProducts() {
     if (!dom.relatedProductsGrid || typeof PRODUCTS === "undefined") return;
 
-    const related = PRODUCTS.filter(
-      (p) => p.category === product.category && p.id !== product.id,
-    ).slice(0, 4);
+    const related = PRODUCTS.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
 
     dom.relatedProductsGrid.innerHTML = related
       .map((p) => {
@@ -309,7 +261,7 @@
         return `
           <div class="card-product">
             <div class="card-product-thumb">
-              <img src="${typeof window !== "undefined" && window.resolveAssetUrl ? window.resolveAssetUrl(p.img) : p.img}" alt="${p.name}" />
+              <img src="${typeof window !== 'undefined' && window.resolveAssetUrl ? window.resolveAssetUrl(p.img) : p.img}" alt="${p.name}" />
               <div class="card-badge-top">
                 ${
                   isUsed
@@ -320,7 +272,7 @@
             </div>
             <div class="card-product-body">
               <h4 class="card-product-title">
-                <a href="${isUsed ? "product_used.html?id=" + p.id : "product_new.html?id=" + p.id}">${p.short || p.name}</a>
+                <a href="${isUsed ? 'product_used.html?id=' + p.id : 'product_new.html?id=' + p.id}">${p.short || p.name}</a>
               </h4>
               <div class="card-product-prices">
                 <strong class="price text-primary">${Utils.formatCurrency(p.price)}</strong>
@@ -328,7 +280,7 @@
               </div>
             </div>
             <div class="card-product-foot">
-              <a class="btn btn-secondary w-full" href="${isUsed ? "product_used.html?id=" + p.id : "product_new.html?id=" + p.id}">
+              <a class="btn btn-secondary w-full" href="${isUsed ? 'product_used.html?id=' + p.id : 'product_new.html?id=' + p.id}">
                 Xem Chi Tiết
               </a>
             </div>
@@ -344,9 +296,7 @@
     if (dom.variantOptions) {
       $$(".variant-btn", dom.variantOptions).forEach((btn) => {
         btn.addEventListener("click", () => {
-          $$(".variant-btn", dom.variantOptions).forEach((b) =>
-            b.classList.remove("active"),
-          );
+          $$(".variant-btn", dom.variantOptions).forEach((b) => b.classList.remove("active"));
           btn.classList.add("active");
           selectedVariant = btn.textContent.trim();
         });
@@ -387,12 +337,8 @@
     // Modal trả giá
     if (dom.btnOpenOfferModal) {
       dom.btnOpenOfferModal.addEventListener("click", () => {
-        if (dom.offerProductName)
-          dom.offerProductName.textContent = product.name;
-        if (dom.offerProductPrice)
-          dom.offerProductPrice.textContent = Utils.formatCurrency(
-            product.price,
-          );
+        if (dom.offerProductName) dom.offerProductName.textContent = product.name;
+        if (dom.offerProductPrice) dom.offerProductPrice.textContent = Utils.formatCurrency(product.price);
         if (dom.offerPriceInput) {
           const defaultOffer = Math.round(product.price * 0.9);
           dom.offerPriceInput.value = defaultOffer.toLocaleString("vi-VN");
@@ -407,8 +353,7 @@
         chip.addEventListener("click", () => {
           const pct = Math.abs(parseInt(chip.dataset.quick, 10)) / 100;
           const discounted = Math.round(product.price * (1 - pct));
-          if (dom.offerPriceInput)
-            dom.offerPriceInput.value = discounted.toLocaleString("vi-VN");
+          if (dom.offerPriceInput) dom.offerPriceInput.value = discounted.toLocaleString("vi-VN");
         });
       });
     }
@@ -451,10 +396,7 @@
     const btnWriteReview = $("#btnWriteReview");
     if (btnWriteReview) {
       btnWriteReview.addEventListener("click", () => {
-        Utils.toast(
-          "Chức năng đánh giá sẽ mở sau khi bạn hoàn tất đơn hàng và nhận sản phẩm.",
-          "info",
-        );
+        Utils.toast("Chức năng đánh giá sẽ mở sau khi bạn hoàn tất đơn hàng và nhận sản phẩm.", "info");
       });
     }
   }

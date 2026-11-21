@@ -44,11 +44,7 @@
 
 /* Khối thông điệp nổi bật / Tóm tắt */
 .policy-intro-box {
-  background: linear-gradient(
-    135deg,
-    rgba(139, 92, 246, 0.09) 0%,
-    rgba(6, 182, 212, 0.06) 100%
-  );
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.09) 0%, rgba(6, 182, 212, 0.06) 100%);
   border: 1px solid rgba(139, 92, 246, 0.28);
   border-radius: 14px;
   padding: 22px 26px;
@@ -81,9 +77,7 @@
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
   position: relative;
   overflow: hidden;
-  transition:
-    transform 0.2s ease,
-    border-color 0.2s ease;
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 .policy-card:hover {
   border-color: rgba(255, 255, 255, 0.18);
@@ -92,11 +86,7 @@
 /* Biến thể viền trên tạo điểm nhấn nhận diện */
 .policy-card-primary {
   border-top: 3px solid var(--primary-500, #8b5cf6);
-  background: linear-gradient(
-    180deg,
-    rgba(139, 92, 246, 0.05) 0%,
-    #131722 100%
-  );
+  background: linear-gradient(180deg, rgba(139, 92, 246, 0.05) 0%, #131722 100%);
 }
 .policy-card-secondary {
   border-top: 3px solid var(--secondary-400, #22d3ee);
@@ -214,9 +204,7 @@
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 10px;
   padding: 14px 18px;
-  transition:
-    background 0.15s ease,
-    border-color 0.15s ease;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 .policy-item:hover {
   background: rgba(255, 255, 255, 0.04);
@@ -458,3 +446,242 @@ body.light-theme .policy-main-headline {
   color: #0f172a;
   border-bottom-color: #e2e8f0;
 }
+
+/* ==========================================================================
+   Bổ sung: Mục Lục Nhanh (TOC), Thanh Tìm Kiếm & Bảng Thông Số Pháp Lý
+   ========================================================================== */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Thanh Mục Lục Nhanh (Table of Contents) */
+.policy-toc {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 28px;
+}
+.policy-toc-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #94a3b8;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.policy-toc-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.policy-toc-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 6px 14px;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.policy-toc-link:hover {
+  color: #ffffff;
+  background: rgba(139, 92, 246, 0.2);
+  border-color: rgba(139, 92, 246, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Thanh Thống Kê / Huy Hiệu Tóm Tắt (Stat Row) */
+.policy-stat-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 28px;
+}
+.policy-stat-item {
+  background: #131722;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 16px 14px;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+.policy-stat-item:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+.policy-stat-icon {
+  font-size: 1.6rem;
+  margin-bottom: 6px;
+  display: inline-block;
+}
+.policy-stat-val {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #f8fafc;
+  line-height: 1.2;
+}
+.policy-stat-lbl {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin-top: 4px;
+}
+
+/* Bảng Dữ Liệu / Phân Loại Pháp Lý (Policy Table) */
+.policy-table-wrapper {
+  overflow-x: auto;
+  margin: 14px 0;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.policy-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  text-align: left;
+}
+.policy-table th {
+  background: rgba(255, 255, 255, 0.05);
+  color: #f8fafc;
+  font-weight: 700;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  white-space: nowrap;
+}
+.policy-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: #cbd5e1;
+  line-height: 1.6;
+}
+.policy-table tr:last-child td {
+  border-bottom: none;
+}
+.policy-table tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Hộp Cảnh Báo / Cam Kết (Callout Box) */
+.policy-callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 20px;
+  border-radius: 10px;
+  margin: 16px 0;
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+.policy-callout-primary {
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  color: #e2e8f0;
+}
+.policy-callout-warning {
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #fef3c7;
+}
+.policy-callout-success {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #d1fae5;
+}
+.policy-callout-icon {
+  font-size: 1.35rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Light Theme Styling Bổ Sung */
+[data-theme="light"] .policy-toc,
+body.light-theme .policy-toc {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+}
+[data-theme="light"] .policy-toc-title,
+body.light-theme .policy-toc-title {
+  color: #64748b;
+}
+[data-theme="light"] .policy-toc-link,
+body.light-theme .policy-toc-link {
+  color: #334155;
+  background: #ffffff;
+  border-color: #e2e8f0;
+}
+[data-theme="light"] .policy-toc-link:hover,
+body.light-theme .policy-toc-link:hover {
+  color: #6d28d9;
+  background: #f5f3ff;
+  border-color: #c4b5fd;
+}
+[data-theme="light"] .policy-stat-item,
+body.light-theme .policy-stat-item {
+  background: #ffffff;
+  border-color: #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+[data-theme="light"] .policy-stat-val,
+body.light-theme .policy-stat-val {
+  color: #0f172a;
+}
+[data-theme="light"] .policy-stat-lbl,
+body.light-theme .policy-stat-lbl {
+  color: #64748b;
+}
+[data-theme="light"] .policy-table-wrapper,
+body.light-theme .policy-table-wrapper {
+  border-color: #e2e8f0;
+}
+[data-theme="light"] .policy-table th,
+body.light-theme .policy-table th {
+  background: #f1f5f9;
+  color: #0f172a;
+  border-bottom-color: #e2e8f0;
+}
+[data-theme="light"] .policy-table td,
+body.light-theme .policy-table td {
+  border-bottom-color: #f1f5f9;
+  color: #334155;
+}
+[data-theme="light"] .policy-table tr:hover td,
+body.light-theme .policy-table tr:hover td {
+  background: #f8fafc;
+}
+[data-theme="light"] .policy-callout-primary,
+body.light-theme .policy-callout-primary {
+  background: #faf5ff;
+  border-color: #ddd6fe;
+  color: #4c1d95;
+}
+[data-theme="light"] .policy-callout-warning,
+body.light-theme .policy-callout-warning {
+  background: #fffbeb;
+  border-color: #fde68a;
+  color: #92400e;
+}
+[data-theme="light"] .policy-callout-success,
+body.light-theme .policy-callout-success {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+  color: #14532d;
+}
+
+@media (max-width: 768px) {
+  .policy-stat-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
+

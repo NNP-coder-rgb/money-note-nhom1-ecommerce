@@ -107,14 +107,18 @@
       // Gợi ý sẵn email ở trang đăng nhập
       sessionStorage.setItem("hv_prefill", data.email.trim());
 
+      const isSellerReg = data.role === "seller";
+      const loginUrl = "auth_login.html" + (isSellerReg ? "?role=seller" : "");
+
       showPopup({
         type: "success",
         title: "Đăng ký thành công!",
-        message:
-          "Tài khoản của bạn đã được tạo. Hãy đăng nhập để vào trang chủ.",
+        message: isSellerReg
+          ? "Tài khoản Người Bán đã được tạo thành công! Hãy đăng nhập để truy cập Kênh Quản Lý Gian Hàng."
+          : "Tài khoản của bạn đã được tạo thành công! Hãy đăng nhập để bắt đầu trải nghiệm mua sắm.",
         confirmText: "Đến trang đăng nhập",
         onConfirm: () => {
-          window.location.href = "auth_login.html";
+          window.location.href = loginUrl;
         },
       });
     }, 800);
