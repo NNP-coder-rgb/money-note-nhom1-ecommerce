@@ -93,9 +93,25 @@
     btn.innerHTML =
       '<span class="material-symbols-outlined spin">sync</span><span>ĐANG TẠO TÀI KHOẢN...</span>';
 
-    setTimeout(() => {
+    setTimeout(async () => {
       btn.disabled = false;
       btn.innerHTML = original;
+
+      // 1. Thử gọi API Backend đăng ký tài khoản vào CSDL 23 bảng
+      if (typeof API !== "undefined" && API.Auth) {
+        try {
+          await API.Auth.register({
+            email: data.email.trim(),
+            phone: data.phone.trim(),
+            password: data.password,
+            full_name: data.fullName.trim(),
+            role: data.role || "buyer"
+          });
+          console.log("✅ Đăng ký tài khoản thành công vào Backend Database!");
+        } catch (apiErr) {
+          console.warn("[Register] API Backend warning:", apiErr.message);
+        }
+      }
 
       const res = Auth.register(data);
       if (!res.ok) {

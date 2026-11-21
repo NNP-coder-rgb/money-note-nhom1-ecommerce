@@ -798,26 +798,71 @@
   }
 
   /* =========================================================================
-     6. QUẢN LÝ GIỎ HÀNG (Cart) - Task [FE] T12
+     6. QUẢN LÝ GIỎ HÀNG (Cart) — TÁCH BIỆT DỮ LIỆU RIÊNG CHO TỪNG TÀI KHOẢN
      ========================================================================= */
-  const CART_STORAGE_KEY = "hv_cart_items";
-
   const Cart = {
+    // 1. Xác định Storage Key riêng theo tài khoản đăng nhập (User-scoped Storage Key)
+    getStorageKey() {
+      let user = null;
+      try {
+        if (typeof Auth !== "undefined" && typeof Auth.current === "function") {
+          user = Auth.current();
+        } else if (typeof localStorage !== "undefined") {
+          user = JSON.parse(localStorage.getItem("hv_current_user") || "null");
+        }
+      } catch (e) {}
+
+      if (user && (user.id || user.email || user.username)) {
+        const uId = String(user.id || user.email || user.username).toLowerCase().replace(/[^a-z0-9_-]/g, "_");
+        return "hv_cart_user_" + uId;
+      }
+      return "hv_cart_guest";
+    },
+
     getItems() {
       if (typeof localStorage === "undefined") return [];
       try {
-        return JSON.parse(localStorage.getItem(CART_STORAGE_KEY)) || [];
+        const key = Cart.getStorageKey();
+        return JSON.parse(localStorage.getItem(key)) || [];
       } catch (e) {
         return [];
       }
     },
+
     saveItems(items) {
       if (typeof localStorage === "undefined") return;
-      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
+      const key = Cart.getStorageKey();
+      try {
+        localStorage.setItem(key, JSON.stringify(items));
+      } catch (e) {}
       if (typeof window !== "undefined") {
-        window.dispatchEvent(new CustomEvent("cart:updated", { detail: { items } }));
+        window.dispatchEvent(new CustomEvent("cart:updated", { detail: { items, key } }));
         Cart.syncBadge();
       }
+    },
+
+    migrateGuestCart() {
+      if (typeof localStorage === "undefined") return;
+      try {
+        const guestItems = JSON.parse(localStorage.getItem("hv_cart_guest") || "[]");
+        if (guestItems.length > 0) {
+          const userKey = Cart.getStorageKey();
+          if (userKey !== "hv_cart_guest") {
+            const userItems = JSON.parse(localStorage.getItem(userKey) || "[]");
+            guestItems.forEach((g) => {
+              const existing = userItems.find((u) => u.id === g.id && u.variant === g.variant);
+              if (existing) {
+                existing.qty = Math.min(99, (existing.qty || 1) + (g.qty || 1));
+              } else {
+                userItems.push(g);
+              }
+            });
+            localStorage.setItem(userKey, JSON.stringify(userItems));
+            localStorage.removeItem("hv_cart_guest");
+            Cart.syncBadge();
+          }
+        }
+      } catch (e) {}
     },
     addItem(product, qty = 1, variant = null) {
       if (!product || !product.id) return false;
@@ -1046,11 +1091,23 @@
     },
     mockLogout() {
       if (typeof localStorage !== "undefined") {
-        localStorage.removeItem(AUTH_STORAGE_KEY);
+        try {
+          localStorage.removeItem(AUTH_STORAGE_KEY);
+          localStorage.removeItem("hv_access_token");
+          localStorage.removeItem("hybrid_current_user");
+          localStorage.removeItem("hybrid_access_token");
+          localStorage.removeItem("hv_browser_google_account");
+        } catch (e) {}
+      }
+      if (typeof sessionStorage !== "undefined") {
+        try { sessionStorage.clear(); } catch (e) {}
       }
       if (typeof window !== "undefined") {
         window.dispatchEvent(
           new CustomEvent("auth:changed", { detail: { user: null } }),
+        );
+        window.dispatchEvent(
+          new CustomEvent("auth:logout"),
         );
       }
       return true;
@@ -1470,26 +1527,82 @@
   };
 
   /* =========================================================================
-     11. DANH SÁCH YÊU THÍCH (Wishlist)
+     11. DANH SÁCH YÊU THÍCH (Wishlist) — TÁCH BIỆT DỮ LIỆU RIÊNG CHO TỪNG TÀI KHOẢN
      ========================================================================= */
-  const WISHLIST_STORAGE_KEY = "hv_wishlist_items";
-
   const Wishlist = {
+    // 1. Xác định Storage Key riêng theo tài khoản đăng nhập (User-scoped Storage Key)
+    getStorageKey() {
+      let user = null;
+      try {
+        if (typeof Auth !== "undefined" && typeof Auth.current === "function") {
+          user = Auth.current();
+        } else if (typeof localStorage !== "undefined") {
+          user = JSON.parse(localStorage.getItem("hv_current_user") || "null");
+        }
+      } catch (e) {}
+
+      if (user && (user.id || user.email || user.username)) {
+        const uId = String(user.id || user.email || user.username).toLowerCase().replace(/[^a-z0-9_-]/g, "_");
+        return "hv_wishlist_user_" + uId;
+      }
+      return "hv_wishlist_guest";
+    },
+
+    // 2. Lấy danh sách sản phẩm yêu thích của người dùng hiện tại
     getItems() {
       if (typeof localStorage === "undefined") return [];
+      const key = Wishlist.getStorageKey();
       try {
-        return JSON.parse(localStorage.getItem(WISHLIST_STORAGE_KEY)) || [];
+        const raw = localStorage.getItem(key);
+        if (raw !== null) {
+          return JSON.parse(raw) || [];
+        }
+
+        // Khởi tạo danh sách mẫu độc lập và phù hợp với từng vai trò
+        let user = null;
+        try {
+          if (typeof Auth !== "undefined" && typeof Auth.current === "function") {
+            user = Auth.current();
+          } else {
+            user = JSON.parse(localStorage.getItem("hv_current_user") || "null");
+          }
+        } catch (e) {}
+
+        let initialList = [];
+        if (user) {
+          const role = (user.role || "").toLowerCase();
+          if (role === "seller") {
+            // Người Bán theo dõi các thiết bị kinh doanh / thiết bị mẫu công nghệ
+            initialList = ["m3", "u2"];
+          } else if (role === "admin") {
+            // Quản Trị Viên theo dõi sản phẩm nổi bật
+            initialList = ["m1", "m2", "u1"];
+          } else {
+            // Người Mua theo dõi đồ mua sắm cá nhân, đồ sale hot
+            initialList = ["m1", "u1"];
+          }
+        } else {
+          initialList = []; // Khách vãng lai mặc định danh sách rỗng
+        }
+
+        localStorage.setItem(key, JSON.stringify(initialList));
+        return initialList;
       } catch (e) {
         return [];
       }
     },
+
+    // 3. Kiểm tra sản phẩm đã nằm trong Wishlist chưa
     has(productId) {
       if (!productId) return false;
       const items = Wishlist.getItems();
       return items.some((id) => String(id) === String(productId));
     },
+
+    // 4. Thêm / Xóa sản phẩm khỏi danh sách yêu thích
     toggle(productId) {
       if (!productId) return false;
+      const key = Wishlist.getStorageKey();
       const items = Wishlist.getItems();
       const strId = String(productId);
       const idx = items.findIndex((id) => String(id) === strId);
@@ -1501,22 +1614,50 @@
         items.push(strId);
         isAdded = true;
       }
+
       if (typeof localStorage !== "undefined") {
         try {
-          localStorage.setItem(WISHLIST_STORAGE_KEY, JSON.stringify(items));
+          localStorage.setItem(key, JSON.stringify(items));
         } catch (e) {}
       }
+
+      // Đồng bộ tới backend API nếu có đăng nhập
+      try {
+        let user = typeof Auth !== "undefined" && typeof Auth.current === "function" ? Auth.current() : null;
+        if (!user && typeof localStorage !== "undefined") {
+          user = JSON.parse(localStorage.getItem("hv_current_user") || "null");
+        }
+        if (user && user.id && window.API && window.API.Interaction) {
+          window.API.Interaction.toggleWishlist(user.id, strId).catch(() => {});
+        }
+      } catch (err) {}
+
       if (typeof window !== "undefined") {
         window.dispatchEvent(
           new CustomEvent("wishlist:updated", {
-            detail: { items, isAdded, productId: strId },
+            detail: { items, isAdded, productId: strId, key: key },
           }),
         );
       }
       return isAdded;
     },
+
+    // 5. Đếm số lượng sản phẩm yêu thích
     count() {
       return Wishlist.getItems().length;
+    },
+
+    // 6. Làm mới danh sách và bắn sự kiện cập nhật toàn sàn (khi đổi vai trò / Đăng nhập / Đăng xuất)
+    refresh() {
+      const items = Wishlist.getItems();
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(
+          new CustomEvent("wishlist:updated", {
+            detail: { items, refreshed: true, key: Wishlist.getStorageKey() },
+          }),
+        );
+      }
+      return items;
     },
   };
 

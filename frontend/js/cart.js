@@ -420,8 +420,12 @@
       const orderId = "ORD-" + Date.now().toString().slice(-6);
 
       // Tạo đối tượng đơn hàng mới
+      const buyerUser = (typeof Auth !== "undefined" && typeof Auth.current === "function") ? Auth.current() : null;
       const newOrder = {
         id: orderId,
+        orderCode: orderId,
+        buyerId: buyerUser ? buyerUser.id : "guest",
+        buyerEmail: buyerUser ? buyerUser.email : "",
         createdAt: new Date().toISOString(),
         status: "delivering",
         statusLabel: "Đang xử lý & đóng gói",

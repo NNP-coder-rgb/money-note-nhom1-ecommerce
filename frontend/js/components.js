@@ -164,6 +164,20 @@
       if (!user && UtilsRef && UtilsRef.Auth && typeof UtilsRef.Auth.getCurrentUser === "function") {
         user = UtilsRef.Auth.getCurrentUser();
       }
+      if (!user && typeof Auth !== "undefined" && typeof Auth.current === "function") {
+        user = Auth.current();
+      }
+
+      var userInitials = "";
+      if (user) {
+        userInitials = ((user.fullName || user.name || "U")
+          .trim()
+          .split(/\s+/)
+          .slice(-2)
+          .map(function (w) { return w[0]; })
+          .join("")
+          .toUpperCase()) || "U";
+      }
 
       /* ----- 1. BIẾN THỂ MINIMAL (Giỏ hàng, Thanh toán, Auth) ----- */
       if (variant === Header.MINIMAL) {
@@ -345,9 +359,14 @@
         '<span class="material-symbols-outlined">shopping_bag</span>' +
         '<span class="badge badge-counter" id="cartCount">0</span>' +
         "</a>" +
-        '<a class="avatar" id="avatarBtn" href="' + profileUrl + '" aria-label="Tài khoản" title="' + escapeHtml(avatarTitle) + '">' +
-        '<span class="material-symbols-outlined">person</span>' +
+        '<div class="header-user-wrapper" style="position: relative; display: inline-flex; align-items: center;">' +
+        '<a class="avatar" id="avatarBtn" href="' + (user ? "javascript:void(0)" : loginUrl) + '" aria-label="Tài khoản" title="' + escapeHtml(avatarTitle) + '">' +
+        (user && userInitials
+          ? '<span class="avatar-initials">' + escapeHtml(userInitials) + '</span>'
+          : '<span class="material-symbols-outlined">person</span>') +
         "</a>" +
+        (user && typeof UserAccountDropdown !== "undefined" ? UserAccountDropdown.createHTML(user, bp) : "") +
+        "</div>" +
         "</div>" +
         "</div>" +
         "</header>"
@@ -442,7 +461,7 @@
         UtilsRef.Cart.syncBadge();
       }
 
-      // 2b. Đồng bộ số lượng Wishlist Badge
+      // 2b. Đồng bộ số lượng Wishlist Badge & Drawer Wishlist
       function syncWishlistBadge() {
         var wishBadge = document.getElementById("wishlistCount");
         if (wishBadge) {
@@ -451,6 +470,9 @@
             : 0;
           wishBadge.textContent = count;
           wishBadge.style.display = count > 0 ? "inline-flex" : "none";
+        }
+        if (typeof DrawerWishlist !== "undefined" && typeof DrawerWishlist.update === "function") {
+          DrawerWishlist.update();
         }
       }
       syncWishlistBadge();
@@ -467,6 +489,11 @@
           var sidebar = document.querySelector(".dash-sidebar");
           if (sidebar) sidebar.classList.toggle("open");
         });
+      }
+
+      // 4. Gắn Menu Tài Khoản & Nút Đăng Xuất cho Avatar
+      if (typeof UserAccountDropdown !== "undefined" && typeof UserAccountDropdown.bindEvents === "function") {
+        UserAccountDropdown.bindEvents();
       }
     }
   };
@@ -1929,6 +1956,230 @@
   };
 
   /* =====================================================================
+     TASK: USER ACCOUNT DROPDOWN & LOGOUT COMPONENT
+     - Tự động gắn vào Header Avatar trên MỌI trang
+     - Menu hiển thị thông tin tài khoản, vai trò, liên kết nhanh
+     - Nút "Đăng Xuất Tài Khoản" màu đỏ dọn dẹp sạch toàn bộ phiên đăng nhập
+     ===================================================================== */
+  var UserAccountDropdown = {
+    createHTML: function (user, bp) {
+      if (!user) return "";
+      bp = detectBasePath(bp);
+      var profileUrl = resolveUrl("pages/account/profile.html", bp);
+      var ordersUrl = resolveUrl("pages/buyer/orders.html", bp);
+      var sellerUrl = resolveUrl("pages/seller/dashboard.html", bp);
+      var adminUrl = resolveUrl("pages/admin/admin_system.html", bp);
+
+      var fullName = user.fullName || user.name || "Người dùng";
+      var contact = user.email || user.phone || "";
+      var role = (user.role || "buyer").toLowerCase();
+      var isSeller = role === "seller";
+      var isAdmin = role === "admin";
+
+      var roleLabel = isAdmin ? "Master Admin" : isSeller ? "Người Bán (Seller)" : "Khách Hàng (Buyer)";
+      var roleBadgeClass = isAdmin ? "badge-danger" : isSeller ? "badge-secondary" : "badge-outline";
+
+      var initials = fullName
+        .trim()
+        .split(/\s+/)
+        .slice(-2)
+        .map(function (w) { return w[0]; })
+        .join("")
+        .toUpperCase() || "U";
+
+      return (
+        '<div class="user-account-dropdown" id="userAccountDropdown" style="display: none;">' +
+        '  <a href="' + profileUrl + '" class="user-dropdown-header" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px; cursor: pointer;" title="Bấm để vào Hồ Sơ Cá Nhân">' +
+        '    <div class="user-dropdown-avatar">' + escapeHtml(initials) + '</div>' +
+        '    <div class="user-dropdown-info">' +
+        '      <div class="user-name flex items-center justify-between" title="' + escapeHtml(fullName) + '">' +
+        '        <span>' + escapeHtml(fullName) + '</span>' +
+        '        <span class="material-symbols-outlined icon-xs text-muted">arrow_forward</span>' +
+        '      </div>' +
+        '      <div class="user-contact text-2xs text-muted mono">' + escapeHtml(contact) + '</div>' +
+        '      <div class="user-role-wrap mt-1">' +
+        '        <span class="badge ' + roleBadgeClass + '">' + roleLabel + '</span>' +
+        '      </div>' +
+        '    </div>' +
+        '  </a>' +
+        '  <div class="user-dropdown-divider"></div>' +
+        '  <ul class="user-dropdown-menu">' +
+        '    <li>' +
+        '      <a href="' + profileUrl + '" class="user-dropdown-item">' +
+        '        <span class="material-symbols-outlined icon-sm">person</span>' +
+        '        <span>Hồ Sơ Cá Nhân</span>' +
+        '      </a>' +
+        '    </li>' +
+        '    <li>' +
+        '      <a href="' + ordersUrl + '" class="user-dropdown-item">' +
+        '        <span class="material-symbols-outlined icon-sm">receipt_long</span>' +
+        '        <span>Đơn Hàng Của Tôi</span>' +
+        '      </a>' +
+        '    </li>' +
+        (isSeller || isAdmin
+          ? '    <li>' +
+            '      <a href="' + sellerUrl + '" class="user-dropdown-item">' +
+            '        <span class="material-symbols-outlined icon-sm text-warning">storefront</span>' +
+            '        <span>Kênh Người Bán</span>' +
+            '      </a>' +
+            '    </li>'
+          : '') +
+        (isAdmin
+          ? '    <li>' +
+            '      <a href="' + adminUrl + '" class="user-dropdown-item">' +
+            '        <span class="material-symbols-outlined icon-sm text-primary">terminal</span>' +
+            '        <span>Master Admin Portal</span>' +
+            '      </a>' +
+            '    </li>'
+          : '') +
+        '  </ul>' +
+        '  <div class="user-dropdown-divider"></div>' +
+        '  <div class="user-dropdown-footer">' +
+        '    <button type="button" class="btn btn-danger btn-sm is-full flex items-center justify-center gap-1" id="headerLogoutBtn">' +
+        '      <span class="material-symbols-outlined icon-xs">logout</span>' +
+        '      <span>Đăng Xuất Tài Khoản</span>' +
+        '    </button>' +
+        '  </div>' +
+        '</div>'
+      );
+    },
+
+    bindEvents: function () {
+      if (typeof document === "undefined") return;
+      var btn = document.getElementById("avatarBtn");
+      if (!btn) return;
+
+      var curUser = null;
+      if (typeof Auth !== "undefined" && typeof Auth.current === "function") {
+        curUser = Auth.current();
+      } else if (typeof UtilsRef !== "undefined" && UtilsRef.Auth && typeof UtilsRef.Auth.getCurrentUser === "function") {
+        curUser = UtilsRef.Auth.getCurrentUser();
+      }
+
+      var bp = detectBasePath();
+      var loginUrl = resolveUrl("pages/account/auth_login.html", bp);
+
+      // Nếu chưa đăng nhập, bấm vào avatar sẽ chuyển đến trang Đăng Nhập
+      if (!curUser) {
+        if (!btn.dataset.userNavBound) {
+          btn.dataset.userNavBound = "true";
+          btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            window.location.href = loginUrl;
+          });
+        }
+        return;
+      }
+
+      // Đã đăng nhập: Cập nhật initials nếu hiển thị ký tự ngắn
+      var initials = (curUser.fullName || curUser.name || "U")
+        .trim()
+        .split(/\s+/)
+        .slice(-2)
+        .map(function (w) { return w[0]; })
+        .join("")
+        .toUpperCase();
+      if (!btn.querySelector(".material-symbols-outlined") && btn.textContent.trim().length <= 2) {
+        btn.textContent = initials;
+      }
+      btn.title = (curUser.fullName || curUser.name || "Tài khoản") + " (Nhấp để mở menu tài khoản, nhấp đúp để vào hồ sơ)";
+
+      // Kiểm tra hoặc chèn container dropdown
+      var dropdown = document.getElementById("userAccountDropdown");
+      if (!dropdown) {
+        var wrapper = btn.closest(".header-user-wrapper");
+        if (!wrapper && btn.parentElement) {
+          wrapper = document.createElement("div");
+          wrapper.className = "header-user-wrapper";
+          wrapper.style.position = "relative";
+          wrapper.style.display = "inline-flex";
+          wrapper.style.alignItems = "center";
+          btn.parentNode.insertBefore(wrapper, btn);
+          wrapper.appendChild(btn);
+        }
+        var container = wrapper || btn.parentElement;
+        if (container) {
+          var temp = document.createElement("div");
+          temp.innerHTML = UserAccountDropdown.createHTML(curUser, bp);
+          var dropdownNode = temp.firstElementChild;
+          if (dropdownNode) {
+            container.appendChild(dropdownNode);
+            dropdown = dropdownNode;
+          }
+        }
+      }
+
+      if (!btn.dataset.avatarDropdownBound) {
+        btn.dataset.avatarDropdownBound = "true";
+        btn.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          var notif = document.getElementById("notifDropdown");
+          if (notif) notif.style.display = "none";
+
+          if (dropdown) {
+            var isShown = dropdown.style.display === "block";
+            dropdown.style.display = isShown ? "none" : "block";
+          }
+        });
+      }
+
+      if (!btn.dataset.avatarDblClickBound) {
+        btn.dataset.avatarDblClickBound = "true";
+        btn.addEventListener("dblclick", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          window.location.href = profileUrl;
+        });
+      }
+
+      if (dropdown && !dropdown.dataset.bound) {
+        dropdown.dataset.bound = "true";
+        document.addEventListener("click", function (e) {
+          if (!dropdown.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
+            dropdown.style.display = "none";
+          }
+        });
+
+        // Xử lý nút ĐĂNG XUẤT
+        var logoutBtn = dropdown.querySelector("#headerLogoutBtn");
+        if (logoutBtn && !logoutBtn.dataset.bound) {
+          logoutBtn.dataset.bound = "true";
+          logoutBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (typeof Auth !== "undefined" && typeof Auth.logout === "function") {
+              Auth.logout();
+            } else if (typeof UtilsRef !== "undefined" && UtilsRef.Auth && typeof UtilsRef.Auth.logout === "function") {
+              UtilsRef.Auth.logout();
+            }
+            try {
+              localStorage.removeItem("hv_current_user");
+              localStorage.removeItem("hv_access_token");
+              localStorage.removeItem("hybrid_current_user");
+              localStorage.removeItem("hybrid_access_token");
+              localStorage.removeItem("hv_browser_google_account");
+              sessionStorage.clear();
+            } catch (err) {}
+
+            if (typeof UtilsRef !== "undefined" && typeof UtilsRef.toast === "function") {
+              UtilsRef.toast("Đã đăng xuất tài khoản thành công.", "info");
+            } else if (typeof window.Utils !== "undefined" && typeof window.Utils.toast === "function") {
+              window.Utils.toast("Đã đăng xuất tài khoản thành công.", "info");
+            }
+
+            setTimeout(function () {
+              var homeUrl = resolveUrl("index.html", bp);
+              window.location.href = homeUrl;
+            }, 250);
+          });
+        }
+      }
+    }
+  };
+
+  /* =====================================================================
      XUẤT RA TOÀN CỤC & TỰ ĐỘNG KHỞI TẠO (AUTO-INIT)
      ===================================================================== */
 
@@ -1945,6 +2196,7 @@
     MobileBottomNav: MobileBottomNav,
     NotificationCenter: NotificationCenter,
     LiveChat: LiveChat,
+    UserAccountDropdown: UserAccountDropdown,
 
     // Shortcut API trực quan
     renderHeader: function (target, options) {
@@ -2030,6 +2282,11 @@
         chatContainer.innerHTML = LiveChat.createHTML();
         document.body.appendChild(chatContainer);
         LiveChat.bindEvents();
+      }
+
+      // 8b. Khởi tạo User Account Dropdown & Logout Trigger
+      if (typeof UserAccountDropdown !== "undefined" && typeof UserAccountDropdown.bindEvents === "function") {
+        UserAccountDropdown.bindEvents();
       }
 
       // 9. Lắng nghe mở DrawerCart khi có sự kiện cart:item-added

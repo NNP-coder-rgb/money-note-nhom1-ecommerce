@@ -977,6 +977,7 @@
 
     <!-- Scripts -->
     <script src="../../js/popup.js"></script>
+    <script src="../../js/api.js"></script>
     <script src="../../js/auth.js"></script>
     <script src="../../js/mock_data.js"></script>
     <script src="../../js/utils.js"></script>
@@ -1097,7 +1098,27 @@
             } catch (e) {}
           }
 
-          return combined;
+          // Phân quyền & Phân lập dữ liệu đơn hàng theo từng tài khoản
+          const currentUser = (typeof Auth !== "undefined" && typeof Auth.current === "function") ? Auth.current() : null;
+          const isAdmin = typeof Auth !== "undefined" && Auth.isAdmin(currentUser);
+
+          // Super Admin có toàn quyền xem toàn bộ đơn của toàn sàn
+          if (isAdmin) return combined;
+          if (!currentUser) return combined;
+
+          return combined.filter((o) => {
+            // Khớp theo buyerId, buyerEmail
+            if (o.buyerId && (o.buyerId === currentUser.id || o.buyerId === currentUser.email)) return true;
+            if (o.buyerEmail && o.buyerEmail.toLowerCase() === (currentUser.email || "").toLowerCase()) return true;
+            if (o.shippingAddress && o.shippingAddress.phone && currentUser.phone) {
+              const p1 = o.shippingAddress.phone.replace(/\D/g, "");
+              const p2 = currentUser.phone.replace(/\D/g, "");
+              if (p1 && p2 && p1 === p2) return true;
+            }
+            // Đơn mẫu mặc định hiển thị cho tài khoản Người Mua demo (tuan.le@gmail.com)
+            if (currentUser.role === "buyer" && (!o.buyerId || o.buyerId === "u-demo-pending-01")) return true;
+            return false;
+          });
         }
 
         // Lưu đơn hàng cập nhật vào localStorage

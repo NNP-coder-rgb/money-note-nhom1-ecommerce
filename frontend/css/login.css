@@ -196,21 +196,27 @@
   border-radius: var(--radius-sm);
 }
 
-/* Thẻ đăng nhập */
+/* Thẻ đăng nhập cao cấp (Glassmorphism & Ambient Glow) */
 .login-card {
   position: relative;
-  padding: var(--sp-6);
+  padding: 34px 30px;
+  border-radius: 20px;
+  background: rgba(18, 18, 30, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 25px 65px -15px rgba(0, 0, 0, 0.7), 0 0 40px -10px rgba(99, 102, 241, 0.2);
   overflow: hidden;
-  box-shadow: var(--shadow-md);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 .login-card::before {
   content: "";
   position: absolute;
   top: 0;
   right: 0;
-  width: 144px;
-  height: 144px;
-  background: linear-gradient(225deg, rgba(139, 92, 246, 0.2), transparent 60%);
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.25), transparent 70%);
   pointer-events: none;
 }
 .login-card > * {
@@ -223,12 +229,12 @@
   gap: var(--sp-3);
   margin-bottom: var(--sp-5);
   padding-bottom: var(--sp-4);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--border, rgba(255, 255, 255, 0.08));
 }
 .card-head .panel-title {
-  font-size: var(--fs-sm);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
 .card-head a {
   display: inline-flex;
@@ -236,18 +242,48 @@
   gap: 4px;
   font-size: var(--fs-xs);
   font-weight: 600;
+  color: var(--secondary, #38bdf8);
+  transition: opacity 0.2s ease;
+}
+.card-head a:hover {
+  opacity: 0.85;
+  text-decoration: underline;
 }
 
 .segmented.is-full {
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: 100%;
+  padding: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.1));
+  border-radius: 12px;
+  gap: 4px;
 }
 .segmented.is-full button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--sp-2);
+  gap: 8px;
+  padding: 10px 14px;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.segmented.is-full button:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.04);
+}
+.segmented.is-full button.active {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(6, 182, 212, 0.2));
+  color: #ffffff;
+  border: 1px solid rgba(99, 102, 241, 0.4);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
 }
 
 .passkey-btn {
@@ -402,23 +438,27 @@
   justify-content: center;
   gap: 12px;
   width: 100%;
-  padding: 11px 16px;
+  padding: 12px 18px;
   background: #ffffff;
   color: #1f2937;
-  border: 1px solid #e5e7eb;
-  border-radius: var(--radius-lg);
-  font-size: var(--fs-sm);
+  border: 1.5px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: all var(--t-fast);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
   margin-bottom: var(--sp-3);
   text-decoration: none;
 }
 .btn-social-google:hover {
-  background: #f8fafc;
-  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.25);
-  transform: translateY(-1px);
+  background: #f9fafb;
+  border-color: #cbd5e1;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+  transform: translateY(-1.5px);
+}
+.btn-social-google:active {
+  transform: translateY(0);
 }
 .btn-social-google svg {
   flex-shrink: 0;
@@ -463,11 +503,11 @@
 .login-method-nav {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 6px;
+  gap: 4px;
   background: rgba(255, 255, 255, 0.035);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.08));
   padding: 4px;
-  border-radius: var(--radius-md);
+  border-radius: 12px;
   margin-bottom: var(--sp-4);
 }
 .login-method-btn {
@@ -475,23 +515,65 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 8px 10px;
+  padding: 9px 12px;
   background: transparent;
-  border: none;
-  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  border-radius: 8px;
   color: var(--text-muted);
   font-size: var(--fs-xs);
   font-weight: 600;
   cursor: pointer;
-  transition: all var(--t-fast);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .login-method-btn:hover {
   color: var(--text);
+  background: rgba(255, 255, 255, 0.03);
 }
 .login-method-btn.active {
-  background: var(--neutral-800);
-  color: var(--primary-300);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  background: rgba(99, 102, 241, 0.16);
+  color: var(--secondary, #38bdf8);
+  border-color: rgba(56, 189, 248, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* Tinh chỉnh input và nút đăng nhập CTA */
+.login-card .input-group {
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+.login-card .input-group:focus-within {
+  border-color: var(--primary, #6366f1);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+}
+.login-card .input {
+  height: 44px;
+  font-size: 14px;
+}
+.login-card .btn-cta.btn-block {
+  width: 100%;
+  height: 46px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.38);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.login-card .btn-cta.btn-block:hover {
+  background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.5);
+  transform: translateY(-1.5px);
+}
+.login-card .btn-cta.btn-block:active {
+  transform: translateY(0);
 }
 
 /* OTP Hints & Groups */
@@ -528,6 +610,166 @@
   padding: 2px 8px;
   border-radius: 4px;
 }
+
+/* Thông báo SMS OTP bảo mật */
+.secure-sms-notice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: rgba(6, 182, 212, 0.08);
+  border: 1px solid rgba(6, 182, 212, 0.35);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--sp-3);
+  animation: fadeIn var(--t-fast);
+}
+
+/* GIS Google Modal Picker */
+.google-accounts-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: var(--sp-3);
+}
+.google-account-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  color: var(--text);
+  transition: all var(--t-fast);
+}
+.google-account-row:hover {
+  background: rgba(66, 133, 244, 0.12);
+  border-color: rgba(66, 133, 244, 0.5);
+  transform: translateX(3px);
+}
+.google-avatar-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 13px;
+  color: #fff;
+  background: #4285F4;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(66, 133, 244, 0.35);
+}
+.google-other-acc-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 14px;
+  background: transparent;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  font-size: var(--fs-xs);
+  cursor: pointer;
+  transition: all var(--t-fast);
+}
+.google-other-acc-btn:hover {
+  color: var(--text);
+  border-color: rgba(66, 133, 244, 0.5);
+  background: rgba(66, 133, 244, 0.05);
+}
+.google-privacy-disclaimer {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--text-faint);
+  line-height: 1.5;
+  margin-top: var(--sp-3);
+  padding-top: var(--sp-2);
+  border-top: 1px solid var(--border);
+}
+
+/* Wizard Steps trong Modal Quên Mật Khẩu */
+.forgot-wizard-steps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.forgot-step-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.forgot-step-item.active {
+  color: var(--secondary-400);
+}
+.forgot-step-item .step-num {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 10px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.08);
+}
+.forgot-step-item.active .step-num {
+  background: var(--secondary-400);
+  color: #000;
+}
+.forgot-step-divider {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+  margin: 0 8px;
+}
+.secure-email-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: rgba(6, 182, 212, 0.08);
+  border: 1px solid rgba(6, 182, 212, 0.35);
+  border-radius: var(--radius-md);
+}
+
+/* Thẻ hiển thị mật khẩu mới an toàn */
+.new-password-display-box {
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.password-highlight-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 14px;
+  background: #020617;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  border-radius: var(--radius-sm);
+}
+.password-code {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #34d399;
+}
+
 
 /* Danh sách tài khoản Google trong modal */
 .google-account-list {
