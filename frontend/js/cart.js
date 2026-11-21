@@ -71,31 +71,101 @@
     }
   }
 
+  /* ---------------- CHUẨN HÓA DỮ LIỆU GIỎ HÀNG ---------------- */
+  function sanitizeCartItems() {
+    if (typeof Utils === "undefined" || !Utils.Cart) return;
+    try {
+      const items = Utils.Cart.getItems();
+      let changed = false;
+      const validItems = items.map((item) => {
+        // Thay thế id mẫu m01 cũ thành sản phẩm thật f2 (Áo Blazer Runway)
+        if (item.id === "m01") {
+          changed = true;
+          return {
+            id: "f2",
+            name: "Áo Jacket Blazer Runway Nam Cắt May Cao Cấp",
+            price: 4690000,
+            oldPrice: 5200000,
+            type: "mall",
+            variant: "Size L • Mới nguyên seal",
+            img: "assets/images/products/ao-jacket-blazer-runway-nam.png",
+            qty: item.qty || 1,
+          };
+        }
+        // Thay thế id mẫu c01 cũ thành sản phẩm thật t2 (Điện thoại Flagship)
+        if (item.id === "c01") {
+          changed = true;
+          return {
+            id: "t2",
+            name: "Điện Thoại Smartphone Flagship Màn Hình Tràn Viền 120Hz Camera AI",
+            price: 21800000,
+            oldPrice: 29990000,
+            type: "c2c",
+            condition: "98% MỚI",
+            discountPercent: 27,
+            seller: "Việt Dũng Store",
+            img: "assets/images/products/dien-thoai-smartphone-flagship.png",
+            qty: item.qty || 1,
+          };
+        }
+        // Đồng bộ chuẩn xác 100% tên và ảnh theo danh mục PRODUCTS nếu sản phẩm có trong hệ thống
+        if (typeof PRODUCTS !== "undefined" && Array.isArray(PRODUCTS)) {
+          const found = PRODUCTS.find((p) => p.id === item.id);
+          if (found) {
+            if (item.name !== found.name || item.img !== found.img) {
+              changed = true;
+              return {
+                ...item,
+                name: found.name,
+                img: found.img,
+                price: found.price || item.price,
+                oldPrice: found.oldPrice || item.oldPrice,
+                type: found.type || item.type,
+              };
+            }
+          }
+        }
+        return item;
+      });
+      if (changed) {
+        if (typeof Utils.Cart.saveItems === "function") {
+          Utils.Cart.saveItems(validItems);
+        } else {
+          localStorage.setItem("hybrid_cart", JSON.stringify(validItems));
+        }
+      }
+    } catch (e) {
+      console.warn("Cart sanitize error:", e);
+    }
+  }
+
   /* ---------------- KHỞI TẠO DỮ LIỆU MẪU BAN ĐẦU ---------------- */
   function ensureInitialCart() {
     if (typeof Utils === "undefined" || !Utils.Cart) return;
+    sanitizeCartItems();
     const current = Utils.Cart.getItems();
-    // Nếu chưa từng bấm xóa giỏ hàng và giỏ hiện đang rỗng, tự nạp 2 món mẫu đặc trưng
+    // Nếu chưa từng bấm xóa giỏ hàng và giỏ hiện đang rỗng, nạp 2 món thật mẫu đặc trưng
     if (current.length === 0 && !localStorage.getItem("hybrid_cart_cleared")) {
       Utils.Cart.addItem({
-        id: "m01",
-        name: "Áo Khoác Bomber Cyberpunk J1A-GT Multi-Pocket",
+        id: "f2",
+        name: "Áo Jacket Blazer Runway Nam Cắt May Cao Cấp",
         price: 4690000,
         oldPrice: 5200000,
         type: "mall",
-        variant: "Size M • Mới nguyên seal",
-        img: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=300",
+        variant: "Size L • Mới nguyên seal",
+        img: "assets/images/products/ao-jacket-blazer-runway-nam.png",
         qty: 1,
       });
       Utils.Cart.addItem({
-        id: "c01",
-        name: "iPhone 15 Pro Max 256GB Titan Tự Nhiên (Like New 99%)",
-        price: 21990000,
+        id: "t2",
+        name: "Điện Thoại Smartphone Flagship Màn Hình Tràn Viền 120Hz Camera AI",
+        price: 21800000,
         oldPrice: 29990000,
         type: "c2c",
-        condition: "99% MỚI",
+        condition: "98% MỚI",
+        discountPercent: 27,
         seller: "Việt Dũng Store",
-        img: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=300",
+        img: "assets/images/products/dien-thoai-smartphone-flagship.png",
         qty: 1,
       });
     }
@@ -110,8 +180,8 @@
         ? Math.round((1 - item.price / item.oldPrice) * 100)
         : 0);
     const detailUrl = isUsed
-      ? `product_used.html?id=${item.id}`
-      : `product_new.html?id=${item.id}`;
+      ? `product_used.html?id=${encodeURIComponent(item.id)}`
+      : `product_new.html?id=${encodeURIComponent(item.id)}`;
 
     return `
       <div class="cart-item" data-id="${item.id}" data-variant="${item.variant || ""}">

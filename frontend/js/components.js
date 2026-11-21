@@ -1011,20 +1011,27 @@
 
       var bp = detectBasePath();
       var html = items.map(function (item) {
-        var prod = item.product || {};
-        var name = prod.name || prod.title || "Sản phẩm";
+        var prod = item.product || item || {};
+        var id = prod.id || item.id || "";
+        var name = prod.name || prod.title || item.name || "Sản phẩm";
         var price = item.price || prod.price || 0;
-        var img = resolveUrl(prod.img || "", bp);
-        var isMall = prod.type === "mall";
-        var badgeText = isMall ? "Brand Mall" : (prod.condText || (prod.cond ? prod.cond + "% Mới" : "Like New"));
+        var rawImg = prod.img || item.img || "";
+        var img = "";
+        if (typeof window !== "undefined" && typeof window.resolveAssetUrl === "function") {
+          img = window.resolveAssetUrl(rawImg);
+        } else {
+          img = resolveUrl(rawImg, bp);
+        }
+        var isMall = (prod.type === "mall" || item.type === "mall");
+        var badgeText = isMall ? "Brand Mall" : (prod.condText || item.condition || (prod.cond ? prod.cond + "% Mới" : "Like New"));
         var badgeClass = isMall ? "badge badge-solid" : "badge badge-secondary";
         var variantText = item.variant ? '<span class="text-xs text-muted block mt-0.5">' + escapeHtml(item.variant) + '</span>' : '';
         var detailUrl = isMall
-          ? resolveUrl("pages/shop/product_new.html?id=" + encodeURIComponent(prod.id), bp)
-          : resolveUrl("pages/shop/product_used.html?id=" + encodeURIComponent(prod.id), bp);
+          ? resolveUrl("pages/shop/product_new.html?id=" + encodeURIComponent(id), bp)
+          : resolveUrl("pages/shop/product_used.html?id=" + encodeURIComponent(id), bp);
 
         return (
-          '<div class="drawer-cart-item" data-id="' + escapeHtml(prod.id) + '" data-variant="' + escapeHtml(item.variant || "") + '">' +
+          '<div class="drawer-cart-item" data-id="' + escapeHtml(id) + '" data-variant="' + escapeHtml(item.variant || "") + '">' +
           '  <a href="' + detailUrl + '" class="drawer-cart-item-img">' +
           '    <img src="' + img + '" alt="' + escapeHtml(name) + '" loading="lazy" />' +
           '  </a>' +

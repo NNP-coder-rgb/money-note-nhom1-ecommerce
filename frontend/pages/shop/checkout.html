@@ -1229,26 +1229,56 @@
             items = Utils.Cart.getItems();
           }
 
+          // Chuẩn hóa và ánh xạ sản phẩm cũ nếu có
+          if (Array.isArray(items) && items.length > 0) {
+            items = items.map((it) => {
+              if (it.id === "m01") {
+                return {
+                  id: "f2",
+                  name: "Áo Jacket Blazer Runway Nam Cắt May Cao Cấp",
+                  price: 4690000,
+                  type: "mall",
+                  variant: "Size L • Mới nguyên seal",
+                  img: "assets/images/products/ao-jacket-blazer-runway-nam.png",
+                  qty: it.qty || 1,
+                };
+              }
+              if (it.id === "c01") {
+                return {
+                  id: "t2",
+                  name: "Điện Thoại Smartphone Flagship Màn Hình Tràn Viền 120Hz Camera AI",
+                  price: 21800000,
+                  type: "c2c",
+                  condition: "98% MỚI",
+                  seller: "Việt Dũng Store",
+                  img: "assets/images/products/dien-thoai-smartphone-flagship.png",
+                  qty: it.qty || 1,
+                };
+              }
+              return it;
+            });
+          }
+
           if (!items || items.length === 0) {
-            // Mẫu sản phẩm mặc định để trải nghiệm
+            // Mẫu sản phẩm mặc định chuẩn xác để trải nghiệm
             items = [
               {
-                id: "m01",
-                name: "Áo Khoác Bomber Cyberpunk J1A-GT Multi-Pocket",
+                id: "f2",
+                name: "Áo Jacket Blazer Runway Nam Cắt May Cao Cấp",
                 price: 4690000,
                 type: "mall",
-                variant: "Size M • Nguyên seal",
-                img: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=200",
+                variant: "Size L • Mới nguyên seal",
+                img: "assets/images/products/ao-jacket-blazer-runway-nam.png",
                 qty: 1
               },
               {
-                id: "c01",
-                name: "iPhone 15 Pro Max 256GB Titan Tự Nhiên (Like New 99%)",
-                price: 21990000,
+                id: "t2",
+                name: "Điện Thoại Smartphone Flagship Màn Hình Tràn Viền 120Hz Camera AI",
+                price: 21800000,
                 type: "c2c",
-                condition: "99% MỚI",
+                condition: "98% MỚI",
                 seller: "Việt Dũng Store",
-                img: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=200",
+                img: "assets/images/products/dien-thoai-smartphone-flagship.png",
                 qty: 1
               }
             ];
