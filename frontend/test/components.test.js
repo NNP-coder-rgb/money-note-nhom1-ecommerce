@@ -435,6 +435,36 @@ it("Sự kiện click nổi bọt lên document bị chặn gọi đúp nếu n�
   assert.strictEqual(global.localStorage.getItem("hybrid_theme"), "light");
 });
 
+console.log("\n--- 9. KIỂM THỬ USER ACCOUNT DROPDOWN VÀ ĐĂNG XUẤT ---");
+
+it("UserAccountDropdown: Sinh mã HTML menu người dùng, thông tin và nút Đăng Xuất", () => {
+  const mockUser = {
+    id: "u123",
+    fullName: "Nguyễn Ngọc Phúc",
+    email: "nguyenphuc230607@gmail.com",
+    role: "buyer",
+  };
+  const html = Components.UserAccountDropdown.createHTML(mockUser, "");
+  assert(html.includes("user-account-dropdown"), "Phải có class user-account-dropdown");
+  assert(html.includes("NP"), "Phải có viết tắt tên NP");
+  assert(html.includes("Nguyễn Ngọc Phúc"), "Phải có tên người dùng");
+  assert(html.includes("nguyenphuc230607@gmail.com"), "Phải có email");
+  assert(html.includes("Hồ Sơ Cá Nhân"), "Phải có liên kết Hồ Sơ Cá Nhân");
+  assert(html.includes("Đơn Hàng Của Tôi"), "Phải có liên kết Đơn Hàng Của Tôi");
+  assert(html.includes('id="headerLogoutBtn"'), "Phải có nút Đăng Xuất id=headerLogoutBtn");
+  assert(html.includes("Đăng Xuất Tài Khoản"), "Phải có chữ Đăng Xuất Tài Khoản");
+});
+
+it("UserAccountDropdown: Menu cho Người Bán (Seller) và Master Admin có mục điều hướng tương ứng", () => {
+  const sellerUser = { fullName: "Shop Công Nghệ", role: "seller", email: "shop@hybrid.store" };
+  const sellerHtml = Components.UserAccountDropdown.createHTML(sellerUser, "");
+  assert(sellerHtml.includes("Kênh Người Bán"), "Seller phải có Kênh Người Bán");
+
+  const adminUser = { fullName: "Master Admin", role: "admin", email: "admin@hybrid.system" };
+  const adminHtml = Components.UserAccountDropdown.createHTML(adminUser, "");
+  assert(adminHtml.includes("Master Admin Portal"), "Admin phải có Master Admin Portal");
+});
+
 console.log("\n========================================================");
 console.log(`KẾT QUẢ KIỂM THỬ: ${passed} / ${passed + failed} PASS`);
 console.log("========================================================\n");

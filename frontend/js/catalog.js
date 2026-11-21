@@ -120,13 +120,6 @@
       avatarBtn.textContent = initials;
       avatarBtn.title = user.fullName;
     }
-    avatarBtn.addEventListener("click", () => {
-      if (!user) {
-        window.location.href = "../account/auth_login.html";
-        return;
-      }
-      window.location.href = "../account/profile.html";
-    });
 
     const btnHeaderPost = $("#btnHeaderPost");
     if (btnHeaderPost) {
@@ -1436,5 +1429,43 @@
   enableHorizontalDrag($(".subnav .container"));
   if (typeof Utils !== "undefined" && Utils.Cart) {
     Utils.Cart.syncBadge();
+  }
+
+  // Đồng bộ sản phẩm từ Backend Database API
+  if (window.API && window.API.Catalog) {
+    window.API.Catalog.getProducts().then((backendProducts) => {
+      if (Array.isArray(backendProducts) && backendProducts.length > 0) {
+        const catMap = { 1: "tech", 2: "audio", 3: "fashion", 4: "book", 5: "appliances" };
+        const existingIds = new Set(PRODUCTS.map((p) => p.id));
+        let addedCount = 0;
+        backendProducts.forEach((bp) => {
+          if (!existingIds.has(bp.id)) {
+            const mapped = {
+              id: bp.id,
+              name: bp.name,
+              short: bp.name,
+              category: catMap[bp.category_id] || "tech",
+              type: bp.is_new ? "mall" : "c2c",
+              badge: bp.is_new ? "CHÍNH HÃNG 100%" : `ĐỒ CŨ ${bp.wear_condition || 98}%`,
+              cond: bp.wear_condition || 100,
+              price: bp.selling_price,
+              oldPrice: bp.original_price,
+              img: (bp.media && bp.media[0] && bp.media[0].media_url) || "../../assets/images/products/phone-sample.svg",
+              desc: bp.description,
+              rating: 5,
+              ratingCount: 1,
+              soldCount: 0
+            };
+            PRODUCTS.unshift(mapped);
+            addedCount++;
+          }
+        });
+        if (addedCount > 0) {
+          initTypeTabCounts();
+          updateSidebarCounts();
+          render();
+        }
+      }
+    }).catch((e) => console.warn("Catalog API sync fallback:", e));
   }
 })();

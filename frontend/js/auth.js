@@ -429,10 +429,43 @@
       try {
         localStorage.setItem(CURRENT_KEY, JSON.stringify(session));
       } catch (e) {}
+      if (typeof Utils !== "undefined") {
+        if (Utils.Wishlist && typeof Utils.Wishlist.refresh === "function") Utils.Wishlist.refresh();
+        if (Utils.Cart) {
+          if (typeof Utils.Cart.migrateGuestCart === "function") Utils.Cart.migrateGuestCart();
+          if (typeof Utils.Cart.syncBadge === "function") Utils.Cart.syncBadge();
+        }
+      }
       return { ok: true, user: session };
     },
 
     // 1. Quản lý tài khoản Google lưu trữ riêng trên từng thiết bị (localStorage của thiết bị đó)
+    getSampleGoogleAccounts() {
+      return [
+        {
+          name: "Nguyễn Ngọc Phúc",
+          email: "phuc@hybrid.store",
+          avatar: "NP",
+          role: "buyer",
+          note: "Tài khoản VIP • Người Mua"
+        },
+        {
+          name: "Nguyễn Huy Bình",
+          email: "binh@sneakers.vn",
+          avatar: "HB",
+          role: "seller",
+          note: "Chủ Gian Hàng • Người Bán"
+        },
+        {
+          name: "Lê Minh Tuấn",
+          email: "tuan.le@gmail.com",
+          avatar: "LT",
+          role: "buyer",
+          note: "Thành viên Mua Sắm Cá Nhân"
+        }
+      ];
+    },
+
     getBrowserGoogleAccount() {
       try {
         const raw = localStorage.getItem("hv_browser_google_account");
@@ -537,23 +570,119 @@
       try {
         localStorage.setItem(CURRENT_KEY, JSON.stringify(session));
       } catch (e) {}
+      if (typeof Utils !== "undefined") {
+        if (Utils.Wishlist && typeof Utils.Wishlist.refresh === "function") Utils.Wishlist.refresh();
+        if (Utils.Cart) {
+          if (typeof Utils.Cart.migrateGuestCart === "function") Utils.Cart.migrateGuestCart();
+          if (typeof Utils.Cart.syncBadge === "function") Utils.Cart.syncBadge();
+        }
+      }
       return { ok: true, user: session };
     },
 
-    // 2. Gửi mã OTP đăng nhập qua số điện thoại
-    sendPhoneOtp(phoneInput) {
-      const phone = digits(phoneInput);
-      if (!phone || phone.length !== 10) {
-        return { ok: false, error: "Số điện thoại không hợp lệ (phải gồm đúng 10 chữ số)." };
-      }
-      const otp = String(Math.floor(100000 + Math.random() * 900000));
-      try {
-        sessionStorage.setItem("hv_login_otp_" + phone, otp);
-      } catch (e) {}
-      return { ok: true, phone, otp };
+    // 2. Gửi mã OTP đăng nhập qua số điện thoại (Bảo mật: Rate limiting, Cooldown 60s, Hết hạn 3 phút, Che mờ SĐT)
+    maskPhone(phone) {
+      const p = digits(phone);
+      if (!p || p.length !== 10) return phone || "";
+      return p.slice(0, 3) + "****" + p.slice(-3);
     },
 
-    // 3. Đăng nhập bằng số điện thoại + OTP
+    maskEmail(email) {
+      if (!email || !email.includes("@")) return email || "";
+      const [name, domain] = email.trim().toLowerCase().split("@");
+      if (name.length <= 2) return name[0] + "*@" + domain;
+      return name[0] + "***" + name.slice(-1) + "@" + domain;
+    },
+
+    getSimulatedSms(phoneInput) {
+      const p = digits(phoneInput);
+      try {
+        return sessionStorage.getItem("hv_sms_log_" + p) || null;
+      } catch (e) {
+        return null;
+      }
+    },
+
+    getLastResetEmail(emailInput) {
+      const em = (emailInput || "").trim().toLowerCase();
+      try {
+        return sessionStorage.getItem("hv_email_log_" + em) || null;
+      } catch (e) {
+        return null;
+      }
+    },
+
+    sendPhoneOtp(phoneInput) {
+      const phone = digits(phoneInput);
+      if (!phone || phone.length !== 10 || !phone.startsWith("0")) {
+        return { ok: false, error: "Số điện thoại không hợp lệ (phải gồm đúng 10 chữ số bắt đầu bằng số 0)." };
+      }
+
+      const now = Date.now();
+      // 1. Kiểm tra Cooldown 60s
+      let lastSent = 0;
+      try {
+        const stored = JSON.parse(sessionStorage.getItem("hv_login_otp_" + phone));
+        if (stored && stored.sentAt) lastSent = stored.sentAt;
+      } catch (e) {}
+
+      if (now - lastSent < 60000) {
+        const remainSec = Math.ceil((60000 - (now - lastSent)) / 1000);
+        return {
+          ok: false,
+          error: `Vui lòng đợi ${remainSec} giây trước khi yêu cầu gửi lại mã OTP.`,
+          remainSeconds: remainSec,
+        };
+      }
+
+      // 2. Kiểm tra Rate Limiting (Tối đa 3 lần / 10 phút)
+      let rateData = { count: 0, windowStart: now };
+      try {
+        const rawRate = JSON.parse(sessionStorage.getItem("hv_sms_rate_" + phone));
+        if (rawRate && now - rawRate.windowStart < 600000) {
+          rateData = rawRate;
+        }
+      } catch (e) {}
+
+      if (rateData.count >= 3) {
+        return {
+          ok: false,
+          error: "Bạn đã yêu cầu OTP quá số lần quy định (tối đa 3 lần trong 10 phút). Vui lòng thử lại sau.",
+        };
+      }
+
+      // 3. Sinh mã OTP 6 chữ số ngẫu nhiên có độ entropy cao
+      const otp = String(Math.floor(100000 + Math.random() * 900000));
+      const maskedPhone = this.maskPhone(phone);
+
+      const record = {
+        code: otp,
+        sentAt: now,
+        expiresAt: now + 180000, // 3 phút hiệu lực
+        attempts: 0,
+      };
+
+      try {
+        sessionStorage.setItem("hv_login_otp_" + phone, JSON.stringify(record));
+        sessionStorage.setItem(
+          "hv_sms_log_" + phone,
+          `[HYBRID_AUTH] Mã xác thực OTP của bạn là ${otp}. Hiệu lực 3 phút. Tuyệt đối KHÔNG chia sẻ mã này cho bất kỳ ai.`
+        );
+        rateData.count += 1;
+        sessionStorage.setItem("hv_sms_rate_" + phone, JSON.stringify(rateData));
+      } catch (e) {}
+
+      return {
+        ok: true,
+        phone,
+        maskedPhone,
+        expiresAt: record.expiresAt,
+        expiresInSeconds: 180,
+        otp, // Trả về cho dispatcher/test suite nội bộ, UI không in lộ thiên
+      };
+    },
+
+    // 3. Đăng nhập bằng số điện thoại + OTP (Bảo mật: Giới hạn 3 lần thử, Chống Brute Force)
     loginWithPhone(phoneInput, otpCode, role = "buyer") {
       const phone = digits(phoneInput);
       if (!phone || phone.length !== 10) {
@@ -561,12 +690,57 @@
       }
       const cleanOtp = String(otpCode || "").trim();
       if (!cleanOtp || cleanOtp.length !== 6) {
-        return { ok: false, error: "Mã OTP phải gồm 6 chữ số." };
+        return { ok: false, error: "Mã OTP phải gồm đúng 6 chữ số." };
       }
-      const storedOtp = sessionStorage.getItem("hv_login_otp_" + phone);
-      if (cleanOtp !== storedOtp && cleanOtp !== "882601" && cleanOtp !== "123456" && cleanOtp !== "654321") {
-        return { ok: false, error: "Mã OTP không chính xác hoặc đã hết hạn. Vui lòng thử lại." };
+
+      let record = null;
+      try {
+        record = JSON.parse(sessionStorage.getItem("hv_login_otp_" + phone));
+      } catch (e) {}
+
+      if (!record || !record.code) {
+        return {
+          ok: false,
+          error: "Không tìm thấy yêu cầu OTP cho số điện thoại này. Vui lòng bấm 'Nhận Mã OTP' trước.",
+        };
       }
+
+      const now = Date.now();
+      if (now > record.expiresAt) {
+        try {
+          sessionStorage.removeItem("hv_login_otp_" + phone);
+        } catch (e) {}
+        return {
+          ok: false,
+          error: "Mã OTP đã hết hạn (chỉ có hiệu lực trong 3 phút). Vui lòng yêu cầu mã mới.",
+        };
+      }
+
+      if (record.attempts >= 3) {
+        try {
+          sessionStorage.removeItem("hv_login_otp_" + phone);
+        } catch (e) {}
+        return {
+          ok: false,
+          error: "Mã OTP đã bị hủy do nhập sai quá 3 lần để bảo vệ tài khoản. Vui lòng yêu cầu mã mới.",
+        };
+      }
+
+      if (cleanOtp !== record.code) {
+        record.attempts += 1;
+        try {
+          sessionStorage.setItem("hv_login_otp_" + phone, JSON.stringify(record));
+        } catch (e) {}
+        const remain = 3 - record.attempts;
+        return {
+          ok: false,
+          error: remain > 0
+            ? `Mã OTP không chính xác. Bạn còn ${remain} lần thử.`
+            : "Mã OTP đã bị hủy do nhập sai quá 3 lần. Vui lòng yêu cầu mã mới.",
+        };
+      }
+
+      // Xác thực thành công: Hủy ngay mã OTP đã dùng
       try {
         sessionStorage.removeItem("hv_login_otp_" + phone);
       } catch (e) {}
@@ -612,99 +786,255 @@
       try {
         localStorage.setItem(CURRENT_KEY, JSON.stringify(session));
       } catch (e) {}
+      if (typeof Utils !== "undefined") {
+        if (Utils.Wishlist && typeof Utils.Wishlist.refresh === "function") Utils.Wishlist.refresh();
+        if (Utils.Cart) {
+          if (typeof Utils.Cart.migrateGuestCart === "function") Utils.Cart.migrateGuestCart();
+          if (typeof Utils.Cart.syncBadge === "function") Utils.Cart.syncBadge();
+        }
+      }
       return { ok: true, user: session };
     },
 
-    // 4. Gửi mã OTP quên mật khẩu
-    sendResetOtp(identifier) {
-      const id = (identifier || "").trim().toLowerCase();
-      const idDigits = digits(identifier);
+    // 4. QUÊN MẬT KHẨU BẢO MẬT: GỬI MÃ XÁC THỰC OTP QUA EMAIL ĐĂNG KÝ
+    sendPasswordResetEmail(emailInput) {
+      const email = (emailInput || "").trim().toLowerCase();
+      if (!email || !email.includes("@") || !email.includes(".")) {
+        return { ok: false, error: "Vui lòng nhập địa chỉ email hợp lệ (ví dụ: ban@hybrid.store)." };
+      }
+
       const users = readUsers();
-      const user = users.find(
-        (u) => u.email === id || (idDigits && idDigits.length >= 9 && u.phone === idDigits),
-      );
+      const user = users.find((u) => (u.email || "").toLowerCase() === email);
       if (!user) {
         return {
           ok: false,
-          error: "Không tìm thấy tài khoản nào liên kết với email hoặc số điện thoại này.",
+          error: "Không tìm thấy tài khoản nào liên kết với email này. Vui lòng kiểm tra lại hoặc Đăng ký mới.",
         };
       }
-      const otp = String(Math.floor(100000 + Math.random() * 900000));
-      const key = "hv_reset_otp_" + (user.email || user.phone);
+
+      const now = Date.now();
+      // Cooldown 60s
+      let lastSent = 0;
       try {
-        sessionStorage.setItem(key, JSON.stringify({ otp, userId: user.id, time: Date.now() }));
+        const stored = JSON.parse(sessionStorage.getItem("hv_email_reset_" + email));
+        if (stored && stored.sentAt) lastSent = stored.sentAt;
       } catch (e) {}
-      return { ok: true, user, otp };
+
+      if (now - lastSent < 60000) {
+        const remainSec = Math.ceil((60000 - (now - lastSent)) / 1000);
+        return {
+          ok: false,
+          error: `Vui lòng đợi ${remainSec} giây trước khi yêu cầu gửi lại mã qua email.`,
+          remainSeconds: remainSec,
+        };
+      }
+
+      // Sinh mã OTP xác minh email gồm 6 chữ số
+      const otp = String(Math.floor(100000 + Math.random() * 900000));
+      const masked = this.maskEmail(email);
+
+      const record = {
+        code: otp,
+        sentAt: now,
+        expiresAt: now + 300000, // 5 phút hiệu lực
+        attempts: 0,
+        userId: user.id,
+      };
+
+      try {
+        sessionStorage.setItem("hv_email_reset_" + email, JSON.stringify(record));
+        sessionStorage.setItem(
+          "hv_email_log_" + email,
+          `[HYBRID.STORE Security] Kính gửi ${user.fullName}, Mã xác nhận khôi phục tài khoản của bạn là: ${otp}. Mã có hiệu lực trong 5 phút. Vui lòng tuyệt đối không cung cấp mã cho người khác.`
+        );
+      } catch (e) {}
+
+      return {
+        ok: true,
+        email: user.email,
+        maskedEmail: masked,
+        user,
+        expiresAt: record.expiresAt,
+        expiresInSeconds: 300,
+        otp, // Cho dispatcher/tests
+      };
     },
 
-    // 5. Kiểm tra mã OTP khôi phục mật khẩu
-    verifyResetOtp(identifier, otpCode) {
+    // 5. QUÊN MẬT KHẨU: XÁC MINH MÃ OTP GỬI VỀ EMAIL
+    verifyEmailResetOtp(emailInput, otpCode) {
+      const email = (emailInput || "").trim().toLowerCase();
+      const cleanOtp = String(otpCode || "").trim();
+
+      if (!email || !email.includes("@")) {
+        return { ok: false, error: "Email không hợp lệ." };
+      }
+      if (!cleanOtp || cleanOtp.length !== 6) {
+        return { ok: false, error: "Vui lòng nhập đúng mã xác thực gồm 6 chữ số." };
+      }
+
+      let record = null;
+      try {
+        record = JSON.parse(sessionStorage.getItem("hv_email_reset_" + email));
+      } catch (e) {}
+
+      if (!record || !record.code) {
+        return {
+          ok: false,
+          error: "Không tìm thấy yêu cầu xác minh cho email này. Vui lòng bấm 'Gửi Mã Xác Thực' trước.",
+        };
+      }
+
+      const now = Date.now();
+      if (now > record.expiresAt) {
+        try {
+          sessionStorage.removeItem("hv_email_reset_" + email);
+        } catch (e) {}
+        return {
+          ok: false,
+          error: "Mã xác thực đã hết hạn (chỉ có hiệu lực trong 5 phút). Vui lòng yêu cầu mã mới.",
+        };
+      }
+
+      if (record.attempts >= 3) {
+        try {
+          sessionStorage.removeItem("hv_email_reset_" + email);
+        } catch (e) {}
+        return {
+          ok: false,
+          error: "Mã xác thực đã bị hủy do nhập sai quá 3 lần. Vui lòng gửi lại yêu cầu.",
+        };
+      }
+
+      if (cleanOtp !== record.code) {
+        record.attempts += 1;
+        try {
+          sessionStorage.setItem("hv_email_reset_" + email, JSON.stringify(record));
+        } catch (e) {}
+        const remain = 3 - record.attempts;
+        return {
+          ok: false,
+          error: remain > 0
+            ? `Mã xác thực không đúng. Bạn còn ${remain} lần thử.`
+            : "Mã xác thực đã bị hủy do nhập sai quá 3 lần. Vui lòng gửi lại yêu cầu.",
+        };
+      }
+
+      // Đánh dấu email đã được xác minh chính chủ
+      try {
+        sessionStorage.setItem(
+          "hv_email_verified_" + email,
+          JSON.stringify({ verified: true, verifiedAt: now, userId: record.userId })
+        );
+      } catch (e) {}
+
+      return {
+        ok: true,
+        email,
+        message: "Xác thực email chính chủ thành công!",
+      };
+    },
+
+    // 6. QUÊN MẬT KHẨU: CẤP MẬT KHẨU MỚI BẢO MẬT VÀ GỬI TRỰC TIẾP VỀ EMAIL
+    generateAndSendNewPassword(emailInput) {
+      const email = (emailInput || "").trim().toLowerCase();
+      let verifiedData = null;
+      try {
+        verifiedData = JSON.parse(sessionStorage.getItem("hv_email_verified_" + email));
+      } catch (e) {}
+
+      if (!verifiedData || !verifiedData.verified) {
+        return {
+          ok: false,
+          error: "Email này chưa được xác thực chính chủ qua mã OTP. Vui lòng hoàn thành bước xác thực email trước.",
+        };
+      }
+
+      const users = readUsers();
+      const uIndex = users.findIndex((u) => (u.email || "").toLowerCase() === email);
+      if (uIndex === -1) {
+        return { ok: false, error: "Không tìm thấy tài khoản để cập nhật mật khẩu." };
+      }
+
+      // Sinh mật khẩu mới ngẫu nhiên an toàn: Hyb# + 4 số ngẫu nhiên + @2026
+      const randDigits = String(Math.floor(1000 + Math.random() * 9000));
+      const newPassword = `Hyb#${randDigits}@2026`;
+
+      users[uIndex].password = newPassword;
+      writeUsers(users);
+
+      const masked = this.maskEmail(email);
+
+      // Lưu nhật ký email gửi mật khẩu mới
+      try {
+        sessionStorage.removeItem("hv_email_reset_" + email);
+        sessionStorage.removeItem("hv_email_verified_" + email);
+        sessionStorage.setItem(
+          "hv_email_log_" + email,
+          `[HYBRID.STORE Security] Kính gửi ${users[uIndex].fullName}, Mật khẩu mới của bạn đã được khởi tạo thành công: ${newPassword}. Vui lòng sử dụng mật khẩu này để đăng nhập ngay và đổi lại mật khẩu trong trang Cá Nhân.`
+        );
+      } catch (e) {}
+
+      return {
+        ok: true,
+        email,
+        maskedEmail: masked,
+        newPassword,
+        user: users[uIndex],
+        message: `Mật khẩu mới đã được khởi tạo và gửi trực tiếp tới hòm thư ${masked}.`,
+      };
+    },
+
+    // Tương thích ngược các hàm cũ:
+    sendResetOtp(identifier) {
       const id = (identifier || "").trim().toLowerCase();
+      if (id.includes("@")) {
+        return this.sendPasswordResetEmail(id);
+      }
       const idDigits = digits(identifier);
       const users = readUsers();
-      const user = users.find(
-        (u) => u.email === id || (idDigits && idDigits.length >= 9 && u.phone === idDigits),
-      );
+      const user = users.find((u) => idDigits && idDigits.length >= 9 && u.phone === idDigits);
+      if (!user) {
+        return { ok: false, error: "Không tìm thấy tài khoản nào liên kết với số điện thoại này." };
+      }
+      return this.sendPasswordResetEmail(user.email);
+    },
+
+    verifyResetOtp(identifier, otpCode) {
+      const id = (identifier || "").trim().toLowerCase();
+      if (id.includes("@")) {
+        return this.verifyEmailResetOtp(id, otpCode);
+      }
+      const idDigits = digits(identifier);
+      const users = readUsers();
+      const user = users.find((u) => idDigits && idDigits.length >= 9 && u.phone === idDigits);
       if (!user) {
         return { ok: false, error: "Không tìm thấy tài khoản." };
       }
-      const key = "hv_reset_otp_" + (user.email || user.phone);
-      let savedData = null;
-      try {
-        savedData = JSON.parse(sessionStorage.getItem(key));
-      } catch (e) {}
-
-      const validOtp = savedData ? savedData.otp : null;
-      const cleanOtp = String(otpCode || "").trim();
-      if (
-        cleanOtp !== validOtp &&
-        cleanOtp !== "882601" &&
-        cleanOtp !== "123456" &&
-        cleanOtp !== "654321"
-      ) {
-        return { ok: false, error: "Mã OTP không đúng hoặc đã hết hạn. Vui lòng kiểm tra lại." };
-      }
-      return { ok: true, user };
+      return this.verifyEmailResetOtp(user.email, otpCode);
     },
 
-    // 6. Đặt lại mật khẩu mới sau khi xác thực OTP
     resetPassword(identifier, otpCode, newPassword) {
       const id = (identifier || "").trim().toLowerCase();
-      const idDigits = digits(identifier);
-      const users = readUsers();
-      const uIndex = users.findIndex(
-        (u) => u.email === id || (idDigits && idDigits.length >= 9 && u.phone === idDigits),
-      );
-      if (uIndex === -1) {
-        return { ok: false, error: "Không tìm thấy tài khoản." };
-      }
-      const user = users[uIndex];
-      const key = "hv_reset_otp_" + (user.email || user.phone);
-      let savedData = null;
-      try {
-        savedData = JSON.parse(sessionStorage.getItem(key));
-      } catch (e) {}
+      const email = id.includes("@") ? id : ((readUsers().find((u) => digits(identifier) && u.phone === digits(identifier)) || {}).email || id);
+      const vRes = this.verifyEmailResetOtp(email, otpCode);
+      if (!vRes.ok) return vRes;
 
-      const validOtp = savedData ? savedData.otp : null;
-      const cleanOtp = String(otpCode || "").trim();
-      if (
-        cleanOtp !== validOtp &&
-        cleanOtp !== "882601" &&
-        cleanOtp !== "123456" &&
-        cleanOtp !== "654321"
-      ) {
-        return { ok: false, error: "Mã OTP không đúng hoặc đã hết hạn. Vui lòng kiểm tra lại." };
-      }
       if (!newPassword || newPassword.length < 6) {
-        return { ok: false, error: "Mật khẩu mới phải có ít nhất 6 ký tự." };
+        return this.generateAndSendNewPassword(email);
       }
+
+      const users = readUsers();
+      const uIndex = users.findIndex((u) => (u.email || "").toLowerCase() === email);
+      if (uIndex === -1) return { ok: false, error: "Không tìm thấy tài khoản." };
 
       users[uIndex].password = newPassword;
       writeUsers(users);
       try {
-        sessionStorage.removeItem(key);
+        sessionStorage.removeItem("hv_email_reset_" + email);
+        sessionStorage.removeItem("hv_email_verified_" + email);
       } catch (e) {}
-      return { ok: true, message: "Đặt lại mật khẩu thành công!", user: users[uIndex] };
+
+      return { ok: true, message: "Đặt lại mật khẩu thành công!", user: users[uIndex], newPassword };
     },
 
     current() {
@@ -742,6 +1072,21 @@
     logout() {
       try {
         localStorage.removeItem(CURRENT_KEY);
+        localStorage.removeItem("hv_access_token");
+        localStorage.removeItem("hybrid_current_user");
+        localStorage.removeItem("hybrid_access_token");
+        localStorage.removeItem("hv_browser_google_account");
+        sessionStorage.clear();
+      } catch (e) {}
+      if (typeof Utils !== "undefined") {
+        if (Utils.Wishlist && typeof Utils.Wishlist.refresh === "function") Utils.Wishlist.refresh();
+        if (Utils.Cart && typeof Utils.Cart.syncBadge === "function") Utils.Cart.syncBadge();
+      }
+      try {
+        if (typeof window !== "undefined") {
+          window.dispatchEvent(new CustomEvent("auth:logout"));
+          window.dispatchEvent(new CustomEvent("auth:changed", { detail: { user: null } }));
+        }
       } catch (e) {}
     },
 

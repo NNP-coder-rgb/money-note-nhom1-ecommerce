@@ -620,6 +620,7 @@
     <div class="toast-stack" id="toastStack"></div>
 
     <script src="../../js/popup.js"></script>
+    <script src="../../js/api.js"></script>
     <script src="../../js/auth.js"></script>
     <script src="../../js/mock_data.js"></script>
     <script src="../../js/utils.js"></script>
@@ -904,9 +905,24 @@
         }
 
         // 11. Các nút hành động Giỏ Hàng & Mua Ngay
+        function isCurrentProductOwner() {
+          const user = typeof Auth !== "undefined" && typeof Auth.current === "function" ? Auth.current() : null;
+          if (!user) return false;
+          const uName = (user.fullName || "").toLowerCase();
+          const uNick = (user.username || "").toLowerCase();
+          const uId = String(user.id || "").toLowerCase();
+          const pSeller = String(p.seller || p.sellerName || "").toLowerCase();
+          const pSellerId = String(p.sellerId || "").toLowerCase();
+          return (pSeller && (pSeller.includes(uName) || pSeller.includes(uNick))) || (pSellerId && pSellerId === uId);
+        }
+
         const btnUsedAddCart = document.getElementById("btnUsedAddCart");
         if (btnUsedAddCart) {
           btnUsedAddCart.addEventListener("click", () => {
+            if (isCurrentProductOwner()) {
+              Utils.toast("Bạn là người sở hữu món hàng này, không thể thêm vào giỏ hàng!", "warning");
+              return;
+            }
             if (!Auth.ensureLogin(() => {
               Utils.Cart.addItem(p, 1);
             }, {
@@ -920,6 +936,10 @@
         const btnUsedBuyNow = document.getElementById("btnUsedBuyNow");
         if (btnUsedBuyNow) {
           btnUsedBuyNow.addEventListener("click", () => {
+            if (isCurrentProductOwner()) {
+              Utils.toast("Bạn là người đăng bán món hàng này, không thể tự mua sản phẩm của chính mình!", "warning");
+              return;
+            }
             if (!Auth.ensureLogin(() => {
               Utils.Cart.addItem(p, 1);
               window.location.href = "cart.html";
@@ -1027,7 +1047,7 @@
                     </div>
                     <span class="badge ${badgeClass}" style="font-size: 10px;">${statusLabel}</span>
                   </div>
-                  ${o.message ? `<div class="text-xs text-muted mb-2 font-italic">"${o.message}"</div>` : ""}
+                  ${o.message ? `<div class="text-xs text-muted mb-2 font-italic">"${Utils.escapeHtml(o.message)}"</div>` : ""}
                   <div class="flex items-center justify-between text-xs text-faint flex-wrap gap-2">
                     <span>Mã thương lượng: <strong class="mono text-muted">${o.id}</strong></span>
                     ${isAccepted ? `
@@ -1048,6 +1068,10 @@
           // Gắn sự kiện nút Mua Với Giá Đã Trả
           document.querySelectorAll(".btn-buy-offer").forEach((btn) => {
             btn.addEventListener("click", () => {
+              if (isCurrentProductOwner()) {
+                Utils.toast("Bạn là người sở hữu món hàng này, không thể tự mua!", "warning");
+                return;
+              }
               const offerPrice = Number(btn.dataset.price);
               const customProduct = {
                 ...p,
@@ -1073,6 +1097,10 @@
         // Mở modal trả giá
         if (btnUsedOffer) {
           btnUsedOffer.addEventListener("click", () => {
+            if (isCurrentProductOwner()) {
+              Utils.toast("Bạn là người đăng bán món hàng này, không thể tự trả giá sản phẩm của chính mình!", "warning");
+              return;
+            }
             if (!Auth.ensureLogin(() => {
               Utils.openModal("usedOfferModal");
             }, {
@@ -1117,6 +1145,10 @@
         // Gửi đề xuất trả giá
         if (btnSubmitOffer) {
           btnSubmitOffer.addEventListener("click", () => {
+            if (isCurrentProductOwner()) {
+              Utils.toast("Bạn là người sở hữu món hàng này, không thể tự gửi đề xuất trả giá!", "warning");
+              return;
+            }
             const user = Auth.current();
             if (!Auth.ensureLogin(() => {}, {
               title: "Yêu Cầu Đăng Nhập",

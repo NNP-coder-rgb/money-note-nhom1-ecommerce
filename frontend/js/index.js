@@ -70,7 +70,7 @@
   /* ---------------- Tài khoản ---------------- */
   const user = typeof Auth !== "undefined" && typeof Auth.current === "function" ? Auth.current() : null;
   const avatarBtn = $("#avatarBtn");
-  if (user) {
+  if (user && avatarBtn) {
     const initials = user.fullName
       .trim()
       .split(/\s+/)
@@ -81,13 +81,6 @@
     avatarBtn.textContent = initials;
     avatarBtn.title = user.fullName;
   }
-  avatarBtn.addEventListener("click", () => {
-    if (!user) {
-      window.location.href = "pages/account/auth_login.html";
-      return;
-    }
-    window.location.href = "pages/account/profile.html";
-  });
 
   /* ---------------- Tìm kiếm tương tác trang chủ ---------------- */
   const searchInput = $("#homeSearchInput");
@@ -888,4 +881,40 @@
       .querySelectorAll("#offerModal.is-open, #postModal.is-open")
       .forEach(closeModal);
   });
+
+  // Đồng bộ sản phẩm từ Backend Database API cho trang chủ
+  if (window.API && window.API.Catalog) {
+    window.API.Catalog.getProducts().then((backendProducts) => {
+      if (Array.isArray(backendProducts) && backendProducts.length > 0) {
+        const catMap = { 1: "tech", 2: "audio", 3: "fashion", 4: "book", 5: "appliances" };
+        const existingIds = new Set(PRODUCTS.map((p) => p.id));
+        let added = false;
+        backendProducts.forEach((bp) => {
+          if (!existingIds.has(bp.id)) {
+            const mapped = {
+              id: bp.id,
+              name: bp.name,
+              short: bp.name,
+              category: catMap[bp.category_id] || "tech",
+              type: bp.is_new ? "mall" : "c2c",
+              badge: bp.is_new ? "CHÍNH HÃNG 100%" : `ĐỒ CŨ ${bp.wear_condition || 98}%`,
+              cond: bp.wear_condition || 100,
+              price: bp.selling_price,
+              oldPrice: bp.original_price,
+              img: (bp.media && bp.media[0] && bp.media[0].media_url) || "assets/images/products/phone-sample.svg",
+              desc: bp.description,
+              rating: 5,
+              ratingCount: 1,
+              soldCount: 0
+            };
+            PRODUCTS.unshift(mapped);
+            added = true;
+          }
+        });
+        if (added && typeof renderAllCategories === "function") {
+          renderAllCategories();
+        }
+      }
+    }).catch((e) => console.warn("Index API sync fallback:", e));
+  }
 })();

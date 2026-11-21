@@ -192,7 +192,7 @@
             document.body.classList.toggle("light-theme", e.newValue === "light");
           }
         }
-      } else if (e.key === STORAGE_KEYS.WISHLIST) {
+      } else if (e.key && (e.key === STORAGE_KEYS.WISHLIST || e.key.indexOf("hv_wishlist_") === 0)) {
         window.dispatchEvent(new CustomEvent("wishlist:updated", { detail: { storageEvent: true } }));
       }
     });
@@ -448,15 +448,27 @@
   }
 
   /**
-   * Đăng ký Progressive Web App (PWA) Service Worker
+   * Đồng bộ và làm mới Progressive Web App (PWA) Service Worker, tự động dọn Cache cũ
    */
   function setupServiceWorker() {
     if (typeof window === "undefined" || typeof navigator === "undefined" || !("serviceWorker" in navigator)) return;
     if (window.location && window.location.protocol && window.location.protocol.startsWith("http")) {
       window.addEventListener("load", () => {
-        navigator.serviceWorker
-          .register("./sw.js")
-          .catch(() => {});
+        navigator.serviceWorker.getRegistrations().then((registrations) => {
+          for (let registration of registrations) {
+            registration.update();
+          }
+        });
+        if (typeof caches !== "undefined") {
+          caches.keys().then((names) => {
+            names.forEach((name) => {
+              if (name === "hybrid-store-v1") {
+                console.log("[PWA] Tự động giải phóng cache cũ:", name);
+                caches.delete(name);
+              }
+            });
+          });
+        }
       });
     }
   }

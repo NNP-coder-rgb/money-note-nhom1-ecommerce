@@ -418,6 +418,7 @@
     <footer class="site-footer" data-component="footer"></footer>
 
     <script src="../../js/popup.js"></script>
+    <script src="../../js/api.js"></script>
     <script src="../../js/auth.js"></script>
     <script src="../../js/mock_data.js"></script>
     <script src="../../js/utils.js"></script>
@@ -1054,6 +1055,29 @@
             } catch (fallbackErr) {
               console.error("Không thể lưu sản phẩm:", fallbackErr);
             }
+          }
+
+          // Đồng bộ sản phẩm vào Database Backend qua API
+          if (window.API && window.API.Catalog) {
+            const catMap = { tech: 1, audio: 2, fashion: 3, book: 4, home: 5 };
+            const catId = catMap[catKey] || 1;
+            const backendPayload = {
+              name: nameVal,
+              category_id: catId,
+              original_price: oldPriceNum,
+              selling_price: priceNum,
+              stock: 1,
+              is_new: false,
+              wear_condition: condNum,
+              description: descVal,
+              specs: { accessories: selectedAccs, shipping: selectedShipping, location: locationVal },
+              media: uploadedImages.map((u, i) => ({ media_url: u, is_primary: i === 0, media_type: "image" }))
+            };
+            API.Catalog.createProduct(backendPayload).then((res) => {
+              console.log("Đã đồng bộ sản phẩm vào Database Backend thành công:", res);
+            }).catch((err) => {
+              console.warn("Đồng bộ API backend chuyển sang lưu trữ cục bộ:", err);
+            });
           }
 
           Utils.toast("Đang đồng bộ món hàng lên gian hàng Sàn C2C...", "info");

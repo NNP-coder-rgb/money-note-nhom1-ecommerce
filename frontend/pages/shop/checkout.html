@@ -1068,6 +1068,7 @@
 
     <!-- Scripts -->
     <script src="../../js/popup.js"></script>
+    <script src="../../js/api.js"></script>
     <script src="../../js/auth.js"></script>
     <script src="../../js/mock_data.js"></script>
     <script src="../../js/utils.js"></script>
@@ -1771,9 +1772,12 @@
               else if (state.paymentMethod === "CARD") paymentLabel = "Thẻ Quốc Tế (Visa/Mastercard)";
               else if (state.paymentMethod === "EWALLET") paymentLabel = "Ví điện tử MoMo / ZaloPay";
 
+              const buyerUser = (typeof Auth !== "undefined" && typeof Auth.current === "function") ? Auth.current() : null;
               const newOrder = {
                 id: state.orderCode,
                 orderCode: state.orderCode,
+                buyerId: buyerUser ? buyerUser.id : "guest",
+                buyerEmail: buyerUser ? buyerUser.email : "",
                 createdAt: new Date().toISOString(),
               vatInvoice: (document.getElementById("vatInvoiceCheck")?.checked) ? {
                 required: true,
@@ -1820,6 +1824,34 @@
                 localStorage.setItem("hybrid_orders", JSON.stringify(saved));
               } catch (err) {
                 console.error("Lưu đơn lỗi:", err);
+              }
+
+              // Đồng bộ đơn hàng vào Database Backend qua API
+              if (window.API && window.API.Order) {
+                try {
+                  const buyerUser = (window.Auth && window.Auth.current && window.Auth.current()) || null;
+                  const buyerId = (buyerUser && buyerUser.id) ? buyerUser.id : 1;
+                  const payMethodCode = state.paymentMethod === "COD" ? "cod" : (state.paymentMethod === "VIETQR" ? "vietqr" : "card");
+                  const orderPayload = {
+                    order_type: "b2c",
+                    shipping_address_id: 1,
+                    shipping_carrier: state.shippingMethod === "express" ? "Bưu Tá Hỏa Tốc HYBRID (2 Giờ)" : "VNPost Nhanh Toàn Quốc",
+                    shipping_fee: state.shippingFee,
+                    payment_method: payMethodCode,
+                    items: state.cartItems.map((it) => ({
+                      product_id: typeof it.id === "number" ? it.id : 1,
+                      quantity: it.qty || 1,
+                      unit_price: it.price
+                    }))
+                  };
+                  window.API.Order.createOrder(buyerId, orderPayload).then((res) => {
+                    console.log("Đã đồng bộ đơn hàng vào Database Backend thành công:", res);
+                  }).catch((apiErr) => {
+                    console.warn("Backend order sync fallback to local storage:", apiErr);
+                  });
+                } catch (e) {
+                  console.warn("Lỗi chuẩn bị dữ liệu gửi đơn hàng API:", e);
+                }
               }
 
               // Xóa giỏ hàng
