@@ -6,11 +6,15 @@
 (function (global) {
   "use strict";
 
-  // Tự động nhận diện URL Backend (Hỗ trợ Localhost, Cloud Render, IP Lan)
-  const isLocalDev = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
-  const API_BASE = isLocalDev && window.location.port === "5500" 
-    ? "http://127.0.0.1:8000/api/v1" 
-    : "/api/v1";
+  // Tự động nhận diện URL Backend thông minh (Hỗ trợ Live Server mọi cổng, file protocol, Uvicorn 8000, và Cloud Render)
+  let API_BASE = "/api/v1";
+  if (typeof window !== "undefined") {
+    const isFileProto = window.location.protocol === "file:";
+    const isLocalHost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+    if (isFileProto || (isLocalHost && window.location.port !== "8000")) {
+      API_BASE = "http://127.0.0.1:8000/api/v1";
+    }
+  }
 
   const TOKEN_KEY = "hybrid_access_token";
 
@@ -42,7 +46,18 @@
       const data = isJson ? await response.json() : await response.text();
 
       if (!response.ok) {
-        const errorMsg = (data && (data.detail || data.message)) || `Lỗi HTTP ${response.status}`;
+        let errorMsg = `Lỗi HTTP ${response.status}`;
+        if (data) {
+          if (typeof data.detail === "string") {
+            errorMsg = data.detail;
+          } else if (Array.isArray(data.detail)) {
+            errorMsg = data.detail.map((e) => (e && e.msg) || (typeof e === "string" ? e : JSON.stringify(e))).join("; ");
+          } else if (typeof data.message === "string") {
+            errorMsg = data.message;
+          } else if (typeof data.detail === "object" && data.detail !== null) {
+            errorMsg = JSON.stringify(data.detail);
+          }
+        }
         throw new Error(errorMsg);
       }
 
@@ -64,6 +79,8 @@
       });
       if (res.data && res.data.access_token) {
         localStorage.setItem(TOKEN_KEY, res.data.access_token);
+        localStorage.setItem("hv_access_token", res.data.access_token);
+        localStorage.setItem("hv_current_user", JSON.stringify(res.data.user));
         localStorage.setItem("hybrid_current_user", JSON.stringify(res.data.user));
       }
       return res;

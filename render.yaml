@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: hybrid-store
+    runtime: python
+    branch: developer
+    buildCommand: pip install -r backend/requirements.txt && python backend/seed_data.py
+    startCommand: cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: USE_SQLITE_FALLBACK
+        value: "true"
+      - key: DEBUG
+        value: "false"
