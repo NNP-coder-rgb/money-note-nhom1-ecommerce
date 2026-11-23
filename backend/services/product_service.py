@@ -6,7 +6,7 @@ from typing import List, Optional, Tuple
 from sqlalchemy.orm import Session
 from sqlalchemy import or_
 
-from models.product import Product
+from models.catalog import Product
 from schemas.product import ProductCreate, ProductUpdate
 
 
