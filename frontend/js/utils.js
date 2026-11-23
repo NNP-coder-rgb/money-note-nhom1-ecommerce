@@ -823,7 +823,17 @@
       if (typeof localStorage === "undefined") return [];
       try {
         const key = Cart.getStorageKey();
-        return JSON.parse(localStorage.getItem(key)) || [];
+        let items = JSON.parse(localStorage.getItem(key)) || [];
+        // Tương thích ngược nếu còn lưu trữ key cũ hybrid_cart
+        if ((!items || items.length === 0) && key === "hv_cart_guest") {
+          const legacy = JSON.parse(localStorage.getItem("hybrid_cart") || "[]");
+          if (Array.isArray(legacy) && legacy.length > 0) {
+            items = legacy;
+            localStorage.setItem(key, JSON.stringify(items));
+            localStorage.removeItem("hybrid_cart");
+          }
+        }
+        return items;
       } catch (e) {
         return [];
       }

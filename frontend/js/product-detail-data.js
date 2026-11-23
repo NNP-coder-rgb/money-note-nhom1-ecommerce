@@ -11,19 +11,61 @@
      * Phân giải sản phẩm từ ID URL query (?id=...)
      */
     resolveProduct: function (productId) {
+      if (!productId) return null;
       let p = null;
+
+      // 1. Tìm trong mảng PRODUCTS chính thức
       if (typeof PRODUCTS !== "undefined" && Array.isArray(PRODUCTS) && PRODUCTS.length) {
-        if (productId) {
-          p = PRODUCTS.find((x) => String(x.id).toLowerCase() === String(productId).toLowerCase());
-        }
+        p = PRODUCTS.find((x) => String(x.id).toLowerCase() === String(productId).toLowerCase());
+        
+        // Hỗ trợ ánh xạ ngược mã cũ nếu người dùng mở link cũ
         if (!p) {
-          // Tìm trong sản phẩm người bán tự đăng
-          try {
-            const customList = JSON.parse(localStorage.getItem("hv_seller_products") || "[]");
-            p = customList.find((x) => String(x.id).toLowerCase() === String(productId).toLowerCase());
-          } catch (e) {}
+          if (productId.toLowerCase() === "m01") {
+            p = PRODUCTS.find((x) => x.id === "f2") || null;
+          } else if (productId.toLowerCase() === "c01") {
+            p = PRODUCTS.find((x) => x.id === "t2") || null;
+          }
         }
       }
+
+      // 2. Tìm trong sản phẩm người bán tự đăng
+      if (!p) {
+        try {
+          const customList = JSON.parse(localStorage.getItem("hv_seller_products") || "[]");
+          p = customList.find((x) => String(x.id).toLowerCase() === String(productId).toLowerCase());
+        } catch (e) {}
+      }
+
+      // 3. Tìm trong giỏ hàng hiện tại nếu có
+      if (!p) {
+        try {
+          if (typeof Utils !== "undefined" && Utils.Cart) {
+            const cartItems = Utils.Cart.getItems();
+            const cartFound = cartItems.find((x) => String(x.id).toLowerCase() === String(productId).toLowerCase());
+            if (cartFound) {
+              p = {
+                id: cartFound.id,
+                name: cartFound.name,
+                short: cartFound.name,
+                img: cartFound.img,
+                price: cartFound.price,
+                oldPrice: cartFound.oldPrice || cartFound.price,
+                type: cartFound.type || "mall",
+                category: cartFound.category || "fashion",
+                sub: cartFound.seller || (cartFound.type === "mall" ? "HYBRID Flagship" : "Shop Kiểm Định"),
+                tag: cartFound.variant || "Chính hãng",
+                cond: cartFound.condition ? parseInt(cartFound.condition) || 98 : 98,
+                condText: cartFound.condition || "Like New 98%",
+                desc: cartFound.name + " - Sản phẩm chính hãng cao cấp tại HYBRID.STORE.",
+                rating: 5.0,
+                reviews: 18,
+                sold: 52,
+              };
+            }
+          }
+        } catch (e) {}
+      }
+
       return p;
     },
 
@@ -172,6 +214,34 @@
           { label: "Tính năng thông minh", value: "Cảm biến tự động ngắt an toàn, màn hình LED hiển thị thông số" },
           { label: "Nguồn điện áp", value: "220V / 50Hz (Chuẩn lưới điện dân dụng Việt Nam)" },
           { label: "Tình trạng máy", value: isMall ? "Mới 100% nguyên đai nguyên kiện" : `Đồ cũ ${p.cond || 95}% (Động cơ êm ái, vệ sinh sạch sẽ)` },
+          { label: "Bảo hành", value: warranty },
+        ];
+      }
+
+      // 8. Gaming & Console
+      if (cat === "gaming") {
+        return [
+          { label: "Thương hiệu", value: p.sub || "PlayStation / Razer / Logitech" },
+          { label: "Dòng thiết bị", value: p.short || p.name },
+          { label: "Chuẩn kết nối", value: "Không dây Wireless 2.4GHz / Bluetooth 5.3 & Cáp Type-C siêu mềm" },
+          { label: "Công nghệ phản hồi", value: "Cảm ứng xúc giác Haptic Feedback, Cò bấm Adaptive Triggers / Switch cơ học" },
+          { label: "Thời lượng pin", value: "Pin sạc lithium dung lượng cao, thời gian chơi liên tục 12 - 40 giờ" },
+          { label: "Tương thích hệ máy", value: "PC Windows, Mac, PS5, Xbox, Nintendo Switch, Android, iOS" },
+          { label: "Tình trạng sản phẩm", value: isMall ? "Mới 100% Nguyên seal hộp chính hãng" : `Đồ cũ Like New ${p.cond || 98}% (Nút bấm nảy tốt, cần analog 0% drift)` },
+          { label: "Bảo hành", value: warranty },
+        ];
+      }
+
+      // 9. Đồng hồ & Phụ kiện
+      if (cat === "watches") {
+        return [
+          { label: "Thương hiệu", value: p.sub || "Seiko / Tissot / Apple" },
+          { label: "Dòng đồng hồ", value: p.short || p.name },
+          { label: "Chất liệu mặt kính", value: "Kính Sapphire nguyên khối chống trầy xước / Kính khoáng cường lực Hardlex" },
+          { label: "Chất liệu vỏ & dây", value: "Thép không gỉ 316L cao cấp / Dây da thủ công hoặc Titanium" },
+          { label: "Bộ máy vận hành", value: name.includes("Automatic") || name.includes("Cơ") ? "Bộ máy cơ Automatic tự động trữ cót 41 giờ" : "Bộ máy Quartz chính xác cao hoặc Vi xử lý thông minh" },
+          { label: "Khả năng chống nước", value: "Chống nước 5 ATM - 10 ATM (50m - 100m) bơi lội an toàn" },
+          { label: "Tình trạng ngoại quan", value: isMall ? "Mới 100% Fullbox sổ thẻ bảo hành quốc tế" : `Đồ cũ Like New ${p.cond || 98}% (Mặt kính không tì vết, máy nguyên bản)` },
           { label: "Bảo hành", value: warranty },
         ];
       }
