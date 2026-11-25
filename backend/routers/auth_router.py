@@ -1,5 +1,6 @@
 """
 routers/auth_router.py — API Endpoints Xác Thực, Đăng Ký, Đăng Nhập & eKYC CCCD
+Nguyễn Khả Minh Đức
 """
 
 from typing import Optional, Dict, Any
