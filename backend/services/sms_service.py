@@ -2,6 +2,7 @@
 services/sms_service.py — Cổng Gửi Tin Nhắn SMS Thật Trực Tiếp Đến Thuê Bao Di Động
 Hỗ trợ tích hợp cổng viễn thông Quốc tế (Twilio) và cổng viễn thông Việt Nam (eSMS.vn / SpeedSMS).
 Sử dụng thư viện chuẩn urllib.request (zero dependency).
+Nguyen Huy Binh 25/11
 """
 
 import base64

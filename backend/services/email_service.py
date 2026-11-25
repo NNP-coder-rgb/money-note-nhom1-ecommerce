@@ -2,6 +2,7 @@
 services/email_service.py — Dịch Vụ Gửi Email Thật Qua Cổng REST API (Resend HTTPS Port 443) hoặc SMTP
 Hỗ trợ Resend API (cổng 443 không bị chặn bởi Render Free) và SMTP truyền thống.
 Sử dụng thư viện chuẩn urllib.request, smtplib và email.mime của Python.
+Nguyen Huy Binh 25/11
 """
 
 import json
