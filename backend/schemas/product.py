@@ -1,6 +1,6 @@
 """
 schemas/product.py — Pydantic Schemas Cho Đối Tượng Sản Phẩm (Product)
-Nguyen Tien Dat
+Nguyen Tien Dat 
 """
 
 from typing import Optional
