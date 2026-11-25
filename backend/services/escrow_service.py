@@ -1,5 +1,6 @@
 """
 services/escrow_service.py — Nghiệp vụ Ví Ký Quỹ Escrow & Sổ Cái 24/7
+Task T41: Ký quỹ escrow & Trọng tài tranh chấp (Chu Đình Minh)
 """
 
 import uuid
