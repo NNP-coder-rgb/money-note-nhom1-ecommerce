@@ -1,5 +1,6 @@
 """
 schemas/voucher.py — Pydantic Schemas Cho Khuyến Mãi & Voucher
+Nguyễn Tiến Hùng
 """
 
 from typing import Optional
