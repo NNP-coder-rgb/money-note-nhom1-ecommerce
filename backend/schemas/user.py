@@ -1,5 +1,6 @@
 """
 schemas/user.py — Pydantic Schemas Cho Người Dùng, eKYC, Sổ Địa Chỉ & Ngân Hàng
+Nguyễn Khả Minh Đức
 """
 
 from typing import Optional, List

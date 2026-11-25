@@ -1,5 +1,6 @@
 """
 services/auth_service.py — Nghiệp vụ Xác thực, Người dùng, eKYC, Sổ Địa Chỉ & Ngân Hàng
+Nguyễn Khả Minh Đức
 """
 
 import hashlib
