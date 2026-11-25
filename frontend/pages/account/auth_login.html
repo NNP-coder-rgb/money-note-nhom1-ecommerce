@@ -168,7 +168,7 @@
                 <span class="material-symbols-outlined icon-xs">mail</span> Email &amp; Mật Khẩu
               </button>
               <button type="button" class="login-method-btn" id="tabLoginPhone" data-target="phoneOtpLoginForm">
-                <span class="material-symbols-outlined icon-xs">sms</span> Số Điện Thoại (OTP)
+                <span class="material-symbols-outlined icon-xs">pin</span> Số Điện Thoại / Email (OTP)
               </button>
             </div>
 
@@ -244,23 +244,41 @@
                 <span id="buttonText">ĐĂNG NHẬP NGAY</span>
                 <span class="material-symbols-outlined icon-sm">arrow_forward</span>
               </button>
+
+              <!-- Tài khoản mẫu để kiểm thử nhanh -->
+              <div class="demo-accounts-box" style="margin-top: 14px; padding: 10px 12px; background: rgba(56, 189, 248, 0.05); border: 1px dashed rgba(56, 189, 248, 0.3); border-radius: 8px;">
+                <div style="font-size: 11px; font-weight: 700; color: #38bdf8; margin-bottom: 8px; display: flex; align-items: center; gap: 4px;">
+                  <span class="material-symbols-outlined icon-xs">flash_on</span>
+                  ĐĂNG NHẬP NHANH 1-CHẠM (TÀI KHOẢN MẪU):
+                </div>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                  <button type="button" class="btn btn-outline btn-xs" id="quickFillAdminBtn" style="font-size: 11px; padding: 4px 8px; border-color: rgba(99, 102, 241, 0.5); color: #818cf8;">
+                    👑 Quản Trị Viên (Admin)
+                  </button>
+                  <button type="button" class="btn btn-outline btn-xs" id="quickFillBuyerBtn" style="font-size: 11px; padding: 4px 8px; border-color: rgba(56, 189, 248, 0.5); color: #38bdf8;">
+                    🛍️ Người Mua (Buyer)
+                  </button>
+                  <button type="button" class="btn btn-outline btn-xs" id="quickFillSellerBtn" style="font-size: 11px; padding: 4px 8px; border-color: rgba(245, 158, 11, 0.5); color: #fbbf24;">
+                    🏷️ Người Bán (Seller)
+                  </button>
+                </div>
+              </div>
             </form>
 
             <!-- Form 2: Đăng nhập bằng Số điện thoại + Mã SMS OTP (Bảo mật cao) -->
             <form id="phoneOtpLoginForm" style="display: none;" novalidate>
               <div class="form-group">
-                <label class="form-label" for="otpPhoneNumber">Số điện thoại đăng nhập (*)</label>
+                <label class="form-label" for="otpPhoneNumber">Số điện thoại hoặc Email nhận mã OTP (*)</label>
                 <div class="otp-input-group">
                   <div class="input-group flex-1">
-                    <span class="icon-left material-symbols-outlined">call</span>
+                    <span class="icon-left material-symbols-outlined">alternate_email</span>
                     <input
-                      class="input mono"
+                      class="input"
                       id="otpPhoneNumber"
                       name="otpPhoneNumber"
-                      type="tel"
-                      maxlength="10"
+                      type="text"
                       required
-                      placeholder="Ví dụ: 0901234567 hoặc 0987654321"
+                      placeholder="Nhập số điện thoại (09...) hoặc Email của bạn"
                     />
                   </div>
                   <button type="button" class="btn btn-secondary btn-send-otp" id="btnSendPhoneOtp">
@@ -541,12 +559,12 @@
     </div>
 
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script src="../../js/popup.js?v=20261122_v9"></script>
-    <script src="../../js/api.js?v=20261122_v9"></script>
-    <script src="../../js/auth.js?v=20261122_v9"></script>
-    <script src="../../js/utils.js?v=20261122_v9"></script>
-    <script src="../../js/components.js?v=20261122_v9"></script>
-    <script src="../../js/app.js?v=20261122_v9"></script>
-    <script src="../../js/login.js?v=20261122_v9"></script>
+    <script src="../../js/popup.js?v=20261122_v13"></script>
+    <script src="../../js/api.js?v=20261122_v13"></script>
+    <script src="../../js/auth.js?v=20261122_v13"></script>
+    <script src="../../js/utils.js?v=20261122_v13"></script>
+    <script src="../../js/components.js?v=20261122_v13"></script>
+    <script src="../../js/app.js?v=20261122_v13"></script>
+    <script src="../../js/login.js?v=20261122_v13"></script>
   </body>
 </html>

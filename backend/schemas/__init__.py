@@ -31,6 +31,9 @@ from schemas.interaction import (
     WishlistResponse, NotificationResponse
 )
 from schemas.admin import AdminStatsResponse
+from schemas.ai_agent import (
+    AiChatRequest, AiActionSuggestion, AiProductCard, AiChatResponse
+)
 
 __all__ = [
     "BaseResponse",

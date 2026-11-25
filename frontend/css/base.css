@@ -232,10 +232,20 @@ body.light-theme {
 *::before,
 *::after {
   box-sizing: border-box;
+  overflow-wrap: break-word;
 }
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
+}
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
+  position: relative;
 }
 body,
 h1,
@@ -4220,6 +4230,120 @@ body.light-theme .btn-outlined:hover {
   border-color: var(--primary-500);
 }
 
+/* AI Agent Interactive Components */
+.chat-agent-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(139, 92, 246, 0.15);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  color: var(--primary-300);
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: var(--radius-pill);
+}
+
+.chat-product-recommend-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+.chat-product-mini-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 8px;
+  transition: all var(--t-fast);
+}
+.chat-product-mini-card:hover {
+  border-color: var(--primary);
+  background: rgba(139, 92, 246, 0.08);
+}
+.chat-product-mini-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #000;
+}
+.chat-product-mini-info {
+  flex: 1;
+  min-width: 0;
+}
+.chat-product-mini-name {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+  margin-bottom: 2px;
+}
+.chat-product-mini-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+}
+.chat-product-mini-meta .price {
+  color: var(--secondary);
+  font-weight: 800;
+  font-family: var(--font-mono);
+}
+.chat-action-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.action-pill {
+  background: rgba(139, 92, 246, 0.12);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  color: var(--primary-300);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all var(--t-fast);
+  text-decoration: none;
+}
+.action-pill:hover {
+  background: var(--primary-600);
+  color: #fff;
+  border-color: var(--primary-500);
+}
+
+[data-theme="light"] .chat-product-mini-card,
+body.light-theme .chat-product-mini-card {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+}
+[data-theme="light"] .chat-product-mini-card:hover,
+body.light-theme .chat-product-mini-card:hover {
+  background: #f1f5f9;
+  border-color: #6d28d9;
+}
+[data-theme="light"] .action-pill,
+body.light-theme .action-pill {
+  background: #ede9fe;
+  color: #6d28d9;
+  border-color: #c4b5fd;
+}
+[data-theme="light"] .action-pill:hover,
+body.light-theme .action-pill:hover {
+  background: #6d28d9;
+  color: #ffffff;
+  border-color: #5b21b6;
+}
+
 /* ---------------- 6. PRODUCT WISHLIST HEART BUTTON ---------------- */
 .product-wishlist-btn {
   position: absolute;
@@ -5518,6 +5642,491 @@ body.light-theme .user-dropdown-footer {
 body.light-theme .user-dropdown-item:hover {
   background: #f1f5f9;
 }
+
+/* =====================================================================
+   T15 & T16 — TOÀN DIỆN RESPONSIVE MOBILE CHO TẤT CẢ CÁC TRANG & VIEWPORT (PHỤC VỤ ĐIỆN THOẠI & APP MOBILE)
+   Tiêu chí:
+   1. KHÔNG TRÀN (No Horizontal Overflow): html, body, wrapper, table, modal, drawer 100% không tràn ngang.
+   2. KHÔNG THIẾU DIỆN TÍCH (Optimal Space Utilization): Tối ưu từng px trên màn hình 360px - 430px.
+   3. 2 SẢN PHẨM / HÀNG: Cân đối, nút bấm dễ chạm (touch target 34px), chữ vừa mắt không bị co rúm.
+   4. CHỐNG TỰ ĐỘNG ZOOM TRÊN SAFARI: font-size 16px cho form control di động.
+   ===================================================================== */
+
+@media (max-width: 768px) {
+  /* 1. Ngăn chặn triệt để tràn ngang ở mọi cấp độ */
+  html,
+  body {
+    max-width: 100% !important;
+    width: 100% !important;
+    overflow-x: hidden !important;
+    position: relative !important;
+  }
+
+  body {
+    padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  /* Khi có sticky buy bar ở trang sản phẩm, ẩn mobile bottom nav để tránh chồng đè */
+  body:has(#mobileStickyBuyBar),
+  body:has(.mobile-sticky-buy-bar),
+  body.page-product-detail {
+    padding-bottom: calc(74px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  body:has(#mobileStickyBuyBar) .mobile-bottom-nav,
+  body:has(.mobile-sticky-buy-bar) .mobile-bottom-nav,
+  body.page-product-detail .mobile-bottom-nav {
+    display: none !important;
+  }
+
+  /* 2. Container di động: Tối ưu lề 12px, không lãng phí diện tích hai bên */
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-inline: 12px !important;
+  }
+
+  /* 3. Header di động tinh gọn & sắc nét */
+  .site-header {
+    height: 54px !important;
+    padding: 0 !important;
+  }
+  .site-header .container {
+    height: 100% !important;
+    padding-inline: 12px !important;
+    gap: 8px !important;
+    justify-content: space-between !important;
+  }
+  .site-header .brand {
+    font-size: 0.95rem !important;
+    gap: 6px !important;
+  }
+  .site-header .brand-mark {
+    width: 32px !important;
+    height: 32px !important;
+  }
+  .site-header .brand-mark .material-symbols-outlined {
+    font-size: 18px !important;
+  }
+  .site-header .brand small,
+  .site-header .brand .badge {
+    display: none !important;
+  }
+  .site-header .header-actions {
+    gap: 6px !important;
+  }
+  .site-header .header-actions .icon-btn {
+    width: 36px !important;
+    height: 36px !important;
+  }
+  #btnHeaderPost,
+  .wallet-pill,
+  .site-header .header-actions #headerWishlistBtn,
+  .site-header .header-actions #headerNotifBtn {
+    display: none !important;
+  }
+
+  /* 4. Subnav & Breadcrumb di động */
+  .subnav {
+    padding-block: 6px !important;
+  }
+  .subnav .container {
+    padding-inline: 12px !important;
+  }
+  .subnav-info {
+    display: none !important;
+  }
+  .breadcrumb {
+    font-size: 11.5px !important;
+    white-space: nowrap !important;
+    overflow-x: auto !important;
+    scrollbar-width: none !important;
+  }
+  .breadcrumb::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  /* 5. LƯỚI SẢN PHẨM DI ĐỘNG: CHUẨN 2 SẢN PHẨM 1 HÀNG TRÊN MỌI MÀN HÌNH */
+  .product-grid,
+  .catalog-grid,
+  .related-grid,
+  #flashGrid,
+  #trendingProductsGrid,
+  #suggestProductsGrid,
+  .products-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    width: 100% !important;
+    margin-inline: 0 !important;
+  }
+
+  /* Thẻ sản phẩm chuẩn di động: Đều đặn, không giật hình, không tràn mép */
+  .product-card {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    border-radius: 12px !important;
+    border-width: 1px !important;
+    overflow: hidden !important;
+    background: var(--bg-card) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+    transition: none !important;
+  }
+  .product-card:hover {
+    transform: none !important;
+  }
+
+  .product-media {
+    position: relative !important;
+    width: 100% !important;
+    aspect-ratio: 1 / 1 !important;
+    overflow: hidden !important;
+    background: rgba(0, 0, 0, 0.15) !important;
+  }
+  .product-media img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  .product-tags {
+    position: absolute !important;
+    top: 6px !important;
+    left: 6px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 3px !important;
+    z-index: 2 !important;
+  }
+  .product-tags .badge {
+    font-size: 9px !important;
+    padding: 2px 5px !important;
+    line-height: 1.2 !important;
+    border-radius: 4px !important;
+    max-width: 110px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .product-wishlist-btn,
+  .product-compare-btn {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 14px !important;
+    position: absolute !important;
+    z-index: 3 !important;
+  }
+  .product-wishlist-btn {
+    top: 6px !important;
+    right: 6px !important;
+  }
+  .product-compare-btn {
+    top: 38px !important;
+    right: 6px !important;
+  }
+  .media-tag {
+    font-size: 9px !important;
+    padding: 2px 5px !important;
+    bottom: 6px !important;
+    left: 6px !important;
+    border-radius: 4px !important;
+  }
+
+  /* Nội dung thẻ sản phẩm: Cân xứng, tận dụng tối đa chiều rộng */
+  .product-body {
+    padding: 8px 8px 4px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 1 auto !important;
+    gap: 3px !important;
+  }
+  .product-cat {
+    font-size: 9.5px !important;
+    letter-spacing: 0.02em !important;
+    margin-bottom: 2px !important;
+  }
+  .product-name {
+    font-size: 12px !important;
+    line-height: 1.35 !important;
+    height: 2.7em !important;
+    min-height: 2.7em !important;
+    max-height: 2.7em !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    margin-bottom: 2px !important;
+    word-break: break-word !important;
+  }
+  .stars-container {
+    font-size: 11px !important;
+    gap: 1px !important;
+    margin-block: 2px !important;
+  }
+  .cond {
+    margin-block: 2px !important;
+    font-size: 10px !important;
+  }
+  .cond .progress {
+    height: 3px !important;
+  }
+  .product-meta {
+    font-size: 10px !important;
+    gap: 3px !important;
+  }
+
+  .product-price {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: baseline !important;
+    gap: 4px !important;
+    margin-top: 2px !important;
+  }
+  .product-price .price {
+    font-size: 13.5px !important;
+    font-weight: 800 !important;
+  }
+  .product-price .price-old {
+    font-size: 10px !important;
+  }
+  .product-body .text-xs.text-success {
+    font-size: 9.5px !important;
+    line-height: 1.25 !important;
+  }
+
+  /* Nút bấm trên thẻ sản phẩm: Chiều cao chuẩn 34px, dễ chạm, chữ vừa vặn không tràn */
+  .product-actions {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 5px !important;
+    padding: 0 8px 8px !important;
+    margin-top: auto !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .product-actions .btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    padding: 4px 4px !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    border-radius: 8px !important;
+    gap: 3px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    box-sizing: border-box !important;
+  }
+  .product-actions .btn span.material-symbols-outlined {
+    font-size: 15px !important;
+    margin: 0 !important;
+  }
+  .product-actions.c2c-actions {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 5px !important;
+  }
+  .product-actions.c2c-actions .btn-offer-c2c,
+  .product-actions.c2c-actions [data-action="offer"],
+  .product-actions.c2c-actions > :nth-child(3) {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    font-size: 11px !important;
+    padding: 4px 6px !important;
+  }
+
+  /* 6. CHỐNG PHÓNG TO (ANTI-AUTO-ZOOM) TRÊN IOS SAFARI */
+  input[type="text"],
+  input[type="number"],
+  input[type="email"],
+  input[type="password"],
+  input[type="tel"],
+  input[type="search"],
+  select,
+  textarea {
+    font-size: 16px !important; /* Ngăn iOS Safari tự zoom in làm tràn màn hình */
+  }
+
+  /* 7. BẢNG BIỂU CHỐNG TRÀN VÀ TỰ ĐỘNG CUỘN MƯỢT */
+  .table-responsive,
+  .table-wrap,
+  .table-wrapper,
+  .specs-table-wrapper,
+  .admin-table-wrap,
+  .order-table-wrap {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    display: block !important;
+    scrollbar-width: thin !important;
+    margin-bottom: var(--sp-4) !important;
+  }
+  table {
+    word-break: normal !important;
+    border-collapse: collapse !important;
+  }
+
+  /* 8. MODAL & DIALOG DI ĐỘNG: VỪA VẶN MỌI MÀN HÌNH */
+  .modal-backdrop {
+    padding: 8px !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .modal,
+  .modal-lg,
+  .modal-sm,
+  .compare-modal-box {
+    width: 100% !important;
+    max-width: calc(100vw - 16px) !important;
+    max-height: calc(100vh - 24px) !important;
+    border-radius: 16px !important;
+    padding: 16px 14px !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+  }
+  .modal-head {
+    padding-bottom: 10px !important;
+    margin-bottom: 10px !important;
+    border-bottom: 1px solid var(--border) !important;
+  }
+  .modal-body {
+    padding-inline: 0 !important;
+    max-height: calc(100vh - 140px) !important;
+    overflow-y: auto !important;
+  }
+  .modal-foot {
+    padding-top: 10px !important;
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+  }
+  .modal-foot .btn {
+    flex: 1 1 calc(50% - 6px) !important;
+    justify-content: center !important;
+    min-height: 38px !important;
+  }
+
+  /* 9. SLIDE-OVER DRAWER & DROPDOWN DI ĐỘNG */
+  .drawer-cart,
+  .drawer-wishlist {
+    width: 100vw !important;
+    max-width: 100vw !important;
+  }
+  .search-dropdown,
+  .notif-dropdown {
+    position: fixed !important;
+    top: 58px !important;
+    left: 8px !important;
+    right: 8px !important;
+    width: auto !important;
+    max-width: calc(100vw - 16px) !important;
+    max-height: 80vh !important;
+    border-radius: var(--radius-lg) !important;
+    z-index: 1000 !important;
+  }
+  .live-chat-widget {
+    bottom: 74px !important;
+    right: 12px !important;
+  }
+  .live-chat-window {
+    position: fixed !important;
+    bottom: 74px !important;
+    left: 8px !important;
+    right: 8px !important;
+    width: auto !important;
+    max-width: calc(100vw - 16px) !important;
+    max-height: calc(100vh - 86px) !important;
+    border-radius: 16px !important;
+  }
+  .seller-chat-drawer {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 75vh !important;
+    max-height: 85vh !important;
+    border-radius: 20px 20px 0 0 !important;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.7) !important;
+  }
+
+  /* 10. TYPOGRAPHY DI ĐỘNG CÂN XỨNG */
+  h1, .h1, .hero-title, .cart-header-title {
+    font-size: 1.35rem !important;
+    line-height: 1.35 !important;
+  }
+  h2, .h2, .section-title {
+    font-size: 1.18rem !important;
+    line-height: 1.35 !important;
+  }
+  h3, .h3 {
+    font-size: 1.02rem !important;
+  }
+
+  /* 11. FOOTER DI ĐỘNG */
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+    padding-block: 24px !important;
+  }
+  .footer-col {
+    padding-bottom: 14px !important;
+    border-bottom: 1px dashed var(--border) !important;
+  }
+  .footer-col:last-child {
+    border-bottom: none !important;
+  }
+  .footer-bottom {
+    padding-top: 14px !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    text-align: center !important;
+    align-items: center !important;
+  }
+}
+
+/* Tinh chỉnh đặc thù cho điện thoại nhỏ (<= 480px) */
+@media (max-width: 480px) {
+  .container {
+    padding-inline: 10px !important;
+  }
+  .product-grid,
+  .catalog-grid,
+  .related-grid,
+  #flashGrid,
+  #trendingProductsGrid,
+  #suggestProductsGrid,
+  .products-grid {
+    gap: 6px !important;
+  }
+  .product-body {
+    padding: 6px 6px 4px !important;
+  }
+  .product-actions {
+    padding: 0 6px 6px !important;
+    gap: 4px !important;
+  }
+  .product-actions .btn {
+    font-size: 10.5px !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    padding: 2px 2px !important;
+  }
+  .product-price .price {
+    font-size: 13px !important;
+  }
+}
+
+
 
 
 

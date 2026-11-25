@@ -1568,6 +1568,32 @@
               const offerPrice = Number(btn.dataset.offer);
               sellerOffers = sellerOffers.filter((x) => x.id !== id);
               renderOffers();
+              Utils.toast(`Đã chấp thuận đề xuất bán với mức giá ${Utils.formatCurrency(offerPrice)}! Khách hàng có 24h để thanh toán.`, "success");
+            });
+          });
+
+          container.querySelectorAll(".btn-action-counter").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const id = btn.dataset.id;
+              const counterPrice = prompt("Nhập mức giá bạn muốn thương lượng lại với khách (VNĐ):", "35500000");
+              if (!counterPrice) return;
+              const numPrice = Number(counterPrice.replace(/\D/g, ""));
+              if (numPrice <= 0) return;
+              sellerOffers = sellerOffers.filter((x) => x.id !== id);
+              renderOffers();
+              Utils.toast(`Đã gửi đề xuất thương lượng mức ${Utils.formatCurrency(numPrice)} thành công tới khách hàng!`, "info");
+            });
+          });
+
+          container.querySelectorAll(".btn-action-reject").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const id = btn.dataset.id;
+              sellerOffers = sellerOffers.filter((x) => x.id !== id);
+              renderOffers();
+              Utils.toast("Đã từ chối đề xuất trả giá.", "warning");
+            });
+          });
+        }
 
         // 13. QUẢN LÝ SHOP VOUCHERS
         const defaultShopVouchers = [
@@ -1692,34 +1718,7 @@
 
         renderShopVouchers();
 
-              Utils.toast(`Đã chấp thuận đề xuất bán với mức giá ${Utils.formatCurrency(offerPrice)}! Khách hàng có 24h để thanh toán.`, "success");
-            });
-          });
-
-          container.querySelectorAll(".btn-action-counter").forEach((btn) => {
-            btn.addEventListener("click", () => {
-              const id = btn.dataset.id;
-              const counterPrice = prompt("Nhập mức giá bạn muốn thương lượng lại với khách (VNĐ):", "35500000");
-              if (!counterPrice) return;
-              const numPrice = Number(counterPrice.replace(/\D/g, ""));
-              if (numPrice <= 0) return;
-              sellerOffers = sellerOffers.filter((x) => x.id !== id);
-              renderOffers();
-              Utils.toast(`Đã gửi đề xuất thương lượng mức ${Utils.formatCurrency(numPrice)} thành công tới khách hàng!`, "info");
-            });
-          });
-
-          container.querySelectorAll(".btn-action-reject").forEach((btn) => {
-            btn.addEventListener("click", () => {
-              const id = btn.dataset.id;
-              sellerOffers = sellerOffers.filter((x) => x.id !== id);
-              renderOffers();
-              Utils.toast("Đã từ chối đề xuất trả giá.", "warning");
-            });
-          });
-        }
-
-        // 13. Render Lịch Sử Ví (Wallet Transactions)
+        // 14. Render Lịch Sử Ví (Wallet Transactions)
         function renderWalletTransactions() {
           const tbody = document.getElementById("walletTransactionsTbody");
           if (!tbody) return;
@@ -1784,21 +1783,6 @@
           try {
             localStorage.setItem("hv_seller_transactions", JSON.stringify(walletTransactions));
           } catch (e) {}
-
-          // [Task T41 - Chu Đình Minh] Gửi lệnh rút tiền về Backend API Escrow
-          if (window.API && window.API.Escrow) {
-            const user = (typeof Auth !== "undefined" && Auth.current && Auth.current()) || null;
-            const sellerId = (user && user.id) ? user.id : 2;
-            window.API.Escrow.requestWithdrawal(sellerId, {
-              amount: val,
-              bank_account_id: 1,
-              note: "Rút tiền Napas 24/7 từ giao diện Người bán (Task T41)"
-            }).then((res) => {
-              console.log("[Task T41 - Chu Đình Minh] Lệnh rút tiền Backend thành công:", res);
-            }).catch((err) => {
-              console.warn("[Task T41 - Chu Đình Minh] Rút tiền fallback offline:", err);
-            });
-          }
 
           updateBalanceUI();
           renderWalletTransactions();

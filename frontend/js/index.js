@@ -472,11 +472,12 @@
     const catSections = $("#categorySections");
     if (catSections) {
       catSections.innerHTML = list.map((c) => {
+        const maxPerCat = typeof window !== "undefined" && window.innerWidth <= 768 ? 6 : 12;
         const items = PRODUCTS.filter((p) => {
           const matchCat = p.category === c.id;
           const matchType = currentHomeType === "all" ? true : p.type === currentHomeType;
           return matchCat && matchType && !p.flashOnly && !p.catalogOnly;
-        }).slice(0, 12);
+        }).slice(0, maxPerCat);
         if (!items || items.length === 0) return "";
         const viewAllUrl = currentHomeType === "all"
           ? 'pages/shop/catalog.html?cat=' + c.id

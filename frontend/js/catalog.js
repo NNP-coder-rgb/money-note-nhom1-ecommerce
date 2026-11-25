@@ -66,7 +66,7 @@
     },
     sortKey: "default",
     page: 1,
-    pageSize: 18, // Tăng thêm 10 sản phẩm mỗi trang (từ 8 lên 18 sản phẩm/trang)
+    pageSize: typeof window !== "undefined" && window.innerWidth <= 768 ? 6 : 18, // 6 sản phẩm chuẩn di động (3 hàng x 2 cột), 18 sản phẩm trên desktop
   };
 
   /* ---------------- THAM CHIẾU DOM ---------------- */
@@ -595,6 +595,9 @@
       dom.minPriceInput.value = state.filters.minPrice != null ? state.filters.minPrice : "";
     if (dom.maxPriceInput)
       dom.maxPriceInput.value = state.filters.maxPrice != null ? state.filters.maxPrice : "";
+    if (dom.pageSizeSelect) {
+      dom.pageSizeSelect.value = String(state.pageSize);
+    }
   }
 
   function resetAllFilters() {
@@ -978,7 +981,7 @@
     // 10. Số lượng hiển thị mỗi trang (Page Size)
     if (dom.pageSizeSelect) {
       dom.pageSizeSelect.addEventListener("change", (e) => {
-        state.pageSize = Number(e.target.value) || 18;
+        state.pageSize = Number(e.target.value) || (window.innerWidth <= 768 ? 6 : 18);
         state.page = 1;
         render();
       });

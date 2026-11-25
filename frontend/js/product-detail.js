@@ -9,9 +9,20 @@
 
   // Lấy ID sản phẩm từ URL (?id=...)
   const params = new URLSearchParams(window.location.search);
-  const productId = params.get("id") || (typeof PRODUCTS !== "undefined" && PRODUCTS[0] ? PRODUCTS[0].id : null);
+  let rawId = params.get("id");
+  const aliasMap = { m01: "f2", c01: "t2" };
+  if (rawId && aliasMap[String(rawId).toLowerCase()]) {
+    rawId = aliasMap[String(rawId).toLowerCase()];
+  }
+  const productId = rawId || (typeof PRODUCTS !== "undefined" && PRODUCTS[0] ? PRODUCTS[0].id : null);
 
-  const product = (typeof PRODUCTS !== "undefined") ? PRODUCTS.find((p) => p.id === productId) || PRODUCTS[0] : null;
+  let product = null;
+  if (typeof ProductDetailData !== "undefined" && typeof ProductDetailData.resolveProduct === "function") {
+    product = ProductDetailData.resolveProduct(productId);
+  }
+  if (!product && typeof PRODUCTS !== "undefined") {
+    product = PRODUCTS.find((p) => String(p.id).toLowerCase() === String(productId).toLowerCase()) || PRODUCTS[0];
+  }
 
   if (!product) {
     console.error("Không tìm thấy sản phẩm:", productId);

@@ -2894,7 +2894,8 @@ body.light-theme .admin-quick-card:hover {
 }
 @media (max-width: 600px) {
   .related-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
   }
 }
 
@@ -4492,3 +4493,495 @@ body.light-theme .courier-gps-map-box {
   background: #f1f5f9;
   border-color: #cbd5e1;
 }
+
+/* =====================================================================
+   T16 — TOÀN DIỆN RESPONSIVE MOBILE CHO TẤT CẢ CÁC MÀN HÌNH CHỨC NĂNG
+   (Product Detail, Cart, Checkout, Orders, Dispute, Seller, Admin, Profile)
+   ===================================================================== */
+
+/* 1. MÀN HÌNH CHI TIẾT SẢN PHẨM (Brand Mall & C2C Like New) */
+@media (max-width: 768px) {
+  .product-detail-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .gallery-main,
+  .product-gallery-main {
+    max-height: 380px !important;
+    border-radius: var(--radius-lg) !important;
+  }
+  .gallery-main img,
+  .product-gallery-main img {
+    max-height: 380px !important;
+    object-fit: contain !important;
+  }
+  .thumb-strip,
+  .product-thumbs-strip {
+    display: flex !important;
+    gap: 8px !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding-bottom: 4px !important;
+  }
+  .thumb-strip img,
+  .product-thumb-item {
+    width: 54px !important;
+    height: 54px !important;
+    flex-shrink: 0 !important;
+    border-radius: var(--radius-sm) !important;
+  }
+  .product-detail-info {
+    padding-top: 4px !important;
+  }
+  .product-detail-title,
+  .product-title {
+    font-size: 1.25rem !important;
+    line-height: 1.35 !important;
+    margin-bottom: 8px !important;
+  }
+  .product-price-box {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    align-items: baseline !important;
+    margin-block: 10px !important;
+  }
+  .product-price-current,
+  .price-current {
+    font-size: 1.35rem !important;
+    font-weight: 800 !important;
+  }
+  .variant-btn-group,
+  .variant-options-group {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+  }
+  .variant-btn {
+    min-height: 36px !important;
+    padding: 6px 12px !important;
+    font-size: 12px !important;
+  }
+  .lab-report-box {
+    padding: 14px 12px !important;
+    border-radius: var(--radius-lg) !important;
+  }
+  #labReportGrid {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+  .specs-table {
+    display: table !important;
+    width: 100% !important;
+    font-size: 12px !important;
+  }
+  .specs-table th {
+    width: 38% !important;
+    padding: 8px 10px !important;
+    font-size: 11.5px !important;
+  }
+  .specs-table td {
+    padding: 8px 10px !important;
+    font-size: 12px !important;
+  }
+  .detail-tabs-bar {
+    display: flex !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    scrollbar-width: none !important;
+    padding-bottom: 6px !important;
+    gap: 8px !important;
+  }
+  .detail-tabs-bar::-webkit-scrollbar {
+    display: none !important;
+  }
+  .detail-tab-btn {
+    padding: 8px 14px !important;
+    font-size: 12px !important;
+    flex-shrink: 0 !important;
+  }
+  .seller-card-full {
+    padding: 14px 12px !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    align-items: stretch !important;
+  }
+  .reviews-summary-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+}
+
+/* 2. MÀN HÌNH GIỎ HÀNG (Cart) */
+@media (max-width: 768px) {
+  .cart-layout {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  .cart-item {
+    display: grid !important;
+    grid-template-columns: 64px minmax(0, 1fr) !important;
+    gap: 10px !important;
+    padding: 12px !important;
+    border-radius: var(--radius-md) !important;
+    position: relative !important;
+  }
+  .cart-item-img {
+    width: 64px !important;
+    height: 64px !important;
+    border-radius: var(--radius-sm) !important;
+  }
+  .cart-item-title {
+    font-size: 12.5px !important;
+    line-height: 1.35 !important;
+  }
+  .cart-item-actions {
+    grid-column: 1 / -1 !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding-top: 10px !important;
+    margin-top: 6px !important;
+    border-top: 1px dashed var(--border) !important;
+  }
+  .qty-control {
+    height: 32px !important;
+  }
+  .qty-btn {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 14px !important;
+  }
+  .qty-input {
+    width: 40px !important;
+    height: 32px !important;
+    font-size: 12.5px !important;
+  }
+  .cart-summary-panel {
+    border-radius: var(--radius-lg) !important;
+    padding: 16px 14px !important;
+  }
+  .voucher-input-row {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  .voucher-input-row .btn {
+    width: 100% !important;
+  }
+}
+
+/* 3. MÀN HÌNH THANH TOÁN (Checkout) */
+@media (max-width: 992px) {
+  .checkout-layout-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  .checkout-summary-panel {
+    position: static !important;
+    top: auto !important;
+  }
+}
+@media (max-width: 768px) {
+  .checkout-item-row {
+    gap: 10px !important;
+    padding-block: 8px !important;
+  }
+  .checkout-item-thumb {
+    width: 44px !important;
+    height: 44px !important;
+  }
+  .pay-method-card {
+    padding: 12px 14px !important;
+    margin-bottom: 8px !important;
+  }
+  .saved-address-pills {
+    display: flex !important;
+    gap: 8px !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    padding-bottom: 6px !important;
+    scrollbar-width: none !important;
+  }
+  .saved-address-pills::-webkit-scrollbar {
+    display: none !important;
+  }
+  .shipping-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+  .addr-type-btn-group {
+    flex-direction: row !important;
+  }
+}
+
+/* 4. MÀN HÌNH ĐƠN HÀNG & CHI TIẾT ĐƠN (Orders & Order Detail) */
+@media (max-width: 768px) {
+  .order-container-main {
+    padding-top: 16px !important;
+    padding-bottom: 40px !important;
+  }
+  .order-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    margin-bottom: 20px !important;
+  }
+  .order-stat-card {
+    padding: 12px 14px !important;
+    gap: 10px !important;
+    border-radius: var(--radius-md) !important;
+  }
+  .order-stat-icon-wrap {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  .order-tabs-bar {
+    display: flex !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    gap: 6px !important;
+    scrollbar-width: none !important;
+    padding-bottom: 6px !important;
+  }
+  .order-tabs-bar::-webkit-scrollbar {
+    display: none !important;
+  }
+  .order-tab-btn {
+    padding: 8px 14px !important;
+    font-size: 12px !important;
+    flex-shrink: 0 !important;
+  }
+  .order-card {
+    padding: 16px 14px !important;
+    border-radius: var(--radius-lg) !important;
+    margin-bottom: 18px !important;
+  }
+  .order-card-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+    padding-bottom: 12px !important;
+    margin-bottom: 14px !important;
+  }
+  .order-meta-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+  .order-card-actions {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+  }
+  .order-card-actions > * {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+  .order-tracking-bar {
+    grid-template-columns: repeat(2, 1fr) !important;
+    padding: 12px 14px !important;
+    gap: 10px !important;
+  }
+  .order-full-stepper {
+    grid-template-columns: 1fr !important;
+    padding: 14px 16px !important;
+    gap: 14px !important;
+  }
+  .shipper-dispatch-card {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 14px 16px !important;
+    gap: 12px !important;
+  }
+}
+@media (max-width: 480px) {
+  .order-stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* 5. MÀN HÌNH TRANH CHẤP & KHIẾU NẠI (Dispute) */
+@media (max-width: 840px) {
+  .dispute-3col-layout {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .dispute-panel {
+    padding: 16px 14px !important;
+    border-radius: var(--radius-lg) !important;
+  }
+  .dispute-chat-box {
+    height: 380px !important;
+  }
+}
+
+/* 6. MÀN HÌNH KÊNH NGƯỜI BÁN & ĐĂNG BÁN AI (Seller Dashboard & Post Item) */
+@media (max-width: 860px) {
+  .dash-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+  .dash-sidebar {
+    width: 100% !important;
+    position: static !important;
+    height: auto !important;
+    border-radius: var(--radius-lg) !important;
+  }
+  .side-nav {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+  }
+  .side-link {
+    flex: 1 1 calc(50% - 6px) !important;
+    min-height: 40px !important;
+    font-size: 12px !important;
+  }
+  .stat-grid,
+  .metric-grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+  .post-studio-layout {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+  .ai-viewfinder-box {
+    aspect-ratio: 4 / 3 !important;
+    max-height: 320px !important;
+  }
+}
+@media (max-width: 480px) {
+  .side-link {
+    flex: 1 1 100% !important;
+  }
+  .stat-grid,
+  .metric-grid-4 {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* 7. MÀN HÌNH MASTER ADMIN (Admin Portal) */
+@media (max-width: 1024px) {
+  .admin-dash {
+    grid-template-columns: 1fr !important;
+  }
+  .admin-content-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .admin-metric-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+}
+@media (max-width: 640px) {
+  .admin-metric-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .admin-header-actions {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+}
+
+/* 8. MÀN HÌNH HỒ SƠ NGƯỜI DÙNG & TÀI KHOẢN (Profile) */
+@media (max-width: 992px) {
+  .profile-layout {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  .profile-sidebar {
+    width: 100% !important;
+  }
+}
+@media (max-width: 768px) {
+  .profile-card-user,
+  .profile-card-stats,
+  .profile-card-dist,
+  .profile-section-panel {
+    padding: 16px 14px !important;
+    border-radius: var(--radius-lg) !important;
+  }
+  .profile-avatar-wrap {
+    width: 80px !important;
+    height: 80px !important;
+  }
+  .profile-avatar-img {
+    font-size: 24px !important;
+  }
+  .profile-header-title {
+    font-size: 1.35rem !important;
+  }
+}
+
+/* =====================================================================
+   9. TỐI ƯU TOÀN DIỆN KHÔNG TRÀN & KHÔNG THIẾU DIỆN TÍCH CHO CÁC MÀN HÌNH NÂNG CAO
+   ===================================================================== */
+@media (max-width: 768px) {
+  /* Seller Chat Drawer dạng Bottom Sheet */
+  .seller-chat-drawer {
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 75vh !important;
+    max-height: 85vh !important;
+    border-radius: 20px 20px 0 0 !important;
+    border-bottom: none !important;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.7) !important;
+  }
+
+  /* Compare Modal & Matrix */
+  .compare-modal-box {
+    padding: 16px 12px !important;
+    max-width: calc(100vw - 16px) !important;
+  }
+  .compare-matrix-table,
+  .compare-table {
+    display: block !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  /* Review Summary Card */
+  .reviews-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .reviews-summary-card {
+    padding: 16px !important;
+  }
+
+  /* Specs Table */
+  .specs-table-wrapper {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .specs-table {
+    min-width: 100% !important;
+  }
+  .specs-table td,
+  .specs-table th {
+    padding: 8px 10px !important;
+    font-size: 12px !important;
+  }
+
+  /* Sticky Buy Bar */
+  .mobile-sticky-buy-bar {
+    padding: 8px 12px !important;
+    gap: 8px !important;
+  }
+  .mobile-sticky-buy-bar .sticky-price-info {
+    min-width: 0 !important;
+  }
+  .mobile-sticky-buy-bar .sticky-actions {
+    gap: 6px !important;
+  }
+  .mobile-sticky-buy-bar .btn {
+    padding: 6px 10px !important;
+    font-size: 12px !important;
+    min-height: 36px !important;
+  }
+}
+

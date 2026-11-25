@@ -441,6 +441,50 @@
     }, 600);
   });
 
+  // Các nút điền nhanh tài khoản mẫu kiểm thử 1-chạm
+  const quickFillAdminBtn = document.getElementById("quickFillAdminBtn");
+  const quickFillBuyerBtn = document.getElementById("quickFillBuyerBtn");
+  const quickFillSellerBtn = document.getElementById("quickFillSellerBtn");
+
+  if (quickFillAdminBtn) {
+    quickFillAdminBtn.addEventListener("click", () => {
+      if (idInput) idInput.value = "admin";
+      if (pwd) pwd.value = "admin123456";
+      role = "admin";
+      updateRoleDestHint("admin");
+      if (form) {
+        if (typeof form.requestSubmit === "function") form.requestSubmit();
+        else form.dispatchEvent(new Event("submit"));
+      }
+    });
+  }
+
+  if (quickFillBuyerBtn) {
+    quickFillBuyerBtn.addEventListener("click", () => {
+      if (idInput) idInput.value = "phuc@hybrid.store";
+      if (pwd) pwd.value = "password123";
+      role = "buyer";
+      updateRoleDestHint("buyer");
+      if (form) {
+        if (typeof form.requestSubmit === "function") form.requestSubmit();
+        else form.dispatchEvent(new Event("submit"));
+      }
+    });
+  }
+
+  if (quickFillSellerBtn) {
+    quickFillSellerBtn.addEventListener("click", () => {
+      if (idInput) idInput.value = "binh@sneakers.vn";
+      if (pwd) pwd.value = "password123";
+      role = "seller";
+      updateRoleDestHint("seller");
+      if (form) {
+        if (typeof form.requestSubmit === "function") form.requestSubmit();
+        else form.dispatchEvent(new Event("submit"));
+      }
+    });
+  }
+
   // =========================================================================
   // 3. ĐĂNG NHẬP BẰNG TÀI KHOẢN GOOGLE CHUẨN GOOGLE IDENTITY SERVICES (GIS)
   // =========================================================================
@@ -844,92 +888,98 @@
   if (btnSendPhoneOtp && otpPhoneNumber) {
     btnSendPhoneOtp.addEventListener("click", async () => {
       if (phoneInputError) phoneInputError.textContent = "";
-      const phoneVal = otpPhoneNumber.value.trim();
-      const cleanPhone = phoneVal.replace(/\D/g, "");
+      const rawTarget = otpPhoneNumber.value.trim();
+      const isEmail = rawTarget.includes("@") && rawTarget.includes(".");
+      const cleanTarget = isEmail ? rawTarget.toLowerCase() : rawTarget.replace(/\D/g, "");
 
-      if (!cleanPhone || cleanPhone.length !== 10 || !cleanPhone.startsWith("0")) {
-        if (phoneInputError) phoneInputError.textContent = "Vui lòng nhập đúng số điện thoại di động (10 chữ số, ví dụ 0901234567).";
-        otpPhoneNumber.focus();
-        return;
+      if (isEmail) {
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanTarget)) {
+          if (phoneInputError) phoneInputError.textContent = "Địa chỉ email không hợp lệ. Vui lòng kiểm tra lại.";
+          otpPhoneNumber.focus();
+          return;
+        }
+      } else {
+        if (!cleanTarget || cleanTarget.length !== 10 || !cleanTarget.startsWith("0")) {
+          if (phoneInputError) phoneInputError.textContent = "Vui lòng nhập đúng số điện thoại di động (10 chữ số, ví dụ 09...) hoặc Email của bạn.";
+          otpPhoneNumber.focus();
+          return;
+        }
       }
 
       btnSendPhoneOtp.disabled = true;
-      btnSendPhoneOtp.innerHTML = `<span class="material-symbols-outlined icon-xs spin">sync</span> Đang gửi SMS...`;
+      btnSendPhoneOtp.innerHTML = `<span class="material-symbols-outlined icon-xs spin">sync</span> ${isEmail ? "Đang gửi email..." : "Đang gửi SMS..."}`;
 
       try {
         let sentOk = false;
-        let maskedPhone = cleanPhone.slice(0, 3) + "****" + cleanPhone.slice(-3);
-        let devOtp = null;
-        let isRealSmsSent = false;
+        let maskedTarget = isEmail
+          ? cleanTarget.replace(/^(.)(.*)(@.*)$/, (_, a, b, c) => a + "***" + c)
+          : cleanTarget.slice(0, 3) + "****" + cleanTarget.slice(-3);
+        let errorMsg = "";
 
-        // 1. Gửi qua Backend SMS Gateway thật (Twilio / eSMS)
+        // Gửi qua Backend SMS Gateway / Resend Email API thật
         if (typeof API !== "undefined" && API.Auth && API.Auth.sendPhoneOtpSms) {
           try {
-            const apiRes = await API.Auth.sendPhoneOtpSms(cleanPhone);
+            const apiRes = await API.Auth.sendPhoneOtpSms(cleanTarget);
             if (apiRes && apiRes.success) {
               sentOk = true;
               if (apiRes.data) {
-                if (apiRes.data.masked_phone) maskedPhone = apiRes.data.masked_phone;
-                isRealSmsSent = !!apiRes.data.sms_dispatched;
-                if (apiRes.data.dev_otp) devOtp = apiRes.data.dev_otp;
+                if (apiRes.data.masked_phone) maskedTarget = apiRes.data.masked_phone;
+                if (apiRes.data.masked_target) maskedTarget = apiRes.data.masked_target;
               }
+            } else if (apiRes && apiRes.message) {
+              errorMsg = apiRes.message;
             }
           } catch (e) {
-            console.warn("[Phone OTP SMS] Lỗi kết nối API Gateway, chuyển dự phòng:", e.message);
+            errorMsg = e.message || (isEmail ? "Lỗi gửi mã OTP qua email." : "Lỗi kết nối Cổng SMS viễn thông.");
+            console.warn("[OTP Dispatch] Lỗi kết nối API Gateway:", errorMsg);
           }
         }
 
-        // 2. Dự phòng Auth cục bộ nếu backend offline
-        if (!sentOk && typeof Auth !== "undefined" && Auth.sendPhoneOtp) {
-          const localRes = Auth.sendPhoneOtp(cleanPhone);
-          if (localRes.ok) {
-            sentOk = true;
-            maskedPhone = localRes.maskedPhone;
-            devOtp = localRes.code;
-          } else {
-            if (phoneInputError) phoneInputError.textContent = localRes.error;
-            btnSendPhoneOtp.disabled = false;
-            btnSendPhoneOtp.innerHTML = `<span class="material-symbols-outlined icon-xs">send</span> Nhận Mã OTP`;
-            return;
+        // Nếu chưa cấu hình hoặc gửi thất bại -> Báo lỗi bảo vệ hệ thống, tuyệt đối không in mã ra màn hình
+        if (!sentOk) {
+          btnSendPhoneOtp.disabled = false;
+          btnSendPhoneOtp.innerHTML = `<span class="material-symbols-outlined icon-xs">send</span> Nhận Mã OTP`;
+          const displayErr = errorMsg || (isEmail ? "Chưa thể gửi email OTP. Vui lòng kiểm tra cấu hình RESEND_API_KEY trên Render." : "Hệ thống chưa kết nối Cổng SMS viễn thông (eSMS/Twilio).");
+          if (phoneInputError) {
+            phoneInputError.textContent = displayErr;
           }
+          if (typeof notify === "function") {
+            notify({
+              type: "error",
+              title: isEmail ? "Chưa Thể Gửi Email OTP" : "Chưa Thể Gửi SMS OTP",
+              message: displayErr,
+            });
+          }
+          return;
         }
 
-        if (sentOk) {
-          if (secureSmsNotice && secureSmsNoticeText) {
-            secureSmsNotice.style.display = "flex";
-            if (isRealSmsSent) {
-              secureSmsNoticeText.innerHTML = `Mã OTP 6 số đã được gửi trực tiếp đến SIM điện thoại <strong class="text-secondary">${escapeSafeHtml(maskedPhone)}</strong> qua Cổng viễn thông. Vui lòng mở tin nhắn SMS trên điện thoại của bạn để lấy mã (hiệu lực 3 phút).`;
-            } else {
-              secureSmsNoticeText.innerHTML = `
-                <div class="mb-1 text-secondary fw-700">Mã xác thực OTP: <span class="mono" style="font-size: 16px; letter-spacing: 2px; color: #fff; background: rgba(56, 189, 248, 0.25); padding: 2px 8px; border-radius: 4px;">${devOtp || "123456"}</span></div>
-                <div class="text-3xs text-muted">Hệ thống chưa kết nối Cổng SMS viễn thông trả phí (Twilio/eSMS). Mã OTP được tạo tự động và điền sẵn bên dưới để bạn đăng nhập ngay!</div>
-              `;
-            }
-          }
-
-          if (devOtp && phoneOtpCode) {
-            phoneOtpCode.value = devOtp;
-          }
-
-          notify({
-            type: "success",
-            title: isRealSmsSent ? "Đã Gửi Tin Nhắn SMS OTP" : "Mã OTP Xác Thực",
-            message: isRealSmsSent
-              ? `Mã OTP đã được gửi đến số thuê bao ${maskedPhone}. Vui lòng mở ứng dụng Tin nhắn (SMS) trên điện thoại để lấy mã.`
-              : `Mã OTP của bạn là: ${devOtp}. Hệ thống đã tự động điền sẵn vào ô mã để bạn đăng nhập ngay!`,
-          });
-
-          startPhoneOtpCooldown(60);
-          if (phoneOtpCode) {
-            phoneOtpCode.focus();
-          }
-        } else {
-          throw new Error("Không thể gửi tin nhắn SMS lúc này. Vui lòng thử lại sau.");
+        // Gửi thành công trực tiếp vào Email hoặc SIM điện thoại
+        if (secureSmsNotice && secureSmsNoticeText) {
+          secureSmsNotice.style.display = "flex";
+          secureSmsNoticeText.innerHTML = isEmail
+            ? `Mã OTP 6 số bảo mật đã được gửi trực tiếp đến hòm thư <strong class="text-secondary">${escapeSafeHtml(maskedTarget)}</strong>. Vui lòng mở hòm thư email của bạn để lấy mã (hiệu lực 3 phút).`
+            : `Mã OTP 6 số bảo mật đã được gửi trực tiếp qua mạng viễn thông tới SIM điện thoại <strong class="text-secondary">${escapeSafeHtml(maskedTarget)}</strong>. Vui lòng mở tin nhắn SMS trên điện thoại của bạn để lấy mã (hiệu lực 3 phút).`;
         }
+
+        // Ô nhập mã OTP để trống hoàn toàn để người dùng tự tay nhập mã nhận được
+        if (phoneOtpCode) {
+          phoneOtpCode.value = "";
+          phoneOtpCode.focus();
+        }
+
+        notify({
+          type: "success",
+          title: isEmail ? "Đã Gửi Mã OTP Đến Email" : "Đã Gửi Tin Nhắn SMS OTP",
+          message: isEmail
+            ? `Mã OTP bảo mật đã được gửi trực tiếp đến hộp thư ${maskedTarget}. Vui lòng kiểm tra hòm thư của bạn.`
+            : `Mã OTP bảo mật đã được gửi trực tiếp đến SIM điện thoại ${maskedTarget}. Vui lòng mở tin nhắn SMS trên máy để lấy mã.`,
+        });
+
+        startPhoneOtpCooldown(60);
       } catch (err) {
         btnSendPhoneOtp.disabled = false;
         btnSendPhoneOtp.innerHTML = `<span class="material-symbols-outlined icon-xs">send</span> Nhận Mã OTP`;
-        if (phoneInputError) phoneInputError.textContent = err.message || "Lỗi gửi tin nhắn SMS.";
+        if (phoneInputError) phoneInputError.textContent = err.message || "Lỗi gửi mã OTP.";
       }
     });
   }
@@ -940,18 +990,27 @@
       if (phoneInputError) phoneInputError.textContent = "";
       if (phoneOtpCodeError) phoneOtpCodeError.textContent = "";
 
-      const phoneVal = otpPhoneNumber ? otpPhoneNumber.value.trim() : "";
-      const cleanPhone = phoneVal.replace(/\D/g, "");
+      const rawVal = otpPhoneNumber ? otpPhoneNumber.value.trim() : "";
+      const isEmail = rawVal.includes("@") && rawVal.includes(".");
+      const cleanTarget = isEmail ? rawVal.toLowerCase() : rawVal.replace(/\D/g, "");
       const otpVal = phoneOtpCode ? phoneOtpCode.value.trim() : "";
 
-      if (!cleanPhone || cleanPhone.length !== 10) {
-        if (phoneInputError) phoneInputError.textContent = "Vui lòng nhập đúng số điện thoại (10 chữ số).";
-        if (otpPhoneNumber) otpPhoneNumber.focus();
-        return;
+      if (isEmail) {
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanTarget)) {
+          if (phoneInputError) phoneInputError.textContent = "Địa chỉ email không hợp lệ.";
+          if (otpPhoneNumber) otpPhoneNumber.focus();
+          return;
+        }
+      } else {
+        if (!cleanTarget || cleanTarget.length !== 10) {
+          if (phoneInputError) phoneInputError.textContent = "Vui lòng nhập đúng số điện thoại (10 chữ số) hoặc địa chỉ Email.";
+          if (otpPhoneNumber) otpPhoneNumber.focus();
+          return;
+        }
       }
 
       if (!otpVal || otpVal.length !== 6) {
-        if (phoneOtpCodeError) phoneOtpCodeError.textContent = "Vui lòng nhập đúng mã OTP gồm 6 chữ số từ tin nhắn SMS.";
+        if (phoneOtpCodeError) phoneOtpCodeError.textContent = "Vui lòng nhập đúng mã OTP gồm 6 chữ số.";
         if (phoneOtpCode) phoneOtpCode.focus();
         return;
       }
@@ -969,7 +1028,7 @@
         // 1. Xác thực và đăng nhập qua Backend API
         if (typeof API !== "undefined" && API.Auth && API.Auth.loginWithPhoneOtp) {
           try {
-            const apiLogin = await API.Auth.loginWithPhoneOtp(cleanPhone, otpVal, role);
+            const apiLogin = await API.Auth.loginWithPhoneOtp(cleanTarget, otpVal, role);
             if (apiLogin && apiLogin.success && apiLogin.data) {
               loginSuccess = true;
               sessionUser = apiLogin.data.user;
@@ -978,14 +1037,14 @@
               }
             }
           } catch (e) {
-            console.warn("[Phone Login] API backend login fallback:", e.message);
+            console.warn("[Phone/Email Login] API backend login fallback:", e.message);
             errorMsg = e.message;
           }
         }
 
         // 2. Dự phòng Auth cục bộ nếu backend offline
         if (!loginSuccess && typeof Auth !== "undefined" && Auth.loginWithPhone) {
-          const localLogin = Auth.loginWithPhone(cleanPhone, otpVal, role);
+          const localLogin = Auth.loginWithPhone(cleanTarget, otpVal, role);
           if (localLogin.ok) {
             loginSuccess = true;
             sessionUser = localLogin.user;
@@ -1005,7 +1064,7 @@
             showPopup({
               type: "error",
               title: "Xác thực OTP thất bại",
-              message: errorMsg || "Mã OTP không chính xác hoặc đã hết hạn. Vui lòng kiểm tra lại tin nhắn SMS trên điện thoại.",
+              message: errorMsg || (isEmail ? "Mã OTP không chính xác hoặc đã hết hạn. Vui lòng kiểm tra lại hòm thư email của bạn." : "Mã OTP không chính xác hoặc đã hết hạn. Vui lòng kiểm tra lại tin nhắn SMS trên điện thoại."),
               confirmText: "Thử lại",
             });
           }
@@ -1025,12 +1084,13 @@
         const confirmLabel = getConfirmButtonLabel(targetAfterLogin, sessionUser, role);
 
         if (typeof showPopup === "function") {
+          const targetDisplay = (sessionUser && (sessionUser.phone || sessionUser.email)) || cleanTarget;
           showPopup({
             type: "success",
             title: "Đăng nhập thành công!",
             message:
-              "Xác thực số điện thoại " +
-              (sessionUser.phone || cleanPhone) +
+              (isEmail ? "Xác thực địa chỉ Email " : "Xác thực số điện thoại ") +
+              targetDisplay +
               " thành công. " +
               getWelcomeMessage(sessionUser, role),
             confirmText: confirmLabel,
@@ -1176,6 +1236,7 @@
     try {
       let res = null;
       // 1. Gửi qua Backend SMTP thật (Gmail / SendGrid)
+      let errorMsg = "";
       if (typeof API !== "undefined" && API.Auth && API.Auth.requestPasswordReset) {
         try {
           const apiRes = await API.Auth.requestPasswordReset(emailVal);
@@ -1184,16 +1245,32 @@
               ok: true,
               email: apiRes.data.email,
               maskedEmail: apiRes.data.masked_email,
+              isRealEmail: !!apiRes.data.email_dispatched,
+              testOtp: apiRes.data.test_otp,
             };
+          } else if (apiRes && apiRes.message) {
+            errorMsg = apiRes.message;
           }
         } catch (e) {
-          console.warn("[Forgot-Password] API SMTP fallback:", e.message);
+          errorMsg = e.message || "Lỗi kết nối máy chủ gửi Email SMTP.";
+          console.warn("[Forgot-Password] API SMTP Error:", errorMsg);
         }
       }
 
       // 2. Dự phòng Auth cục bộ nếu backend offline
       if (!res && typeof Auth !== "undefined" && Auth.sendPasswordResetEmail) {
-        res = Auth.sendPasswordResetEmail(emailVal);
+        const localRes = Auth.sendPasswordResetEmail(emailVal);
+        if (localRes.ok) {
+          res = {
+            ok: true,
+            email: localRes.email || emailVal,
+            maskedEmail: localRes.maskedEmail,
+            isRealEmail: false,
+            testOtp: localRes.code,
+          };
+        } else {
+          errorMsg = localRes.error;
+        }
       }
 
       if (btnSendForgotOtp) {
@@ -1202,7 +1279,16 @@
       }
 
       if (!res || !res.ok) {
-        if (forgotStep1Error) forgotStep1Error.textContent = (res && res.error) || "Không thể gửi email lúc này.";
+        if (forgotStep1Error) {
+          forgotStep1Error.textContent = errorMsg || "Không tìm thấy tài khoản hoặc không thể gửi email lúc này.";
+        }
+        if (typeof notify === "function") {
+          notify({
+            type: "error",
+            title: "Chưa Thể Gửi Email OTP",
+            message: errorMsg || "Vui lòng kiểm tra lại địa chỉ email tài khoản.",
+          });
+        }
         return;
       }
 
@@ -1215,7 +1301,7 @@
       notify({
         type: "success",
         title: "Đã Gửi Mã OTP Đến Email",
-        message: `Mã xác thực OTP đã được gửi trực tiếp đến hộp thư ${res.maskedEmail || res.email}. Vui lòng kiểm tra hòm thư.`,
+        message: `Mã xác thực OTP đã được gửi trực tiếp đến hộp thư ${res.maskedEmail || res.email}. Vui lòng mở hòm thư để lấy mã.`,
       });
 
       setForgotStep(2);
@@ -1260,21 +1346,22 @@
       btnResendForgotOtp.disabled = true;
 
       let res = null;
+      let resendError = "";
       if (typeof API !== "undefined" && API.Auth && API.Auth.requestPasswordReset) {
         try {
           const apiRes = await API.Auth.requestPasswordReset(resetVerifiedEmail);
           if (apiRes && apiRes.success && apiRes.data) {
             res = { ok: true, maskedEmail: apiRes.data.masked_email };
+          } else if (apiRes && apiRes.message) {
+            resendError = apiRes.message;
           }
-        } catch (e) {}
-      }
-
-      if (!res && typeof Auth !== "undefined" && Auth.sendPasswordResetEmail) {
-        res = Auth.sendPasswordResetEmail(resetVerifiedEmail);
+        } catch (e) {
+          resendError = e.message || "Lỗi gửi lại mã OTP qua email.";
+        }
       }
 
       if (!res || !res.ok) {
-        if (forgotStep2Error) forgotStep2Error.textContent = (res && res.error) || "Không thể gửi lại mã lúc này.";
+        if (forgotStep2Error) forgotStep2Error.textContent = resendError || "Không thể gửi lại mã lúc này. Vui lòng kiểm tra cấu hình SMTP trên Render.";
         btnResendForgotOtp.disabled = false;
         return;
       }

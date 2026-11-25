@@ -1451,15 +1451,12 @@
               chatBody.scrollTop = chatBody.scrollHeight;
             }
 
-            // [Task T41 - Chu Đình Minh] Đồng bộ tin nhắn phòng tranh chấp lên Backend qua API
+            // Đồng bộ tin nhắn phòng tranh chấp lên Backend qua API
             if (window.API && window.API.Dispute) {
-              const currentUser = (typeof Auth !== "undefined" && Auth.current && Auth.current()) || null;
-              const senderId = (currentUser && currentUser.id) ? currentUser.id : 1;
-              const senderRole = (currentUser && currentUser.role) ? currentUser.role : "buyer";
-              window.API.Dispute.sendMessage(1, senderId, senderRole, { message_text: text, attachment_url: "" }).then((res) => {
-                console.log("[Task T41 - Chu Đình Minh] Đã đồng bộ tin nhắn tranh chấp lên Database:", res);
+              window.API.Dispute.sendMessage(1, { message: text }).then((res) => {
+                console.log("Đã đồng bộ tin nhắn tranh chấp lên Database:", res);
               }).catch((err) => {
-                console.warn("[Task T41 - Chu Đình Minh] Lưu trữ chat tranh chấp dự phòng:", err);
+                console.warn("Lưu trữ chat tranh chấp dự phòng:", err);
               });
             }
 
