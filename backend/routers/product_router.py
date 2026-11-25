@@ -1,5 +1,6 @@
 """
 routers/product_router.py — API Endpoints Quản Lý Sản Phẩm (Products)
+Nguyen Tien Dat
 """
 
 from typing import Optional, Annotated

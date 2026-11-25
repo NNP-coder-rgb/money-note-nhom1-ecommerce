@@ -1,5 +1,6 @@
 """
 routers/catalog_router.py — API Endpoints Danh Mục, Thương Hiệu & Sản Phẩm (Mall & C2C)
+Nguyen Tien Dat
 """
 
 from typing import Optional, List, Annotated

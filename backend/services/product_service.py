@@ -1,5 +1,6 @@
 """
 services/product_service.py — Lớp Xử Lý Nghiệp Vụ & Truy Vấn CRUD Cho Product
+Nguyen Tien Dat
 """
 
 from typing import List, Optional, Tuple

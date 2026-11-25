@@ -1,5 +1,6 @@
 """
 services/catalog_service.py — Nghiệp vụ Danh mục, Thương hiệu, Sản phẩm & Thư viện ảnh
+Nguyen Tien Dat
 """
 
 from typing import List, Optional, Tuple, Dict, Any
