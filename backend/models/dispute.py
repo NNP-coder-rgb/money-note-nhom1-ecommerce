@@ -1,5 +1,6 @@
 """
 models/dispute.py — SQLAlchemy ORM Models cho Phòng Trọng Tài Khiếu Nại 3 Bên
+Task T41: Ký quỹ escrow & Trọng tài tranh chấp (Chu Đình Minh)
 """
 
 from datetime import datetime

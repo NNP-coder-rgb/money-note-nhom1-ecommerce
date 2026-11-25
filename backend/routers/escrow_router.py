@@ -1,5 +1,6 @@
 """
 routers/escrow_router.py — API Endpoints Ví Ký Quỹ Escrow & Sổ Cái 24/7
+Task T41: Ký quỹ escrow & Trọng tài tranh chấp (Chu Đình Minh)
 """
 
 from typing import List, Optional

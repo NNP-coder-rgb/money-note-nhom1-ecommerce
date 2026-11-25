@@ -1,5 +1,6 @@
 """
 models/escrow.py — SQLAlchemy ORM Models cho Ví Ký Quỹ Escrow & Sổ Cái Biến Động 24/7
+Task T41: Ký quỹ escrow & Trọng tài tranh chấp (Chu Đình Minh)
 """
 
 from datetime import datetime

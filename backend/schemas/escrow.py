@@ -1,5 +1,6 @@
 """
 schemas/escrow.py — Pydantic Schemas Cho Ví Ký Quỹ Escrow & Sổ Cái 24/7
+Task T41: Ký quỹ escrow & Trọng tài tranh chấp (Chu Đình Minh)
 """
 
 from typing import Optional, List
