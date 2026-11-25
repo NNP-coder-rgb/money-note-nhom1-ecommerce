@@ -54,12 +54,12 @@
         gap: 14px;
       }
 
-      /* Stepper 5 bước chi tiết */
+      /* Stepper 4 bước tinh gọn */
       .order-full-stepper {
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         gap: 14px;
-        padding: 20px 24px;
+        padding: 16px 20px;
         background: rgba(255, 255, 255, 0.02);
         border: 1px solid var(--border);
         border-radius: var(--radius-lg);
@@ -450,20 +450,20 @@
         const isCancelled = status === "cancelled";
         const isPending = status === "pending" || status === "confirmed" || status === "processing";
 
-        let stepIndex = currentOrder.stepIndex || 1;
-        if (isCompleted) stepIndex = 5;
-        else if (isDelivering) stepIndex = 4;
+        let stepIndex = 1;
+        if (isCompleted) stepIndex = 4;
+        else if (isDelivering) stepIndex = 3;
         else if (isPending) stepIndex = 2;
 
         let statusBadgeHtml = "";
         if (isCompleted) {
-          statusBadgeHtml = `<span class="badge badge-success flex items-center gap-1" style="font-size: 12px; padding: 6px 12px;"><span class="material-symbols-outlined icon-xs">verified</span> ĐÃ GIAO THÀNH CÔNG &amp; ĐỒNG KIỂM XONG</span>`;
+          statusBadgeHtml = `<span class="badge badge-success flex items-center gap-1" style="font-size: 12px; padding: 5px 10px;"><span class="material-symbols-outlined icon-xs">verified</span> Đã Giao Hàng</span>`;
         } else if (isDelivering) {
-          statusBadgeHtml = `<span class="badge badge-secondary flex items-center gap-1" style="font-size: 12px; padding: 6px 12px;"><span class="material-symbols-outlined icon-xs">local_shipping</span> ĐANG GIAO HỎA TỐC TẬN TAY</span>`;
+          statusBadgeHtml = `<span class="badge badge-secondary flex items-center gap-1" style="font-size: 12px; padding: 5px 10px;"><span class="material-symbols-outlined icon-xs">local_shipping</span> Đang Giao Hàng</span>`;
         } else if (isCancelled) {
-          statusBadgeHtml = `<span class="badge badge-danger flex items-center gap-1" style="font-size: 12px; padding: 6px 12px;"><span class="material-symbols-outlined icon-xs">cancel</span> ĐÃ HỦY ĐƠN HÀNG</span>`;
+          statusBadgeHtml = `<span class="badge badge-danger flex items-center gap-1" style="font-size: 12px; padding: 5px 10px;"><span class="material-symbols-outlined icon-xs">cancel</span> Đã Hủy</span>`;
         } else {
-          statusBadgeHtml = `<span class="badge badge-warning flex items-center gap-1" style="font-size: 12px; padding: 6px 12px;"><span class="material-symbols-outlined icon-xs">hourglass_top</span> ĐANG XỬ LÝ &amp; KIỂM ĐỊNH KỸ THUẬT</span>`;
+          statusBadgeHtml = `<span class="badge badge-warning flex items-center gap-1" style="font-size: 12px; padding: 5px 10px;"><span class="material-symbols-outlined icon-xs">hourglass_top</span> Đang Xử Lý</span>`;
         }
 
         const addr = currentOrder.shippingAddress || {};
@@ -484,28 +484,23 @@
           return `
             <div class="item-detail-row">
               <a href="${detailUrl}">
-                <img src="${imgSrc}" alt="${item.name}" style="width: 84px; height: 84px; border-radius: 10px; object-fit: cover; border: 1px solid var(--border);" />
+                <img src="${imgSrc}" alt="${item.name}" style="width: 72px; height: 72px; border-radius: 8px; object-fit: cover; border: 1px solid var(--border);" />
               </a>
               <div class="flex-1" style="min-width: 0;">
                 <div class="flex items-center gap-2 mb-1 flex-wrap">
-                  ${isUsed ? `<span class="badge badge-c2c" style="font-size: 10px;">ĐỒ CŨ ${item.condition || "99%"}</span>` : `<span class="badge badge-mall" style="font-size: 10px;">BRAND MALL MỚI 100%</span>`}
+                  ${isUsed ? `<span class="badge badge-c2c" style="font-size: 10px;">${item.condition || "99% MỚI"}</span>` : `<span class="badge badge-mall" style="font-size: 10px;">MỚI 100%</span>`}
                   ${item.variant ? `<span class="badge badge-secondary" style="font-size: 10px;">${item.variant}</span>` : ""}
-                  <span class="badge badge-outlined" style="font-size: 10px;">IMEI/SN: 356891029384712</span>
                 </div>
-                <h3 class="text-sm fw-700 line-clamp-1 mb-1">
+                <h3 class="text-sm fw-600 line-clamp-1 mb-1">
                   <a href="${detailUrl}" class="text-hover-primary">${item.name}</a>
                 </h3>
-                <div class="text-xs text-muted flex items-center gap-3 flex-wrap" style="margin-top: 4px;">
-                  <span>Xuất kho: <strong class="text-white">${item.seller || "Kho Keangnam HN"}</strong></span>
-                  <span>•</span>
-                  <span>Số lượng: <strong>x${qty}</strong></span>
-                  <span>•</span>
-                  <span class="text-success fw-600 flex items-center gap-1"><span class="material-symbols-outlined icon-xs">security</span> Bảo hành 12-24 Tháng</span>
+                <div class="text-xs text-muted">
+                  Số lượng: <strong>x${qty}</strong>
                 </div>
               </div>
               <div class="text-right" style="white-space: nowrap;">
-                <div class="mono text-primary text-base fw-700">${formatMoney(sub)}</div>
-                <div class="text-xs text-muted mt-0.5">${formatMoney(item.price)} x ${qty}</div>
+                <div class="mono text-primary text-sm fw-700">${formatMoney(sub)}</div>
+                <div class="text-2xs text-muted mt-0.5">${formatMoney(item.price)}/sp</div>
               </div>
             </div>
           `;
@@ -533,7 +528,7 @@
               <div class="flex items-center gap-2 flex-wrap">
                 ${statusBadgeHtml}
                 <button class="btn btn-secondary btn-sm" onclick="window.print();">
-                  <span class="material-symbols-outlined icon-xs">print</span> In Đơn Hàng
+                  <span class="material-symbols-outlined icon-xs">print</span> In Đơn
                 </button>
               </div>
             </div>
@@ -542,67 +537,54 @@
             ${
               currentOrder.vatInvoice && currentOrder.vatInvoice.required
                 ? `
-                <div class="panel p-4 my-3" style="background: rgba(59, 130, 246, 0.05); border: 1.5px solid rgba(59, 130, 246, 0.3); border-radius: var(--radius-lg, 12px);">
-                  <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+                <div class="panel p-3 my-3" style="background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.25); border-radius: var(--radius-md);">
+                  <div class="flex items-center justify-between mb-2 flex-wrap gap-2">
                     <div class="flex items-center gap-2">
-                      <span class="material-symbols-outlined text-primary">receipt_long</span>
-                      <h3 class="text-sm fw-700 text-white m-0">HÓA ĐƠN ĐIỆN TỬ GIÁ TRỊ GIA TĂNG (VAT)</h3>
+                      <span class="material-symbols-outlined text-primary icon-sm">receipt_long</span>
+                      <h3 class="text-xs fw-700 text-white m-0">HÓA ĐƠN ĐIỆN TỬ (VAT)</h3>
                     </div>
-                    <span class="badge badge-success text-2xs"><span class="status-dot"></span> ĐÃ PHÁT HÀNH HỢP LỆ</span>
+                    <span class="badge badge-success text-2xs">HỢP LỆ</span>
                   </div>
-                  <div class="grid grid-2 gap-3 text-xs">
-                    <div><span class="text-muted">Đơn vị mua hàng:</span> <strong class="text-white block mt-0.5">${currentOrder.vatInvoice.companyName}</strong></div>
-                    <div><span class="text-muted">Mã số thuế (MST):</span> <strong class="mono text-white block mt-0.5">${currentOrder.vatInvoice.taxCode}</strong></div>
-                    <div><span class="text-muted">Địa chỉ cơ quan:</span> <span class="text-muted block mt-0.5">${currentOrder.vatInvoice.address}</span></div>
-                    <div><span class="text-muted">Email nhận file XML/PDF:</span> <span class="text-muted block mt-0.5">${currentOrder.vatInvoice.email}</span></div>
-                    <div><span class="text-muted">Số hóa đơn điện tử:</span> <strong class="mono text-primary block mt-0.5">${currentOrder.vatInvoice.invoiceNumber}</strong></div>
-                    <div><span class="text-muted">Ký số điện tử:</span> <span class="text-success block mt-0.5">Xác thực chứng thư số VNPT-CA</span></div>
+                  <div class="grid grid-2 gap-2 text-xs">
+                    <div><span class="text-muted">Đơn vị:</span> <strong class="text-white">${currentOrder.vatInvoice.companyName}</strong></div>
+                    <div><span class="text-muted">MST:</span> <strong class="mono text-white">${currentOrder.vatInvoice.taxCode}</strong></div>
+                    <div><span class="text-muted">Số HĐ:</span> <strong class="mono text-primary">${currentOrder.vatInvoice.invoiceNumber}</strong></div>
+                    <div><span class="text-muted">Email nhận:</span> <span class="text-muted">${currentOrder.vatInvoice.email}</span></div>
                   </div>
                 </div>
               `
                 : ""
             }
 
-            <!-- STEPPER 5 BƯỚC CHI TIẾT -->
+            <!-- STEPPER 4 BƯỚC TINH GỌN -->
             <div class="order-full-stepper">
               <div class="stepper-step ${stepIndex >= 1 ? (stepIndex > 1 ? "done" : "active") : ""}">
                 <div class="stepper-dot-wrap">
                   <div class="stepper-dot">${stepIndex > 1 ? "✓" : "1"}</div>
-                  <strong class="text-xs">Tiếp Nhận Đơn</strong>
+                  <strong class="text-xs">Đặt Hàng</strong>
                 </div>
-                <div class="text-xs text-muted">Hệ thống ghi nhận</div>
               </div>
               <div class="stepper-step ${stepIndex >= 2 ? (stepIndex > 2 ? "done" : "active") : ""}">
                 <div class="stepper-dot-wrap">
                   <div class="stepper-dot">${stepIndex > 2 ? "✓" : "2"}</div>
-                  <strong class="text-xs">Test 15 Bước</strong>
+                  <strong class="text-xs">Đã Xác Nhận</strong>
                 </div>
-                <div class="text-xs text-muted">Dán tem niêm phong</div>
               </div>
               <div class="stepper-step ${stepIndex >= 3 ? (stepIndex > 3 ? "done" : "active") : ""}">
                 <div class="stepper-dot-wrap">
                   <div class="stepper-dot">${stepIndex > 3 ? "✓" : "3"}</div>
-                  <strong class="text-xs">Xuất Kho Bưu Cục</strong>
+                  <strong class="text-xs">Đang Giao Hàng</strong>
                 </div>
-                <div class="text-xs text-muted">Đóng gói chống va đập</div>
               </div>
-              <div class="stepper-step ${stepIndex >= 4 ? (stepIndex > 4 ? "done" : "active") : ""}">
+              <div class="stepper-step ${stepIndex >= 4 ? "done" : ""}">
                 <div class="stepper-dot-wrap">
-                  <div class="stepper-dot">${stepIndex > 4 ? "✓" : "4"}</div>
-                  <strong class="text-xs">Bưu Tá Đang Giao</strong>
+                  <div class="stepper-dot">${stepIndex >= 4 ? "✓" : "4"}</div>
+                  <strong class="text-xs">Đã Giao</strong>
                 </div>
-                <div class="text-xs text-muted">Trên đường giao đến bạn</div>
-              </div>
-              <div class="stepper-step ${stepIndex >= 5 ? "done" : ""}">
-                <div class="stepper-dot-wrap">
-                  <div class="stepper-dot">${stepIndex >= 5 ? "✓" : "5"}</div>
-                  <strong class="text-xs">Đồng Kiểm Thành Công</strong>
-                </div>
-                <div class="text-xs text-muted">Kích hoạt bảo hành điện tử</div>
               </div>
             </div>
 
-            <!-- SHIPPER CARD NẾU ĐANG GIAO -->
+            <!-- THÔNG TIN BƯU TÁ NẾU ĐANG GIAO -->
             ${
               isDelivering
                 ? `
@@ -613,47 +595,18 @@
                       </div>
                       <div>
                         <div class="flex items-center gap-2">
-                          <strong class="text-xs text-white">Bưu tá phụ trách: Nguyễn Văn Hùng</strong>
-                          <span class="badge badge-success" style="font-size: 10px;"><span class="shipper-live-dot"></span> Đang di chuyển</span>
+                          <strong class="text-xs text-white">Bưu tá: Nguyễn Văn Hùng</strong>
+                          <span class="badge badge-success" style="font-size: 10px;"><span class="shipper-live-dot"></span> Đang giao</span>
                         </div>
                         <div class="text-xs text-muted" style="margin-top: 3px;">
-                          Tuyến giao hỏa tốc: Keangnam - Cầu Giấy • Xe máy: Honda Airblade (29-X1 884.29)
-                        </div>
-                        <div class="text-xs text-success flex items-center gap-1" style="margin-top: 3px;">
-                          <span class="material-symbols-outlined icon-xs">task_alt</span> Bưu tá sẽ chờ quý khách mở hộp cắm sạc test máy 15 phút trước khi nhận
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- BẢN ĐỒ THEO DÕI SHIPPER GPS THỜI GIAN THỰC -->
-                    <div class="courier-gps-map-box my-3">
-                      <div class="gps-radar-grid"></div>
-                      <div class="gps-radar-sweep"></div>
-                      <div class="gps-route-line"></div>
-                      <div class="gps-shipper-dot" title="Shipper Nguyễn Văn Hùng">
-                        <span class="material-symbols-outlined" style="font-size: 14px;">two_wheeler</span>
-                      </div>
-                      <div class="gps-destination-dot" title="Địa chỉ nhận hàng của bạn">
-                        <span class="material-symbols-outlined" style="font-size: 14px;">home_pin</span>
-                      </div>
-                      <div class="gps-hud-overlay">
-                        <div class="flex items-center justify-between text-2xs">
-                          <span class="flex items-center gap-1 text-success">
-                            <span class="status-dot"></span> ĐỊNH VỊ GPS BƯU TÁ TRỰC TIẾP
-                          </span>
-                          <span class="mono text-white">VNPOST HỎA TỐC 2H</span>
-                        </div>
-                        <div class="flex items-center justify-between mt-1 text-xs">
-                          <div>Khoảng cách: <strong class="text-primary mono">1.8 km</strong></div>
-                          <div>Dự kiến đến: <strong class="text-warning mono">~12 phút</strong></div>
-                          <div>Tốc độ: <strong class="mono text-white">28 km/h</strong></div>
+                          SĐT: 0981 234 567 • Tuyến Cầu Giấy / Nam Từ Liêm
                         </div>
                       </div>
                     </div>
 
                     <div class="flex items-center gap-2">
                       <button class="btn btn-secondary btn-sm" onclick="alert('Đang kết nối cuộc gọi đến bưu tá Nguyễn Văn Hùng (0981 234 567)...');">
-                        <span class="material-symbols-outlined icon-xs text-success">call</span> Gọi Bưu Tá (0981 234 567)
+                        <span class="material-symbols-outlined icon-xs text-success">call</span> Gọi Bưu Tá
                       </button>
                       <button class="btn btn-primary btn-sm" id="btnOpenTrackModal">
                         <span class="material-symbols-outlined icon-xs">route</span> Xem Lộ Trình
@@ -665,77 +618,34 @@
             }
           </div>
 
-          <!-- KHỐI 2: BIÊN BẢN KIỂM ĐỊNH KỸ THUẬT 15 BƯỚC -->
-          <div class="inspection-box">
-            <div class="flex items-center justify-between flex-wrap gap-2">
-              <div class="flex items-center gap-3">
-                <span class="material-symbols-outlined text-success" style="font-size: 28px;">verified</span>
-                <div>
-                  <h3 class="text-sm fw-700 text-white" style="margin: 0;">BIÊN BẢN KIỂM ĐỊNH KỸ THUẬT SỐ 15 BƯỚC HYBRID.STORE</h3>
-                  <div class="text-xs text-muted mt-0.5">
-                    Kỹ thuật viên trưởng: <strong class="text-white">Trần Hoàng Nam</strong> (Mã KTV: KTV-082 • Showroom Keangnam HN)
-                  </div>
-                </div>
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="badge badge-success" style="font-size: 11px; padding: 4px 10px;">15/15 BƯỚC ĐẠT CHUẨN XUẤT SẮC</span>
-                <span class="badge badge-secondary" style="font-size: 11px; padding: 4px 10px;">TEM MÀNG VỠ: QR-HYBRID-884920</span>
-              </div>
+          <!-- TEM KIỂM ĐỊNH KỸ THUẬT -->
+          <div class="p-3 mb-4 rounded flex items-center justify-between flex-wrap gap-2" style="background: rgba(16, 185, 129, 0.06); border: 1px solid rgba(16, 185, 129, 0.25);">
+            <div class="flex items-center gap-2 text-xs">
+              <span class="material-symbols-outlined text-success icon-sm">verified</span>
+              <span class="text-white fw-600">Đã kiểm định kỹ thuật 15 bước đạt chuẩn 100%</span>
+              <span class="text-muted">• Tem niêm phong: QR-HYBRID-884920</span>
             </div>
-
-            <div class="inspection-grid">
-              <div class="inspection-check-item">
-                <span class="material-symbols-outlined text-success icon-xs">check_circle</span>
-                <div>
-                  <strong class="text-white block">1. Màn Hình &amp; Cảm Ứng</strong>
-                  <span class="text-muted">Tần số quét 120Hz mượt, không đốm sáng, không ám ố hay điểm chết.</span>
-                </div>
-              </div>
-
-              <div class="inspection-check-item">
-                <span class="material-symbols-outlined text-success icon-xs">check_circle</span>
-                <div>
-                  <strong class="text-white block">2. Pin &amp; Hiệu Năng Chipset</strong>
-                  <span class="text-muted">Dung lượng pin 98%-100%, nhiệt độ máy mát, sạc nhanh ổn định.</span>
-                </div>
-              </div>
-
-              <div class="inspection-check-item">
-                <span class="material-symbols-outlined text-success icon-xs">check_circle</span>
-                <div>
-                  <strong class="text-white block">3. Loa, Mic &amp; Kết Nối Sóng</strong>
-                  <span class="text-muted">Âm thanh stereo trong trẻo, mic lọc tiếng ồn, sóng 5G &amp; Wifi 6E hoàn hảo.</span>
-                </div>
-              </div>
-
-              <div class="inspection-check-item">
-                <span class="material-symbols-outlined text-success icon-xs">check_circle</span>
-                <div>
-                  <strong class="text-white block">4. Nguồn Gốc &amp; Tem Niêm Phong</strong>
-                  <span class="text-muted">Đã thoát toàn bộ iCloud/tài khoản cũ, dán tem màng vỡ QR chống tháo vỏ.</span>
-                </div>
-              </div>
-            </div>
+            <span class="badge badge-success text-2xs">Chính hãng</span>
           </div>
 
-          <!-- KHỐI 3: DANH SÁCH MẶT HÀNG TRONG ĐƠN -->
+          <!-- KHỐI 2: DANH SÁCH MẶT HÀNG TRONG ĐƠN -->
           <div class="detail-card">
             <h3 class="text-sm fw-700 text-white mb-3 flex items-center gap-2">
-              <span class="material-symbols-outlined icon-sm text-primary">devices</span> Danh Sách Thiết Bị Trong Đơn Hàng (${(currentOrder.items || []).length})
+              <span class="material-symbols-outlined icon-sm text-primary">devices</span> Danh Sách Sản Phẩm (${(currentOrder.items || []).length})
             </h3>
             <div class="items-list-container">
               ${itemsHtml}
             </div>
           </div>
 
-          <!-- KHỐI 4: THÔNG TIN GIAO NHẬN & BẢNG KÊ THANH TOÁN (2 CỘT RÕ RÀNG) -->
+          <!-- KHỐI 3: THÔNG TIN GIAO NHẬN & CHI PHÍ -->
           <div class="detail-meta-grid">
             <div class="meta-panel">
               <h4 class="text-xs fw-700 text-white flex items-center gap-1.5" style="margin: 0 0 6px 0;">
-                <span class="material-symbols-outlined icon-xs text-secondary">location_on</span> Thông Tin Người Nhận &amp; Bưu Cục
+                <span class="material-symbols-outlined icon-xs text-secondary">location_on</span> Thông Tin Người Nhận
               </h4>
               <div class="meta-line">
-                <span class="text-muted">Họ tên người nhận:</span>
+                <span class="text-muted">Họ tên:</span>
                 <strong>${recipientName}</strong>
               </div>
               <div class="meta-line">
@@ -743,11 +653,11 @@
                 <strong>${recipientPhone}</strong>
               </div>
               <div class="meta-line" style="align-items: flex-start;">
-                <span class="text-muted" style="white-space: nowrap; margin-right: 12px;">Địa chỉ nhận hàng:</span>
+                <span class="text-muted" style="white-space: nowrap; margin-right: 12px;">Địa chỉ:</span>
                 <strong class="text-right" style="word-break: break-word;">${fullAddr}</strong>
               </div>
               <div class="meta-line">
-                <span class="text-muted">Đơn vị vận chuyển:</span>
+                <span class="text-muted">Vận chuyển:</span>
                 <strong>${carrier}</strong>
               </div>
               <div class="meta-line">
@@ -757,7 +667,7 @@
               ${
                 currentOrder.note
                   ? `<div class="text-xs text-muted pt-2 italic" style="border-top: 1px dashed rgba(255,255,255,0.06);">
-                       Ghi chú khách hàng: "${currentOrder.note}"
+                       Ghi chú: "${currentOrder.note}"
                      </div>`
                   : ""
               }
@@ -765,51 +675,47 @@
 
             <div class="meta-panel">
               <h4 class="text-xs fw-700 text-white flex items-center gap-1.5" style="margin: 0 0 6px 0;">
-                <span class="material-symbols-outlined icon-xs text-success">receipt</span> Chi Phí &amp; Quyền Lợi Đồng Kiểm
+                <span class="material-symbols-outlined icon-xs text-success">receipt</span> Chi Phí Đơn Hàng
               </h4>
               <div class="meta-line">
-                <span class="text-muted">Tổng tiền hàng:</span>
+                <span class="text-muted">Tiền hàng:</span>
                 <strong class="mono">${formatMoney(currentOrder.subtotal || currentOrder.total || 0)}</strong>
               </div>
               <div class="meta-line">
-                <span class="text-muted">Phí vận chuyển bưu điện:</span>
+                <span class="text-muted">Phí vận chuyển:</span>
                 <span class="mono text-success">${currentOrder.shippingFee ? formatMoney(currentOrder.shippingFee) : "0₫ (Freeship)"}</span>
               </div>
               ${
                 currentOrder.discount
                   ? `<div class="meta-line">
-                       <span class="text-muted">Voucher giảm giá:</span>
+                       <span class="text-muted">Giảm giá voucher:</span>
                        <span class="mono text-success">-${formatMoney(currentOrder.discount)}</span>
                      </div>`
                   : ""
               }
-              <div class="meta-line">
-                <span class="text-muted">Bảo hiểm vận chuyển &amp; đồng kiểm:</span>
-                <span class="mono text-success">0₫ (Bảo hiểm 100%)</span>
-              </div>
               <div class="meta-line pt-2" style="border-top: 1px dashed var(--border); margin-top: 6px;">
-                <strong class="text-white" style="font-size: 14px;">Tổng cộng thanh toán:</strong>
+                <strong class="text-white" style="font-size: 14px;">Tổng thanh toán:</strong>
                 <strong class="mono text-gradient text-sm" style="font-size: 1.35rem;">${formatMoney(currentOrder.total || 0)}</strong>
               </div>
               <div class="text-xs text-muted mt-1">
-                Phương thức: <strong>${currentOrder.paymentMethod === "COD" ? "Thanh toán tiền mặt khi nhận hàng (COD)" : "Chuyển khoản Napas 24/7"}</strong>
+                Phương thức: <strong>${currentOrder.paymentMethod === "COD" ? "Thanh toán khi nhận hàng (COD)" : "Chuyển khoản Napas 24/7"}</strong>
               </div>
             </div>
           </div>
 
-          <!-- KHỐI 5: CỤM THAO TÁC CHÍNH DÀNH CHO KHÁCH HÀNG -->
+          <!-- KHỐI 4: THAO TÁC ĐƠN HÀNG -->
           <div class="detail-card flex items-center justify-between flex-wrap gap-3">
             <div class="flex items-center gap-2 flex-wrap">
               <a href="orders.html" class="btn btn-secondary btn-sm">
-                <span class="material-symbols-outlined icon-xs">arrow_back</span> Danh Sách Đơn Mua
+                <span class="material-symbols-outlined icon-xs">arrow_back</span> Danh Sách Đơn
               </a>
               <button class="btn btn-ghost btn-sm" id="btnOpenInvoiceModal">
-                <span class="material-symbols-outlined icon-xs text-secondary">receipt_long</span> Xem Hóa Đơn VAT
+                <span class="material-symbols-outlined icon-xs text-secondary">receipt_long</span> Hóa Đơn VAT
               </button>
               ${
                 !isCancelled
                   ? `<a class="btn btn-ghost btn-sm text-danger" href="dispute.html?orderId=${encodeURIComponent(orderId)}">
-                       <span class="material-symbols-outlined icon-xs">report_problem</span> Khiếu Nại / Đổi Trả 7 Ngày
+                       <span class="material-symbols-outlined icon-xs">report_problem</span> Khiếu Nại / Đổi Trả
                      </a>`
                   : ""
               }
@@ -819,17 +725,17 @@
               ${
                 isPending
                   ? `<button class="btn btn-ghost btn-sm text-danger" id="btnCancelThisOrder">
-                       <span class="material-symbols-outlined icon-xs">cancel</span> Hủy Đơn Hàng
+                       <span class="material-symbols-outlined icon-xs">cancel</span> Hủy Đơn
                      </button>`
                   : ""
               }
               <button class="btn btn-secondary btn-sm" id="btnReorderThis">
-                <span class="material-symbols-outlined icon-xs">replay</span> Mua Lại Đơn Này
+                <span class="material-symbols-outlined icon-xs">replay</span> Mua Lại
               </button>
               ${
                 isDelivering
                   ? `<button class="btn btn-primary btn-sm" id="btnConfirmReceived">
-                       <span class="material-symbols-outlined icon-xs">task_alt</span> Xác Nhận Đã Nhận &amp; Hài Lòng (+500 VIP)
+                       <span class="material-symbols-outlined icon-xs">task_alt</span> Đã Nhận Hàng
                      </button>`
                   : ""
               }
@@ -930,12 +836,12 @@
           });
         }
 
-        // Nút Xác Nhận Đã Nhận & Hài Lòng
+        // Nút Xác Nhận Đã Nhận Hàng
         const btnConfirm = document.getElementById("btnConfirmReceived");
         if (btnConfirm) {
           btnConfirm.addEventListener("click", () => {
             currentOrder.status = "completed";
-            currentOrder.stepIndex = 5;
+            currentOrder.stepIndex = 4;
             currentOrder.completedAt = new Date().toISOString();
             saveOrders(allOrders);
 
@@ -946,7 +852,7 @@
               localStorage.setItem("hv_user_points", p);
             } catch (e) {}
 
-            alert("Chúc mừng! Bạn đã xác nhận đồng kiểm thành công và được cộng +500 điểm VIP!");
+            alert("Đã xác nhận nhận hàng thành công!");
             window.location.reload();
           });
         }

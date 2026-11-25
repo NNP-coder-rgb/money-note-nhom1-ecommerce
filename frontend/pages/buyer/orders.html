@@ -25,124 +25,510 @@
     <link rel="stylesheet" href="../../css/master_screens.css" />
     <style>
       /* ==========================================================================
-         BỐ CỤC & KHOẢNG CÁCH CÁC KHỐI CHUẨN ĐỀU NHAU (NO CRAMPING / NO OVERLAP)
+         BỐ CỤC CHUẨN SÀN THƯƠNG MẠI ĐIỆN TỬ (SHOPEE STYLE ORDERS PAGE)
          ========================================================================== */
       .order-container-main {
         max-width: 1040px;
         margin-inline: auto;
-        padding-top: 24px;
-        padding-bottom: 56px;
+        padding-top: 20px;
+        padding-bottom: 64px;
       }
 
-      /* 1. Thanh tiêu đề & đếm ngược */
+      /* 1. Thanh tiêu đề & Badge bảo hiểm */
       .cart-header-bar {
-        margin-bottom: 26px;
+        margin-bottom: 20px;
       }
       .cart-header-title {
-        margin-bottom: 8px;
-        font-size: 1.55rem;
-      }
-      .cart-header-desc {
-        line-height: 1.6;
-        color: var(--text-muted);
-        font-size: var(--fs-sm);
-        max-width: 680px;
-      }
-      .countdown-pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: rgba(139, 92, 246, 0.15);
-        border: 1px solid rgba(139, 92, 246, 0.35);
-        padding: 8px 16px;
-        border-radius: var(--radius-pill);
-        color: var(--secondary-300);
-        font-family: var(--font-mono);
+        font-family: var(--font-head);
+        font-size: 1.45rem;
         font-weight: 700;
-        font-size: var(--fs-xs);
-        white-space: nowrap;
+        color: var(--text);
       }
 
-      /* 2. Khối 4 thống kê tổng quan (Grid đồng nhất) */
-      .order-stats-grid {
+      /* Thống kê nhanh dạng dải ngang (Stats Strip) */
+      .order-stats-strip {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 16px;
-        margin-bottom: 28px;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-bottom: 20px;
       }
-      .order-stat-card {
+      @media (max-width: 768px) {
+        .order-stats-strip {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 10px;
+        }
+      }
+      .stat-pill {
         background: var(--bg-surface);
         border: 1px solid var(--border);
         border-radius: var(--radius-lg);
-        padding: 18px 20px;
+        padding: 12px 16px;
         display: flex;
         align-items: center;
-        gap: 16px;
-        transition: transform var(--speed-fast), border-color var(--speed-fast), box-shadow var(--speed-fast);
+        justify-content: space-between;
+        gap: 8px;
+        transition: border-color var(--t-fast), transform var(--t-fast);
       }
-      .order-stat-card:hover {
-        transform: translateY(-2px);
-        border-color: var(--primary-500);
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+      .stat-pill:hover {
+        border-color: var(--primary);
+        transform: translateY(-1px);
       }
-      .order-stat-icon-wrap {
-        width: 48px;
-        height: 48px;
-        border-radius: var(--radius-md);
-        display: grid;
-        place-items: center;
-        flex-shrink: 0;
+      .stat-label {
+        font-size: 12.5px;
+        color: var(--text-muted);
+        font-weight: 500;
+      }
+      .stat-val {
+        font-size: 15px;
+        font-weight: 700;
       }
 
-      /* 3. Thanh 5 tabs trạng thái */
+      /* 2. Thanh Tabs trạng thái 6 mục chuẩn Shopee */
       .order-tabs-bar {
         display: flex;
-        align-items: center;
-        gap: 10px;
-        border-bottom: 1px solid var(--border);
-        margin-bottom: 24px;
-        padding-bottom: 8px;
+        background: var(--bg-surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        margin-bottom: 16px;
         overflow-x: auto;
-        scrollbar-width: thin;
+        scrollbar-width: none;
+        position: sticky;
+        top: 72px;
+        z-index: 20;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+      }
+      .order-tabs-bar::-webkit-scrollbar {
+        display: none;
       }
       .order-tab-btn {
-        padding: 10px 18px;
+        flex: 1;
+        min-width: 120px;
+        padding: 15px 10px;
         background: transparent;
         border: none;
-        border-bottom: 2px solid transparent;
+        border-bottom: 3px solid transparent;
         color: var(--text-muted);
-        font-size: var(--fs-sm);
+        font-size: 13.5px;
         font-weight: 600;
         cursor: pointer;
         white-space: nowrap;
         display: flex;
         align-items: center;
-        gap: 8px;
-        border-radius: var(--radius-md) var(--radius-md) 0 0;
-        transition: all var(--speed-fast);
+        justify-content: center;
+        gap: 6px;
+        transition: all var(--t-fast);
+        outline: none;
       }
       .order-tab-btn:hover {
-        color: var(--text);
-        background: rgba(255, 255, 255, 0.03);
+        color: var(--primary);
+        background: rgba(255, 255, 255, 0.02);
       }
       .order-tab-btn.active {
-        color: var(--primary-400);
-        border-bottom-color: var(--primary-500);
-        background: rgba(139, 92, 246, 0.08);
+        color: var(--primary);
+        border-bottom-color: var(--primary);
+        font-weight: 700;
+      }
+      [data-theme="light"] .order-tab-btn.active,
+      body.light-theme .order-tab-btn.active {
+        color: #ee4d2d;
+        border-bottom-color: #ee4d2d;
       }
       .order-tab-btn .badge {
-        font-size: 11px;
-        padding: 3px 8px;
-        border-radius: var(--radius-pill);
+        font-size: 10.5px;
+        padding: 2px 7px;
+        border-radius: 999px;
+        background: rgba(139, 92, 246, 0.15);
+        color: var(--primary-300, #c4b5fd);
+        font-weight: 700;
+      }
+      [data-theme="light"] .order-tab-btn .badge,
+      body.light-theme .order-tab-btn .badge {
+        background: #fee2e2;
+        color: #ef4444;
       }
 
-      /* 4. Thanh tìm kiếm và bộ lọc sắp xếp */
+      /* 3. Thanh tìm kiếm đơn hàng chuẩn TMĐT */
       .order-search-box {
         display: flex;
         align-items: center;
-        gap: 16px;
-        margin-bottom: 30px;
+        gap: 12px;
+        background: var(--bg-surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 10px 14px;
+        margin-bottom: 18px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      }
+      .order-search-box .input-group {
+        flex: 1;
+        margin-bottom: 0;
+      }
+      .order-search-box .input-sm {
+        height: 38px;
+        font-size: 13px;
+        background: var(--bg-base);
+        border-color: var(--border);
+      }
+
+      /* 4. Thẻ đơn hàng chuẩn Shopee (Shopee Order Card) */
+      .shopee-order-card {
+        background: var(--bg-surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg, 12px);
+        margin-bottom: 18px;
+        overflow: hidden;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      }
+      .shopee-order-card:hover {
+        border-color: rgba(139, 92, 246, 0.4);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+      }
+      [data-theme="light"] .shopee-order-card,
+      body.light-theme .shopee-order-card {
+        background: #ffffff;
+        border-color: #e2e8f0;
+      }
+
+      /* Header Shop trong Card */
+      .shopee-card-head {
+        padding: 14px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--border);
+        gap: 12px;
         flex-wrap: wrap;
+        background: rgba(255, 255, 255, 0.01);
+      }
+      [data-theme="light"] .shopee-card-head,
+      body.light-theme .shopee-card-head {
+        background: #fafafa;
+        border-bottom-color: #f1f5f9;
+      }
+      .shopee-shop-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .shopee-mall-pill {
+        background: #d0011b;
+        color: #ffffff;
+        font-size: 10px;
+        font-weight: 800;
+        padding: 2px 7px;
+        border-radius: 3px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+      .shopee-fav-pill {
+        background: #ee4d2d;
+        color: #ffffff;
+        font-size: 10px;
+        font-weight: 700;
+        padding: 2px 7px;
+        border-radius: 3px;
+      }
+      .shopee-shop-name {
+        font-size: 13.5px;
+        font-weight: 700;
+        color: var(--text);
+      }
+      .shopee-shop-actions {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .shopee-btn-shop {
+        padding: 3px 9px;
+        font-size: 11.5px;
+        font-weight: 600;
+        border-radius: 4px;
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--text-muted);
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        transition: all 0.15s;
+        text-decoration: none;
+      }
+      .shopee-btn-shop:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+      }
+      .shopee-status-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-left: auto;
+        font-size: 13px;
+      }
+      .shopee-delivery-hint {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        color: #10b981;
+        font-weight: 500;
+        font-size: 12.5px;
+      }
+      .shopee-divider {
+        color: var(--text-faint, #64748b);
+        font-size: 11px;
+      }
+      .shopee-status-tag {
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 12px;
+        letter-spacing: 0.3px;
+      }
+      .shopee-status-tag.status-completed {
+        color: #10b981;
+      }
+      .shopee-status-tag.status-delivering {
+        color: #06b6d4;
+      }
+      .shopee-status-tag.status-pending {
+        color: #f59e0b;
+      }
+      .shopee-status-tag.status-cancelled {
+        color: #ef4444;
+      }
+
+      /* Danh sách mặt hàng chuẩn Shopee */
+      .shopee-card-body {
+        padding: 4px 20px;
+      }
+      .shopee-product-item {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 14px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        text-decoration: none;
+        color: inherit;
+        transition: background 0.15s;
+      }
+      .shopee-product-item:last-child {
+        border-bottom: none;
+      }
+      [data-theme="light"] .shopee-product-item,
+      body.light-theme .shopee-product-item {
+        border-bottom-color: #f1f5f9;
+      }
+      .shopee-product-thumb {
+        width: 78px;
+        height: 78px;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        object-fit: cover;
+        flex-shrink: 0;
+        background: var(--bg-base);
+      }
+      .shopee-product-details {
+        flex: 1;
+        min-width: 0;
+      }
+      .shopee-product-title {
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1.4;
+        color: var(--text);
+        margin: 0 0 5px 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .shopee-product-variant {
+        font-size: 12px;
+        color: var(--text-muted);
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .shopee-product-badges {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .shopee-tag-return {
+        font-size: 10.5px;
+        padding: 1px 6px;
+        border-radius: 3px;
+        border: 1px solid #10b981;
+        color: #10b981;
+        font-weight: 600;
+        background: rgba(16, 185, 129, 0.06);
+      }
+      .shopee-product-pricing {
+        text-align: right;
+        white-space: nowrap;
+      }
+      .shopee-old-price {
+        font-size: 12px;
+        text-decoration: line-through;
+        color: var(--text-muted);
+        margin-bottom: 2px;
+        font-family: var(--font-mono, monospace);
+      }
+      .shopee-item-price {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--secondary-400, #22d3ee);
+        font-family: var(--font-mono, monospace);
+      }
+      [data-theme="light"] .shopee-item-price,
+      body.light-theme .shopee-item-price {
+        color: #ee4d2d;
+      }
+
+      /* Chân Card: Thành tiền & Cụm nút hành động */
+      .shopee-card-foot {
+        background: rgba(255, 255, 255, 0.02);
+        border-top: 1px solid var(--border);
+        padding: 14px 20px;
+      }
+      [data-theme="light"] .shopee-card-foot,
+      body.light-theme .shopee-card-foot {
+        background: #fcfcfc;
+        border-top-color: #f1f5f9;
+      }
+      .shopee-total-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding-bottom: 12px;
+        font-size: 13px;
+        flex-wrap: wrap;
+      }
+      .shopee-pay-badge {
+        font-size: 11.5px;
+        font-weight: 600;
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .shopee-total-amount {
+        font-size: 18px;
+        font-weight: 800;
+        color: var(--primary-400, #c4b5fd);
+        font-family: var(--font-mono, monospace);
+      }
+      [data-theme="light"] .shopee-total-amount,
+      body.light-theme .shopee-total-amount {
+        color: #ee4d2d;
+      }
+
+      .shopee-actions-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        padding-top: 12px;
+        border-top: 1px dashed var(--border);
+      }
+      .shopee-order-meta {
+        font-size: 12px;
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .shopee-buttons-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-left: auto;
+        flex-wrap: wrap;
+      }
+      .shopee-buttons-group .btn {
+        padding: 7px 14px;
+        font-size: 12px;
+        font-weight: 600;
+        border-radius: var(--radius-md, 6px);
+      }
+      [data-theme="light"] .shopee-buttons-group .btn-primary,
+      body.light-theme .shopee-buttons-group .btn-primary {
+        background: #ee4d2d;
+        border-color: #ee4d2d;
+      }
+
+      @media (max-width: 640px) {
+        .order-container-main {
+          padding-top: 12px;
+          padding-inline: 10px;
+        }
+        .order-tabs-bar {
+          top: 60px;
+        }
+        .order-tab-btn {
+          padding: 12px 10px;
+          font-size: 13px;
+          min-width: 105px;
+        }
+        .shopee-card-head {
+          padding: 10px 14px;
+          gap: 8px;
+        }
+        .shopee-status-group {
+          width: 100%;
+          justify-content: space-between;
+          padding-top: 6px;
+          border-top: 1px dashed rgba(255, 255, 255, 0.05);
+          margin-left: 0;
+        }
+        [data-theme="light"] .shopee-status-group,
+        body.light-theme .shopee-status-group {
+          border-top-color: #f1f5f9;
+        }
+        .shopee-card-body {
+          padding: 0 14px;
+        }
+        .shopee-product-item {
+          padding: 10px 0;
+          gap: 12px;
+        }
+        .shopee-product-thumb {
+          width: 68px;
+          height: 68px;
+        }
+        .shopee-product-title {
+          font-size: 13px;
+        }
+        .shopee-card-foot {
+          padding: 12px 14px;
+        }
+        .shopee-total-row {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+        }
+        .shopee-actions-row {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 10px;
+        }
+        .shopee-buttons-group {
+          width: 100%;
+          justify-content: flex-end;
+          gap: 6px;
+        }
+        .shopee-buttons-group .btn {
+          flex: 1 1 auto;
+          text-align: center;
+          justify-content: center;
+          padding: 8px 10px;
+          font-size: 12px;
+        }
       }
 
       /* 5. Khối thẻ đơn hàng chi tiết (Order Card) */
@@ -522,98 +908,84 @@
     </div>
 
     <main class="container order-container-main">
-      <!-- 1. TIÊU ĐỀ TRANG & ĐẾM NGƯỢC -->
-      <div class="cart-header-bar flex items-center justify-between flex-wrap gap-4">
-        <div>
-          <h1 class="cart-header-title flex items-center gap-2">
-            <span class="material-symbols-outlined cart-title-icon text-primary">local_shipping</span>
-            Quản Lý Đơn Mua &amp; Trung Tâm Đồng Kiểm
-          </h1>
-          <p class="cart-header-desc">
-            Theo dõi chi tiết hành trình bưu phẩm theo thời gian thực, xem biên bản kiểm định 15 bước, mở hộp đồng kiểm ngoại quan cùng shipper và kích hoạt bảo hành điện tử chính hãng.
-          </p>
-        </div>
-        <div class="countdown-pill" id="trialCountdownPill">
-          <span class="material-symbols-outlined icon-xs">timer</span>
-          Thời gian đổi trả còn: <span id="trialCountdownText">47:58:20</span>
-        </div>
-      </div>
-
-      <!-- 2. KHỐI 4 THỐNG KÊ TỔNG QUAN -->
-      <div class="order-stats-grid">
-        <div class="order-stat-card">
-          <div class="order-stat-icon-wrap" style="background: rgba(139, 92, 246, 0.15); color: var(--primary-400);">
-            <span class="material-symbols-outlined">receipt_long</span>
-          </div>
-          <div>
-            <div class="text-xs text-muted">Tổng Đơn Hàng</div>
-            <div class="fw-700 text-lg mono" id="statTotalOrders">0</div>
-          </div>
-        </div>
-
-        <div class="order-stat-card">
-          <div class="order-stat-icon-wrap" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;">
-            <span class="material-symbols-outlined">local_shipping</span>
-          </div>
-          <div>
-            <div class="text-xs text-muted">Đang Vận Chuyển</div>
-            <div class="fw-700 text-lg mono text-secondary" id="statDeliveringOrders">0</div>
-          </div>
-        </div>
-
-        <div class="order-stat-card">
-          <div class="order-stat-icon-wrap" style="background: rgba(34, 197, 94, 0.15); color: var(--success);">
-            <span class="material-symbols-outlined">verified</span>
-          </div>
-          <div>
-            <div class="text-xs text-muted">Đã Giao Thành Công</div>
-            <div class="fw-700 text-lg mono text-success" id="statCompletedOrders">0</div>
-          </div>
-        </div>
-
-        <div class="order-stat-card">
-          <div class="order-stat-icon-wrap" style="background: rgba(245, 158, 11, 0.15); color: var(--warning);">
-            <span class="material-symbols-outlined">stars</span>
-          </div>
-          <div>
-            <div class="text-xs text-muted">Điểm VIP Tích Lũy</div>
-            <div class="fw-700 text-lg mono text-warning" id="statVipPoints">1,500 đ</div>
-          </div>
+      <!-- 1. TIÊU ĐỀ TRANG -->
+      <div class="cart-header-bar flex items-center justify-between flex-wrap gap-3 mb-3">
+        <h1 class="cart-header-title m-0 flex items-center gap-2">
+          <span class="material-symbols-outlined cart-title-icon text-primary">receipt_long</span>
+          Đơn Mua
+        </h1>
+        <div class="flex items-center gap-3 text-xs text-muted">
+          <span class="flex items-center gap-1 text-success fw-600">
+            <span class="material-symbols-outlined icon-xs">verified_user</span> Đồng kiểm 100%
+          </span>
+          <span>•</span>
+          <span class="flex items-center gap-1 text-secondary fw-600">
+            <span class="material-symbols-outlined icon-xs">published_with_changes</span> 7 ngày đổi trả
+          </span>
+          <span id="trialCountdownPill" class="hidden"><span id="trialCountdownText">47:58:20</span></span>
         </div>
       </div>
 
-      <!-- 3. THANH TABS LỌC TRẠNG THÁI ĐƠN HÀNG (5 TABS CHUẨN E-COMMERCE) -->
+      <!-- 2. THỐNG KÊ NHANH CHUẨN TMĐT -->
+      <div class="order-stats-strip">
+        <div class="stat-pill">
+          <span class="stat-label">Tổng đơn mua</span>
+          <strong class="stat-val mono text-primary" id="statTotalOrders">0</strong>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-label">Đang giao hàng</span>
+          <strong class="stat-val mono text-secondary" id="statDeliveringOrders">0</strong>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-label">Đã hoàn thành</span>
+          <strong class="stat-val mono text-success" id="statCompletedOrders">0</strong>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-label">Điểm VIP tích lũy</span>
+          <strong class="stat-val mono text-warning" id="statVipPoints">1,500 đ</strong>
+        </div>
+      </div>
+
+      <!-- 3. THANH TABS LỌC TRẠNG THÁI ĐƠN HÀNG (CHUẨN SHOPEE) -->
       <div class="order-tabs-bar" id="orderTabsBar">
         <button class="order-tab-btn active" data-filter="all" type="button">
-          Tất Cả Đơn <span class="badge badge-secondary" id="tabCountAll">0</span>
+          <span>Tất Cả</span>
+          <span class="badge" id="tabCountAll">0</span>
         </button>
         <button class="order-tab-btn" data-filter="pending" type="button">
-          Chờ Xử Lý &amp; Đóng Gói <span class="badge badge-secondary" id="tabCountPending">0</span>
+          <span>Chờ Xác Nhận</span>
+          <span class="badge" id="tabCountPending">0</span>
         </button>
         <button class="order-tab-btn" data-filter="delivering" type="button">
-          Đang Vận Chuyển <span class="badge badge-secondary" id="tabCountDelivering">0</span>
+          <span>Đang Giao</span>
+          <span class="badge" id="tabCountDelivering">0</span>
         </button>
         <button class="order-tab-btn" data-filter="completed" type="button">
-          Đã Giao Thành Công <span class="badge badge-secondary" id="tabCountCompleted">0</span>
+          <span>Hoàn Thành</span>
+          <span class="badge" id="tabCountCompleted">0</span>
         </button>
         <button class="order-tab-btn" data-filter="cancelled" type="button">
-          Đã Hủy <span class="badge badge-secondary" id="tabCountCancelled">0</span>
+          <span>Đã Hủy</span>
+          <span class="badge" id="tabCountCancelled">0</span>
+        </button>
+        <button class="order-tab-btn" data-filter="dispute" type="button">
+          <span>Trả Hàng/Hoàn Tiền</span>
+          <span class="badge" id="tabCountDispute">0</span>
         </button>
       </div>
 
-      <!-- 4. THANH TÌM KIẾM ĐƠN HÀNG & BỘ SẮP XẾP -->
+      <!-- 4. THANH TÌM KIẾM ĐƠN HÀNG CHUẨN SHOPEE & BỘ SẮP XẾP -->
       <div class="order-search-box">
-        <div class="input-group" style="flex: 1; min-width: 260px;">
+        <div class="input-group">
           <span class="icon-left material-symbols-outlined">search</span>
           <input
             id="orderSearchInput"
             class="input input-sm"
             type="search"
-            placeholder="Tìm theo mã đơn (ORD-...), tên máy (iPhone, MacBook...), mã vận đơn..."
+            placeholder="Bạn có thể tìm kiếm theo Tên Shop, ID Đơn Hàng hoặc Tên Sản Phẩm..."
           />
         </div>
         <div class="flex items-center gap-2">
-          <span class="text-xs text-muted hide-sm">Sắp xếp:</span>
           <select id="orderSortSelect" class="input input-sm" style="width: auto;">
             <option value="newest">Đơn mới nhất</option>
             <option value="oldest">Đơn cũ nhất</option>
@@ -1001,6 +1373,7 @@
           tabCountDelivering: document.getElementById("tabCountDelivering"),
           tabCountCompleted: document.getElementById("tabCountCompleted"),
           tabCountCancelled: document.getElementById("tabCountCancelled"),
+          tabCountDispute: document.getElementById("tabCountDispute"),
           orderSearchInput: document.getElementById("orderSearchInput"),
           orderSortSelect: document.getElementById("orderSortSelect"),
           // Thống kê nhanh
@@ -1071,6 +1444,112 @@
             ? MOCK_ORDERS
             : [];
 
+          const demoExtra = [
+            {
+              id: "ORD-20261120-4491",
+              createdAt: "2026-11-20T10:20:00Z",
+              status: "pending",
+              statusLabel: "Chờ xác nhận",
+              stepIndex: 1,
+              seller: "Sony Official Flagship Store",
+              items: [
+                {
+                  id: "t4",
+                  name: "Tai Nghe Không Dây Chống Ồn Cao Cấp Sony WH-1000XM5",
+                  type: "mall",
+                  price: 6990000,
+                  oldPrice: 8490000,
+                  qty: 1,
+                  seller: "Sony Official Flagship Store",
+                  variant: "Bạc Ánh Kim (Silver)",
+                  img: (typeof IMG !== "undefined" && IMG.tech_headphone) || "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200",
+                },
+              ],
+              subtotal: 6990000,
+              shippingFee: 0,
+              discount: 200000,
+              total: 6790000,
+              paymentMethod: "COD",
+              paymentLabel: "Thanh toán khi nhận hàng (Đồng kiểm)",
+              shippingAddress: {
+                fullName: "Nguyễn Ngọc Phúc",
+                phone: "0912 345 678",
+                address: "Tòa Keangnam Landmark 72, Nam Từ Liêm, Hà Nội",
+              },
+              trackingCode: "VNPOST-HN-772910",
+              carrier: "VNPost Hỏa Tốc",
+            },
+            {
+              id: "ORD-20261028-1104",
+              createdAt: "2026-10-28T16:45:00Z",
+              cancelledAt: "2026-10-28T17:10:00Z",
+              cancelReason: "Người mua muốn đổi sang model màu xám Space Gray",
+              status: "cancelled",
+              statusLabel: "Đã hủy đơn",
+              stepIndex: 1,
+              seller: "Logitech Official Store",
+              items: [
+                {
+                  id: "p2",
+                  name: "Chuột Công Thái Học Không Dây Logitech MX Master 3S Silent",
+                  type: "mall",
+                  price: 2190000,
+                  oldPrice: 2490000,
+                  qty: 1,
+                  seller: "Logitech Official Store",
+                  variant: "Space Gray Silent",
+                  img: (typeof IMG !== "undefined" && IMG.tech_mouse) || "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=200",
+                },
+              ],
+              subtotal: 2190000,
+              shippingFee: 30000,
+              discount: 0,
+              total: 2220000,
+              paymentMethod: "QR_PAY",
+              paymentLabel: "Chuyển khoản QR Ngân hàng (Đã hoàn tiền)",
+              shippingAddress: {
+                fullName: "Nguyễn Ngọc Phúc",
+                phone: "0912 345 678",
+                address: "Tòa Keangnam Landmark 72, Nam Từ Liêm, Hà Nội",
+              },
+            },
+            {
+              id: "ORD-20261015-6629",
+              createdAt: "2026-10-15T08:30:00Z",
+              status: "dispute",
+              statusLabel: "Trả hàng / Hoàn tiền",
+              isDispute: true,
+              stepIndex: 4,
+              seller: "Keychron Vietnam Official",
+              items: [
+                {
+                  id: "t5",
+                  name: "Bàn Phím Cơ Không Dây Keychron K8 Pro QMK/VIA Gateron Red Switch",
+                  type: "c2c",
+                  condition: "99%",
+                  price: 2450000,
+                  oldPrice: 2890000,
+                  qty: 1,
+                  seller: "Keychron Vietnam Official",
+                  variant: "Red Switch / LED RGB Nhôm",
+                  img: (typeof IMG !== "undefined" && IMG.tech_keyboard) || "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=200",
+                },
+              ],
+              subtotal: 2450000,
+              shippingFee: 0,
+              discount: 0,
+              total: 2450000,
+              refundAmount: 2450000,
+              paymentMethod: "QR_PAY",
+              paymentLabel: "Đã hoàn 100% tiền qua Napas 24/7",
+              shippingAddress: {
+                fullName: "Nguyễn Ngọc Phúc",
+                phone: "0912 345 678",
+                address: "Tòa Keangnam Landmark 72, Nam Từ Liêm, Hà Nội",
+              },
+            },
+          ];
+
           const map = new Map();
           savedOrders.forEach((o) => {
             if (o && (o.id || o.orderCode)) {
@@ -1079,8 +1558,8 @@
             }
           });
 
-          // Nạp các đơn mock nếu chưa có
-          mockList.forEach((o) => {
+          // Nạp các đơn mock & demoExtra nếu chưa có
+          mockList.concat(demoExtra).forEach((o) => {
             if (o && (o.id || o.orderCode)) {
               const key = o.id || o.orderCode;
               if (!map.has(key)) {
@@ -1165,12 +1644,16 @@
           const countDelivering = allOrders.filter((o) => o.status === "delivering").length;
           const countCompleted = allOrders.filter((o) => o.status === "completed").length;
           const countCancelled = allOrders.filter((o) => o.status === "cancelled").length;
+          const countDispute = allOrders.filter(
+            (o) => o.status === "dispute" || o.status === "returned" || o.status === "refunding" || o.status === "refunded" || o.isDispute
+          ).length;
 
           if (dom.tabCountAll) dom.tabCountAll.textContent = countAll;
           if (dom.tabCountPending) dom.tabCountPending.textContent = countPending;
           if (dom.tabCountDelivering) dom.tabCountDelivering.textContent = countDelivering;
           if (dom.tabCountCompleted) dom.tabCountCompleted.textContent = countCompleted;
           if (dom.tabCountCancelled) dom.tabCountCancelled.textContent = countCancelled;
+          if (dom.tabCountDispute) dom.tabCountDispute.textContent = countDispute;
 
           if (dom.statTotalOrders) dom.statTotalOrders.textContent = countAll;
           if (dom.statDeliveringOrders) dom.statDeliveringOrders.textContent = countDelivering;
@@ -1191,6 +1674,9 @@
             if (currentFilter === "delivering") return o.status === "delivering";
             if (currentFilter === "completed") return o.status === "completed";
             if (currentFilter === "cancelled") return o.status === "cancelled";
+            if (currentFilter === "dispute") {
+              return o.status === "dispute" || o.status === "returned" || o.status === "refunding" || o.status === "refunded" || o.isDispute;
+            }
             return true;
           });
 
@@ -1201,11 +1687,12 @@
               const idMatch = (o.id || o.orderCode || "").toLowerCase().includes(kw);
               const trackMatch = (o.trackingCode || "").toLowerCase().includes(kw);
               const carrierMatch = (o.carrier || "").toLowerCase().includes(kw);
+              const sellerMatch = (o.seller || "").toLowerCase().includes(kw);
               const recipientMatch = (o.shippingAddress && o.shippingAddress.fullName || "").toLowerCase().includes(kw);
               const itemsMatch = (o.items || []).some((item) =>
-                (item.name || "").toLowerCase().includes(kw)
+                (item.name || "").toLowerCase().includes(kw) || (item.seller || "").toLowerCase().includes(kw)
               );
-              return idMatch || trackMatch || carrierMatch || recipientMatch || itemsMatch;
+              return idMatch || trackMatch || carrierMatch || sellerMatch || recipientMatch || itemsMatch;
             });
           }
 
@@ -1229,7 +1716,7 @@
 
           dom.ordersEmptyState.style.display = "none";
 
-          // Sinh mã HTML cho từng đơn hàng
+          // Sinh mã HTML chuẩn Shopee cho từng đơn hàng
           dom.ordersListContainer.innerHTML = filtered.map((order) => {
             const orderId = order.id || order.orderCode;
             const status = order.status || "delivering";
@@ -1237,315 +1724,207 @@
             const isDelivering = status === "delivering";
             const isPending = status === "pending" || status === "confirmed" || status === "processing";
             const isCancelled = status === "cancelled";
+            const isDispute = status === "dispute" || status === "returned" || status === "refunding" || status === "refunded" || order.isDispute;
 
-            let stepIndex = order.stepIndex || 1;
-            if (isCompleted) stepIndex = 4;
-            else if (isDelivering) stepIndex = 3;
-            else if (isPending) stepIndex = 2;
+            // Xác định tên shop & huy hiệu shop (Mall / Yêu thích)
+            const firstItem = (order.items && order.items[0]) || {};
+            const primarySeller = order.seller || firstItem.seller || "HYBRID Official Store";
+            const isMall = firstItem.type === "mall" || primarySeller.toLowerCase().includes("official") || primarySeller.toLowerCase().includes("mall") || primarySeller.toLowerCase().includes("flagship");
+            const shopBadgeHtml = isMall
+              ? `<span class="shopee-mall-pill">Mall</span>`
+              : `<span class="shopee-fav-pill">Yêu Thích</span>`;
 
-            // Badges trạng thái
-            let statusBadgeHtml = "";
+            // Trạng thái vận chuyển & Tag bên phải header
+            let deliveryHintHtml = "";
+            let statusTagHtml = "";
             if (isCompleted) {
-              statusBadgeHtml = `<span class="badge badge-success flex items-center gap-1"><span class="material-symbols-outlined icon-xs">verified</span> ĐÃ GIAO THÀNH CÔNG</span>`;
+              deliveryHintHtml = `<span class="shopee-delivery-hint"><span class="material-symbols-outlined" style="font-size: 15px;">local_shipping</span> Giao hàng thành công</span>`;
+              statusTagHtml = `<span class="shopee-status-tag status-completed">HOÀN THÀNH</span>`;
             } else if (isDelivering) {
-              statusBadgeHtml = `<span class="badge badge-secondary flex items-center gap-1"><span class="material-symbols-outlined icon-xs">local_shipping</span> ĐANG GIAO HỎA TỐC</span>`;
+              deliveryHintHtml = `<span class="shopee-delivery-hint" style="color: #06b6d4;"><span class="material-symbols-outlined" style="font-size: 15px;">local_shipping</span> Đang vận chuyển</span>`;
+              statusTagHtml = `<span class="shopee-status-tag status-delivering">ĐANG GIAO</span>`;
             } else if (isCancelled) {
-              statusBadgeHtml = `<span class="badge badge-danger flex items-center gap-1"><span class="material-symbols-outlined icon-xs">cancel</span> ĐÃ HỦY ĐƠN</span>`;
+              deliveryHintHtml = `<span class="shopee-delivery-hint" style="color: #ef4444;"><span class="material-symbols-outlined" style="font-size: 15px;">cancel</span> Đã hủy bởi người mua</span>`;
+              statusTagHtml = `<span class="shopee-status-tag status-cancelled">ĐÃ HỦY</span>`;
+            } else if (isDispute) {
+              deliveryHintHtml = `<span class="shopee-delivery-hint" style="color: #ec4899;"><span class="material-symbols-outlined" style="font-size: 15px;">assignment_return</span> Đã hoàn tất trả hàng</span>`;
+              statusTagHtml = `<span class="shopee-status-tag" style="color: #ec4899;">TRẢ HÀNG / HOÀN TIỀN</span>`;
             } else {
-              statusBadgeHtml = `<span class="badge badge-warning flex items-center gap-1"><span class="material-symbols-outlined icon-xs">hourglass_top</span> ĐANG XỬ LÝ &amp; ĐÓNG GÓI</span>`;
+              deliveryHintHtml = `<span class="shopee-delivery-hint" style="color: #f59e0b;"><span class="material-symbols-outlined" style="font-size: 15px;">schedule</span> Chờ người bán chuẩn bị hàng</span>`;
+              statusTagHtml = `<span class="shopee-status-tag status-pending">CHỜ XÁC NHẬN</span>`;
             }
 
-            // Badge phương thức thanh toán
-            let paymentBadgeHtml = "";
-            const isCod = order.paymentMethod === "COD" || (order.paymentLabel && order.paymentLabel.includes("COD"));
-            if (isCod) {
-              paymentBadgeHtml = `
-                <span class="badge badge-warning flex items-center gap-1" title="Khách thanh toán tiền mặt sau khi đồng kiểm cùng bưu tá">
-                  <span class="material-symbols-outlined icon-xs">payments</span> COD • Thu tiền khi giao (100% Đồng kiểm)
-                </span>
-              `;
-            } else if (order.paymentMethod === "CARD") {
-              paymentBadgeHtml = `
-                <span class="badge badge-success flex items-center gap-1">
-                  <span class="material-symbols-outlined icon-xs">credit_card</span> Đã thanh toán Thẻ Quốc Tế
-                </span>
-              `;
-            } else {
-              paymentBadgeHtml = `
-                <span class="badge badge-success flex items-center gap-1">
-                  <span class="material-symbols-outlined icon-xs">check_circle</span> Đã thanh toán Napas 24/7
-                </span>
-              `;
-            }
-
-            // Danh sách mặt hàng
+            // Danh sách sản phẩm chuẩn Shopee
             const itemsHtml = (order.items || []).map((item) => {
               const isUsed = item.type === "c2c";
               const rawImg = item.img || item.image || "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200";
               const imgSrc = typeof window !== "undefined" && window.resolveAssetUrl ? window.resolveAssetUrl(rawImg) : rawImg;
               const qty = item.qty || item.quantity || 1;
-              const detailUrl = isUsed ? `../shop/product_used.html?id=${item.id}` : `../shop/product_new.html?id=${item.id}`;
+              const detailUrl = `order_detail.html?id=${encodeURIComponent(orderId)}`;
 
               return `
-                <div class="order-item-row">
-                  <a href="${detailUrl}">
-                    <img src="${imgSrc}" alt="${item.name}" style="width: 76px; height: 76px; border-radius: 10px; object-fit: cover; border: 1px solid var(--border);" />
-                  </a>
-                  <div class="flex-1" style="min-width: 0;">
-                    <div class="flex items-center gap-2 mb-1 flex-wrap">
+                <a class="shopee-product-item" href="${detailUrl}" title="Bấm xem chi tiết đơn hàng #${orderId}">
+                  <img class="shopee-product-thumb" src="${imgSrc}" alt="${item.name}" loading="lazy" />
+                  <div class="shopee-product-details">
+                    <div class="shopee-product-title">${item.name}</div>
+                    <div class="shopee-product-variant">
+                      <span>Phân loại hàng: ${item.variant || (isUsed ? "Đồ cũ " + (item.condition || "Like New 99%") : "Hàng mới chính hãng 100%")}</span>
                       ${
                         isUsed
-                          ? `<span class="badge badge-c2c" style="font-size: 10px;">ĐỒ CŨ ${item.condition || "LIKE NEW 99%"}</span>`
-                          : `<span class="badge badge-mall" style="font-size: 10px;">BRAND MALL MỚI 100%</span>`
+                          ? `<span class="badge badge-c2c" style="font-size: 10px; padding: 1px 6px; margin-left: 6px;">Đồ Cũ</span>`
+                          : `<span class="badge badge-mall" style="font-size: 10px; padding: 1px 6px; margin-left: 6px;">Chính Hãng</span>`
                       }
-                      ${item.variant ? `<span class="badge badge-secondary" style="font-size: 10px;">${item.variant}</span>` : ""}
                     </div>
-                    <h4 class="text-sm fw-700 line-clamp-1 mb-1">
-                      <a href="${detailUrl}" class="text-hover-primary">${item.name}</a>
-                    </h4>
-                    <div class="text-xs text-muted flex items-center gap-2 flex-wrap" style="margin-top: 4px;">
-                      <span>Xuất kho: <strong class="text-white">${item.seller || "Kho Keangnam HN"}</strong></span>
-                      <span>•</span>
-                      <span>Số lượng: <strong>x${qty}</strong></span>
-                      <span>•</span>
-                      <span class="text-success flex items-center gap-0.5"><span class="material-symbols-outlined icon-xs">verified</span> Tem màng vỡ QR</span>
+                    <div class="shopee-product-badges">
+                      <span class="shopee-tag-return">
+                        <span class="material-symbols-outlined" style="font-size: 11px; vertical-align: middle;">published_with_changes</span> 7 ngày trả hàng miễn phí
+                      </span>
+                      <span class="text-xs text-muted" style="margin-left: 6px;">Số lượng: <strong>x${qty}</strong></span>
+                      <span class="text-xs text-success flex items-center gap-0.5" style="margin-left: 6px;">
+                        <span class="material-symbols-outlined icon-xs">verified</span> Tem niêm phong QR
+                      </span>
                     </div>
                   </div>
-                  <div class="text-right" style="white-space: nowrap;">
-                    <strong class="mono text-primary text-sm">${formatMoney(item.price * qty)}</strong>
-                    ${item.oldPrice ? `<div class="text-xs text-faint line-through mono mt-1">${formatMoney(item.oldPrice * qty)}</div>` : ""}
+                  <div class="shopee-product-pricing">
+                    ${item.oldPrice ? `<div class="shopee-old-price">${formatMoney(item.oldPrice * qty)}</div>` : ""}
+                    <div class="shopee-item-price">${formatMoney(item.price * qty)}</div>
                   </div>
-                </div>
+                </a>
               `;
             }).join("");
 
-            // Thông tin địa chỉ & vận chuyển
-            const addr = order.shippingAddress || {};
-            const carrier = order.carrier || "VNPost Hỏa Tốc";
-            const trackingCode = order.trackingCode || ("VNPOST-" + Math.floor(100000 + Math.random() * 900000));
-            const recipientName = addr.fullName || "Khách Hàng";
-            const recipientPhone = addr.phone || "0912 345 678";
-            const fullAddress = addr.fullAddress || addr.address || "Tòa Keangnam Landmark 72, Nam Từ Liêm, Hà Nội";
+            // Thông tin thanh toán rút gọn
+            const isCod = order.paymentMethod === "COD" || (order.paymentLabel && order.paymentLabel.includes("COD"));
+            const paymentLabel = isCod ? "Thanh toán khi nhận hàng (COD)" : (order.paymentMethod === "CARD" ? "Thẻ Quốc Tế" : "Napas 24/7 (Đã thanh toán)");
 
-            // Shipper banner giả lập nếu đơn đang giao
-            let shipperDispatchHtml = "";
+            // Nút thao tác theo trạng thái đơn hàng (Chuẩn TMĐT)
+            let buttonsHtml = "";
             if (isDelivering) {
-              shipperDispatchHtml = `
-                <div class="shipper-dispatch-card">
-                  <div class="flex items-center gap-3">
-                    <div class="shipper-avatar">
-                      <span class="material-symbols-outlined">delivery_dining</span>
-                    </div>
-                    <div>
-                      <div class="flex items-center gap-2">
-                        <strong class="text-xs text-white">Bưu tá: Nguyễn Văn Hùng</strong>
-                        <span class="badge badge-success" style="font-size: 10px;"><span class="shipper-live-dot"></span> Đang di chuyển</span>
-                      </div>
-                      <div class="text-xs text-muted" style="margin-top: 4px;">
-                        Xe máy Honda Airblade (29-X1 884.29) • Đội Hỏa Tốc Keangnam
-                      </div>
-                      <div class="text-xs text-success flex items-center gap-1" style="margin-top: 4px;">
-                        <span class="material-symbols-outlined icon-xs">task_alt</span> Bưu tá sẽ chờ quý khách mở hộp đồng kiểm ngoại quan 15 phút
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex items-center gap-2">
-                    <button class="btn btn-secondary btn-sm btn-call-shipper" type="button" data-phone="0981 234 567" data-name="Nguyễn Văn Hùng">
-                      <span class="material-symbols-outlined icon-xs text-success">call</span> Gọi Bưu Tá
-                    </button>
-                  </div>
-                </div>
+              buttonsHtml = `
+                <button class="btn btn-secondary btn-sm btn-view-track" type="button" data-order-id="${orderId}">
+                  <span class="material-symbols-outlined icon-xs">route</span> Theo Dõi Vận Đơn
+                </button>
+                <a class="btn btn-secondary btn-sm" href="order_detail.html?id=${encodeURIComponent(orderId)}">
+                  <span class="material-symbols-outlined icon-xs">visibility</span> Xem Chi Tiết
+                </a>
+                <button class="btn btn-primary btn-sm btn-confirm-satisfied" type="button" data-order-id="${orderId}">
+                  <span class="material-symbols-outlined icon-xs">task_alt</span> Đã Nhận Được Hàng
+                </button>
               `;
-            }
-
-            // Thanh Stepper tiến trình (Nếu không bị hủy)
-            let stepperHtml = "";
-            if (!isCancelled) {
-              stepperHtml = `
-                <div class="order-tracking-bar">
-                  <div class="order-track-step ${stepIndex >= 1 ? (stepIndex > 1 ? "done" : "active") : ""}">
-                    <div class="order-track-circle">${stepIndex > 1 ? "✓" : "1"}</div>
-                    <div>
-                      <strong class="block">Đặt Đơn Hàng</strong>
-                      <span class="text-xs text-muted">Đã tiếp nhận</span>
-                    </div>
-                  </div>
-                  <div class="order-track-step ${stepIndex >= 2 ? (stepIndex > 2 ? "done" : "active") : ""}">
-                    <div class="order-track-circle">${stepIndex > 2 ? "✓" : "2"}</div>
-                    <div>
-                      <strong class="block">Test 15 Bước</strong>
-                      <span class="text-xs text-muted">Dán tem niêm phong</span>
-                    </div>
-                  </div>
-                  <div class="order-track-step ${stepIndex >= 3 ? (stepIndex > 3 ? "done" : "active") : ""}">
-                    <div class="order-track-circle">${stepIndex > 3 ? "✓" : "3"}</div>
-                    <div>
-                      <strong class="block">Đang Giao Tận Tay</strong>
-                      <span class="text-xs text-muted">Bưu tá đang phát</span>
-                    </div>
-                  </div>
-                  <div class="order-track-step ${stepIndex >= 4 ? "done" : ""}">
-                    <div class="order-track-circle">${stepIndex >= 4 ? "✓" : "4"}</div>
-                    <div>
-                      <strong class="block">Đồng Kiểm Xong</strong>
-                      <span class="text-xs text-muted">Bảo hành 12-24T</span>
-                    </div>
-                  </div>
-                </div>
+            } else if (isCompleted) {
+              buttonsHtml = `
+                <a class="btn btn-ghost btn-sm text-danger" href="dispute.html?orderId=${encodeURIComponent(orderId)}">
+                  <span class="material-symbols-outlined icon-xs">assignment_return</span> Yêu Cầu Trả Hàng
+                </a>
+                <button class="btn btn-ghost btn-sm btn-view-invoice" type="button" data-order-id="${orderId}">
+                  <span class="material-symbols-outlined icon-xs text-secondary">receipt_long</span> Hóa Đơn VAT
+                </button>
+                <a class="btn btn-secondary btn-sm" href="order_detail.html?id=${encodeURIComponent(orderId)}">
+                  <span class="material-symbols-outlined icon-xs">visibility</span> Xem Chi Tiết
+                </a>
+                <button class="btn btn-outlined btn-sm btn-reviewed" type="button" data-order-id="${orderId}">
+                  <span class="material-symbols-outlined icon-xs text-warning">star</span> Đánh Giá
+                </button>
+                <button class="btn btn-primary btn-sm btn-reorder" type="button" data-order-id="${orderId}">
+                  <span class="material-symbols-outlined icon-xs">replay</span> Mua Lại
+                </button>
               `;
-            } else {
-              stepperHtml = `
-                <div class="panel p-4 mb-4 flex items-center justify-between gap-3 text-xs" style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: var(--radius-lg);">
-                  <div class="flex items-center gap-3 text-danger">
-                    <span class="material-symbols-outlined icon-md">cancel</span>
-                    <div>
-                      <strong style="font-size: 13px;">Đơn hàng đã được hủy bỏ</strong>
-                      <div class="text-muted" style="margin-top: 4px;">Lý do: ${order.cancelReason || "Người mua yêu cầu hủy đơn"} • Thời gian hủy: ${formatDateStr(order.cancelledAt || order.createdAt)}</div>
-                    </div>
-                  </div>
-                  <span class="badge badge-outlined">Hoàn tất hủy</span>
-                </div>
+            } else if (isPending) {
+              buttonsHtml = `
+                <button class="btn btn-ghost btn-sm text-danger btn-cancel-order" type="button" data-order-id="${orderId}">
+                  <span class="material-symbols-outlined icon-xs">cancel</span> Hủy Đơn Hàng
+                </button>
+                <a class="btn btn-secondary btn-sm" href="order_detail.html?id=${encodeURIComponent(orderId)}">
+                  <span class="material-symbols-outlined icon-xs">visibility</span> Xem Chi Tiết
+                </a>
+                <button class="btn btn-primary btn-sm btn-view-track" type="button" data-order-id="${orderId}">
+                  <span class="material-symbols-outlined icon-xs">route</span> Xem Tiến Độ
+                </button>
+              `;
+            } else if (isCancelled) {
+              buttonsHtml = `
+                <span class="text-xs text-muted hide-sm" style="margin-right: 6px;">Lý do: ${order.cancelReason || "Người mua hủy đơn"}</span>
+                <a class="btn btn-secondary btn-sm" href="order_detail.html?id=${encodeURIComponent(orderId)}">
+                  <span class="material-symbols-outlined icon-xs">visibility</span> Xem Chi Tiết
+                </a>
+                <button class="btn btn-primary btn-sm btn-reorder" type="button" data-order-id="${orderId}">
+                  <span class="material-symbols-outlined icon-xs">replay</span> Mua Lại
+                </button>
+              `;
+            } else if (isDispute) {
+              buttonsHtml = `
+                <span class="text-xs text-success hide-sm" style="margin-right: 6px;">Đã hoàn ${formatMoney(order.refundAmount || order.total || 0)}</span>
+                <a class="btn btn-secondary btn-sm" href="dispute.html?orderId=${encodeURIComponent(orderId)}">
+                  <span class="material-symbols-outlined icon-xs">gavel</span> Khiếu Nại
+                </a>
+                <a class="btn btn-primary btn-sm" href="order_detail.html?id=${encodeURIComponent(orderId)}">
+                  <span class="material-symbols-outlined icon-xs">visibility</span> Xem Chi Tiết
+                </a>
               `;
             }
 
             return `
-              <div class="order-card" data-order-id="${orderId}">
-                <!-- ĐẦU CARD: MÃ ĐƠN, NGÀY ĐẶT & TRẠNG THÁI -->
-                <div class="order-card-header">
-                  <div class="flex items-center gap-3 flex-wrap">
-                    <div class="flex items-center gap-1.5">
-                      <a href="order_detail.html?id=${encodeURIComponent(orderId)}" class="mono text-secondary fw-700 text-hover-primary" title="Xem chi tiết đơn hàng #${orderId}">Mã Đơn: ${orderId}</a>
-                      <button class="btn-copy-code btn-copy-order-code" type="button" data-code="${orderId}" title="Sao chép mã đơn">
-                        <span class="material-symbols-outlined icon-xs">content_copy</span>
+              <div class="shopee-order-card" data-order-id="${orderId}">
+                <!-- 1. ĐẦU CARD: TÊN SHOP, CHAT, XEM SHOP & TRẠNG THÁI GIAO HÀNG -->
+                <div class="shopee-card-head">
+                  <div class="shopee-shop-info">
+                    ${shopBadgeHtml}
+                    <span class="shopee-shop-name">${primarySeller}</span>
+                    <div class="shopee-shop-actions">
+                      <button class="shopee-btn-shop btn-chat-shop" type="button" data-seller="${primarySeller}" title="Nhắn tin với người bán">
+                        <span class="material-symbols-outlined" style="font-size: 13px;">chat</span> Chat
                       </button>
+                      <a class="shopee-btn-shop" href="../shop/catalog.html?seller=${encodeURIComponent(primarySeller)}" title="Ghé thăm cửa hàng">
+                        <span class="material-symbols-outlined" style="font-size: 13px;">storefront</span> Xem Shop
+                      </a>
                     </div>
-                    <span class="text-faint">•</span>
-                    <span class="text-xs text-muted">Đặt lúc: ${formatDateStr(order.createdAt)}</span>
-                    <span class="text-faint">•</span>
-                    ${paymentBadgeHtml}
                   </div>
-                  ${statusBadgeHtml}
+                  <div class="shopee-status-group">
+                    ${deliveryHintHtml}
+                    <span class="shopee-divider">|</span>
+                    ${statusTagHtml}
+                  </div>
                 </div>
 
-                <!-- STEPPER TIẾN TRÌNH VẬN CHUYỂN -->
-                ${stepperHtml}
-
-                <!-- BANNER SHIPPER NẾU ĐANG GIAO -->
-                ${shipperDispatchHtml}
-
-                <!-- DANH SÁCH MẶT HÀNG -->
-                <div class="order-items-wrapper">
+                <!-- 2. THÂN CARD: DANH SÁCH MẶT HÀNG CLICKABLE -->
+                <div class="shopee-card-body">
                   ${itemsHtml}
                 </div>
 
-                <!-- KHỐI 2 CỘT: THÔNG TIN GIAO NHẬN & TỔNG THANH TOÁN (CÁCH ĐỀU NHAU) -->
-                <div class="order-meta-grid">
-                  <div class="order-meta-card">
-                    <div class="order-meta-title">
-                      <span class="material-symbols-outlined icon-sm text-primary">local_shipping</span> Thông Tin Giao Nhận &amp; Đồng Kiểm:
+                <!-- 3. CHÂN CARD: THÀNH TIỀN & CỤM NÚT HÀNH ĐỘNG -->
+                <div class="shopee-card-foot">
+                  <div class="shopee-total-row">
+                    <div class="flex items-center gap-2 flex-wrap">
+                      <span class="shopee-pay-badge">
+                        <span class="material-symbols-outlined" style="font-size: 14px;">payments</span>
+                        ${paymentLabel}
+                      </span>
+                      <span class="text-faint">•</span>
+                      <span class="text-xs text-muted">
+                        Mã đơn: <a href="order_detail.html?id=${encodeURIComponent(orderId)}" class="mono fw-700 text-hover-primary" title="Xem chi tiết đơn hàng">#${orderId}</a>
+                        <button class="btn-copy-code btn-copy-order-code" type="button" data-code="${orderId}" title="Sao chép mã đơn">
+                          <span class="material-symbols-outlined" style="font-size: 12px;">content_copy</span>
+                        </button>
+                      </span>
+                      <span class="text-faint">•</span>
+                      <span class="text-xs text-muted">${formatDateStr(order.createdAt)}</span>
                     </div>
-                    <div class="order-info-line">
-                      <span class="text-muted">Đơn vị vận chuyển:</span>
-                      <strong><span class="text-secondary">${carrier}</span> (<span class="mono">${trackingCode}</span>)</strong>
-                    </div>
-                    <div class="order-info-line">
-                      <span class="text-muted">Người nhận máy:</span>
-                      <strong>${recipientName} (${recipientPhone})</strong>
-                    </div>
-                    <div class="order-info-line" style="align-items: flex-start;">
-                      <span class="text-muted" style="white-space: nowrap; margin-right: 12px;">Địa chỉ nhận:</span>
-                      <strong class="text-right" style="word-break: break-word;">${fullAddress}</strong>
-                    </div>
-                    ${
-                      order.note
-                        ? `<div class="order-info-line pt-1 text-muted italic" style="border-top: 1px dashed rgba(255,255,255,0.06);">
-                             <span>Ghi chú bưu tá:</span>
-                             <span class="text-white">"${order.note}"</span>
-                           </div>`
-                        : ""
-                    }
-                  </div>
-
-                  <div class="order-meta-card">
-                    <div class="order-meta-title">
-                      <span class="material-symbols-outlined icon-sm text-success">receipt</span> Chi Phí &amp; Quyền Lợi Khách Hàng:
-                    </div>
-                    <div class="order-info-line">
-                      <span class="text-muted">Tiền hàng (${(order.items || []).length} sản phẩm):</span>
-                      <strong class="mono">${formatMoney(order.subtotal || order.total || 0)}</strong>
-                    </div>
-                    <div class="order-info-line">
-                      <span class="text-muted">Phí vận chuyển bưu tá:</span>
-                      <span class="mono text-success">${order.shippingFee ? formatMoney(order.shippingFee) : "Miễn Phí (Freeship)"}</span>
-                    </div>
-                    ${
-                      order.discount
-                        ? `<div class="order-info-line">
-                             <span class="text-muted">Voucher giảm giá:</span>
-                             <span class="mono text-success">-${formatMoney(order.discount)}</span>
-                           </div>`
-                        : ""
-                    }
-                    <div class="order-info-line pt-2" style="border-top: 1px dashed var(--border); margin-top: 6px;">
-                      <span class="fw-700 text-white" style="font-size: 13px;">Tổng tiền thanh toán:</span>
-                      <strong class="mono text-gradient text-sm" style="font-size: 1.25rem;">${formatMoney(order.total || 0)}</strong>
+                    <div class="flex items-center gap-2">
+                      <span class="text-xs text-muted">Thành tiền:</span>
+                      <strong class="shopee-total-amount">${formatMoney(order.total || 0)}</strong>
                     </div>
                   </div>
-                </div>
 
-                <!-- CỤM NÚT THAO TÁC CỦA NGƯỜI MUA CHUẨN E-COMMERCE -->
-                <div class="order-card-actions">
-                  <div class="flex items-center gap-2.5 flex-wrap">
-                    <a class="btn btn-secondary btn-sm" href="order_detail.html?id=${encodeURIComponent(orderId)}">
-                      <span class="material-symbols-outlined icon-xs text-secondary">visibility</span> Chi Tiết Đơn Hàng
-                    </a>
-                    <button class="btn btn-ghost btn-sm btn-quick-view-detail" type="button" data-order-id="${orderId}" title="Xem nhanh hồ sơ kiểm định 15 bước">
-                      <span class="material-symbols-outlined icon-xs">preview</span> Xem Nhanh
-                    </button>
-                    <button class="btn btn-secondary btn-sm btn-view-track" type="button" data-order-id="${orderId}">
-                      <span class="material-symbols-outlined icon-xs text-primary">route</span> Theo Dõi Hành Trình
-                    </button>
-                    ${
-                      isCompleted
-                        ? `<button class="btn btn-ghost btn-sm btn-view-invoice" type="button" data-order-id="${orderId}">
-                             <span class="material-symbols-outlined icon-xs text-secondary">receipt_long</span> Xem Hóa Đơn VAT
-                           </button>`
-                        : ""
-                    }
-                    ${
-                      !isCancelled
-                        ? `<a class="btn btn-ghost btn-sm text-danger" href="dispute.html?orderId=${encodeURIComponent(orderId)}">
-                             <span class="material-symbols-outlined icon-xs">report_problem</span> Khiếu Nại / Đổi Trả
-                           </a>`
-                        : ""
-                    }
-                  </div>
-
-                  <div class="flex items-center gap-2.5 flex-wrap">
-                    ${
-                      isPending
-                        ? `<button class="btn btn-ghost btn-sm text-danger btn-cancel-order" type="button" data-order-id="${orderId}">
-                             <span class="material-symbols-outlined icon-xs">cancel</span> Hủy Đơn Hàng
-                           </button>`
-                        : ""
-                    }
-                    <button class="btn btn-secondary btn-sm btn-reorder" type="button" data-order-id="${orderId}">
-                      <span class="material-symbols-outlined icon-xs">replay</span> Mua Lại
-                    </button>
-                    ${
-                      isDelivering
-                        ? `<button class="btn btn-primary btn-sm btn-confirm-satisfied" type="button" data-order-id="${orderId}">
-                             <span class="material-symbols-outlined icon-xs">task_alt</span> Xác Nhận Đã Nhận &amp; Hài Lòng
-                           </button>`
-                        : ""
-                    }
-                    ${
-                      isCompleted
-                        ? `<button class="btn btn-outlined btn-sm btn-reviewed" type="button" data-order-id="${orderId}">
-                             <span class="material-symbols-outlined icon-xs text-warning">star</span> Đánh Giá Sản Phẩm
-                           </button>`
-                        : ""
-                    }
+                  <div class="shopee-actions-row">
+                    <div class="shopee-order-meta hide-sm">
+                      <span class="flex items-center gap-1 text-success">
+                        <span class="material-symbols-outlined" style="font-size: 15px;">verified_user</span> Được đồng kiểm khi nhận hàng
+                      </span>
+                      ${order.trackingCode ? `<span class="text-faint">•</span><span class="mono text-xs text-muted">Mã vận đơn: <strong>${order.trackingCode}</strong></span>` : ""}
+                    </div>
+                    <div class="shopee-buttons-group">
+                      ${buttonsHtml}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1558,6 +1937,19 @@
 
         // 4. Gắn các sự kiện tương tác
         function bindOrderEvents() {
+          // Nút Chat với shop
+          document.querySelectorAll(".btn-chat-shop").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const seller = btn.dataset.seller || "Shop";
+              if (typeof Toast !== "undefined" && Toast.info) {
+                Toast.info("Đang kết nối trung tâm tin nhắn với " + seller + "...");
+              } else if (typeof Utils !== "undefined" && Utils.showToast) {
+                Utils.showToast("Đang kết nối trung tâm tin nhắn với " + seller + "...", "info");
+              } else {
+                alert("Đang kết nối trung tâm tin nhắn với " + seller + "...");
+              }
+            });
+          });
           // Nút Xem nhanh Chi Tiết Đơn Hàng (Modal preview)
           document.querySelectorAll(".btn-quick-view-detail").forEach((btn) => {
             btn.addEventListener("click", () => {

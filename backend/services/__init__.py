@@ -11,6 +11,7 @@ from services.escrow_service import escrow_service, EscrowService
 from services.dispute_service import dispute_service, DisputeService
 from services.interaction_service import interaction_service, InteractionService
 from services.admin_service import admin_service, AdminService
+from services.ai_agent_service import AiAgentService
 
 __all__ = [
     "auth_service",

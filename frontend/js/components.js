@@ -1012,26 +1012,27 @@
       var bp = detectBasePath();
       var html = items.map(function (item) {
         var prod = item.product || item || {};
-        var id = prod.id || item.id || "";
+        var prodId = item.id || prod.id || "";
+        if (typeof PRODUCTS !== "undefined" && Array.isArray(PRODUCTS) && prodId) {
+          var matched = PRODUCTS.find(function (p) {
+            return String(p.id).toLowerCase() === String(prodId).toLowerCase();
+          });
+          if (matched) prod = matched;
+        }
         var name = prod.name || prod.title || item.name || "Sản phẩm";
         var price = item.price || prod.price || 0;
         var rawImg = prod.img || item.img || "";
-        var img = "";
-        if (typeof window !== "undefined" && typeof window.resolveAssetUrl === "function") {
-          img = window.resolveAssetUrl(rawImg);
-        } else {
-          img = resolveUrl(rawImg, bp);
-        }
-        var isMall = (prod.type === "mall" || item.type === "mall");
-        var badgeText = isMall ? "Brand Mall" : (prod.condText || item.condition || (prod.cond ? prod.cond + "% Mới" : "Like New"));
+        var img = resolveUrl(rawImg, bp);
+        var isMall = (prod.type || item.type) === "mall";
+        var badgeText = isMall ? "Brand Mall" : (item.condition || prod.condText || (prod.cond ? prod.cond + "% Mới" : "Like New"));
         var badgeClass = isMall ? "badge badge-solid" : "badge badge-secondary";
         var variantText = item.variant ? '<span class="text-xs text-muted block mt-0.5">' + escapeHtml(item.variant) + '</span>' : '';
         var detailUrl = isMall
-          ? resolveUrl("pages/shop/product_new.html?id=" + encodeURIComponent(id), bp)
-          : resolveUrl("pages/shop/product_used.html?id=" + encodeURIComponent(id), bp);
+          ? resolveUrl("pages/shop/product_new.html?id=" + encodeURIComponent(prodId), bp)
+          : resolveUrl("pages/shop/product_used.html?id=" + encodeURIComponent(prodId), bp);
 
         return (
-          '<div class="drawer-cart-item" data-id="' + escapeHtml(id) + '" data-variant="' + escapeHtml(item.variant || "") + '">' +
+          '<div class="drawer-cart-item" data-id="' + escapeHtml(prodId) + '" data-variant="' + escapeHtml(item.variant || "") + '">' +
           '  <a href="' + detailUrl + '" class="drawer-cart-item-img">' +
           '    <img src="' + img + '" alt="' + escapeHtml(name) + '" loading="lazy" />' +
           '  </a>' +
@@ -1785,9 +1786,11 @@
   };
 
   /* =====================================================================
-     TASK: FLOATING LIVE CHAT SUPPORT 24/7 (AI Trợ Lý & CSKH)
+     TASK: FLOATING LIVE CHAT SUPPORT 24/7 (AI Trợ Lý Thông Minh & CSKH)
      ===================================================================== */
   var LiveChat = {
+    history: [],
+
     FAQS: [
       {
         keys: ["15 bước", "kiểm định", "check", "phần cứng", "zin"],
@@ -1811,10 +1814,35 @@
       }
     ],
 
+    getApiUrl: function () {
+      if (typeof window !== "undefined") {
+        if (typeof API !== "undefined" && API.BASE_URL) {
+          return API.BASE_URL + "/ai/chat";
+        }
+        var port = window.location.port;
+        if (port === "5500" || port === "3000" || port === "5173" || window.location.protocol === "file:") {
+          return "http://127.0.0.1:8000/api/v1/ai/chat";
+        }
+      }
+      return "/api/v1/ai/chat";
+    },
+
+    formatBotText: function (raw) {
+      if (!raw) return "";
+      var safe = escapeHtml(raw);
+      // Format **bold**
+      safe = safe.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      // Format bullet lists * text or - text
+      safe = safe.replace(/(?:^|\n)[*-]\s+(.+)/g, '<div class="chat-bullet-item">• $1</div>');
+      // Format newlines
+      safe = safe.replace(/\n/g, '<br/>');
+      return safe;
+    },
+
     createHTML: function () {
       return (
         '<div class="live-chat-widget" id="liveChatWidget">' +
-        '  <button class="live-chat-floating-btn" id="liveChatFloatingBtn" type="button" aria-label="Mở cửa sổ hỗ trợ trực tuyến" title="Hỗ trợ trực tuyến 24/7">' +
+        '  <button class="live-chat-floating-btn" id="liveChatFloatingBtn" type="button" aria-label="Mở cửa sổ hỗ trợ trực tuyến" title="Hỗ trợ trực tuyến AI 24/7">' +
         '    <span class="material-symbols-outlined chat-icon">support_agent</span>' +
         '    <span class="material-symbols-outlined close-icon hidden">close</span>' +
         '    <span class="chat-pulse-badge"></span>' +
@@ -1827,8 +1855,11 @@
         '          <span class="online-indicator"></span>' +
         '        </div>' +
         '        <div>' +
-        '          <h5 class="m-0 text-sm fw-700">HYBRID Assistant 24/7</h5>' +
-        '          <small class="text-success flex items-center gap-1">● Trực tuyến hỗ trợ ngay</small>' +
+        '          <div class="flex items-center gap-2">' +
+        '            <h5 class="m-0 text-sm fw-700">HYBRID Assistant 24/7</h5>' +
+        '            <span class="chat-agent-badge"><span class="material-symbols-outlined" style="font-size: 13px;">auto_awesome</span>AI Agent</span>' +
+        '          </div>' +
+        '          <small class="text-success flex items-center gap-1">● Trực tuyến hỗ trợ thông minh 24/7</small>' +
         '        </div>' +
         '      </div>' +
         '      <button class="icon-btn icon-btn-sm" id="chatMinimizeBtn" type="button" aria-label="Thu nhỏ">' +
@@ -1837,7 +1868,7 @@
         '    </div>' +
         '    <div class="chat-messages" id="chatMessages">' +
         '      <div class="chat-msg bot-msg">' +
-        '        <p>Xin chào quý khách! 👋 Tôi là trợ lý ảo HYBRID.STORE. Quý khách cần hỗ trợ giải đáp về Brand Mall hàng mới hay Chợ Đồ Cũ Like New kiểm định 15 bước?</p>' +
+        '        <p>Xin chào quý khách! 👋 Tôi là <strong>HYBRID AI Assistant</strong>. Tôi có thể tư vấn quy trình kiểm định 15 bước, quỹ bảo vệ Escrow 48h, tư vấn gợi ý sản phẩm theo mức giá, hoặc tra cứu đơn hàng &amp; bảo hành. Quý khách cần hỗ trợ gì hôm nay?</p>' +
         '        <span class="msg-time">Vừa xong</span>' +
         '      </div>' +
         '      <div class="chat-quick-replies" id="chatQuickReplies">' +
@@ -1845,10 +1876,11 @@
         '        <button type="button" class="quick-pill" data-query="Chính sách bảo hành và đổi trả">🛡️ Chính sách bảo hành &amp; đổi trả</button>' +
         '        <button type="button" class="quick-pill" data-query="Cách trả giá với người bán">🤝 Cách trả giá / thương lượng</button>' +
         '        <button type="button" class="quick-pill" data-query="Hình thức thanh toán Napas QR">💳 Thanh toán Napas &amp; QR</button>' +
+        '        <button type="button" class="quick-pill" data-query="Tư vấn iPhone dưới 15 triệu">📱 Tư vấn iPhone dưới 15tr</button>' +
         '      </div>' +
         '    </div>' +
         '    <form class="chat-input-bar" id="chatForm">' +
-        '      <input type="text" id="chatInput" placeholder="Nhập câu hỏi của quý khách..." autocomplete="off" />' +
+        '      <input type="text" id="chatInput" placeholder="Hỏi AI: Tư vấn sản phẩm, kiểm định, đơn hàng..." autocomplete="off" />' +
         '      <button type="submit" class="btn btn-primary btn-sm" id="chatSendBtn" aria-label="Gửi tin">' +
         '        <span class="material-symbols-outlined icon-sm">send</span>' +
         '      </button>' +
@@ -1920,10 +1952,71 @@
         chatMsgs.scrollTop = chatMsgs.scrollHeight;
       }
 
+      function appendBotMessage(replyText, products, actions) {
+        if (!chatMsgs) return;
+        var div = document.createElement("div");
+        div.className = "chat-msg bot-msg";
+
+        var contentHtml = '<p>' + LiveChat.formatBotText(replyText) + '</p>';
+
+        // Thẻ gợi ý sản phẩm mini (nếu AI tư vấn được sản phẩm phù hợp)
+        if (Array.isArray(products) && products.length > 0) {
+          contentHtml += '<div class="chat-product-recommend-box">';
+          contentHtml += '  <div class="chat-product-recommend-title"><span class="material-symbols-outlined" style="font-size: 15px; color: var(--color-primary, #6366f1);">recommend</span> Gợi ý dành cho bạn:</div>';
+          for (var i = 0; i < products.length; i++) {
+            var p = products[i];
+            var pUrl = p.url || ('product-detail.html?id=' + encodeURIComponent(p.id || ''));
+            var pImg = p.thumbnail || p.img || 'images/products/iphone-15-pro-max.png';
+            var pName = escapeHtml(p.name || 'Sản phẩm HYBRID');
+            var pPrice = escapeHtml(p.price_display || (p.price ? Number(p.price).toLocaleString("vi-VN") + "đ" : "Liên hệ"));
+            var pBadge = p.badge ? '<span class="badge ' + (p.badge.indexOf('Like New') !== -1 ? 'badge-amber' : 'badge-primary') + '" style="font-size: 10px; padding: 2px 6px;">' + escapeHtml(p.badge) + '</span>' : '';
+            var pCond = p.condition ? '<span class="text-xs text-muted" style="margin-left: 4px;">(' + escapeHtml(p.condition) + ')</span>' : '';
+
+            contentHtml += '<a href="' + pUrl + '" class="chat-product-mini-card">';
+            contentHtml += '  <img src="' + pImg + '" class="chat-product-mini-thumb" alt="' + pName + '" onerror="this.src=\'images/products/iphone-15-pro-max.png\'" />';
+            contentHtml += '  <div class="chat-product-mini-info">';
+            contentHtml += '    <div class="chat-product-mini-name">' + pName + '</div>';
+            contentHtml += '    <div class="chat-product-mini-meta">';
+            contentHtml += '      <span class="chat-product-mini-price">' + pPrice + '</span>';
+            contentHtml += '      ' + pBadge + pCond;
+            contentHtml += '    </div>';
+            contentHtml += '  </div>';
+            contentHtml += '  <span class="material-symbols-outlined" style="font-size: 18px; color: var(--color-text-muted, #94a3b8); margin-left: auto;">chevron_right</span>';
+            contentHtml += '</a>';
+          }
+          contentHtml += '</div>';
+        }
+
+        // Action gợi ý tương tác nhanh
+        if (Array.isArray(actions) && actions.length > 0) {
+          contentHtml += '<div class="chat-action-chips">';
+          for (var j = 0; j < actions.length; j++) {
+            var act = actions[j];
+            var actLabel = escapeHtml(act.label || 'Xem ngay');
+            var actUrlAttr = act.url ? ' data-url="' + escapeHtml(act.url) + '"' : '';
+            var actQueryAttr = act.query ? ' data-query="' + escapeHtml(act.query) + '"' : '';
+            contentHtml += '<button type="button" class="action-pill"' + actUrlAttr + actQueryAttr + '>';
+            contentHtml += actLabel;
+            contentHtml += '</button>';
+          }
+          contentHtml += '</div>';
+        }
+
+        contentHtml += '<span class="msg-time">Vừa xong</span>';
+        div.innerHTML = contentHtml;
+        chatMsgs.appendChild(div);
+        chatMsgs.scrollTop = chatMsgs.scrollHeight;
+      }
+
       function handleUserSend(text) {
         if (!text || !text.trim()) return;
         var trimmed = text.trim();
         appendMessage("user", trimmed);
+
+        LiveChat.history.push({ role: "user", content: trimmed });
+        if (LiveChat.history.length > 10) {
+          LiveChat.history = LiveChat.history.slice(-10);
+        }
 
         var typingDiv = document.createElement("div");
         typingDiv.className = "chat-msg bot-msg chat-typing";
@@ -1931,11 +2024,71 @@
         chatMsgs.appendChild(typingDiv);
         chatMsgs.scrollTop = chatMsgs.scrollHeight;
 
-        setTimeout(function () {
-          typingDiv.remove();
-          var reply = LiveChat.getBotReply(trimmed);
-          appendMessage("bot", reply);
-        }, 500);
+        var apiUrl = LiveChat.getApiUrl();
+        var requestPayload = {
+          message: trimmed,
+          history: LiveChat.history.slice(0, -1),
+          context: {
+            current_page: (typeof window !== "undefined" && window.location) ? window.location.pathname : "",
+            user_id: (typeof Auth !== "undefined" && Auth.currentUser) ? (Auth.currentUser.id || null) : null
+          }
+        };
+
+        var hasFinished = false;
+        function finishWithReply(replyText, products, actions) {
+          if (hasFinished) return;
+          hasFinished = true;
+          if (typingDiv && typingDiv.parentNode) {
+            typingDiv.remove();
+          }
+          appendBotMessage(replyText, products, actions);
+          LiveChat.history.push({ role: "assistant", content: replyText });
+          if (LiveChat.history.length > 10) {
+            LiveChat.history = LiveChat.history.slice(-10);
+          }
+        }
+
+        var timeoutId = setTimeout(function () {
+          if (!hasFinished) {
+            var fallbackReply = LiveChat.getBotReply(trimmed);
+            finishWithReply(fallbackReply, null, null);
+          }
+        }, 6500);
+
+        if (typeof fetch === "function") {
+          fetch(apiUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            },
+            body: JSON.stringify(requestPayload)
+          })
+          .then(function (res) {
+            if (!res.ok) {
+              throw new Error("HTTP " + res.status);
+            }
+            return res.json();
+          })
+          .then(function (data) {
+            clearTimeout(timeoutId);
+            var reply = (data && data.reply) ? data.reply : LiveChat.getBotReply(trimmed);
+            var prods = (data && data.products) ? data.products : null;
+            var acts = (data && (data.suggested_actions || data.actions)) ? (data.suggested_actions || data.actions) : null;
+            finishWithReply(reply, prods, acts);
+          })
+          .catch(function () {
+            clearTimeout(timeoutId);
+            var fallbackReply = LiveChat.getBotReply(trimmed);
+            finishWithReply(fallbackReply, null, null);
+          });
+        } else {
+          clearTimeout(timeoutId);
+          setTimeout(function () {
+            var fallbackReply = LiveChat.getBotReply(trimmed);
+            finishWithReply(fallbackReply, null, null);
+          }, 300);
+        }
       }
 
       if (chatForm && !chatForm.dataset.bound) {
@@ -1957,6 +2110,23 @@
           if (!pill) return;
           var q = pill.getAttribute("data-query");
           if (q) handleUserSend(q);
+        });
+      }
+
+      if (chatMsgs && !chatMsgs.dataset.boundClicks) {
+        chatMsgs.dataset.boundClicks = "true";
+        chatMsgs.addEventListener("click", function (e) {
+          var pill = e.target.closest(".action-pill, .quick-pill");
+          if (!pill) return;
+          var url = pill.getAttribute("data-url");
+          var query = pill.getAttribute("data-query");
+          if (url) {
+            window.location.href = url;
+            return;
+          }
+          if (query) {
+            handleUserSend(query);
+          }
         });
       }
     }

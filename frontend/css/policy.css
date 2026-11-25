@@ -685,3 +685,15 @@ body.light-theme .policy-callout-success {
   }
 }
 
+@media (max-width: 480px) {
+  .policy-stat-row {
+    grid-template-columns: 1fr;
+  }
+  .policy-body {
+    padding-inline: 12px !important;
+  }
+  .policy-toc {
+    padding: 12px 14px !important;
+  }
+}
+

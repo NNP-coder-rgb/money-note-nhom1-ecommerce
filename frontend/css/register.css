@@ -278,6 +278,22 @@
   }
 }
 
+@media (max-width: 480px) {
+  .auth-wrap {
+    padding-inline: 12px !important;
+  }
+  .auth-form {
+    padding: 18px 14px !important;
+    border-radius: var(--radius-lg) !important;
+  }
+  .auth-head h1 {
+    font-size: 1.35rem !important;
+  }
+  .role-card {
+    padding: 14px !important;
+  }
+}
+
 /* Chế độ Sáng / Light Theme */
 [data-theme="light"] .role-card,
 body.light-theme .role-card {

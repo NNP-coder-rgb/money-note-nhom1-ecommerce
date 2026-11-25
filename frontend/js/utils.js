@@ -1081,7 +1081,7 @@
         username: matchedUser ? matchedUser.username : cleanIdentifier.split("@")[0],
         email: matchedUser ? matchedUser.email : cleanIdentifier,
         fullName: matchedUser ? matchedUser.fullName : "Nguyễn Ngọc Phúc",
-        role: userRole,
+        role: (matchedUser && matchedUser.role) || (cleanIdentifier.toLowerCase().includes("admin") ? "admin" : userRole),
         phone: matchedUser ? matchedUser.phone : "0912 345 678",
         avatar: matchedUser ? matchedUser.avatar : "P",
         ekycStatus: matchedUser ? matchedUser.ekycStatus : "verified",

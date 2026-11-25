@@ -4,6 +4,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Đang Tải Chi Tiết Sản Phẩm | HYBRID.STORE</title>
+    <!-- Chống giật giao diện (Zero-FOUC Theme Init) -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("hybrid_theme") || "dark";
+          document.documentElement.setAttribute("data-theme", t);
+          if (t === "light") document.documentElement.classList.add("light-theme");
+        } catch (e) {}
+      })();
+    </script>
     <link rel="stylesheet" href="../../css/base.css" />
     <script src="../../js/mock_data.js"></script>
     <script src="../../js/product-detail-data.js"></script>

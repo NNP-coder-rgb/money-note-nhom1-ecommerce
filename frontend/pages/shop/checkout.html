@@ -376,16 +376,12 @@
           </a>
         </div>
 
-        <div class="header-trust-pills hide-md flex items-center gap-4 text-xs text-muted">
+        <div class="header-trust-pills hide-md flex items-center gap-2 text-xs text-muted">
           <span class="flex items-center gap-1 text-success fw-600">
-            <span class="material-symbols-outlined icon-sm">verified_user</span> Đồng kiểm 100% khi nhận hàng
+            <span class="material-symbols-outlined icon-sm">verified_user</span> Đồng kiểm 100%
           </span>
-          <span class="flex items-center gap-1 text-secondary fw-600">
-            <span class="material-symbols-outlined icon-sm">payments</span> Hỗ trợ COD &amp; Napas 24/7
-          </span>
-          <span class="flex items-center gap-1">
-            <span class="material-symbols-outlined icon-sm">support_agent</span> Hotline: 1900 8899
-          </span>
+          <span>•</span>
+          <span>Hotline: 1900 8899</span>
         </div>
 
         <div class="header-actions">
@@ -415,17 +411,9 @@
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="../../index.html">Trang Chủ</a></li>
             <li class="breadcrumb-item"><a href="cart.html">Giỏ Hàng</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Thanh Toán &amp; Xác Thực Đơn Hàng</li>
+            <li class="breadcrumb-item active" aria-current="page">Thanh Toán</li>
           </ol>
         </nav>
-        <div class="subnav-info hide-sm">
-          <span class="text-success flex items-center gap-1">
-            <span class="material-symbols-outlined icon-sm">verified</span> Bảo hiểm bưu gửi: 100%
-          </span>
-          <span class="text-secondary flex items-center gap-1">
-            <span class="material-symbols-outlined icon-sm">local_shipping</span> Hỗ trợ giao hỏa tốc 2 Giờ
-          </span>
-        </div>
       </div>
     </div>
 
@@ -438,7 +426,6 @@
           </div>
           <div class="cart-step-text">
             <strong>1. Giỏ Hàng</strong>
-            <small style="color: var(--success); font-weight: 600;">Đã xác nhận</small>
           </div>
         </div>
 
@@ -449,8 +436,7 @@
             <span class="material-symbols-outlined">payments</span>
           </div>
           <div class="cart-step-text">
-            <strong>2. Giao Hàng &amp; Thanh Toán</strong>
-            <small>Đang thực hiện</small>
+            <strong>2. Thanh Toán</strong>
           </div>
         </div>
 
@@ -462,7 +448,6 @@
           </div>
           <div class="cart-step-text">
             <strong>3. Hoàn Tất</strong>
-            <small>Đồng kiểm &amp; nhận máy</small>
           </div>
         </div>
       </div>
@@ -470,18 +455,13 @@
 
     <main class="container py-4">
       <!-- TIÊU ĐỀ TRANG -->
-      <div class="cart-header-bar mb-5 flex items-center justify-between flex-wrap gap-3">
-        <div>
-          <h1 class="cart-header-title">
-            <span class="material-symbols-outlined cart-title-icon">payments</span>
-            Thanh Toán &amp; Xác Thực Đơn Hàng
-          </h1>
-          <p class="cart-header-desc">
-            Chọn hình thức nhận hàng, phương thức thanh toán an toàn (COD hoặc Chuyển khoản Napas 24/7) và hoàn tất đơn hàng.
-          </p>
-        </div>
-        <div class="flex items-center gap-2 text-xs text-success fw-600 bg-surface px-3 py-1.5 rounded" style="border: 1px solid rgba(16, 185, 129, 0.3);">
-          <span class="material-symbols-outlined icon-sm">lock</span> Bảo Mật SSL 256-Bit • PCI-DSS
+      <div class="cart-header-bar mb-4 flex items-center justify-between flex-wrap gap-3">
+        <h1 class="cart-header-title m-0">
+          <span class="material-symbols-outlined cart-title-icon">payments</span>
+          Thanh Toán Đơn Hàng
+        </h1>
+        <div class="flex items-center gap-1.5 text-xs text-success fw-600 bg-surface px-3 py-1 rounded" style="border: 1px solid rgba(16, 185, 129, 0.3);">
+          <span class="material-symbols-outlined icon-xs">lock</span> Bảo Mật SSL 256-Bit
         </div>
       </div>
 
@@ -496,26 +476,23 @@
             <section class="panel p-5 mb-4">
               <h2 class="checkout-section-title">
                 <span class="material-symbols-outlined text-primary">person_pin_circle</span>
-                1. Thông Tin Nhận Hàng &amp; Địa Chỉ Giao
+                1. Địa Chỉ Nhận Hàng
               </h2>
 
               <!-- Chọn nhanh địa chỉ mẫu / đã lưu -->
               <div class="mb-3">
-                <div class="text-xs text-muted mb-2 fw-600 flex items-center gap-1">
-                  <span class="material-symbols-outlined icon-xs">bookmark</span> Địa chỉ gợi ý sẵn (Bấm để điền nhanh):
-                </div>
                 <div class="saved-address-pills" id="savedAddressPills">
                   <button type="button" class="address-pill-btn active" data-addr-id="addr1">
                     <span class="material-symbols-outlined icon-xs">apartment</span>
-                    <span>Hà Nội: Keangnam Landmark 72 (Mặc định)</span>
+                    <span>Keangnam Landmark 72 (Mặc định)</span>
                   </button>
                   <button type="button" class="address-pill-btn" data-addr-id="addr2">
                     <span class="material-symbols-outlined icon-xs">home</span>
-                    <span>TP.HCM: Bitexco Financial Tower, Q.1</span>
+                    <span>Bitexco Financial Tower, Q.1</span>
                   </button>
                   <button type="button" class="address-pill-btn" data-addr-id="custom">
                     <span class="material-symbols-outlined icon-xs">edit_location</span>
-                    <span>+ Nhập địa chỉ khác</span>
+                    <span>+ Địa chỉ khác</span>
                   </button>
                 </div>
               </div>
@@ -523,12 +500,12 @@
               <!-- Form nhập thông tin người nhận -->
               <div class="form-row">
                 <div class="form-group">
-                  <label class="form-label text-xs fw-600" for="recipientName">Họ và tên người nhận (*)</label>
-                  <input class="input" id="recipientName" type="text" placeholder="Ví dụ: Nguyễn Văn A" value="Nguyễn Ngọc Phúc" required />
+                  <label class="form-label text-xs fw-600" for="recipientName">Họ và tên (*)</label>
+                  <input class="input" id="recipientName" type="text" placeholder="Nguyễn Văn A" value="Nguyễn Ngọc Phúc" required />
                 </div>
                 <div class="form-group">
-                  <label class="form-label text-xs fw-600" for="recipientPhone">Số điện thoại nhận hàng (*)</label>
-                  <input class="input mono" id="recipientPhone" type="tel" placeholder="Ví dụ: 0384416977 (10 số)" value="0384416977" required />
+                  <label class="form-label text-xs fw-600" for="recipientPhone">Số điện thoại (*)</label>
+                  <input class="input mono" id="recipientPhone" type="tel" placeholder="0384416977" value="0384416977" required />
                   <small class="text-xs text-danger hidden" id="phoneErrorMsg">Số điện thoại không hợp lệ (cần 10 số, bắt đầu 03, 05, 07, 08, 09)</small>
                 </div>
               </div>
@@ -562,28 +539,28 @@
               </div>
 
               <div class="form-group mb-3">
-                <label class="form-label text-xs fw-600" for="recipientAddress">Số nhà, tên đường, ngõ/ngách chi tiết (*)</label>
-                <textarea class="textarea" id="recipientAddress" rows="2" placeholder="Ví dụ: Tầng 18, Tòa Keangnam Landmark 72, Đường Phạm Hùng" required>Tầng 18, Tòa Keangnam Landmark 72, Đường Phạm Hùng</textarea>
+                <label class="form-label text-xs fw-600" for="recipientAddress">Địa chỉ chi tiết (*)</label>
+                <textarea class="textarea" id="recipientAddress" rows="2" placeholder="Số nhà, tên đường, tòa nhà..." required>Tầng 18, Tòa Keangnam Landmark 72, Đường Phạm Hùng</textarea>
               </div>
 
               <!-- Phân loại địa chỉ giao -->
               <div class="form-group mb-3">
-                <label class="form-label text-xs fw-600">Loại địa chỉ giao hàng:</label>
+                <label class="form-label text-xs fw-600">Loại địa chỉ:</label>
                 <div class="addr-type-btn-group">
                   <button type="button" class="addr-type-btn active" data-type="office">
                     <span class="material-symbols-outlined icon-xs">apartment</span>
-                    <span>Văn Phòng (Giờ hành chính: 8h00 - 18h00)</span>
+                    <span>Văn Phòng</span>
                   </button>
                   <button type="button" class="addr-type-btn" data-type="home">
                     <span class="material-symbols-outlined icon-xs">home</span>
-                    <span>Nhà Riêng (Tất cả các khung giờ)</span>
+                    <span>Nhà Riêng</span>
                   </button>
                 </div>
               </div>
 
               <div class="form-group mb-0">
-                <label class="form-label text-xs fw-600" for="orderNote">Ghi chú cho bưu tá (Tùy chọn):</label>
-                <input class="input input-sm" id="orderNote" type="text" placeholder="Ví dụ: Gọi điện trước khi giao 15 phút, giao giờ hành chính..." />
+                <label class="form-label text-xs fw-600" for="orderNote">Ghi chú giao hàng (tùy chọn):</label>
+                <input class="input input-sm" id="orderNote" type="text" placeholder="Ví dụ: Gọi điện trước khi giao..." />
               </div>
             </section>
 
@@ -591,7 +568,7 @@
             <section class="panel p-5 mb-4">
               <h2 class="checkout-section-title">
                 <span class="material-symbols-outlined text-secondary">local_shipping</span>
-                2. Chọn Phương Thức Vận Chuyển
+                2. Phương Thức Vận Chuyển
               </h2>
 
               <div class="shipping-grid">
@@ -599,16 +576,11 @@
                 <label class="shipping-card active" id="shipCardStandard">
                   <input type="radio" name="shippingMethod" value="standard" checked />
                   <div class="flex-1">
-                    <div class="flex items-center justify-between mb-1">
+                    <div class="flex items-center justify-between mb-0.5">
                       <strong class="text-sm">Giao Tiêu Chuẩn</strong>
                       <span class="text-xs fw-700 text-success" id="shipStandardPriceText">25.000₫</span>
                     </div>
-                    <p class="text-xs text-muted mb-1" style="line-height: 1.4;">
-                      Nhận hàng sau 2 - 3 ngày làm việc. Miễn phí cho đơn hàng từ 500.000₫.
-                    </p>
-                    <span class="badge badge-success" style="font-size: 10px;">
-                      <span class="material-symbols-outlined icon-xs">verified</span> Đồng kiểm 100% cùng shipper
-                    </span>
+                    <span class="text-xs text-muted">2 - 3 ngày làm việc (Freeship từ 500k)</span>
                   </div>
                 </label>
 
@@ -616,73 +588,43 @@
                 <label class="shipping-card" id="shipCardExpress">
                   <input type="radio" name="shippingMethod" value="express" />
                   <div class="flex-1">
-                    <div class="flex items-center justify-between mb-1">
+                    <div class="flex items-center justify-between mb-0.5">
                       <strong class="text-sm">Hỏa Tốc 2 Giờ</strong>
                       <span class="text-xs fw-700 text-secondary">45.000₫</span>
                     </div>
-                    <p class="text-xs text-muted mb-1" style="line-height: 1.4;">
-                      Bưu tá chuyên trách giao siêu tốc trong 120 phút nội thành Hà Nội, Đà Nẵng, TP.HCM.
-                    </p>
-                    <span class="badge badge-secondary" style="font-size: 10px;">
-                      <span class="material-symbols-outlined icon-xs">bolt</span> Giao siêu tốc 120 phút
-                    </span>
+                    <span class="text-xs text-muted">Giao trong 120 phút (nội thành)</span>
                   </div>
                 </label>
               </div>
             </section>
 
-            <!-- KHỐI 3: CHỌN PHƯƠNG THỨC THANH TOÁN (COD & NAPAS 24/7 & THẺ) -->
+            <!-- KHỐI 3: CHỌN PHƯƠNG THỨC THANH TOÁN -->
             <section class="panel p-5 mb-4">
               <h2 class="checkout-section-title">
                 <span class="material-symbols-outlined text-warning">account_balance_wallet</span>
-                3. Chọn Phương Thức Thanh Toán
+                3. Phương Thức Thanh Toán
               </h2>
 
               <div class="flex flex-col gap-3">
-                <!-- 1. COD: THANH TOÁN KHI NHẬN HÀNG (Khuyên Dùng) -->
+                <!-- 1. COD: THANH TOÁN KHI NHẬN HÀNG -->
                 <label class="pay-method-card active" id="payMethodCod">
                   <input type="radio" name="payGateway" value="COD" checked />
                   <div class="flex-1">
                     <div class="flex items-center justify-between flex-wrap gap-2">
                       <div class="flex items-center gap-2">
                         <span class="material-symbols-outlined text-success icon-sm">payments</span>
-                        <strong class="text-sm">Thanh toán khi nhận hàng (COD - Tiền mặt)</strong>
+                        <strong class="text-sm">Thanh toán khi nhận hàng (COD)</strong>
                       </div>
-                      <span class="badge badge-success" style="font-size: 10px;">
-                        Đồng Kiểm 100% • Không Trả Trước
-                      </span>
+                      <span class="badge badge-success" style="font-size: 10px;">Đồng kiểm 100%</span>
                     </div>
-                    <p class="text-xs text-muted mt-1 mb-0">
-                      Mở hộp kiểm tra máy, test ngoại quan cùng bưu tá trước khi thanh toán tiền mặt. Không phát sinh phụ phí.
-                    </p>
                   </div>
                 </label>
 
-                <!-- HỘP HƯỚNG DẪN COD CHI TIẾT (Hiển thị khi chọn COD) -->
-                <div class="cod-notice-box" id="codDetailsBox">
-                  <div class="flex items-center gap-2 text-sm fw-700 text-success mb-2">
-                    <span class="material-symbols-outlined icon-sm">verified_user</span>
-                    Đặc Quyền Đồng Kiểm 100% Khi Thanh Toán COD:
-                  </div>
-                  <p class="text-xs mb-2" style="line-height: 1.6;">
-                    Tại <strong>HYBRID.STORE</strong>, bạn được bảo đảm an toàn tuyệt đối với hình thức thanh toán COD:
-                  </p>
-                  <ul class="cod-feature-list">
-                    <li class="cod-feature-item">
-                      <span class="material-symbols-outlined text-success icon-xs" style="margin-top: 2px;">check_circle</span>
-                      <span><strong>Đồng kiểm mở hộp:</strong> Bạn có quyền bóc seal bọc ngoài, kiểm tra đúng mã máy, phụ kiện, số serial trước mặt bưu tá.</span>
-                    </li>
-                    <li class="cod-feature-item">
-                      <span class="material-symbols-outlined text-success icon-xs" style="margin-top: 2px;">check_circle</span>
-                      <span><strong>Thử nguồn cơ bản:</strong> Bật nguồn màn hình, kiểm tra cảm ứng ngoại quan trước khi thanh toán.</span>
-                    </li>
-                    <li class="cod-feature-item">
-                      <span class="material-symbols-outlined text-success icon-xs" style="margin-top: 2px;">check_circle</span>
-                      <span><strong>Từ chối không mất phí:</strong> Nếu sản phẩm không đúng như mô tả trên đơn hàng, bạn có quyền từ chối nhận và <strong>không phải trả bất kỳ khoản phí nào</strong>.</span>
-                    </li>
-                  </ul>
-                  <div class="text-xs text-muted mt-3 pt-2" style="border-top: 1px dashed rgba(16, 185, 129, 0.3);">
-                    💡 <em>Lưu ý: Bưu tá sẽ liên hệ với bạn trước khi giao. Bạn có thể thanh toán tiền mặt hoặc chuyển khoản sang mã VietQR cá nhân của bưu tá tại thời điểm nhận hàng.</em>
+                <!-- HỘP LƯU Ý COD GỌN GÀNG -->
+                <div class="cod-notice-box" id="codDetailsBox" style="padding: 10px 14px; margin-top: 4px;">
+                  <div class="flex items-center gap-2 text-xs text-success">
+                    <span class="material-symbols-outlined icon-xs">verified</span>
+                    <span>Được kiểm tra máy cùng bưu tá trước khi thanh toán. Không phát sinh phụ phí.</span>
                   </div>
                 </div>
 
@@ -693,13 +635,10 @@
                     <div class="flex items-center justify-between flex-wrap gap-2">
                       <div class="flex items-center gap-2">
                         <span class="material-symbols-outlined text-primary icon-sm">qr_code_scanner</span>
-                        <strong class="text-sm">Napas 24/7 — Quét mã VietQR Chuyển Khoản Tự Động</strong>
+                        <strong class="text-sm">Chuyển khoản VietQR (Napas 24/7)</strong>
                       </div>
-                      <span class="badge badge-primary" style="font-size: 10px;">Khớp Lệnh 0 Giây • Miễn Phí</span>
+                      <span class="badge badge-primary" style="font-size: 10px;">Khớp lệnh tự động</span>
                     </div>
-                    <p class="text-xs text-muted mt-1 mb-0">
-                      Mở ứng dụng ngân hàng bất kỳ (MB, Vietcombank, Techcombank,...) quét mã VietQR, hệ thống tự động xác nhận đơn trong 3 giây.
-                    </p>
                   </div>
                 </label>
 
@@ -709,13 +648,12 @@
                     <div class="flex items-center gap-2">
                       <span class="badge badge-success flex items-center gap-1.5" style="font-size: 11px;">
                         <span class="live-dot" style="width: 6px; height: 6px;"></span>
-                        CỔNG NAPAS 24/7 SẴN SÀNG
+                        CỔNG NAPAS 24/7
                       </span>
-                      <span class="text-xs text-muted hide-sm">Tự động khớp lệnh 0 giây không cần chụp gửi bill</span>
                     </div>
                     <div class="text-xs mono text-secondary flex items-center gap-1 px-2.5 py-1 rounded" style="background: rgba(6, 182, 212, 0.1);">
                       <span class="material-symbols-outlined icon-xs">schedule</span>
-                      Giữ đơn trong: <strong id="qrCountdownText" class="text-white">15:00</strong>
+                      Hết hạn: <strong id="qrCountdownText" class="text-white">15:00</strong>
                     </div>
                   </div>
 
@@ -727,18 +665,18 @@
                           <span>VIETQR</span> • <span>NAPAS 24/7</span>
                         </div>
                       </div>
-                      <div class="text-xs text-muted mt-2">Quét bằng App ngân hàng bất kỳ</div>
+                      <div class="text-xs text-muted mt-2">Quét bằng ứng dụng ngân hàng</div>
                     </div>
 
                     <div>
                       <div class="bank-row">
-                        <div class="text-xs text-muted">Ngân hàng thụ hưởng:</div>
+                        <div class="text-xs text-muted">Ngân hàng:</div>
                         <strong class="text-sm">MB Bank (Ngân Hàng Quân Đội)</strong>
                       </div>
 
                       <div class="bank-row flex items-center justify-between">
                         <div>
-                          <div class="text-xs text-muted">Số tài khoản nhận tiền:</div>
+                          <div class="text-xs text-muted">Số tài khoản:</div>
                           <strong class="text-sm mono text-secondary" id="bankAccDisplay">0901234567</strong>
                         </div>
                         <button type="button" class="btn btn-secondary btn-xs btn-copy" data-copy="0901234567">
@@ -753,7 +691,7 @@
 
                       <div class="bank-row flex items-center justify-between">
                         <div>
-                          <div class="text-xs text-muted">Số tiền cần chuyển chính xác:</div>
+                          <div class="text-xs text-muted">Số tiền chuyển:</div>
                           <strong class="text-base mono text-success" id="bankAmountDisplay">0₫</strong>
                         </div>
                         <button type="button" class="btn btn-secondary btn-xs btn-copy" id="btnCopyAmount" data-copy="0">
@@ -763,7 +701,7 @@
 
                       <div class="bank-row flex items-center justify-between mt-2" style="background: rgba(245, 158, 11, 0.08); padding: 8px 10px; border-radius: 6px; border: 1px dashed rgba(245, 158, 11, 0.35);">
                         <div>
-                          <div class="text-xs text-warning fw-600">Nội dung chuyển khoản (Bắt buộc):</div>
+                          <div class="text-xs text-warning fw-600">Nội dung chuyển khoản:</div>
                           <strong class="text-sm mono" id="bankMsgDisplay">HYB-8888</strong>
                         </div>
                         <button type="button" class="btn btn-secondary btn-xs btn-copy" id="btnCopyMsg" data-copy="HYB-8888">
@@ -781,13 +719,10 @@
                     <div class="flex items-center justify-between flex-wrap gap-2">
                       <div class="flex items-center gap-2">
                         <span class="material-symbols-outlined text-secondary icon-sm">credit_card</span>
-                        <strong class="text-sm">Thẻ Quốc Tế (Visa / MasterCard / JCB)</strong>
+                        <strong class="text-sm">Thẻ Quốc Tế (Visa / MasterCard)</strong>
                       </div>
-                      <span class="badge badge-secondary" style="font-size: 10px;">Bảo Mật SSL 256-Bit</span>
+                      <span class="badge badge-secondary" style="font-size: 10px;">Bảo mật SSL</span>
                     </div>
-                    <p class="text-xs text-muted mt-1 mb-0">
-                      Thanh toán an toàn qua cổng thẻ quốc tế, mã hóa chuẩn bảo mật thanh toán PCI-DSS Level 1.
-                    </p>
                   </div>
                 </label>
 
@@ -798,113 +733,81 @@
                     <span class="card-chip-tag text-warning">MASTERCARD</span>
                     <span class="card-chip-tag text-success">JCB</span>
                     <span class="text-xs text-muted ml-auto flex items-center gap-1">
-                      <span class="material-symbols-outlined icon-xs text-success">lock</span> 3D Secure OTP
+                      <span class="material-symbols-outlined icon-xs text-success">lock</span> 3D Secure
                     </span>
                   </div>
 
                   <div class="form-group mb-3">
-                    <label class="form-label text-xs fw-600" for="cardNumberInput">Số thẻ tín dụng / ghi nợ (*)</label>
+                    <label class="form-label text-xs fw-600" for="cardNumberInput">Số thẻ (*)</label>
                     <input class="input mono" id="cardNumberInput" type="text" maxlength="19" placeholder="4111 2222 3333 4444" />
                   </div>
 
                   <div class="form-group mb-3">
-                    <label class="form-label text-xs fw-600" for="cardHolderInput">Tên in trên thẻ (Không dấu in hoa) (*)</label>
+                    <label class="form-label text-xs fw-600" for="cardHolderInput">Tên in trên thẻ (*)</label>
                     <input class="input" id="cardHolderInput" type="text" placeholder="NGUYEN NGOC PHUC" style="text-transform: uppercase;" />
                   </div>
 
                   <div class="form-row">
                     <div class="form-group">
-                      <label class="form-label text-xs fw-600" for="cardExpiryInput">Ngày hết hạn (*)</label>
+                      <label class="form-label text-xs fw-600" for="cardExpiryInput">Hạn thẻ (*)</label>
                       <input class="input mono" id="cardExpiryInput" type="text" maxlength="5" placeholder="MM/YY" />
                     </div>
                     <div class="form-group">
-                      <label class="form-label text-xs fw-600" for="cardCvvInput">Mã bảo mật CVV/CVC (*)</label>
+                      <label class="form-label text-xs fw-600" for="cardCvvInput">Mã CVV (*)</label>
                       <input class="input mono" id="cardCvvInput" type="password" maxlength="3" placeholder="•••" />
                     </div>
                   </div>
                 </div>
 
-                <!-- 4. VÍ ĐIỆN TỬ (MOMO / ZALOPAY) -->
+                <!-- 4. VÍ ĐIỆN TỬ -->
                 <label class="pay-method-card" id="payMethodEwallet">
                   <input type="radio" name="payGateway" value="EWALLET" />
                   <div class="flex-1">
                     <div class="flex items-center justify-between flex-wrap gap-2">
                       <div class="flex items-center gap-2">
                         <span class="material-symbols-outlined text-primary icon-sm">account_balance_wallet</span>
-                        <strong class="text-sm">Ví Điện Tử (MoMo / ZaloPay / Apple Pay)</strong>
+                        <strong class="text-sm">Ví Điện Tử (MoMo / ZaloPay)</strong>
                       </div>
-                      <span class="badge badge-solid" style="font-size: 10px;">Ưu Đãi Hoàn Tiền</span>
+                      <span class="badge badge-solid" style="font-size: 10px;">Quét mã</span>
                     </div>
-                    <p class="text-xs text-muted mt-1 mb-0">
-                      Mở ứng dụng ví điện tử quét mã thanh toán 1-chạm cực kỳ nhanh gọn.
-                    </p>
                   </div>
                 </label>
               </div>
             </section>
 
-            
             <!-- KHỐI YÊU CẦU XUẤT HÓA ĐƠN ĐIỆN TỬ VAT -->
-            <section class="panel p-4 mb-4 vat-invoice-toggle-box" style="background: rgba(59, 130, 246, 0.04); border: 1.5px solid rgba(59, 130, 246, 0.25); border-radius: var(--radius-lg, 12px);">
-              <div class="flex items-center justify-between gap-3">
-                <label class="flex items-center gap-2.5 cursor-pointer m-0" for="vatInvoiceCheck">
-                  <input type="checkbox" id="vatInvoiceCheck" style="width: 18px; height: 18px; accent-color: var(--primary, #3b82f6);" />
-                  <div>
-                    <strong class="text-sm text-text block">Yêu Cầu Xuất Hóa Đơn Điện Tử VAT (Doanh Nghiệp / Cá Nhân)</strong>
-                    <span class="text-2xs text-muted block">Hóa đơn điện tử hợp lệ theo Thông tư 78/2021/TT-BTC gửi qua email trong vòng 24h</span>
-                  </div>
-                </label>
+            <section class="panel p-3 mb-4 vat-invoice-toggle-box" style="background: rgba(59, 130, 246, 0.04); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: var(--radius-md);">
+              <label class="flex items-center justify-between cursor-pointer m-0" for="vatInvoiceCheck">
+                <span class="flex items-center gap-2 text-xs fw-600">
+                  <input type="checkbox" id="vatInvoiceCheck" style="accent-color: var(--primary);" />
+                  <strong>Yêu cầu xuất hóa đơn điện tử VAT</strong>
+                </span>
                 <span class="badge badge-primary text-2xs">VAT 8% - 10%</span>
-              </div>
+              </label>
 
-              <div id="vatInvoiceFields" style="display: none; margin-top: 16px; padding-top: 16px; border-top: 1px dashed rgba(255, 255, 255, 0.1);">
+              <div id="vatInvoiceFields" style="display: none; margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border);">
                 <div class="grid grid-2 gap-3 mb-3">
                   <div class="form-group mb-0">
-                    <label class="form-label text-xs fw-600">Tên Doanh Nghiệp / Tổ Chức <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control text-xs" id="vatCompanyName" placeholder="Công ty Cổ phần Công nghệ..." />
+                    <label class="form-label text-xs fw-600">Tên Doanh Nghiệp <span class="text-danger">*</span></label>
+                    <input type="text" class="input input-sm text-xs" id="vatCompanyName" placeholder="Công ty..." />
                   </div>
                   <div class="form-group mb-0">
                     <label class="form-label text-xs fw-600">Mã Số Thuế (MST) <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control text-xs" id="vatTaxCode" placeholder="0101234567 hoặc 0312345678" />
+                    <input type="text" class="input input-sm text-xs mono" id="vatTaxCode" placeholder="0101234567" />
                   </div>
                 </div>
                 <div class="grid grid-2 gap-3">
                   <div class="form-group mb-0">
-                    <label class="form-label text-xs fw-600">Địa Chỉ Trụ Sở Công Ty <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control text-xs" id="vatAddress" placeholder="Số 1 Đại lộ Thăng Long, Mễ Trì, Nam Từ Liêm, Hà Nội" />
+                    <label class="form-label text-xs fw-600">Địa Chỉ <span class="text-danger">*</span></label>
+                    <input type="text" class="input input-sm text-xs" id="vatAddress" placeholder="Địa chỉ cơ quan" />
                   </div>
                   <div class="form-group mb-0">
-                    <label class="form-label text-xs fw-600">Email Nhận Hóa Đơn Điện Tử <span class="text-danger">*</span></label>
-                    <input type="email" class="form-control text-xs" id="vatEmail" placeholder="ketoan@congty.com" />
+                    <label class="form-label text-xs fw-600">Email Nhận HĐ <span class="text-danger">*</span></label>
+                    <input type="email" class="input input-sm text-xs" id="vatEmail" placeholder="ketoan@congty.com" />
                   </div>
                 </div>
               </div>
             </section>
-
-            <!-- KHỐI 4: 3 TRỤ CỘT CAM KẾT BẢO VỆ NGƯỜI MUA -->
-            <div class="cart-trust-grid" style="margin-top: 0; margin-bottom: 24px;">
-              <div class="cart-trust-card">
-                <span class="material-symbols-outlined text-success" style="font-size: 26px;">verified_user</span>
-                <div>
-                  <strong class="text-xs block mb-1">Đồng kiểm 100% khi nhận</strong>
-                  <p class="text-xs text-muted mb-0">Được mở hộp bật nguồn kiểm tra máy cùng bưu tá trước khi trả tiền.</p>
-                </div>
-              </div>
-              <div class="cart-trust-card">
-                <span class="material-symbols-outlined text-secondary" style="font-size: 26px;">published_with_changes</span>
-                <div>
-                  <strong class="text-xs block mb-1">Đổi trả 7 ngày miễn phí</strong>
-                  <p class="text-xs text-muted mb-0">Bao test 1 đổi 1 hoặc hoàn tiền 100% nếu có lỗi phần cứng từ nhà sản xuất.</p>
-                </div>
-              </div>
-              <div class="cart-trust-card">
-                <span class="material-symbols-outlined text-primary" style="font-size: 26px;">verified</span>
-                <div>
-                  <strong class="text-xs block mb-1">Tem niêm phong màng vỡ</strong>
-                  <p class="text-xs text-muted mb-0">Đạt chuẩn thẩm định 15 bước phòng Lab, dán tem QR chống tráo hàng.</p>
-                </div>
-              </div>
-            </div>
           </div>
 
           <!-- CỘT PHẢI (STICKY ASIDE): KIỆN HÀNG, MÃ VOUCHER & BẢNG TỔNG KẾT -->
@@ -950,7 +853,7 @@
 
               <!-- BẢNG TỔNG KẾT CHI PHÍ -->
               <div class="summary-row">
-                <span>Tạm tính tiền hàng:</span>
+                <span>Tiền hàng:</span>
                 <strong class="mono" id="subtotalDisplay">0₫</strong>
               </div>
               <div class="summary-row">
@@ -958,37 +861,23 @@
                 <strong class="mono" id="shippingFeeDisplay">25.000₫</strong>
               </div>
               <div class="summary-row" id="discountRow" style="display: none;">
-                <span>Giảm giá voucher:</span>
+                <span>Giảm giá:</span>
                 <strong class="mono text-success" id="discountDisplay">-0₫</strong>
-              </div>
-              <div class="summary-row">
-                <span>Phí kiểm định &amp; niêm phong:</span>
-                <span class="text-success fw-600">0₫ (Miễn phí)</span>
-              </div>
-              <div class="summary-row">
-                <span>Đặc quyền đồng kiểm bưu tá:</span>
-                <span class="text-success fw-600">0₫ (Miễn phí)</span>
               </div>
               <div class="summary-row total-row">
                 <span>Tổng thanh toán:</span>
                 <strong class="mono text-gradient" id="checkoutTotalDisplay" style="font-size: 1.45rem;">0₫</strong>
               </div>
-              <small class="text-xs text-muted block mt-1">Đã bao gồm thuế VAT và bảo hiểm bưu gửi 100%</small>
 
               <!-- NÚT XÁC NHẬN ĐẶT HÀNG -->
               <button class="btn btn-primary is-full btn-lg mt-4" id="btnSubmitOrder" type="submit" style="padding: 14px;">
                 <span class="material-symbols-outlined" id="btnSubmitIcon">local_shipping</span>
-                <span id="btnSubmitOrderText">Xác Nhận Đặt Hàng (Thanh Toán COD)</span>
+                <span id="btnSubmitOrderText">Đặt Hàng (COD)</span>
               </button>
 
-              <div class="mt-4 pt-3 text-center" style="border-top: 1px solid var(--border);">
-                <span class="text-xs text-muted block mb-2">Thanh toán &amp; Đồng kiểm an toàn:</span>
-                <div class="flex justify-center gap-2 flex-wrap text-xs">
-                  <span class="badge badge-success">COD Đồng Kiểm 100%</span>
-                  <span class="badge badge-secondary">Napas 24/7</span>
-                  <span class="badge badge-secondary">VietQR Pro</span>
-                  <span class="badge badge-secondary">Visa / Mastercard</span>
-                </div>
+              <div class="mt-3 text-center text-xs text-muted flex items-center justify-center gap-1">
+                <span class="material-symbols-outlined icon-xs text-success">lock</span>
+                <span>Thanh toán bảo mật SSL 256-Bit</span>
               </div>
             </div>
           </aside>
@@ -1229,55 +1118,48 @@
             items = Utils.Cart.getItems();
           }
 
-          // Chuẩn hóa và ánh xạ sản phẩm cũ nếu có
-          if (Array.isArray(items) && items.length > 0) {
-            items = items.map((it) => {
-              if (it.id === "m01") {
-                return {
-                  id: "f2",
-                  name: "Áo Jacket Blazer Runway Nam Cắt May Cao Cấp",
-                  price: 4690000,
-                  type: "mall",
-                  variant: "Size L • Mới nguyên seal",
-                  img: "assets/images/products/ao-jacket-blazer-runway-nam.png",
-                  qty: it.qty || 1,
-                };
+          if (items && items.length > 0) {
+            // Đồng bộ dữ liệu chính xác với danh mục mock_data.js nếu có
+            items = items.map((item) => {
+              let prodId = item.id;
+              if (prodId === "m01") prodId = "f2";
+              if (prodId === "c01") prodId = "t2";
+              let matched = null;
+              if (typeof PRODUCTS !== "undefined" && Array.isArray(PRODUCTS) && prodId) {
+                matched = PRODUCTS.find((p) => String(p.id).toLowerCase() === String(prodId).toLowerCase());
               }
-              if (it.id === "c01") {
-                return {
-                  id: "t2",
-                  name: "Điện Thoại Smartphone Flagship Màn Hình Tràn Viền 120Hz Camera AI",
-                  price: 21800000,
-                  type: "c2c",
-                  condition: "98% MỚI",
-                  seller: "Việt Dũng Store",
-                  img: "assets/images/products/dien-thoai-smartphone-flagship.png",
-                  qty: it.qty || 1,
-                };
-              }
-              return it;
+              return {
+                id: prodId,
+                name: matched ? (matched.name || matched.short) : (item.name || item.title || "Sản phẩm"),
+                price: matched ? Number(matched.price) : (Number(item.price) || 0),
+                type: matched ? matched.type : (item.type || "mall"),
+                condition: item.condition || (matched && matched.cond ? `${matched.cond}% MỚI` : (matched && matched.type === "mall" ? "MỚI 100%" : "LIKE NEW")),
+                variant: item.variant || (matched && matched.specs ? matched.specs[0] : ""),
+                img: matched ? matched.img : (item.img || item.image || ""),
+                qty: item.qty || item.quantity || 1
+              };
             });
           }
 
           if (!items || items.length === 0) {
-            // Mẫu sản phẩm mặc định chuẩn xác để trải nghiệm
+            // Mẫu sản phẩm mặc định chuẩn xác trong kho hàng
             items = [
               {
                 id: "f2",
-                name: "Áo Jacket Blazer Runway Nam Cắt May Cao Cấp",
-                price: 4690000,
+                name: "Áo Khoác Bomber Cyberpunk J1A-GT Multi-Pocket",
+                price: 1250000,
                 type: "mall",
-                variant: "Size L • Mới nguyên seal",
+                variant: "Size L • Đen Cyber",
                 img: "assets/images/products/ao-jacket-blazer-runway-nam.png",
                 qty: 1
               },
               {
                 id: "t2",
-                name: "Điện Thoại Smartphone Flagship Màn Hình Tràn Viền 120Hz Camera AI",
-                price: 21800000,
+                name: "iPhone 15 Pro Max 256GB Titan Tự Nhiên",
+                price: 24500000,
                 type: "c2c",
-                condition: "98% MỚI",
-                seller: "Việt Dũng Store",
+                condition: "99% MỚI",
+                seller: "Apple Store VN",
                 img: "assets/images/products/dien-thoai-smartphone-flagship.png",
                 qty: 1
               }
@@ -1299,13 +1181,20 @@
           function renderRow(item) {
             const isUsed = item.type === "c2c";
             const qty = item.qty || item.quantity || 1;
-            const imgSrc = (typeof window !== "undefined" && window.resolveAssetUrl ? window.resolveAssetUrl(item.img || item.image) : item.img || item.image) || "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200";
+            const imgSrc = (typeof window !== "undefined" && window.resolveAssetUrl ? window.resolveAssetUrl(item.img || item.image) : item.img || item.image) || "../../assets/images/products/phone-sample.svg";
+            const detailUrl = isUsed
+              ? `product_used.html?id=${encodeURIComponent(item.id)}`
+              : `product_new.html?id=${encodeURIComponent(item.id)}`;
 
             return `
               <div class="checkout-item-row">
-                <img class="checkout-item-thumb" src="${imgSrc}" alt="${item.name}" />
+                <a href="${detailUrl}" class="flex-shrink-0" title="${item.name}">
+                  <img class="checkout-item-thumb" src="${imgSrc}" alt="${item.name}" loading="lazy" />
+                </a>
                 <div class="flex-1" style="min-width: 0;">
-                  <div class="text-xs fw-600 line-clamp-1" title="${item.name}">${item.name}</div>
+                  <div class="text-xs fw-600 line-clamp-1" title="${item.name}">
+                    <a href="${detailUrl}" class="text-hover-primary" title="${item.name}">${item.name}</a>
+                  </div>
                   <div class="text-xs text-muted flex items-center gap-1.5 mt-0.5">
                     <span>x${qty}</span>
                     <span>•</span>
@@ -1594,16 +1483,16 @@
 
               // Cập nhật text & icon trên nút bấm Đặt Hàng
               if (radio.value === "COD") {
-                dom.btnSubmitOrderText.textContent = "Xác Nhận Đặt Hàng (Thanh Toán COD)";
+                dom.btnSubmitOrderText.textContent = "Đặt Hàng (COD)";
                 dom.btnSubmitIcon.textContent = "local_shipping";
               } else if (radio.value === "VIETQR") {
-                dom.btnSubmitOrderText.textContent = "Tôi Đã Chuyển Khoản Napas 24/7";
+                dom.btnSubmitOrderText.textContent = "Xác Nhận Đã Chuyển Khoản";
                 dom.btnSubmitIcon.textContent = "task_alt";
               } else if (radio.value === "CARD") {
-                dom.btnSubmitOrderText.textContent = "Thanh Toán Qua Thẻ Ngân Hàng";
+                dom.btnSubmitOrderText.textContent = "Thanh Toán Bằng Thẻ";
                 dom.btnSubmitIcon.textContent = "credit_card";
               } else if (radio.value === "EWALLET") {
-                dom.btnSubmitOrderText.textContent = "Mở Ví Điện Tử Thanh Toán";
+                dom.btnSubmitOrderText.textContent = "Thanh Toán Bằng Ví";
                 dom.btnSubmitIcon.textContent = "account_balance_wallet";
               }
             });
@@ -1791,7 +1680,7 @@
             // 3. Hiệu ứng Loading trên nút
             const originalBtnText = dom.btnSubmitOrderText.textContent;
             dom.btnSubmitOrder.disabled = true;
-            dom.btnSubmitOrderText.textContent = "Đang Khởi Tạo Đơn Hàng...";
+            dom.btnSubmitOrderText.textContent = "Đang tạo đơn...";
 
             setTimeout(() => {
               const costs = calculateCosts();
@@ -1921,11 +1810,11 @@
 
           // Nội dung lời nhắc phù hợp với phương thức
           if (order.paymentMethod === "COD") {
-            dom.modalSpecialNoteText.innerHTML = `Nhân viên giao hàng sẽ gọi điện trước khi phát kiện. Bạn vui lòng chuẩn bị số tiền mặt <strong>${formatCurr(order.total)}</strong> và nhớ tận hưởng đặc quyền <strong>mở hộp đồng kiểm tra máy trước khi thanh toán</strong> nhé!`;
+            dom.modalSpecialNoteText.innerHTML = `Bưu tá sẽ gọi trước khi giao. Quý khách vui lòng chuẩn bị <strong>${formatCurr(order.total)}</strong> tiền mặt và đồng kiểm tra máy trước khi thanh toán.`;
           } else if (order.paymentMethod === "VIETQR") {
-            dom.modalSpecialNoteText.innerHTML = `Cổng Napas 24/7 đã ghi nhận khớp lệnh chuyển khoản cho mã đơn <strong>${order.orderCode}</strong>. Kiện hàng đang được bộ phận kiểm định đóng hộp dán tem niêm phong để bàn giao shipper.`;
+            dom.modalSpecialNoteText.innerHTML = `Đã ghi nhận chuyển khoản cho đơn <strong>${order.orderCode}</strong>. Kiện hàng đang được đóng gói giao ngay.`;
           } else {
-            dom.modalSpecialNoteText.innerHTML = `Thanh toán thẻ quốc tế thành công. Đơn hàng <strong>${order.orderCode}</strong> đã được xác thực bảo mật và chuyển tiếp sang trung tâm phân phối.`;
+            dom.modalSpecialNoteText.innerHTML = `Thanh toán thẻ thành công. Đơn hàng <strong>${order.orderCode}</strong> đang được chuẩn bị để giao.`;
           }
 
           dom.modal.classList.remove("hidden");

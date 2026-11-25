@@ -71,122 +71,90 @@
     }
   }
 
-  /* ---------------- CHUẨN HÓA DỮ LIỆU GIỎ HÀNG ---------------- */
-  function sanitizeCartItems() {
-    if (typeof Utils === "undefined" || !Utils.Cart) return;
-    try {
-      const items = Utils.Cart.getItems();
-      let changed = false;
-      const validItems = items.map((item) => {
-        // Thay thế id mẫu m01 cũ thành sản phẩm thật f2 (Áo Blazer Runway)
-        if (item.id === "m01") {
-          changed = true;
-          return {
-            id: "f2",
-            name: "Áo Jacket Blazer Runway Nam Cắt May Cao Cấp",
-            price: 4690000,
-            oldPrice: 5200000,
-            type: "mall",
-            variant: "Size L • Mới nguyên seal",
-            img: "assets/images/products/ao-jacket-blazer-runway-nam.png",
-            qty: item.qty || 1,
-          };
-        }
-        // Thay thế id mẫu c01 cũ thành sản phẩm thật t2 (Điện thoại Flagship)
-        if (item.id === "c01") {
-          changed = true;
-          return {
-            id: "t2",
-            name: "Điện Thoại Smartphone Flagship Màn Hình Tràn Viền 120Hz Camera AI",
-            price: 21800000,
-            oldPrice: 29990000,
-            type: "c2c",
-            condition: "98% MỚI",
-            discountPercent: 27,
-            seller: "Việt Dũng Store",
-            img: "assets/images/products/dien-thoai-smartphone-flagship.png",
-            qty: item.qty || 1,
-          };
-        }
-        // Đồng bộ chuẩn xác 100% tên và ảnh theo danh mục PRODUCTS nếu sản phẩm có trong hệ thống
-        if (typeof PRODUCTS !== "undefined" && Array.isArray(PRODUCTS)) {
-          const found = PRODUCTS.find((p) => p.id === item.id);
-          if (found) {
-            if (item.name !== found.name || item.img !== found.img) {
-              changed = true;
-              return {
-                ...item,
-                name: found.name,
-                img: found.img,
-                price: found.price || item.price,
-                oldPrice: found.oldPrice || item.oldPrice,
-                type: found.type || item.type,
-              };
-            }
-          }
-        }
-        return item;
-      });
-      if (changed) {
-        if (typeof Utils.Cart.saveItems === "function") {
-          Utils.Cart.saveItems(validItems);
-        } else {
-          localStorage.setItem("hybrid_cart", JSON.stringify(validItems));
-        }
-      }
-    } catch (e) {
-      console.warn("Cart sanitize error:", e);
-    }
-  }
-
   /* ---------------- KHỞI TẠO DỮ LIỆU MẪU BAN ĐẦU ---------------- */
   function ensureInitialCart() {
     if (typeof Utils === "undefined" || !Utils.Cart) return;
-    sanitizeCartItems();
-    const current = Utils.Cart.getItems();
-    // Nếu chưa từng bấm xóa giỏ hàng và giỏ hiện đang rỗng, nạp 2 món thật mẫu đặc trưng
+    let current = Utils.Cart.getItems();
+
+    // Tự động dọn dẹp và nâng cấp các ID cũ (m01 -> f2, c01 -> t2) hoặc link ảnh ngoài nếu còn lưu trong localStorage
+    let updated = false;
+    current = current.map((item) => {
+      let realId = item.id;
+      if (item.id === "m01") realId = "f2";
+      if (item.id === "c01") realId = "t2";
+
+      if (typeof PRODUCTS !== "undefined" && Array.isArray(PRODUCTS)) {
+        const p = PRODUCTS.find((x) => String(x.id).toLowerCase() === String(realId).toLowerCase());
+        if (p) {
+          if (item.id !== p.id || item.name !== p.name || item.img !== p.img) {
+            updated = true;
+            return {
+              id: p.id,
+              name: p.name,
+              price: p.price,
+              oldPrice: p.oldPrice || 0,
+              type: p.type,
+              condition: p.condText || (p.type === "mall" ? "Mới 100%" : "Like New 99%"),
+              variant: item.variant || (p.type === "mall" ? "Size L • Mới nguyên seal" : "Bản 256GB • Like New 99%"),
+              discountPercent: p.off || (p.oldPrice ? Math.round((1 - p.price / p.oldPrice) * 100) : 0),
+              img: p.img,
+              category: p.category || "",
+              qty: item.qty || 1,
+            };
+          }
+        }
+      }
+      return item;
+    });
+
+    if (updated) {
+      Utils.Cart.saveItems(current);
+    }
+
+    // Nếu chưa từng bấm xóa giỏ hàng và giỏ hiện đang rỗng, tự nạp 2 món mẫu chuẩn xác từ PRODUCTS
     if (current.length === 0 && !localStorage.getItem("hybrid_cart_cleared")) {
-      Utils.Cart.addItem({
-        id: "f2",
-        name: "Áo Jacket Blazer Runway Nam Cắt May Cao Cấp",
-        price: 4690000,
-        oldPrice: 5200000,
-        type: "mall",
-        variant: "Size L • Mới nguyên seal",
-        img: "assets/images/products/ao-jacket-blazer-runway-nam.png",
-        qty: 1,
-      });
-      Utils.Cart.addItem({
-        id: "t2",
-        name: "Điện Thoại Smartphone Flagship Màn Hình Tràn Viền 120Hz Camera AI",
-        price: 21800000,
-        oldPrice: 29990000,
-        type: "c2c",
-        condition: "98% MỚI",
-        discountPercent: 27,
-        seller: "Việt Dũng Store",
-        img: "assets/images/products/dien-thoai-smartphone-flagship.png",
-        qty: 1,
-      });
+      const prodMall = (typeof PRODUCTS !== "undefined" && Array.isArray(PRODUCTS))
+        ? PRODUCTS.find((p) => p.id === "f2")
+        : null;
+      const prodUsed = (typeof PRODUCTS !== "undefined" && Array.isArray(PRODUCTS))
+        ? PRODUCTS.find((p) => p.id === "t2")
+        : null;
+
+      if (prodMall) {
+        Utils.Cart.addItem(prodMall, 1, "Size L • Mới 100% nguyên seal");
+      }
+      if (prodUsed) {
+        Utils.Cart.addItem(prodUsed, 1, "Titan Tự Nhiên • Like New 99%");
+      }
     }
   }
 
   function renderItemHTML(item) {
-    const isUsed = item.type === "c2c";
-    const lineTotal = item.price * item.qty;
+    let prod = null;
+    if (typeof PRODUCTS !== "undefined" && Array.isArray(PRODUCTS)) {
+      prod = PRODUCTS.find((p) => String(p.id).toLowerCase() === String(item.id).toLowerCase());
+    }
+    const name = (prod && prod.name) || item.name;
+    const price = (prod && prod.price) || item.price;
+    const oldPrice = (prod && prod.oldPrice) || item.oldPrice;
+    const type = (prod && prod.type) || item.type || "mall";
+    const isUsed = type === "c2c";
+    const lineTotal = price * item.qty;
     const discountPercent =
       item.discountPercent ||
-      (isUsed && item.oldPrice
-        ? Math.round((1 - item.price / item.oldPrice) * 100)
+      (isUsed && oldPrice
+        ? Math.round((1 - price / oldPrice) * 100)
         : 0);
     const detailUrl = isUsed
       ? `product_used.html?id=${encodeURIComponent(item.id)}`
       : `product_new.html?id=${encodeURIComponent(item.id)}`;
+    const rawImg = (prod && prod.img) || item.img || "";
+    const imgSrc = (typeof window !== "undefined" && window.resolveAssetUrl ? window.resolveAssetUrl(rawImg) : rawImg) || "../../assets/images/products/phone-sample.svg";
 
     return `
       <div class="cart-item" data-id="${item.id}" data-variant="${item.variant || ""}">
         <a href="${detailUrl}">
-          <img class="cart-item-img" src="${(typeof window !== 'undefined' && window.resolveAssetUrl ? window.resolveAssetUrl(item.img) : item.img) || "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300"}" alt="${item.name}" />
+          <img class="cart-item-img" src="${imgSrc}" alt="${name}" />
         </a>
         <div>
           <div class="flex items-center gap-2 mb-1 flex-wrap">
@@ -198,11 +166,11 @@
             ${item.variant ? `<span class="badge badge-secondary">${item.variant}</span>` : ""}
           </div>
           <h4 class="cart-item-title mb-1">
-            <a href="${detailUrl}" class="text-hover-primary">${item.name}</a>
+            <a href="${detailUrl}" class="text-hover-primary">${name}</a>
           </h4>
           <div class="flex items-baseline gap-2">
-            <strong class="mono text-primary">${Utils.formatCurrency(item.price)}</strong>
-            ${isUsed && item.oldPrice ? `<small class="text-faint line-through mono">${Utils.formatCurrency(item.oldPrice)}</small>` : ""}
+            <strong class="mono text-primary">${Utils.formatCurrency(price)}</strong>
+            ${isUsed && oldPrice ? `<small class="text-faint line-through mono">${Utils.formatCurrency(oldPrice)}</small>` : ""}
           </div>
         </div>
 

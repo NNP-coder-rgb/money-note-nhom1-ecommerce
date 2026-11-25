@@ -16,6 +16,7 @@ from routers.dispute_router import router as dispute_router
 from routers.interaction_router import router as interaction_router
 from routers.admin_router import router as admin_router
 from routers.upload_router import router as upload_router
+from routers.ai_agent_router import router as ai_agent_router
 
 # Router chính tổng hợp toàn bộ các phân hệ API
 api_router = APIRouter()
@@ -32,6 +33,7 @@ api_router.include_router(dispute_router)
 api_router.include_router(interaction_router)
 api_router.include_router(admin_router)
 api_router.include_router(upload_router)
+api_router.include_router(ai_agent_router)
 
 __all__ = [
     "api_router",
