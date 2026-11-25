@@ -1,5 +1,6 @@
 """
 models/user.py — SQLAlchemy ORM Models cho Phân Hệ Người Dùng, eKYC, Địa Chỉ & Ngân Hàng
+Nguyễn Khả Minh Đức
 """
 
 from datetime import datetime

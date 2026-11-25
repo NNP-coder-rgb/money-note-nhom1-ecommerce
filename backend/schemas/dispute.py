@@ -1,5 +1,6 @@
 """
 schemas/dispute.py — Pydantic Schemas Cho Phòng Trọng Tài Khiếu Nại 3 Bên
+Task T41: Ký quỹ escrow & Trọng tài tranh chấp (Chu Đình Minh)
 """
 
 from typing import Optional, List

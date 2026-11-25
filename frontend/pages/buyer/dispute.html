@@ -1353,6 +1353,22 @@
             } else {
               alert("Chúc mừng! Bạn đã ký điện tử thông qua biên bản hòa giải thành công.");
             }
+
+            // [Task T41 - Chu Đình Minh] Đồng bộ quyết định hòa giải lên Backend qua API
+            if (window.API && window.API.Dispute) {
+              const currentUser = (typeof Auth !== "undefined" && Auth.current && Auth.current()) || null;
+              const adminId = (currentUser && currentUser.id) ? currentUser.id : 1;
+              const resolvePayload = {
+                solution_code: "full_refund",
+                approved_refund: (selectedOrder && selectedOrder.total) ? selectedOrder.total : 21490000,
+                admin_decision_summary: "Ký điện tử thông qua phương án hòa giải bồi hoàn và đóng hồ sơ tranh chấp thành công."
+              };
+              window.API.Dispute.resolveDispute(1, adminId, resolvePayload).then((res) => {
+                console.log("[Task T41 - Chu Đình Minh] Đã đồng bộ quyết định hòa giải lên Backend:", res);
+              }).catch((err) => {
+                console.warn("[Task T41 - Chu Đình Minh] Lưu trữ biên bản hòa giải dự phòng:", err);
+              });
+            }
           });
         }
 
@@ -1435,12 +1451,15 @@
               chatBody.scrollTop = chatBody.scrollHeight;
             }
 
-            // Đồng bộ tin nhắn phòng tranh chấp lên Backend qua API
+            // [Task T41 - Chu Đình Minh] Đồng bộ tin nhắn phòng tranh chấp lên Backend qua API
             if (window.API && window.API.Dispute) {
-              window.API.Dispute.sendMessage(1, { message: text }).then((res) => {
-                console.log("Đã đồng bộ tin nhắn tranh chấp lên Database:", res);
+              const currentUser = (typeof Auth !== "undefined" && Auth.current && Auth.current()) || null;
+              const senderId = (currentUser && currentUser.id) ? currentUser.id : 1;
+              const senderRole = (currentUser && currentUser.role) ? currentUser.role : "buyer";
+              window.API.Dispute.sendMessage(1, senderId, senderRole, { message_text: text, attachment_url: "" }).then((res) => {
+                console.log("[Task T41 - Chu Đình Minh] Đã đồng bộ tin nhắn tranh chấp lên Database:", res);
               }).catch((err) => {
-                console.warn("Lưu trữ chat tranh chấp dự phòng:", err);
+                console.warn("[Task T41 - Chu Đình Minh] Lưu trữ chat tranh chấp dự phòng:", err);
               });
             }
 

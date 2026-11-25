@@ -1,5 +1,6 @@
 """
 services/dispute_service.py — Xử lý nghiệp vụ Phòng Trọng Tài Khiếu Nại 3 Bên (Disputes & Arbitration)
+Task T41: Ký quỹ escrow & Trọng tài tranh chấp (Chu Đình Minh)
 """
 
 import random

@@ -1115,6 +1115,48 @@
         }
         updateBalanceUI();
 
+        // ==============================================================
+        // [Task T41 - Chu Đình Minh] Đồng bộ Ví Ký Quỹ & Sổ Cái từ Backend API Escrow
+        // ==============================================================
+        function syncEscrowWalletFromAPI() {
+          if (window.API && window.API.Escrow) {
+            const user = (typeof Auth !== "undefined" && Auth.current && Auth.current()) || null;
+            const sellerId = (user && user.id) ? user.id : 2; // Mặc định tài khoản seller Việt Dũng
+
+            window.API.Escrow.getUserWallet(sellerId).then((res) => {
+              if (res && res.data) {
+                currentBalance = res.data.available_balance || 0;
+                const holdingEl = document.getElementById("walletEscrowHolding");
+                if (holdingEl) holdingEl.textContent = Utils.formatCurrency(res.data.locked_balance || 0);
+                updateBalanceUI();
+              }
+            }).catch((err) => {
+              console.warn("[Task T41 - Chu Đình Minh] Dùng dữ liệu ví ký quỹ dự phòng:", err);
+            });
+
+            window.API.Escrow.getTransactions(sellerId).then((res) => {
+              if (res && res.data && res.data.length > 0) {
+                walletTransactions = res.data.map((tx) => {
+                  const d = tx.created_at ? new Date(tx.created_at) : new Date();
+                  const timeStr = `${d.getDate().toString().padStart(2, '0')}/${(d.getMonth()+1).toString().padStart(2, '0')}/${d.getFullYear()} ${d.getHours().toString().padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')}`;
+                  return {
+                    time: timeStr,
+                    code: tx.transaction_code,
+                    type: tx.memo || (tx.transaction_type === 'release_payout' ? 'Tiền hàng mở khóa ký quỹ' : (tx.transaction_type === 'withdrawal' ? 'Rút tiền Napas 24/7' : 'Tạm giữ ký quỹ')),
+                    amount: tx.amount,
+                    status: tx.status === 'completed' ? 'Đã hoàn tất' : 'Đang xử lý',
+                    statusBadge: tx.status === 'completed' ? 'badge-success' : 'badge-warning'
+                  };
+                });
+                renderWalletTransactions();
+              }
+            }).catch((err) => {
+              console.warn("[Task T41 - Chu Đình Minh] Dùng lịch sử giao dịch ví dự phòng:", err);
+            });
+          }
+        }
+        syncEscrowWalletFromAPI();
+
         // 8. Render Bảng Sản Phẩm
         function renderProducts() {
           const allProds = getAllProducts();
@@ -1742,6 +1784,21 @@
           try {
             localStorage.setItem("hv_seller_transactions", JSON.stringify(walletTransactions));
           } catch (e) {}
+
+          // [Task T41 - Chu Đình Minh] Gửi lệnh rút tiền về Backend API Escrow
+          if (window.API && window.API.Escrow) {
+            const user = (typeof Auth !== "undefined" && Auth.current && Auth.current()) || null;
+            const sellerId = (user && user.id) ? user.id : 2;
+            window.API.Escrow.requestWithdrawal(sellerId, {
+              amount: val,
+              bank_account_id: 1,
+              note: "Rút tiền Napas 24/7 từ giao diện Người bán (Task T41)"
+            }).then((res) => {
+              console.log("[Task T41 - Chu Đình Minh] Lệnh rút tiền Backend thành công:", res);
+            }).catch((err) => {
+              console.warn("[Task T41 - Chu Đình Minh] Rút tiền fallback offline:", err);
+            });
+          }
 
           updateBalanceUI();
           renderWalletTransactions();

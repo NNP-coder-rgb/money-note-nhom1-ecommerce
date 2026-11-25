@@ -1,5 +1,6 @@
 """
 routers/dispute_router.py — API Endpoints Phòng Trọng Tài Khiếu Nại 3 Bên (Disputes & Tripartite Arbitration)
+Task T41: Ký quỹ escrow & Trọng tài tranh chấp (Chu Đình Minh)
 """
 
 from typing import List, Optional, Annotated

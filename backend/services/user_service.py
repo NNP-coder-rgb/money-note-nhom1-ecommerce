@@ -2,6 +2,7 @@
 services/user_service.py — Lớp Xử Lý Nghiệp Vụ & Truy Vấn CRUD Cho User
 Tách bạch hoàn toàn logic nghiệp vụ với Router:
 Mọi thao tác truy vấn CSDL qua `db: Session` đều được thực thi tại đây.
+Nguyễn Khả Minh Đức
 """
 
 import hashlib

@@ -1,5 +1,6 @@
 """
 routers/user_router.py — API Endpoints Quản Lý Người Dùng, Sổ Địa Chỉ & Tài Khoản Ngân Hàng
+Nguyễn Khả Minh Đức
 """
 
 from typing import Optional, List, Annotated
