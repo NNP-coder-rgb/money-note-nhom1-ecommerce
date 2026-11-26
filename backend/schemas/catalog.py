@@ -1,5 +1,6 @@
 """
 schemas/catalog.py — Pydantic Schemas Cho Danh Mục, Thương Hiệu và Sản Phẩm
+Nguyen Tien Dat
 """
 
 from typing import Optional, List, Dict, Any
