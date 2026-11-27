@@ -28,6 +28,8 @@ class Settings(BaseSettings):
     VERSION: str = "2.0.0"
     API_V1_STR: str = "/api/v1"
     SECRET_KEY: str = Field(default="hybrid-store-jwt-secret-key-change-in-production", description="Khóa bí mật JWT")
+    ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7  # 7 ngày
     DEBUG: bool = True
 
     # 2. Cấu hình Máy chủ Web

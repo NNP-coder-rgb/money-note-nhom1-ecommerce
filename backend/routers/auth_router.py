@@ -14,6 +14,12 @@ from sqlalchemy.orm import Session
 
 from core.config import settings
 from core.database import get_db
+from core.security import (
+    create_access_token,
+    get_current_user,
+    get_optional_current_user,
+    get_current_admin
+)
 from schemas.common import BaseResponse
 from schemas.user import (
     UserCreate, UserUpdate, UserResponse, UserLogin,
@@ -72,14 +78,17 @@ def login(login_in: UserLogin, db: Session = Depends(get_db)):
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Tài khoản hoặc mật khẩu không chính xác"
         )
-    # Trả về thông tin người dùng kèm token phiên làm việc
+    # Cấp phát JWT token ký số bảo mật chuẩn RFC 7519
+    access_token = create_access_token(
+        data={"sub": str(user.id), "role": user.role, "email": user.email}
+    )
     user_data = UserResponse.model_validate(user).model_dump()
     return BaseResponse[dict](
         success=True,
         message="Đăng nhập thành công",
         data={
             "user": user_data,
-            "access_token": f"bearer_{user.id}_token_session_2026",
+            "access_token": access_token,
             "token_type": "bearer"
         }
     )
@@ -90,10 +99,21 @@ def login(login_in: UserLogin, db: Session = Depends(get_db)):
     response_model=BaseResponse[UserResponse],
     summary="Lấy thông tin tài khoản hiện tại"
 )
-def get_current_user_profile(user_id: int = Query(..., description="ID tài khoản đăng nhập"), db: Session = Depends(get_db)):
-    user = auth_service.get_by_id(db, user_id=user_id)
+def get_current_user_profile(
+    user_id: Optional[int] = Query(None, description="Tùy chọn ID tài khoản"),
+    current_user: Optional[User] = Depends(get_optional_current_user),
+    db: Session = Depends(get_db)
+):
+    # Ưu tiên danh tính lấy an toàn từ JWT Token xác thực
+    user = current_user
+    if not user and user_id is not None:
+        user = auth_service.get_by_id(db, user_id=user_id)
+
     if not user:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Không tìm thấy thông tin tài khoản")
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Yêu cầu đăng nhập để truy cập thông tin tài khoản"
+        )
     return BaseResponse[UserResponse](
         success=True,
         message="Lấy hồ sơ cá nhân thành công",
@@ -108,10 +128,17 @@ def get_current_user_profile(user_id: int = Query(..., description="ID tài kho�
 )
 def update_current_user_profile(
     user_in: UserUpdate,
-    user_id: int = Query(..., description="ID tài khoản đăng nhập"),
+    user_id: Optional[int] = Query(None, description="Tùy chọn ID tài khoản"),
+    current_user: Optional[User] = Depends(get_optional_current_user),
     db: Session = Depends(get_db)
 ):
-    user = auth_service.update_user(db, user_id=user_id, user_in=user_in)
+    target_id = current_user.id if current_user else user_id
+    if not target_id:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Yêu cầu đăng nhập để cập nhật hồ sơ"
+        )
+    user = auth_service.update_user(db, user_id=target_id, user_in=user_in)
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Không tìm thấy tài khoản cần cập nhật")
     return BaseResponse[UserResponse](
@@ -128,17 +155,24 @@ def update_current_user_profile(
 )
 def submit_ekyc(
     kyc_in: KYCVerificationCreate,
-    user_id: int = Query(..., description="ID tài khoản gửi hồ sơ eKYC"),
+    user_id: Optional[int] = Query(None, description="Tùy chọn ID tài khoản"),
+    current_user: Optional[User] = Depends(get_optional_current_user),
     db: Session = Depends(get_db)
 ):
-    user = auth_service.get_by_id(db, user_id=user_id)
+    target_id = current_user.id if current_user else user_id
+    if not target_id:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Yêu cầu đăng nhập để nộp hồ sơ eKYC"
+        )
+    user = auth_service.get_by_id(db, user_id=target_id)
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Không tìm thấy người dùng")
 
-    kyc = auth_service.submit_ekyc(db, user_id=user_id, kyc_in=kyc_in)
+    kyc = auth_service.submit_ekyc(db, user_id=target_id, kyc_in=kyc_in)
     return BaseResponse[KYCVerificationResponse](
         success=True,
-        message="Đã gửi hồ sơ xác thực CCCD gắn chip thành công. Vui lòng chờ phê duyệt.",
+        message="Nộp hồ sơ định danh CCCD thành công",
         data=kyc
     )
 
@@ -507,13 +541,16 @@ def login_phone_otp(body: PhoneOtpVerify, db: Session = Depends(get_db)):
             )
             user = auth_service.create_user(db, user_in=user_in)
 
+    access_token = create_access_token(
+        data={"sub": str(user.id), "role": user.role, "email": user.email}
+    )
     user_data = UserResponse.model_validate(user).model_dump()
     return BaseResponse[dict](
         success=True,
         message="Xác thực OTP thành công! Đang chuyển hướng...",
         data={
             "user": user_data,
-            "access_token": f"bearer_{'email' if is_email else 'phone'}_{user.id}_session_2026",
+            "access_token": access_token,
             "token_type": "bearer"
         }
     )
@@ -579,13 +616,16 @@ def verify_google_oauth_token(body: GoogleTokenVerify, db: Session = Depends(get
         )
         user = auth_service.create_user(db, user_in=user_in)
 
+    jwt_token = create_access_token(
+        data={"sub": str(user.id), "role": user.role, "email": user.email}
+    )
     user_data = UserResponse.model_validate(user).model_dump()
     return BaseResponse[dict](
         success=True,
         message=f"Đăng nhập tài khoản Google {email} thành công!",
         data={
             "user": user_data,
-            "access_token": f"bearer_google_{user.id}_session_2026",
+            "access_token": jwt_token,
             "token_type": "bearer"
         }
     )

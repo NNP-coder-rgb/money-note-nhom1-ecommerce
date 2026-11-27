@@ -14,8 +14,11 @@ from models.order import Order
 
 class EscrowService:
     @staticmethod
-    def get_or_create_wallet(db: Session, user_id: int) -> EscrowWallet:
-        wallet = db.query(EscrowWallet).filter(EscrowWallet.user_id == user_id).first()
+    def get_or_create_wallet(db: Session, user_id: int, for_update: bool = False) -> EscrowWallet:
+        q = db.query(EscrowWallet).filter(EscrowWallet.user_id == user_id)
+        if for_update and db.bind and db.bind.dialect.name != "sqlite":
+            q = q.with_for_update()
+        wallet = q.first()
         if not wallet:
             wallet = EscrowWallet(
                 user_id=user_id,
@@ -34,7 +37,7 @@ class EscrowService:
 
     @staticmethod
     def hold_order_funds(db: Session, seller_id: int, order_id: int, amount: int) -> EscrowTransaction:
-        wallet = EscrowService.get_or_create_wallet(db, seller_id)
+        wallet = EscrowService.get_or_create_wallet(db, seller_id, for_update=True)
         wallet.locked_balance += amount
 
         tx_code = f"TX-HOLD-{uuid.uuid4().hex[:8].upper()}"
@@ -55,7 +58,7 @@ class EscrowService:
 
     @staticmethod
     def release_payout(db: Session, seller_id: int, order_id: int, amount: int) -> EscrowTransaction:
-        wallet = EscrowService.get_or_create_wallet(db, seller_id)
+        wallet = EscrowService.get_or_create_wallet(db, seller_id, for_update=True)
         if wallet.locked_balance >= amount:
             wallet.locked_balance -= amount
         wallet.available_balance += amount
@@ -78,7 +81,9 @@ class EscrowService:
 
     @staticmethod
     def request_withdrawal(db: Session, user_id: int, amount: int, bank_account_id: int, note: str = "") -> EscrowTransaction:
-        wallet = EscrowService.get_or_create_wallet(db, user_id)
+        if amount <= 0:
+            raise ValueError("Số tiền rút phải lớn hơn 0")
+        wallet = EscrowService.get_or_create_wallet(db, user_id, for_update=True)
         if wallet.available_balance < amount:
             raise ValueError("Số dư khả dụng không đủ để thực hiện rút tiền")
 

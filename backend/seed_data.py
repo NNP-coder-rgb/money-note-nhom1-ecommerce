@@ -15,6 +15,7 @@ if CURRENT_DIR not in sys.path:
     sys.path.insert(0, CURRENT_DIR)
 
 from core.database import engine, Base, SessionLocal, DB_PATH
+from core.security import hash_password
 from models import (
     User, KYCVerification, UserAddress, BankAccount,
     Category, Brand, Product, ProductImage, ProductSpec,
@@ -48,7 +49,7 @@ def seed(drop_existing: bool = True):
         admin = User(
             email="admin@hybridstore.vn",
             phone="0900000001",
-            password_hash="admin123456",
+            password_hash=hash_password("admin123456"),
             full_name="Quản Trị Viên Hệ Thống (Admin)",
             username="admin",
             role="admin",
@@ -62,7 +63,7 @@ def seed(drop_existing: bool = True):
         inspector = User(
             email="inspector@hybridstore.vn",
             phone="0900000002",
-            password_hash="inspect123456",
+            password_hash=hash_password("inspect123456"),
             full_name="Kiểm Định Viên Trung Tâm Quốc Gia",
             username="inspector",
             role="inspector",
@@ -76,7 +77,7 @@ def seed(drop_existing: bool = True):
         seller_techzone = User(
             email="techzone@hybridstore.vn",
             phone="0900000003",
-            password_hash="seller123456",
+            password_hash=hash_password("seller123456"),
             full_name="TechZone Official Store",
             username="techzone",
             role="seller",
@@ -91,7 +92,7 @@ def seed(drop_existing: bool = True):
         seller_minh = User(
             email="minhhoang@gmail.com",
             phone="0912345678",
-            password_hash="minh123456",
+            password_hash=hash_password("minh123456"),
             full_name="Trần Minh Hoàng",
             username="minhhoang",
             role="seller",
@@ -106,7 +107,7 @@ def seed(drop_existing: bool = True):
         buyer_tuan = User(
             email="tuananh@gmail.com",
             phone="0988888888",
-            password_hash="tuan123456",
+            password_hash=hash_password("tuan123456"),
             full_name="Nguyễn Tuấn Anh",
             username="tuananh",
             role="buyer",
@@ -120,7 +121,7 @@ def seed(drop_existing: bool = True):
         user_phuc = User(
             email="nguyenphuc230607@gmail.com",
             phone="0912345679",
-            password_hash="phuc123456",
+            password_hash=hash_password("phuc123456"),
             full_name="Nguyễn Phúc",
             username="nguyenphuc",
             role="buyer",

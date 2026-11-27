@@ -1,0 +1,52 @@
+name: CI / Automated Testing Pipeline
+
+on:
+  push:
+    branches: [ "main", "developer", "feature/**" ]
+  pull_request:
+    branches: [ "main", "developer" ]
+
+jobs:
+  # 1. Kiểm thử tự động Frontend (Vanilla JS Unit Test Suites)
+  test-frontend:
+    name: Frontend Unit Tests (Node.js)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run Utils Unit Tests (53 tests)
+        run: node frontend/test/utils.test.js
+
+      - name: Run UI Components Unit Tests (20 tests)
+        run: node frontend/test/components.test.js
+
+  # 2. Kiểm thử tự động Backend (Pytest Suite)
+  test-backend:
+    name: Backend API & Security Tests (Python)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r backend/requirements.txt
+
+      - name: Seed Database
+        run: python backend/seed_data.py
+
+      - name: Run Pytest Suite (20 tests)
+        run: pytest backend/test -v

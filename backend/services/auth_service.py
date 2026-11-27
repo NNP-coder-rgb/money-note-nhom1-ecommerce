@@ -13,9 +13,7 @@ from models.user import User, KYCVerification, UserAddress, BankAccount
 from schemas.user import UserCreate, UserUpdate, KYCVerificationCreate, UserAddressCreate, BankAccountCreate
 
 
-def hash_password(password: str) -> str:
-    salt = "hybrid_store_salt_2026"
-    return f"sha256${hashlib.sha256((password + salt).encode('utf-8')).hexdigest()}"
+from core.security import hash_password, verify_password
 
 
 class AuthService:
@@ -39,16 +37,10 @@ class AuthService:
     def authenticate(db: Session, username_or_phone: str, password: str) -> Optional[User]:
         clean_id = (username_or_phone or "").strip().lower()
         clean_pwd = (password or "").strip()
+        if not clean_id or not clean_pwd:
+            return None
 
-        # 1. Hỗ trợ đăng nhập tài khoản Quản Trị Viên (Admin) với mọi định dạng quen thuộc
-        admin_aliases = ["admin", "admin_master", "admin@hybridstore.vn", "admin@hybrid.store", "admin@hybrid.vn", "0900000001"]
-        admin_passwords = ["admin123456", "admin123", "password123", "123456"]
-        if clean_id in admin_aliases and clean_pwd in admin_passwords:
-            admin_user = db.query(User).filter(User.role == "admin").first()
-            if admin_user:
-                return admin_user
-
-        # 2. Tìm kiếm người dùng theo số điện thoại, email hoặc username
+        # Tìm kiếm người dùng theo số điện thoại, email hoặc username
         user = (
             db.query(User)
             .filter(
@@ -61,14 +53,17 @@ class AuthService:
         if not user:
             return None
 
-        # 3. Kiểm tra mật khẩu (hỗ trợ hash sha256, so sánh dev plain-text và master password)
-        expected = hash_password(clean_pwd)
-        if user.password_hash == expected or user.password_hash == clean_pwd:
+        # Kiểm tra mật khẩu (hỗ trợ Bcrypt và tương thích ngược bản cũ)
+        if verify_password(clean_pwd, user.password_hash):
+            # Tự động nâng cấp hash sang Bcrypt nếu tài khoản đang dùng định dạng cũ
+            if not user.password_hash.startswith(("$2a$", "$2b$", "$2y$")):
+                try:
+                    user.password_hash = hash_password(clean_pwd)
+                    db.commit()
+                except Exception:
+                    pass
             return user
-        if user.password_hash.endswith(clean_pwd):
-            return user
-        if clean_pwd in ["123456", "password123"]:
-            return user
+
         return None
 
     @staticmethod
