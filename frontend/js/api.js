@@ -6,13 +6,20 @@
 (function (global) {
   "use strict";
 
-  // Tự động nhận diện URL Backend thông minh (Hỗ trợ Live Server mọi cổng, file protocol, Uvicorn 8000, và Cloud Render)
+  // Tự động nhận diện URL Backend thông minh (Hỗ trợ cấu hình tùy biến, Live Server mọi cổng, file protocol, Uvicorn, và Cloud Render)
   let API_BASE = "/api/v1";
   if (typeof window !== "undefined") {
-    const isFileProto = window.location.protocol === "file:";
-    const isLocalHost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
-    if (isFileProto || (isLocalHost && window.location.port !== "8000")) {
-      API_BASE = "http://127.0.0.1:8000/api/v1";
+    if (window.API_BASE) {
+      API_BASE = window.API_BASE;
+    } else if (window.__API_BASE__) {
+      API_BASE = window.__API_BASE__;
+    } else {
+      const isFileProto = window.location.protocol === "file:";
+      const isLocalHost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+      if (isFileProto || (isLocalHost && window.location.port !== "8000")) {
+        const defaultPort = window.BACKEND_PORT || "8000";
+        API_BASE = `http://127.0.0.1:${defaultPort}/api/v1`;
+      }
     }
   }
 
@@ -26,9 +33,9 @@
     const headers = options.headers || {};
 
     // Gắn Bearer Token nếu có trong localStorage
-    const token = localStorage.getItem(TOKEN_KEY);
+    const token = localStorage.getItem(TOKEN_KEY) || localStorage.getItem("hv_access_token");
     if (token && !headers["Authorization"]) {
-      headers["Authorization"] = `Bearer ${token}`;
+      headers["Authorization"] = token.toLowerCase().startsWith("bearer ") ? token : `Bearer ${token}`;
     }
 
     if (!(options.body instanceof FormData) && !headers["Content-Type"]) {

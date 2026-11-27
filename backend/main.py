@@ -6,12 +6,21 @@ Cấu hình CORS Middleware, Tự động khởi tạo bảng CSDL (create_all),
 
 import os
 import sys
+import logging
+from typing import Optional
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, Request, status, Depends
+from fastapi import FastAPI, Request, status, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 import uvicorn
+
+# Cấu hình logging chuẩn
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s"
+)
+logger = logging.getLogger("hybrid_store")
 
 # Thêm thư mục backend vào sys.path để import chuẩn theo kiến trúc phân tầng
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -20,6 +29,8 @@ if CURRENT_DIR not in sys.path:
 
 from core.config import settings
 from core.database import engine, Base, create_all_tables, get_db, Session
+from core.security import get_optional_current_user
+from models.user import User
 from routers import api_router
 
 
@@ -121,9 +132,17 @@ def health_check():
 @app.get(
     "/api/v1/system/db-info",
     tags=["System"],
-    summary="Kiểm tra nguồn cơ sở dữ liệu thực tế và thống kê bản ghi"
+    summary="Kiểm tra nguồn cơ sở dữ liệu thực tế và thống kê bản ghi (Admin only)"
 )
-def get_db_info(db: Session = Depends(get_db)):
+def get_db_info(
+    current_user: Optional[User] = Depends(get_optional_current_user),
+    db: Session = Depends(get_db)
+):
+    if not current_user or current_user.role != "admin":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Yêu cầu quyền Quản trị viên (Admin) để xem thông tin cấu hình hệ thống"
+        )
     is_mysql_active = engine is not None and str(engine.url).startswith("mysql")
     raw_url = str(engine.url) if engine else "unknown"
     masked_url = raw_url
@@ -138,7 +157,7 @@ def get_db_info(db: Session = Depends(get_db)):
 
     counts = {}
     try:
-        from models import User, Product, Order, Category, Dispute, EscrowWallet
+        from models import Product, Order, Category, Dispute, EscrowWallet
         counts["users (người dùng)"] = db.query(User).count()
         counts["products (sản phẩm)"] = db.query(Product).count()
         counts["orders (đơn hàng)"] = db.query(Order).count()

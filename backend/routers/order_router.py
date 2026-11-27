@@ -8,6 +8,8 @@ from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
 
 from core.database import get_db
+from core.security import get_optional_current_user
+from models.user import User
 from schemas.common import BaseResponse, PaginatedResponse
 from schemas.order import OrderCreate, OrderUpdate, OrderResponse, OrderTrackingResponse
 from services.order_service import order_service
@@ -72,10 +74,17 @@ def get_order(identifier: str, db: Session = Depends(get_db)):
 )
 def create_order(
     order_in: OrderCreate,
-    buyer_id: int = Query(..., description="ID người mua thực hiện đặt hàng"),
+    buyer_id: Optional[int] = Query(None, description="ID người mua thực hiện đặt hàng (nếu không dùng token)"),
+    current_user: Optional[User] = Depends(get_optional_current_user),
     db: Session = Depends(get_db)
 ):
-    order = order_service.create_order(db, buyer_id=buyer_id, order_in=order_in)
+    actual_buyer_id = current_user.id if current_user else buyer_id
+    if not actual_buyer_id:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Vui lòng đăng nhập để tiến hành đặt hàng"
+        )
+    order = order_service.create_order(db, buyer_id=actual_buyer_id, order_in=order_in)
     return BaseResponse[OrderResponse](
         success=True,
         message="Đặt đơn hàng thành công",

@@ -24,6 +24,7 @@ try:
         # Cấu hình Pool kết nối cho MySQL
         engine = create_engine(
             db_url,
+            connect_args={"connect_timeout": 1},
             pool_pre_ping=True,       # Tự động ping kiểm tra kết nối còn sống trước khi query
             pool_recycle=3600,        # Tái tạo kết nối sau 1 giờ tránh MySQL timeout (8h)
             pool_size=10,             # Số lượng kết nối duy trì trong pool
