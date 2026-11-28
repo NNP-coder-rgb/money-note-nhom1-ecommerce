@@ -10,3 +10,5 @@ services:
         value: "true"
       - key: DEBUG
         value: "false"
+      - key: GOOGLE_CLIENT_ID
+        value: "223634301957-1di4nvebgc2ne34kqa0gb3l321de00j4.apps.googleusercontent.com"

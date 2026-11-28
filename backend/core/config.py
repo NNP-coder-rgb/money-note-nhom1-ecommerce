@@ -51,7 +51,7 @@ class Settings(BaseSettings):
     USE_SQLITE_FALLBACK: bool = True
 
     # 4. Cấu hình Đăng Nhập Google OAuth 2.0 (Google Identity Services)
-    GOOGLE_CLIENT_ID: str = Field(default="", description="Google OAuth 2.0 Client ID từ Google Cloud Console")
+    GOOGLE_CLIENT_ID: str = Field(default="223634301957-1di4nvebgc2ne34kqa0gb3l321de00j4.apps.googleusercontent.com", description="Google OAuth 2.0 Client ID từ Google Cloud Console")
     GOOGLE_CLIENT_SECRET: str = Field(default="", description="Google OAuth 2.0 Client Secret")
     GOOGLE_REDIRECT_URI: Optional[str] = Field(default=None, description="URL Callback nhận OAuth Token")
 

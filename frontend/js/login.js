@@ -519,7 +519,7 @@
       }
     }
 
-    return "481928491823-hybridstore.apps.googleusercontent.com";
+    return "223634301957-1di4nvebgc2ne34kqa0gb3l321de00j4.apps.googleusercontent.com";
   }
 
   function getGoogleRedirectUri() {

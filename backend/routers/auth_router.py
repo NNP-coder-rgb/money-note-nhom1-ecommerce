@@ -569,7 +569,7 @@ def get_google_oauth_config():
         success=True,
         message="Lấy cấu hình Google OAuth thành công",
         data={
-            "client_id": settings.GOOGLE_CLIENT_ID or "481928491823-hybridstore.apps.googleusercontent.com",
+            "client_id": settings.GOOGLE_CLIENT_ID or "223634301957-1di4nvebgc2ne34kqa0gb3l321de00j4.apps.googleusercontent.com",
             "is_configured": bool(settings.GOOGLE_CLIENT_ID)
         }
     )
